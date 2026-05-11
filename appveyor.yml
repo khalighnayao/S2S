@@ -1,5 +1,6 @@
 version: 1.BETA.{build}
 # skip_tags is important or you will get an infinite build loop when we apply release tags
+# testing itzabird appveyor
 skip_tags: true
 skip_branch_with_pr: true
 
