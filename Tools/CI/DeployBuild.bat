@@ -100,7 +100,7 @@ call xcopy "%build_dir%\Assets\fpklive_token.txt" "Assets" /Y
 
 :fpk_live
 echo Packing FPKs...
-call "%root_dir%\Tools\FPKLive.exe"
+call "%root_dir%\Tools\FpkBuilder.exe"
 if %ERRORLEVEL% neq 0 (
     echo Packing FPKs failed, aborting deployment
     exit /B 1
