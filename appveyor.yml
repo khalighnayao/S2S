@@ -17,11 +17,11 @@ environment:
     secure: T8MivnrThpqDptrSafu2kWSvadsSCOtu9KkamwqNm20=
   WEBHOOK_URL:
     secure: 6hg1/q82Oatu+Swl6MRrqf81pFqjPTwPSfIDwzoERyCfYbjWeE+xm6NObTx+8MwGGxDmvpYKs0olhCbgp5txi4eBO/Er5o7eHydLganoCvIld/bPMP8LrzIMKoEZOGfryI5D0/qSBFdgmyzVrmaX7PVkRzYZJQUSQLUucJXUHls=
-  # git_email:
-  #   secure: trN7d/FWgBATcyR/BWbF313Avez3hsRfOq4PdxNcll0=
-  # git_user: flabbert
-  # git_access_token:
-  #   secure: /wUaPN2WiulxpYjI5oJzoadfI+BY6w9toeIK20J2kob7116rdXEj7FrXrNU4SwnhyELyIrwEOnWS/cxkFMQOoZYKsVqcZt/8TD62Px1rOpXewA7wN2ZPT5zm+9Io2c+O
+  git_email:
+    secure: trN7d/FWgBATcyR/BWbF313Avez3hsRfOq4PdxNcll0=
+  git_user: flabbert
+  git_access_token:
+    secure: /wUaPN2WiulxpYjI5oJzoadfI+BY6w9toeIK20J2kob7116rdXEj7FrXrNU4SwnhyELyIrwEOnWS/cxkFMQOoZYKsVqcZt/8TD62Px1rOpXewA7wN2ZPT5zm+9Io2c+O
 
 build_script:
   - cmd: >-
