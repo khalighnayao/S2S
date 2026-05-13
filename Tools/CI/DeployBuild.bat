@@ -46,7 +46,7 @@ powershell -ExecutionPolicy Bypass -File "%root_dir%\Tools\CI\InitGit.ps1"
 
 :: COMPILE -----------------------------------------------------
 echo Building FinalRelease DLL...
-call "%root_dir%\Tools\_MakeDLL.bat" FinalRelease build deploy
+call "%root_dir%\Tools\_MakeDLL.bat" Release build deploy
 if not errorlevel 0 (
     echo Building FinalRelease DLL failed, aborting deployment!
     exit /B 2
@@ -122,24 +122,27 @@ xcopy "C2C3.ico" "%build_dir%" /R /Y
 xcopy "C2C4.ico" "%build_dir%" /R /Y
 xcopy "Tools\CI\C2C.bat" "%build_dir%" /R /Y
 
-:: SET TEMP GIT RELEASE TAG -----------------------------------
-:: This is temporary so that the change log gets created
-:: correctly (it uses origin tags I guess).
-:: TODO: update chlog to not require this...
-echo Setting release version build tag on git ...
-call git tag -a %C2C_VERSION% %APPVEYOR_REPO_COMMIT% -m "%C2C_VERSION%" -f
-call git push --tags
+echo %APPVEYOR_REPO_COMMIT%
+echo %C2C_VERSION%
 
-:: GENERATE NEW CHANGES LOG ------------------------------------
-echo Generate SVN commit description...
-call Tools\CI\git-chglog_windows_amd64.exe --output "%root_dir%\commit_desc.md" --config Tools\CI\.chglog\config.yml %C2C_VERSION%
+@REM :: SET TEMP GIT RELEASE TAG -----------------------------------
+@REM :: This is temporary so that the change log gets created
+@REM :: correctly (it uses origin tags I guess).
+@REM :: TODO: update chlog to not require this...
+@REM echo Setting release version build tag on git ...
+@REM call git tag -a %C2C_VERSION% %APPVEYOR_REPO_COMMIT% -m "%C2C_VERSION%" -f
+@REM call git push --tags
 
-echo Generate forum commit description...
-call Tools\CI\git-chglog_windows_amd64.exe --output "%root_dir%\commit_desc.txt" --config Tools\CI\.chglog\config-bbcode.yml %C2C_VERSION%
+@REM :: GENERATE NEW CHANGES LOG ------------------------------------
+@REM echo Generate SVN commit description...
+@REM call Tools\CI\git-chglog_windows_amd64.exe --output "%root_dir%\commit_desc.md" --config Tools\CI\.chglog\config.yml %C2C_VERSION%
 
-:: GENERATE FULL CHANGELOG -------------------------------------
-echo Update full SVN changelog ...
-call Tools\CI\git-chglog_windows_amd64.exe --output "%build_dir%\CHANGELOG.md" --config Tools\CI\.chglog\config.yml
+@REM echo Generate forum commit description...
+@REM call Tools\CI\git-chglog_windows_amd64.exe --output "%root_dir%\commit_desc.txt" --config Tools\CI\.chglog\config-bbcode.yml %C2C_VERSION%
+
+@REM :: GENERATE FULL CHANGELOG -------------------------------------
+@REM echo Update full SVN changelog ...
+@REM call Tools\CI\git-chglog_windows_amd64.exe --output "%build_dir%\CHANGELOG.md" --config Tools\CI\.chglog\config.yml
 
 :: DELETE TEMP RELEASE TAG -------------------------------------
 :: We delete it ASAP so it isn't left up if the build fails
@@ -193,14 +196,14 @@ call git push --tags
 
 POPD
 
-echo FORUM COMMIT MESSAGE ----------------------------------------------------------
-echo -------------------------------------------------------------------------------
-echo.
-echo [size=6][b]SVN-%svn_rev%[/b][/size]
-type "%root_dir%\commit_desc.txt"
-echo.
-echo -------------------------------------------------------------------------------
-echo -------------------------------------------------------------------------------
+@REM echo FORUM COMMIT MESSAGE ----------------------------------------------------------
+@REM echo -------------------------------------------------------------------------------
+@REM echo.
+@REM echo [size=6][b]SVN-%svn_rev%[/b][/size]
+@REM type "%root_dir%\commit_desc.txt"
+@REM echo.
+@REM echo -------------------------------------------------------------------------------
+@REM echo -------------------------------------------------------------------------------
 
 echo Done!
 
