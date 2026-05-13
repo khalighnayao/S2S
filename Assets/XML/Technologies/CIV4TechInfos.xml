@@ -490,7 +490,6 @@
 			<SoundMP>AS2D_TECH_WEAVING</SoundMP>
 			<Button>Art/Interface/Buttons/TechTree/Button_Weaving.dds</Button>
 		</TechInfo>
-        <!--        balance tech -2-->
         <TechInfo>
             <Type>TECH_COUNTING</Type>
             <Description>TXT_KEY_TECH_COUNTING</Description>
@@ -658,7 +657,6 @@
 			<SoundMP>AS2D_TECH_HARD_HAMMER_PERCUSSION</SoundMP>
 			<Button>Art/Interface/Buttons/TechTree/Button_StoneTools.dds</Button>
 		</TechInfo>
-        <!--        balance -1 tech-->
         <TechInfo>
             <Type>TECH_COOKING</Type>
             <Description>TXT_KEY_TECH_COOKING</Description>
@@ -2617,7 +2615,7 @@
 			</OrPreReqs>
 			<AndPreReqs>
 				<PrereqTech>TECH_PORTABLE_SHELTERS</PrereqTech>
-				<PrereqTech>TECH_BARTER</PrereqTech>
+				<PrereqTech>TECH_CONDUCT</PrereqTech>
 			</AndPreReqs>
 			<Quote>TXT_KEY_TECH_TRIBALISM_QUOTE</Quote>
 			<Sound>AS2D_TECH_TRIBALISM</Sound>
@@ -2757,6 +2755,9 @@
                     <iFlavor>4</iFlavor>
                 </Flavor>
             </Flavors>
+            <AndPreReqs>
+                <PrereqTech>TECH_BARTER</PrereqTech>
+            </AndPreReqs>
             <OrPreReqs>
                 <PrereqTech>TECH_TRIBALISM</PrereqTech>
             </OrPreReqs>
@@ -3445,7 +3446,6 @@
 			<iAIWeight>100</iAIWeight>
 			<iCost>74</iCost>
 			<Era>C2C_ERA_ANCIENT</Era>
-			<iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>12</iAsset>
 			<bTrade>1</bTrade>
 			<iGridX>19</iGridX>
@@ -3658,6 +3658,52 @@
 			<SoundMP>AS2D_TECH_TAXONOMY</SoundMP>
 			<Button>Art/Interface/Buttons/TechTree/taxonomy.dds</Button>
 		</TechInfo>
+        <TechInfo>
+            <Type>TECH_EQUINE_DOMESTICATION</Type>
+            <Description>TXT_KEY_TECH_EQUINE_DOMESTICATION</Description>
+            <Civilopedia>TXT_KEY_TECH_EQUINE_DOMESTICATION_PEDIA</Civilopedia>
+            <Advisor>ADVISOR_MILITARY</Advisor>
+            <iCost>96</iCost>
+            <Era>C2C_ERA_ANCIENT</Era>
+            <iAsset>8</iAsset>
+            <iPower>2</iPower>
+            <bTrade>1</bTrade>
+            <iGridX>21</iGridX>
+            <iGridY>5</iGridY>
+            <Flavors>
+                <Flavor>
+                    <FlavorType>FLAVOR_MILITARY</FlavorType>
+                    <iFlavor>3</iFlavor>
+                </Flavor>
+                <Flavor>
+                    <FlavorType>FLAVOR_RELIGION</FlavorType>
+                    <iFlavor>1</iFlavor>
+                </Flavor>
+                <Flavor>
+                    <FlavorType>FLAVOR_PRODUCTION</FlavorType>
+                    <iFlavor>4</iFlavor>
+                </Flavor>
+                <Flavor>
+                    <FlavorType>FLAVOR_SCIENCE</FlavorType>
+                    <iFlavor>2</iFlavor>
+                </Flavor>
+                <Flavor>
+                    <FlavorType>FLAVOR_CULTURE</FlavorType>
+                    <iFlavor>1</iFlavor>
+                </Flavor>
+                <Flavor>
+                    <FlavorType>FLAVOR_GROWTH</FlavorType>
+                    <iFlavor>9</iFlavor>
+                </Flavor>
+            </Flavors>
+            <OrPreReqs>
+                <PrereqTech>TECH_AGRICULTURE</PrereqTech>
+            </OrPreReqs>
+            <Quote>TXT_KEY_TECH_EQUINE_DOMESTICATION_QUOTE</Quote>
+            <Sound>AS2D_TECH_EQUINE_DOMESTICATION</Sound>
+            <SoundMP>AS2D_TECH_EQUINE_DOMESTICATION</SoundMP>
+            <Button>Art/Interface/Buttons/TechTree/equinedomestication.dds</Button>
+        </TechInfo>
         <TechInfo>
             <Type>TECH_POULTRY_DOMESTICATION</Type>
             <Description>TXT_KEY_TECH_POULTRY_DOMESTICATION</Description>
@@ -4007,50 +4053,41 @@
             <Button>Art/Interface/Buttons/TechTree/fungiculture.dds</Button>
         </TechInfo>
         <TechInfo>
-            <Type>TECH_EQUINE_DOMESTICATION</Type>
-            <Description>TXT_KEY_TECH_EQUINE_DOMESTICATION</Description>
-            <Civilopedia>TXT_KEY_TECH_EQUINE_DOMESTICATION_PEDIA</Civilopedia>
-            <Advisor>ADVISOR_MILITARY</Advisor>
+            <Type>TECH_TENGRIISM</Type>
+            <Description>TXT_KEY_TECH_TENGRIISM</Description>
+            <Civilopedia>TXT_KEY_TECH_TENGRIISM_PEDIA</Civilopedia>
+            <Advisor>ADVISOR_RELIGION</Advisor>
+            <bGlobal>1</bGlobal>
             <iCost>110</iCost>
             <Era>C2C_ERA_ANCIENT</Era>
+            <FirstFreeProphet>UNIT_PROPHET</FirstFreeProphet>
             <iAsset>8</iAsset>
-            <iPower>2</iPower>
-            <bTrade>1</bTrade>
             <iGridX>22</iGridX>
             <iGridY>5</iGridY>
             <Flavors>
                 <Flavor>
-                    <FlavorType>FLAVOR_MILITARY</FlavorType>
-                    <iFlavor>3</iFlavor>
-                </Flavor>
-                <Flavor>
                     <FlavorType>FLAVOR_RELIGION</FlavorType>
-                    <iFlavor>1</iFlavor>
+                    <iFlavor>10</iFlavor>
                 </Flavor>
                 <Flavor>
-                    <FlavorType>FLAVOR_PRODUCTION</FlavorType>
-                    <iFlavor>4</iFlavor>
-                </Flavor>
-                <Flavor>
-                    <FlavorType>FLAVOR_SCIENCE</FlavorType>
-                    <iFlavor>2</iFlavor>
-                </Flavor>
-                <Flavor>
-                    <FlavorType>FLAVOR_CULTURE</FlavorType>
-                    <iFlavor>1</iFlavor>
+                    <FlavorType>FLAVOR_MILITARY</FlavorType>
+                    <iFlavor>8</iFlavor>
                 </Flavor>
                 <Flavor>
                     <FlavorType>FLAVOR_GROWTH</FlavorType>
-                    <iFlavor>9</iFlavor>
+                    <iFlavor>5</iFlavor>
                 </Flavor>
             </Flavors>
+            <AndPreReqs>
+                <PrereqTech>TECH_CONSCIOUSNESS</PrereqTech>
+            </AndPreReqs>
             <OrPreReqs>
-                <PrereqTech>TECH_POTTERY</PrereqTech>
+                <PrereqTech>TECH_EQUINE_DOMESTICATION</PrereqTech>
             </OrPreReqs>
-            <Quote>TXT_KEY_TECH_EQUINE_DOMESTICATION_QUOTE</Quote>
-            <Sound>AS2D_TECH_EQUINE_DOMESTICATION</Sound>
-            <SoundMP>AS2D_TECH_EQUINE_DOMESTICATION</SoundMP>
-            <Button>Art/Interface/Buttons/TechTree/equinedomestication.dds</Button>
+            <Quote>TXT_KEY_TECH_TENGRIISM_QUOTE</Quote>
+            <Sound>AS2D_TECH_TENGRIISM2</Sound>
+            <SoundMP>AS2D_TECH_GENERIC</SoundMP>
+            <Button>Art/Interface/Buttons/TechTree/tengriism.dds</Button>
         </TechInfo>
 		<TechInfo>
 			<Type>TECH_SAILING</Type>
@@ -4205,43 +4242,6 @@
 			<SoundMP>AS2D_TECH_MP_THE_WHEEL</SoundMP>
 			<Button>Art/Interface/Buttons/TechTree/thewheel2.dds</Button>
 		</TechInfo>
-        <TechInfo>
-            <Type>TECH_TENGRIISM</Type>
-            <Description>TXT_KEY_TECH_TENGRIISM</Description>
-            <Civilopedia>TXT_KEY_TECH_TENGRIISM_PEDIA</Civilopedia>
-            <Advisor>ADVISOR_RELIGION</Advisor>
-            <bGlobal>1</bGlobal>
-            <iCost>110</iCost>
-            <Era>C2C_ERA_ANCIENT</Era>
-            <FirstFreeProphet>UNIT_PROPHET</FirstFreeProphet>
-            <iAsset>8</iAsset>
-            <iGridX>22</iGridX>
-            <iGridY>13</iGridY>
-            <Flavors>
-                <Flavor>
-                    <FlavorType>FLAVOR_RELIGION</FlavorType>
-                    <iFlavor>10</iFlavor>
-                </Flavor>
-                <Flavor>
-                    <FlavorType>FLAVOR_MILITARY</FlavorType>
-                    <iFlavor>8</iFlavor>
-                </Flavor>
-                <Flavor>
-                    <FlavorType>FLAVOR_GROWTH</FlavorType>
-                    <iFlavor>5</iFlavor>
-                </Flavor>
-            </Flavors>
-            <OrPreReqs>
-                <PrereqTech>TECH_CONSCIOUSNESS</PrereqTech>
-            </OrPreReqs>
-            <AndPreReqs>
-                <PrereqTech>TECH_EQUINE_DOMESTICATION</PrereqTech>
-            </AndPreReqs>
-            <Quote>TXT_KEY_TECH_TENGRIISM_QUOTE</Quote>
-            <Sound>AS2D_TECH_TENGRIISM2</Sound>
-            <SoundMP>AS2D_TECH_GENERIC</SoundMP>
-            <Button>Art/Interface/Buttons/TechTree/tengriism.dds</Button>
-        </TechInfo>
 		<TechInfo>
 			<Type>TECH_POLYTHEISM</Type>
 			<Description>TXT_KEY_TECH_POLYTHEISM</Description>
@@ -4888,9 +4888,6 @@
             <OrPreReqs>
                 <PrereqTech>TECH_CHARIOTRY</PrereqTech>
             </OrPreReqs>
-            <AndPreReqs>
-                <PrereqTech>TECH_EQUINE_DOMESTICATION</PrereqTech>
-            </AndPreReqs>
             <Quote>TXT_KEY_TECH_ANIMAL_RIDING_QUOTE</Quote>
             <Sound>AS2D_TECH_ANIMAL_RIDING</Sound>
             <SoundMP>AS2D_TECH_GENERIC</SoundMP>
@@ -6152,6 +6149,7 @@
 			<Era>C2C_ERA_ANCIENT</Era>
 			<iAsset>8</iAsset>
 			<bEmbassyTrading>1</bEmbassyTrading>
+            <iFirstFreeTechs>1</iFirstFreeTechs>
 			<bTrade>1</bTrade>
 			<bGoodyTech>1</bGoodyTech>
 			<bTechTrading>1</bTechTrading>
@@ -7235,7 +7233,6 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iCost>401</iCost>
 			<Era>C2C_ERA_CLASSICAL</Era>
-			<iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>16</iAsset>
 			<iPower>4</iPower>
 			<bTrade>1</bTrade>
@@ -7550,6 +7547,7 @@
 			<bTrade>1</bTrade>
 			<iGridX>33</iGridX>
 			<iGridY>15</iGridY>
+            <iFirstFreeTechs>1</iFirstFreeTechs>
 			<Flavors>
 				<Flavor>
 					<FlavorType>FLAVOR_RELIGION</FlavorType>
@@ -9585,7 +9583,6 @@
 			<Advisor>ADVISOR_GROWTH</Advisor>
 			<iCost>1040</iCost>
 			<Era>C2C_ERA_MEDIEVAL</Era>
-			<iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>24</iAsset>
 			<bTrade>1</bTrade>
 			<iGridX>41</iGridX>
@@ -9663,6 +9660,7 @@
 			</OrPreReqs>
 			<AndPreReqs>
 				<PrereqTech>TECH_MEDITATION</PrereqTech>
+				<PrereqTech>TECH_REINCARNATION</PrereqTech>
 			</AndPreReqs>
 			<Quote>TXT_KEY_TECH_THEOLOGY_QUOTE</Quote>
 			<Sound>AS2D_TECH_THEOLOGY</Sound>
@@ -10902,6 +10900,7 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iCost>1563</iCost>
 			<Era>C2C_ERA_MEDIEVAL</Era>
+            <iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>24</iAsset>
 			<bTrade>1</bTrade>
 			<iGridX>46</iGridX>
@@ -11842,7 +11841,6 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iCost>2208</iCost>
 			<Era>C2C_ERA_RENAISSANCE</Era>
-			<iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>32</iAsset>
 			<bTrade>1</bTrade>
 			<iGridX>50</iGridX>
@@ -11889,6 +11887,7 @@
 			<bTrade>1</bTrade>
 			<iGridX>51</iGridX>
 			<iGridY>5</iGridY>
+            <iFirstFreeTechs>1</iFirstFreeTechs>
 			<Flavors>
 				<Flavor>
 					<FlavorType>FLAVOR_RELIGION</FlavorType>
@@ -13151,6 +13150,7 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iCost>3074</iCost>
 			<Era>C2C_ERA_RENAISSANCE</Era>
+            <iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>20</iAsset>
 			<bTrade>1</bTrade>
 			<iGridX>55</iGridX>
@@ -13525,7 +13525,6 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<iCost>3484</iCost>
 			<Era>C2C_ERA_RENAISSANCE</Era>
-			<iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>32</iAsset>
 			<bTrade>1</bTrade>
 			<iGridX>57</iGridX>
@@ -14247,7 +14246,6 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<iCost>4925</iCost>
 			<Era>C2C_ERA_INDUSTRIAL</Era>
-			<iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>40</iAsset>
 			<bTrade>1</bTrade>
 			<iGridX>61</iGridX>
@@ -16891,7 +16889,6 @@
 			<iAITradeModifier>10</iAITradeModifier>
 			<iCost>9094</iCost>
 			<Era>C2C_ERA_ATOMIC</Era>
-			<iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>40</iAsset>
 			<iPower>10</iPower>
 			<bTrade>1</bTrade>
@@ -20242,6 +20239,7 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iCost>14287</iCost>
 			<Era>C2C_ERA_ATOMIC</Era>
+            <iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>48</iAsset>
 			<bTrade>1</bTrade>
 			<iGridX>82</iGridX>
@@ -20941,7 +20939,6 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iCost>19246</iCost>
 			<Era>C2C_ERA_INFORMATION</Era>
-			<iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>48</iAsset>
 			<iPower>4</iPower>
 			<bTrade>1</bTrade>
@@ -24087,7 +24084,6 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iCost>35299</iCost>
 			<Era>C2C_ERA_NANOTECH</Era>
-			<iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>50</iAsset>
 			<iPower>5</iPower>
 			<bTrade>1</bTrade>
@@ -27583,7 +27579,6 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iCost>61449</iCost>
 			<Era>C2C_ERA_TRANSHUMAN</Era>
-			<iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>50</iAsset>
 			<iPower>5</iPower>
 			<bTrade>1</bTrade>
@@ -30868,7 +30863,6 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iCost>122420</iCost>
 			<Era>C2C_ERA_GALACTIC</Era>
-			<iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>50</iAsset>
 			<iPower>5</iPower>
 			<bTrade>1</bTrade>
@@ -33267,7 +33261,6 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iCost>253187</iCost>
 			<Era>C2C_ERA_COSMIC</Era>
-			<iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>50</iAsset>
 			<iPower>5</iPower>
 			<bTrade>1</bTrade>
@@ -34991,7 +34984,6 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iCost>480519</iCost>
 			<Era>C2C_ERA_TRANSCENDENT</Era>
-			<iFirstFreeTechs>1</iFirstFreeTechs>
 			<iAsset>50</iAsset>
 			<iPower>5</iPower>
 			<bTrade>1</bTrade>

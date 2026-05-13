@@ -189,6 +189,7 @@
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
 				<TerrainType>TERRAIN_ROCKY</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_SCRUB</TerrainType>
@@ -319,6 +320,7 @@
 				<TerrainType>TERRAIN_DUNES</TerrainType>
 				<TerrainType>TERRAIN_GRASSLAND</TerrainType>
 				<TerrainType>TERRAIN_LUSH</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_MARSH</TerrainType>
 				<TerrainType>TERRAIN_MUDDY</TerrainType>
 				<TerrainType>TERRAIN_PLAINS</TerrainType>
@@ -1737,6 +1739,7 @@
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_SEA</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP_POLAR</TerrainType>
@@ -1842,6 +1845,7 @@
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_SEA</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP</TerrainType>
                 <TerrainType>TERRAIN_PEAK</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP_POLAR</TerrainType>
@@ -3245,6 +3249,7 @@
 				<TerrainType>TERRAIN_PEAK</TerrainType>
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
@@ -3534,6 +3539,7 @@
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
 				<TerrainType>TERRAIN_ROCKY</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_SCRUB</TerrainType>
@@ -4271,6 +4277,7 @@
 				<TerrainType>TERRAIN_ROCKY</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_SCRUB</TerrainType>
 				<TerrainType>TERRAIN_TAIGA</TerrainType>
@@ -5516,6 +5523,7 @@
 				<TerrainType>TERRAIN_SEA</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP_POLAR</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
 				<TerrainType>TERRAIN_SEA_TROPICAL</TerrainType>
@@ -6686,6 +6694,7 @@
 				<TerrainType>TERRAIN_PEAK</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
 				<TerrainType>TERRAIN_TRENCH</TerrainType>
 				<TerrainType>TERRAIN_TRENCH_POLAR</TerrainType>
@@ -6967,6 +6976,7 @@
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_TRENCH</TerrainType>
 				<TerrainType>TERRAIN_TRENCH_POLAR</TerrainType>
 				<TerrainType>TERRAIN_TRENCH_TROPICAL</TerrainType>
@@ -7077,6 +7087,7 @@
 				<TerrainType>TERRAIN_OCEAN_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_TRENCH</TerrainType>
 				<TerrainType>TERRAIN_TRENCH_POLAR</TerrainType>
 				<TerrainType>TERRAIN_TRENCH_TROPICAL</TerrainType>
@@ -7508,6 +7519,7 @@
 				<TerrainType>TERRAIN_ICE</TerrainType>
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_TAIGA</TerrainType>
@@ -7890,6 +7902,7 @@
 				<TerrainType>TERRAIN_DUNES</TerrainType>
 				<TerrainType>TERRAIN_ICE</TerrainType>
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_SEA</TerrainType>
@@ -8018,6 +8031,7 @@
 				<TerrainType>TERRAIN_LUSH</TerrainType>
 				<TerrainType>TERRAIN_MARSH</TerrainType>
 				<TerrainType>TERRAIN_MUDDY</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_PLAINS</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
@@ -10254,6 +10268,7 @@
 				<TerrainType>TERRAIN_OCEAN_POLAR</TerrainType>
 				<TerrainType>TERRAIN_OCEAN_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_TRENCH</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_TRENCH_POLAR</TerrainType>
 				<TerrainType>TERRAIN_TRENCH_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_PEAK</TerrainType>
@@ -10366,6 +10381,7 @@
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_TRENCH</TerrainType>
 				<TerrainType>TERRAIN_TRENCH_POLAR</TerrainType>
 				<TerrainType>TERRAIN_TRENCH_TROPICAL</TerrainType>
@@ -10639,6 +10655,7 @@
 				<TerrainType>TERRAIN_ICE</TerrainType>
 				<TerrainType>TERRAIN_OCEAN</TerrainType>
 				<TerrainType>TERRAIN_OCEAN_TROPICAL</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_OCEAN_POLAR</TerrainType>
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
@@ -10762,6 +10779,7 @@
 				<TerrainType>TERRAIN_ICE</TerrainType>
 				<TerrainType>TERRAIN_OCEAN</TerrainType>
 				<TerrainType>TERRAIN_OCEAN_POLAR</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_OCEAN_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
@@ -11189,6 +11207,7 @@
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_SEA</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP_POLAR</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
@@ -12672,6 +12691,7 @@
 				<TerrainType>TERRAIN_DESERT</TerrainType>
 				<TerrainType>TERRAIN_DUNES</TerrainType>
 				<TerrainType>TERRAIN_ICE</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
@@ -13434,6 +13454,7 @@
 				<TerrainType>TERRAIN_SEA_DEEP</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP_POLAR</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP_TROPICAL</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
 				<TerrainType>TERRAIN_SEA_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_PEAK</TerrainType>
@@ -13680,6 +13701,7 @@
 				<TerrainType>TERRAIN_ICE</TerrainType>
 				<TerrainType>TERRAIN_PEAK</TerrainType>
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
@@ -14777,6 +14799,7 @@
 				<TerrainType>TERRAIN_ICE</TerrainType>
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_TAIGA</TerrainType>
@@ -16279,6 +16302,7 @@
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
 				<TerrainType>TERRAIN_ROCKY</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
 				<TerrainType>TERRAIN_TAIGA</TerrainType>
 				<TerrainType>TERRAIN_TUNDRA</TerrainType>
@@ -16412,6 +16436,7 @@
 				<TerrainType>TERRAIN_SEA_DEEP_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
 				<TerrainType>TERRAIN_SEA_TROPICAL</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_TAIGA</TerrainType>
 				<TerrainType>TERRAIN_TUNDRA</TerrainType>
 				<TerrainType>TERRAIN_PEAK</TerrainType>
@@ -16731,6 +16756,7 @@
 				<TerrainType>TERRAIN_COAST_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_DESERT</TerrainType>
 				<TerrainType>TERRAIN_DUNES</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_ICE</TerrainType>
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
@@ -16846,6 +16872,7 @@
 				<TerrainType>TERRAIN_ICE</TerrainType>
 				<TerrainType>TERRAIN_PEAK</TerrainType>
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
@@ -17126,6 +17153,7 @@
 				<TerrainType>TERRAIN_COAST_POLAR</TerrainType>
 				<TerrainType>TERRAIN_COAST_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_DESERT</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_DUNES</TerrainType>
 				<TerrainType>TERRAIN_ICE</TerrainType>
 				<TerrainType>TERRAIN_PEAK</TerrainType>
@@ -17241,6 +17269,7 @@
 				<TerrainType>TERRAIN_COAST_POLAR</TerrainType>
 				<TerrainType>TERRAIN_COAST_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_DUNES</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_ICE</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_PEAK</TerrainType>
@@ -18485,6 +18514,7 @@
 				<TerrainType>TERRAIN_COAST_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_DESERT</TerrainType>
 				<TerrainType>TERRAIN_DUNES</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_ICE</TerrainType>
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
@@ -18717,6 +18747,7 @@
 				<TerrainType>TERRAIN_COAST_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_COAST_DEEP_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_DESERT</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_DUNES</TerrainType>
 				<TerrainType>TERRAIN_OCEAN</TerrainType>
 				<TerrainType>TERRAIN_OCEAN_POLAR</TerrainType>
@@ -19089,6 +19120,7 @@
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_TAIGA</TerrainType>
 				<TerrainType>TERRAIN_TUNDRA</TerrainType>
 				<TerrainType>TERRAIN_PEAK</TerrainType>
@@ -20153,6 +20185,7 @@
 				<TerrainType>TERRAIN_LUSH</TerrainType>
 				<TerrainType>TERRAIN_PLAINS</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_SCRUB</TerrainType>
 				<TerrainType>TERRAIN_PEAK</TerrainType>
@@ -20811,6 +20844,7 @@
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_SEA</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP_POLAR</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP_TROPICAL</TerrainType>
@@ -21541,6 +21575,7 @@
 				<TerrainType>TERRAIN_ICE</TerrainType>
 				<TerrainType>TERRAIN_PERMAFROST</TerrainType>
 				<TerrainType>TERRAIN_JAGGED</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_SEA</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP</TerrainType>
@@ -23598,6 +23633,7 @@
 				<TerrainType>TERRAIN_OCEAN_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_BADLAND</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_TRENCH</TerrainType>
 				<TerrainType>TERRAIN_TRENCH_POLAR</TerrainType>
 				<TerrainType>TERRAIN_TRENCH_TROPICAL</TerrainType>
@@ -23850,6 +23886,7 @@
 				<TerrainType>TERRAIN_TUNDRA</TerrainType>
 				<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
 				<TerrainType>TERRAIN_SEA</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP_POLAR</TerrainType>
 				<TerrainType>TERRAIN_SEA_DEEP_TROPICAL</TerrainType>
@@ -24180,6 +24217,7 @@
 				<TerrainType>TERRAIN_COAST_POLAR</TerrainType>
 				<TerrainType>TERRAIN_COAST_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_DESERT</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_DUNES</TerrainType>
 				<TerrainType>TERRAIN_ICE</TerrainType>
 				<TerrainType>TERRAIN_PEAK</TerrainType>
@@ -24520,6 +24558,7 @@
 				<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
 				<TerrainType>TERRAIN_TAIGA</TerrainType>
 				<TerrainType>TERRAIN_TRENCH</TerrainType>
+                <TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
 				<TerrainType>TERRAIN_TRENCH_POLAR</TerrainType>
 				<TerrainType>TERRAIN_TRENCH_TROPICAL</TerrainType>
 				<TerrainType>TERRAIN_TUNDRA</TerrainType>
