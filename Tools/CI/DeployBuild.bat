@@ -147,7 +147,7 @@ echo %C2C_VERSION%
 :: DELETE TEMP RELEASE TAG -------------------------------------
 :: We delete it ASAP so it isn't left up if the build fails
 :: below.
-call git push origin --delete %C2C_VERSION%
+@REM call git push origin --delete %C2C_VERSION%
 
 :: DETECT SVN CHANGES ------------------------------------------
 echo Detecting working copy changes...
