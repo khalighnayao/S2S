@@ -2,7 +2,7 @@ style: github
 template: CHANGELOG.tpl.md
 info:
   title: CHANGELOG
-  repository_url: https://github.com/caveman2cosmos/Caveman2Cosmos
+  repository_url: https://github.com/stones2stars/S2S
 options:
   commits:
     # filters:

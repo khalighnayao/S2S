@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<Civ4MapInfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schema\Caveman2Cosmos.xsd">
+<Civ4MapInfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schema\Stones2Stars.xsd">
 	<MapInfos>
 		<MapInfo>
 			<!-- Earth map -->
@@ -17,9 +17,9 @@
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>0</bStartRevealed>
 			<!-- WB map path should look like the one below, i.e. beginning with \ -->
-			<!-- <InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\Test.Civ4BeyondSwordWBSave</InitialWBMap> -->
+			<!-- <InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\Test.Civ4BeyondSwordWBSave</InitialWBMap> -->
 			<!-- Alternatively if using generated space zone -->
-			<!-- <MapScript>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\Test.py</MapScript> -->
+			<!-- <MapScript>\Mods\Stones2Stars\PrivateMaps\Multimaps\Test.py</MapScript> -->
 			<InitialWBMap/>
 			<MapScript/>
 		</MapInfo>
@@ -52,7 +52,7 @@
 			<bWrapX>1</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_01_CISLUNAR.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_01_CISLUNAR.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 		<MapInfo>
@@ -68,7 +68,7 @@
 			<bWrapX>1</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_02_MOON.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_02_MOON.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 		<MapInfo>
@@ -84,7 +84,7 @@
 			<bWrapX>1</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_03_MARS.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_03_MARS.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 		<MapInfo>
@@ -100,7 +100,7 @@
 			<bWrapX>1</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_04_VENUS.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_04_VENUS.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 		<MapInfo>
@@ -116,7 +116,7 @@
 			<bWrapX>1</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_05_INNNER_SOLAR_SYSTEM.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_05_INNNER_SOLAR_SYSTEM.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 		<MapInfo>
@@ -132,7 +132,7 @@
 			<bWrapX>1</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_06_OUTER_SOLAR_SYSTEM.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_06_OUTER_SOLAR_SYSTEM.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 		<MapInfo>
@@ -148,7 +148,7 @@
 			<bWrapX>1</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_07_TITAN.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_07_TITAN.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 		<MapInfo>
@@ -164,7 +164,7 @@
 			<bWrapX>1</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_08_KUIPER.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_08_KUIPER.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 		<MapInfo>
@@ -180,7 +180,7 @@
 			<bWrapX>1</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_09_NEARBY_STARS.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_09_NEARBY_STARS.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 		<MapInfo>
@@ -196,7 +196,7 @@
 			<bWrapX>1</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_10_ORION_ARM.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_10_ORION_ARM.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 		<MapInfo>
@@ -212,7 +212,7 @@
 			<bWrapX>0</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_11_MILKY_WAY.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_11_MILKY_WAY.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 		<MapInfo>
@@ -228,7 +228,7 @@
 			<bWrapX>1</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_12_LOCAL_GROUP.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_12_LOCAL_GROUP.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 		<MapInfo>
@@ -244,7 +244,7 @@
 			<bWrapX>1</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_13_VIRGO_SUPERCLUSTER.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_13_VIRGO_SUPERCLUSTER.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 		<MapInfo>
@@ -260,7 +260,7 @@
 			<bWrapX>1</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_14_UNIVERSE.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_14_UNIVERSE.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 		<MapInfo>
@@ -276,7 +276,7 @@
 			<bWrapX>1</bWrapX>
 			<bWrapY>0</bWrapY>
 			<bStartRevealed>1</bStartRevealed>
-			<InitialWBMap>\Mods\Caveman2Cosmos\PrivateMaps\Multimaps\MM_15_DISTANT_COSMOS.CivBeyondSwordWBSave</InitialWBMap>
+			<InitialWBMap>\Mods\Stones2Stars\PrivateMaps\Multimaps\MM_15_DISTANT_COSMOS.CivBeyondSwordWBSave</InitialWBMap>
 			<MapScript/>
 		</MapInfo>
 	</MapInfos>

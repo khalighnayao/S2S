@@ -4,7 +4,7 @@
 	by Zappara & Afforess
 -->
 <mod id="AutomatedSettings"	module="AutomatedSettings"
-	name="Caveman2Cosmos" author="Afforess"
+	name="Stones2Stars" author="Afforess"
 	version="1.75" date="9/20/10" url="">
 
 	<events module="AutomatedSettings"/>

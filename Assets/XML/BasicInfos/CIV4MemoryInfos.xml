@@ -4,7 +4,7 @@
 		Memories are hard coded enumerated in the SDK.
 		New ones can be added, but must be added at the end of the file for save compatibility.
 -->
-<Civ4MemoryInfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schema\Caveman2Cosmos.xsd">
+<Civ4MemoryInfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schema\Stones2Stars.xsd">
 	<MemoryInfos>
 		<MemoryInfo>
 			<Type>MEMORY_DECLARED_WAR</Type>

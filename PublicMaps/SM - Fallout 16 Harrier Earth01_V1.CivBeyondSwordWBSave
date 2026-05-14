@@ -1,7 +1,7 @@
 BeginMeta
 	Version=C2C_2
 	Description=Harrier Earth Map with KaTiON_PT's Large Solar System Space map in a post-apocalyptic world with 16 players. For more challenging game, you can set an increased number of barbarians. Have fun!
-	ModPath=Mods\Caveman2Cosmos
+	ModPath=Mods\Stones2Stars
 EndMeta
 BeginMap
 	grid width=108

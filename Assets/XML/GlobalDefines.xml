@@ -11,7 +11,7 @@
 		The plan is to have increasing unit upkeep values as unit technology develops,
 		and when that plan is fulfilled these values will likely be set higher too.
  -->
-<Civ4Defines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Schema\Caveman2Cosmos.xsd">
+<Civ4Defines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Schema\Stones2Stars.xsd">
 	<Define>
 		<DefineName>CIV4_VERSION</DefineName>
 		<iDefineIntVal>319</iDefineIntVal>

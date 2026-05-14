@@ -4,7 +4,7 @@
 <!-- Copyright Firaxis Games 2005 -->
 <!-- Created with Notepad by strategyonly -->
 <!-- Unit art path information -->
-<Civ4ArtDefines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\Xml\Schema\Caveman2Cosmos.xsd">
+<Civ4ArtDefines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\Xml\Schema\Stones2Stars.xsd">
 	<UnitArtInfos>
 		<UnitArtInfo>
 			<Type>ART_DEF_UNIT_LARA_CROFT</Type>

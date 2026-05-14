@@ -8,14 +8,14 @@ if not exist ..\..\Civ4BeyondSword.exe (
 )
 
 PUSHD "%~dp0..\.."
-start "" "Civ4BeyondSword.exe" "mod= mods\Caveman2Cosmos"
+start "" "Civ4BeyondSword.exe" "mod= Mods\Stones2Stars"
 POPD
 POPD
 exit /B 0
 
 :wrong_mods_dir
 echo Can't launch Caveman2Cosmos, it is not installed to the correct location!
-echo Please install it to Mods\Caveman2Cosmos under your Beyond the Sword install directory.
+echo Please install it to Mods\Stones2Stars under your Beyond the Sword install directory.
 echo i.e. Not under your My Documents folder or anywhere else.
 pause
 

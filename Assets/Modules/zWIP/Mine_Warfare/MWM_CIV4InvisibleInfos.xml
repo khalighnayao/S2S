@@ -3,7 +3,7 @@
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- Basic Infos -->
-<Civ4InvisibleInfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\Xml\Schema\Caveman2Cosmos.xsd">
+<Civ4InvisibleInfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\Xml\Schema\Stones2Stars.xsd">
 	<InvisibleInfos>
 		<!-- Mine Warfare Mod -->
 		<InvisibleInfo>

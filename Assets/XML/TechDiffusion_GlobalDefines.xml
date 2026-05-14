@@ -3,7 +3,7 @@
 	Tech Diffusion modifies this to take into account relationships, so tech diffuses fastest through open borders.
 	In addition, it enables a kind of tech welfare to keep the civs who are far behind technologically relevant. -->
 <!-- by jdog5000 -->
-<Civ4Defines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Schema\Caveman2Cosmos.xsd">
+<Civ4Defines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Schema\Stones2Stars.xsd">
 	<Define>
 		<DefineName>TECH_DIFFUSION_ENABLE</DefineName>
 		<iDefineIntVal>1</iDefineIntVal>

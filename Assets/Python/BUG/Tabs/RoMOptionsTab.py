@@ -12,7 +12,7 @@ import BugOptionsTab
 class RoMOptionsTab(BugOptionsTab.BugOptionsTab):
 
 	def __init__(self, screen):
-		BugOptionsTab.BugOptionsTab.__init__(self, "RoMSettings", "Caveman2Cosmos")
+		BugOptionsTab.BugOptionsTab.__init__(self, "RoMSettings", "Stones2Stars")
 
 	def create(self, screen):
 		self.createTab(screen)

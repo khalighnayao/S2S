@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<Civ4ArtDefines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schema\Caveman2Cosmos.xsd">
+<Civ4ArtDefines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schema\Stones2Stars.xsd">
 	<MiscArtInfos>
 		<MiscArtInfo>
 			<Type>ART_GREAT_WALL_POST</Type>
@@ -306,7 +306,7 @@
 		</MiscArtInfo>
 		<MiscArtInfo>
 			<Type>DEFAULT_THEME_NAME</Type>
-			<Path>Mods/Caveman2Cosmos/Resource/C2C.thm</Path>
+			<Path>Mods/Stones2Stars/Resource/C2C.thm</Path>
 			<fScale>0</fScale>
 			<NIF/>
 			<KFM/>

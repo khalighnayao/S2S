@@ -3725,7 +3725,7 @@ import os.path
 def civFilePath():
 	try:
 		folder = os.path.dirname(os.path.realpath(__file__))
-		folder = os.path.join(folder[:-6], "Mods\Caveman2Cosmos\UserSettings")
+		folder = os.path.join(folder[:-6], "Mods\Stones2Stars\UserSettings")
 		return folder
 	except:
 		return ""

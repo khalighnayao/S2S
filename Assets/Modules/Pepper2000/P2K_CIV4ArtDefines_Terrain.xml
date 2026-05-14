@@ -3,7 +3,7 @@
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- Terrain art path information -->
-<Civ4ArtDefines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\Xml\Schema\Caveman2Cosmos.xsd">
+<Civ4ArtDefines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\Xml\Schema\Stones2Stars.xsd">
 	<TerrainArtInfos>
 		<TerrainArtInfo>
 			<Type>ART_DEF_TERRAIN_MERCURY</Type>

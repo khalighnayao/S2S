@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!-- Global Defines! -->
-<Civ4Defines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Schema\Caveman2Cosmos.xsd">
+<Civ4Defines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Schema\Stones2Stars.xsd">
 	<Define>
 		<DefineName>SHOW_HIDDEN_ATTITUDE</DefineName>
 		<iDefineIntVal>1</iDefineIntVal>

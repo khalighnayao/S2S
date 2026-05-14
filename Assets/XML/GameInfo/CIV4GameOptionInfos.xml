@@ -16,7 +16,7 @@
 	and on the enforced option(s): "[NEWLINE]This option is required for, and will thus be forced ON, if [indicated game option] is used!"
 	and on the enforced off option(s): "[NEWLINE]This option is incompatible with, and will thus be forced OFF, if [indicated game option] is used!" -->
 <!-- Match ordering of these options with CvEnums.h -->
-<Civ4GameOptionInfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schema\Caveman2Cosmos.xsd">
+<Civ4GameOptionInfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schema\Stones2Stars.xsd">
 	<GameOptionInfos>
 		<GameOptionInfo>
 			<!-- This one must always be the first option as the exe has hardcoded it as such -->

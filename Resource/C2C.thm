@@ -2,8 +2,8 @@
 // *** Control Bitmap Theme file
 
 // Set the resource
-resource_path	"Mods/Caveman2Cosmos/Resource";
+resource_path	"Mods/Stones2Stars/Resource";
 
 // Setup common properties
-include			"Mods/Caveman2Cosmos/Resource/Theme/C2CTheme.thm";
+include			"Mods/Stones2Stars/Resource/Theme/C2CTheme.thm";
 

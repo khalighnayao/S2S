@@ -3,7 +3,7 @@
 <!-- Sid Meier's Civilization 4 -->
 <!-- Copyright Firaxis Games 2005 -->
 <!-- Global Defines -->
-<Civ4Defines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Schema\Caveman2Cosmos.xsd">
+<Civ4Defines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Schema\Stones2Stars.xsd">
 	<!-- DCM features -->
 	<Define>
 		<DefineName>DCM_AIR_BOMBING</DefineName>

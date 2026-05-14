@@ -66,7 +66,7 @@ Logs/
 UserSettings/
 .vs/slnx.sqlite
 .vs/VSWorkspaceState.json
-.vs/caveman2cosmos/v16/.suo
+.vs/
 /.idea
 /cmake-build-debug
 /CMakeLists.txt

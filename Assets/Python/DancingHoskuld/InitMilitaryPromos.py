@@ -1,6 +1,6 @@
 ##=========================##
 ## MILITIA PROMOTIONS CODE ##
-## Code for Caveman2Cosmos ##
+## Code for Stones2Stars   ##
 ##=========================##
 from CvPythonExtensions import *
 

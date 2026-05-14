@@ -4,7 +4,7 @@
 <!-- Copyright Firaxis Games 2005 -->
 <!-- Global Types -->
 <!-- To search for one of these types use CvGlobals (CyGlobalContext if using Python) ::getInfoTypeForString(strTypeName) -->
-<Civ4Types xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Schema\Caveman2Cosmos.xsd">
+<Civ4Types xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Schema\Stones2Stars.xsd">
 	<AnimationOperatorTypes>
 		<!--Changes must be reflected in CvEnums.h-->
 		<AnimationOperatorType>RAND_FPR</AnimationOperatorType>

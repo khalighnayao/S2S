@@ -3954,11 +3954,11 @@ class MapOptions:
 		except:
 			print "------\n unexpected problem writing", fileName
 
-
+	# TOOD: fix this so that it references modname by variable
 	def civFilePath(self):
 		try:
 			folder = os.path.dirname(os.path.realpath(__file__))
-			folder = os.path.join(folder[:-6], "Mods\Caveman2Cosmos\UserSettings")
+			folder = os.path.join(folder[:-6], "Mods\Stones2Stars\UserSettings")
 			return folder
 		except:
 			return ""

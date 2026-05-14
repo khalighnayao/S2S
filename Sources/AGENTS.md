@@ -31,7 +31,7 @@ These instructions apply to code under `Sources/`.
 
 ## Pitfalls
 - Build dependencies are legacy and strict (VC++ toolkit + bundled deps in `Build/deps/`); avoid modern compiler assumptions.
-- `DevSetup.bat` warns that `Mods/Caveman2Cosmos` can be replaced/symlinked; keep edits in the git workspace.
+- `DevSetup.bat` warns that `Mods/Stones2Stars` can be replaced/symlinked; keep edits in the git workspace.
 - Some mod/runtime behavior depends on local tooling and setup scripts; avoid assuming clean-room runtime behavior without validation.
 
 ## Reference Docs

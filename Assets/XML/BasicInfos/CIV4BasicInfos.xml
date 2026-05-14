@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- This file contains the Civ IV and BtS game concepts. Don't change. -->
-<Civ4BasicInfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schema\Caveman2Cosmos.xsd">
+<Civ4BasicInfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\Schema\Stones2Stars.xsd">
 	<ConceptInfos>
 		<ConceptInfo>
 			<Type>CONCEPT_AIR_COMBAT</Type>

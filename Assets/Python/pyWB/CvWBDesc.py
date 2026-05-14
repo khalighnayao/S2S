@@ -1785,7 +1785,7 @@ class CvWBDesc:
 
 		f = file(fileName + getWBSaveExtension(), "w") # open text file
 
-		f.write("BeginMeta\n\tVersion=%s\n\tDescription=undescribed\n\tModPath=Mods\Caveman2Cosmos\nEndMeta\n" % VERSION)
+		f.write("BeginMeta\n\tVersion=%s\n\tDescription=undescribed\n\tModPath=Mods\Stones2Stars\nEndMeta\n" % VERSION)
 		CvGameDesc().write(f)
 
 		# Write map info

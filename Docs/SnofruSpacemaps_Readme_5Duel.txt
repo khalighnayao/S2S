@@ -3,7 +3,7 @@ These maps contain all the space areas that are necessary for the full late game
 The Spacemaps can be used just like any other map in Caveman2Cosmos. You can just play with them and if you finish or quit before space comes into play you won´t see any difference to a normal game. Playing on a Spacemap just means that you have the opportunity to use all the space-related stuff in the late game which you don´t have if you start playing on a normal map.
 
 Installation:
-Unzip this file and copy one or more of the included map files to ...\Sid Meier's Civilization 4\Beyond the Sword\Mods\Caveman2Cosmos\PrivateMaps. Start Caveman2Cosmos - Single Game - Custom Scenario where you can select your civilization, your name, difficulty, game speed, game settings and victory conditions.
+Unzip this file and copy one or more of the included map files to ...\Sid Meier's Civilization 4\Beyond the Sword\Mods\Stones2Stars\PrivateMaps. Start Caveman2Cosmos - Single Game - Custom Scenario where you can select your civilization, your name, difficulty, game speed, game settings and victory conditions.
 Important: Never use more than the recommended number of civs (yours included)! Additional civs will land in weird places.
 
 Modmods:

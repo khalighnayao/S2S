@@ -25,9 +25,9 @@ def init(dir):
 
 	# Set correct MainMenuMods if current is invalid.
 	szMainMenuMods = Config.get("GAME", "MainMenuMods")
-	if szMainMenuMods != "Caveman2Cosmos":
+	if szMainMenuMods != "Stones2Stars":
 		print "Fixing MainMenuMods"
-		Config.set("GAME", "MainMenuMods", "Caveman2Cosmos")
+		Config.set("GAME", "MainMenuMods", "Stones2Stars")
 		file = open(path, 'wb')
 		Config.write(file)
 		file.close()

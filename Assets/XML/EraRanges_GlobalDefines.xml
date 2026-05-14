@@ -2,7 +2,7 @@
 <!-- This feature will change the date calculation algorithm, making them more historically accurate 
 depending on the global technological level for greater game immersion. -->
 <!-- by Blakil -->
-<Civ4Defines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Schema\Caveman2Cosmos.xsd">
+<Civ4Defines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Schema\Stones2Stars.xsd">
 	<!-- Era ranges -->
 	<Define>
 		<DefineName>HISTORICAL_ACCURATE_ERA_RANGE_PREHISTORIC_START</DefineName>

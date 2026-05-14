@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Civ4ArtDefines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\Xml\Schema\Caveman2Cosmos.xsd">
+<Civ4ArtDefines xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\Xml\Schema\Stones2Stars.xsd">
 	<BonusArtInfos>
 		<BonusArtInfo>
 			<Type>ART_DEF_BONUS_ABANDONED_CIVILIZATION</Type>

@@ -4,7 +4,7 @@
 	by Zappara & Afforess
 -->
 <mod id="DiplomacySettings"	module="DiplomacySettings"
-	name="Caveman2Cosmos" author="Afforess"
+	name="Stones2Stars" author="Afforess"
 	version="1.73" date="5/14/10" url="">
 
 	<events module="DiplomacySettings"/>
