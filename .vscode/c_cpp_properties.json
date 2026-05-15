@@ -20,6 +20,7 @@
         "_MOD_FRACTRADE",
         "__INTELLISENSE__"
       ],
+      "compilerPath": "",
       "windowsSdkVersion": "10.0.22621.0",
       "cStandard": "c99",
       "cppStandard": "c++03",
