@@ -365,7 +365,7 @@ void CvPlot::setRequireGraphicsVisible(ECvPlotGraphics::type graphics, bool visi
 
 bool CvPlot::isGraphicsVisible(ECvPlotGraphics::type graphics) const
 {
-	return (m_visibleGraphics & graphics) != 0 && isInViewport();
+	return (!GC.isGraphicalPaging() || (m_visibleGraphics & graphics) != 0) && isInViewport();
 }
 
 bool CvPlot::isGraphicPagingEnabled() const
