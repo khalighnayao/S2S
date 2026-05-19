@@ -612,3 +612,11 @@ const std::vector<std::pair<ImprovementTypes, BuildTypes> >* CvBonusInfo::getTra
 
 	return (const std::vector<std::pair<ImprovementTypes, BuildTypes> >*)m_tradeProvidingImprovements;
 }
+
+// ===== Methods relocated from CvInfos.cpp =====
+
+const CvArtInfoBonus* CvBonusInfo::getArtInfo() const
+{
+	return ARTFILEMGR.getBonusArtInfo( getArtDefineTag());
+}
+
