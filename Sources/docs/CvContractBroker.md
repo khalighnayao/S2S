@@ -8,8 +8,7 @@
 the need for cities and units to search for each other directly, which improves
 performance and reduces AI coupling.
 
-Each `CvPlayer` owns one `CvContractBroker` instance. It is cleared and rebuilt at the
-start of the player's AI turn.
+Each `CvPlayer` owns one `CvContractBroker` instance.
 
 ## Key Concepts
 
