@@ -74,5 +74,3 @@ DevExtras/.vs/
 DevExtras/__pycache__/
 DevExtras/PyScripts/Profiling/Backup/
 DevExtras/PyScripts/Profiling/__pycache__/
-.claude/settings.local.json
-.claude/
