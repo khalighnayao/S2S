@@ -4,9 +4,6 @@ version: 1.BETA.{build}
 skip_tags: true
 skip_branch_with_pr: true
 
-cache:
-- _build\
-
 environment:
   svn_url: https://svn.code.sf.net/p/stones2stars/code/trunk
   release_prefix: Stones2Stars
