@@ -365,7 +365,16 @@ void CvPlot::setRequireGraphicsVisible(ECvPlotGraphics::type graphics, bool visi
 
 bool CvPlot::isGraphicsVisible(ECvPlotGraphics::type graphics) const
 {
-	return (!GC.isGraphicalPaging() || (m_visibleGraphics & graphics) != 0) && isInViewport();
+	// IsGraphicsInitialized() guards against creating plot graphics before the engine
+	// landscape exists (e.g. during new-game map generation). With graphics paging on
+	// this was hidden because m_visibleGraphics stays empty during generation; with
+	// paging off the gate reduced to isInViewport() and the river/feature symbol
+	// updaters would call into non-existent engine plots and crash. See setPlotType's
+	// equivalent guard. Graphics are (re)built post-generation via setupGraphical /
+	// the paging-disable pass, so nothing is lost by deferring here.
+	return GC.IsGraphicsInitialized()
+		&& (!GC.isGraphicalPaging() || (m_visibleGraphics & graphics) != 0)
+		&& isInViewport();
 }
 
 bool CvPlot::isGraphicPagingEnabled() const
