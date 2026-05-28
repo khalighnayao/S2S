@@ -22,11 +22,16 @@ public:
 	// Sorted ascending by BuildTypes id.
 	const std::vector<BuildTypes>& improvementBuilds() const;
 
+	// Builds whose CvBuildInfo::getRoute() != NO_ROUTE.
+	// Sorted ascending by BuildTypes id.
+	const std::vector<BuildTypes>& routeBuilds() const;
+
 private:
 	BuildsRepo();
 	~BuildsRepo();
 
 	std::vector<BuildTypes> m_improvementBuilds;
+	std::vector<BuildTypes> m_routeBuilds;
 };
 
 #endif // BUILDS_REPO_H
