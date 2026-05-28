@@ -24,12 +24,24 @@ public:
 	// Returns an empty vector for NO_RELIGION or out-of-range eReligion.
 	const std::vector<BuildingTypes>& byReligion(ReligionTypes eReligion) const;
 
+	// Buildings with getMaxGlobalInstances() != -1 (i.e. isWorldWonder).
+	const std::vector<BuildingTypes>& worldWonders() const;
+
+	// Buildings with getFreeStartEra() != NO_ERA.
+	const std::vector<BuildingTypes>& withFreeStartEra() const;
+
+	// Buildings with isAutoBuild().
+	const std::vector<BuildingTypes>& autoBuildings() const;
+
 private:
 	BuildingsRepo();
 	~BuildingsRepo();
 
 	// m_byReligion[r] = sorted ascending list of buildings with getReligionType() == r.
 	std::vector<std::vector<BuildingTypes> > m_byReligion;
+	std::vector<BuildingTypes> m_worldWonders;
+	std::vector<BuildingTypes> m_withFreeStartEra;
+	std::vector<BuildingTypes> m_autoBuildings;
 	std::vector<BuildingTypes> m_emptyBucket;
 };
 

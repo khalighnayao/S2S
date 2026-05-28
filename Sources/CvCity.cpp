@@ -1485,33 +1485,30 @@ void CvCity::doAutobuild()
 		checkPropertyBuildings();
 	}
 	// Auto-build any auto-build buildings we can
-	for (int iI = GC.getNumBuildingInfos() - 1; iI > -1; iI--)
+	foreach_(const BuildingTypes eBuilding, BuildingsRepo::get().autoBuildings())
 	{
-		const CvBuildingInfo& kBuilding = GC.getBuildingInfo((BuildingTypes)iI);
-		if (kBuilding.isAutoBuild())
+		const CvBuildingInfo& kBuilding = GC.getBuildingInfo(eBuilding);
+		if (!hasBuilding(eBuilding))
 		{
-			if (!hasBuilding((BuildingTypes)iI))
+			if (canConstruct(eBuilding, false, false, true))
 			{
-				if (canConstruct((BuildingTypes)iI, false, false, true))
-				{
-					changeHasBuilding((BuildingTypes)iI, true);
-					const CvWString szBuffer = gDLL->getText("TXT_KEY_COMPLETED_AUTO_BUILD", kBuilding.getTextKeyWide(), getName().GetCString());
-					AddDLLMessage(getOwner(), true, 10, szBuffer, NULL, MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN());
-				}
+				changeHasBuilding(eBuilding, true);
+				const CvWString szBuffer = gDLL->getText("TXT_KEY_COMPLETED_AUTO_BUILD", kBuilding.getTextKeyWide(), getName().GetCString());
+				AddDLLMessage(getOwner(), true, 10, szBuffer, NULL, MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN());
 			}
-			// Toffer - World wonder autobuilds should never be auto-removed.
-			else if (kBuilding.getMaxGlobalInstances() == -1)
+		}
+		// Toffer - World wonder autobuilds should never be auto-removed.
+		else if (kBuilding.getMaxGlobalInstances() == -1)
+		{
+			// Special rule meant for adopted cultures, hopefully it won't affect other autobuilds in an irrational way.
+			foreach_(const BuildingModifier2& modifier, kBuilding.getPrereqNumOfBuildings())
 			{
-				// Special rule meant for adopted cultures, hopefully it won't affect other autobuilds in an irrational way.
-				foreach_(const BuildingModifier2& modifier, kBuilding.getPrereqNumOfBuildings())
+				if (GET_PLAYER(getOwner()).getBuildingCount(modifier.first) < GET_PLAYER(getOwner()).getBuildingPrereqBuilding(eBuilding, modifier.first, 0))
 				{
-					if (GET_PLAYER(getOwner()).getBuildingCount(modifier.first) < GET_PLAYER(getOwner()).getBuildingPrereqBuilding((BuildingTypes)iI, modifier.first, 0))
-					{
-						changeHasBuilding((BuildingTypes)iI, false);
-						const CvWString szBuffer = gDLL->getText("TXT_KEY_COMPLETED_AUTO_BUILD_NOT", kBuilding.getTextKeyWide(), getName().GetCString());
-						AddDLLMessage(getOwner(), true, 10, szBuffer, NULL, MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED());
-						break;
-					}
+					changeHasBuilding(eBuilding, false);
+					const CvWString szBuffer = gDLL->getText("TXT_KEY_COMPLETED_AUTO_BUILD_NOT", kBuilding.getTextKeyWide(), getName().GetCString());
+					AddDLLMessage(getOwner(), true, 10, szBuffer, NULL, MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED());
+					break;
 				}
 			}
 		}
