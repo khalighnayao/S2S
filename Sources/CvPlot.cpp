@@ -33,6 +33,7 @@
 #include "CvDLLSymbolIFaceBase.h"
 #include "CvDLLPlotBuilderIFaceBase.h"
 #include "CvDLLUtilityIFaceBase.h"
+#include "Repos/BuildsRepo.h"
 #include "FAStarNode.h"
 
 #define STANDARD_MINIMAP_ALPHA		(0.6f)
@@ -3589,11 +3590,11 @@ int CvPlot::getBuildTime(BuildTypes eBuild) const
 		const RouteTypes eCurrentRoute = getRouteType();
 		if (eCurrentRoute != NO_ROUTE && GC.getDefineINT("ROUTES_UPGRADE") > 0)
 		{
-			for (int iI = 0; iI < GC.getNumBuildInfos(); iI++)
+			foreach_(const BuildTypes eBuild, BuildsRepo::get().routeBuilds())
 			{
-				if (GC.getBuildInfo((BuildTypes)iI).getRoute() == eCurrentRoute)
+				if (GC.getBuildInfo(eBuild).getRoute() == eCurrentRoute)
 				{
-					iTime = std::max(1, iTime - GC.getBuildInfo((BuildTypes)iI).getTime());
+					iTime = std::max(1, iTime - GC.getBuildInfo(eBuild).getTime());
 					break;
 				}
 			}
