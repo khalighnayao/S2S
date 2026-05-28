@@ -150,6 +150,44 @@ public:
 
 	int getBuildingHappinessChanges(int i) const;
 	int getBuildingHealthChanges(int i) const;
+
+	// ---------------------------------------------------------------------
+	// Sparse views over the per-building modifier arrays.
+	//
+	// The dense int* arrays (m_paiBuildingHappinessChanges /
+	// m_paiBuildingHealthChanges) remain the canonical storage. They preserve
+	// the XML schema, the save-load layout, and the existing per-index
+	// accessors getBuildingHappinessChanges(i) / getBuildingHealthChanges(i).
+	//
+	// The sparse views below exist purely as a query-time optimization for
+	// callers that previously did a full sweep over every building to apply a
+	// civic's effect, e.g.:
+	//
+	//     for (i = 0; i < GC.getNumBuildingInfos(); i++)
+	//         changeExtraBuildingHappiness(
+	//             (BuildingTypes)i,
+	//             kCivic.getBuildingHappinessChanges(i) * iChange, ...);
+	//
+	// In a typical civic only a handful of buildings have a non-zero modifier,
+	// so that loop spends almost all of its iterations calling change*() with
+	// a zero delta (and relying on the early-return inside change*() to make
+	// it a no-op). Migrated callers iterate only the non-zero entries:
+	//
+	//     foreach_(const BuildingModifier2& m,
+	//              kCivic.getBuildingHappinessChangesSparse())
+	//         changeExtraBuildingHappiness(m.first, m.second * iChange, ...);
+	//
+	// Cache lifecycle: filled lazily on first access from the dense arrays,
+	// invalidated by copyNonDefaults() when the dense storage is mutated.
+	// Same template applies to the other per-X dense arrays on this class
+	// (FeatureHappinessChanges, BuildingCommerceChange/Modifier,
+	// ImprovementYieldChanges, ...) once the pattern lands here.
+	// ---------------------------------------------------------------------
+	const std::vector<BuildingModifier2>& getBuildingHappinessChangesSparse() const;
+	const std::vector<BuildingModifier2>& getBuildingHealthChangesSparse() const;
+	// Same pattern, indexed by FeatureTypes instead of BuildingTypes.
+	const std::vector<std::pair<FeatureTypes, int> >& getFeatureHappinessChangesSparse() const;
+	void invalidateSparseLists();
 	int getFeatureHappinessChanges(int i) const;
 	int getBonusMintedPercent(int i) const;
 	int getFreeSpecialistCount(int i) const;
@@ -341,6 +379,15 @@ protected:
 	std::vector<int> m_aiCategories;
 
 	IDValueMap<BuildingTypes, int> m_aBuildingProductionModifier;
+
+	// Sparse-view caches paired with the dense arrays above. See the public
+	// accessor block for the design rationale and migration template.
+	// Fields are mutable so const accessors can populate the cache on demand.
+	void cacheSparseListsIfNeeded() const;
+	mutable bool m_bSparseListsCached;
+	mutable std::vector<BuildingModifier2> m_vBuildingHappinessChangesSparse;
+	mutable std::vector<BuildingModifier2> m_vBuildingHealthChangesSparse;
+	mutable std::vector<std::pair<FeatureTypes, int> > m_vFeatureHappinessChangesSparse;
 
 	std::vector<CvString> m_aszUnitProdModforPass3;
 	std::vector<int> m_aiUnitProdModforPass3;

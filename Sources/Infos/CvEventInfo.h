@@ -104,6 +104,27 @@ public:
 	int getBuildingHealthChange(int iBuilding) const;
 	int getNumBuildingHealthChanges() const;
 
+	// ---------------------------------------------------------------------
+	// Direct sparse-iteration accessors over the per-building modifier
+	// vectors below. Storage in CvEventInfo is already sparse (only buildings
+	// with a non-zero change are stored), but the dense getXxx(iBuilding, ...)
+	// accessors above do a linear search per call. Callers that want to apply
+	// every change should iterate these vectors directly:
+	//
+	//     foreach_(const BuildingYieldChange& yc, kEvent.getBuildingYieldChanges())
+	//         pCity->changeBuildingYieldChange(yc.eBuilding, yc.eYield, yc.iChange);
+	//
+	// This is the structural counterpart to the lazy sparse cache in
+	// CvCivicInfo: there, the dense storage stays canonical and a sparse view
+	// is derived. Here, the storage is already sparse so no caching is needed
+	// — only public exposure of the existing vectors.
+	// ---------------------------------------------------------------------
+	const BuildingChangeArray& getBuildingHappyChanges() const;
+	const BuildingChangeArray& getBuildingHealthChanges() const;
+	const std::vector<BuildingYieldChange>& getBuildingYieldChanges() const;
+	const std::vector<BuildingCommerceChange>& getBuildingCommerceChanges() const;
+	const std::vector<BuildingCommerceChange>& getBuildingCommerceModifiers() const;
+
 	const CvProperties* getProperties() const;
 	const CvProperties* getPropertiesAllCities() const;
 
