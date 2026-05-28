@@ -29,13 +29,30 @@ void BuildingsRepo::rebuild()
 
 	m_byReligion.clear();
 	m_byReligion.resize(iNumReligions);
+	m_worldWonders.clear();
+	m_withFreeStartEra.clear();
+	m_autoBuildings.clear();
 
 	for (int iI = 0; iI < iNumBuildings; ++iI)
 	{
-		const int iReligion = GC.getBuildingInfo((BuildingTypes)iI).getReligionType();
+		const CvBuildingInfo& kBuilding = GC.getBuildingInfo((BuildingTypes)iI);
+
+		const int iReligion = kBuilding.getReligionType();
 		if (iReligion >= 0 && iReligion < iNumReligions)
 		{
 			m_byReligion[iReligion].push_back((BuildingTypes)iI);
+		}
+		if (kBuilding.getMaxGlobalInstances() != -1)
+		{
+			m_worldWonders.push_back((BuildingTypes)iI);
+		}
+		if (kBuilding.getFreeStartEra() != NO_ERA)
+		{
+			m_withFreeStartEra.push_back((BuildingTypes)iI);
+		}
+		if (kBuilding.isAutoBuild())
+		{
+			m_autoBuildings.push_back((BuildingTypes)iI);
 		}
 	}
 	// Iteration over [0, iNumBuildings) guarantees each bucket is ascending,
@@ -49,4 +66,19 @@ const std::vector<BuildingTypes>& BuildingsRepo::byReligion(ReligionTypes eRelig
 		return m_emptyBucket;
 	}
 	return m_byReligion[eReligion];
+}
+
+const std::vector<BuildingTypes>& BuildingsRepo::worldWonders() const
+{
+	return m_worldWonders;
+}
+
+const std::vector<BuildingTypes>& BuildingsRepo::withFreeStartEra() const
+{
+	return m_withFreeStartEra;
+}
+
+const std::vector<BuildingTypes>& BuildingsRepo::autoBuildings() const
+{
+	return m_autoBuildings;
 }

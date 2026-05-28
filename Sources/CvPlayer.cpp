@@ -37,6 +37,7 @@
 #include "CvDLLFAStarIFaceBase.h"
 #include "CvDLLInterfaceIFaceBase.h"
 #include "CvDLLUtilityIFaceBase.h"
+#include "Repos/BuildingsRepo.h"
 #include "CvTraitInfo.h"
 #include <boost/scoped_ptr.hpp>
 
@@ -6478,12 +6479,9 @@ void CvPlayer::found(int iX, int iY, CvUnit *pUnit)
 		else FErrorMsg(CvString::format("Player %d (%S) no initial defender availible for city %S at %d, %d", getID(), getCivilizationDescription(0), pCity->getName(0).GetCString(), iX, iY).c_str());
 	}
 
-	for (int iI = 0; iI < GC.getNumBuildingInfos(); iI++)
+	foreach_(const BuildingTypes eBuildingX, BuildingsRepo::get().withFreeStartEra())
 	{
-		const BuildingTypes eBuildingX = static_cast<BuildingTypes>(iI);
-
-		if (GC.getBuildingInfo(eBuildingX).getFreeStartEra() != NO_ERA
-		&& GC.getGame().getStartEra() >= GC.getBuildingInfo(eBuildingX).getFreeStartEra()
+		if (GC.getGame().getStartEra() >= GC.getBuildingInfo(eBuildingX).getFreeStartEra()
 		&& pCity->canConstruct(eBuildingX))
 		{
 			pCity->changeHasBuilding(eBuildingX, true);
@@ -24685,12 +24683,9 @@ int CvPlayer::getNewCityProductionValue() const
 	PROFILE_EXTRA_FUNC();
 	int iValue = 0;
 
-	for (int iJ = 0; iJ < GC.getNumBuildingInfos(); iJ++)
+	foreach_(const BuildingTypes eBuilding, BuildingsRepo::get().withFreeStartEra())
 	{
-		const BuildingTypes eBuilding = static_cast<BuildingTypes>(iJ);
-
-		if (GC.getBuildingInfo(eBuilding).getFreeStartEra() != NO_ERA
-		&& GC.getGame().getStartEra() >= GC.getBuildingInfo(eBuilding).getFreeStartEra())
+		if (GC.getGame().getStartEra() >= GC.getBuildingInfo(eBuilding).getFreeStartEra())
 		{
 			iValue += 100 * getProductionNeeded(eBuilding) / std::max(1, 100 + getProductionModifier(eBuilding));
 		}
@@ -26819,34 +26814,31 @@ int CvPlayer::getSevoWondersScore(int mode)
 	PROFILE_EXTRA_FUNC();
 	int iCount = 0;
 
-	for (int iJ = GC.getNumBuildingInfos() - 1; iJ > -1; iJ--)
+	foreach_(const BuildingTypes eWonder, BuildingsRepo::get().worldWonders())
 	{
-		if (isWorldWonder((BuildingTypes)iJ))
+		if (mode == 2)
 		{
-			if (mode == 2)
-			{
-				iCount++;
-				continue;
-			}
-			bool bFound = false;
+			iCount++;
+			continue;
+		}
+		bool bFound = false;
 
-			for (int iI = 0; iI < MAX_PLAYERS; iI++)
+		for (int iI = 0; iI < MAX_PLAYERS; iI++)
+		{
+			if (GET_PLAYER((PlayerTypes)iI).isAlive() && !GET_PLAYER((PlayerTypes)iI).isMinorCiv())
 			{
-				if (GET_PLAYER((PlayerTypes)iI).isAlive() && !GET_PLAYER((PlayerTypes)iI).isMinorCiv())
+				foreach_(const CvCity* cityX, GET_PLAYER((PlayerTypes)iI).cities())
 				{
-					foreach_(const CvCity* cityX, GET_PLAYER((PlayerTypes)iI).cities())
+					if (cityX->hasBuilding(eWonder))
 					{
-						if (cityX->hasBuilding((BuildingTypes)iJ))
+						if (mode == 1 || cityX->getBuildingData(eWonder).eBuiltBy == getID())
 						{
-							if (mode == 1 || cityX->getBuildingData((BuildingTypes)iJ).eBuiltBy == getID())
-							{
-								iCount++;
-							}
-							bFound = true; break;
+							iCount++;
 						}
+						bFound = true; break;
 					}
-					if (bFound) break;
 				}
+				if (bFound) break;
 			}
 		}
 	}
