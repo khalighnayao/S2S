@@ -79,6 +79,9 @@
     <Filter Include="Source\Base\Infos\PythonInterface">
       <UniqueIdentifier>{9d62ef56-42ed-47fd-b44b-6688fadd8cfc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Base\Repos">
+      <UniqueIdentifier>{8a2c4f1d-7b3e-4d52-9a6f-1c2e3b4a5d6e}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source\Base\Properties">
       <UniqueIdentifier>{534a1ab8-2aff-4b46-aa86-ae1735a3ccd8}</UniqueIdentifier>
     </Filter>
@@ -647,6 +650,12 @@
     </ClCompile>
     <ClCompile Include="Infos\CvReligionInfo.cpp">
       <Filter>Source\Base\Infos</Filter>
+    </ClCompile>
+    <ClCompile Include="Repos\BuildingsRepo.cpp">
+      <Filter>Source\Base\Repos</Filter>
+    </ClCompile>
+    <ClCompile Include="Repos\BuildsRepo.cpp">
+      <Filter>Source\Base\Repos</Filter>
     </ClCompile>
     <ClCompile Include="Infos\CvRiverModelInfo.cpp">
       <Filter>Source\Base\Infos</Filter>
@@ -1651,6 +1660,12 @@
     </ClInclude>
     <ClInclude Include="Infos\CvReligionInfo.h">
       <Filter>Source\Base\Infos</Filter>
+    </ClInclude>
+    <ClInclude Include="Repos\BuildingsRepo.h">
+      <Filter>Source\Base\Repos</Filter>
+    </ClInclude>
+    <ClInclude Include="Repos\BuildsRepo.h">
+      <Filter>Source\Base\Repos</Filter>
     </ClInclude>
     <ClInclude Include="Infos\CvRiverModelInfo.h">
       <Filter>Source\Base\Infos</Filter>

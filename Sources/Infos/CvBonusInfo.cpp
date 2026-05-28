@@ -1,6 +1,7 @@
 #include "CvGameCoreDLL.h"
 #include "FProfiler.h"
 
+#include "CvArtFileMgr.h"
 #include "CvBonusInfo.h"
 #include "CvDefines.h"
 #include "CvImprovementInfo.h"

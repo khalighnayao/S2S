@@ -359,6 +359,8 @@
     <ClCompile Include="Infos\CvPromotionLineInfo.cpp" />
     <ClCompile Include="Infos\CvPropertyInfo.cpp" />
     <ClCompile Include="Infos\CvReligionInfo.cpp" />
+    <ClCompile Include="Repos\BuildingsRepo.cpp" />
+    <ClCompile Include="Repos\BuildsRepo.cpp" />
     <ClCompile Include="Infos\CvRiverModelInfo.cpp" />
     <ClCompile Include="Infos\CvRouteInfo.cpp" />
     <ClCompile Include="Infos\CvRouteModelInfo.cpp" />
@@ -666,6 +668,8 @@
     <ClInclude Include="Infos\CvPromotionLineInfo.h" />
     <ClInclude Include="Infos\CvPropertyInfo.h" />
     <ClInclude Include="Infos\CvReligionInfo.h" />
+    <ClInclude Include="Repos\BuildingsRepo.h" />
+    <ClInclude Include="Repos\BuildsRepo.h" />
     <ClInclude Include="Infos\CvRiverModelInfo.h" />
     <ClInclude Include="Infos\CvRouteInfo.h" />
     <ClInclude Include="Infos\CvRouteModelInfo.h" />

@@ -29,6 +29,7 @@
 #include "CvDLLInterfaceIFaceBase.h"
 #include "CvDLLUtilityIFaceBase.h"
 #include "CvTraitInfo.h"
+#include "Repos/BuildingsRepo.h"
 #ifdef THE_GREAT_WALL
 #include "CvDLLEngineIFaceBase.h"
 #endif
@@ -15166,12 +15167,9 @@ void CvCity::processVoteSourceBonus(VoteSourceTypes eVoteSource, bool bActive)
 
 				if (0 != iChange)
 				{
-					for (int iBuilding = 0; iBuilding < GC.getNumBuildingInfos(); ++iBuilding)
+					foreach_(const BuildingTypes eBuilding, BuildingsRepo::get().byReligion(eReligion))
 					{
-						if (GC.getBuildingInfo((BuildingTypes)iBuilding).getReligionType() == eReligion)
-						{
-							changeBuildingYieldChange((BuildingTypes)iBuilding, (YieldTypes)iYield, iChange);
-						}
+						changeBuildingYieldChange(eBuilding, (YieldTypes)iYield, iChange);
 					}
 				}
 			}
@@ -15186,12 +15184,9 @@ void CvCity::processVoteSourceBonus(VoteSourceTypes eVoteSource, bool bActive)
 
 				if (0 != iChange)
 				{
-					for (int iBuilding = 0; iBuilding < GC.getNumBuildingInfos(); ++iBuilding)
+					foreach_(const BuildingTypes eBuilding, BuildingsRepo::get().byReligion(eReligion))
 					{
-						if (GC.getBuildingInfo((BuildingTypes)iBuilding).getReligionType() == eReligion)
-						{
-							changeBuildingCommerceChange((BuildingTypes)iBuilding, (CommerceTypes)iCommerce, iChange);
-						}
+						changeBuildingCommerceChange(eBuilding, (CommerceTypes)iCommerce, iChange);
 					}
 				}
 			}

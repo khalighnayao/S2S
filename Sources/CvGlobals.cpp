@@ -29,6 +29,8 @@
 #include "CyGlobalContext.h"
 #include "FVariableSystem.h"
 #include "CityOutputHistory.h"
+#include "Repos/BuildingsRepo.h"
+#include "Repos/BuildsRepo.h"
 #include <time.h>
 #include <sstream>
 
@@ -788,6 +790,10 @@ void cvInternalGlobals::updateReplacements()
 
 	m_HandicapInfoReplacements.updateReplacements(m_paHandicapInfo);
 //ReplacementStep: search down here for 'CvInfoReplacements'
+
+	// Rebuild repository indices after pointer swaps in the Info vectors.
+	BuildingsRepo::get().rebuild();
+	BuildsRepo::get().rebuild();
 }
 
 /************************************************************************************************/
