@@ -8785,17 +8785,10 @@ int CvCity::getAdditionalHappinessByCivic(CivicTypes eCivic, bool bDifferenceToC
 	}
 
 	//#1.e: FeatureHappinessChanges
-	if (kCivic.isAnyFeatureHappinessChange())
+	typedef std::pair<FeatureTypes, int> FeatureHappy;
+	foreach_(const FeatureHappy& change, kCivic.getFeatureHappinessChangesSparse())
 	{
-		for (int iI = 0; iI < GC.getNumFeatureInfos(); iI++)
-		{
-			const int iTempHappy = kCivic.getFeatureHappinessChanges(iI);
-
-			if (iTempHappy != 0)
-			{
-				iHappy += iTempHappy * algo::count_if(plots(NUM_CITY_PLOTS), CvPlot::fn::getFeatureType() == (FeatureTypes)iI);
-			}
-		}
+		iHappy += change.second * algo::count_if(plots(NUM_CITY_PLOTS), CvPlot::fn::getFeatureType() == change.first);
 	}
 
 	//#1.f: Religious Happiness
@@ -18958,19 +18951,9 @@ void CvCity::applyEvent(EventTypes eEvent, const EventTriggeredData* pTriggeredD
 		}
 	}
 
-	if (kEvent.getNumBuildingCommerceChanges() > 0)
+	foreach_(const BuildingCommerceChange& cc, kEvent.getBuildingCommerceChanges())
 	{
-		for (int iI = GC.getNumBuildingInfos() - 1; iI > -1; iI--)
-		{
-			for (int iJ = 0; iJ < NUM_COMMERCE_TYPES; ++iJ)
-			{
-				const int iChange = kEvent.getBuildingCommerceChange(iI, iJ);
-				if (iChange != 0)
-				{
-					changeBuildingCommerceChange(static_cast<BuildingTypes>(iI), static_cast<CommerceTypes>(iJ), iChange);
-				}
-			}
-		}
+		changeBuildingCommerceChange(cc.eBuilding, cc.eCommerce, cc.iChange);
 	}
 
 	if (kEvent.getNumBuildingHappyChanges() > 0)

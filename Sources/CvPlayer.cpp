@@ -18255,13 +18255,13 @@ void CvPlayer::processCivics(const CivicTypes eCivic, const int iChange, const b
 	//Speed Optimizations
 	if (bLimited)
 	{
-		if (kCivic.isAnyBuildingHappinessChange() || kCivic.isAnyBuildingHealthChange())
+		foreach_(const BuildingModifier2& change, kCivic.getBuildingHappinessChangesSparse())
 		{
-			for (int iI = 0; iI < GC.getNumBuildingInfos(); iI++)
-			{
-				changeExtraBuildingHappiness((BuildingTypes)iI, kCivic.getBuildingHappinessChanges(iI) * iChange, bLimited);
-				changeExtraBuildingHealth((BuildingTypes)iI, kCivic.getBuildingHealthChanges(iI) * iChange, bLimited);
-			}
+			changeExtraBuildingHappiness(change.first, change.second * iChange, bLimited);
+		}
+		foreach_(const BuildingModifier2& change, kCivic.getBuildingHealthChangesSparse())
+		{
+			changeExtraBuildingHealth(change.first, change.second * iChange, bLimited);
 		}
 		if (kCivic.isAnyFeatureHappinessChange())
 		{
@@ -18334,10 +18334,13 @@ void CvPlayer::processCivics(const CivicTypes eCivic, const int iChange, const b
 			changeBuildingProductionModifier(modifier.first, modifier.second * iChange);
 		}
 
-		for (int iI = 0; iI < GC.getNumBuildingInfos(); iI++)
+		foreach_(const BuildingModifier2& change, kCivic.getBuildingHappinessChangesSparse())
 		{
-			changeExtraBuildingHappiness((BuildingTypes)iI, (kCivic.getBuildingHappinessChanges(iI) * iChange));
-			changeExtraBuildingHealth((BuildingTypes)iI, (kCivic.getBuildingHealthChanges(iI) * iChange));
+			changeExtraBuildingHappiness(change.first, change.second * iChange);
+		}
+		foreach_(const BuildingModifier2& change, kCivic.getBuildingHealthChangesSparse())
+		{
+			changeExtraBuildingHealth(change.first, change.second * iChange);
 		}
 
 		for (int iI = 0; iI < GC.getNumUnitInfos(); iI++)
@@ -22401,54 +22404,31 @@ void CvPlayer::applyEvent(EventTypes eEvent, int iEventTriggeredId, bool bUpdate
 			changeExtraHealth(kEvent.getHealth());
 		}
 
-		if (kEvent.getNumBuildingYieldChanges() > 0)
+		foreach_(const BuildingYieldChange& yc, kEvent.getBuildingYieldChanges())
 		{
-			for (int iBuilding = 0; iBuilding < GC.getNumBuildingInfos(); ++iBuilding)
+			foreach_(CvCity* pLoopCity, cities())
 			{
-				for (int iYield = 0; iYield < NUM_YIELD_TYPES; ++iYield)
-				{
-					foreach_(CvCity* pLoopCity, cities())
-					{
-						pLoopCity->changeBuildingYieldChange((BuildingTypes)iBuilding, (YieldTypes)iYield, kEvent.getBuildingYieldChange(iBuilding, iYield));
-					}
-				}
+				pLoopCity->changeBuildingYieldChange(yc.eBuilding, yc.eYield, yc.iChange);
 			}
 		}
 
-		if (kEvent.getNumBuildingCommerceChanges() > 0)
+		foreach_(const BuildingCommerceChange& cc, kEvent.getBuildingCommerceChanges())
 		{
-			for (int iBuilding = 0; iBuilding < GC.getNumBuildingInfos(); ++iBuilding)
+			foreach_(CvCity* pLoopCity, cities())
 			{
-				for (int iCommerce = 0; iCommerce < NUM_COMMERCE_TYPES; ++iCommerce)
-				{
-					foreach_(CvCity* pLoopCity, cities())
-					{
-						pLoopCity->changeBuildingCommerceChange((BuildingTypes)iBuilding, (CommerceTypes)iCommerce, kEvent.getBuildingCommerceChange(iBuilding, iCommerce));
-					}
-				}
+				pLoopCity->changeBuildingCommerceChange(cc.eBuilding, cc.eCommerce, cc.iChange);
 			}
 		}
 
-		if (kEvent.getNumBuildingHappyChanges() > 0)
+		typedef std::pair<BuildingTypes, int> BuildingChange;
+		foreach_(const BuildingChange& bc, kEvent.getBuildingHappyChanges())
 		{
-			for (int i = 0; i < GC.getNumBuildingInfos(); ++i)
-			{
-				if (0 != kEvent.getBuildingHappyChange(i))
-				{
-					changeExtraBuildingHappiness((BuildingTypes)i, kEvent.getBuildingHappyChange(i));
-				}
-			}
+			changeExtraBuildingHappiness(bc.first, bc.second);
 		}
 
-		if (kEvent.getNumBuildingHealthChanges() > 0)
+		foreach_(const BuildingChange& bc, kEvent.getBuildingHealthChanges())
 		{
-			for (int i = 0; i < GC.getNumBuildingInfos(); ++i)
-			{
-				if (0 != kEvent.getBuildingHealthChange(i))
-				{
-					changeExtraBuildingHealth((BuildingTypes)i, kEvent.getBuildingHealthChange(i));
-				}
-			}
+			changeExtraBuildingHealth(bc.first, bc.second);
 		}
 
 		if (!adjustModifiersOnly)

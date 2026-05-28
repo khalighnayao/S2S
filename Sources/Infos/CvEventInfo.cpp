@@ -598,6 +598,33 @@ int CvEventInfo::getNumBuildingHealthChanges() const
 }
 
 
+// Direct sparse-iteration accessors. See header for the rationale.
+const BuildingChangeArray& CvEventInfo::getBuildingHappyChanges() const
+{
+	return m_aBuildingHappyChanges;
+}
+
+const BuildingChangeArray& CvEventInfo::getBuildingHealthChanges() const
+{
+	return m_aBuildingHealthChanges;
+}
+
+const std::vector<BuildingYieldChange>& CvEventInfo::getBuildingYieldChanges() const
+{
+	return m_aBuildingYieldChanges;
+}
+
+const std::vector<BuildingCommerceChange>& CvEventInfo::getBuildingCommerceChanges() const
+{
+	return m_aBuildingCommerceChanges;
+}
+
+const std::vector<BuildingCommerceChange>& CvEventInfo::getBuildingCommerceModifiers() const
+{
+	return m_aBuildingCommerceModifiers;
+}
+
+
 int CvEventInfo::getBuildingHealthChange(int iBuilding) const
 {
 	PROFILE_EXTRA_FUNC();
