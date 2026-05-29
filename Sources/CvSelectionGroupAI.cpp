@@ -129,7 +129,7 @@ bool CvSelectionGroupAI::AI_update()
 				StrUnitName = this->getHeadUnit()->getName(0).GetCString();
 			}
 
-			logBBAI("Player %d Group ID %d, mené par %d %S of Type %S, at (%d, %d), Mission %S [stack size %d], Was fortified/BuildUp, Force to Awake...", getOwner(), m_iID, this->getHeadUnit()->getID(), StrUnitName.GetCString(), StrunitAIType.GetCString(), getX(), getY(), MissionInfos.GetCString(), getNumUnits());
+			logBBAI("Player %d Group ID %d, menï¿½ par %d %S of Type %S, at (%d, %d), Mission %S [stack size %d], Was fortified/BuildUp, Force to Awake...", getOwner(), m_iID, this->getHeadUnit()->getID(), StrUnitName.GetCString(), StrunitAIType.GetCString(), getX(), getY(), MissionInfos.GetCString(), getNumUnits());
 		});
 		clearMissionQueue(); // XXX ???
 		setActivityType(ACTIVITY_AWAKE);
@@ -1103,6 +1103,21 @@ void CvSelectionGroupAI::AI_setMissionAI(MissionAITypes eNewMissionAI, const CvP
 	if (oldPlot && eOldMissionAI != NO_MISSIONAI)
 	{
 		GET_PLAYER(getOwner()).AI_noteMissionAITargetCountChange(eOldMissionAI, oldPlot, -getNumUnits(), plot(), -getNumUnitCargoVolumeTotal());
+	}
+
+	// Release worker plot claims when the group pivots away from a MISSIONAI_BUILD
+	// target. Covers explicit clearMissionQueue, popMission finishing the queue,
+	// switch to a different MISSIONAI, and switch to a different plot under the
+	// same MISSIONAI. Unit death is handled separately in CvUnit::killUnconditional.
+	if (eOldMissionAI == MISSIONAI_BUILD && oldPlot != NULL
+	&& !(eNewMissionAI == MISSIONAI_BUILD && newPlot == oldPlot))
+	{
+		CvWorkerAI& workerAI = GET_PLAYER(getOwner()).getWorkerAI();
+		const int oldPlotIdx = GC.getMap().plotNum(oldPlot->getX(), oldPlot->getY());
+		foreach_(const CvUnit* unitX, units())
+		{
+			workerAI.releaseClaim(oldPlotIdx, unitX->getID());
+		}
 	}
 
 	// Worker city tracking

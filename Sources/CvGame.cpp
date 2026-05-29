@@ -23,6 +23,7 @@
 #include "CvPlayerAI.h"
 #include "CvPlot.h"
 #include "CvPopupInfo.h"
+#include "Utils/PlotSnapshot.h"
 #include "CvPython.h"
 #include "CvReplayInfo.h"
 #include "CvReplayMessage.h"
@@ -586,6 +587,13 @@ void CvGame::onFinalInitialized(const bool bNewGame)
 	//gDLL->getEngineIFace()->clearSigns();
 	gDLL->getEngineIFace()->setResourceLayer(GC.getResourceLayer());
 	//gDLL->getInterfaceIFace()->setEndTurnCounter(2 * getBugOptionINT("MainInterface__AutoEndTurnDelay", 2));
+
+	// Capture a CSV reference of every plot's state for cross-referencing with
+	// BuildEvaluation.log. Tag "start" for new games, "load" for save-loads.
+	// regenerateMap fires its own writePlotSnapshot("regen") because that path
+	// doesn't route through onFinalInitialized.
+	writePlotSnapshot(bNewGame ? "start" : "load");
+
 	OutputDebugString("onFinalInitialized: End\n");
 }
 
@@ -757,6 +765,10 @@ void CvGame::regenerateMap()
 	CvEventReporter::getInstance().mapRegen();
 
 	doPreTurn0();
+
+	// Fresh plot snapshot for the regenerated map. Distinguished from the
+	// "start" snapshot (which runs from onFinalInitialized) by tag.
+	writePlotSnapshot("regen");
 }
 
 void CvGame::uninit()
@@ -5723,6 +5735,13 @@ void CvGame::addGreatPersonBornName(const CvWString& szName)
 void CvGame::doTurn()
 {
 	PROFILE_BEGIN("CvGame::doTurn()",DOTURN1);
+
+	// Capture a snapshot of every plot's state at the start of the turn so the
+	// BuildEvaluation.log entries that follow can be cross-referenced against
+	// a frozen view of the world the AI saw when it made each decision. One
+	// file per turn (PlotSnapshot_turn_t<N>.csv) -- complements the one-off
+	// "start" / "load" / "regen" snapshots from onFinalInitialized.
+	writePlotSnapshot("turn");
 
 	// END OF TURN
 	CvEventReporter::getInstance().beginGameTurn( getGameTurn() );

@@ -1510,6 +1510,12 @@ void CvUnit::killUnconditional(bool bDelay, PlayerTypes ePlayer, bool bMessaged)
 	const PlayerTypes eOwner = getOwner();
 	CvPlayerAI& owner = GET_PLAYER(eOwner);
 
+	// Release any worker plot claims held by this unit. CvUnit::kill does not
+	// route through AI_setMissionAI for the dying unit, so explicit release is
+	// required (not merely defensive) -- combat losses, disbands, and drowned
+	// cargo all bypass that hook.
+	owner.getWorkerAI().releaseAllClaimsBy(getID());
+
 	CvPlot* pPlot = plot();
 
 	if (pPlot)

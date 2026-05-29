@@ -62,11 +62,11 @@ Settings
                     + ' boost_python-vc71-mt-1_32.lib' 
                     + ' XercesLib-3.1.1-x86-windows-vc-7.1.lib'
 
-.GLOBAL_LIBS        = ' /LIBPATH:"$TOOLKIT$/lib"' 
-                    + ' /LIBPATH:"$PSDK$/Lib"' 
-                    + ' winmm.lib' 
-                    + ' user32.lib' 
-                    + ' psapi.lib' 
+.GLOBAL_LIBS        = ' /LIBPATH:"$TOOLKIT$/lib"'
+                    + ' /LIBPATH:"$PSDK$/Lib"'
+                    + ' winmm.lib'
+                    + ' user32.lib'
+                    + ' psapi.lib'
                     + ' advapi32.lib'
 .LIBS               = '$PROJECT_LIBS$ $GLOBAL_LIBS$'
 
@@ -198,7 +198,7 @@ Settings
 
 Unity( 'Sources-Unity' )
 {
-    .UnityInputPath = { '$SOURCE_DIR$', '$SOURCE_DIR$/Infos', '$SOURCE_DIR$/Repos' }
+    .UnityInputPath = { '$SOURCE_DIR$', '$SOURCE_DIR$/Infos', '$SOURCE_DIR$/Repos', '$SOURCE_DIR$/Utils' }
     .UnityInputExcludePattern = '*/Cy*'
     // Keep our pch file out of the unity files
     .UnityInputExcludedFiles = { "CvGameCoreDLL.cpp" }

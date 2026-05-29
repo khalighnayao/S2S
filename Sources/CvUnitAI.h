@@ -32,6 +32,11 @@ class ConstructionNeeds;
  */
 class CvUnitAI : public CvUnit
 {
+	// CvWorkerAI hosts the unified improveBonus planner that calls AI_plotValid,
+	// AI_betterPlotBuild, and AI_connectPlot. Granting friend access here avoids
+	// promoting those methods to public for one caller.
+	friend class CvWorkerAI;
+
 public:
     /**
      * Constructor for CvUnitAI.
@@ -1988,16 +1993,6 @@ protected:
      *   3. Returns true if construction was performed.
      */
 	bool AI_fortTerritory(bool bCanal, bool bAirbase);
-
-    /**
-     * Attempts to improve a bonus resource.
-     * @brief Executes logic for building improvements on resource tiles.
-     * Steps:
-     *   1. Identifies resource tiles needing improvement.
-     *   2. Moves to and builds improvement.
-     *   3. Returns true if improvement was performed.
-     */
-	bool AI_improveBonus(int iMinValue = 0, CvPlot** ppBestPlot = NULL, BuildTypes* peBestBuild = NULL, int* piBestValue = NULL);
 
     /**
      * Attempts to improve a plot.
