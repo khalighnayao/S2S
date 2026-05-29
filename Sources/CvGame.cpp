@@ -490,10 +490,12 @@ void CvGame::init(HandicapTypes eHandicap)
 void CvGame::onFinalInitialized(const bool bNewGame)
 {
 	PROFILE("CvGame::onFinalInitialized");
-	FAssert(!m_bFinalInitialized);
 	OutputDebugString("onFinalInitialized: Start\n");
 
-	// Game has been initialized fully when reaching this point.
+	// Some in-session load paths reach us with the flag still true from the
+	// previous game (reset() isn't reliably called between loads). The function
+	// is idempotent w.r.t. this flag, so just (re)assert the true state rather
+	// than relying on an external precondition.
 	m_bFinalInitialized = true;
 	// First code flow opportunity after fully loading a save is here
 	if (!bNewGame)

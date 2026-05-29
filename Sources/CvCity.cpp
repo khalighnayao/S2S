@@ -29,6 +29,7 @@
 #include "CvDLLInterfaceIFaceBase.h"
 #include "CvDLLUtilityIFaceBase.h"
 #include "CvTraitInfo.h"
+#include "Repos/BuildingsRepo.h"
 #ifdef THE_GREAT_WALL
 #include "CvDLLEngineIFaceBase.h"
 #endif
@@ -1484,33 +1485,30 @@ void CvCity::doAutobuild()
 		checkPropertyBuildings();
 	}
 	// Auto-build any auto-build buildings we can
-	for (int iI = GC.getNumBuildingInfos() - 1; iI > -1; iI--)
+	foreach_(const BuildingTypes eBuilding, BuildingsRepo::get().autoBuildings())
 	{
-		const CvBuildingInfo& kBuilding = GC.getBuildingInfo((BuildingTypes)iI);
-		if (kBuilding.isAutoBuild())
+		const CvBuildingInfo& kBuilding = GC.getBuildingInfo(eBuilding);
+		if (!hasBuilding(eBuilding))
 		{
-			if (!hasBuilding((BuildingTypes)iI))
+			if (canConstruct(eBuilding, false, false, true))
 			{
-				if (canConstruct((BuildingTypes)iI, false, false, true))
-				{
-					changeHasBuilding((BuildingTypes)iI, true);
-					const CvWString szBuffer = gDLL->getText("TXT_KEY_COMPLETED_AUTO_BUILD", kBuilding.getTextKeyWide(), getName().GetCString());
-					AddDLLMessage(getOwner(), true, 10, szBuffer, NULL, MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN());
-				}
+				changeHasBuilding(eBuilding, true);
+				const CvWString szBuffer = gDLL->getText("TXT_KEY_COMPLETED_AUTO_BUILD", kBuilding.getTextKeyWide(), getName().GetCString());
+				AddDLLMessage(getOwner(), true, 10, szBuffer, NULL, MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN());
 			}
-			// Toffer - World wonder autobuilds should never be auto-removed.
-			else if (kBuilding.getMaxGlobalInstances() == -1)
+		}
+		// Toffer - World wonder autobuilds should never be auto-removed.
+		else if (kBuilding.getMaxGlobalInstances() == -1)
+		{
+			// Special rule meant for adopted cultures, hopefully it won't affect other autobuilds in an irrational way.
+			foreach_(const BuildingModifier2& modifier, kBuilding.getPrereqNumOfBuildings())
 			{
-				// Special rule meant for adopted cultures, hopefully it won't affect other autobuilds in an irrational way.
-				foreach_(const BuildingModifier2& modifier, kBuilding.getPrereqNumOfBuildings())
+				if (GET_PLAYER(getOwner()).getBuildingCount(modifier.first) < GET_PLAYER(getOwner()).getBuildingPrereqBuilding(eBuilding, modifier.first, 0))
 				{
-					if (GET_PLAYER(getOwner()).getBuildingCount(modifier.first) < GET_PLAYER(getOwner()).getBuildingPrereqBuilding((BuildingTypes)iI, modifier.first, 0))
-					{
-						changeHasBuilding((BuildingTypes)iI, false);
-						const CvWString szBuffer = gDLL->getText("TXT_KEY_COMPLETED_AUTO_BUILD_NOT", kBuilding.getTextKeyWide(), getName().GetCString());
-						AddDLLMessage(getOwner(), true, 10, szBuffer, NULL, MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED());
-						break;
-					}
+					changeHasBuilding(eBuilding, false);
+					const CvWString szBuffer = gDLL->getText("TXT_KEY_COMPLETED_AUTO_BUILD_NOT", kBuilding.getTextKeyWide(), getName().GetCString());
+					AddDLLMessage(getOwner(), true, 10, szBuffer, NULL, MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED());
+					break;
 				}
 			}
 		}
@@ -8784,17 +8782,10 @@ int CvCity::getAdditionalHappinessByCivic(CivicTypes eCivic, bool bDifferenceToC
 	}
 
 	//#1.e: FeatureHappinessChanges
-	if (kCivic.isAnyFeatureHappinessChange())
+	typedef std::pair<FeatureTypes, int> FeatureHappy;
+	foreach_(const FeatureHappy& change, kCivic.getFeatureHappinessChangesSparse())
 	{
-		for (int iI = 0; iI < GC.getNumFeatureInfos(); iI++)
-		{
-			const int iTempHappy = kCivic.getFeatureHappinessChanges(iI);
-
-			if (iTempHappy != 0)
-			{
-				iHappy += iTempHappy * algo::count_if(plots(NUM_CITY_PLOTS), CvPlot::fn::getFeatureType() == (FeatureTypes)iI);
-			}
-		}
+		iHappy += change.second * algo::count_if(plots(NUM_CITY_PLOTS), CvPlot::fn::getFeatureType() == change.first);
 	}
 
 	//#1.f: Religious Happiness
@@ -15166,12 +15157,9 @@ void CvCity::processVoteSourceBonus(VoteSourceTypes eVoteSource, bool bActive)
 
 				if (0 != iChange)
 				{
-					for (int iBuilding = 0; iBuilding < GC.getNumBuildingInfos(); ++iBuilding)
+					foreach_(const BuildingTypes eBuilding, BuildingsRepo::get().byReligion(eReligion))
 					{
-						if (GC.getBuildingInfo((BuildingTypes)iBuilding).getReligionType() == eReligion)
-						{
-							changeBuildingYieldChange((BuildingTypes)iBuilding, (YieldTypes)iYield, iChange);
-						}
+						changeBuildingYieldChange(eBuilding, (YieldTypes)iYield, iChange);
 					}
 				}
 			}
@@ -15186,12 +15174,9 @@ void CvCity::processVoteSourceBonus(VoteSourceTypes eVoteSource, bool bActive)
 
 				if (0 != iChange)
 				{
-					for (int iBuilding = 0; iBuilding < GC.getNumBuildingInfos(); ++iBuilding)
+					foreach_(const BuildingTypes eBuilding, BuildingsRepo::get().byReligion(eReligion))
 					{
-						if (GC.getBuildingInfo((BuildingTypes)iBuilding).getReligionType() == eReligion)
-						{
-							changeBuildingCommerceChange((BuildingTypes)iBuilding, (CommerceTypes)iCommerce, iChange);
-						}
+						changeBuildingCommerceChange(eBuilding, (CommerceTypes)iCommerce, iChange);
 					}
 				}
 			}
@@ -18963,19 +18948,9 @@ void CvCity::applyEvent(EventTypes eEvent, const EventTriggeredData* pTriggeredD
 		}
 	}
 
-	if (kEvent.getNumBuildingCommerceChanges() > 0)
+	foreach_(const BuildingCommerceChange& cc, kEvent.getBuildingCommerceChanges())
 	{
-		for (int iI = GC.getNumBuildingInfos() - 1; iI > -1; iI--)
-		{
-			for (int iJ = 0; iJ < NUM_COMMERCE_TYPES; ++iJ)
-			{
-				const int iChange = kEvent.getBuildingCommerceChange(iI, iJ);
-				if (iChange != 0)
-				{
-					changeBuildingCommerceChange(static_cast<BuildingTypes>(iI), static_cast<CommerceTypes>(iJ), iChange);
-				}
-			}
-		}
+		changeBuildingCommerceChange(cc.eBuilding, cc.eCommerce, cc.iChange);
 	}
 
 	if (kEvent.getNumBuildingHappyChanges() > 0)

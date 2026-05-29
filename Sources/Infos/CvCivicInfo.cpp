@@ -108,6 +108,7 @@ CvCivicInfo::CvCivicInfo()
 	, m_piSpecialistExtraCommerce(NULL)
 	, m_paiBuildingHappinessChanges(NULL)
 	, m_paiBuildingHealthChanges(NULL)
+	, m_bSparseListsCached(false)
 	, m_paiFeatureHappinessChanges(NULL)
 	, m_pabHurry(NULL)
 	, m_pabSpecialBuildingNotRequired(NULL)
@@ -905,6 +906,81 @@ int CvCivicInfo::getBuildingHealthChanges(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumBuildingInfos(), i);
 	return m_paiBuildingHealthChanges ? m_paiBuildingHealthChanges[i] : 0;
+}
+
+
+// Walk the dense arrays once and record (building id, value) pairs for the
+// non-zero entries. The dense arrays may be NULL when no modifier was loaded
+// for this civic, in which case the corresponding sparse list stays empty.
+// Called only from the public sparse accessors below; safe to call from a
+// const context because the cache fields are mutable.
+//
+// Invariant: cache is valid until invalidateSparseLists() is called, which
+// happens whenever copyNonDefaults() writes to one of the dense arrays.
+void CvCivicInfo::cacheSparseListsIfNeeded() const
+{
+	PROFILE_EXTRA_FUNC();
+	if (m_bSparseListsCached)
+	{
+		return;
+	}
+	m_vBuildingHappinessChangesSparse.clear();
+	m_vBuildingHealthChangesSparse.clear();
+	m_vFeatureHappinessChangesSparse.clear();
+
+	const int iNumBuildings = GC.getNumBuildingInfos();
+	for (int i = 0; i < iNumBuildings; ++i)
+	{
+		const int iHappy = m_paiBuildingHappinessChanges ? m_paiBuildingHappinessChanges[i] : 0;
+		if (iHappy != 0)
+		{
+			m_vBuildingHappinessChangesSparse.push_back(BuildingModifier2((BuildingTypes)i, iHappy));
+		}
+		const int iHealth = m_paiBuildingHealthChanges ? m_paiBuildingHealthChanges[i] : 0;
+		if (iHealth != 0)
+		{
+			m_vBuildingHealthChangesSparse.push_back(BuildingModifier2((BuildingTypes)i, iHealth));
+		}
+	}
+
+	const int iNumFeatures = GC.getNumFeatureInfos();
+	for (int i = 0; i < iNumFeatures; ++i)
+	{
+		const int iHappy = m_paiFeatureHappinessChanges ? m_paiFeatureHappinessChanges[i] : 0;
+		if (iHappy != 0)
+		{
+			m_vFeatureHappinessChangesSparse.push_back(std::pair<FeatureTypes, int>((FeatureTypes)i, iHappy));
+		}
+	}
+
+	m_bSparseListsCached = true;
+}
+
+
+const std::vector<BuildingModifier2>& CvCivicInfo::getBuildingHappinessChangesSparse() const
+{
+	cacheSparseListsIfNeeded();
+	return m_vBuildingHappinessChangesSparse;
+}
+
+
+const std::vector<BuildingModifier2>& CvCivicInfo::getBuildingHealthChangesSparse() const
+{
+	cacheSparseListsIfNeeded();
+	return m_vBuildingHealthChangesSparse;
+}
+
+
+const std::vector<std::pair<FeatureTypes, int> >& CvCivicInfo::getFeatureHappinessChangesSparse() const
+{
+	cacheSparseListsIfNeeded();
+	return m_vFeatureHappinessChangesSparse;
+}
+
+
+void CvCivicInfo::invalidateSparseLists()
+{
+	m_bSparseListsCached = false;
 }
 
 
@@ -2116,6 +2192,11 @@ void CvCivicInfo::copyNonDefaults(const CvCivicInfo* pClassInfo)
 		}
 	}
 
+	// Note: any write into m_paiBuildingHappinessChanges /
+	// m_paiBuildingHealthChanges below must be followed by
+	// invalidateSparseLists() so the next sparse-view access rebuilds from the
+	// updated dense storage. The two single calls below cover the only mutating
+	// branches in this block.
 	for ( int i = 0; i < GC.getNumBuildingInfos(); i++ )
 	{
 		if ( getBuildingHappinessChanges(i) == iDefault && pClassInfo->getBuildingHappinessChanges(i) != iDefault)
@@ -2125,6 +2206,7 @@ void CvCivicInfo::copyNonDefaults(const CvCivicInfo* pClassInfo)
 				CvXMLLoadUtility::InitList(&m_paiBuildingHappinessChanges,GC.getNumBuildingInfos(),iDefault);
 			}
 			m_paiBuildingHappinessChanges[i] = pClassInfo->getBuildingHappinessChanges(i);
+			invalidateSparseLists();
 		}
 		if ( getBuildingHealthChanges(i) == iDefault && pClassInfo->getBuildingHealthChanges(i) != iDefault)
 		{
@@ -2133,6 +2215,7 @@ void CvCivicInfo::copyNonDefaults(const CvCivicInfo* pClassInfo)
 				CvXMLLoadUtility::InitList(&m_paiBuildingHealthChanges,GC.getNumBuildingInfos(),iDefault);
 			}
 			m_paiBuildingHealthChanges[i] = pClassInfo->getBuildingHealthChanges(i);
+			invalidateSparseLists();
 		}
 	}
 	for ( int i = 0; i < GC.getNumFeatureInfos(); i++ )
@@ -2144,6 +2227,7 @@ void CvCivicInfo::copyNonDefaults(const CvCivicInfo* pClassInfo)
 				CvXMLLoadUtility::InitList(&m_paiFeatureHappinessChanges,GC.getNumFeatureInfos(),iDefault);
 			}
 			m_paiFeatureHappinessChanges[i] = pClassInfo->getFeatureHappinessChanges(i);
+			invalidateSparseLists();
 		}
 	}
 

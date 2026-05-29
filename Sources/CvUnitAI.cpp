@@ -29,6 +29,7 @@
 #include "CvUnitSelectionCriteria.h"
 #include "CvDLLFAStarIFaceBase.h"
 #include "BetterBTSAI.h"
+#include "Repos/BuildsRepo.h"
 #ifdef USE_OLD_PATH_GENERATOR
 #include "FAStarNode.h"
 #endif
@@ -21720,16 +21721,22 @@ bool CvUnitAI::AI_irrigateTerritory()
 				{
 					int iBestTempBuildValue = MAX_INT;
 					BuildTypes eBestTempBuild = NO_BUILD;
+					int iQualified = 0;
 
-					for (int iJ = 0; iJ < GC.getNumBuildInfos(); iJ++)
+					foreach_(const BuildTypes eBuild, BuildsRepo::get().improvementBuilds())
 					{
-						const BuildTypes eBuild = (BuildTypes)iJ;
-
-						if (GC.getBuildInfo(eBuild).getImprovement() != NO_IMPROVEMENT
-						&& GC.getImprovementInfo(GC.getBuildInfo(eBuild).getImprovement()).isCarriesIrrigation()
+						if (GC.getImprovementInfo(GC.getBuildInfo(eBuild).getImprovement()).isCarriesIrrigation()
 						&& canBuild(pLoopPlot, eBuild))
 						{
+							++iQualified;
 							const int iValue = 10000 / (GC.getBuildInfo(eBuild).getTime() + 1);
+
+							if (gPlayerLogLevel >= 3)
+							{
+								logBuildEvaluation(3, "  AI_irrigateTerritory cand build=%s time=%d score=%d",
+									GC.getBuildInfo(eBuild).getType(),
+									GC.getBuildInfo(eBuild).getTime(), iValue);
+							}
 
 							if (iValue < iBestTempBuildValue)
 							{
@@ -21737,6 +21744,18 @@ bool CvUnitAI::AI_irrigateTerritory()
 								eBestTempBuild = eBuild;
 							}
 						}
+					}
+
+					if (gPlayerLogLevel >= 2)
+					{
+						const CvWString szOwnerName = GET_PLAYER(getOwner()).getName();
+						const CvWString szUnitName = getName();
+						logBuildEvaluation(2, "AI_irrigateTerritory owner=%S[%d] unit=%S[%d] at=(%d,%d) qualified=%d -> %s score=%d",
+							szOwnerName.GetCString(), getOwner(),
+							szUnitName.GetCString(), getID(),
+							pLoopPlot->getX(), pLoopPlot->getY(), iQualified,
+							eBestTempBuild == NO_BUILD ? "NO_BUILD" : GC.getBuildInfo(eBestTempBuild).getType(),
+							eBestTempBuild == NO_BUILD ? 0 : iBestTempBuildValue);
 					}
 
 					if (eBestTempBuild != NO_BUILD)
@@ -21835,37 +21854,56 @@ bool CvUnitAI::AI_fortTerritory(bool bCanal, bool bAirbase)
 			{
 				int iBestBuildValue = MAX_INT;
 				BuildTypes eBestTempBuild = NO_BUILD;
+				int iQualified = 0;
 
-				for (int iJ = 0; iJ < GC.getNumBuildInfos(); iJ++)
+				foreach_(const BuildTypes eBuild, BuildsRepo::get().improvementBuilds())
 				{
-					const BuildTypes eBuild = ((BuildTypes)iJ);
+					const CvImprovementInfo& kImprovement = GC.getImprovementInfo(GC.getBuildInfo(eBuild).getImprovement());
 
-					if (GC.getBuildInfo(eBuild).getImprovement() != NO_IMPROVEMENT)
+					if ((bCanal && kImprovement.isCanMoveSeaUnits() || kImprovement.isActsAsCity() && kImprovement.getDefenseModifier() > 0)
+					&& canBuild(pLoopPlot, eBuild))
 					{
-						const CvImprovementInfo& kImprovement = GC.getImprovementInfo(GC.getBuildInfo(eBuild).getImprovement());
+						++iQualified;
+						int iBuildValue = 100 * kImprovement.getDefenseModifier();
 
-						if ((bCanal && kImprovement.isCanMoveSeaUnits() || kImprovement.isActsAsCity() && kImprovement.getDefenseModifier() > 0)
-						&& canBuild(pLoopPlot, eBuild))
+						if (kImprovement.isCanMoveSeaUnits() && bCanal)
 						{
-							int iBuildValue = 100 * kImprovement.getDefenseModifier();
+							iBuildValue += 2000;
+						}
+						if (kImprovement.isZOCSource())
+						{
+							iBuildValue += 5000;
+						}
+						iBuildValue /= (GC.getBuildInfo(eBuild).getTime() + 1);
 
-							if (kImprovement.isCanMoveSeaUnits() && bCanal)
-							{
-								iBuildValue += 2000;
-							}
-							if (kImprovement.isZOCSource())
-							{
-								iBuildValue += 5000;
-							}
-							iBuildValue /= (GC.getBuildInfo(eBuild).getTime() + 1);
+						if (gPlayerLogLevel >= 3)
+						{
+							logBuildEvaluation(3, "  AI_fortTerritory cand build=%s impr=%s canMoveSea=%d acts=%d def=%d zoc=%d time=%d score=%d",
+								GC.getBuildInfo(eBuild).getType(), kImprovement.getType(),
+								kImprovement.isCanMoveSeaUnits() ? 1 : 0, kImprovement.isActsAsCity() ? 1 : 0,
+								kImprovement.getDefenseModifier(), kImprovement.isZOCSource() ? 1 : 0,
+								GC.getBuildInfo(eBuild).getTime(), iBuildValue);
+						}
 
-							if (iBuildValue > iBestBuildValue)
-							{
-								iBestBuildValue = iBuildValue;
-								eBestTempBuild = eBuild;
-							}
+						if (iBuildValue > iBestBuildValue)
+						{
+							iBestBuildValue = iBuildValue;
+							eBestTempBuild = eBuild;
 						}
 					}
+				}
+
+				if (gPlayerLogLevel >= 2)
+				{
+					const CvWString szOwnerName = GET_PLAYER(getOwner()).getName();
+					const CvWString szUnitName = getName();
+					logBuildEvaluation(2, "AI_fortTerritory bCanal=%d owner=%S[%d] unit=%S[%d] at=(%d,%d) qualified=%d -> %s score=%d",
+						bCanal ? 1 : 0,
+						szOwnerName.GetCString(), getOwner(),
+						szUnitName.GetCString(), getID(),
+						pLoopPlot->getX(), pLoopPlot->getY(), iQualified,
+						eBestTempBuild == NO_BUILD ? "NO_BUILD" : GC.getBuildInfo(eBestTempBuild).getType(),
+						eBestTempBuild == NO_BUILD ? 0 : iBestBuildValue);
 				}
 
 				if (eBestTempBuild != NO_BUILD && !pLoopPlot->isVisibleEnemyUnit(this))
@@ -22047,32 +22085,50 @@ bool CvUnitAI::AI_improveBonus(int iMinValue, CvPlot** ppBestPlot, BuildTypes* p
 						PROFILE("CvUnitAI::AI_improveBonus.CheckBuild");
 
 						int iBestTempBuildValue = MAX_INT;
+						int iQualified = 0;
 
-						for (int iJ = 0; iJ < GC.getNumBuildInfos(); iJ++)
+						foreach_(const BuildTypes eBuild, BuildsRepo::get().improvementBuilds())
 						{
-							const BuildTypes eBuild = (BuildTypes)iJ;
+							const CvImprovementInfo& kImprovementX = GC.getImprovementInfo(GC.getBuildInfo(eBuild).getImprovement());
 
-							if (GC.getBuildInfo(eBuild).getImprovement() != NO_IMPROVEMENT)
+							if ((!bLeaveForests || eFeature == NO_FEATURE || !GC.getBuildInfo(eBuild).isFeatureRemove(eFeature))
+
+							&& (ePlotOwner == ePlayer || kImprovementX.getCulture() > 0 && kImprovementX.isOutsideBorders())
+
+							&& (kImprovementX.isImprovementBonusTrade(eNonObsoleteBonus) || !bCityRadius && kImprovementX.getCulture() > 0)
+
+							&& canBuild(pLoopPlot, eBuild))
 							{
-								const CvImprovementInfo& kImprovementX = GC.getImprovementInfo(GC.getBuildInfo(eBuild).getImprovement());
+								++iQualified;
+								const int iValue = 10000 / (GC.getBuildInfo(eBuild).getTime() + 1);
 
-								if ((!bLeaveForests || eFeature == NO_FEATURE || !GC.getBuildInfo(eBuild).isFeatureRemove(eFeature))
-
-								&& (ePlotOwner == ePlayer || kImprovementX.getCulture() > 0 && kImprovementX.isOutsideBorders())
-
-								&& (kImprovementX.isImprovementBonusTrade(eNonObsoleteBonus) || !bCityRadius && kImprovementX.getCulture() > 0)
-
-								&& canBuild(pLoopPlot, eBuild))
+								if (gPlayerLogLevel >= 3)
 								{
-									const int iValue = 10000 / (GC.getBuildInfo(eBuild).getTime() + 1);
+									logBuildEvaluation(3, "  AI_improveBonus cand build=%s impr=%s culture=%d outsideBorders=%d bonusTrade=%d time=%d score=%d",
+										GC.getBuildInfo(eBuild).getType(), kImprovementX.getType(),
+										kImprovementX.getCulture(), kImprovementX.isOutsideBorders() ? 1 : 0,
+										kImprovementX.isImprovementBonusTrade(eNonObsoleteBonus) ? 1 : 0,
+										GC.getBuildInfo(eBuild).getTime(), iValue);
+								}
 
-									if (iValue < iBestTempBuildValue)
-									{
-										iBestTempBuildValue = iValue;
-										eBestTempBuild = eBuild;
-									}
+								if (iValue < iBestTempBuildValue)
+								{
+									iBestTempBuildValue = iValue;
+									eBestTempBuild = eBuild;
 								}
 							}
+						}
+
+						if (gPlayerLogLevel >= 2)
+						{
+							const CvWString szOwnerName = GET_PLAYER(getOwner()).getName();
+							const CvWString szUnitName = getName();
+							logBuildEvaluation(2, "AI_improveBonus owner=%S[%d] unit=%S[%d] at=(%d,%d) qualified=%d -> %s score=%d",
+								szOwnerName.GetCString(), getOwner(),
+								szUnitName.GetCString(), getID(),
+								pLoopPlot->getX(), pLoopPlot->getY(), iQualified,
+								eBestTempBuild == NO_BUILD ? "NO_BUILD" : GC.getBuildInfo(eBestTempBuild).getType(),
+								eBestTempBuild == NO_BUILD ? 0 : iBestTempBuildValue);
 						}
 					}
 					if (eBestTempBuild == NO_BUILD)
@@ -27154,43 +27210,61 @@ BuildTypes CvUnitAI::AI_findBestFort(const CvPlot* pPlot) const
 	PROFILE_FUNC();
 	int iBestTempBuildValue = 0;
 	BuildTypes eBestTempBuild = NO_BUILD;
+	int iQualified = 0;
 
-	for (int iI = 0; iI < GC.getNumBuildInfos(); iI++)
+	foreach_(const BuildTypes eBuild, BuildsRepo::get().improvementBuilds())
 	{
-		const BuildTypes eBuild = static_cast<BuildTypes>(iI);
-
-		if (GC.getBuildInfo(eBuild).getImprovement() != NO_IMPROVEMENT)
+		const CvImprovementInfo& kImprovement = GC.getImprovementInfo(GC.getBuildInfo(eBuild).getImprovement());
+		// Watchtower can claim land if fort can't
+		if (kImprovement.isMilitaryStructure() && canBuild(pPlot, eBuild))
 		{
-			const CvImprovementInfo& kImprovement = GC.getImprovementInfo(GC.getBuildInfo(eBuild).getImprovement());
-			// Watchtower can claim land if fort can't
-			if (kImprovement.isMilitaryStructure() && canBuild(pPlot, eBuild))
+			++iQualified;
+			int iValue =
+				(
+					kImprovement.getDefenseModifier() * 100
+					+
+					kImprovement.getVisibilityChange() * 1000 // Each visibility equals 10% defense mod
+				);
+			if (kImprovement.isActsAsCity())
 			{
-				int iValue =
-					(
-						kImprovement.getDefenseModifier() * 100
-						+
-						kImprovement.getVisibilityChange() * 1000 // Each visibility equals 10% defense mod
-					);
-				if (kImprovement.isActsAsCity())
-				{
-					iValue += 5000; // Equals 50% defense mod
-				}
-				if (kImprovement.isZOCSource())
-				{
-					iValue += 5000; // Equals 50% defense mod
-				}
-				if (iValue > 0)
-				{
-					iValue /= (GC.getBuildInfo(eBuild).getTime() + 1);
+				iValue += 5000; // Equals 50% defense mod
+			}
+			if (kImprovement.isZOCSource())
+			{
+				iValue += 5000; // Equals 50% defense mod
+			}
+			if (iValue > 0)
+			{
+				iValue /= (GC.getBuildInfo(eBuild).getTime() + 1);
 
-					if (iValue > iBestTempBuildValue)
-					{
-						iBestTempBuildValue = iValue;
-						eBestTempBuild = eBuild;
-					}
+				if (gPlayerLogLevel >= 3)
+				{
+					logBuildEvaluation(3, "  AI_findBestFort cand build=%s impr=%s def=%d vis=%d acts=%d zoc=%d time=%d score=%d",
+						GC.getBuildInfo(eBuild).getType(), kImprovement.getType(),
+						kImprovement.getDefenseModifier(), kImprovement.getVisibilityChange(),
+						kImprovement.isActsAsCity() ? 1 : 0, kImprovement.isZOCSource() ? 1 : 0,
+						GC.getBuildInfo(eBuild).getTime(), iValue);
+				}
+
+				if (iValue > iBestTempBuildValue)
+				{
+					iBestTempBuildValue = iValue;
+					eBestTempBuild = eBuild;
 				}
 			}
 		}
+	}
+
+	if (gPlayerLogLevel >= 2)
+	{
+		const CvWString szOwnerName = GET_PLAYER(getOwner()).getName();
+		const CvWString szUnitName = getName();
+		logBuildEvaluation(2, "AI_findBestFort owner=%S[%d] unit=%S[%d] at=(%d,%d) qualified=%d -> %s score=%d",
+			szOwnerName.GetCString(), getOwner(),
+			szUnitName.GetCString(), getID(),
+			pPlot->getX(), pPlot->getY(), iQualified,
+			eBestTempBuild == NO_BUILD ? "NO_BUILD" : GC.getBuildInfo(eBestTempBuild).getType(),
+			iBestTempBuildValue);
 	}
 
 	return eBestTempBuild;
