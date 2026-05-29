@@ -516,6 +516,7 @@ void CvPlayer::init(PlayerTypes eID)
 		setLeaderHeadLevel(0);
 	}
 	m_contractBroker.init(eID);
+	m_workerAI.setOwner(eID);
 	AI_init();
 }
 
@@ -610,6 +611,7 @@ void CvPlayer::initInGame(PlayerTypes eID, bool bSetAlive)
 	}
 	resetPlotAndCityData();
 	m_contractBroker.init(eID);
+	m_workerAI.setOwner(eID);
 	AI_init();
 }
 
@@ -3707,6 +3709,8 @@ void CvPlayer::doTurn()
 	//	Each turn flush the movement cost cache for each player to avoid it getting too large
 	CvPlot::flushMovementCostCache();
 
+	m_workerAI.onTurnBegin(GC.getGame().getGameTurn());
+
 #ifdef CAN_TRAIN_CACHING
 	//	Clear training caches at the start of each turn
 	algo::for_each(cities(), CvCity::fn::clearCanTrainCache());
@@ -3916,6 +3920,8 @@ void CvPlayer::doMultiMapTurn()
 
 	//	Each turn flush the movement cost cache for each player to avoid it getting too large
 	CvPlot::flushMovementCostCache();
+
+	m_workerAI.onTurnBegin(GC.getGame().getGameTurn());
 
 #ifdef CAN_TRAIN_CACHING
 	//	Clear training caches at the start of each turn

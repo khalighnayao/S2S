@@ -82,6 +82,9 @@
     <Filter Include="Source\Base\Repos">
       <UniqueIdentifier>{8a2c4f1d-7b3e-4d52-9a6f-1c2e3b4a5d6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Base\Utils">
+      <UniqueIdentifier>{c4e2a371-9b86-4f4d-bd57-2e8f3a517d04}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source\Base\Properties">
       <UniqueIdentifier>{534a1ab8-2aff-4b46-aa86-ae1735a3ccd8}</UniqueIdentifier>
     </Filter>
@@ -656,6 +659,9 @@
     </ClCompile>
     <ClCompile Include="Repos\BuildsRepo.cpp">
       <Filter>Source\Base\Repos</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\PlotSnapshot.cpp">
+      <Filter>Source\Base\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Infos\CvRiverModelInfo.cpp">
       <Filter>Source\Base\Infos</Filter>
@@ -1666,6 +1672,9 @@
     </ClInclude>
     <ClInclude Include="Repos\BuildsRepo.h">
       <Filter>Source\Base\Repos</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\PlotSnapshot.h">
+      <Filter>Source\Base\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Infos\CvRiverModelInfo.h">
       <Filter>Source\Base\Infos</Filter>

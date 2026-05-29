@@ -9,6 +9,7 @@
 #include "CvBuildLists.h"
 #include "CvCityAI.h"
 #include "CvContractBroker.h"
+#include "CvWorkerAI.h"
 #include "CvGameObject.h"
 #include "CvBuildLists.h"
 #include "CvPlotGroup.h"
@@ -2329,6 +2330,7 @@ public:
 
 	void RecalculatePlotGroupHashes();
 	CvContractBroker& getContractBroker();
+	CvWorkerAI& getWorkerAI() { return m_workerAI; }
 
 	void addPlotDangerSource(const CvPlot* pPlot, int iStrength);
 
@@ -2393,6 +2395,7 @@ private:
 	mutable std::map<int, bool>	m_canHaveBuilder;
 
 	CvContractBroker m_contractBroker;
+	CvWorkerAI m_workerAI;
 
 	mutable bst::scoped_ptr<CvUpgradeCache> m_upgradeCache;
 

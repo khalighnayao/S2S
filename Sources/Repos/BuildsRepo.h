@@ -26,12 +26,19 @@ public:
 	// Sorted ascending by BuildTypes id.
 	const std::vector<BuildTypes>& routeBuilds() const;
 
+	// Builds whose produced improvement has getCulture() > 0.
+	// Used by the worker AI to consider culture-extending improvements on bonus tiles
+	// outside city radius, in addition to improvements that directly trade the bonus.
+	// Sorted ascending by BuildTypes id.
+	const std::vector<BuildTypes>& cultureBuilds() const;
+
 private:
 	BuildsRepo();
 	~BuildsRepo();
 
 	std::vector<BuildTypes> m_improvementBuilds;
 	std::vector<BuildTypes> m_routeBuilds;
+	std::vector<BuildTypes> m_cultureBuilds;
 };
 
 #endif // BUILDS_REPO_H
