@@ -1775,16 +1775,20 @@ class CvEventManager:
 						# Connect two cities on the way to appia
 						CyCityTo, iPath2Appia = aCityList.pop(iIdx)
 						iCities -= 1
-						MAP.generatePathForHypotheticalUnit(CyCityFrom.plot(), CyCityTo.plot(), iPlayer, iUnit, PathingFlags.MOVE_SAFE_TERRITORY, 9999)
-						for j in xrange(iMinPath):
-							MAP.getLastPathPlotByIndex(j).setRouteType(iRoute)
+						if MAP.generatePathForHypotheticalUnit(CyCityFrom.plot(), CyCityTo.plot(), iPlayer, iUnit, PathingFlags.MOVE_SAFE_TERRITORY, 9999):
+							for j in xrange(MAP.getLastPathStepNum()):
+								pRoutePlot = MAP.getLastPathPlotByIndex(j)
+								if pRoutePlot:
+									pRoutePlot.setRouteType(iRoute)
 						CyCityFrom = CyCityTo
 						iMaxPath2Appia = iPath2Appia
 					else:
 						# Connect to the appian city
-						MAP.generatePathForHypotheticalUnit(CyCityFrom.plot(), CyCity.plot(), iPlayer, iUnit, PathingFlags.MOVE_SAFE_TERRITORY, 9999)
-						for j in xrange(iMaxPath2Appia):
-							MAP.getLastPathPlotByIndex(j).setRouteType(iRoute)
+						if MAP.generatePathForHypotheticalUnit(CyCityFrom.plot(), CyCity.plot(), iPlayer, iUnit, PathingFlags.MOVE_SAFE_TERRITORY, 9999):
+							for j in xrange(MAP.getLastPathStepNum()):
+								pRoutePlot = MAP.getLastPathPlotByIndex(j)
+								if pRoutePlot:
+									pRoutePlot.setRouteType(iRoute)
 						if iOtherPath2Appia:
 							CyCityFrom = CyCityEnd
 							iMaxPath2Appia = iOtherPath2Appia
