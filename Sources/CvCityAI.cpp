@@ -10590,6 +10590,12 @@ void CvCityAI::AI_findBestImprovementForPlot(const CvPlot* pPlot, plotInfo* plot
 	//AI_clearfeaturevalue needs to be rewritten to work with new priorities
 	// int iClearFeatureValue = currentFeature ? AI_clearFeatureValue(getCityPlotIndex(pPlot)) : 0;
 
+	// Scoring follows the same shape as CvWorkerAI::improveBonus: yield-primary
+	// (CalculateCityPlotValue delta over current), tiebreaker on build time
+	// (faster wins). The legacy comparator used >= which made later-iterated
+	// (= lower-indexed) improvements silently win ties; combined with a 0-value
+	// first iteration that would overwrite the initial NO_BUILD slot.
+	int bestTimeScore = 0;
 	for (int iI = GC.getNumImprovementInfos() - 1; iI > -1; iI--)
 	{
 		const ImprovementTypes ePotentialImprovement = static_cast<ImprovementTypes>(iI);
@@ -10640,15 +10646,22 @@ void CvCityAI::AI_findBestImprovementForPlot(const CvPlot* pPlot, plotInfo* plot
 		}
 
 		// subtract existing plot value
-		int plotValue = std::max(0, CvValueService::CalculateCityPlotValue(ratios, plotInfo->newYields, plotHasBonus, plotHasBonus && potentialImprovementInfo.isImprovementBonusTrade(eNonObsoleteBonus)) - currentPlotValue);
+		const int plotValue = std::max(0, CvValueService::CalculateCityPlotValue(ratios, plotInfo->newYields, plotHasBonus, plotHasBonus && potentialImprovementInfo.isImprovementBonusTrade(eNonObsoleteBonus)) - currentPlotValue);
 
-		if (plotValue >= plotInfo->newValue)
+		// Skip zero-value candidates; they cannot improve the plot.
+		if (plotValue <= 0) continue;
+
+		const int timeScore = 10000 / (GC.getBuildInfo(eBestBuild).getTime() + 1);
+
+		// Primary: plotValue strict greater; tiebreaker: faster build (higher timeScore).
+		if (plotValue > plotInfo->newValue
+		|| (plotValue == plotInfo->newValue && timeScore > bestTimeScore))
 		{
 			plotInfo->newValue = plotValue;
 			plotInfo->newBuild = eBestBuild;
 			plotInfo->newImprovement = ePotentialImprovement;
+			bestTimeScore = timeScore;
 		}
-
 	}
 	if (plotInfo->newImprovement == plotInfo->currentImprovement) {
 		plotInfo->newValue = 0;

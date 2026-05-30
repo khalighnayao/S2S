@@ -21204,80 +21204,10 @@ bool CvUnitAI::AI_connectPlot(CvPlot* pPlot, int iRange)
 // Returns true if a mission was pushed...
 bool CvUnitAI::AI_improveCity(CvCity* pCity)
 {
-	PROFILE_FUNC();
-
-	CvPlot* pBestPlot;
-	BuildTypes eBestBuild;
-
-	if (AI_bestCityBuild(pCity, &pBestPlot, &eBestBuild, NULL, this))
-	{
-		FAssertMsg(pBestPlot != NULL, "BestPlot is not assigned a valid value");
-		FASSERT_BOUNDS(0, GC.getNumBuildInfos(), eBestBuild);
-
-		MissionTypes eMission;
-		if ((plot()->getWorkingCity() != pCity) || (GC.getBuildInfo(eBestBuild).getRoute() != NO_ROUTE))
-		{
-			eMission = MISSION_ROUTE_TO;
-		}
-		else
-		{
-			int iPathTurns;
-
-			eMission = MISSION_MOVE_TO;
-			if (NULL != pBestPlot && generatePath(pBestPlot, MOVE_WITH_CAUTION, false, &iPathTurns) && (iPathTurns == 1) && (getPathMovementRemaining() == 0))
-			{
-				if (pBestPlot->getRouteType() != NO_ROUTE)
-				{
-					eMission = MISSION_ROUTE_TO;
-				}
-			}
-			else if (plot()->getRouteType() == NO_ROUTE)
-			{
-				int iPlotMoveCost = GC.getTerrainInfo(plot()->getTerrainType()).getMovementCost();
-
-				if (plot()->getFeatureType() != NO_FEATURE)
-				{
-					iPlotMoveCost += GC.getFeatureInfo(plot()->getFeatureType()).getMovementCost();
-				}
-
-				if (plot()->isHills())
-				{
-					iPlotMoveCost += GC.getHILLS_EXTRA_MOVEMENT();
-				}
-
-				if (plot()->isAsPeak())
-				{
-					if (!GET_TEAM(getTeam()).isMoveFastPeaks())
-					{
-						iPlotMoveCost += GC.getPEAK_EXTRA_MOVEMENT();
-					}
-					iPlotMoveCost += 3;
-				}
-
-				if (iPlotMoveCost > 1)
-				{
-					eMission = MISSION_ROUTE_TO;
-				}
-			}
-			if (getGroup()->pushMissionInternal(eMission, pBestPlot->getX(), pBestPlot->getY(), isHuman() ? 0 : MOVE_WITH_CAUTION, false, false, MISSIONAI_BUILD, pBestPlot))
-			{
-				getGroup()->pushMission(MISSION_BUILD, eBestBuild, -1, 0, (getGroup()->getLengthMissionQueue() > 0), false, MISSIONAI_BUILD, pBestPlot);
-
-				return true;
-			}
-		}
-
-		eBestBuild = AI_betterPlotBuild(pBestPlot, eBestBuild);
-
-		if (getGroup()->pushMissionInternal(eMission, pBestPlot->getX(), pBestPlot->getY(), isHuman() ? 0 : MOVE_WITH_CAUTION, false, false, MISSIONAI_BUILD, pBestPlot))
-		{
-			getGroup()->pushMission(MISSION_BUILD, eBestBuild, -1, 0, (getGroup()->getLengthMissionQueue() > 0), false, MISSIONAI_BUILD, pBestPlot);
-
-			return true;
-		}
-	}
-
-	return false;
+	// Delegates to CvWorkerAI::improveCity, which mirrors improveBonus's
+	// single-pass scoring + caching pattern. AI_bestCityBuild is retained for
+	// any external callers but no longer used by the AI path.
+	return GET_PLAYER(getOwner()).getWorkerAI().improveCity(this, pCity);
 }
 
 bool CvUnitAI::AI_improveLocalPlot(int iRange, const CvCity* pIgnoreCity)
