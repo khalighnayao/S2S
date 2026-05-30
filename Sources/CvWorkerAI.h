@@ -6,6 +6,8 @@
 #include "CvEnums.h"
 #include <map>
 
+class CvCity;
+class CvPlot;
 class CvUnitAI;
 class FDataStreamBase;
 
@@ -83,8 +85,19 @@ struct WorkerScoringWeights
 //   [WAI/mission]       final mission decision (MOVE_TO vs ROUTE_TO)
 //   [WAI/end]           function exit with success/failure
 //
+// Log taxonomy for improveCity (parallel to the above; [WAI/city/*] prefix):
+//
+//   [WAI/city/begin]    function entry; identifies the unit + city
+//   [WAI/city/plot/skip] plot rejected (notWorking / safeAutomation / noPath / dedup)
+//   [WAI/city/eval/hit] city plot evaluation read from cache
+//   [WAI/city/eval/new] city plot evaluation computed fresh
+//   [WAI/city/score]    per-plot scoring after path-turn + dedup
+//   [WAI/city/best]     new best plot during outer iteration
+//   [WAI/city/mission]  final mission decision (MOVE_TO vs ROUTE_TO)
+//   [WAI/city/end]      function exit with success/failure
+//
 // Levels: 1 -> [begin] [end] [best]; 2 -> [plot/...] [build/winner] [score]
-//         [dedup] [mission]; 3 -> [build/cand] (per-candidate detail).
+//         [dedup] [mission] [city/*]; 3 -> [build/cand] (per-candidate detail).
 // ----------------------------------------------------------------------------
 class CvWorkerAI
 {
@@ -99,6 +112,13 @@ public:
 
 	// ---- worker planning ----
 	bool improveBonus(CvUnitAI* unit, int allowedMovementTurns = -1);
+
+	// Mirrors improveBonus's structure, but for the city build path: iterate the
+	// city's working plots, consume the per-city precomputed best build as the
+	// inner-pick (analog of BonusEval cache), apply path-turn + dedup scoring,
+	// push the mission. Replaces the legacy CvUnitAI::AI_bestCityBuild 2-pass.
+	// Logged under [WAI/city/*]; see taxonomy below.
+	bool improveCity(CvUnitAI* unit, CvCity* pCity);
 
 	// ---- scoring weights ----
 	const WorkerScoringWeights& weights() const { return m_weights; }
@@ -117,6 +137,24 @@ public:
 	const BonusEval* lookup(int plotIdx, UnitTypes unitType,
 	                        int gameTurn, BonusTypes currentBonus) const;
 	void record(int plotIdx, UnitTypes unitType, const BonusEval& eval);
+
+	// ---- per-plot city-build cache (turn-scoped) ----
+	// Mirrors BonusEval but for the AI_improveCity flow. Keyed on (plotIdx,
+	// unitType) just like BonusEval -- different worker tiers can have different
+	// canBuild() outcomes so they can't share entries. cityId is stored to
+	// invalidate the entry if a plot's working city flips during the turn.
+	struct CityPlotEval
+	{
+		int        turnComputed;
+		int        cityId;       // entry is a miss if plot's working city changed
+		BuildTypes bestBuild;    // copy of pCity->AI_getBestBuild(plotIdx) at compute time
+		int        baseValue;    // pCity->AI_getBestBuildValue(plotIdx) at compute time
+		bool       canBuild;     // unit->canBuild(plot, bestBuild) -- the per-unit filter
+	};
+
+	const CityPlotEval* lookupCity(int plotIdx, UnitTypes unitType,
+	                               int gameTurn, int cityId) const;
+	void recordCity(int plotIdx, UnitTypes unitType, const CityPlotEval& eval);
 
 	// ---- outer-filter rejection cache (turn-scoped) ----
 	// Records plots that improveBonus rejected at the outer filter for a STABLE
@@ -150,6 +188,14 @@ public:
 	void releaseAllClaimsBy(int unitId);
 
 private:
+	// Shared mission-push tail for improveBonus / improveCity. Static because
+	// it has no per-instance state; lives on the class so the friend access
+	// CvUnitAI grants to CvWorkerAI extends to it (anonymous-namespace helpers
+	// don't inherit friendship).
+	static bool pushBuildMission(CvUnitAI* unit, CvPlot* pBestPlot,
+	                             BuildTypes eBestBuild, MissionTypes eMission,
+	                             int iBestValue, const char* section);
+
 	typedef std::pair<int, int> EvalKey; // (plotIdx, unitType)
 
 	PlayerTypes m_owner;
@@ -158,6 +204,7 @@ private:
 	WorkerScoringWeights m_weights;
 
 	std::map<EvalKey, BonusEval>          m_bonusEvalCache;
+	std::map<EvalKey, CityPlotEval>       m_cityEvalCache;
 	std::map<EvalKey, OuterRejectReason>  m_outerRejected;
 	std::map<int, int>                    m_claims; // plotIdx -> unitId
 };

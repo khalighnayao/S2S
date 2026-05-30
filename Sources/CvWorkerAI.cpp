@@ -14,6 +14,7 @@
 #include "CvPlot.h"
 #include "CvReachablePlotSet.h"
 #include "CvSelectionGroup.h"
+#include "CvTeamAI.h"
 #include "CvUnitAI.h"
 #include "Repos/BuildsRepo.h"
 
@@ -48,6 +49,7 @@ void CvWorkerAI::onTurnBegin(int gameTurn)
 {
 	m_lastTurn = gameTurn;
 	m_bonusEvalCache.clear();
+	m_cityEvalCache.clear();
 	m_outerRejected.clear();
 	m_claims.clear();
 }
@@ -91,6 +93,22 @@ const CvWorkerAI::BonusEval* CvWorkerAI::lookup(int plotIdx, UnitTypes unitType,
 void CvWorkerAI::record(int plotIdx, UnitTypes unitType, const BonusEval& eval)
 {
 	m_bonusEvalCache[EvalKey(plotIdx, (int)unitType)] = eval;
+}
+
+const CvWorkerAI::CityPlotEval* CvWorkerAI::lookupCity(int plotIdx, UnitTypes unitType,
+                                                       int gameTurn, int cityId) const
+{
+	std::map<EvalKey, CityPlotEval>::const_iterator it =
+		m_cityEvalCache.find(EvalKey(plotIdx, (int)unitType));
+	if (it == m_cityEvalCache.end())          return NULL;
+	if (it->second.turnComputed != gameTurn)  return NULL;
+	if (it->second.cityId       != cityId)    return NULL;
+	return &it->second;
+}
+
+void CvWorkerAI::recordCity(int plotIdx, UnitTypes unitType, const CityPlotEval& eval)
+{
+	m_cityEvalCache[EvalKey(plotIdx, (int)unitType)] = eval;
 }
 
 bool CvWorkerAI::tryClaim(int plotIdx, int unitId)
@@ -240,6 +258,142 @@ int computeYieldSum(CvPlot* plot, ImprovementTypes eImpr, PlayerTypes ePlayer)
 }
 
 } // namespace
+
+// ---------------------------------------------------------------------------
+// CvWorkerAI::pushBuildMission -- shared mission-push tail for the two planners.
+//
+// Both improveBonus and improveCity decide their best plot + build + mission
+// type by different rules, then run the identical sequence: AI_betterPlotBuild
+// substitution, [<section>/mission] log, atPlot fast-path, moves guard, push
+// the move + build pair, log success or pushFailed. Extracted here so the
+// two callers don't drift.
+//
+// `section` is the log-tag prefix -- "WAI" for the bonus planner (emits
+// [WAI/mission] / [WAI/end]) and "WAI/city" for the city planner (emits
+// [WAI/city/mission] / [WAI/city/end]). The bonus planner keeps its own
+// [WAI/end] result=noTarget and result=route exits inline because they
+// happen *before* eMission is decided.
+//
+// Returns true if a mission was pushed onto the unit's group.
+// ---------------------------------------------------------------------------
+bool CvWorkerAI::pushBuildMission(CvUnitAI* unit, CvPlot* pBestPlot, BuildTypes eBestBuild,
+                                  MissionTypes eMission, int iBestValue, const char* section)
+{
+	FAssertMsg(unit != NULL && pBestPlot != NULL, "pushBuildMission requires unit+plot");
+	FAssertMsg(eBestBuild != NO_BUILD, "pushBuildMission requires a build");
+	FAssertMsg(eBestBuild < GC.getNumBuildInfos(), "BestBuild is assigned a corrupt value");
+
+	// AI_betterPlotBuild can substitute the chosen improvement build with a
+	// route build (typically BUILD_TRAIL) so the worker lays the road first.
+	// Log both the originally chosen and the substituted build so the analyst
+	// sees both the planner's decision and the mission's actual payload.
+	const BuildTypes eChosenBuild = eBestBuild;
+	eBestBuild = unit->AI_betterPlotBuild(pBestPlot, eBestBuild);
+	const bool bSubstituted = (eBestBuild != eChosenBuild);
+	const bool bAtBestPlot  = unit->atPlot(pBestPlot);
+
+	if (gPlayerLogLevel >= 2)
+	{
+		const char* missionName = bAtBestPlot ? "BUILD_HERE"
+			: (eMission == MISSION_ROUTE_TO ? "ROUTE_TO" : "MOVE_TO");
+		if (bSubstituted)
+		{
+			logBuildEvaluation(2, "[%s/mission] at=(%d,%d) chosen=%s actual=%s mission=%s value=%d",
+				section,
+				pBestPlot->getX(), pBestPlot->getY(),
+				GC.getBuildInfo(eChosenBuild).getType(),
+				GC.getBuildInfo(eBestBuild).getType(),
+				missionName, iBestValue);
+		}
+		else
+		{
+			logBuildEvaluation(2, "[%s/mission] at=(%d,%d) build=%s mission=%s value=%d",
+				section,
+				pBestPlot->getX(), pBestPlot->getY(),
+				GC.getBuildInfo(eBestBuild).getType(),
+				missionName, iBestValue);
+		}
+	}
+
+	// Fast path: unit already standing on the chosen plot. BTS rejects
+	// pushMissionInternal(MISSION_MOVE_TO|ROUTE_TO, ...) when from == to;
+	// without this guard those cases surface as result=pushFailed even
+	// though the plan was sound.
+	if (bAtBestPlot)
+	{
+		unit->getGroup()->pushMission(MISSION_BUILD, eBestBuild, -1, 0,
+			false, false, MISSIONAI_BUILD, pBestPlot);
+
+		if (gPlayerLogLevel >= 1)
+		{
+			if (bSubstituted)
+			{
+				logBuildEvaluation(1, "[%s/end] unit=%d result=build at=(%d,%d) chosen=%s actual=%s value=%d (atPlot)",
+					section, unit->getID(), pBestPlot->getX(), pBestPlot->getY(),
+					GC.getBuildInfo(eChosenBuild).getType(),
+					GC.getBuildInfo(eBestBuild).getType(), iBestValue);
+			}
+			else
+			{
+				logBuildEvaluation(1, "[%s/end] unit=%d result=build at=(%d,%d) build=%s value=%d (atPlot)",
+					section, unit->getID(), pBestPlot->getX(), pBestPlot->getY(),
+					GC.getBuildInfo(eBestBuild).getType(), iBestValue);
+			}
+		}
+		return true;
+	}
+
+	// Moves guard: BTS validates the first step at push time and rejects
+	// when no move is possible. Converts what would otherwise surface as a
+	// noisy pushFailed into a clean noMoves exit.
+	if (unit->getMoves() <= 0)
+	{
+		if (gPlayerLogLevel >= 1)
+			logBuildEvaluation(1, "[%s/end] unit=%d result=noMoves at=(%d,%d) target=(%d,%d) mission=%s",
+				section, unit->getID(), unit->getX(), unit->getY(),
+				pBestPlot->getX(), pBestPlot->getY(),
+				eMission == MISSION_ROUTE_TO ? "ROUTE_TO" : "MOVE_TO");
+		return false;
+	}
+
+	if (unit->getGroup()->pushMissionInternal(eMission, pBestPlot->getX(), pBestPlot->getY(),
+		unit->isHuman() ? 0 : MOVE_WITH_CAUTION, false, false, MISSIONAI_BUILD, pBestPlot))
+	{
+		unit->getGroup()->pushMission(MISSION_BUILD, eBestBuild, -1, 0,
+			(unit->getGroup()->getLengthMissionQueue() > 0), false, MISSIONAI_BUILD, pBestPlot);
+
+		if (gPlayerLogLevel >= 1)
+		{
+			if (bSubstituted)
+			{
+				logBuildEvaluation(1, "[%s/end] unit=%d result=build at=(%d,%d) chosen=%s actual=%s value=%d",
+					section, unit->getID(), pBestPlot->getX(), pBestPlot->getY(),
+					GC.getBuildInfo(eChosenBuild).getType(),
+					GC.getBuildInfo(eBestBuild).getType(), iBestValue);
+			}
+			else
+			{
+				logBuildEvaluation(1, "[%s/end] unit=%d result=build at=(%d,%d) build=%s value=%d",
+					section, unit->getID(), pBestPlot->getX(), pBestPlot->getY(),
+					GC.getBuildInfo(eBestBuild).getType(), iBestValue);
+			}
+		}
+		return true;
+	}
+
+	// pushMissionInternal returned false: typically busy with a prior mission,
+	// or path now invalid (enemy revealed, etc.). Log enough context to
+	// diagnose without re-running the game.
+	if (gPlayerLogLevel >= 1)
+		logBuildEvaluation(1, "[%s/end] unit=%d result=pushFailed from=(%d,%d) to=(%d,%d) mission=%s moves=%d isBusy=%d",
+			section, unit->getID(),
+			unit->getX(), unit->getY(),
+			pBestPlot->getX(), pBestPlot->getY(),
+			eMission == MISSION_ROUTE_TO ? "ROUTE_TO" : "MOVE_TO",
+			unit->getMoves(),
+			unit->getGroup()->isBusy() ? 1 : 0);
+	return false;
+}
 
 // ---------------------------------------------------------------------------
 // CvWorkerAI::improveBonus
@@ -822,17 +976,12 @@ bool CvWorkerAI::improveBonus(CvUnitAI* unit, int allowedMovementTurns)
 	if (eBestBuild != NO_BUILD)
 	{
 		FAssertMsg(!bBestBuildIsRoute, "BestBuild should not be a route");
-		FAssertMsg(eBestBuild < GC.getNumBuildInfos(), "BestBuild is assigned a corrupt value");
 
-		// When the unit is already standing on the chosen plot, skip the movement
-		// mission entirely -- BTS rejects pushMissionInternal(MISSION_ROUTE_TO, ...)
-		// when from == to, which used to surface as "pushFailed" in the logs even
-		// though the plan was good. Push the build directly instead.
-		const bool bAtBestPlot = unit->atPlot(pBestPlot);
-
-		// Decide MOVE_TO vs ROUTE_TO based on connectivity and path-vs-step distance.
+		// Decide MOVE_TO vs ROUTE_TO based on connectivity and path-vs-step
+		// distance. The shared pushBuildMission helper handles the atPlot
+		// fast-path (which makes the mission type moot when from == to).
 		MissionTypes eBestMission = MISSION_MOVE_TO;
-		if (!bAtBestPlot)
+		if (!unit->atPlot(pBestPlot))
 		{
 			if (pBestPlot->getWorkingCity() == NULL
 			|| !pBestPlot->getWorkingCity()->isConnectedToCapital())
@@ -850,125 +999,8 @@ bool CvWorkerAI::improveBonus(CvUnitAI* unit, int allowedMovementTurns)
 				}
 			}
 		}
-		// AI_betterPlotBuild can substitute the chosen improvement build with a
-		// route build (typically BUILD_TRAIL) when the bonus plot lacks a road --
-		// the worker lays the road first, the improvement is picked next turn.
-		// We log both the originally chosen build (which reflects the worker AI's
-		// actual decision) and the substituted build (what the mission actually runs).
-		const BuildTypes eChosenBuild = eBestBuild;
-		eBestBuild = unit->AI_betterPlotBuild(pBestPlot, eBestBuild);
-		const bool bSubstituted = (eBestBuild != eChosenBuild);
 
-		if (gPlayerLogLevel >= 2)
-		{
-			const char* missionName = bAtBestPlot ? "BUILD_HERE"
-				: (eBestMission == MISSION_ROUTE_TO ? "ROUTE_TO" : "MOVE_TO");
-			if (bSubstituted)
-			{
-				logBuildEvaluation(2, "[WAI/mission] at=(%d,%d) chosen=%s actual=%s mission=%s value=%d",
-					pBestPlot->getX(), pBestPlot->getY(),
-					GC.getBuildInfo(eChosenBuild).getType(),
-					GC.getBuildInfo(eBestBuild).getType(),
-					missionName, iBestValue);
-			}
-			else
-			{
-				logBuildEvaluation(2, "[WAI/mission] at=(%d,%d) build=%s mission=%s value=%d",
-					pBestPlot->getX(), pBestPlot->getY(),
-					GC.getBuildInfo(eBestBuild).getType(),
-					missionName, iBestValue);
-			}
-		}
-
-		// Fast path: unit is already on the plot. No movement mission required;
-		// push the build mission directly. CvSelectionGroup::pushMission's
-		// 5th arg is bAppendMission -- false because there's no preceding
-		// mission to append to.
-		if (bAtBestPlot)
-		{
-			unit->getGroup()->pushMission(MISSION_BUILD, eBestBuild, -1, 0,
-				false, false, MISSIONAI_BUILD, pBestPlot);
-
-			if (gPlayerLogLevel >= 1)
-			{
-				if (bSubstituted)
-				{
-					logBuildEvaluation(1, "[WAI/end] unit=%d result=build at=(%d,%d) chosen=%s actual=%s value=%d (atPlot)",
-						unit->getID(), pBestPlot->getX(), pBestPlot->getY(),
-						GC.getBuildInfo(eChosenBuild).getType(),
-						GC.getBuildInfo(eBestBuild).getType(), iBestValue);
-				}
-				else
-				{
-					logBuildEvaluation(1, "[WAI/end] unit=%d result=build at=(%d,%d) build=%s value=%d (atPlot)",
-						unit->getID(), pBestPlot->getX(), pBestPlot->getY(),
-						GC.getBuildInfo(eBestBuild).getType(), iBestValue);
-				}
-			}
-			return true;
-		}
-
-		// Guard: a unit with 0 movement points can't start MISSION_MOVE_TO or
-		// MISSION_ROUTE_TO -- BTS validates the first step at push time and
-		// rejects when no move is possible. Without this guard we'd surface
-		// the rejection as [WAI/end] result=pushFailed, which is noisy and
-		// misleading (the plan was good; the unit just had nothing left to
-		// spend this turn). The clean exit replaces ~all remaining pushFailed
-		// cases with [WAI/end] result=noMoves.
-		//
-		// PLACEMENT NOTE: this guard logically belongs in the AI caller layer
-		// (don't even invoke improveBonus for an exhausted unit) -- move it
-		// there when the worker AI gets its broader overhaul. Keeping it here
-		// for now to keep BuildEvaluation.log clean.
-		if (unit->getMoves() <= 0)
-		{
-			if (gPlayerLogLevel >= 1)
-			{
-				logBuildEvaluation(1, "[WAI/end] unit=%d result=noMoves at=(%d,%d) target=(%d,%d) mission=%s",
-					unit->getID(), unit->getX(), unit->getY(),
-					pBestPlot->getX(), pBestPlot->getY(),
-					eBestMission == MISSION_ROUTE_TO ? "ROUTE_TO" : "MOVE_TO");
-			}
-			return false;
-		}
-
-		if (unit->getGroup()->pushMissionInternal(eBestMission, pBestPlot->getX(), pBestPlot->getY(),
-			(unit->isHuman() ? 0 : MOVE_WITH_CAUTION), false, false, MISSIONAI_BUILD, pBestPlot))
-		{
-			unit->getGroup()->pushMission(MISSION_BUILD, eBestBuild, -1, 0,
-				(unit->getGroup()->getLengthMissionQueue() > 0), false, MISSIONAI_BUILD, pBestPlot);
-
-			if (gPlayerLogLevel >= 1)
-			{
-				if (bSubstituted)
-				{
-					logBuildEvaluation(1, "[WAI/end] unit=%d result=build at=(%d,%d) chosen=%s actual=%s value=%d",
-						unit->getID(), pBestPlot->getX(), pBestPlot->getY(),
-						GC.getBuildInfo(eChosenBuild).getType(),
-						GC.getBuildInfo(eBestBuild).getType(), iBestValue);
-				}
-				else
-				{
-					logBuildEvaluation(1, "[WAI/end] unit=%d result=build at=(%d,%d) build=%s value=%d",
-						unit->getID(), pBestPlot->getX(), pBestPlot->getY(),
-						GC.getBuildInfo(eBestBuild).getType(), iBestValue);
-				}
-			}
-			return true;
-		}
-
-		// pushMissionInternal returned false: typically out-of-moves, busy with a
-		// prior mission, or path now invalid (enemy revealed, etc.). Log enough
-		// context to diagnose without re-running the game.
-		if (gPlayerLogLevel >= 1)
-			logBuildEvaluation(1, "[WAI/end] unit=%d result=pushFailed from=(%d,%d) to=(%d,%d) mission=%s moves=%d isBusy=%d",
-				unit->getID(),
-				unit->getX(), unit->getY(),
-				pBestPlot->getX(), pBestPlot->getY(),
-				eBestMission == MISSION_ROUTE_TO ? "ROUTE_TO" : "MOVE_TO",
-				unit->getMoves(),
-				unit->getGroup()->isBusy() ? 1 : 0);
-		return false;
+		return pushBuildMission(unit, pBestPlot, eBestBuild, eBestMission, iBestValue, "WAI");
 	}
 
 	if (bBestBuildIsRoute)
@@ -993,4 +1025,242 @@ bool CvWorkerAI::improveBonus(CvUnitAI* unit, int allowedMovementTurns)
 	if (gPlayerLogLevel >= 1)
 		logBuildEvaluation(1, "[WAI/end] unit=%d result=fallthrough", unit->getID());
 	return false;
+}
+
+// ---------------------------------------------------------------------------
+// CvWorkerAI::improveCity
+//
+// Successor to the legacy CvUnitAI::AI_bestCityBuild + AI_improveCity pair.
+// Mirrors improveBonus's single-pass shape: one iteration over the city's
+// working plots, yield-primary scoring (from the per-city precomputed
+// AI_getBestBuildValue, which is the city-AI's analog of the BonusEval
+// score), path-turn + dedup multipliers, mission push at the end.
+//
+// The legacy code ran the path generation + dedup work twice (pass 0 picked
+// a naive best, pass 1 confirmed it with path turns and might fall through
+// to scan again). This version computes the path-discounted value inline for
+// every candidate, so the comparator always sees the same units it ranks on.
+// ---------------------------------------------------------------------------
+bool CvWorkerAI::improveCity(CvUnitAI* unit, CvCity* pCity)
+{
+	PROFILE_FUNC();
+
+	if (pCity == NULL || unit == NULL) return false;
+
+	const PlayerTypes ePlayer    = unit->getOwner();
+	const CvPlayerAI& kOwner     = GET_PLAYER(ePlayer);
+	const bool bSafeAutomation   = kOwner.isOption(PLAYEROPTION_SAFE_AUTOMATION);
+	const ImprovementTypes eRuins = GC.getIMPROVEMENT_CITY_RUINS();
+	const int  iGameTurn         = GC.getGame().getGameTurn();
+	const UnitTypes eUnitType    = unit->getUnitType();
+	const int  iCityId           = pCity->getID();
+	const bool bUnitInCity       = unit->plot()->isCity();
+
+	int        iBestValue = 0;
+	int        iBestPathTurns = 0;
+	CvPlot*    pBestPlot = NULL;
+	BuildTypes eBestBuild = NO_BUILD;
+
+	if (gPlayerLogLevel >= 1)
+	{
+		logBuildEvaluation(1, "[WAI/city/begin] owner=%d unit=%d at=(%d,%d) city=%S(%d) plots=%d",
+			(int)ePlayer, unit->getID(), unit->getX(), unit->getY(),
+			pCity->getName().GetCString(), iCityId, pCity->getNumCityPlots());
+	}
+
+	for (int iI = 0; iI < pCity->getNumCityPlots(); iI++)
+	{
+		CvPlot* pLoopPlot = plotCity(pCity->getX(), pCity->getY(), iI);
+		if (pLoopPlot == NULL) continue;
+
+		// --- [WAI/city/plot/skip] outer filters mirror AI_bestCityBuild ---
+		if (pLoopPlot->getWorkingCity() != pCity) continue;
+		if (!unit->AI_plotValid(pLoopPlot))      continue;
+
+		if (bSafeAutomation)
+		{
+			const ImprovementTypes eImpr = pLoopPlot->getImprovementType();
+			if (eImpr != NO_IMPROVEMENT && eImpr != eRuins)
+			{
+				if (gPlayerLogLevel >= 3)
+					logBuildEvaluation(3, "[WAI/city/plot/skip] at=(%d,%d) reason=safeAutomation",
+						pLoopPlot->getX(), pLoopPlot->getY());
+				continue;
+			}
+		}
+
+		const int iPlotIdx = GC.getMap().plotNum(pLoopPlot->getX(), pLoopPlot->getY());
+
+		// --- Inner pick: read from cache, else materialise from the per-city precomputed best ---
+		BuildTypes eBuild  = NO_BUILD;
+		int        iValue  = 0;
+		bool       bCanBuild = false;
+		bool       bFromCache = false;
+
+		const CityPlotEval* pCached = lookupCity(iPlotIdx, eUnitType, iGameTurn, iCityId);
+		if (pCached != NULL)
+		{
+			eBuild    = pCached->bestBuild;
+			iValue    = pCached->baseValue;
+			bCanBuild = pCached->canBuild;
+			bFromCache = true;
+
+			if (gPlayerLogLevel >= 2)
+				logBuildEvaluation(2, "[WAI/city/eval/hit] at=(%d,%d) build=%s value=%d canBuild=%d",
+					pLoopPlot->getX(), pLoopPlot->getY(),
+					eBuild == NO_BUILD ? "NO_BUILD" : GC.getBuildInfo(eBuild).getType(),
+					iValue, bCanBuild ? 1 : 0);
+		}
+		else
+		{
+			iValue = pCity->AI_getBestBuildValue(iI);
+			eBuild = pCity->AI_getBestBuild(iI);
+			bCanBuild = (eBuild != NO_BUILD) && unit->canBuild(pLoopPlot, eBuild);
+
+			CityPlotEval eval;
+			eval.turnComputed = iGameTurn;
+			eval.cityId       = iCityId;
+			eval.bestBuild    = eBuild;
+			eval.baseValue    = iValue;
+			eval.canBuild     = bCanBuild;
+			recordCity(iPlotIdx, eUnitType, eval);
+
+			if (gPlayerLogLevel >= 2)
+				logBuildEvaluation(2, "[WAI/city/eval/new] at=(%d,%d) build=%s value=%d canBuild=%d",
+					pLoopPlot->getX(), pLoopPlot->getY(),
+					eBuild == NO_BUILD ? "NO_BUILD" : GC.getBuildInfo(eBuild).getType(),
+					iValue, bCanBuild ? 1 : 0);
+		}
+		(void)bFromCache;
+
+		if (iValue <= 0 || eBuild == NO_BUILD || !bCanBuild) continue;
+
+		// --- Path / dedup gate ---
+		int iPathTurns = 0;
+		if (pLoopPlot->isVisibleEnemyUnit(unit)) continue;
+		if (!unit->generatePath(pLoopPlot, 0, true, &iPathTurns))
+		{
+			if (gPlayerLogLevel >= 3)
+				logBuildEvaluation(3, "[WAI/city/plot/skip] at=(%d,%d) reason=noPath",
+					pLoopPlot->getX(), pLoopPlot->getY());
+			continue;
+		}
+
+		int iMaxWorkers = 1;
+		if (unit->getPathMovementRemaining() == 0)
+		{
+			iPathTurns++;
+		}
+		else if (iPathTurns <= 1)
+		{
+			iMaxWorkers = unit->AI_calculatePlotWorkersNeeded(pLoopPlot, eBuild);
+		}
+		// Preserves the legacy "I'm already in a city and one step away" stack bonus.
+		if (bUnitInCity && iPathTurns == 1 && unit->getPathMovementRemaining() > 0)
+		{
+			iMaxWorkers += 10;
+		}
+
+		const int iOtherBuilders = kOwner.AI_plotTargetMissionAIs(
+			pLoopPlot, MISSIONAI_BUILD, unit->getGroup());
+		const bool bDedupOK = iOtherBuilders < iMaxWorkers;
+
+		const bool bAtPlot = unit->atPlot(pLoopPlot);
+
+		// Path-turn discount + atPlot bonus, same shape as improveBonus.
+		int iScored = iValue;
+		if (bAtPlot)
+		{
+			iScored = iScored * 3 / 2;
+		}
+		iScored /= (1 + iPathTurns);
+
+		if (gPlayerLogLevel >= 2)
+			logBuildEvaluation(2, "[WAI/city/score] at=(%d,%d) build=%s base=%d path=%d atPlot=%d maxW=%d others=%d scored=%d ok=%d",
+				pLoopPlot->getX(), pLoopPlot->getY(),
+				GC.getBuildInfo(eBuild).getType(),
+				iValue, iPathTurns, bAtPlot ? 1 : 0, iMaxWorkers, iOtherBuilders,
+				iScored, bDedupOK ? 1 : 0);
+
+		if (!bDedupOK)
+		{
+			if (gPlayerLogLevel >= 2)
+				logBuildEvaluation(2, "[WAI/city/dedup] at=(%d,%d) skip others=%d max=%d",
+					pLoopPlot->getX(), pLoopPlot->getY(), iOtherBuilders, iMaxWorkers);
+			continue;
+		}
+
+		if (iScored > iBestValue)
+		{
+			iBestValue     = iScored;
+			iBestPathTurns = iPathTurns;
+			pBestPlot      = pLoopPlot;
+			eBestBuild     = eBuild;
+
+			if (gPlayerLogLevel >= 1)
+				logBuildEvaluation(1, "[WAI/city/best] at=(%d,%d) build=%s value=%d",
+					pLoopPlot->getX(), pLoopPlot->getY(),
+					GC.getBuildInfo(eBestBuild).getType(), iScored);
+		}
+	}
+
+	if (pBestPlot == NULL || eBestBuild == NO_BUILD)
+	{
+		if (gPlayerLogLevel >= 1)
+			logBuildEvaluation(1, "[WAI/city/end] unit=%d result=noTarget city=%S",
+				unit->getID(), pCity->getName().GetCString());
+		return false;
+	}
+
+	// --- Mission decision ---
+	// Mirrors the legacy AI_improveCity branching: if the unit isn't already on
+	// the working-city plot (or the chosen build IS a route build), the worker
+	// needs to lay road as it goes; otherwise pick MOVE_TO unless the plot has
+	// a movement-cost terrain that warrants ROUTE_TO anyway.
+	MissionTypes eMission;
+	if (unit->plot()->getWorkingCity() != pCity
+	|| GC.getBuildInfo(eBestBuild).getRoute() != NO_ROUTE)
+	{
+		eMission = MISSION_ROUTE_TO;
+	}
+	else
+	{
+		eMission = MISSION_MOVE_TO;
+		int iPathTurns;
+		if (unit->generatePath(pBestPlot, MOVE_WITH_CAUTION, false, &iPathTurns)
+		&& iPathTurns == 1 && unit->getPathMovementRemaining() == 0)
+		{
+			if (pBestPlot->getRouteType() != NO_ROUTE)
+			{
+				eMission = MISSION_ROUTE_TO;
+			}
+		}
+		else if (unit->plot()->getRouteType() == NO_ROUTE)
+		{
+			int iPlotMoveCost = GC.getTerrainInfo(unit->plot()->getTerrainType()).getMovementCost();
+			if (unit->plot()->getFeatureType() != NO_FEATURE)
+			{
+				iPlotMoveCost += GC.getFeatureInfo(unit->plot()->getFeatureType()).getMovementCost();
+			}
+			if (unit->plot()->isHills())
+			{
+				iPlotMoveCost += GC.getHILLS_EXTRA_MOVEMENT();
+			}
+			if (unit->plot()->isAsPeak())
+			{
+				if (!GET_TEAM(unit->getTeam()).isMoveFastPeaks())
+				{
+					iPlotMoveCost += GC.getPEAK_EXTRA_MOVEMENT();
+				}
+				iPlotMoveCost += 3;
+			}
+			if (iPlotMoveCost > 1)
+			{
+				eMission = MISSION_ROUTE_TO;
+			}
+		}
+	}
+
+	(void)iBestPathTurns; // currently informational only; shared helper logs path-independent fields
+	return pushBuildMission(unit, pBestPlot, eBestBuild, eMission, iBestValue, "WAI/city");
 }

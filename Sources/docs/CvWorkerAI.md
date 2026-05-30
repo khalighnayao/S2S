@@ -303,14 +303,61 @@ Populated in `rebuild()` after XML load and after `updateReplacements()`.
   or a load-time fixup; left for a future pass since it crosses module
   boundaries.
 
+## `improveCity(CvUnitAI* unit, CvCity* pCity)`
+
+Returns `true` if a mission was pushed onto the unit's group. Successor to
+the legacy `CvUnitAI::AI_bestCityBuild` two-pass + `CvUnitAI::AI_improveCity`
+mission-decision body; the latter is now a one-line delegate. `AI_bestCityBuild`
+itself is retained for non-AI callers (`CvGameInterface` UI hints,
+`AI_nextCityToImprove` cross-city probing).
+
+### Algorithm
+
+1. **Outer loop** — iterate `pCity->getNumCityPlots()`. For each plot:
+   1. **Outer filters** — `getWorkingCity() == pCity`, `AI_plotValid`,
+      `PLAYEROPTION_SAFE_AUTOMATION` block on non-ruin improvements.
+   2. **Inner pick** — cache-first via `CityPlotEval`; on miss, materialise
+      from `pCity->AI_getBestBuild(iI)` + `pCity->AI_getBestBuildValue(iI)`
+      (the per-city precomputed result of `AI_findBestImprovementForPlot`)
+      plus the per-unit `canBuild()` filter. The city-AI's precomputed best
+      is the analog of `improveBonus`'s `BonusEval` cached inner pick.
+   3. **Path / dedup gate** — `generatePath`, `AI_calculatePlotWorkersNeeded`
+      vs `AI_plotTargetMissionAIs`. Mirrors the legacy `iMaxWorkers + 10`
+      stack bonus for a worker already standing in a city one step away.
+   4. **Per-plot scoring** — `iValue * (atPlot ? 3/2 : 1) / (1 + pathTurns)`.
+   5. **Best-plot tracking** — strict `iValue > iBestValue` wins.
+2. **Mission push** — `MISSION_MOVE_TO` vs `MISSION_ROUTE_TO` chosen by the
+   same rules the legacy `AI_improveCity` used (own-city plot, route-builds,
+   movement-cost terrain). `AI_betterPlotBuild` substitution kept.
+
+### Inner pick: city-precomputed reuse
+
+The city-AI's per-plot best build is already yield-primary scored (see
+`CvCityAI::AI_findBestImprovementForPlot`, which now also uses a
+yield-primary + time-tiebreaker comparator — the legacy `>=` made
+later-iterated improvements silently win ties, the analog of the
+sign-inverted comparator that `improveBonus` fixed). `improveCity` reuses
+that score directly; it does not re-rank improvements per worker.
+
+### Caching
+
+`CityPlotEval` cache keyed on `(plotIdx, unitType)` and validated against
+the current `gameTurn` + `cityId`. Different worker tiers cannot share
+entries because `canBuild()` varies by unit type. Entries invalidate
+automatically if the plot's working city flips during the turn.
+
+The cache short-circuits the per-unit `canBuild()` call and the indirection
+through `CvCityAI` — useful on the second and subsequent workers per turn,
+but does NOT short-circuit `generatePath` (which is per-unit-position).
+
 ## Known follow-ups
 
-- **`AI_improveCity` redundancy** — every worker scans every city's tile ring;
-  the per-city `m_bestBuildValuesStale` cache handles the inner build pick,
-  but the outer scan is still `O(workers × cities × cityPlots)`. The same
-  cache+ledger pattern applies; see memory `workers-evaluate-builds-individually`.
 - **Player-level task queue** — the cache helps within-turn re-planning but
   not the cold-cache cost of the first worker per turn. A player-level "what
   plot needs a worker" queue, computed once per turn, would let all workers
   consume from a shared pool. This is the architectural finish line that the
   current scaffolding anticipates.
+- **Sparse improvement iteration in `AI_findBestImprovementForPlot`** — still
+  iterates `GC.getNumImprovementInfos()` for every plot. The bonus path got a
+  sparse iteration source (`getProvidedByImprovementTypes`); the city analog
+  would need an indexed `terrain/feature → buildable improvements` map.
