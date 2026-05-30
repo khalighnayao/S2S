@@ -1,6 +1,8 @@
-# Project Guidelines
+# Sources/ Guidelines (C++ DLL)
 
-These instructions apply to code under `Sources/`.
+These instructions apply to code under `Sources/`. For the project-wide guide
+(repo layout, build commands, subsystem knowledge, project skills), see the
+root `AGENTS.md`.
 
 ## Code Style
 - Use only C++2003 language features.
@@ -19,10 +21,16 @@ These instructions apply to code under `Sources/`.
 - For AI overview, see `Sources/Mainpage.dox`.
 
 ## Build And Test
-- Full dev bootstrap + DLL build: `DevSetup.bat`.
-- Build DLL from toolchain: `Tools/_MakeDLL.bat Release build deploy`.
-- CI-style XML validation: `Tools/XmlValidator.exe -a`.
-- Optional callback validation: `Tools/XMLTools/verify-python-callbacks.py`.
+- Build entry point is `Tools/_Build.ps1`, run **from `Sources/`**:
+  `powershell.exe -NoProfile -ExecutionPolicy Bypass -File "../Tools/_Build.ps1" <Config> <verb...>`.
+  Configs: `Assert`/`Debug`/`Release`/`FinalRelease`/`Profile`/`ProfileExtra`; verbs: `clean`/`build`/`rebuild`/`deploy`.
+- Quick compile check after editing: `Assert build` (~30s incremental). `MakeDLL*.bat` always rebuild+deploy.
+- `fbuild.bff` is the source-of-truth for compiled directories (the `.vcxproj` is IDE-only).
+  New `Sources/<Dir>/` must be added to `fbuild.bff`'s `.UnityInputPath` (~line 201) **and** the `.vcxproj`(+`.filters`),
+  or FastBuild fails at link with `LNK2001` while the IDE compiles fine.
+- Full dev bootstrap: `DevSetup.bat`. XML validation: `Tools/XmlValidator.exe -a`.
+  Python callbacks: `Tools/XMLTools/verify-python-callbacks.py`.
+- See the root `AGENTS.md` for full build details.
 
 ## Conventions
 - Prefer minimal, local changes in large core files.
