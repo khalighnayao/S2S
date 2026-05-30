@@ -29696,12 +29696,16 @@ uint64_t CvPlayer::getLeaderLevelupNextCultureTotal() const
 	PROFILE_EXTRA_FUNC();
 	uint64_t iPromoThreshold = 1000;
 	uint64_t iX = 1000;
-	int iY = 10 * GC.getNEXT_TRAIT_CULTURE_REQ_PERCENT() / 100;
+	// Set from the BUG menu (Stones2Stars tab) via MODDERGAMEOPTION_NEXT_TRAIT_CULTURE_REQ_PERCENT.
+	// Falls back to 25 (the former GlobalDefines default) before the BUG value has been pushed in.
+	int iReqPercent = GC.getGame().getModderGameOption(MODDERGAMEOPTION_NEXT_TRAIT_CULTURE_REQ_PERCENT);
+	if (iReqPercent == 0) iReqPercent = 25;
+	int iY = 10 * iReqPercent / 100;
 
 	if (GC.getGame().isOption(GAMEOPTION_LEADER_START_NO_POSITIVE_TRAITS))
 	{
 		iX = 10;
-		iY = 8 * GC.getNEXT_TRAIT_CULTURE_REQ_PERCENT() / 100;
+		iY = 8 * iReqPercent / 100;
 	}
 	const int iIteratorA = getLeaderHeadLevel() + 1;
 	for (int x = 0; x < iIteratorA; x++)
