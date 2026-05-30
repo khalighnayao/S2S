@@ -6625,6 +6625,9 @@
 				<iCommerce>5</iCommerce>
 				<iCommerce>5</iCommerce>
 			</CommerceModifiers>
+			<CommerceChanges>
+				<iCommerce>6</iCommerce>
+			</CommerceChanges>
 			<UnitProductionModifiers>
 				<UnitProductionModifier>
 					<UnitType>UNIT_TRIBE</UnitType>
@@ -6674,8 +6677,8 @@
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<iHappiness>4</iHappiness>
 			<CommerceChanges>
-				<iCommerce>0</iCommerce>
-				<iCommerce>0</iCommerce>
+				<iCommerce>10</iCommerce>
+				<iCommerce>10</iCommerce>
 				<iCommerce>10</iCommerce>
 			</CommerceChanges>
 			<ExtraFreeBonuses>
