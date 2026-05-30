@@ -1,3 +1,6 @@
+# Claude Code local settings (per-developer; keep skills/ shared)
+.claude/settings.local.json
+
 # Compiled Object files
 *.obj
 
