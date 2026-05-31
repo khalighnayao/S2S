@@ -21,7 +21,7 @@ A continuation of *Caveman2Cosmos* — a total-conversion mod for
    git clone https://github.com/Stones2Stars/Stones2Stars.git
    ```
 
-3. Launch by running `C2C.bat`, or start the game and choose
+3. Launch by running `S2S.bat`, or start the game and choose
    *Advanced → Load a Mod → Stones2Stars*.
 
 ## Changelog

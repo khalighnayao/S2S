@@ -1,5 +1,5 @@
 @echo off
-echo Launching Caveman2Cosmos ...
+echo Launching Stones2Stars ...
 
 PUSHD "%~dp0"
 
@@ -14,7 +14,7 @@ POPD
 exit /B 0
 
 :wrong_mods_dir
-echo Can't launch Caveman2Cosmos, it is not installed to the correct location!
+echo Can't launch Stones2Stars, it is not installed to the correct location!
 echo Please install it to Mods\Stones2Stars under your Beyond the Sword install directory.
 echo i.e. Not under your My Documents folder or anywhere else.
 pause

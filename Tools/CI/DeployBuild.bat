@@ -122,7 +122,7 @@ xcopy "C2C1.ico" "%build_dir%" /R /Y
 xcopy "C2C2.ico" "%build_dir%" /R /Y
 xcopy "C2C3.ico" "%build_dir%" /R /Y
 xcopy "C2C4.ico" "%build_dir%" /R /Y
-xcopy "Tools\CI\C2C.bat" "%build_dir%" /R /Y
+xcopy "Tools\CI\S2S.bat" "%build_dir%" /R /Y
 
 echo %APPVEYOR_REPO_COMMIT%
 echo %C2C_VERSION%
@@ -229,7 +229,7 @@ xcopy "%root_dir%\C2C1.ico" "%git_dist_dir%" /R /Y
 xcopy "%root_dir%\C2C2.ico" "%git_dist_dir%" /R /Y
 xcopy "%root_dir%\C2C3.ico" "%git_dist_dir%" /R /Y
 xcopy "%root_dir%\C2C4.ico" "%git_dist_dir%" /R /Y
-xcopy "%root_dir%\Tools\CI\C2C.bat" "%git_dist_dir%" /R /Y
+xcopy "%root_dir%\Tools\CI\S2S.bat" "%git_dist_dir%" /R /Y
 :: Binary-safety: ensure the mirror treats every file as binary (no EOL conversion).
 copy /Y "%root_dir%\Tools\CI\dist.gitattributes" "%git_dist_dir%\.gitattributes"
 :: Keep the ~80 MB debug symbols out of git history.
