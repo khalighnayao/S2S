@@ -203,7 +203,7 @@ call git push "%git_push_url%" %C2C_VERSION% --force
 :: seeded once locally first (see Tools/CI README / deploy plan).
 echo Publishing build to GitHub...
 set "git_dist_dir=%root_dir%\_gitbuild"
-set "git_dist_url=https://%git_access_token%:x-oauth-basic@github.com/stones2stars/stones2stars.git"
+set "git_dist_url=https://%git_access_token%:x-oauth-basic@github.com/Stones2Stars/Stones2Stars.git"
 
 if not exist "%git_dist_dir%\.git" (
     call git clone --depth 1 "%git_dist_url%" "%git_dist_dir%"
