@@ -195,6 +195,50 @@ POPD
 call git tag -a %C2C_VERSION% %APPVEYOR_REPO_COMMIT% -m "SVN-%svn_rev%" -f
 call git push "%git_push_url%" %C2C_VERSION% --force
 
+:: PUBLISH TO GITHUB -------------------------------------------
+:: Mirror the same payload that was committed to SVN into the
+:: GitHub distribution repo. Runs after SVN so a GitHub failure
+:: cannot block the proven SVN channel. Reuses commit_desc.md and
+:: the git credentials configured by InitGit.ps1. The repo must be
+:: seeded once locally first (see Tools/CI README / deploy plan).
+echo Publishing build to GitHub...
+set "git_dist_dir=%root_dir%\_gitbuild"
+set "git_dist_url=https://%git_access_token%:x-oauth-basic@github.com/stones2stars/stones2stars.git"
+
+if not exist "%git_dist_dir%\.git" (
+    call git clone --depth 1 "%git_dist_url%" "%git_dist_dir%"
+) else (
+    call git -C "%git_dist_dir%" fetch --depth 1 origin
+    call git -C "%git_dist_dir%" reset --hard origin/main
+)
+
+:: Same targets as the SVN staging block above. /XD .git guards the
+:: repo metadata against robocopy /MIR purging.
+robocopy "%root_dir%\Assets"      "%git_dist_dir%\Assets"      %ROBOCOPY_FLAGS% /XD .git /XF CvGameCoreDLL.pdb
+robocopy "%root_dir%\PrivateMaps" "%git_dist_dir%\PrivateMaps" %ROBOCOPY_FLAGS%
+robocopy "%root_dir%\PublicMaps"  "%git_dist_dir%\PublicMaps"  %ROBOCOPY_FLAGS%
+robocopy "%root_dir%\Resource"    "%git_dist_dir%\Resource"    %ROBOCOPY_FLAGS%
+robocopy "%root_dir%\Docs"         "%git_dist_dir%\Docs"        %ROBOCOPY_FLAGS%
+xcopy "%root_dir%\Stones2Stars.ini" "%git_dist_dir%" /R /Y
+xcopy "%root_dir%\C2C1.ico" "%git_dist_dir%" /R /Y
+xcopy "%root_dir%\C2C2.ico" "%git_dist_dir%" /R /Y
+xcopy "%root_dir%\C2C3.ico" "%git_dist_dir%" /R /Y
+xcopy "%root_dir%\C2C4.ico" "%git_dist_dir%" /R /Y
+xcopy "%root_dir%\Tools\CI\C2C.bat" "%git_dist_dir%" /R /Y
+:: Binary-safety: ensure the mirror treats every file as binary (no EOL conversion).
+copy /Y "%root_dir%\Tools\CI\dist.gitattributes" "%git_dist_dir%\.gitattributes"
+:: Keep the ~80 MB debug symbols out of git history.
+copy /Y "%root_dir%\Tools\CI\dist.gitignore" "%git_dist_dir%\.gitignore"
+
+PUSHD "%git_dist_dir%"
+call git add -A
+call git commit -F "%root_dir%\commit_desc.md"
+call git push origin HEAD:main
+if %ERRORLEVEL% neq 0 (
+    echo GitHub publish failed; SVN deploy already succeeded, continuing...
+)
+POPD
+
 
 POPD
 

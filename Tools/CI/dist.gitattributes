@@ -1,0 +1,6 @@
+# Distribution repo (.gitattributes for stones2stars/stones2stars).
+# The published payload is almost entirely binary art/data. Disable all
+# text/line-ending conversion so FPKs and other binaries are never mangled
+# on checkout. DeployBuild.bat copies this file into the mirror as
+# .gitattributes before committing.
+* -text

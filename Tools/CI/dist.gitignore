@@ -1,0 +1,6 @@
+# Distribution repo (.gitignore for stones2stars/stones2stars).
+# The debug symbols rebuild (~80 MB) every release and would bloat git
+# history; players don't need them. DeployBuild.bat copies this file into
+# the mirror as .gitignore before committing, and also skips copying the
+# pdb in the robocopy step.
+Assets/CvGameCoreDLL.pdb
