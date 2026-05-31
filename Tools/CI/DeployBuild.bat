@@ -159,6 +159,9 @@ call git push "%git_push_url%" --delete %C2C_VERSION%
 :: DETECT SVN CHANGES ------------------------------------------
 echo Detecting working copy changes...
 PUSHD "%build_dir%"
+:: One-time cleanup: C2C.bat was renamed to S2S.bat. svn delete is a no-op
+:: once it's gone from the working copy, so this self-clears after one release.
+if exist "C2C.bat" call %SVN% delete --force "C2C.bat"
 call %SVN% status | findstr /R "^!" > ..\missing.list
 for /F "tokens=* delims=! " %%A in (..\missing.list) do (svn delete "%%A")
 del ..\missing.list 2>NUL
