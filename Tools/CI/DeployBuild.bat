@@ -143,8 +143,13 @@ echo Generate forum commit description...
 call Tools\CI\git-chglog_windows_amd64.exe --output "%root_dir%\commit_desc.txt" --config Tools\CI\.chglog\config-bbcode.yml %C2C_VERSION%
 
 :: GENERATE FULL CHANGELOG -------------------------------------
-echo Update full SVN changelog ...
-call Tools\CI\git-chglog_windows_amd64.exe --output "%build_dir%\CHANGELOG.md" --config Tools\CI\.chglog\config.yml
+:: Regenerated from git tags every release, so it always reflects the full
+:: history. Written to the repo root, then staged into both deploy roots.
+echo Update full changelog ...
+call Tools\CI\git-chglog_windows_amd64.exe --output "%root_dir%\CHANGELOG.md" --config Tools\CI\.chglog\config.yml
+:: Stage CHANGELOG.md + the release README (from Docs\MOD-README.md) into the SVN root.
+copy /Y "%root_dir%\CHANGELOG.md" "%build_dir%\CHANGELOG.md"
+copy /Y "%root_dir%\Docs\MOD-README.md" "%build_dir%\README.md"
 
 :: DELETE TEMP RELEASE TAG -------------------------------------
 :: We delete it ASAP so it isn't left up if the build fails
@@ -229,6 +234,9 @@ xcopy "%root_dir%\Tools\CI\C2C.bat" "%git_dist_dir%" /R /Y
 copy /Y "%root_dir%\Tools\CI\dist.gitattributes" "%git_dist_dir%\.gitattributes"
 :: Keep the ~80 MB debug symbols out of git history.
 copy /Y "%root_dir%\Tools\CI\dist.gitignore" "%git_dist_dir%\.gitignore"
+:: Root README (from Docs\MOD-README.md) + full changelog.
+copy /Y "%root_dir%\Docs\MOD-README.md" "%git_dist_dir%\README.md"
+copy /Y "%root_dir%\CHANGELOG.md" "%git_dist_dir%\CHANGELOG.md"
 
 PUSHD "%git_dist_dir%"
 call git add -A
