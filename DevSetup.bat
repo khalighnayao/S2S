@@ -104,7 +104,7 @@ POPD
 echo.
 echo.
 echo.
-echo **** Dev Setup complete, you can run the Mod now using LaunchC2C.bat or your prefered method! ****
+echo **** Dev Setup complete, you can run the Mod now using LaunchS2S.bat or your prefered method! ****
 pause
 
 exit /B 0

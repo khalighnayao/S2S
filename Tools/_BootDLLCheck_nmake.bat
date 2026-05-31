@@ -28,7 +28,7 @@ timeout 5
 taskkill /F /IM Civ4BeyondSword.exe
 call _MakeDLL.bat build %1 stage
 
-..\LaunchC2C.bat
+..\LaunchS2S.bat
 goto :done
 
 :no_change
