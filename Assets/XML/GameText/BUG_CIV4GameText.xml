@@ -3566,6 +3566,14 @@
 		<Polish>Bogactwo</Polish>
 	</TEXT>
 	<TEXT>
+		<Tag>TXT_KEY_BUG_OPT_CITYSCREEN__PRODUCTIONOVERFLOWLIMIT_TEXT</Tag>
+		<English>Production Overflow Limit</English>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BUG_OPT_CITYSCREEN__PRODUCTIONOVERFLOWLIMIT_HOVER</Tag>
+		<English>When a city finishes what it is building, leftover production is banked as overflow for the next item. This sets the cap on banked overflow, measured in turns of the city's base production; anything above the cap is converted to gold instead. Higher values waste fewer hammers. Default is 2.</English>
+	</TEXT>
+	<TEXT>
 		<Tag>TXT_KEY_BUG_OPT_CITYSCREEN__GREATPERSONINFO_HOVER</Tag>
 		<English>When checked, displays the percentage chance and type of each possible [ICON_GREATPEOPLE] on the bar. The number shown is controlled by the General setting.</English>
 		<French>Lorsque activé, affiche le pourcentage de probabilité de chaque type de [ICON_GREATPEOPLE] dans la barre. Le Nombre de pourcentages affichés est géré dans l'onglet Général.</French>
