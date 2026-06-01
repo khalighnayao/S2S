@@ -1200,7 +1200,7 @@
 			<iCost>17</iCost>
 			<iBaseUpkeep>1</iBaseUpkeep>
 			<iMoves>2</iMoves>
-			<iCombat>1</iCombat>
+			<iCombat>2</iCombat>
 			<iXPValueAttack>2</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iPursuit>20</iPursuit>
@@ -1332,7 +1332,7 @@
 			<iCost>38</iCost>
 			<iBaseUpkeep>1</iBaseUpkeep>
 			<iMoves>2</iMoves>
-			<iCombat>2</iCombat>
+			<iCombat>3</iCombat>
 			<iXPValueAttack>2</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iCityAttack>-75</iCityAttack>
@@ -1454,7 +1454,7 @@
 				<UnitType>UNIT_RANGER</UnitType>
 				<UnitType>UNIT_NEANDERTHAL_HUNTER</UnitType>
 			</UnitUpgrades>
-			<iCombat>3</iCombat>
+			<iCombat>4</iCombat>
 			<iXPValueAttack>2</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iCityAttack>-75</iCityAttack>
