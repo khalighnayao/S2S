@@ -378,6 +378,7 @@ class CvEventManager:
 				self.PROMO_GUARDIAN_TRIBAL	= GC.getInfoTypeForString("PROMOTION_GUARDIAN_TRIBAL")
 				# onTechAcquired
 				self.TECH_GATHERING = GC.getInfoTypeForString("TECH_GATHERING")
+				self.TECH_PERSISTENCE_HUNTING = GC.getInfoTypeForString("TECH_PERSISTENCE_HUNTING")
 				# Subdued/Tamed animal graphical attachment
 				self.UNIT_STORY_TELLER = GC.getInfoTypeForString("UNIT_STORY_TELLER")
 				# Biodome
@@ -2201,6 +2202,34 @@ class CvEventManager:
 						eMsgType = InterfaceMessageTypes.MESSAGE_TYPE_MAJOR_EVENT, bForce = False
 					)
 
+		# Free Chaser from PERSISTENCE hunting
+		if iTech == self.TECH_PERSISTENCE_HUNTING:
+			X = -1
+			Y = -1
+			CyCity = CyPlayer.getCapitalCity()
+
+			if CyCity:
+				X = CyCity.getX(); Y = CyCity.getY()
+			else:
+				CyUnit, i = CyPlayer.firstUnit(False)
+
+				if CyUnit:
+					X = CyUnit.getX(); Y = CyUnit.getY()
+				else:
+					CyPlot = CyPlayer.getStartingPlot()
+					if CyPlot:
+						X = CyPlot.getX(); Y = CyPlot.getY()
+
+			if -1 not in (X, Y):
+				if GC.getCivilizationInfo(CyPlayer.getCivilizationType()).getType() == "CIVILIZATION_NEANDERTHAL":
+					iWorker = GC.getInfoTypeForString("UNIT_NEANDERTHAL_CHASER")
+				else:
+					iWorker = GC.getInfoTypeForString("UNIT_CHASER")
+
+				CyUnit = CyPlayer.initUnit(iWorker, X, Y, UnitAITypes.NO_UNITAI, DirectionTypes.DIRECTION_SOUTH)
+
+			else: print "Found no valid plot to place the chaser.\n\tNew civ from revolution or barbCiv perhaps?"
+
 		# Free Gatherer from Gathering
 		if iTech == self.TECH_GATHERING:
 			X = -1
@@ -2417,15 +2446,15 @@ class CvEventManager:
 					CyCity.changeHasBuilding(iBuilding, True)
 
 			# Give a free defender to the first city when it is built
-			# if iUnit == self.UNIT_BAND:
-			# 	CyPlayer = GC.getPlayer(iPlayer)
-			# 	if GC.getCivilizationInfo(CyPlayer.getCivilizationType()).getType() == "CIVILIZATION_NEANDERTHAL":
-			# 		iUnitTG = GC.getInfoTypeForString("UNIT_NEANDERTHAL_TRIBAL_GUARDIAN")
-			# 	else:
-			# 		iUnitTG = GC.getInfoTypeForString("UNIT_TRIBAL_GUARDIAN")
-			# 	CyUnitTG = CyPlayer.initUnit(iUnitTG, CyUnit.getX(), CyUnit.getY(), UnitAITypes.UNITAI_PROPERTY_CONTROL, DirectionTypes.DIRECTION_SOUTH)
-			# 	iExp = CyUnit.getExperience()
-			# 	CyUnitTG.setExperience(iExp)
+			if iUnit == self.UNIT_BAND:
+				CyPlayer = GC.getPlayer(iPlayer)
+				if GC.getCivilizationInfo(CyPlayer.getCivilizationType()).getType() == "CIVILIZATION_NEANDERTHAL":
+					iUnitTG = GC.getInfoTypeForString("UNIT_NEANDERTHAL_TRIBAL_GUARDIAN")
+				else:
+					iUnitTG = GC.getInfoTypeForString("UNIT_TRIBAL_GUARDIAN")
+				CyUnitTG = CyPlayer.initUnit(iUnitTG, CyUnit.getX(), CyUnit.getY(), UnitAITypes.UNITAI_PROPERTY_CONTROL, DirectionTypes.DIRECTION_SOUTH)
+				iExp = CyUnit.getExperience()
+				CyUnitTG.setExperience(iExp)
 		if iPop:
 			CyCity.changePopulation(iPop)
 			if self.GO_1_CITY_TILE_FOUNDING:
