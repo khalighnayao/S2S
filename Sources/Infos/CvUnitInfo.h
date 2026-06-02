@@ -197,8 +197,6 @@ public:
 	int getPursuit() const;
 	int getEarlyWithdraw() const;
 	int getVSBarbs() const;
-	int getArmor() const;
-	int getPuncture() const;
 	int getOverrun() const;
 	int getRepel() const;
 	int getFortRepel() const;
@@ -224,8 +222,6 @@ public:
 	int getLongRangeSupportPercent() const;
 	int getFlankSupportPercent() const;
 #endif // STRENGTH_IN_NUMBERS
-	int getDodgeModifier() const;
-	int getPrecisionModifier() const;
 	int getCriticalModifier() const;
 	int getEndurance() const;
 	int getPoisonProbabilityModifier() const;
@@ -388,26 +384,6 @@ public:
 	int getKnockbackVSUnitCombatType(int iUnitCombat, bool bForLoad = false) const;
 	bool isKnockbackVSUnitCombatType(int iUnitCombat, bool bForLoad = false) const;
 	const UnitCombatModifierArray& getKnockbackVSUnitCombatTypes() const;
-
-	int getNumPunctureVSUnitCombatTypes() const;
-	int getPunctureVSUnitCombatType(int iUnitCombat) const;
-	bool isPunctureVSUnitCombatType(int iUnitCombat) const;
-	const UnitCombatModifierArray& getPunctureVSUnitCombatTypes() const;
-
-	int getNumArmorVSUnitCombatTypes() const;
-	int getArmorVSUnitCombatType(int iUnitCombat) const;
-	bool isArmorVSUnitCombatType(int iUnitCombat) const;
-	const UnitCombatModifierArray& getArmorVSUnitCombatTypes() const;
-
-	int getNumDodgeVSUnitCombatTypes() const;
-	int getDodgeVSUnitCombatType(int iUnitCombat) const;
-	bool isDodgeVSUnitCombatType(int iUnitCombat) const;
-	const UnitCombatModifierArray& getDodgeVSUnitCombatTypes() const;
-
-	int getNumPrecisionVSUnitCombatTypes() const;
-	int getPrecisionVSUnitCombatType(int iUnitCombat) const;
-	bool isPrecisionVSUnitCombatType(int iUnitCombat) const;
-	const UnitCombatModifierArray& getPrecisionVSUnitCombatTypes() const;
 
 	int getNumCriticalVSUnitCombatTypes() const;
 	int getCriticalVSUnitCombatType(int iUnitCombat) const;
@@ -829,8 +805,6 @@ private:
 	int m_iPursuit;
 	int m_iEarlyWithdraw;
 	int m_iVSBarbs;
-	int m_iArmor;
-	int m_iPuncture;
 	int m_iOverrun;
 	int m_iRepel;
 	int m_iFortRepel;
@@ -856,8 +830,6 @@ private:
 	int m_iLongRangeSupportPercent;
 	int m_iFlankSupportPercent;
 #endif
-	int m_iDodgeModifier;
-	int m_iPrecisionModifier;
 	int m_iCriticalModifier;
 	int m_iEndurance;
 	int m_iPoisonProbabilityModifier;
@@ -952,10 +924,6 @@ private:
 	UnitCombatModifierArray m_aPursuitVSUnitCombatTypes;
 	UnitCombatModifierArray m_aRepelVSUnitCombatTypes;
 	UnitCombatModifierArray m_aKnockbackVSUnitCombatTypes;
-	UnitCombatModifierArray m_aPunctureVSUnitCombatTypes;
-	UnitCombatModifierArray m_aArmorVSUnitCombatTypes;
-	UnitCombatModifierArray m_aDodgeVSUnitCombatTypes;
-	UnitCombatModifierArray m_aPrecisionVSUnitCombatTypes;
 	UnitCombatModifierArray m_aCriticalVSUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapDisableUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapAvoidanceUnitCombatTypes;

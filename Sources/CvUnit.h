@@ -327,10 +327,6 @@ public:
 								m_iExtraPursuitVSUnitCombatType(0),
 								m_iExtraRepelVSUnitCombatType(0),
 								m_iExtraKnockbackVSUnitCombatType(0),
-								m_iExtraPunctureVSUnitCombatType(0),
-								m_iExtraArmorVSUnitCombatType(0),
-								m_iExtraDodgeVSUnitCombatType(0),
-								m_iExtraPrecisionVSUnitCombatType(0),
 								m_iExtraCriticalVSUnitCombatType(0),
 								m_iHealUnitCombatTypeVolume(0),
 								m_iHealUnitCombatTypeAdjacentVolume(0),
@@ -352,10 +348,6 @@ public:
 			m_iExtraPursuitVSUnitCombatType == 0 &&
 			m_iExtraRepelVSUnitCombatType == 0 &&
 			m_iExtraKnockbackVSUnitCombatType == 0 &&
-			m_iExtraPunctureVSUnitCombatType == 0 &&
-			m_iExtraArmorVSUnitCombatType == 0 &&
-			m_iExtraDodgeVSUnitCombatType == 0 &&
-			m_iExtraPrecisionVSUnitCombatType == 0 &&
 			m_iExtraCriticalVSUnitCombatType == 0 &&
 			m_iHealUnitCombatTypeVolume == 0 &&
 			m_iHealUnitCombatTypeAdjacentVolume == 0 &&
@@ -374,10 +366,6 @@ public:
 	int m_iExtraPursuitVSUnitCombatType;
 	int m_iExtraRepelVSUnitCombatType;
 	int m_iExtraKnockbackVSUnitCombatType;
-	int m_iExtraPunctureVSUnitCombatType;
-	int m_iExtraArmorVSUnitCombatType;
-	int m_iExtraDodgeVSUnitCombatType;
-	int m_iExtraPrecisionVSUnitCombatType;
 	int m_iExtraCriticalVSUnitCombatType;
 	int m_iHealUnitCombatTypeVolume;
 	int m_iHealUnitCombatTypeAdjacentVolume;
@@ -938,8 +926,6 @@ public:
 	int earlyWithdrawTotal() const;
 	int vsBarbsModifier() const;
 	int religiousCombatModifierTotal(ReligionTypes eReligion = NO_RELIGION, bool bDisplay = false) const;
-	int armorTotal() const;
-	int punctureTotal() const;
 	int damageModifierTotal() const;
 	int costModifierTotal() const;
 	int overrunTotal() const;
@@ -972,8 +958,6 @@ public:
 	bool canOnslaught() const;
 	bool hasCureAfflictionType(PromotionLineTypes ePromotionLineType) const;
 	int aidTotal(PropertyTypes eProperty) const;
-	int dodgeTotal() const;
-	int precisionTotal() const;
 	int criticalModifierTotal() const;
 	int enduranceTotal() const;
 	int poisonProbabilityModifierTotal() const;
@@ -1224,12 +1208,6 @@ public:
 	int getExtraReligiousCombatModifier(bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
 	void changeExtraReligiousCombatModifier(int iChange);
 
-	int getExtraArmor (bool bIgnoreCommanders = false,bool bIgnoreCommodores = false) const;
-	void changeExtraArmor (int iChange);
-
-	int getExtraPuncture (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraPuncture (int iChange);
-
 	int getExtraDamageModifier (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
 	void changeExtraDamageModifier (int iChange);
 
@@ -1320,12 +1298,6 @@ public:
 
 	int getExtraFortitude (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
 	void changeExtraFortitude (int iChange);
-
-	int getExtraDodgeModifier (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraDodgeModifier (int iChange);
-
-	int getExtraPrecisionModifier (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraPrecisionModifier (int iChange);
 
 
 	int getExtraCriticalModifier (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
@@ -1740,8 +1712,6 @@ protected:
 	int m_iExtraEarlyWithdraw;
 	int m_iExtraVSBarbs;
 	int m_iExtraReligiousCombatModifier;
-	int m_iExtraArmor;
-	int m_iExtraPuncture;
 	int m_iExtraOverrun;
 	int m_iExtraRepel;
 	int m_iExtraFortRepel;
@@ -1831,8 +1801,6 @@ protected:
 	IDInfo dflIUnit;
 	IDInfo dflIIUnit;
 #endif // STRENGTH_IN_NUMBERS
-	int m_iExtraDodgeModifier;
-	int m_iExtraPrecisionModifier;
 	int m_iExtraCriticalModifier;
 	int m_iExtraEndurance;
 	int m_iCombatKnockbacks;
@@ -2208,22 +2176,6 @@ public:
 	int getExtraKnockbackVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
 	void changeExtraKnockbackVSUnitCombatType(UnitCombatTypes eIndex, int iChange);
 
-	int punctureVSUnitCombatTotal(UnitCombatTypes eCombatType) const;
-	int getExtraPunctureVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
-	void changeExtraPunctureVSUnitCombatType(UnitCombatTypes eIndex, int iChange);
-
-	int armorVSUnitCombatTotal(UnitCombatTypes eCombatType) const;
-	int getExtraArmorVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
-	void changeExtraArmorVSUnitCombatType(UnitCombatTypes eIndex, int iChange);
-
-	int dodgeVSUnitCombatTotal(UnitCombatTypes eCombatType) const;
-	int getExtraDodgeVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
-	void changeExtraDodgeVSUnitCombatType(UnitCombatTypes eIndex, int iChange);
-
-	int precisionVSUnitCombatTotal(UnitCombatTypes eCombatType) const;
-	int getExtraPrecisionVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
-	void changeExtraPrecisionVSUnitCombatType(UnitCombatTypes eIndex, int iChange);
-
 	int criticalVSUnitCombatTotal(UnitCombatTypes eCombatType) const;
 	int getExtraCriticalVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
 	void changeExtraCriticalVSUnitCombatType(UnitCombatTypes eIndex, int iChange);
@@ -2233,10 +2185,6 @@ public:
 	int pursuitVSOpponentProbTotal(const CvUnit* pOpponent) const;
 	int repelVSOpponentProbTotal(const CvUnit* pOpponent) const;
 	int knockbackVSOpponentProbTotal(const CvUnit* pOpponent) const;
-	int punctureVSOpponentProbTotal(const CvUnit* pOpponent) const;
-	int armorVSOpponentProbTotal(const CvUnit* pOpponent) const;
-	int dodgeVSOpponentProbTotal(const CvUnit* pOpponent) const;
-	int precisionVSOpponentProbTotal(const CvUnit* pOpponent) const;
 	int criticalVSOpponentProbTotal(const CvUnit* pOpponent) const;
 
 	bool canInflictCritical(PromotionTypes eCritical) const;
@@ -2761,10 +2709,6 @@ private:
 	static int* g_paiTempExtraPursuitVSUnitCombatType;
 	static int* g_paiTempExtraRepelVSUnitCombatType;
 	static int* g_paiTempExtraKnockbackVSUnitCombatType;
-	static int* g_paiTempExtraPunctureVSUnitCombatType;
-	static int* g_paiTempExtraArmorVSUnitCombatType;
-	static int* g_paiTempExtraDodgeVSUnitCombatType;
-	static int* g_paiTempExtraPrecisionVSUnitCombatType;
 	static int* g_paiTempExtraCriticalVSUnitCombatType;
 	static int*	g_paiTempHealUnitCombatTypeVolume;
 	static int*	g_paiTempHealUnitCombatTypeAdjacentVolume;

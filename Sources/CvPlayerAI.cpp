@@ -29236,49 +29236,10 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 		iTemp /= 400;
 		iValue += iTemp;
 	}
-	//TB Notes: assume that our units value Armor and Puncture in a rather generic accross the board value
-	//(at least for now.  Attackers should probably favor puncture while defenders would favor armor
-	//as armor should come with mobility dampeners (though would likely be included in the eval anyhow...)
-	iTemp = kPromotion.getArmorChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getArmor() : pUnit->armorTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	iTemp = kPromotion.getPunctureChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getPuncture() : pUnit->punctureTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
 	iTemp = kPromotion.getDamageModifierChange();
 	if (iTemp != 0)
 	{
 		iExtra = pUnit == NULL ? kUnit.getDamageModifier() : pUnit->damageModifierTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	iTemp = kPromotion.getDodgeModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getDodgeModifier() : pUnit->dodgeTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	iTemp = kPromotion.getPrecisionModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getPrecisionModifier() : pUnit->precisionTotal();
 		iTemp *= (100 + iExtra);
 		iTemp /= 100;
 		iValue += iTemp;
@@ -30405,166 +30366,6 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 				{
 					iValue += (iTemp * iCombatWeight) / 400;
 				}
-			}
-		}
-	}
-
-	if (kPromotion.getNumPunctureVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getPunctureVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->punctureVSUnitCombatTotal((UnitCombatTypes)iI) >= 0 || !pUnit && kUnit.getPunctureVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->punctureVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getPunctureVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-				iValue += (iTemp * iCombatWeight) / 100;
-			}
-		}
-	}
-
-	if (kPromotion.getNumArmorVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getArmorVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->armorVSUnitCombatTotal((UnitCombatTypes)iI) >= 0 || !pUnit && kUnit.getArmorVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->armorVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getArmorVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-				iValue += (iTemp * iCombatWeight) / 100;
-			}
-		}
-	}
-
-	if (kPromotion.getNumDodgeVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getDodgeVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->dodgeVSUnitCombatTotal((UnitCombatTypes)iI) >= 0 || !pUnit && kUnit.getDodgeVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->dodgeVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getDodgeVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-				iValue += iTemp * iCombatWeight / 100;
-			}
-		}
-	}
-
-	if (kPromotion.getNumPrecisionVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getPrecisionVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->precisionVSUnitCombatTotal((UnitCombatTypes)iI) >= 0 || !pUnit && kUnit.getPrecisionVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->precisionVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getPrecisionVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-				iValue += (iTemp * iCombatWeight) / 100;
 			}
 		}
 	}
@@ -33308,49 +33109,10 @@ int CvPlayerAI::AI_unitCombatValue(UnitCombatTypes eUnitCombat, UnitTypes eUnit,
 			iValue += iTemp;
 		}
 	}
-	//TB Notes: assume that our units value Armor and Puncture in a rather generic accross the board value
-	//(at least for now.  Attackers should probably favor puncture while defenders would favor armor
-	//as armor should come with mobility dampeners (though would likely be included in the eval anyhow...)
-	iTemp = kUnitCombat.getArmorChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getArmor() : pUnit->armorTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	iTemp = kUnitCombat.getPunctureChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getPuncture() : pUnit->punctureTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
 	iTemp = kUnitCombat.getDamageModifierChange();
 	if (iTemp != 0)
 	{
 		iExtra = pUnit == NULL ? kUnit.getDamageModifier() : pUnit->damageModifierTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	iTemp = kUnitCombat.getDodgeModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getDodgeModifier() : pUnit->dodgeTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	iTemp = kUnitCombat.getPrecisionModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getPrecisionModifier() : pUnit->precisionTotal();
 		iTemp *= (100 + iExtra);
 		iTemp /= 100;
 		iValue += iTemp;
@@ -34209,27 +33971,6 @@ int CvPlayerAI::AI_unitCombatValue(UnitCombatTypes eUnitCombat, UnitTypes eUnit,
 		{
 			iValue += kUnitCombat.getKnockbackVSUnitCombatTypeChange(iI).iModifier;
 		}
-	}
-
-	for (int iI = 0; iI < kUnitCombat.getNumPunctureVSUnitCombatTypesChange(); iI++)
-	{
-		iValue += kUnitCombat.getPunctureVSUnitCombatTypeChange(iI).iModifier;
-	}
-
-
-	for (int iI = 0; iI < kUnitCombat.getNumArmorVSUnitCombatTypesChange(); iI++)
-	{
-		iValue += kUnitCombat.getArmorVSUnitCombatTypeChange(iI).iModifier;
-	}
-
-	for (int iI = 0; iI < kUnitCombat.getNumDodgeVSUnitCombatTypesChange(); iI++)
-	{
-		iValue += kUnitCombat.getDodgeVSUnitCombatTypeChange(iI).iModifier;
-	}
-
-	for (int iI = 0; iI < kUnitCombat.getNumPrecisionVSUnitCombatTypesChange(); iI++)
-	{
-		iValue += kUnitCombat.getPrecisionVSUnitCombatTypeChange(iI).iModifier;
 	}
 
 	for (int iI = 0; iI < kUnitCombat.getNumCriticalVSUnitCombatTypesChange(); iI++)

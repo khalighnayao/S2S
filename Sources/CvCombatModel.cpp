@@ -52,35 +52,9 @@ int getCombatOdds(const CvUnit* pAttacker, const CvUnit* pDefender)
 	FAssert(iAttackerStrength + iDefenderStrength > 0);
 	FAssert(iAttackerFirepower + iDefenderFirepower > 0);
 
-	const int iDefenderInitialOdds = GC.getCOMBAT_DIE_SIDES() * iDefenderStrength / std::max(1, iAttackerStrength + iDefenderStrength);
-	const int iDefenderHitOdds = (
-		std::max(
-			5,
-			iDefenderInitialOdds
-			+
-			iDefenderInitialOdds
-			*
-			(pDefender->precisionVSOpponentProbTotal(pAttacker) - pAttacker->dodgeVSOpponentProbTotal(pDefender))
-			/
-			100
-		)
-	);
-	const int iAttackerInitialOdds = GC.getCOMBAT_DIE_SIDES() - iDefenderInitialOdds;
-	const int iAttackerHitOdds = (
-		std::max(
-			5,
-			iAttackerInitialOdds
-			+
-			iAttackerInitialOdds
-			*
-			(pAttacker->precisionVSOpponentProbTotal(pDefender) - pDefender->dodgeVSOpponentProbTotal(pAttacker))
-			/
-			100
-		)
-	);
-	const int iDefenderOdds = ((iDefenderHitOdds - iAttackerHitOdds) + GC.getCOMBAT_DIE_SIDES()) / 2;
-	const int iAttackerOdds = ((iAttackerHitOdds - iDefenderHitOdds) + GC.getCOMBAT_DIE_SIDES()) / 2;
-	//TB Combat Mods end
+	// Plain strength-ratio odds (precision/dodge hit-modifier removed).
+	const int iDefenderOdds = GC.getCOMBAT_DIE_SIDES() * iDefenderStrength / std::max(1, iAttackerStrength + iDefenderStrength);
+	const int iAttackerOdds = GC.getCOMBAT_DIE_SIDES() - iDefenderOdds;
 	if (iDefenderOdds == 0)
 	{
 		return 1000;
@@ -92,62 +66,12 @@ int getCombatOdds(const CvUnit* pAttacker, const CvUnit* pDefender)
 	int iOdds = 0;
 	const int iStrengthFactor = (iAttackerFirepower + iDefenderFirepower + 1) / 2;
 
-	// calculate damage done in one round
-	//TB Combat Mods (Armor Compare)
+	// calculate damage done in one round (armor/puncture mitigation removed)
 	const int iDamageToAttackerBase = GC.getCOMBAT_DAMAGE() * (iDefenderFirepower + iStrengthFactor) / std::max(1, iAttackerFirepower + iStrengthFactor);
 	const int iDamageToDefenderBase = GC.getCOMBAT_DAMAGE() * (iAttackerFirepower + iStrengthFactor) / std::max(1, iDefenderFirepower + iStrengthFactor);
 
-	const int iDamageToAttacker = (
-		std::max(
-			1,
-			(
-				100
-				* iDamageToAttackerBase
-				+ iDamageToAttackerBase
-				* pDefender->damageModifierTotal()
-			)
-			*
-			(
-				100
-				-
-				range(
-					pAttacker->armorVSOpponentProbTotal(pDefender)
-					-
-					pDefender->punctureVSOpponentProbTotal(pAttacker)
-					, 0
-					, 95
-				)
-			)
-			/
-			100
-		)
-	);
-	const int iDamageToDefender = (
-		std::max(
-			1,
-			(
-				100
-				* iDamageToDefenderBase
-				+ iDamageToDefenderBase
-				* pAttacker->damageModifierTotal()
-			)
-			*
-			(
-				100
-				-
-				range(
-					pDefender->armorVSOpponentProbTotal(pAttacker)
-					-
-					pAttacker->punctureVSOpponentProbTotal(pDefender)
-					, 0
-					, 95
-				)
-			)
-			/
-			100
-		)
-	);
-	//TB Combat Mods (Armor Compare) end
+	const int iDamageToAttacker = std::max(1, iDamageToAttackerBase * (100 + pDefender->damageModifierTotal()));
+	const int iDamageToDefender = std::max(1, iDamageToDefenderBase * (100 + pAttacker->damageModifierTotal()));
 
 	// calculate needed rounds.
 	// Needed rounds = round_up(health/damage)
@@ -305,7 +229,6 @@ float getCombatOddsSpecific(const CvUnit* pAttacker, const CvUnit* pDefender, in
 {
 	PROFILE_EXTRA_FUNC();
 
-	//TB Combat Mods (Armor Compare)
 	int iAttackerStrength = pAttacker->currCombatStr(NULL, NULL);
 	int iAttackerFirepower = pAttacker->currFirepower(NULL, NULL);
 	int iDefenderStrength = pDefender->currCombatStr(pDefender->plot(), pAttacker);
@@ -330,63 +253,12 @@ float getCombatOddsSpecific(const CvUnit* pAttacker, const CvUnit* pDefender, in
 	const int iDamageToAttackerBase = GC.getCOMBAT_DAMAGE() * (iDefenderFirepower + iStrengthFactor) / std::max(1, iAttackerFirepower + iStrengthFactor);
 	const int iDamageToDefenderBase = GC.getCOMBAT_DAMAGE() * (iAttackerFirepower + iStrengthFactor) / std::max(1, iDefenderFirepower + iStrengthFactor);
 
-	const int iDamageToAttacker = (
-		std::max(
-			1,
-			(iDamageToAttackerBase + iDamageToAttackerBase * pDefender->damageModifierTotal() / 100)
-			*
-			(100 - range(pAttacker->armorVSOpponentProbTotal(pDefender) - pDefender->punctureVSOpponentProbTotal(pAttacker), 0, 95))
-			/
-			100
-		)
-	);
-	const int iDamageToDefender = (
-		std::max(
-			1,
-			(iDamageToDefenderBase + iDamageToDefenderBase * pAttacker->damageModifierTotal() / 100)
-			*
-			(100 - range(pDefender->armorVSOpponentProbTotal(pAttacker) - pAttacker->punctureVSOpponentProbTotal(pDefender), 0, 95))
-			/
-			100
-		)
-	);
+	const int iDamageToAttacker = std::max(1, iDamageToAttackerBase + iDamageToAttackerBase * pDefender->damageModifierTotal() / 100);
+	const int iDamageToDefender = std::max(1, iDamageToDefenderBase + iDamageToDefenderBase * pAttacker->damageModifierTotal() / 100);
 
-	//TB Combat Mods begin (Dodge/Precision)
-
-	const int iDefenderInitialOdds = GC.getCOMBAT_DIE_SIDES() * iDefenderStrength / (iAttackerStrength + iDefenderStrength);
-	const int iAttackerInitialOdds = GC.getCOMBAT_DIE_SIDES() - iDefenderInitialOdds;
-
-	const int iDefenderHitOdds = (
-		std::max(
-			5,
-			iDefenderInitialOdds
-			+
-			(
-				pDefender->precisionVSOpponentProbTotal(pAttacker)
-				-
-				pAttacker->dodgeVSOpponentProbTotal(pDefender)
-			)
-			*
-			iDefenderInitialOdds / 100
-		)
-	);
-	const int iAttackerHitOdds = (
-		std::max(
-			5,
-			iAttackerInitialOdds
-			+
-			(
-				pAttacker->precisionVSOpponentProbTotal(pDefender)
-				-
-				pDefender->dodgeVSOpponentProbTotal(pAttacker)
-			)
-			* iAttackerInitialOdds / 100
-		)
-	);
-	int iDefenderOdds = ((iDefenderHitOdds - iAttackerHitOdds) + GC.getCOMBAT_DIE_SIDES()) / 2;
-	int iAttackerOdds = ((iAttackerHitOdds - iDefenderHitOdds) + GC.getCOMBAT_DIE_SIDES()) / 2;
-
-	//TB Combat Mods end (Dodge/Precision)
+	// Plain strength-ratio odds (precision/dodge hit-modifier removed).
+	int iDefenderOdds = GC.getCOMBAT_DIE_SIDES() * iDefenderStrength / (iAttackerStrength + iDefenderStrength);
+	int iAttackerOdds = GC.getCOMBAT_DIE_SIDES() - iDefenderOdds;
 
 	if (GC.getDefineINT("ACO_IgnoreBarbFreeWins")==0)
 	{

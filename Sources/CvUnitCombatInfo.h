@@ -93,8 +93,6 @@ public:
 	int getPursuitChange() const;
 	int getEarlyWithdrawChange() const;
 	int getVSBarbsChange() const;
-	int getArmorChange() const;
-	int getPunctureChange() const;
 	int getOverrunChange() const;
 	int getRepelChange() const;
 	int getFortRepelChange() const;
@@ -120,8 +118,6 @@ public:
 	int getLongRangeSupportPercentChange() const;
 	int getFlankSupportPercentChange() const;
 #endif // STRENGTH_IN_NUMBERS
-	int getDodgeModifierChange() const;
-	int getPrecisionModifierChange() const;
 	int getCriticalModifierChange() const;
 	int getEnduranceChange() const;
 	int getPoisonProbabilityModifierChange() const;
@@ -318,18 +314,6 @@ public:
 	int getNumKnockbackVSUnitCombatTypesChange() const;
 	const UnitCombatModifier& getKnockbackVSUnitCombatTypeChange(int iUnitCombat) const;
 
-	int getNumPunctureVSUnitCombatTypesChange() const;
-	const UnitCombatModifier& getPunctureVSUnitCombatTypeChange(int iUnitCombat) const;
-
-	int getNumArmorVSUnitCombatTypesChange() const;
-	const UnitCombatModifier& getArmorVSUnitCombatTypeChange(int iUnitCombat) const;
-
-	int getNumDodgeVSUnitCombatTypesChange() const;
-	const UnitCombatModifier& getDodgeVSUnitCombatTypeChange(int iUnitCombat) const;
-
-	int getNumPrecisionVSUnitCombatTypesChange() const;
-	const UnitCombatModifier& getPrecisionVSUnitCombatTypeChange(int iUnitCombat) const;
-
 	int getNumCriticalVSUnitCombatTypesChange() const;
 	const UnitCombatModifier& getCriticalVSUnitCombatTypeChange(int iUnitCombat) const;
 
@@ -428,8 +412,6 @@ protected:
 	int m_iPursuitChange;
 	int m_iEarlyWithdrawChange;
 	int m_iVSBarbsChange;
-	int m_iArmorChange;
-	int m_iPunctureChange;
 	int m_iOverrunChange;
 	int m_iRepelChange;
 	int m_iFortRepelChange;
@@ -455,8 +437,6 @@ protected:
 	int m_iLongRangeSupportPercentChange;
 	int m_iFlankSupportPercentChange;
 #endif // STRENGTH_IN_NUMBERS
-	int m_iDodgeModifierChange;
-	int m_iPrecisionModifierChange;
 	int m_iCriticalModifierChange;
 	int m_iEnduranceChange;
 	int m_iPoisonProbabilityModifierChange;
@@ -581,10 +561,6 @@ protected:
 	std::vector<UnitCombatModifier> m_aPursuitVSUnitCombatTypeChange;
 	std::vector<UnitCombatModifier> m_aRepelVSUnitCombatTypeChange;
 	std::vector<UnitCombatModifier> m_aKnockbackVSUnitCombatTypeChange;
-	std::vector<UnitCombatModifier> m_aPunctureVSUnitCombatTypeChange;
-	std::vector<UnitCombatModifier> m_aArmorVSUnitCombatTypeChange;
-	std::vector<UnitCombatModifier> m_aDodgeVSUnitCombatTypeChange;
-	std::vector<UnitCombatModifier> m_aPrecisionVSUnitCombatTypeChange;
 	std::vector<UnitCombatModifier> m_aCriticalVSUnitCombatTypeChange;
 	std::vector<UnitCombatModifier> m_aTrapAvoidanceUnitCombatTypes;
 	std::vector<InvisibleTerrainChanges> m_aInvisibleTerrainChanges;

@@ -80,10 +80,6 @@ int*	CvUnit::g_paiTempExtraWithdrawVSUnitCombatType = NULL;
 int*	CvUnit::g_paiTempExtraPursuitVSUnitCombatType = NULL;
 int*	CvUnit::g_paiTempExtraRepelVSUnitCombatType = NULL;
 int*	CvUnit::g_paiTempExtraKnockbackVSUnitCombatType = NULL;
-int*	CvUnit::g_paiTempExtraPunctureVSUnitCombatType = NULL;
-int*	CvUnit::g_paiTempExtraArmorVSUnitCombatType = NULL;
-int*	CvUnit::g_paiTempExtraDodgeVSUnitCombatType = NULL;
-int*	CvUnit::g_paiTempExtraPrecisionVSUnitCombatType = NULL;
 int*	CvUnit::g_paiTempExtraCriticalVSUnitCombatType = NULL;
 int*	CvUnit::g_paiTempHealUnitCombatTypeVolume = NULL;
 int*	CvUnit::g_paiTempHealUnitCombatTypeAdjacentVolume = NULL;
@@ -191,10 +187,6 @@ m_Properties(this)
 		g_paiTempExtraPursuitVSUnitCombatType = new int[GC.getNumUnitCombatInfos()];
 		g_paiTempExtraRepelVSUnitCombatType = new int[GC.getNumUnitCombatInfos()];
 		g_paiTempExtraKnockbackVSUnitCombatType = new int[GC.getNumUnitCombatInfos()];
-		g_paiTempExtraPunctureVSUnitCombatType = new int[GC.getNumUnitCombatInfos()];
-		g_paiTempExtraArmorVSUnitCombatType = new int[GC.getNumUnitCombatInfos()];
-		g_paiTempExtraDodgeVSUnitCombatType = new int[GC.getNumUnitCombatInfos()];
-		g_paiTempExtraPrecisionVSUnitCombatType = new int[GC.getNumUnitCombatInfos()];
 		g_paiTempExtraCriticalVSUnitCombatType = new int[GC.getNumUnitCombatInfos()];
 		g_paiTempHealUnitCombatTypeVolume = new int[GC.getNumUnitCombatInfos()]();
 		g_paiTempHealUnitCombatTypeAdjacentVolume = new int[GC.getNumUnitCombatInfos()]();
@@ -593,8 +585,6 @@ void CvUnit::reset(int iID, UnitTypes eUnit, PlayerTypes eOwner, bool bConstruct
 	m_iExtraEarlyWithdraw = 0;
 	m_iExtraVSBarbs = 0;
 	m_iExtraReligiousCombatModifier = 0;
-	m_iExtraArmor = 0;
-	m_iExtraPuncture = 0;
 	m_iExtraOverrun = 0;
 	m_iExtraRepel = 0;
 	m_iExtraFortRepel = 0;
@@ -630,8 +620,6 @@ void CvUnit::reset(int iID, UnitTypes eUnit, PlayerTypes eOwner, bool bConstruct
 	m_iAttackFromPlotX = INVALID_PLOT_COORD;
 	m_iAttackFromPlotY = INVALID_PLOT_COORD;
 #endif // STRENGTH_IN_NUMBERS
-	m_iExtraDodgeModifier = 0;
-	m_iExtraPrecisionModifier = 0;
 	m_iExtraCriticalModifier = 0;
 	m_iExtraEndurance = 0;
 	m_iCombatKnockbacks = 0;
@@ -956,8 +944,6 @@ CvUnit& CvUnit::operator=(const CvUnit& other)
 	m_iExtraEarlyWithdraw = other.m_iExtraEarlyWithdraw;
 	m_iExtraVSBarbs = other.m_iExtraVSBarbs;
 	m_iExtraReligiousCombatModifier = other.m_iExtraReligiousCombatModifier;
-	m_iExtraArmor = other.m_iExtraArmor;
-	m_iExtraPuncture = other.m_iExtraPuncture;
 	m_iExtraOverrun = other.m_iExtraOverrun;
 	m_iExtraRepel = other.m_iExtraRepel;
 	m_iExtraFortRepel = other.m_iExtraFortRepel;
@@ -993,8 +979,6 @@ CvUnit& CvUnit::operator=(const CvUnit& other)
 	m_iAttackFromPlotX = other.m_iAttackFromPlotX;
 	m_iAttackFromPlotY = other.m_iAttackFromPlotY;
 #endif // STRENGTH_IN_NUMBERS
-	m_iExtraDodgeModifier = other.m_iExtraDodgeModifier;
-	m_iExtraPrecisionModifier = other.m_iExtraPrecisionModifier;
 	m_iExtraCriticalModifier = other.m_iExtraCriticalModifier;
 	m_iExtraEndurance = other.m_iExtraEndurance;
 	m_iCombatKnockbacks = other.m_iCombatKnockbacks;
@@ -2338,10 +2322,6 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition&
 	m_combatResult.bAttackerHitDefenderWithDistanceAttack = false;
 	m_combatResult.bNeverMelee = true;
 	int temporarypursuit = 0;
-	int iDefenderDodge = pDefender->dodgeVSOpponentProbTotal(this);
-	int iDefenderPrecision = pDefender->precisionVSOpponentProbTotal(this);
-	int iAttackerDodge = dodgeVSOpponentProbTotal(pDefender);
-	int iAttackerPrecision = precisionVSOpponentProbTotal(pDefender);
 	bool bBreakdown = false;
 	int iDefenderFirstStrikes = pDefender->getCombatFirstStrikes();
 	int iAttackerFirstStrikes = getCombatFirstStrikes();
@@ -2498,8 +2478,7 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition&
 		}
 		//TB Combat Mods (StrAdjperRnd) end
 
-		iAttackerHitModifier = iAttackerPrecision - iDefenderDodge;
-		iDefenderHitModifier = iDefenderPrecision - iAttackerDodge;
+		// dodge/precision hit-modifier removed; modifiers stay 0 (plain odds).
 		iAttackerOdds = std::max((GC.getCOMBAT_DIE_SIDES() - iDefenderOdds), 0);
 		iDefenderCombatRoll = GC.getGame().getSorenRandNum(GC.getCOMBAT_DIE_SIDES(), "DefenderCombatRoll");
 		iAttackerCombatRoll = GC.getGame().getSorenRandNum(GC.getCOMBAT_DIE_SIDES(), "AttackerCombatRoll");
@@ -14154,16 +14133,6 @@ int CvUnit::religiousCombatModifierTotal(ReligionTypes eReligion, bool bDisplay)
 	return 0;
 }
 
-int CvUnit::armorTotal() const
-{
-	return std::max(0, (m_pUnitInfo->getArmor() + getExtraArmor()));
-}
-
-int CvUnit::punctureTotal() const
-{
-	return std::max(0, (m_pUnitInfo->getPuncture() + getExtraPuncture()));
-}
-
 int CvUnit::damageModifierTotal() const
 {
 	return std::max(-95, (m_pUnitInfo->getDamageModifier() + getExtraDamageModifier()));
@@ -14507,18 +14476,6 @@ bool CvUnit::canOnslaught() const
 	return m_pUnitInfo->isOnslaught() || mayOnslaught();
 }
 
-
-int CvUnit::dodgeTotal() const
-{
-	// Cold-damage "chill" reduction removed with the cold mechanic (R1). dodge/precision
-	// themselves are removed in R5.
-	return m_pUnitInfo->getDodgeModifier() + getExtraDodgeModifier() + 100;
-}
-
-int CvUnit::precisionTotal() const
-{
-	return m_pUnitInfo->getPrecisionModifier() + getExtraPrecisionModifier() + 100;
-}
 
 
 int CvUnit::criticalModifierTotal() const
@@ -17151,58 +17108,6 @@ void CvUnit::changeExtraReligiousCombatModifier(int iChange)
 	m_iExtraReligiousCombatModifier += iChange;
 }
 
-int CvUnit::getExtraArmor(bool bIgnoreCommanders, bool bIgnoreCommodores) const
-{
-	if (!bIgnoreCommanders && !isCommander())
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return std::max(0, m_iExtraArmor + pCommander->m_iExtraArmor);
-		}
-	}
-	if (!bIgnoreCommodores && !isCommodore())
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return std::max(0, m_iExtraArmor + pCommodore->m_iExtraArmor);
-    		}
-    	}
-	return std::max(0, m_iExtraArmor);
-}
-
-void CvUnit::changeExtraArmor(int iChange)
-{
-	m_iExtraArmor += iChange;
-}
-
-int CvUnit::getExtraPuncture(bool bIgnoreCommanders, bool bIgnoreCommodores) const
-{
-	if (!bIgnoreCommanders && !isCommander())
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return std::max(0, m_iExtraPuncture + pCommander->getExtraPuncture());
-		}
-	}
-	if (!bIgnoreCommodores && !isCommodore())
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return std::max(0, m_iExtraPuncture + pCommodore->getExtraPuncture());
-    		}
-    	}
-	return std::max(0, m_iExtraPuncture);
-}
-
-void CvUnit::changeExtraPuncture(int iChange)
-{
-	m_iExtraPuncture += iChange;
-}
-
 int CvUnit::getExtraDamageModifier(bool bIgnoreCommanders, bool bIgnoreCommodores) const
 {
 	if (!bIgnoreCommanders && !isCommander())
@@ -17778,59 +17683,6 @@ void CvUnit::changeExtraFortitude(int iChange)
 	m_iExtraFortitude += iChange;
 	FASSERT_NOT_NEGATIVE(m_iExtraFortitude);
 }
-
-int CvUnit::getExtraDodgeModifier (bool bIgnoreCommanders, bool bIgnoreCommodores) const
-{
-	if (!bIgnoreCommanders && !isCommander())
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return m_iExtraDodgeModifier + pCommander->m_iExtraDodgeModifier;
-		}
-	}
-	if (!bIgnoreCommodores && !isCommodore())
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return m_iExtraDodgeModifier + pCommodore->m_iExtraDodgeModifier;
-    		}
-    	}
-	return m_iExtraDodgeModifier;
-}
-
-void CvUnit::changeExtraDodgeModifier(int iChange)
-{
-	m_iExtraDodgeModifier +=iChange;
-}
-
-int CvUnit::getExtraPrecisionModifier(bool bIgnoreCommanders, bool bIgnoreCommodores) const
-{
-	if (!bIgnoreCommanders && !isCommander())
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return m_iExtraPrecisionModifier + pCommander->m_iExtraPrecisionModifier;
-		}
-	}
-	if (!bIgnoreCommodores && !isCommodore())
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return m_iExtraPrecisionModifier + pCommodore->m_iExtraPrecisionModifier;
-    		}
-    	}
-	return m_iExtraPrecisionModifier;
-}
-
-void CvUnit::changeExtraPrecisionModifier(int iChange)
-{
-	m_iExtraPrecisionModifier +=iChange;
-}
-
 
 int CvUnit::getExtraCriticalModifier(bool bIgnoreCommanders, bool bIgnoreCommodores) const
 {
@@ -20281,8 +20133,6 @@ void CvUnit::processUnitCombat(UnitCombatTypes eIndex, bool bAdding, bool bByPro
 	changeExtraEarlyWithdraw(kUnitCombat.getEarlyWithdrawChange() * iChange);//no merge/split
 	changeExtraVSBarbs(kUnitCombat.getVSBarbsChange() * iChange);//no merge/split
 	changeExtraReligiousCombatModifier(kUnitCombat.getReligiousCombatModifierChange() * iChange);//no merge/split
-	changeExtraArmor(kUnitCombat.getArmorChange() * iChange);//no merge/split
-	changeExtraPuncture(kUnitCombat.getPunctureChange() * iChange);//no merge/split
 	changeExtraDamageModifier(kUnitCombat.getDamageModifierChange() * iChange);//no merge/split
 	changeExtraOverrun(kUnitCombat.getOverrunChange() * iChange);//no merge/split
 	changeExtraRepel(kUnitCombat.getRepelChange() * iChange);//no merge/split
@@ -20310,8 +20160,6 @@ void CvUnit::processUnitCombat(UnitCombatTypes eIndex, bool bAdding, bool bByPro
 	changeExtraFlankSupportPercent(kUnitCombat.getFlankSupportPercentChange() * iChange);//no merge/split
 #endif // STRENGTH_IN_NUMBERS
 
-	changeExtraDodgeModifier(kUnitCombat.getDodgeModifierChange() * iChange);//no merge/split
-	changeExtraPrecisionModifier(kUnitCombat.getPrecisionModifierChange() * iChange);//no merge/split
 	changeExtraCriticalModifier(kUnitCombat.getCriticalModifierChange() * iChange);//no merge/split
 	changeExtraEndurance(kUnitCombat.getEnduranceChange() * iChange);//no merge/split
 	changeExtraPoisonProbabilityModifier(kUnitCombat.getPoisonProbabilityModifierChange() * iChange);//no merge/split
@@ -20556,26 +20404,6 @@ void CvUnit::processUnitCombat(UnitCombatTypes eIndex, bool bAdding, bool bByPro
 		}
 	}
 
-	for (iI = 0; iI < kUnitCombat.getNumPunctureVSUnitCombatTypesChange(); iI++)
-	{
-		changeExtraPunctureVSUnitCombatType(((UnitCombatTypes)kUnitCombat.getPunctureVSUnitCombatTypeChange(iI).eUnitCombat), kUnitCombat.getPunctureVSUnitCombatTypeChange(iI).iModifier * iChange);
-	}
-
-	for (iI = 0; iI < kUnitCombat.getNumArmorVSUnitCombatTypesChange(); iI++)
-	{
-		changeExtraArmorVSUnitCombatType(((UnitCombatTypes)kUnitCombat.getArmorVSUnitCombatTypeChange(iI).eUnitCombat), kUnitCombat.getArmorVSUnitCombatTypeChange(iI).iModifier * iChange);
-	}
-
-	for (iI = 0; iI < kUnitCombat.getNumDodgeVSUnitCombatTypesChange(); iI++)
-	{
-		changeExtraDodgeVSUnitCombatType(((UnitCombatTypes)kUnitCombat.getDodgeVSUnitCombatTypeChange(iI).eUnitCombat), kUnitCombat.getDodgeVSUnitCombatTypeChange(iI).iModifier * iChange);
-	}
-
-	for (iI = 0; iI < kUnitCombat.getNumPrecisionVSUnitCombatTypesChange(); iI++)
-	{
-		changeExtraPrecisionVSUnitCombatType(((UnitCombatTypes)kUnitCombat.getPrecisionVSUnitCombatTypeChange(iI).eUnitCombat), kUnitCombat.getPrecisionVSUnitCombatTypeChange(iI).iModifier * iChange);
-	}
-
 	for (iI = 0; iI < kUnitCombat.getNumCriticalVSUnitCombatTypesChange(); iI++)
 	{
 		changeExtraCriticalVSUnitCombatType(((UnitCombatTypes)kUnitCombat.getCriticalVSUnitCombatTypeChange(iI).eUnitCombat), kUnitCombat.getCriticalVSUnitCombatTypeChange(iI).iModifier * iChange);
@@ -20797,8 +20625,6 @@ void CvUnit::processPromotion(PromotionTypes eIndex, bool bAdding, bool bInitial
 	changeExtraEarlyWithdraw(kPromotion.getEarlyWithdrawChange() * iChange);
 	changeExtraVSBarbs(kPromotion.getVSBarbsChange() * iChange);
 	changeExtraReligiousCombatModifier(kPromotion.getReligiousCombatModifierChange() * iChange);
-	changeExtraArmor(kPromotion.getArmorChange() * iChange);
-	changeExtraPuncture(kPromotion.getPunctureChange() * iChange);
 	changeExtraDamageModifier(kPromotion.getDamageModifierChange() * iChange);
 
 	changeExtraUpkeep100(kPromotion.getExtraUpkeep100() * iChange);
@@ -20847,8 +20673,6 @@ void CvUnit::processPromotion(PromotionTypes eIndex, bool bAdding, bool bInitial
 	changeExtraFlankSupportPercent(kPromotion.getFlankSupportPercentChange() * iChange);
 #endif // STRENGTH_IN_NUMBERS
 
-	changeExtraDodgeModifier(kPromotion.getDodgeModifierChange() * iChange);
-	changeExtraPrecisionModifier(kPromotion.getPrecisionModifierChange() * iChange);
 	changeExtraCriticalModifier(kPromotion.getCriticalModifierChange() * iChange);
 	changeExtraEndurance(kPromotion.getEnduranceChange() * iChange);
 	changeExtraPoisonProbabilityModifier(kPromotion.getPoisonProbabilityModifierChange() * iChange);
@@ -21102,10 +20926,6 @@ void CvUnit::processPromotion(PromotionTypes eIndex, bool bAdding, bool bInitial
 		changeExtraPursuitVSUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getPursuitVSUnitCombatChangeType(iI) * iChange));
 		changeExtraRepelVSUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getRepelVSUnitCombatChangeType(iI) * iChange));
 		changeExtraKnockbackVSUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getKnockbackVSUnitCombatChangeType(iI) * iChange));
-		changeExtraPunctureVSUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getPunctureVSUnitCombatChangeType(iI) * iChange));
-		changeExtraArmorVSUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getArmorVSUnitCombatChangeType(iI) * iChange));
-		changeExtraDodgeVSUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getDodgeVSUnitCombatChangeType(iI) * iChange));
-		changeExtraPrecisionVSUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getPrecisionVSUnitCombatChangeType(iI) * iChange));
 		changeExtraCriticalVSUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getCriticalVSUnitCombatChangeType(iI) * iChange));
 		changeExtraTrapDisableUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getTrapDisableUnitCombatType(iI) * iChange));
 		changeExtraTrapAvoidanceUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getTrapAvoidanceUnitCombatType(iI) * iChange));
@@ -21699,8 +21519,6 @@ void CvUnit::read(FDataStreamBase* pStream)
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraPursuit);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraEarlyWithdraw);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraVSBarbs);
-	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraArmor);
-	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraPuncture);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraOverrun);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraRepel);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraFortRepel);
@@ -21886,8 +21704,6 @@ void CvUnit::read(FDataStreamBase* pStream)
 	WRAPPER_SKIP_ELEMENT(wrapper, "CvUnit", dflIIUnit.iID, SAVE_VALUE_TYPE_INT);
 #endif // STRENGTH_IN_NUMBERS
 
-	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraDodgeModifier);
-	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraPrecisionModifier);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraCriticalModifier);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraEndurance);
 
@@ -22040,126 +21856,6 @@ void CvUnit::read(FDataStreamBase* pStream)
 			UnitCombatKeyedInfo* info = findOrCreateUnitCombatKeyedInfo((UnitCombatTypes)iI);
 
 			info->m_iExtraKnockbackVSUnitCombatType = g_paiTempExtraKnockbackVSUnitCombatType[iI];
-		}
-	}
-
-	// Read compressed data format
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		g_paiTempExtraPunctureVSUnitCombatType[iI] = 0;
-	}
-	do
-	{
-		iI= -1;
-		WRAPPER_READ_DECORATED(wrapper, "CvUnit", &iI, "hasUnitCombatInfo9");
-		if ( iI != -1 )
-		{
-			int iNewIndex = wrapper.getNewClassEnumValue(REMAPPED_CLASS_TYPE_COMBATINFOS, iI, true);
-
-			if ( iNewIndex != NO_UNITCOMBAT )
-			{
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempExtraPunctureVSUnitCombatType[iNewIndex], "extraPunctureVSUnitCombatType");
-			}
-		}
-	} while(iI != -1);
-
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		if ( g_paiTempExtraPunctureVSUnitCombatType[iI] != 0 )
-		{
-			UnitCombatKeyedInfo* info = findOrCreateUnitCombatKeyedInfo((UnitCombatTypes)iI);
-
-			info->m_iExtraPunctureVSUnitCombatType = g_paiTempExtraPunctureVSUnitCombatType[iI];
-		}
-	}
-
-	// Read compressed data format
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		g_paiTempExtraArmorVSUnitCombatType[iI] = 0;
-	}
-	do
-	{
-		iI= -1;
-		WRAPPER_READ_DECORATED(wrapper, "CvUnit", &iI, "hasUnitCombatInfo10");
-		if ( iI != -1 )
-		{
-			int iNewIndex = wrapper.getNewClassEnumValue(REMAPPED_CLASS_TYPE_COMBATINFOS, iI, true);
-
-			if ( iNewIndex != NO_UNITCOMBAT )
-			{
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempExtraArmorVSUnitCombatType[iNewIndex], "extraArmorVSUnitCombatType");
-			}
-		}
-	} while(iI != -1);
-
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		if ( g_paiTempExtraArmorVSUnitCombatType[iI] != 0 )
-		{
-			UnitCombatKeyedInfo* info = findOrCreateUnitCombatKeyedInfo((UnitCombatTypes)iI);
-
-			info->m_iExtraArmorVSUnitCombatType = g_paiTempExtraArmorVSUnitCombatType[iI];
-		}
-	}
-
-	// Read compressed data format
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		g_paiTempExtraDodgeVSUnitCombatType[iI] = 0;
-	}
-	do
-	{
-		iI= -1;
-		WRAPPER_READ_DECORATED(wrapper, "CvUnit", &iI, "hasUnitCombatInfo11");
-		if ( iI != -1 )
-		{
-			int iNewIndex = wrapper.getNewClassEnumValue(REMAPPED_CLASS_TYPE_COMBATINFOS, iI, true);
-
-			if ( iNewIndex != NO_UNITCOMBAT )
-			{
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempExtraDodgeVSUnitCombatType[iNewIndex], "extraDodgeVSUnitCombatType");
-			}
-		}
-	} while(iI != -1);
-
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		if ( g_paiTempExtraDodgeVSUnitCombatType[iI] != 0 )
-		{
-			UnitCombatKeyedInfo* info = findOrCreateUnitCombatKeyedInfo((UnitCombatTypes)iI);
-
-			info->m_iExtraDodgeVSUnitCombatType = g_paiTempExtraDodgeVSUnitCombatType[iI];
-		}
-	}
-
-	// Read compressed data format
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		g_paiTempExtraPrecisionVSUnitCombatType[iI] = 0;
-	}
-	do
-	{
-		iI= -1;
-		WRAPPER_READ_DECORATED(wrapper, "CvUnit", &iI, "hasUnitCombatInfo12");
-		if ( iI != -1 )
-		{
-			int iNewIndex = wrapper.getNewClassEnumValue(REMAPPED_CLASS_TYPE_COMBATINFOS, iI, true);
-
-			if ( iNewIndex != NO_UNITCOMBAT )
-			{
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempExtraPrecisionVSUnitCombatType[iNewIndex], "extraPrecisionVSUnitCombatType");
-			}
-		}
-	} while(iI != -1);
-
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		if ( g_paiTempExtraPrecisionVSUnitCombatType[iI] != 0 )
-		{
-			UnitCombatKeyedInfo* info = findOrCreateUnitCombatKeyedInfo((UnitCombatTypes)iI);
-
-			info->m_iExtraPrecisionVSUnitCombatType = g_paiTempExtraPrecisionVSUnitCombatType[iI];
 		}
 	}
 
@@ -23033,8 +22729,6 @@ void CvUnit::write(FDataStreamBase* pStream)
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraPursuit);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraEarlyWithdraw);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraVSBarbs);
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraArmor);
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraPuncture);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraOverrun);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraRepel);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraFortRepel);
@@ -23113,8 +22807,6 @@ void CvUnit::write(FDataStreamBase* pStream)
 #endif // STRENGTH_IN_NUMBERS
 
 
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraDodgeModifier);
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraPrecisionModifier);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraCriticalModifier);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraEndurance);
 
@@ -23168,46 +22860,6 @@ void CvUnit::write(FDataStreamBase* pStream)
 		{
 			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", iI, "hasUnitCombatInfo8");
 			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getExtraKnockbackVSUnitCombatType((UnitCombatTypes)iI), "extraKnockbackVSUnitCombatType");
-		}
-	}
-
-	//	Use condensed format now - only save non-default array elements
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		if (getExtraPunctureVSUnitCombatType((UnitCombatTypes)iI) != 0)
-		{
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", iI, "hasUnitCombatInfo9");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getExtraPunctureVSUnitCombatType((UnitCombatTypes)iI), "extraPunctureVSUnitCombatType");
-		}
-	}
-
-	//	Use condensed format now - only save non-default array elements
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		if (getExtraArmorVSUnitCombatType((UnitCombatTypes)iI) != 0)
-		{
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", iI, "hasUnitCombatInfo10");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getExtraArmorVSUnitCombatType((UnitCombatTypes)iI), "extraArmorVSUnitCombatType");
-		}
-	}
-
-	//	Use condensed format now - only save non-default array elements
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		if (getExtraDodgeVSUnitCombatType((UnitCombatTypes)iI) != 0)
-		{
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", iI, "hasUnitCombatInfo11");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getExtraDodgeVSUnitCombatType((UnitCombatTypes)iI), "extraDodgeVSUnitCombatType");
-		}
-	}
-
-	//	Use condensed format now - only save non-default array elements
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		if (getExtraPrecisionVSUnitCombatType((UnitCombatTypes)iI) != 0)
-		{
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", iI, "hasUnitCombatInfo12");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getExtraPrecisionVSUnitCombatType((UnitCombatTypes)iI), "extraPrecisionVSUnitCombatType");
 		}
 	}
 
@@ -23725,9 +23377,6 @@ void CvUnit::collateralCombat(const CvPlot* pPlot, CvUnit* pSkipUnit)
 			}
 
 			iCollateralDamage /= 100;
-
-			//TB note: Armor should be checked against the puncture of the attacker (with the weapon in use) and act as a value that diminishes the damage if any armor is left
-			//TB note: A dodge check should also be made (% check) to see if the defender evades the random blast or scattered sources of damage coming at him (entirely - all or nothing).
 
 			iCollateralDamage = std::max(0, iCollateralDamage);
 
@@ -24641,42 +24290,15 @@ void CvUnit::getDefenderCombatValues(const CvUnit& kDefender, const CvPlot* pPlo
 	}
 
 	int iStrengthFactor = ((iOurFirepower + iTheirFirepower + 1) / 2);
-	//TB Combat Mods Begin
-	CvUnit* pAttacker = (CvUnit*)this;
-	int iAttackArmorTotal = armorVSOpponentProbTotal(pDefender);
-	int iDefendPunctureTotal = kDefender.punctureVSOpponentProbTotal(pAttacker);
-	int iAttackPunctureTotal = punctureVSOpponentProbTotal(pDefender);
-	int iDefendArmorTotal = kDefender.armorVSOpponentProbTotal(pAttacker);
 
-	int iUnmodifiedDefenderArmor = (iDefendArmorTotal - iAttackPunctureTotal);
-	int iUnmodifiedAttackerArmor = (iAttackArmorTotal - iDefendPunctureTotal);
-	int iModifiedDefenderArmorZero = (iUnmodifiedDefenderArmor < 0 ? 0 : iUnmodifiedDefenderArmor);
-	int iModifiedAttackerArmorZero = (iUnmodifiedAttackerArmor < 0 ? 0 : iUnmodifiedAttackerArmor);
-	int iModifiedDefenderArmor = (iModifiedDefenderArmorZero < 95 ? iModifiedDefenderArmorZero : 95);
-	int iModifiedAttackerArmor = (iModifiedAttackerArmorZero < 95 ? iModifiedAttackerArmorZero: 95);
-
-	int iDefenderArmor = (100 - iModifiedDefenderArmor);
-	int iAttackerArmor = (100 - iModifiedAttackerArmor);
-	// UncutDragon
-/* original code
-	iOurDamage = std::max(1, ((GC.getDefineINT("COMBAT_DAMAGE") * (iTheirFirepower + iStrengthFactor)) / (iOurFirepower + iStrengthFactor)));
-	iTheirDamage = std::max(1, ((GC.getDefineINT("COMBAT_DAMAGE") * (iOurFirepower + iStrengthFactor)) / (iTheirFirepower + iStrengthFactor)));
-*/	// modified by both UncutDragon and TB
+	// Damage: firepower ratio + damageModifier (armor/puncture mitigation removed).
 	int iDefendDamageModifierTotal = kDefender.damageModifierTotal();
 	int iAttackDamageModifierTotal = damageModifierTotal();
 
 	int iOurDamageBase = ((GC.getCOMBAT_DAMAGE() * (iTheirFirepower + iStrengthFactor)) / std::max(1, (iOurFirepower + iStrengthFactor)));
 	int iTheirDamageBase = ((GC.getCOMBAT_DAMAGE() * (iOurFirepower + iStrengthFactor)) / std::max(1, (iTheirFirepower + iStrengthFactor)));
-	int iOurDamageModified = iOurDamageBase + ((iOurDamageBase * iDefendDamageModifierTotal)/100);
-	int iTheirDamageModified = iTheirDamageBase + ((iTheirDamageBase * iAttackDamageModifierTotal)/100);
-	int iOurDamageArmor = (iOurDamageModified * iAttackerArmor)/100;
-	int iTheirDamageArmor = (iTheirDamageModified * iDefenderArmor)/100;
-	iOurDamage  = std::max(1, iOurDamageArmor);
-	iTheirDamage  = std::max(1, iTheirDamageArmor);
-	//iOurDamage = std::max(1, ((((GC.getCOMBAT_DAMAGE() * (iTheirFirepower + iStrengthFactor)) / (iOurFirepower + iStrengthFactor)) * iAttackerArmor)/100));
-	//iTheirDamage = std::max(1, ((((GC.getCOMBAT_DAMAGE() * (iOurFirepower + iStrengthFactor)) / (iTheirFirepower + iStrengthFactor)) * iDefenderArmor)/100));
-	// /UncutDragon
-	//TB Combat Mods End
+	iOurDamage = std::max(1, iOurDamageBase + ((iOurDamageBase * iDefendDamageModifierTotal)/100));
+	iTheirDamage = std::max(1, iTheirDamageBase + ((iTheirDamageBase * iAttackDamageModifierTotal)/100));
 /************************************************************************************************/
 /* BETTER_BTS_AI_MOD                       END                                                  */
 /************************************************************************************************/
@@ -27656,16 +27278,6 @@ void CvUnit::doBattleFieldPromotions(CvUnit* pDefender, const CombatDetails& cdD
 			{
 				aAttackerAvailablePromotions.push_back(promotionType);
 			}
-			//* attacker had less dodge than defender's precision
-			if (kPromotion.getDodgeModifierChange() > 0 && (dodgeVSOpponentProbTotal(pDefender) < pDefender->precisionVSOpponentProbTotal(this)))
-			{
-				aAttackerAvailablePromotions.push_back(promotionType);
-			}
-			//* defender had more dodge than attacker's precision
-			if (kPromotion.getPrecisionModifierChange() > 0 && (pDefender->dodgeVSOpponentProbTotal(this) > precisionVSOpponentProbTotal(pDefender)))
-			{
-				aAttackerAvailablePromotions.push_back(promotionType);
-			}
 			//* attacker is developing critical chance
 			if (kPromotion.getCriticalModifierChange() > 0 && (criticalVSOpponentProbTotal(pDefender) > 0))
 			{
@@ -27858,16 +27470,6 @@ void CvUnit::doBattleFieldPromotions(CvUnit* pDefender, const CombatDetails& cdD
 			}
 
 			if (!noDefensiveBonus() && kPromotion.getDefenseCombatModifierChange() > 0)
-			{
-				aDefenderAvailablePromotions.push_back(promotionType);
-			}
-			//* defemder had less dodge than attacker's precision
-			if (kPromotion.getDodgeModifierChange() > 0 && (pDefender->dodgeVSOpponentProbTotal(this) < precisionVSOpponentProbTotal(pDefender)))
-			{
-				aDefenderAvailablePromotions.push_back(promotionType);
-			}
-			//* attacker had more dodge than defender's precision
-			if (kPromotion.getPrecisionModifierChange() > 0 && (dodgeVSOpponentProbTotal(pDefender) > pDefender->precisionVSOpponentProbTotal(this)))
 			{
 				aDefenderAvailablePromotions.push_back(promotionType);
 			}
@@ -31267,195 +30869,6 @@ void CvUnit::changeExtraKnockbackVSUnitCombatType(UnitCombatTypes eIndex, int iC
 }
 
 
-int CvUnit::punctureVSUnitCombatTotal(UnitCombatTypes eCombatType) const
-{
-	return (
-		std::max(
-			0,
-			m_pUnitInfo->getPunctureVSUnitCombatType(eCombatType)
-			+ getExtraPunctureVSUnitCombatType(eCombatType, isCommander(), isCommodore())
-		)
-	);
-}
-
-int CvUnit::getExtraPunctureVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander, const bool bCommodore) const
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-
-	const UnitCombatKeyedInfo* info = findUnitCombatKeyedInfo(eIndex);
-
-	if (!bCommander)
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return (info ? info->m_iExtraPunctureVSUnitCombatType : 0) + pCommander->getExtraPunctureVSUnitCombatType(eIndex);
-		}
-	}
-	if (!bCommodore)
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return (info ? info->m_iExtraPunctureVSUnitCombatType : 0) + pCommodore->getExtraPunctureVSUnitCombatType(eIndex);
-    		}
-    	}
-	return info ? info->m_iExtraPunctureVSUnitCombatType : 0;
-}
-
-
-void CvUnit::changeExtraPunctureVSUnitCombatType(UnitCombatTypes eIndex, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-
-	if (iChange != 0)
-	{
-		findOrCreateUnitCombatKeyedInfo(eIndex)->m_iExtraPunctureVSUnitCombatType += iChange;
-	}
-}
-
-
-int CvUnit::armorVSUnitCombatTotal(UnitCombatTypes eCombatType) const
-{
-	return (
-		std::max(
-			0,
-			m_pUnitInfo->getArmorVSUnitCombatType(eCombatType)
-			+ getExtraArmorVSUnitCombatType(eCombatType, isCommander(), isCommodore())
-		)
-	);
-}
-
-int CvUnit::getExtraArmorVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander, const bool bCommodore) const
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-
-	const UnitCombatKeyedInfo* info = findUnitCombatKeyedInfo(eIndex);
-
-	if (!bCommander)
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return (info ? info->m_iExtraArmorVSUnitCombatType : 0) + pCommander->getExtraArmorVSUnitCombatType(eIndex);
-		}
-	}
-	if (!bCommodore)
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return (info ? info->m_iExtraArmorVSUnitCombatType : 0) + pCommodore->getExtraArmorVSUnitCombatType(eIndex);
-    		}
-    	}
-	return info ? info->m_iExtraArmorVSUnitCombatType : 0;
-}
-
-void CvUnit::changeExtraArmorVSUnitCombatType(UnitCombatTypes eIndex, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-
-	if (iChange != 0)
-	{
-		findOrCreateUnitCombatKeyedInfo(eIndex)->m_iExtraArmorVSUnitCombatType += iChange;
-	}
-}
-
-
-int CvUnit::dodgeVSUnitCombatTotal(UnitCombatTypes eCombatType) const
-{
-	return (
-		std::max(
-			0,
-			m_pUnitInfo->getDodgeVSUnitCombatType(eCombatType)
-			+ getExtraDodgeVSUnitCombatType(eCombatType, isCommander(), isCommodore())
-		)
-	);
-}
-
-int CvUnit::getExtraDodgeVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander, const bool bCommodore) const
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-
-	const UnitCombatKeyedInfo* info = findUnitCombatKeyedInfo(eIndex);
-
-	if (!bCommander)
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return (info ? info->m_iExtraDodgeVSUnitCombatType : 0) + pCommander->getExtraDodgeVSUnitCombatType(eIndex);
-		}
-	}
-	if (!bCommodore)
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return (info ? info->m_iExtraDodgeVSUnitCombatType : 0) + pCommodore->getExtraDodgeVSUnitCombatType(eIndex);
-    		}
-    	}
-	return info ? info->m_iExtraDodgeVSUnitCombatType : 0;
-}
-
-void CvUnit::changeExtraDodgeVSUnitCombatType(UnitCombatTypes eIndex, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-
-	if (iChange != 0)
-	{
-		findOrCreateUnitCombatKeyedInfo(eIndex)->m_iExtraDodgeVSUnitCombatType += iChange;
-	}
-}
-
-
-int CvUnit::precisionVSUnitCombatTotal(UnitCombatTypes eCombatType) const
-{
-	return (
-		std::max(
-			0,
-			m_pUnitInfo->getPrecisionVSUnitCombatType(eCombatType)
-			+ getExtraPrecisionVSUnitCombatType(eCombatType, isCommander(), isCommodore())
-		)
-	);
-}
-
-int CvUnit::getExtraPrecisionVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander, const bool bCommodore) const
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-
-	const UnitCombatKeyedInfo* info = findUnitCombatKeyedInfo(eIndex);
-
-	if (!bCommander)
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return (info ? info->m_iExtraPrecisionVSUnitCombatType : 0) + pCommander->getExtraPrecisionVSUnitCombatType(eIndex);
-		}
-	}
-	if (!bCommodore)
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return (info ? info->m_iExtraPrecisionVSUnitCombatType : 0) + pCommodore->getExtraPrecisionVSUnitCombatType(eIndex);
-    		}
-    	}
-	return info ? info->m_iExtraPrecisionVSUnitCombatType : 0;
-}
-
-void CvUnit::changeExtraPrecisionVSUnitCombatType(UnitCombatTypes eIndex, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-
-	if (iChange != 0)
-	{
-		findOrCreateUnitCombatKeyedInfo(eIndex)->m_iExtraPrecisionVSUnitCombatType += iChange;
-	}
-}
-
-
 int CvUnit::criticalVSUnitCombatTotal(UnitCombatTypes eCombatType) const
 {
 	return (
@@ -31610,70 +31023,6 @@ int CvUnit::knockbackVSOpponentProbTotal(const CvUnit* pOpponent) const
 		if (it->second.m_bHasUnitCombat)
 		{
 			iBase += knockbackVSUnitCombatTotal(it->first);
-		}
-	}
-	int iTotal = std::max(0, iBase);
-
-	return iTotal;
-}
-
-int CvUnit::punctureVSOpponentProbTotal(const CvUnit* pOpponent) const
-{
-	PROFILE_EXTRA_FUNC();
-	int iBase = punctureTotal();
-	for (std::map<UnitCombatTypes, UnitCombatKeyedInfo>::const_iterator it = pOpponent->m_unitCombatKeyedInfo.begin(), end = pOpponent->m_unitCombatKeyedInfo.end(); it != end; ++it)
-	{
-		if (it->second.m_bHasUnitCombat)
-		{
-			iBase += punctureVSUnitCombatTotal(it->first);
-		}
-	}
-	int iTotal = std::max(0, iBase);
-
-	return iTotal;
-}
-
-int CvUnit::armorVSOpponentProbTotal(const CvUnit* pOpponent) const
-{
-	PROFILE_EXTRA_FUNC();
-	int iBase = armorTotal();
-	for (std::map<UnitCombatTypes, UnitCombatKeyedInfo>::const_iterator it = pOpponent->m_unitCombatKeyedInfo.begin(), end = pOpponent->m_unitCombatKeyedInfo.end(); it != end; ++it)
-	{
-		if (it->second.m_bHasUnitCombat)
-		{
-			iBase += armorVSUnitCombatTotal(it->first);
-		}
-	}
-	int iTotal = std::max(0, iBase);
-
-	return iTotal;
-}
-
-int CvUnit::dodgeVSOpponentProbTotal(const CvUnit* pOpponent) const
-{
-	PROFILE_EXTRA_FUNC();
-	int iBase = dodgeTotal();
-	for (std::map<UnitCombatTypes, UnitCombatKeyedInfo>::const_iterator it = pOpponent->m_unitCombatKeyedInfo.begin(), end = pOpponent->m_unitCombatKeyedInfo.end(); it != end; ++it)
-	{
-		if (it->second.m_bHasUnitCombat)
-		{
-			iBase += dodgeVSUnitCombatTotal(it->first);
-		}
-	}
-	int iTotal = std::max(0, iBase);
-
-	return iTotal;
-}
-
-int CvUnit::precisionVSOpponentProbTotal(const CvUnit* pOpponent) const
-{
-	PROFILE_EXTRA_FUNC();
-	int iBase = precisionTotal();
-	for (std::map<UnitCombatTypes, UnitCombatKeyedInfo>::const_iterator it = pOpponent->m_unitCombatKeyedInfo.begin(), end = pOpponent->m_unitCombatKeyedInfo.end(); it != end; ++it)
-	{
-		if (it->second.m_bHasUnitCombat)
-		{
-			iBase += precisionVSUnitCombatTotal(it->first);
 		}
 	}
 	int iTotal = std::max(0, iBase);
@@ -32170,11 +31519,8 @@ void CvUnit::checkCityAttackDefensesDamage(CvCity* pCity, const std::vector<Unit
 {
 	PROFILE_EXTRA_FUNC();
 	//Here we cycle through each active building in the city that's triggering the fact that it can possibly damage the attacking unit here and make a check
-	//using the building's % chance to damage - Dodge.  Then if it hits, deals DamageToAttacker modified by the unit's Armor.
+	//using the building's % chance to damage.  Then if it hits, deals DamageToAttacker.
 	//Then battle would proceed as normal.
-	const int iUnitDodge = dodgeTotal() - 100;
-	const int iUnitArmor = armorTotal();
-
 	foreach_(const BuildingTypes eType, pCity->getHasBuildings())
 	{
 		if (pCity->isDisabledBuilding(eType))
@@ -32195,13 +31541,9 @@ void CvUnit::checkCityAttackDefensesDamage(CvCity* pCity, const std::vector<Unit
 			{
 				continue;
 			}
-			if (GC.getGame().getSorenRandNum(100, "BuildingAttackRoll") < buildingX.getDamageAttackerChance() - iUnitDodge)
+			if (GC.getGame().getSorenRandNum(100, "BuildingAttackRoll") < buildingX.getDamageAttackerChance())
 			{
 				int iBuildingAttackDamageBase = buildingX.getDamageToAttacker();
-				if (!buildingX.isDamageToAttackerIgnoresArmor())
-				{
-					iBuildingAttackDamageBase -= iUnitArmor;
-				}
 
 				if (iBuildingAttackDamageBase > 0)
 				{
@@ -36336,11 +35678,8 @@ void CvUnit::doTrapTrigger(CvUnit* pUnit, bool bImmune)
 	int iTrapDmg = 0;
 	int iTrapDmgRange = iTrapDmgMax - iTrapDmgMin;
 	changeNumTimesTriggered(1);
-	int iDodge = pUnit->dodgeVSOpponentProbTotal(this);
-	int iPrecision = precisionVSOpponentProbTotal(pUnit);
-	int iArmor = 100 - pUnit->armorVSOpponentProbTotal(this);
-	int iChanceToDodge = iDodge - iPrecision;
-	if (!bImmune && iChanceToDodge > GC.getGame().getSorenRandNum(100, "Trap Dodge Check"))
+	// dodge/precision dodge-check and armor mitigation removed; trap triggers unless immune.
+	if (!bImmune)
 	{
 		//Trap deals damage, inflicts affliction, and/or nuclear effect
 		//damage
@@ -36348,8 +35687,6 @@ void CvUnit::doTrapTrigger(CvUnit* pUnit, bool bImmune)
 		{
 			iTrapDmg = GC.getGame().getSorenRandNum(iTrapDmgRange, "Trap Damage Check");
 			iTrapDmg += iTrapDmgMin;
-			iTrapDmg *= iArmor;
-			iTrapDmg /= 100;
 			if (iTrapDmg > 0)
 			{
 				pUnit->changeDamage(iTrapDmg, getOwner());

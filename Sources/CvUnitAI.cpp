@@ -1201,26 +1201,6 @@ int CvUnitAI::AI_attackOddsAtPlotInternal(const CvPlot* pPlot, CvUnit* pDefender
 		return 1;
 	}
 
-	//#if 0
-	//	const int iStrengthFactor = (iOurFirepower + iTheirFirepower + 1) / 2;
-	//
-	//	//TB Combat Mods Begin
-	//	const int iUnmodifiedDefenderArmor = pDefender->armorTotal() - punctureTotal();
-	//	const int iUnmodifiedAttackerArmor = armorTotal() - pDefender->punctureTotal();
-	//
-	//	const int iModifiedDefenderArmorZero = iUnmodifiedDefenderArmor < 0 ? 0 : iUnmodifiedDefenderArmor;
-	//	const int iModifiedAttackerArmorZero = iUnmodifiedAttackerArmor < 0 ? 0 : iUnmodifiedAttackerArmor;
-	//
-	//	const int iModifiedDefenderArmor = (iModifiedDefenderArmorZero < 95 ? iModifiedDefenderArmorZero : 95);
-	//	const int iModifiedAttackerArmor = (iModifiedAttackerArmorZero < 95 ? iModifiedAttackerArmorZero : 95);
-	//
-	//	const int iDefenderArmor = (100 - iModifiedDefenderArmor);
-	//	const int iAttackerArmor = (100 - iModifiedAttackerArmor);
-	//
-	//	iDamageToUs = std::max(1, ((((GC.getCOMBAT_DAMAGE() * (iTheirFirepower + iStrengthFactor)) / (iOurFirepower + iStrengthFactor)) * iAttackerArmor) / 100));
-	//	iDamageToThem = std::max(1, ((((GC.getCOMBAT_DAMAGE() * (iOurFirepower + iStrengthFactor)) / (iTheirFirepower + iStrengthFactor)) * iDefenderArmor) / 100));
-	//#endif
-
 	if (getDomainType() != DOMAIN_AIR)
 	{
 		int iOurFirstStrikesTimes2 = (pDefender->immuneToFirstStrikes() ? 0 : 2 * firstStrikes() + chanceFirstStrikes());

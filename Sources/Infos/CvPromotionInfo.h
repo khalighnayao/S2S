@@ -163,8 +163,6 @@ public:
 	int getTauntChange() const;
 	//
 	int getVSBarbsChange() const;
-	int getArmorChange() const;
-	int getPunctureChange() const;
 	// Heart of War
 	int getOverrunChange() const;
 	int getRepelChange() const;
@@ -198,8 +196,6 @@ public:
 	int getLongRangeSupportPercentChange() const;
 	int getFlankSupportPercentChange() const;
 #endif
-	int getDodgeModifierChange() const;
-	int getPrecisionModifierChange() const;
 	int getCriticalModifierChange() const;
 	int getEnduranceChange() const;
 	int getPoisonProbabilityModifierChange() const;
@@ -397,22 +393,6 @@ public:
 	int getNumKnockbackVSUnitCombatChangeTypes() const;
 	int getKnockbackVSUnitCombatChangeType(int iUnitCombat, bool bForLoad = false) const;
 	bool isKnockbackVSUnitCombatChangeType(int iUnitCombat, bool bForLoad = false) const;
-
-	int getNumPunctureVSUnitCombatChangeTypes() const;
-	int getPunctureVSUnitCombatChangeType(int iUnitCombat) const;
-	bool isPunctureVSUnitCombatChangeType(int iUnitCombat) const;
-
-	int getNumArmorVSUnitCombatChangeTypes() const;
-	int getArmorVSUnitCombatChangeType(int iUnitCombat) const;
-	bool isArmorVSUnitCombatChangeType(int iUnitCombat) const;
-
-	int getNumDodgeVSUnitCombatChangeTypes() const;
-	int getDodgeVSUnitCombatChangeType(int iUnitCombat) const;
-	bool isDodgeVSUnitCombatChangeType(int iUnitCombat) const;
-
-	int getNumPrecisionVSUnitCombatChangeTypes() const;
-	int getPrecisionVSUnitCombatChangeType(int iUnitCombat) const;
-	bool isPrecisionVSUnitCombatChangeType(int iUnitCombat) const;
 
 	int getNumCriticalVSUnitCombatChangeTypes() const;
 	int getCriticalVSUnitCombatChangeType(int iUnitCombat) const;
@@ -637,8 +617,6 @@ protected:
 	int m_iPursuitChange;
 	int m_iEarlyWithdrawChange;
 	int m_iVSBarbsChange;
-	int m_iArmorChange;
-	int m_iPunctureChange;
 	int m_iOverrunChange;
 	int m_iRepelChange;
 	int m_iFortRepelChange;
@@ -669,8 +647,6 @@ protected:
 	int m_iLongRangeSupportPercentChange;
 	int m_iFlankSupportPercentChange;
 #endif
-	int m_iDodgeModifierChange;
-	int m_iPrecisionModifierChange;
 	int m_iCriticalModifierChange;
 	int m_iEnduranceChange;
 	int m_iPoisonProbabilityModifierChange;
@@ -789,10 +765,6 @@ protected:
 	UnitCombatModifierArray m_aPursuitVSUnitCombatChangeTypes;
 	UnitCombatModifierArray m_aRepelVSUnitCombatChangeTypes;
 	UnitCombatModifierArray m_aKnockbackVSUnitCombatChangeTypes;
-	UnitCombatModifierArray m_aPunctureVSUnitCombatChangeTypes;
-	UnitCombatModifierArray m_aArmorVSUnitCombatChangeTypes;
-	UnitCombatModifierArray m_aDodgeVSUnitCombatChangeTypes;
-	UnitCombatModifierArray m_aPrecisionVSUnitCombatChangeTypes;
 	UnitCombatModifierArray m_aCriticalVSUnitCombatChangeTypes;
 	UnitCombatModifierArray m_aTrapDisableUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapAvoidanceUnitCombatTypes;
