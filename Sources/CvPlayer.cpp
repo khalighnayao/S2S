@@ -517,6 +517,7 @@ void CvPlayer::init(PlayerTypes eID)
 	}
 	m_contractBroker.init(eID);
 	m_workerAI.setOwner(eID);
+	m_hunterAI.setOwner(eID);
 	AI_init();
 }
 
@@ -612,6 +613,7 @@ void CvPlayer::initInGame(PlayerTypes eID, bool bSetAlive)
 	resetPlotAndCityData();
 	m_contractBroker.init(eID);
 	m_workerAI.setOwner(eID);
+	m_hunterAI.setOwner(eID);
 	AI_init();
 }
 
@@ -3710,6 +3712,7 @@ void CvPlayer::doTurn()
 	CvPlot::flushMovementCostCache();
 
 	m_workerAI.onTurnBegin(GC.getGame().getGameTurn());
+	m_hunterAI.onTurnBegin(GC.getGame().getGameTurn());
 
 #ifdef CAN_TRAIN_CACHING
 	//	Clear training caches at the start of each turn
@@ -3922,6 +3925,7 @@ void CvPlayer::doMultiMapTurn()
 	CvPlot::flushMovementCostCache();
 
 	m_workerAI.onTurnBegin(GC.getGame().getGameTurn());
+	m_hunterAI.onTurnBegin(GC.getGame().getGameTurn());
 
 #ifdef CAN_TRAIN_CACHING
 	//	Clear training caches at the start of each turn
@@ -28890,9 +28894,6 @@ void CvPlayer::recalculateModifiers()
 
 	AI_updateBonusValue();
 	AI_updateFoundValues(true);
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	recalculateAfflictedUnitCount();
-#endif
 	//	Re-establish blockades
 	updatePlunder(1, false);
 	resetCivTypeEffects();
@@ -29170,64 +29171,6 @@ typedef struct buildingCommerceStruct
 	float			fContribution;
 } buildingCommerceStruct;
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-int CvPlayer::getPlayerWideAfflictionCount(PromotionLineTypes ePromotionLineType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-	return m_paiPlayerWideAfflictionCount[ePromotionLineType];
-}
-
-void CvPlayer::changePlayerWideAfflictionCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		m_paiPlayerWideAfflictionCount[ePromotionLineType] += iChange;
-		FASSERT_NOT_NEGATIVE(getPlayerWideAfflictionCount(ePromotionLineType));
-
-		if (getID() == GC.getGame().getActivePlayer())
-		{
-			gDLL->getInterfaceIFace()->setDirty(GameData_DIRTY_BIT, true);
-		}
-	}
-}
-
-void CvPlayer::setPlayerWideAfflictionCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		m_paiPlayerWideAfflictionCount[ePromotionLineType] = iChange;
-		FASSERT_NOT_NEGATIVE(getPlayerWideAfflictionCount(ePromotionLineType));
-
-		if (getID() == GC.getGame().getActivePlayer())
-		{
-			gDLL->getInterfaceIFace()->setDirty(GameData_DIRTY_BIT, true);
-		}
-	}
-}
-
-int CvPlayer::countAfflictedUnits (PromotionLineTypes eAfflictionLine)
-{
-	return algo::count_if(units(), CvUnit::fn::hasAfflictionLine(eAfflictionLine));
-}
-
-void CvPlayer::recalculateAfflictedUnitCount()
-{
-	PROFILE_EXTRA_FUNC();
-	for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-	{
-		if (GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction())
-		{
-			PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-			const int iRecalc = countAfflictedUnits(eAfflictionLine);
-			setPlayerWideAfflictionCount(eAfflictionLine, iRecalc);
-		}
-	}
-}
-#endif
 
 CvCity*	CvPlayer::findClosestCity(const CvPlot* pPlot) const
 {

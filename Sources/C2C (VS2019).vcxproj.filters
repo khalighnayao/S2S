@@ -342,6 +342,12 @@
     <ClCompile Include="CvWorkerAI.cpp">
       <Filter>Source\Base\Unit\Capabilities</Filter>
     </ClCompile>
+    <ClCompile Include="CvHunterAI.cpp">
+      <Filter>Source\Base\Unit\Capabilities</Filter>
+    </ClCompile>
+    <ClCompile Include="CvCombatModel.cpp">
+      <Filter>Source\Base\Unit\Capabilities</Filter>
+    </ClCompile>
     <ClCompile Include="CvBuildingFilters.cpp">
       <Filter>Source\UI\City\BuildMenu</Filter>
     </ClCompile>
@@ -1152,6 +1158,12 @@
       <Filter>Source\Base\Unit</Filter>
     </ClInclude>
     <ClInclude Include="CvWorkerAI.h">
+      <Filter>Source\Base\Unit\Capabilities</Filter>
+    </ClInclude>
+    <ClInclude Include="CvHunterAI.h">
+      <Filter>Source\Base\Unit\Capabilities</Filter>
+    </ClInclude>
+    <ClInclude Include="CvCombatModel.h">
       <Filter>Source\Base\Unit\Capabilities</Filter>
     </ClInclude>
     <ClInclude Include="CvSettlerAI.h">

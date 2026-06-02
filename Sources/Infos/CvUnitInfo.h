@@ -226,14 +226,8 @@ public:
 #endif // STRENGTH_IN_NUMBERS
 	int getDodgeModifier() const;
 	int getPrecisionModifier() const;
-	int getPowerShots() const;
-	int getPowerShotCombatModifier() const;
-	int getPowerShotPunctureModifier() const;
-	int getPowerShotPrecisionModifier() const;
-	int getPowerShotCriticalModifier() const;
 	int getCriticalModifier() const;
 	int getEndurance() const;
-	int getRoundStunProb() const;
 	int getPoisonProbabilityModifier() const;
 	int getCaptureProbabilityModifier() const;
 	int getCaptureResistanceModifier() const;
@@ -267,8 +261,6 @@ public:
 
 	bool isStampede() const;
 	bool isOnslaught() const;
-	bool isDealsColdDamage() const;
-	bool isColdImmune() const;
 	bool isAttackOnlyCities() const;
 	bool isIgnoreNoEntryLevel() const;
 	bool isIgnoreZoneofControl() const;
@@ -327,17 +319,6 @@ public:
 	int getNumCategories() const;
 	bool isCategory(int i) const;
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int getNumAfflictionFortitudeModifiers() const;
-	const PromotionLineModifier& getAfflictionFortitudeModifier(int iAffliction) const;
-
-	int getNumAfflictOnAttackTypes() const;
-	const AfflictOnAttack& getAfflictOnAttackType(int iAfflictionLine) const;
-
-	int getNumAidChanges() const;
-	int getAidChange(int iProperty) const;
-	bool isAidChange(int iProperty) const;
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	int getNumHealUnitCombatTypes() const;
 	const HealUnitCombat& getHealUnitCombatType(int iUnitCombat) const;
@@ -433,10 +414,6 @@ public:
 	bool isCriticalVSUnitCombatType(int iUnitCombat) const;
 	const UnitCombatModifierArray& getCriticalVSUnitCombatTypes() const;
 
-	int getNumRoundStunVSUnitCombatTypes() const;
-	int getRoundStunVSUnitCombatType(int iUnitCombat) const;
-	bool isRoundStunVSUnitCombatType(int iUnitCombat) const;
-	const UnitCombatModifierArray& getRoundStunVSUnitCombatTypes() const;
 
 	int getNumTrapDisableUnitCombatTypes() const;
 	int getTrapDisableUnitCombatType(int iUnitCombat) const;
@@ -881,14 +858,8 @@ private:
 #endif
 	int m_iDodgeModifier;
 	int m_iPrecisionModifier;
-	int m_iPowerShots;
-	int m_iPowerShotCombatModifier;
-	int m_iPowerShotPunctureModifier;
-	int m_iPowerShotPrecisionModifier;
-	int m_iPowerShotCriticalModifier;
 	int m_iCriticalModifier;
 	int m_iEndurance;
-	int m_iRoundStunProb;
 	int m_iPoisonProbabilityModifier;
 	int m_iCaptureProbabilityModifier;
 	int m_iCaptureResistanceModifier;
@@ -929,8 +900,6 @@ private:
 	//booleans
 	bool m_bStampede;
 	bool m_bOnslaught;
-	bool m_bDealsColdDamage;
-	bool m_bColdImmune;
 	bool m_bAttackOnlyCities;
 	bool m_bIgnoreNoEntryLevel;
 	bool m_bIgnoreZoneofControl;
@@ -988,7 +957,6 @@ private:
 	UnitCombatModifierArray m_aDodgeVSUnitCombatTypes;
 	UnitCombatModifierArray m_aPrecisionVSUnitCombatTypes;
 	UnitCombatModifierArray m_aCriticalVSUnitCombatTypes;
-	UnitCombatModifierArray m_aRoundStunVSUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapDisableUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapAvoidanceUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapTriggerUnitCombatTypes;
@@ -998,12 +966,6 @@ private:
 	TerrainModifierArray m_aTerrainWorkRateModifierTypes;
 	FeatureModifierArray m_aFeatureWorkRateModifierTypes;
 	BuildModifierArray m_aBuildWorkRateModifierTypes;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	std::vector<AfflictionLineChanges> m_aDistanceAttackCommunicabilityTypeChanges;
-	std::vector<PromotionLineModifier> m_aAfflictionFortitudeModifiers;
-	std::vector<AfflictOnAttack> m_aAfflictOnAttackTypes;
-	AidArray m_aAidChanges;
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	//Pediahelp
 	std::vector<int> m_aiQualifiedPromotionTypes;

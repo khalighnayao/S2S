@@ -78,10 +78,6 @@ public:
 
 	const std::vector<MapCategoryTypes>& getMapCategories() const { return m_aeMapCategoryTypes; }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int getNumAfflictionCommunicabilityTypes() const;
-	PromotionLineAfflictionModifier getAfflictionCommunicabilityType(int iPromotionLine, bool bWorkedTile = false, bool bVicinity = false, bool bAccessVolume = false);
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	DllExport const CvArtInfoFeature* getArtInfo() const;
 	const char* getButton() const;
@@ -158,9 +154,6 @@ private:
 
 	bool* m_pbTerrain;
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	std::vector<PromotionLineAfflictionModifier> m_aAfflictionCommunicabilityTypes;
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 private:
 	CvString m_szArtDefineTag;

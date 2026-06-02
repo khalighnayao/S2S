@@ -47,10 +47,7 @@ m_piYields(NULL),
 m_pi3DAudioScriptFootstepIndex(NULL)
 ,m_iCultureDistance(0)
 ,m_iHealthPercent(0)
-,m_PropertyManipulators(),
-//TB Combat Mod begin
-m_bColdDamage(false)
-//TB Combat Mod end
+,m_PropertyManipulators()
 {
 	m_zobristValue = GC.getGame().getSorenRand().getInt();
 }
@@ -159,10 +156,6 @@ int CvTerrainInfo::getHealthPercent() const
 
 
 //TB Combat Mod begin
-bool CvTerrainInfo::isColdDamage() const
-{
-	return m_bColdDamage;
-}
 
 //TB Combat Mod end
 
@@ -184,31 +177,7 @@ bool CvTerrainInfo::isCategory(int i) const
 	return algo::any_of_equal(m_aiCategories, i);
 }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-int CvTerrainInfo::getNumAfflictionCommunicabilityTypes() const
-{
-	return (int)m_aAfflictionCommunicabilityTypes.size();
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-
-PromotionLineAfflictionModifier CvTerrainInfo::getAfflictionCommunicabilityType(int iPromotionLine, bool bWorkedTile, bool bVicinity, bool bAccessVolume)
-{
-	FASSERT_BOUNDS(0, getNumAfflictionCommunicabilityTypes(), iPromotionLine);
-
-	if ((bWorkedTile && !m_aAfflictionCommunicabilityTypes[iPromotionLine].bWorkedTile) ||
-		(bVicinity && !m_aAfflictionCommunicabilityTypes[iPromotionLine].bVicinity) ||
-		(bAccessVolume && !m_aAfflictionCommunicabilityTypes[iPromotionLine].bAccessVolume))
-	{
-		PromotionLineAfflictionModifier kMod = m_aAfflictionCommunicabilityTypes[iPromotionLine];
-		kMod.iModifier = 0;
-		return kMod;
-	}
-
-	return m_aAfflictionCommunicabilityTypes[iPromotionLine];
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 
 bool CvTerrainInfo::read(CvXMLLoadUtility* pXML)
@@ -257,36 +226,7 @@ bool CvTerrainInfo::read(CvXMLLoadUtility* pXML)
 
 	m_PropertyManipulators.read(pXML);
 	//TB Combat Mods begin
-	pXML->GetOptionalChildXmlValByName(&m_bColdDamage, L"bColdDamage");
 	//TB Combat Mods end
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if(pXML->TryMoveToXmlFirstChild(L"AfflictionCommunicabilityTypes"))
-	{
-		int i = 0;
-		int iNum = pXML->GetXmlChildrenNumber(L"AfflictionCommunicabilityType" );
-		m_aAfflictionCommunicabilityTypes.resize(iNum);
-		if(pXML->TryMoveToXmlFirstChild())
-		{
-
-			if (pXML->TryMoveToXmlFirstOfSiblings(L"AfflictionCommunicabilityType"))
-			{
-				do
-				{
-					pXML->GetChildXmlValByName(szTextVal, L"PromotionLineType");
-					m_aAfflictionCommunicabilityTypes[i].ePromotionLine = (PromotionLineTypes)pXML->GetInfoClass(szTextVal);
-					pXML->GetChildXmlValByName(&(m_aAfflictionCommunicabilityTypes[i].iModifier), L"iCommunicability");
-					pXML->GetChildXmlValByName(&(m_aAfflictionCommunicabilityTypes[i].bWorkedTile), L"bWorkedTile");
-					pXML->GetChildXmlValByName(&(m_aAfflictionCommunicabilityTypes[i].bVicinity), L"bVicinity");
-					pXML->GetChildXmlValByName(&(m_aAfflictionCommunicabilityTypes[i].bAccessVolume), L"bAccessVolume");
-					i++;
-				} while(pXML->TryMoveToXmlNextSibling(L"PromotionLineType"));
-			}
-			pXML->MoveToXmlParent();
-		}
-		pXML->MoveToXmlParent();
-	}
-
-#endif
 	return true;
 }
 
@@ -351,7 +291,6 @@ void CvTerrainInfo::copyNonDefaults(const CvTerrainInfo* pClassInfo)
 	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
 
 	//TB Combat Mods begin
-	if (isColdDamage() == bDefault) m_bColdDamage = pClassInfo->isColdDamage();
 	//TB Combat Mods end
 }
 
@@ -381,18 +320,9 @@ void CvTerrainInfo::getCheckSum(uint32_t &iSum) const
 
 	m_PropertyManipulators.getCheckSum(iSum);
 	//TB Combat Mods begin
-	CheckSum(iSum, m_bColdDamage);
 	CheckSumC(iSum, m_aiCategories);
 	CheckSumC(iSum, m_aeMapCategoryTypes);
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int iNumElements = m_aAfflictionCommunicabilityTypes.size();
-	for (int i = 0; i < iNumElements; ++i)
-	{
-		CheckSum(iSum, m_aAfflictionCommunicabilityTypes[i].ePromotionLine);
-		CheckSum(iSum, m_aAfflictionCommunicabilityTypes[i].iModifier);
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 	//TB Combat Mods end
 }
 

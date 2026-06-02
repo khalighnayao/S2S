@@ -200,14 +200,8 @@ public:
 #endif
 	int getDodgeModifierChange() const;
 	int getPrecisionModifierChange() const;
-	int getPowerShotsChange() const;
-	int getPowerShotCombatModifierChange() const;
-	int getPowerShotPunctureModifierChange() const;
-	int getPowerShotPrecisionModifierChange() const;
-	int getPowerShotCriticalModifierChange() const;
 	int getCriticalModifierChange() const;
 	int getEnduranceChange() const;
-	int getRoundStunProbChange() const;
 	int getPoisonProbabilityModifierChange() const;
 
 	int getCaptureProbabilityModifierChange() const;
@@ -268,14 +262,7 @@ public:
 	bool isRemoveStampede() const;
 	bool isOnslaughtChange() const;
 	bool isEquipment() const;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	bool isAffliction() const;
-#endif
 	bool isParalyze() const;
-	bool isMakesDamageCold() const;
-	bool isMakesDamageNotCold() const;
-	bool isAddsColdImmunity() const;
-	bool isRemovesColdImmunity() const;
 	bool isCritical() const;
 	bool isAttackOnlyCitiesAdd() const;
 	bool isAttackOnlyCitiesSubtract() const;
@@ -340,11 +327,6 @@ public:
 
 	const std::vector<MapCategoryTypes>& getMapCategories() const { return m_aeMapCategoryTypes; }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int getCureAfflictionChangeType(int i) const;
-	int getNumCureAfflictionChangeTypes() const;
-	bool isCureAfflictionChangeType(int i) const;
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	const std::vector<BonusTypes>& getPrereqBonuses() const { return m_aiPrereqBonusTypes; }
 
@@ -436,9 +418,6 @@ public:
 	int getCriticalVSUnitCombatChangeType(int iUnitCombat) const;
 	bool isCriticalVSUnitCombatChangeType(int iUnitCombat) const;
 
-	int getNumRoundStunVSUnitCombatChangeTypes() const;
-	int getRoundStunVSUnitCombatChangeType(int iUnitCombat) const;
-	bool isRoundStunVSUnitCombatChangeType(int iUnitCombat) const;
 
 	int getNumTrapDisableUnitCombatTypes() const;
 	int getTrapDisableUnitCombatType(int iUnitCombat) const;
@@ -452,11 +431,6 @@ public:
 	int getTrapTriggerUnitCombatType(int iUnitCombat) const;
 	bool isTrapTriggerUnitCombatType(int iUnitCombat) const;
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int getNumAidChanges() const;
-	int getAidChange(int iProperty) const;
-	bool isAidChange(int iProperty) const;
-#endif
 
 	int getNumBuildWorkRateModifierChangeTypes() const;
 	int getBuildWorkRateModifierChangeType(int iBuild) const;
@@ -480,10 +454,6 @@ public:
 	int getNumAfflictionFortitudeChangeModifiers() const;
 	const PromotionLineModifier& getAfflictionFortitudeChangeModifier(int iAfflictionLine) const;
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int getNumAfflictOnAttackChangeTypes() const;
-	const AfflictOnAttackChange& getAfflictOnAttackChangeType(int iAfflictionLine) const;
-#endif
 	int getNumHealUnitCombatChangeTypes() const;
 	const HealUnitCombat& getHealUnitCombatChangeType(int iUnitCombat) const;
 
@@ -701,14 +671,8 @@ protected:
 #endif
 	int m_iDodgeModifierChange;
 	int m_iPrecisionModifierChange;
-	int m_iPowerShotsChange;
-	int m_iPowerShotCombatModifierChange;
-	int m_iPowerShotPunctureModifierChange;
-	int m_iPowerShotPrecisionModifierChange;
-	int m_iPowerShotCriticalModifierChange;
 	int m_iCriticalModifierChange;
 	int m_iEnduranceChange;
-	int m_iRoundStunProbChange;
 	int m_iPoisonProbabilityModifierChange;
 
 	int m_iCaptureProbabilityModifierChange;
@@ -770,14 +734,7 @@ protected:
 	bool m_bRemoveStampede;
 	bool m_bOnslaughtChange;
 	bool m_bEquipment;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	bool m_bAffliction;
-#endif
 	bool m_bParalyze;
-	bool m_bMakesDamageCold;
-	bool m_bMakesDamageNotCold;
-	bool m_bAddsColdImmunity;
-	bool m_bRemovesColdImmunity;
 	bool m_bCritical;
 	bool m_bAttackOnlyCitiesAdd;
 	bool m_bAttackOnlyCitiesSubtract;
@@ -837,13 +794,9 @@ protected:
 	UnitCombatModifierArray m_aDodgeVSUnitCombatChangeTypes;
 	UnitCombatModifierArray m_aPrecisionVSUnitCombatChangeTypes;
 	UnitCombatModifierArray m_aCriticalVSUnitCombatChangeTypes;
-	UnitCombatModifierArray m_aRoundStunVSUnitCombatChangeTypes;
 	UnitCombatModifierArray m_aTrapDisableUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapAvoidanceUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapTriggerUnitCombatTypes;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	AidArray m_aAidChanges;
-#endif
 
 	BuildModifierArray m_aBuildWorkRateModifierChangeTypes;
 	InvisibilityArray m_aVisibilityIntensityChangeTypes;
@@ -851,11 +804,6 @@ protected:
 	InvisibilityArray m_aVisibilityIntensityRangeChangeTypes;
 	// int vector utilizing struct with delayed resolution
 	std::vector<UnitCombatModifier> m_aAIWeightbyUnitCombatTypes;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	std::vector<int> m_aiCureAfflictionChangeTypes;
-	std::vector<PromotionLineModifier> m_aAfflictionFortitudeChangeModifiers;
-	std::vector<AfflictOnAttackChange> m_aAfflictOnAttackChangeTypes;
-#endif
 	std::vector<HealUnitCombat> m_aHealUnitCombatChangeTypes;
 	std::vector<InvisibleTerrainChanges> m_aInvisibleTerrainChanges;
 	std::vector<InvisibleFeatureChanges> m_aInvisibleFeatureChanges;

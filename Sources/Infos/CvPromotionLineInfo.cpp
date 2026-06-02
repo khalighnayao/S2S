@@ -32,19 +32,6 @@ CvPromotionLineInfo::CvPromotionLineInfo() :
 									m_ePrereqTech(NO_TECH),
 									m_eObsoleteTech(NO_TECH),
 									m_ePropertyType(NO_PROPERTY),
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-									m_iToleranceBuildup(0),
-									m_iToleranceDecay(0),
-									m_iCommunicability(0),
-									m_iWorseningProbabilityIncrementModifier(0),
-									m_iWorsenedCommunicabilityIncrementModifier(0),
-									m_iWorsenedOvercomeIncrementModifier(0),
-									m_iOvercomeProbability(0),
-									m_iOvercomeAdjperTurn(0),
-									m_iOutbreakModifier(100),
-									m_iOvercomeModifier(100),
-									m_bAffliction(false),
-#endif
 									m_bEquipment(false),
 									m_bCritical(false),
 									m_bNoSpreadonBattle(false),
@@ -79,19 +66,6 @@ bool CvPromotionLineInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"PropertyType");
 	m_ePropertyType = (PropertyTypes) pXML->GetInfoClass(szTextVal);
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	pXML->GetOptionalChildXmlValByName(&m_iToleranceBuildup, L"iToleranceBuildup");
-	pXML->GetOptionalChildXmlValByName(&m_iToleranceDecay, L"iToleranceDecay");
-	pXML->GetOptionalChildXmlValByName(&m_iCommunicability, L"iCommunicability");
-	pXML->GetOptionalChildXmlValByName(&m_iWorseningProbabilityIncrementModifier, L"iWorseningProbabilityIncrementModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iWorsenedCommunicabilityIncrementModifier, L"iWorsenedCommunicabilityIncrementModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iWorsenedOvercomeIncrementModifier, L"iWorsenedOvercomeIncrementModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iOvercomeProbability, L"iOvercomeProbability");
-	pXML->GetOptionalChildXmlValByName(&m_iOvercomeAdjperTurn, L"iOvercomeAdjperTurn");
-	pXML->GetOptionalChildXmlValByName(&m_iOutbreakModifier, L"iOutbreakModifier", 100);
-	pXML->GetOptionalChildXmlValByName(&m_iOvercomeModifier, L"iOvercomeModifier", 100);
-	pXML->GetOptionalChildXmlValByName(&m_bAffliction, L"bAffliction");
-#endif
 	pXML->GetOptionalChildXmlValByName(&m_bEquipment, L"bEquipment");
 	pXML->GetOptionalChildXmlValByName(&m_bCritical, L"bCritical");
 	pXML->GetOptionalChildXmlValByName(&m_bNoSpreadonBattle, L"bNoSpreadonBattle");
@@ -136,19 +110,6 @@ void CvPromotionLineInfo::copyNonDefaults(const CvPromotionLineInfo* pClassInfo)
 	if (getPrereqTech() == NO_TECH) m_ePrereqTech = pClassInfo->getPrereqTech();
 	if (getObsoleteTech() == NO_TECH) m_eObsoleteTech = pClassInfo->getObsoleteTech();
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if (getToleranceBuildup() == iDefault) m_iToleranceBuildup = pClassInfo->getToleranceBuildup();
-	if (getToleranceDecay() == iDefault) m_iToleranceDecay = pClassInfo->getToleranceDecay();
-	if (getCommunicability() == iDefault) m_iCommunicability = pClassInfo->getCommunicability();
-	if (getWorseningProbabilityIncrementModifier() == iDefault) m_iWorseningProbabilityIncrementModifier = pClassInfo->getWorseningProbabilityIncrementModifier();
-	if (getWorsenedCommunicabilityIncrementModifier() == iDefault) m_iWorsenedCommunicabilityIncrementModifier = pClassInfo->getWorsenedCommunicabilityIncrementModifier();
-	if (getWorsenedOvercomeIncrementModifier() == iDefault) m_iWorsenedOvercomeIncrementModifier = pClassInfo->getWorsenedOvercomeIncrementModifier();
-	if (getOvercomeProbability() == iDefault) m_iOvercomeProbability = pClassInfo->getOvercomeProbability();
-	if (getOvercomeAdjperTurn() == iDefault) m_iOvercomeAdjperTurn = pClassInfo->getOvercomeAdjperTurn();
-	if (getOutbreakModifier() == iDefault) m_iOutbreakModifier = pClassInfo->getOutbreakModifier();
-	if (getOvercomeModifier() == iDefault) m_iOvercomeModifier = pClassInfo->getOvercomeModifier();
-	if (isAffliction() == bDefault) m_bAffliction = pClassInfo->isAffliction();
-#endif
 	if (isEquipment() == bDefault) m_bEquipment = pClassInfo->isEquipment();
 	if (isCritical() == bDefault) m_bCritical = pClassInfo->isCritical();
 	if (isNoSpreadonBattle() == bDefault) m_bNoSpreadonBattle = pClassInfo->isNoSpreadonBattle();
@@ -265,21 +226,6 @@ void CvPromotionLineInfo::getCheckSum(uint32_t& iSum) const
 {
 	CheckSum(iSum, m_ePrereqTech);
 	CheckSum(iSum, m_eObsoleteTech);
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	//integers
-	CheckSum(iSum, m_iToleranceBuildup);
-	CheckSum(iSum, m_iToleranceDecay);
-	CheckSum(iSum, m_iCommunicability);
-	CheckSum(iSum, m_iWorseningProbabilityIncrementModifier);
-	CheckSum(iSum, m_iWorsenedCommunicabilityIncrementModifier);
-	CheckSum(iSum, m_iWorsenedOvercomeIncrementModifier);
-	CheckSum(iSum, m_iOvercomeProbability);
-	CheckSum(iSum, m_iOvercomeAdjperTurn);
-	CheckSum(iSum, m_iOutbreakModifier);
-	CheckSum(iSum, m_iOvercomeModifier);
-	//booleans
-	CheckSum(iSum, m_bAffliction);
-#endif // OUTBREAKS_AND_AFFLICTIONS
 	CheckSum(iSum, m_bEquipment);
 	CheckSum(iSum, m_bCritical);
 	CheckSum(iSum, m_bNoSpreadonBattle);
@@ -334,84 +280,15 @@ TechTypes CvPromotionLineInfo::getObsoleteTech() const
 	return m_eObsoleteTech;
 }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-int CvPromotionLineInfo::getToleranceBuildup() const
-{
-	return m_iToleranceBuildup;
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
 
-int CvPromotionLineInfo::getToleranceDecay() const
-{
-	return m_iToleranceDecay;
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
 
-int CvPromotionLineInfo::getCommunicability() const
-{
-	return m_iCommunicability;
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
 
-int CvPromotionLineInfo::getWorseningProbabilityIncrementModifier() const
-{
-	return m_iWorseningProbabilityIncrementModifier;
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
 
-int CvPromotionLineInfo::getWorsenedCommunicabilityIncrementModifier() const
-{
-	return m_iWorsenedCommunicabilityIncrementModifier;
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-
-int CvPromotionLineInfo::getWorsenedOvercomeIncrementModifier() const
-{
-	return m_iWorsenedOvercomeIncrementModifier;
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
-
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-
-int CvPromotionLineInfo::getOvercomeProbability() const
-{
-	return m_iOvercomeProbability;
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
-
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-
-int CvPromotionLineInfo::getOvercomeAdjperTurn() const
-{
-	return m_iOvercomeAdjperTurn;
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
-
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-
-int CvPromotionLineInfo::getOutbreakModifier() const
-{
-	return m_iOutbreakModifier;
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
-
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-
-int CvPromotionLineInfo::getOvercomeModifier() const
-{
-	return m_iOvercomeModifier;
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 
 bool CvPromotionLineInfo::isEquipment() const

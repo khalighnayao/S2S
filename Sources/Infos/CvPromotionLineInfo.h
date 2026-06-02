@@ -25,19 +25,6 @@ public:
 	TechTypes getPrereqTech() const	{ return m_ePrereqTech; }
 	TechTypes getObsoleteTech() const;
 	PropertyTypes getPropertyType() const;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int getToleranceBuildup() const;
-	int getToleranceDecay() const;
-	int getCommunicability() const;
-	int getWorseningProbabilityIncrementModifier() const;
-	int getWorsenedCommunicabilityIncrementModifier() const;
-	int getWorsenedOvercomeIncrementModifier() const;
-	int getOvercomeProbability() const;
-	int getOvercomeAdjperTurn() const;
-	int getOutbreakModifier() const;
-	int getOvercomeModifier() const;
-	bool isAffliction() const { return m_bAffliction; }
-#endif // OUTBREAKS_AND_AFFLICTIONS
 	bool isEquipment() const;
 	bool isCritical() const;
 	bool isNoSpreadonBattle() const;
@@ -111,19 +98,6 @@ protected:
 	TechTypes m_ePrereqTech;
 	TechTypes m_eObsoleteTech;
 	PropertyTypes m_ePropertyType;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int m_iToleranceBuildup;
-	int m_iToleranceDecay;
-	int m_iCommunicability;
-	int m_iWorseningProbabilityIncrementModifier;
-	int m_iWorsenedCommunicabilityIncrementModifier;
-	int m_iWorsenedOvercomeIncrementModifier;
-	int m_iOvercomeProbability;
-	int m_iOvercomeAdjperTurn;
-	int m_iOutbreakModifier;
-	int m_iOvercomeModifier;
-	bool m_bAffliction;
-#endif // OUTBREAKS_AND_AFFLICTIONS
 	bool m_bEquipment;
 	bool m_bCritical;
 	bool m_bNoSpreadonBattle;

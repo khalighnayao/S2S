@@ -30,6 +30,7 @@
 #include "CvInfos.h"
 #include "CvMap.h"
 #include "CvPlot.h"
+#include "CvUnit.h"
 
 #include <cstdio>   // remove()
 #include <cstdlib>  // getenv()
@@ -166,6 +167,56 @@ void copyCityNameSanitized(const CvCity* city, char* out, size_t outSize)
 	out[o] = '\0';
 }
 
+// Build a `|`-separated list of the animals standing on a plot, one token per
+// animal unit:  <UnitType>@o<owner>c<combat>a<aggression>e<enemyOfActiveTeam>
+//   o = owner player id
+//   c = base combat strength from XML (iCombat; in-game "strength" is c/100)
+//   a = iAggression (0 = passive prey -- the case hunters tend to ignore)
+//   e = 1 if the unit is at war with the active player's team, 0 if not, -1 if
+//       there is no active team. This is the field that explains why a hunter
+//       does/doesn't recognise the animal as a target: AI_huntRange only treats
+//       at-war (or huntable-target) units as candidates.
+// Output is CSV-safe (commas/newlines replaced); empty when no animals present.
+void appendAnimalsField(const CvPlot* pPlot, char* out, size_t outSize)
+{
+	if (outSize == 0) return;
+	out[0] = '\0';
+	size_t o = 0;
+	const TeamTypes eActiveTeam = GC.getGame().getActiveTeam();
+	bool bFirst = true;
+
+	foreach_(const CvUnit* pUnit, pPlot->units())
+	{
+		if (pUnit == NULL || !pUnit->isAnimal())
+		{
+			continue;
+		}
+		const bool bKnownType = (pUnit->getUnitType() != NO_UNIT);
+		const char* szType = bKnownType ? pUnit->getUnitInfo().getType() : "UNKNOWN";
+		const int iCombat   = bKnownType ? pUnit->getUnitInfo().getCombat() : 0;
+		const int iAggr     = bKnownType ? pUnit->getUnitInfo().getAggression() : 0;
+		const int iEnemy    = (eActiveTeam == NO_TEAM) ? -1 : (pUnit->isEnemy(eActiveTeam) ? 1 : 0);
+
+		char buf[96];
+		_snprintf(buf, sizeof(buf) - 1, "%s%s@o%dc%da%de%d",
+			bFirst ? "" : "|", szType, (int)pUnit->getOwner(), iCombat, iAggr, iEnemy);
+		buf[sizeof(buf) - 1] = '\0';
+		for (char* p = buf; *p != '\0'; ++p)
+		{
+			if (*p == ',' || *p == '\n' || *p == '\r') *p = '_';
+		}
+
+		const size_t len = std::strlen(buf);
+		if (o + len + 1 >= outSize)
+		{
+			break; // truncate rather than overflow
+		}
+		std::strcpy(out + o, buf);
+		o += len;
+		bFirst = false;
+	}
+}
+
 } // namespace
 
 void writePlotSnapshot(const char* tag)
@@ -206,13 +257,14 @@ void writePlotSnapshot(const char* tag)
 	// capture metadata, then the column-name row. CSV parsers that don't
 	// know about `#` comments can be told to skip the first line.
 	std::fprintf(fp,
-		"# PlotSnapshot schema=1 tag=%s turn=%d mapW=%d mapH=%d numPlots=%d\n",
+		"# PlotSnapshot schema=2 tag=%s turn=%d mapW=%d mapH=%d numPlots=%d\n",
 		tag, iTurn, iGridW, iGridH, iNumPlots);
 
 	std::fprintf(fp,
 		"plotIdx,x,y,terrain,feature,improvement,route,bonus,"
 		"isWater,isHills,isPeak,isCity,isCityRadius,owner,"
-		"workingCityId,workingCityName,area,improvementCurrentValue\n");
+		"workingCityId,workingCityName,area,improvementCurrentValue,"
+		"numUnits,animals\n");
 
 	// One row per plot. plotIdx is the loop counter; it matches the iI used
 	// as the key in CvWorkerAI's bonus-evaluation cache and the position
@@ -236,8 +288,11 @@ void writePlotSnapshot(const char* tag)
 		// dump to mutate game state.
 		const int iCurrentValue = pPlot->getImprovementCurrentValue();
 
+		char animals[256];
+		appendAnimalsField(pPlot, animals, sizeof(animals));
+
 		std::fprintf(fp,
-			"%d,%d,%d,%s,%s,%s,%s,%s,%d,%d,%d,%d,%d,%d,%d,%s,%d,%d\n",
+			"%d,%d,%d,%s,%s,%s,%s,%s,%d,%d,%d,%d,%d,%d,%d,%s,%d,%d,%d,%s\n",
 			i,
 			pPlot->getX(), pPlot->getY(),
 			terrainName(pPlot->getTerrainType()),
@@ -254,7 +309,9 @@ void writePlotSnapshot(const char* tag)
 			(pWorkingCity != NULL) ? pWorkingCity->getID() : -1,
 			cityName,
 			iAreaId,
-			iCurrentValue);
+			iCurrentValue,
+			pPlot->getNumUnits(),
+			animals);
 	}
 
 	std::fclose(fp);

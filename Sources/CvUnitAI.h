@@ -37,6 +37,12 @@ class CvUnitAI : public CvUnit
 	// promoting those methods to public for one caller.
 	friend class CvWorkerAI;
 
+	// CvHunterAI hosts hunterMove/autoHuntMove (the AUTOMATE_HUNT routines split out
+	// of AI_SearchAndDestroyMove). It calls AI_huntRange, AI_safety, AI_heal,
+	// AI_moveToBorders, AI_patrol, AI_explore, etc. via friend access, mirroring the
+	// CvWorkerAI seam, so those helpers stay non-public on CvUnitAI.
+	friend class CvHunterAI;
+
 public:
     /**
      * Constructor for CvUnitAI.
@@ -1280,17 +1286,6 @@ protected:
      *   3. Returns true if the religion was founded.
      */
 	bool AI_foundReligion();
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-    /**
-     * Attempts to cure an affliction using this unit.
-     * @brief Executes logic for curing a specific affliction line.
-     * Steps:
-     *   1. Checks if the unit has the ability to cure the specified affliction.
-     *   2. Performs the cure action if possible.
-     *   3. Returns true if the affliction was cured.
-     */
-	bool AI_cureAffliction(PromotionLineTypes eAfflictionLine);
-#endif
 
     /**
      * Attempts to trigger a Golden Age with this unit.
@@ -2588,7 +2583,7 @@ public:
      *   2. Moves to and attacks the best target.
      *   3. Returns true if hunting was performed.
      */
-	bool AI_huntRange(int iRange, int iOddsThreshold, bool bStayInBorders = false,  int iMinValue = 0);
+	bool AI_huntRange(int iRange, int iOddsThreshold, bool bStayInBorders = false,  int iMinValue = 0, bool bRawOdds = false);
 
     /**
      * Performs city defense actions.

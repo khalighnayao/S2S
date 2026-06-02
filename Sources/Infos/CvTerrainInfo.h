@@ -44,10 +44,6 @@ public:
 
 	const std::vector<MapCategoryTypes>& getMapCategories() const { return m_aeMapCategoryTypes; }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int getNumAfflictionCommunicabilityTypes() const;
-	PromotionLineAfflictionModifier getAfflictionCommunicabilityType(int iPromotionLine, bool bWorkedTile = false, bool bVicinity = false, bool bAccessVolume = false);
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	const CvArtInfoTerrain* getArtInfo() const;
 	const char* getButton() const;
@@ -68,7 +64,6 @@ public:
 	int getHealthPercent() const;
 
 	//TB Combat Mod begin
-	bool isColdDamage() const;
 	//TB Combat Mod end
 
 	int getCategory(int i) const;
@@ -88,7 +83,6 @@ private:
 	bool m_bFoundCoast;
 	bool m_bFoundFreshWater;
 	bool m_bFreshWaterTerrain;
-	bool m_bColdDamage; // TB Combat Mods
 
 	int m_iMovementCost;
 	int m_iBuildModifier;
@@ -103,9 +97,6 @@ private:
 
 	std::vector<int> m_aiCategories;
 	std::vector<MapCategoryTypes> m_aeMapCategoryTypes;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	std::vector<PromotionLineAfflictionModifier> m_aAfflictionCommunicabilityTypes;
-#endif // OUTBREAKS_AND_AFFLICTIONS
 };
 
 #endif // CV_TERRAIN_INFO_H

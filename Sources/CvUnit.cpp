@@ -85,7 +85,6 @@ int*	CvUnit::g_paiTempExtraArmorVSUnitCombatType = NULL;
 int*	CvUnit::g_paiTempExtraDodgeVSUnitCombatType = NULL;
 int*	CvUnit::g_paiTempExtraPrecisionVSUnitCombatType = NULL;
 int*	CvUnit::g_paiTempExtraCriticalVSUnitCombatType = NULL;
-int*	CvUnit::g_paiTempExtraRoundStunVSUnitCombatType = NULL;
 int*	CvUnit::g_paiTempHealUnitCombatTypeVolume = NULL;
 int*	CvUnit::g_paiTempHealUnitCombatTypeAdjacentVolume = NULL;
 int*	CvUnit::g_paiTempHealAsDamage = NULL;
@@ -197,7 +196,6 @@ m_Properties(this)
 		g_paiTempExtraDodgeVSUnitCombatType = new int[GC.getNumUnitCombatInfos()];
 		g_paiTempExtraPrecisionVSUnitCombatType = new int[GC.getNumUnitCombatInfos()];
 		g_paiTempExtraCriticalVSUnitCombatType = new int[GC.getNumUnitCombatInfos()];
-		g_paiTempExtraRoundStunVSUnitCombatType = new int[GC.getNumUnitCombatInfos()];
 		g_paiTempHealUnitCombatTypeVolume = new int[GC.getNumUnitCombatInfos()]();
 		g_paiTempHealUnitCombatTypeAdjacentVolume = new int[GC.getNumUnitCombatInfos()]();
 		g_paiTempHealAsDamage = new int[GC.getNumUnitCombatInfos()];
@@ -634,21 +632,10 @@ void CvUnit::reset(int iID, UnitTypes eUnit, PlayerTypes eOwner, bool bConstruct
 #endif // STRENGTH_IN_NUMBERS
 	m_iExtraDodgeModifier = 0;
 	m_iExtraPrecisionModifier = 0;
-	m_iExtraPowerShots = 0;
-	m_iExtraPowerShotCombatModifier = 0;
-	m_iExtraPowerShotPunctureModifier = 0;
-	m_iExtraPowerShotPrecisionModifier = 0;
-	m_iExtraPowerShotCriticalModifier = 0;
 	m_iExtraCriticalModifier = 0;
 	m_iExtraEndurance = 0;
-	m_iColdDamage = 0;
-	m_iDealColdDamageCount = 0;
-	m_iColdImmuneCount = 0;
-	m_iCombatPowerShots = 0;
 	m_iCombatKnockbacks = 0;
 	m_iCombatRepels = 0;
-	m_iExtraRoundStunProb = 0;
-	m_iCombatStuns = 0;
 	m_iExtraPoisonProbabilityModifier = 0;
 	m_iRetrainsAvailable = 0;
 	m_iQualityBaseTotal = 0;
@@ -1008,21 +995,10 @@ CvUnit& CvUnit::operator=(const CvUnit& other)
 #endif // STRENGTH_IN_NUMBERS
 	m_iExtraDodgeModifier = other.m_iExtraDodgeModifier;
 	m_iExtraPrecisionModifier = other.m_iExtraPrecisionModifier;
-	m_iExtraPowerShots = other.m_iExtraPowerShots;
-	m_iExtraPowerShotCombatModifier = other.m_iExtraPowerShotCombatModifier;
-	m_iExtraPowerShotPunctureModifier = other.m_iExtraPowerShotPunctureModifier;
-	m_iExtraPowerShotPrecisionModifier = other.m_iExtraPowerShotPrecisionModifier;
-	m_iExtraPowerShotCriticalModifier = other.m_iExtraPowerShotCriticalModifier;
 	m_iExtraCriticalModifier = other.m_iExtraCriticalModifier;
 	m_iExtraEndurance = other.m_iExtraEndurance;
-	m_iColdDamage = other.m_iColdDamage;
-	m_iDealColdDamageCount = other.m_iDealColdDamageCount;
-	m_iColdImmuneCount = other.m_iColdImmuneCount;
-	m_iCombatPowerShots = other.m_iCombatPowerShots;
 	m_iCombatKnockbacks = other.m_iCombatKnockbacks;
 	m_iCombatRepels = other.m_iCombatRepels;
-	m_iExtraRoundStunProb = other.m_iExtraRoundStunProb;
-	m_iCombatStuns = other.m_iCombatStuns;
 	m_iExtraPoisonProbabilityModifier = other.m_iExtraPoisonProbabilityModifier;
 	m_iRetrainsAvailable = other.m_iRetrainsAvailable;
 	m_iQualityBaseTotal = other.m_iQualityBaseTotal;
@@ -1398,8 +1374,6 @@ void CvUnit::convert(CvUnit* pUnit, const bool bKillOriginal)
 
 	const int iCurrentHPCap = pUnit->getMaxHP()-1;
 	setDamage(std::min(iCurrentHPCap, pUnit->getDamage()));
-	//TB Combat Mod next line
-	setColdDamage(std::min(iCurrentHPCap, pUnit->getColdDamage()));
 	setMoves(pUnit->getMoves());
 	setImmobileTimer(pUnit->getImmobileTimer());
 
@@ -1906,11 +1880,6 @@ void CvUnit::doTurn()
 		{
 			changeDamagePercent(plot()->getTerrainTurnDamage(this), NO_PLAYER);
 			//TB Combat Mod
-			if (GC.getTerrainInfo(plot()->getTerrainType()).isColdDamage())
-			{
-				changeColdDamage(plot()->getTerrainTurnDamage(this));
-			}
-			//TB Combat Mod
 			//Calvitix, Terrain Damage gives XP
 			if (isHurt() && plot()->getTerrainType() != NO_TERRAIN)
 			{
@@ -1922,12 +1891,6 @@ void CvUnit::doTurn()
 	const bool bHasMoved = hasMoved();
 	const bool bHeal = ((bHasMoved && isAlwaysHeal()) || !bHasMoved);
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-	{
-		doAffliction(bHeal);
-	}
-#endif
 
 	if (bHeal && isHurt())
 	{
@@ -2112,75 +2075,20 @@ void CvUnit::resolveAirCombat(CvUnit* pInterceptor, CvPlot* pPlot, CvAirMissionD
 			{
 				iTheirDamage += iTheirRoundDamage;
 				pInterceptor->changeDamage(iTheirRoundDamage, getOwner());
-				//TB Combat Mod begin
-				if (dealsColdDamage())
-				{
-					pInterceptor->changeColdDamage(iTheirRoundDamage);
-				}
-				//TB Combat Mod end
 				if (pInterceptor->isDead())
 				{
 					break;
 				}
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-				//here we go with afflict on attack
-				if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-				{
-					for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-					{
-						if (GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction() && !GC.getPromotionLineInfo((PromotionLineTypes)iI).isCritical())
-						{
-							PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-							if (hasAfflictOnAttackType(eAfflictionLine) && isAfflictOnAttackTypeDistance(eAfflictionLine))
-							{
-								int iAttackersPoisonChance = getAfflictOnAttackTypeProbability(eAfflictionLine) - pInterceptor->fortitudeTotal() - pInterceptor->getUnitAfflictionTolerance(eAfflictionLine);
-
-								if (GC.getGame().getSorenRandNum(100, "AttackersPoisonRoll") < iAttackersPoisonChance)
-								{
-									pInterceptor->afflict(eAfflictionLine, true, this);
-								}
-							}
-						}
-					}
-				}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 			}
 		}
 		else
 		{
 			iOurDamage += iOurRoundDamage;
 			changeDamage(iOurRoundDamage, pInterceptor->getOwner());
-			//TB Combat Mod begin
-			if (pInterceptor->dealsColdDamage())
-			{
-				changeColdDamage(iOurRoundDamage);
-			}
-			//TB Combat Mod end
 			if (isDead())
 			{
 				break;
 			}
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-			if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-			{
-				for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-				{
-					if (GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction() && !GC.getPromotionLineInfo((PromotionLineTypes)iI).isCritical())
-					{
-						PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-						if (pInterceptor->hasAfflictOnAttackType(eAfflictionLine) && pInterceptor->isAfflictOnAttackTypeDistance(eAfflictionLine))
-						{
-							int iAttackersPoisonChance = pInterceptor->getAfflictOnAttackTypeProbability(eAfflictionLine) - fortitudeTotal() - getUnitAfflictionTolerance(eAfflictionLine);
-
-							if (GC.getGame().getSorenRandNum(100, "AttackersPoisonRoll") < iAttackersPoisonChance)
-							{
-								afflict(eAfflictionLine, true, pInterceptor);
-							}
-						}
-					}
-				}
-			}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 		}
 	}
 
@@ -2461,20 +2369,6 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition&
 	getDefenderCombatValues(*pDefender, pPlot, iAttackerStrength, iAttackerFirepower, iDefenderOdds, iDefenderStrength, iAttackerDamage, iDefenderDamage, &cdDefenderDetails, pDefender);
 	int iInitialAttackerStrength = iAttackerStrength;
 	int iInitialDefenderStrength = iDefenderStrength;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	//TB Combat Mods Begin
-	for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-	{
-		if (hasAfflictOnAttackType((PromotionLineTypes)iI))
-		{
-			setAfflictOnAttackTypeAttemptedCount((PromotionLineTypes)iI, 0);
-		}
-		if (pDefender->hasAfflictOnAttackType((PromotionLineTypes)iI))
-		{
-			pDefender->setAfflictOnAttackTypeAttemptedCount((PromotionLineTypes)iI, 0);
-		}
-	}
-#endif
 	//  Determine Attack Withdraw odds
 	int iHitLimitThem = pDefender->getMaxHP() - combatLimit(pDefender);
 
@@ -2604,15 +2498,6 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition&
 		}
 		//TB Combat Mods (StrAdjperRnd) end
 
-		//TB Combat Mods begin
-		if (getCombatPowerShots() > 0)
-		{
-			iAttackerPrecision += powerShotPrecisionModifierTotal();
-		}
-		if (pDefender->getCombatPowerShots() > 0)
-		{
-			iDefenderPrecision += pDefender->powerShotPrecisionModifierTotal();
-		}
 		iAttackerHitModifier = iAttackerPrecision - iDefenderDodge;
 		iDefenderHitModifier = iDefenderPrecision - iAttackerDodge;
 		iAttackerOdds = std::max((GC.getCOMBAT_DIE_SIDES() - iDefenderOdds), 0);
@@ -2654,7 +2539,7 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition&
 			m_combatResult.bNeverMelee = false;
 		}
 		//Defender's attack round
-		if (pDefender->getCombatStuns() == 0 && iDefenderCombatRoll < iDefenderHitChance)
+		if (iDefenderCombatRoll < iDefenderHitChance)
 		{
 			if (getCombatFirstStrikes() == 0)
 			{
@@ -2703,14 +2588,6 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition&
 				//TB Combat Mod (Afflict) end
 				changeDamage(iAttackerDamage, pDefender->getOwner());
 				//TB Combat Mod begin
-				checkForStun(iAttackerDamage, pDefender);
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-				checkForCritical(iAttackerDamage, pDefender);
-#endif
-				if (pDefender->dealsColdDamage())
-				{
-					changeColdDamage(iAttackerDamage);
-				}
 				//TB Combat Mod end
 
 				bAttackerHasLostNoHP = false;
@@ -2765,40 +2642,10 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition&
 				{
 					m_combatResult.bDefenderHitAttackerWithDistanceAttack = true;
 				}
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-				if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-				{
-					PROFILE("CvUnit::resolveCombat.Afflictions");
-
-					for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-					{
-						if (GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction() && !GC.getPromotionLineInfo((PromotionLineTypes)iI).isCritical())
-						{
-							PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-							if (pDefender->hasAfflictOnAttackType(eAfflictionLine) &&
-								pDefender->isAfflictOnAttackTypeImmediate(eAfflictionLine) &&
-								pDefender->isAfflictOnAttackTypeAttempted(eAfflictionLine) == false)
-							{
-								bool bDistanceQualified = ((pDefender->getCombatFirstStrikes() > 0 && pDefender->isAfflictOnAttackTypeDistance(eAfflictionLine) && pDefender->isRanged()) ||
-															((pDefender->getCombatFirstStrikes() < 1 || !pDefender->isRanged()) && pDefender->isAfflictOnAttackTypeMelee(eAfflictionLine) && !(getCombatFirstStrikes() > 0 && isRanged())));
-								if (bDistanceQualified)
-								{
-									int iDefendersPoisonChance = pDefender->getAfflictOnAttackTypeProbability(eAfflictionLine) - fortitudeTotal() - getUnitAfflictionTolerance(eAfflictionLine);
-									if (GC.getGame().getSorenRandNum(100, "DefendersPoisonRoll") < iDefendersPoisonChance)
-									{
-										afflict(eAfflictionLine, true, pDefender);
-									}
-									pDefender->changeAfflictOnAttackTypeAttemptedCount(eAfflictionLine, 1);
-								}
-							}
-						}
-					}
-				}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 			}
 		}
 		//Attacker's attack round
-		if (getCombatStuns() == 0 && ((bVanillaCombat && iDefenderCombatRoll >= iDefenderHitChance) || (iAttackerCombatRoll < iAttackerHitChance)))
+		if ((bVanillaCombat && iDefenderCombatRoll >= iDefenderHitChance) || (iAttackerCombatRoll < iAttackerHitChance))
 		{
 			if (pDefender->getCombatFirstStrikes() == 0)
 			{
@@ -2825,10 +2672,6 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition&
 						{
 							m_combatResult.bDeathMessaged = false;
 							pDefender->setDamage(combatLimit(pDefender), getOwner());
-							if (dealsColdDamage())
-							{
-								pDefender->setColdDamage(combatLimit(pDefender));
-							}
 						}
 						temporarypursuit = 0;
 						break;
@@ -2899,14 +2742,6 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition&
 				//TB Combat Mods Begin
 				if (!bBreakdown)
 				{
-					pDefender->checkForStun(iDefenderDamage, this);
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-					pDefender->checkForCritical(iDefenderDamage, this);
-#endif
-					if (dealsColdDamage())
-					{
-						pDefender->changeColdDamage(iDefenderDamage);
-					}
 				}
 				//TB Combat Mods End
 
@@ -2967,50 +2802,8 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition&
 					{
 						m_combatResult.bAttackerHitDefenderWithDistanceAttack = true;
 					}
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-					if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-					{
-						for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-						{
-							if (GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction() && !GC.getPromotionLineInfo((PromotionLineTypes)iI).isCritical())
-							{
-								PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-								if (hasAfflictOnAttackType(eAfflictionLine) &&
-									isAfflictOnAttackTypeImmediate(eAfflictionLine) &&
-									isAfflictOnAttackTypeAttempted(eAfflictionLine) == false)
-								{
-									bool bDistanceQualified = ((getCombatFirstStrikes() > 0 && isAfflictOnAttackTypeDistance(eAfflictionLine) && isRanged()) ||
-															((getCombatFirstStrikes() < 1 || !isRanged()) && isAfflictOnAttackTypeMelee(eAfflictionLine) && !(pDefender->getCombatFirstStrikes() > 0 && pDefender->isRanged())));
-									if (bDistanceQualified)
-									{
-										int iAttackersPoisonChance = getAfflictOnAttackTypeProbability(eAfflictionLine) - pDefender->fortitudeTotal() - pDefender->getUnitAfflictionTolerance(eAfflictionLine);
-
-										if (GC.getGame().getSorenRandNum(100, "AttackersPoisonRoll") < iAttackersPoisonChance)
-										{
-											pDefender->afflict(eAfflictionLine, true, this);
-										}
-										changeAfflictOnAttackTypeAttemptedCount(eAfflictionLine, 1);
-									}
-								}
-							}
-						}
-					}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 				}
 			}
-		}
-		//TB Combat Mods begin
-		if (pDefender->getCombatFirstStrikes() == 0 && getCombatPowerShots() > 0)
-		{
-			if (!bBreakdown)
-			{
-				changeCombatPowerShots(-1);
-			}
-		}
-
-		if (getCombatFirstStrikes() == 0 && pDefender->getCombatPowerShots() > 0)
-		{
-			pDefender->changeCombatPowerShots(-1);
 		}
 
 		if ((getCombatKnockbacks() > 0) && (pDefender->getCombatFirstStrikes() == 0))
@@ -3026,25 +2819,13 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition&
 			pDefender->changeCombatRepels(-1);
 		}
 
-		if (getCombatStuns() > 0)
-		{
-			if (!bBreakdown)
-			{
-				changeCombatStuns(-1);
-			}
-		}
-
-		if (pDefender->getCombatStuns() > 0)
-		{
-			pDefender->changeCombatStuns(-1);
-		}
 		//TB Combat Mods end
-		if (pDefender->getCombatStuns() == 0 && getCombatFirstStrikes() > 0)
+		if (getCombatFirstStrikes() > 0)
 		{
 			changeCombatFirstStrikes(-1);
 		}
 
-		if (getCombatStuns() == 0 && pDefender->getCombatFirstStrikes() > 0)
+		if (pDefender->getCombatFirstStrikes() > 0)
 		{
 			pDefender->changeCombatFirstStrikes(-1);
 		}
@@ -3436,109 +3217,6 @@ void CvUnit::updateCombat(CvUnit* pSelectedDefender, bool bSamePlot, bool bSteal
 		}
 #endif // STRENGTH_IN_NUMBERS
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-		//TB Combat Mod (Afflict) begin
-		if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-		{
-			for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-			{
-				if (m_combatResult.bAttackerInjured
-				&&
-				(
-					pDefender->isDead()
-					|| m_combatResult.bDefenderWithdrawn
-					|| m_combatResult.bDefenderKnockedBack
-					|| m_combatResult.bAttackerRepelled
-					|| m_combatResult.bAttackerWithdraws
-				)
-				&& GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction()
-				&& !GC.getPromotionLineInfo((PromotionLineTypes)iI).isCritical())
-				{
-					const PromotionLineTypes eAfflictionLine = (PromotionLineTypes)iI;
-
-					if (pDefender->hasAfflictOnAttackType(eAfflictionLine)
-					&& !pDefender->isAfflictOnAttackTypeAttempted(eAfflictionLine)
-					// Distance Qualifier
-					&&
-					(
-						m_combatResult.bDefenderHitAttackerWithDistanceAttack
-						&& pDefender->isAfflictOnAttackTypeDistance(eAfflictionLine)
-						|| pDefender->isAfflictOnAttackTypeMelee(eAfflictionLine)
-						&& !m_combatResult.bNeverMelee
-					))
-					{
-						const int iDefendersPoisonChance =
-						(
-							pDefender->getAfflictOnAttackTypeProbability(eAfflictionLine)
-							- fortitudeTotal() - getUnitAfflictionTolerance(eAfflictionLine)
-						);
-						if (GC.getGame().getSorenRandNum(100, "DefendersPoisonRoll") < iDefendersPoisonChance)
-						{
-							afflict(eAfflictionLine, true, pDefender);
-						}
-						pDefender->setAfflictOnAttackTypeAttemptedCount(eAfflictionLine, 1);
-					}
-					//Battle proximity communicability affliction spread
-					if (!m_combatResult.bNeverMelee && pDefender->hasAfflictionLine(eAfflictionLine) && GC.getPromotionLineInfo(eAfflictionLine).getCommunicability() > 0 && !GC.getPromotionLineInfo(eAfflictionLine).isNoSpreadonBattle())
-					{
-						const int iDefendersChancetoAfflict = getChancetoContract(eAfflictionLine) + pDefender->worsenedProbabilitytoAfflict(eAfflictionLine);
-
-						if (GC.getGame().getSorenRandNum(100, "DefenderCauseContractRoll") < iDefendersChancetoAfflict)
-						{
-							afflict(eAfflictionLine, false, pDefender);
-						}
-					}
-				}
-				if (m_combatResult.bDefenderInjured
-				&&
-				(
-					isDead()
-					|| m_combatResult.bDefenderWithdrawn
-					|| m_combatResult.bDefenderKnockedBack
-					|| m_combatResult.bAttackerRepelled
-					|| m_combatResult.bAttackerWithdraws
-				)
-				&& GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction()
-				&& !GC.getPromotionLineInfo((PromotionLineTypes)iI).isCritical())
-				{
-					const PromotionLineTypes eAfflictionLine = (PromotionLineTypes)iI;
-					if (hasAfflictOnAttackType(eAfflictionLine)
-					&& !isAfflictOnAttackTypeAttempted(eAfflictionLine)
-					&&
-					(
-						m_combatResult.bDefenderHitAttackerWithDistanceAttack
-						&& isAfflictOnAttackTypeDistance(eAfflictionLine)
-						|| isAfflictOnAttackTypeMelee(eAfflictionLine)
-						&& !m_combatResult.bNeverMelee
-					))
-					{
-						const int iAttackersPoisonChance =
-						(
-							getAfflictOnAttackTypeProbability(eAfflictionLine)
-							- pDefender->fortitudeTotal()
-							- pDefender->getUnitAfflictionTolerance(eAfflictionLine)
-						);
-						if (GC.getGame().getSorenRandNum(100, "AttackersPoisonRoll") < iAttackersPoisonChance)
-						{
-							pDefender->afflict(eAfflictionLine, true, this);
-						}
-						setAfflictOnAttackTypeAttemptedCount(eAfflictionLine, 1);
-					}
-					//Communicability exposure
-					if (!m_combatResult.bNeverMelee && hasAfflictionLine(eAfflictionLine) && GC.getPromotionLineInfo(eAfflictionLine).getCommunicability() > 0 && !GC.getPromotionLineInfo(eAfflictionLine).isNoSpreadonBattle())
-					{
-						const int iAttackersChancetoAfflict = pDefender->getChancetoContract(eAfflictionLine) + worsenedProbabilitytoAfflict(eAfflictionLine);
-
-						if (GC.getGame().getSorenRandNum(100, "AttackerCauseContractRoll") < iAttackersChancetoAfflict)
-						{
-							pDefender->afflict(eAfflictionLine, false, this);
-						}
-					}
-				}
-			}
-		}
-		//TB Combat Mod (Afflict) end
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 		//TB Combat Mod (Stampede/Onslaught)
 		if (pDefender->isDead() || m_combatResult.bDefenderWithdrawn || m_combatResult.bDefenderKnockedBack || m_combatResult.bAttackerRepelled || m_combatResult.bAttackerWithdraws)
@@ -7897,71 +7575,9 @@ void CvUnit::doHeal()
 	}
 	//TB Combat Mod begin
 	//Note: to be re-evaluated!!!
-	if (getColdDamage() > 0)
-	{
-		changeColdDamage(-(healRate(plot())));
-	}
 	//TB Combat Mod end
 }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-void CvUnit::doAffliction(const bool bHeal)
-{
-	PROFILE_EXTRA_FUNC();
-	for (int iI = GC.getNumPromotionLineInfos() - 1; iI > -1; iI--)
-	{
-		const PromotionLineTypes ePromoLine = static_cast<PromotionLineTypes>(iI);
-		const CvPromotionLineInfo& promoLine = GC.getPromotionLineInfo(ePromoLine);
-
-		if (promoLine.isAffliction())
-		{
-			const bool bHasAffliction = hasAfflictionLine(ePromoLine);
-
-			if (bHasAffliction)
-			{
-				changeAfflictionTurnCount(ePromoLine, 1);
-
-				for (int iJ = 0; iJ < promoLine.getNumPromotions(); iJ++)
-				{
-					//Update Afflictions
-					const PromotionTypes ePromotion = (PromotionTypes)promoLine.getPromotion(iJ);
-
-					if (isHasPromotion(ePromotion))
-					{
-						changeAfflictionHitCount(ePromotion, 1);
-						updateAfflictionHits(ePromotion);
-
-						if (GC.getPromotionInfo(ePromotion).isParalyze())
-						{
-							changeImmobileTimer(1);
-						}
-					}
-				}
-			}
-			//Update Afflictions
-			const int iToleranceDecay = promoLine.getToleranceDecay();
-
-			if (!bHasAffliction && getUnitAfflictionTolerance(ePromoLine) > 0 && iToleranceDecay != 0)
-			{
-				changeUnitAfflictionTolerance(ePromoLine, -iToleranceDecay);
-			}
-
-			int iCommunicableExposure = getTotalCommunicableExposure(ePromoLine);
-			if (iCommunicableExposure > 0)//sure we have access to communicable source?  Maybe included in checkcontract huh?
-			{
-				if (checkContractDisease(ePromoLine, iCommunicableExposure))
-				{
-					afflict(ePromoLine);
-				}
-			}
-			if (bHeal && bHasAffliction)
-			{
-				doOvercomeAttempt(ePromoLine);
-			}
-		}
-	}
-}
-#endif
 
 bool CvUnit::canAirlift(const CvPlot* pPlot) const
 {
@@ -11617,18 +11233,6 @@ bool CvUnit::promote(PromotionTypes ePromotion, int iLeaderUnitId)
 		{
 			changeLevel(1);
 			changeDamage(-(getDamage() / 2));
-			int iDmgChange = (-(getDamage() / 2));
-			if (getColdDamage() > 0)
-			{
-				if (iDmgChange > getColdDamage())
-				{
-					setColdDamage(0);
-				}
-				else
-				{
-					changeColdDamage(iDmgChange);
-				}
-			}
 		}
 	}
 
@@ -14903,79 +14507,19 @@ bool CvUnit::canOnslaught() const
 	return m_pUnitInfo->isOnslaught() || mayOnslaught();
 }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-bool CvUnit::hasCureAfflictionType(PromotionLineTypes ePromotionLineType) const
-{
-	PROFILE_EXTRA_FUNC();
-	bool bCureAffliction = ePromotionLineType != NO_PROMOTIONLINE && hasExtraCureAffliction(ePromotionLineType);
-	if (!bCureAffliction)
-	{
-		for (int iI = 0; iI < m_pUnitInfo->getNumCureAfflictionTypes(); iI++)
-		{
-			if (m_pUnitInfo->getCureAfflictionType(iI) == (int)ePromotionLineType)
-			{
-				bCureAffliction = true;
-			}
-		}
-	}
-	return bCureAffliction;
-}
-
-int CvUnit::fortitudeTotal() const
-{
-	return m_pUnitInfo->getFortitude() + getExtraFortitude();
-}
-
-int CvUnit::aidTotal(PropertyTypes eProperty) const
-{
-	return std::max(0, (m_pUnitInfo->getAidChange((int)eProperty) + extraAidChange(eProperty)));
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 int CvUnit::dodgeTotal() const
 {
-	const int iChill = std::max(
-		0, getColdDamage() - getColdDamage() * enduranceTotal() / 10
-	);
-	const int iDodge = m_pUnitInfo->getDodgeModifier() + getExtraDodgeModifier() + 100;
-
-	return iDodge - iDodge * iChill / 100;
+	// Cold-damage "chill" reduction removed with the cold mechanic (R1). dodge/precision
+	// themselves are removed in R5.
+	return m_pUnitInfo->getDodgeModifier() + getExtraDodgeModifier() + 100;
 }
 
 int CvUnit::precisionTotal() const
 {
-	const int iChill = std::max(
-		0, getColdDamage() - getColdDamage() * enduranceTotal() / 10
-	);
-	const int iPrecision = m_pUnitInfo->getPrecisionModifier() + getExtraPrecisionModifier() + 100;
-
-	return iPrecision - iPrecision * iChill / 100;
+	return m_pUnitInfo->getPrecisionModifier() + getExtraPrecisionModifier() + 100;
 }
 
-int CvUnit::powerShotsTotal() const
-{
-	return m_pUnitInfo->getPowerShots() + getExtraPowerShots();
-}
-
-int CvUnit::powerShotCombatModifierTotal() const
-{
-	return m_pUnitInfo->getPowerShotCombatModifier() + getExtraPowerShotCombatModifier();
-}
-
-int CvUnit::powerShotPunctureModifierTotal() const
-{
-	return m_pUnitInfo->getPowerShotPunctureModifier() + getExtraPowerShotPunctureModifier();
-}
-
-int CvUnit::powerShotPrecisionModifierTotal() const
-{
-	return m_pUnitInfo->getPowerShotPrecisionModifier() + getExtraPowerShotPrecisionModifier();
-}
-
-int CvUnit::powerShotCriticalModifierTotal() const
-{
-	return m_pUnitInfo->getPowerShotCriticalModifier() + getExtraPowerShotCriticalModifier();
-}
 
 int CvUnit::criticalModifierTotal() const
 {
@@ -14987,15 +14531,6 @@ int CvUnit::enduranceTotal() const
 	return m_pUnitInfo->getEndurance() + getExtraEndurance();
 }
 
-bool CvUnit::dealsColdDamage() const
-{
-	return (m_pUnitInfo->isDealsColdDamage() || mayDealColdDamage()) && !cannotDealColdDamage();
-}
-
-bool CvUnit::hasImmunitytoColdDamage() const
-{
-	return (m_pUnitInfo->isColdImmune() || mayColdImmune()) && !cannotColdImmune();
-}
 
 int CvUnit::poisonProbabilityModifierTotal() const
 {
@@ -18214,75 +17749,8 @@ void CvUnit::changeOnslaughtCount(int iChange)
 	FASSERT_NOT_NEGATIVE(getOnslaughtCount());
 }
 
-int CvUnit::getDealColdDamageCount() const
-{
-	return m_iDealColdDamageCount;
-}
-
-bool CvUnit::cannotDealColdDamage() const
-{
-	return getDealColdDamageCount() < 0;
-}
-
-bool CvUnit::mayDealColdDamage() const
-{
-	return getDealColdDamageCount() > 0;
-}
-
-void CvUnit::changeDealColdDamageCount(int iChange)
-{
-	m_iDealColdDamageCount += iChange;
-}
-
-int CvUnit::getColdImmuneCount() const
-{
-	return m_iColdImmuneCount;
-}
-
-bool CvUnit::cannotColdImmune() const
-{
-	return getColdImmuneCount() < 0;
-}
-
-bool CvUnit::mayColdImmune() const
-{
-	return getColdImmuneCount() > 0;
-}
-
-void CvUnit::changeColdImmuneCount(int iChange)
-{
-	m_iColdImmuneCount += iChange;
-}
 
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-int CvUnit::getCureAfflictionCount(PromotionLineTypes ePromotionLineType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	return info == NULL ? 0 : info->m_iCureAfflictionTypeCount;
-}
-
-bool CvUnit::hasExtraCureAffliction(PromotionLineTypes ePromotionLineType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-	return (getCureAfflictionCount(ePromotionLineType) > 0);
-}
-
-void CvUnit::changeCureAfflictionCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType);
-
-		info->m_iCureAfflictionTypeCount += iChange;
-	}
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 int CvUnit::getExtraFortitude(bool bIgnoreCommanders, bool bIgnoreCommodores) const
 {
@@ -18363,140 +17831,6 @@ void CvUnit::changeExtraPrecisionModifier(int iChange)
 	m_iExtraPrecisionModifier +=iChange;
 }
 
-int CvUnit::getExtraPowerShots(bool bIgnoreCommanders, bool bIgnoreCommodores) const
-{
-	if (!bIgnoreCommanders && !isCommander())
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return m_iExtraPowerShots + pCommander->m_iExtraPowerShots;
-		}
-	}
-	if (!bIgnoreCommodores && !isCommodore())
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return m_iExtraPowerShots + pCommodore->m_iExtraPowerShots;
-    		}
-    	}
-	return m_iExtraPowerShots;
-}
-
-void CvUnit::changeExtraPowerShots(int iChange)
-{
-	m_iExtraPowerShots += iChange;
-	FASSERT_NOT_NEGATIVE(m_iExtraPowerShots);
-}
-
-int CvUnit::getExtraPowerShotCombatModifier(bool bIgnoreCommanders, bool bIgnoreCommodores) const
-{
-	if (!bIgnoreCommanders && !isCommander())
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return m_iExtraPowerShotCombatModifier + pCommander->m_iExtraPowerShotCombatModifier;
-		}
-	}
-	if (!bIgnoreCommodores && !isCommodore())
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return m_iExtraPowerShotCombatModifier + pCommodore->m_iExtraPowerShotCombatModifier;
-    		}
-    	}
-	return m_iExtraPowerShotCombatModifier;
-}
-
-void CvUnit::changeExtraPowerShotCombatModifier(int iChange)
-{
-	m_iExtraPowerShotCombatModifier += iChange;
-	FASSERT_NOT_NEGATIVE(m_iExtraPowerShotCombatModifier);
-}
-
-int CvUnit::getExtraPowerShotPunctureModifier(bool bIgnoreCommanders, bool bIgnoreCommodores) const
-{
-	if (!bIgnoreCommanders && !isCommander())
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return m_iExtraPowerShotPunctureModifier + pCommander->m_iExtraPowerShotPunctureModifier;
-		}
-	}
-	if (!bIgnoreCommodores && !isCommodore())
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return m_iExtraPowerShotPunctureModifier + pCommodore->m_iExtraPowerShotPunctureModifier;
-    		}
-    	}
-	return m_iExtraPowerShotPunctureModifier;
-}
-
-void CvUnit::changeExtraPowerShotPunctureModifier(int iChange)
-{
-	m_iExtraPowerShotPunctureModifier += iChange;
-	FASSERT_NOT_NEGATIVE(m_iExtraPowerShotPunctureModifier);
-}
-
-int CvUnit::getExtraPowerShotPrecisionModifier(bool bIgnoreCommanders, bool bIgnoreCommodores) const
-{
-	if (!bIgnoreCommanders && !isCommander())
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return m_iExtraPowerShotPrecisionModifier + pCommander->m_iExtraPowerShotPrecisionModifier;
-		}
-	}
-	if (!bIgnoreCommodores && !isCommodore())
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return m_iExtraPowerShotPrecisionModifier + pCommodore->m_iExtraPowerShotPrecisionModifier;
-    		}
-    	}
-	return m_iExtraPowerShotPrecisionModifier;
-}
-
-void CvUnit::changeExtraPowerShotPrecisionModifier(int iChange)
-{
-	m_iExtraPowerShotPrecisionModifier += iChange;
-	FASSERT_NOT_NEGATIVE(m_iExtraPowerShotPrecisionModifier);
-}
-
-int CvUnit::getExtraPowerShotCriticalModifier(bool bIgnoreCommanders, bool bIgnoreCommodores) const
-{
-	if (!bIgnoreCommanders && !isCommander())
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return m_iExtraPowerShotCriticalModifier + pCommander->m_iExtraPowerShotCriticalModifier;
-		}
-	}
-	if (!bIgnoreCommodores && !isCommodore())
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return m_iExtraPowerShotCriticalModifier + pCommodore->m_iExtraPowerShotCriticalModifier;
-    		}
-    	}
-	return m_iExtraPowerShotCriticalModifier;
-}
-
-void CvUnit::changeExtraPowerShotCriticalModifier(int iChange)
-{
-	m_iExtraPowerShotCriticalModifier += iChange;
-	FASSERT_NOT_NEGATIVE(m_iExtraPowerShotCriticalModifier);
-}
 
 int CvUnit::getExtraCriticalModifier(bool bIgnoreCommanders, bool bIgnoreCommodores) const
 {
@@ -19433,7 +18767,6 @@ void CvUnit::setCombatUnit(CvUnit* pCombatUnit, bool bAttacking, bool bQuick, bo
 		else setCombatFirstStrikes(stealthStrikesTotal());
 
 		//TB Combat mod begin
-		setCombatPowerShots(powerShotsTotal());
 
 		if (knockbackTotal() > 0)
 		{
@@ -19443,7 +18776,6 @@ void CvUnit::setCombatUnit(CvUnit* pCombatUnit, bool bAttacking, bool bQuick, bo
 		{
 			setCombatRepels(repelRetriesTotal() + 1);
 		}
-		setCombatStuns(0);
 		//TB Combat Mod end
 	}
 	else if (getCombatUnit())
@@ -19451,10 +18783,8 @@ void CvUnit::setCombatUnit(CvUnit* pCombatUnit, bool bAttacking, bool bQuick, bo
 		m_combatUnit.reset();
 		setCombatFirstStrikes(0);
 		//TB Combat Mod begin
-		setCombatPowerShots(0);
 		setCombatKnockbacks(0);
 		setCombatRepels(0);
-		setCombatStuns(0);
 		//TB Combat mod end
 
 		if (IsSelected())
@@ -20073,12 +19403,6 @@ bool CvUnit::canAcquirePromotion(PromotionTypes ePromotion, bool bIgnoreHas, boo
 		return false;
 	}
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if (!bAfflict && promo.isAffliction())
-	{
-		return false;
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	//TB Debug Note: If the promotion being evaluated for is the sort you get from a leader as it attaches to the unit that then qualifies you for other
 	//promotions, and the check being called here is not for that specific purpose, then return false for that promotion.
@@ -20208,9 +19532,6 @@ bool CvUnit::canAcquirePromotion(PromotionTypes ePromotion, bool bIgnoreHas, boo
 	//	have one specific present at a time (and higher priority takes precedence)
 	if (ePromotionLine != NO_PROMOTIONLINE
 		&& (
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-			promo.isAffliction() ||
-#endif // OUTBREAKS_AND_AFFLICTIONS
 			promo.isEquipment()))
 	{
 		for (int iI = 0; iI < GC.getNumPromotionInfos(); iI++)
@@ -20981,12 +20302,6 @@ void CvUnit::processUnitCombat(UnitCombatTypes eIndex, bool bAdding, bool bByPro
 	changeExtraDynamicDefense(kUnitCombat.getDynamicDefenseChange() * iChange);//no merge/split
 	changeExtraStrength(kUnitCombat.getStrengthChange() * iChange);//no merge/split (but included into merge/split mult)
 	changeExtraFortitude(kUnitCombat.getFortitudeChange() * iChange);//no merge/split
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	for (iI = 0; iI < GC.getNumPropertyInfos(); iI++)
-	{
-		changeExtraAidChange((PropertyTypes)iI, kUnitCombat.getAidChange(iI) * iChange);//no merge/split
-	}
-#endif
 #ifdef STRENGTH_IN_NUMBERS
 	changeExtraFrontSupportPercent(kUnitCombat.getFrontSupportPercentChange() * iChange);//no merge/split
 	changeExtraShortRangeSupportPercent(kUnitCombat.getShortRangeSupportPercentChange() * iChange);//no merge/split
@@ -20997,14 +20312,8 @@ void CvUnit::processUnitCombat(UnitCombatTypes eIndex, bool bAdding, bool bByPro
 
 	changeExtraDodgeModifier(kUnitCombat.getDodgeModifierChange() * iChange);//no merge/split
 	changeExtraPrecisionModifier(kUnitCombat.getPrecisionModifierChange() * iChange);//no merge/split
-	changeExtraPowerShots(kUnitCombat.getPowerShotsChange() * iChange);//no merge/split
-	changeExtraPowerShotCombatModifier(kUnitCombat.getPowerShotCombatModifierChange() * iChange);//no merge/split
-	changeExtraPowerShotPunctureModifier(kUnitCombat.getPowerShotPunctureModifierChange() * iChange);//no merge/split
-	changeExtraPowerShotPrecisionModifier(kUnitCombat.getPowerShotPrecisionModifierChange() * iChange);//no merge/split
-	changeExtraPowerShotCriticalModifier(kUnitCombat.getPowerShotCriticalModifierChange() * iChange);//no merge/split
 	changeExtraCriticalModifier(kUnitCombat.getCriticalModifierChange() * iChange);//no merge/split
 	changeExtraEndurance(kUnitCombat.getEnduranceChange() * iChange);//no merge/split
-	changeExtraRoundStunProb(kUnitCombat.getRoundStunProbChange() * iChange);//no merge/split
 	changeExtraPoisonProbabilityModifier(kUnitCombat.getPoisonProbabilityModifierChange() * iChange);//no merge/split
 	changeExtraCaptureProbabilityModifier(kUnitCombat.getCaptureProbabilityModifierChange() * iChange);//no merge/split
 	changeExtraCaptureResistanceModifier(kUnitCombat.getCaptureResistanceModifierChange() * iChange);//no merge/split
@@ -21056,10 +20365,6 @@ void CvUnit::processUnitCombat(UnitCombatTypes eIndex, bool bAdding, bool bByPro
 	changeStampedeCount((kUnitCombat.isRemoveStampede()) ? -iChange : 0);
 	changeAnimalIgnoresBordersCount(kUnitCombat.getAnimalIgnoresBordersChange() * iChange);
 	changeOnslaughtCount((kUnitCombat.isOnslaughtChange()) ? iChange : 0);
-	changeDealColdDamageCount((kUnitCombat.isMakesDamageCold()) ? iChange : 0);
-	changeDealColdDamageCount((kUnitCombat.isMakesDamageNotCold()) ? -iChange : 0);
-	changeColdImmuneCount((kUnitCombat.isAddsColdImmunity()) ? iChange : 0);
-	changeColdImmuneCount((kUnitCombat.isRemovesColdImmunity()) ? -iChange : 0);
 	changeAttackOnlyCitiesCount((kUnitCombat.isAttackOnlyCitiesAdd()) ? iChange : 0);
 	changeAttackOnlyCitiesCount((kUnitCombat.isAttackOnlyCitiesSubtract()) ? -iChange : 0);
 	changeIgnoreNoEntryLevelCount((kUnitCombat.isIgnoreNoEntryLevelAdd()) ? iChange : 0);
@@ -21099,20 +20404,6 @@ void CvUnit::processUnitCombat(UnitCombatTypes eIndex, bool bAdding, bool bByPro
 		}
 	}
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	// bool vector with delayed resolution
-	if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-	{
-		for (iI = 0; iI < kUnitCombat.getNumCureAfflictionChangeTypes(); iI++)
-		{
-			changeCureAfflictionCount(((PromotionLineTypes)kUnitCombat.getCureAfflictionChangeType(iI)), iChange);
-		}
-		for (iI = 0; iI < kUnitCombat.getNumAfflictionFortitudeChangeModifiers(); iI++)
-		{
-			changeFortitudeModifierTypeAmount(((PromotionLineTypes)kUnitCombat.getAfflictionFortitudeChangeModifier(iI).ePromotionLine), kUnitCombat.getAfflictionFortitudeChangeModifier(iI).iModifier * iChange);
-		}
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	for (iI = 0; iI < kUnitCombat.getNumTerrainIgnoreDamageChangeTypes(); iI++)
 	{
@@ -21134,12 +20425,6 @@ void CvUnit::processUnitCombat(UnitCombatTypes eIndex, bool bAdding, bool bByPro
 		changeTrapImmunityUnitCombatCount((UnitCombatTypes)kUnitCombat.getTrapImmunityUnitCombatType(iI), iChange);
 	}
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	for (iI = 0; iI < kUnitCombat.getNumDistanceAttackCommunicabilityTypeChanges(); iI++)
-	{
-		changeDistanceAttackCommunicability((PromotionLineTypes)kUnitCombat.getDistanceAttackCommunicabilityTypeChange(iI).eAfflictionLine, kUnitCombat.getDistanceAttackCommunicabilityTypeChange(iI).iChange * iChange);
-	}
-#endif
 	// int vector utilizing pairing without delayed resolution
 	for (iI = 0; iI < GC.getNumTerrainInfos(); iI++)
 	{
@@ -21296,26 +20581,12 @@ void CvUnit::processUnitCombat(UnitCombatTypes eIndex, bool bAdding, bool bByPro
 		changeExtraCriticalVSUnitCombatType(((UnitCombatTypes)kUnitCombat.getCriticalVSUnitCombatTypeChange(iI).eUnitCombat), kUnitCombat.getCriticalVSUnitCombatTypeChange(iI).iModifier * iChange);
 	}
 
-	for (iI = 0; iI < kUnitCombat.getNumRoundStunVSUnitCombatTypesChange(); iI++)
-	{
-		changeExtraRoundStunVSUnitCombatType(((UnitCombatTypes)kUnitCombat.getRoundStunVSUnitCombatTypeChange(iI).eUnitCombat), kUnitCombat.getRoundStunVSUnitCombatTypeChange(iI).iModifier * iChange);
-	}
 
 	for (iI = 0; iI < kUnitCombat.getNumTrapAvoidanceUnitCombatTypes(); iI++)
 	{
 		changeExtraTrapAvoidanceUnitCombatType(((UnitCombatTypes)kUnitCombat.getTrapAvoidanceUnitCombatType(iI).eUnitCombat), kUnitCombat.getTrapAvoidanceUnitCombatType(iI).iModifier * iChange);
 	}
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	for (iI = 0; iI < kUnitCombat.getNumAfflictOnAttackChangeTypes(); iI++)
-	{
-		changeAfflictOnAttackTypeCount(((PromotionLineTypes)kUnitCombat.getAfflictOnAttackChangeType(iI).eAfflictionLine), iChange);
-		changeAfflictOnAttackTypeProbability(((PromotionLineTypes)kUnitCombat.getAfflictOnAttackChangeType(iI).eAfflictionLine), kUnitCombat.getAfflictOnAttackChangeType(iI).iProbabilityChange * iChange);
-		changeAfflictOnAttackTypeMeleeCount(((PromotionLineTypes)kUnitCombat.getAfflictOnAttackChangeType(iI).eAfflictionLine), kUnitCombat.getAfflictOnAttackChangeType(iI).iMelee * iChange);
-		changeAfflictOnAttackTypeDistanceCount(((PromotionLineTypes)kUnitCombat.getAfflictOnAttackChangeType(iI).eAfflictionLine), kUnitCombat.getAfflictOnAttackChangeType(iI).iDistance * iChange);
-		changeAfflictOnAttackTypeImmediateCount(((PromotionLineTypes)kUnitCombat.getAfflictOnAttackChangeType(iI).eAfflictionLine), kUnitCombat.getAfflictOnAttackChangeType(iI).iImmediate * iChange);
-	}
-#endif
 	if (bSM && bByPromo)
 	{
 		setSMValues();
@@ -21399,19 +20670,6 @@ void CvUnit::processPromotion(PromotionTypes eIndex, bool bAdding, bool bInitial
 	int	iI;
 	bool bSMrecalc = false;
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	//	On affliction removal get rid of the accrued per-turn detrimental effects
-	if (kPromotion.isAffliction() && !bAdding)
-	{
-		// Make sure we don't remove or reset these counts if we're taking away lesser versions of worsening afflictions
-		PromotionLineTypes eAfflictionLine = kPromotion.getPromotionLine();
-		if (kPromotion.getLinePriority() > getAfflictionLineCount(eAfflictionLine))
-		{
-			removeAfflictionHits(eIndex);
-			setAfflictionHitCount(eIndex, 0);
-		}
-	}
-#endif
 
 	if (kPromotion.isParalyze() && bAdding)
 	{
@@ -21581,12 +20839,6 @@ void CvUnit::processPromotion(PromotionTypes eIndex, bool bAdding, bool bInitial
 	changeAnimalIgnoresBordersCount(kPromotion.getAnimalIgnoresBordersChange() * iChange);
 	changeOnslaughtCount((kPromotion.isOnslaughtChange()) ? iChange : 0);
 	changeExtraFortitude(kPromotion.getFortitudeChange() * iChange);
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	for (iI = 0; iI < GC.getNumPropertyInfos(); iI++)
-	{
-		changeExtraAidChange((PropertyTypes)iI, kPromotion.getAidChange(iI) * iChange);
-	}
-#endif
 #ifdef STRENGTH_IN_NUMBERS
 	changeExtraFrontSupportPercent(kPromotion.getFrontSupportPercentChange() * iChange);
 	changeExtraShortRangeSupportPercent(kPromotion.getShortRangeSupportPercentChange() * iChange);
@@ -21597,18 +20849,8 @@ void CvUnit::processPromotion(PromotionTypes eIndex, bool bAdding, bool bInitial
 
 	changeExtraDodgeModifier(kPromotion.getDodgeModifierChange() * iChange);
 	changeExtraPrecisionModifier(kPromotion.getPrecisionModifierChange() * iChange);
-	changeExtraPowerShots(kPromotion.getPowerShotsChange() * iChange);
-	changeExtraPowerShotCombatModifier(kPromotion.getPowerShotCombatModifierChange() * iChange);
-	changeExtraPowerShotPunctureModifier(kPromotion.getPowerShotPunctureModifierChange() * iChange);
-	changeExtraPowerShotPrecisionModifier(kPromotion.getPowerShotPrecisionModifierChange() * iChange);
-	changeExtraPowerShotCriticalModifier(kPromotion.getPowerShotCriticalModifierChange() * iChange);
 	changeExtraCriticalModifier(kPromotion.getCriticalModifierChange() * iChange);
 	changeExtraEndurance(kPromotion.getEnduranceChange() * iChange);
-	changeDealColdDamageCount((kPromotion.isMakesDamageCold()) ? iChange : 0);
-	changeDealColdDamageCount((kPromotion.isMakesDamageNotCold()) ? -iChange : 0);
-	changeColdImmuneCount((kPromotion.isAddsColdImmunity()) ? iChange : 0);
-	changeColdImmuneCount((kPromotion.isRemovesColdImmunity()) ? -iChange : 0);
-	changeExtraRoundStunProb(kPromotion.getRoundStunProbChange() * iChange);
 	changeExtraPoisonProbabilityModifier(kPromotion.getPoisonProbabilityModifierChange() * iChange);
 
 	changeExtraCaptureProbabilityModifier(kPromotion.getCaptureProbabilityModifierChange() * iChange);
@@ -21746,12 +20988,6 @@ void CvUnit::processPromotion(PromotionTypes eIndex, bool bAdding, bool bInitial
 		bSMrecalc = true;
 	}
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if (!bAdding && kPromotion.isAffliction())
-	{
-		changeUnitAfflictionTolerance(((PromotionLineTypes)kPromotion.getPromotionLine()),GC.getPromotionLineInfo((PromotionLineTypes)kPromotion.getPromotionLine()).getToleranceBuildup() * iChange);
-	}
-#endif
 
 	if (kPromotion.isZoneOfControl())
 	{
@@ -21857,12 +21093,6 @@ void CvUnit::processPromotion(PromotionTypes eIndex, bool bAdding, bool bInitial
 		changeExtraVisibleImprovementRange((InvisibleTypes)kPromotion.getVisibleImprovementRangeChange(iI).eInvisible,(ImprovementTypes)kPromotion.getVisibleImprovementRangeChange(iI).eImprovement, kPromotion.getVisibleImprovementRangeChange(iI).iIntensity * iChange);
 	}
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	for (iI = 0; iI < kPromotion.getNumDistanceAttackCommunicabilityTypeChanges(); iI++)
-	{
-		changeDistanceAttackCommunicability((PromotionLineTypes)kPromotion.getDistanceAttackCommunicabilityTypeChange(iI).eAfflictionLine, kPromotion.getDistanceAttackCommunicabilityTypeChange(iI).iChange * iChange);
-	}
-#endif
 	const int numUnitCombatInfos = GC.getNumUnitCombatInfos();
 	for (iI = 0; iI < numUnitCombatInfos; iI++)
 	{
@@ -21877,7 +21107,6 @@ void CvUnit::processPromotion(PromotionTypes eIndex, bool bAdding, bool bInitial
 		changeExtraDodgeVSUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getDodgeVSUnitCombatChangeType(iI) * iChange));
 		changeExtraPrecisionVSUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getPrecisionVSUnitCombatChangeType(iI) * iChange));
 		changeExtraCriticalVSUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getCriticalVSUnitCombatChangeType(iI) * iChange));
-		changeExtraRoundStunVSUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getRoundStunVSUnitCombatChangeType(iI) * iChange));
 		changeExtraTrapDisableUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getTrapDisableUnitCombatType(iI) * iChange));
 		changeExtraTrapAvoidanceUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getTrapAvoidanceUnitCombatType(iI) * iChange));
 		changeExtraTrapTriggerUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getTrapTriggerUnitCombatType(iI) * iChange));
@@ -21893,29 +21122,6 @@ void CvUnit::processPromotion(PromotionTypes eIndex, bool bAdding, bool bInitial
 		setHasUnitCombat(((UnitCombatTypes)kPromotion.getRemovesUnitCombatType(iI)), bAdding ? false : true, true);
 	}
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-	{
-		for (iI = 0; iI < kPromotion.getNumCureAfflictionChangeTypes(); iI++)
-		{
-			changeCureAfflictionCount(((PromotionLineTypes)kPromotion.getCureAfflictionChangeType(iI)), bAdding);
-		}
-
-		for (iI = 0; iI < kPromotion.getNumAfflictionFortitudeChangeModifiers(); iI++)
-		{
-			changeFortitudeModifierTypeAmount(((PromotionLineTypes)kPromotion.getAfflictionFortitudeChangeModifier(iI).ePromotionLine), kPromotion.getAfflictionFortitudeChangeModifier(iI).iModifier * iChange);
-		}
-
-		for (iI = 0; iI < kPromotion.getNumAfflictOnAttackChangeTypes(); iI++)
-		{
-			changeAfflictOnAttackTypeCount(((PromotionLineTypes)kPromotion.getAfflictOnAttackChangeType(iI).eAfflictionLine), iChange);
-			changeAfflictOnAttackTypeProbability(((PromotionLineTypes)kPromotion.getAfflictOnAttackChangeType(iI).eAfflictionLine), kPromotion.getAfflictOnAttackChangeType(iI).iProbabilityChange * iChange);
-			changeAfflictOnAttackTypeMeleeCount(((PromotionLineTypes)kPromotion.getAfflictOnAttackChangeType(iI).eAfflictionLine), kPromotion.getAfflictOnAttackChangeType(iI).iMelee * iChange);
-			changeAfflictOnAttackTypeDistanceCount(((PromotionLineTypes)kPromotion.getAfflictOnAttackChangeType(iI).eAfflictionLine), kPromotion.getAfflictOnAttackChangeType(iI).iDistance * iChange);
-			changeAfflictOnAttackTypeImmediateCount(((PromotionLineTypes)kPromotion.getAfflictOnAttackChangeType(iI).eAfflictionLine), kPromotion.getAfflictOnAttackChangeType(iI).iImmediate * iChange);
-		}
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	for (iI = 0; iI < kPromotion.getNumHealUnitCombatChangeTypes(); iI++)
 	{
@@ -21973,16 +21179,6 @@ void CvUnit::setHasPromotion(PromotionTypes eIndex, bool bNewValue, bool bFree, 
 
 	const CvPromotionInfo& kPromotion = GC.getPromotionInfo(eIndex);
 	// Disable spy promotions mechanism
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	//TB Combat Mods begin (first, regardless of remove, add, or ignore because they already have it, reset AfflictionTurnCount to 0,
-	//and another check is necessary here for equips and afflicts to ensure unusual means of reaching this point cannot bypass some necessary disqualifiers)
-	if (kPromotion.isAffliction())
-	{
-		PromotionLineTypes eAfflict = (PromotionLineTypes)kPromotion.getPromotionLine();
-		setAfflictionTurnCount(eAfflict, 0);
-	}
-	//TB Combat Mods end
-#endif
 	bool canPromote = !isSpy() || GC.isSS_ENABLED() || kPromotion.isEnemyRoute(); //exempt commando promotion
 
 	bool bAssignFree = false;
@@ -22017,9 +21213,6 @@ void CvUnit::setHasPromotion(PromotionTypes eIndex, bool bNewValue, bool bFree, 
 		// run up against regularly by default anyhow.  If we notice units getting free promos they can't keep, then
 		// we'll have to find the source and check against canKeepPromotion before they qualify to get to setHasPromotion in the first place.
 		if (canPromote && bNewValue && (kPromotion.isEquipment()
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-			|| kPromotion.isAffliction()
-#endif
 			))
 		{
 			// When trying to add a promotion: check we are allowed to have it.
@@ -22027,9 +21220,6 @@ void CvUnit::setHasPromotion(PromotionTypes eIndex, bool bNewValue, bool bFree, 
 			//	or afflication promotions from the same line as an existing one that has a higher priority
 			PromotionRequirements::flags promoFlags = PromotionRequirements::None;
 			if (kPromotion.isEquipment()) promoFlags |= PromotionRequirements::Equip;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-			if (kPromotion.isAffliction()) promoFlags |= PromotionRequirements::Afflict;
-#endif
 			canPromote = canAcquirePromotion(eIndex, promoFlags);
 		}
 
@@ -22077,9 +21267,6 @@ void CvUnit::setHasPromotion(PromotionTypes eIndex, bool bNewValue, bool bFree, 
 			{
 				if (kPromotion.getPromotionLine() != NO_PROMOTIONLINE
 				&& (
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-					kPromotion.isAffliction() ||
-#endif
 					kPromotion.isEquipment()))
 				{
 					for (int iI = 0; iI < GC.getNumPromotionInfos(); iI++)
@@ -22417,9 +21604,6 @@ void CvUnit::read(FDataStreamBase* pStream)
 
 			if (GC.getPromotionInfo((PromotionTypes)iI).getPromotionLine() != NO_PROMOTIONLINE
 			&& !GC.getPromotionInfo((PromotionTypes)iI).isEquipment()
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-			&& !GC.getPromotionInfo((PromotionTypes)iI).isAffliction()
-#endif
 			&& !GC.getPromotionInfo((PromotionTypes)iI).isStatus())
 			{
 				//	All lesser priority promotions on the same line are implied - make sure they are set
@@ -22704,17 +21888,8 @@ void CvUnit::read(FDataStreamBase* pStream)
 
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraDodgeModifier);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraPrecisionModifier);
-	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraPowerShots);
-	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraPowerShotCombatModifier);
-	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraPowerShotPunctureModifier);
-	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraPowerShotPrecisionModifier);
-	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraPowerShotCriticalModifier);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraCriticalModifier);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraEndurance);
-	WRAPPER_READ(wrapper, "CvUnit", &m_iColdDamage);
-	WRAPPER_READ(wrapper, "CvUnit", &m_iDealColdDamageCount);
-	WRAPPER_READ(wrapper, "CvUnit", &m_iColdImmuneCount);
-	WRAPPER_READ(wrapper, "CvUnit", &m_iCombatPowerShots);
 
 	// Read compressed data format
 	for (int iI = 0; iI < GC.getNumPromotionInfos(); iI++)
@@ -23018,57 +22193,12 @@ void CvUnit::read(FDataStreamBase* pStream)
 		}
 	}
 
-	// Read compressed data format
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		g_paiTempExtraRoundStunVSUnitCombatType[iI] = 0;
-	}
-	do
-	{
-		iI= -1;
-		WRAPPER_READ_DECORATED(wrapper, "CvUnit", &iI, "hasUnitCombatInfo14");
-		if ( iI != -1 )
-		{
-			int iNewIndex = wrapper.getNewClassEnumValue(REMAPPED_CLASS_TYPE_COMBATINFOS, iI, true);
-
-			if ( iNewIndex != NO_UNITCOMBAT )
-			{
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempExtraRoundStunVSUnitCombatType[iNewIndex], "extraRoundStunVSUnitCombatType");
-			}
-		}
-	} while(iI != -1);
-
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		if ( g_paiTempExtraRoundStunVSUnitCombatType[iI] != 0 )
-		{
-			UnitCombatKeyedInfo* info = findOrCreateUnitCombatKeyedInfo((UnitCombatTypes)iI);
-
-			info->m_iExtraRoundStunVSUnitCombatType = g_paiTempExtraRoundStunVSUnitCombatType[iI];
-		}
-	}
-	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraRoundStunProb);
-	WRAPPER_READ(wrapper, "CvUnit", &m_iCombatStuns);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraPoisonProbabilityModifier);
 
 	// Read compressed data format
 	for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
 	{
 		g_pabTempValidBuildUp[iI] = false;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-		g_paiTempAfflictOnAttackTypeProbability[iI] = 0;
-		g_paiTempAfflictOnAttackTypeCount[iI] = 0;
-		g_paiTempAfflictOnAttackTypeImmediateCount[iI] = 0;
-		g_paiTempAfflictOnAttackTypeAttemptedCount[iI] = 0;
-		g_paiTempCureAfflictionTypeCount[iI] = 0;
-		g_paiTempAfflictionTurnTypeCount[iI] = 0;
-		g_paiTempAfflictionLineCount[iI] = 0;
-		g_paiTempAfflictionTypeTolerance[iI] = 0;
-		g_paiTempFortitudeModifierAmount[iI] = 0;
-		g_paiTempDistanceAttackCommunicability[iI] = 0;
-		g_paiTempAfflictOnAttackTypeMeleeCount[iI] = 0;
-		g_paiTempAfflictOnAttackTypeDistanceCount[iI] = 0;
-#endif
 	}
 	do
 	{
@@ -23103,20 +22233,6 @@ void CvUnit::read(FDataStreamBase* pStream)
 	{
 		bool	bNonDefaultValue =
 			g_pabTempValidBuildUp[iI]
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-			|| g_paiTempAfflictOnAttackTypeProbability[iI] != 0
-			|| g_paiTempAfflictOnAttackTypeCount[iI] != 0
-			|| g_paiTempAfflictOnAttackTypeImmediateCount[iI] != 0
-			|| g_paiTempAfflictOnAttackTypeAttemptedCount[iI] != 0
-			|| g_paiTempCureAfflictionTypeCount[iI] != 0
-			|| g_paiTempAfflictionTurnTypeCount[iI] != 0
-			|| g_paiTempAfflictionLineCount[iI] != 0
-			|| g_paiTempAfflictionTypeTolerance[iI] != 0
-			|| g_paiTempFortitudeModifierAmount[iI] != 0
-			|| g_paiTempDistanceAttackCommunicability[iI] != 0
-			|| g_paiTempAfflictOnAttackTypeMeleeCount[iI] != 0
-			|| g_paiTempAfflictOnAttackTypeDistanceCount[iI] != 0
-#endif
 		;
 
 		if ( bNonDefaultValue )
@@ -23124,20 +22240,6 @@ void CvUnit::read(FDataStreamBase* pStream)
 			PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo((PromotionLineTypes)iI);
 
 			info->m_bValidBuildUp = g_pabTempValidBuildUp[iI];
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-			info->m_iAfflictOnAttackTypeProbability = g_paiTempAfflictOnAttackTypeProbability[iI];
-			info->m_iAfflictOnAttackTypeCount = g_paiTempAfflictOnAttackTypeCount[iI];
-			info->m_iAfflictOnAttackTypeImmediateCount = g_paiTempAfflictOnAttackTypeImmediateCount[iI];
-			info->m_iAfflictOnAttackTypeAttemptedCount = g_paiTempAfflictOnAttackTypeAttemptedCount[iI];
-			info->m_iCureAfflictionTypeCount = g_paiTempCureAfflictionTypeCount[iI];
-			info->m_iAfflictionTurnTypeCount = g_paiTempAfflictionTurnTypeCount[iI];
-			info->m_iAfflictionLineCount = g_paiTempAfflictionLineCount[iI];
-			info->m_iAfflictionTypeTolerance = g_paiTempAfflictionTypeTolerance[iI];
-			info->m_iFortitudeModifierAmount = g_paiTempFortitudeModifierAmount[iI];
-			info->m_iDistanceAttackCommunicability = g_paiTempDistanceAttackCommunicability[iI];
-			info->m_iAfflictOnAttackTypeMeleeCount = g_paiTempAfflictOnAttackTypeMeleeCount[iI];
-			info->m_iAfflictOnAttackTypeDistanceCount = g_paiTempAfflictOnAttackTypeDistanceCount[iI];
-#endif
 		}
 	}
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraAttackCombatModifier);
@@ -23955,24 +23057,6 @@ void CvUnit::write(FDataStreamBase* pStream)
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraFortitude);
 
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	//	Use condensed format now - only save non-default array elements
-	for (int iI = 0; iI < GC.getNumPromotionInfos(); iI++)
-	{
-		if ( getAfflictionHitCount((PromotionTypes)iI) != 0)
-		{
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", iI, "hasAfflicationInfo");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getAfflictionHitCount((PromotionTypes)iI), "afflictOnAttack");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getAfflictionHitCount((PromotionTypes)iI), "cureAffliction");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getAfflictionHitCount((PromotionTypes)iI), "afflictionTurn");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getAfflictionHitCount((PromotionTypes)iI), "afflictionHit");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getAfflictionHitCount((PromotionTypes)iI), "afflictionTolerance");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getAfflictionHitCount((PromotionTypes)iI), "fortitudeModifierType");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getTrapSetWithPromotionCount((PromotionTypes)iI), "trapSetWithPromotionType");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getAfflictionHitCount((PromotionTypes)iI), "promotionFromTraitCount");
-		}
-	}
-#endif
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iRoundCount);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iAttackCount);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iDefenseCount);
@@ -24031,17 +23115,8 @@ void CvUnit::write(FDataStreamBase* pStream)
 
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraDodgeModifier);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraPrecisionModifier);
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraPowerShots);
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraPowerShotCombatModifier);
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraPowerShotPunctureModifier);
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraPowerShotPrecisionModifier);
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraPowerShotCriticalModifier);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraCriticalModifier);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraEndurance);
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iColdDamage);
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iDealColdDamageCount);
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iColdImmuneCount);
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iCombatPowerShots);
 
 	//	Use condensed format now - only save non-default array elements
 	for (int iI = 0; iI < GC.getNumPromotionInfos(); iI++)
@@ -24146,46 +23221,8 @@ void CvUnit::write(FDataStreamBase* pStream)
 		}
 	}
 
-	//	Use condensed format now - only save non-default array elements
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		if (getExtraRoundStunVSUnitCombatType((UnitCombatTypes)iI) != 0)
-		{
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", iI, "hasUnitCombatInfo14");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getExtraRoundStunVSUnitCombatType((UnitCombatTypes)iI), "extraRoundStunVSUnitCombatType");
-		}
-	}
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraRoundStunProb);
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iCombatStuns);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraPoisonProbabilityModifier);
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	//	Use condensed format now - only save non-default array elements
-	for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-	{
-		if ( getAfflictOnAttackTypeProbability((PromotionLineTypes)iI) != 0 ||
-			 getAfflictOnAttackTypeCount((PromotionLineTypes)iI) != 0 ||
-			 getAfflictOnAttackTypeImmediateCount((PromotionLineTypes)iI) != 0 ||
-			 getAfflictOnAttackTypeAttemptedCount((PromotionLineTypes)iI) != 0 ||
-			 getCureAfflictionCount((PromotionLineTypes)iI) != 0 ||
-			 getAfflictionTurnCount((PromotionLineTypes)iI) != 0 ||
-			 getAfflictionLineCount((PromotionLineTypes)iI) != 0 ||
-			 getUnitAfflictionTolerance((PromotionLineTypes)iI) != 0 ||
-			 getFortitudeModifierTypeAmount((PromotionLineTypes)iI) != 0)
-		{
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", iI, "hasAfflictOnAttackInfo");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getAfflictOnAttackTypeProbability((PromotionLineTypes)iI), "afflictOnAttackTypeProb");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getAfflictOnAttackTypeCount((PromotionLineTypes)iI), "afflictOnAttackTypeCount");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getAfflictOnAttackTypeImmediateCount((PromotionLineTypes)iI), "afflictOnAttackTypeImmediateCount");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getAfflictOnAttackTypeAttemptedCount((PromotionLineTypes)iI), "afflictOnAttackTypeAttemptedCount");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getCureAfflictionCount((PromotionLineTypes)iI), "cureAfflictionType");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getAfflictionTurnCount((PromotionLineTypes)iI), "afflictionTurnType");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getAfflictionLineCount((PromotionLineTypes)iI), "hasAfflictionLine");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getUnitAfflictionTolerance((PromotionLineTypes)iI), "afflictionToleranceType");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getFortitudeModifierTypeAmount((PromotionLineTypes)iI), "fortitudeModifier");
-		}
-	}
-#endif
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraAttackCombatModifier);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraDefenseCombatModifier);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iRetrainsAvailable);
@@ -24703,10 +23740,6 @@ void CvUnit::collateralCombat(const CvPlot* pPlot, CvUnit* pSkipUnit)
 				int iDamageDone = iUnitDamage - pBestUnit->getDamage();
 				pBestUnit->setDamage(iUnitDamage, getOwner());
 				//TB Combat Mod begin
-				if (dealsColdDamage())
-				{
-					pBestUnit->setColdDamage(iUnitDamage);
-				}
 				//TB Combat Mod end
 				CvEventReporter::getInstance().combatLogCollateral(this, pBestUnit, iDamageDone);
 // BUG - Combat Events - end
@@ -24744,28 +23777,6 @@ void CvUnit::rBombardCombat(const CvPlot* pPlot, CvUnit* pFirstUnit)
 
 	const int iPossibleTargets = std::min(pPlot->getNumVisiblePotentialEnemyDefenders(this), rBombardDamageMaxUnits());
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int iDistanceAttackCommunicability = 0;
-	std::vector<int> m_iAfflictionIndex;
-	bool bAffliction = false;
-	if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-	{
-		for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-		{
-			iDistanceAttackCommunicability = getDistanceAttackCommunicability((PromotionLineTypes)iI);
-			if (iDistanceAttackCommunicability > 0)
-			{
-				bAffliction = true;
-				PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-				if (pCity != NULL)
-				{
-					pCity->changePromotionLineAfflictionAttackCommunicability(eAfflictionLine, iDistanceAttackCommunicability);
-				}
-				m_iAfflictionIndex.push_back(iI);
-			}
-		}
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	std::map<CvUnit*, int>::iterator it;
 	std::map<CvUnit*, int> mapUnitDamage;
@@ -24877,45 +23888,7 @@ void CvUnit::rBombardCombat(const CvPlot* pPlot, CvUnit* pFirstUnit)
 				int iDamageDone = iUnitDamage - pBestUnit->getDamage();
 				pBestUnit->setDamage(iUnitDamage, getOwner());
 				//TB Combat Mod begin
-				if (dealsColdDamage())
-				{
-					pBestUnit->setColdDamage(iUnitDamage);
-				}
 				//TB Combat Mod end
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-				//Distance Communicability
-				if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-				{
-					if (bAffliction)
-					{
-						int iSize = (int)m_iAfflictionIndex.size();
-						for (int iJ = 0; iJ < iSize; iJ++)
-						{
-							int iIndex = m_iAfflictionIndex[iJ];
-							PromotionLineTypes eAfflictionLine = (PromotionLineTypes)iIndex;
-							int iDAC = getDistanceAttackCommunicability(eAfflictionLine);
-							if (pBestUnit->checkContractDisease(eAfflictionLine, iDAC))
-							{
-								pBestUnit->afflict(eAfflictionLine);
-							}
-						}
-					}
-					//Afflict On Attack
-					for (int iJ = 0; iJ < GC.getNumPromotionLineInfos(); iJ++)
-					{
-						if (hasAfflictOnAttackType((PromotionLineTypes)iJ) && isAfflictOnAttackTypeDistance((PromotionLineTypes)iJ) && GC.getPromotionLineInfo((PromotionLineTypes)iJ).isAffliction())
-						{
-							PromotionLineTypes eAfflictionLinePoison = ((PromotionLineTypes)iJ);
-							int iAfflictChance = getAfflictOnAttackTypeProbability(eAfflictionLinePoison) - pBestUnit->fortitudeTotal() - pBestUnit->getUnitAfflictionTolerance(eAfflictionLinePoison);
-							int iAfflictCheckResult = GC.getGame().getSorenRandNum(100, "Trap Affliction Check");
-							if (iAfflictCheckResult < iAfflictChance)
-							{
-								pBestUnit->afflict(eAfflictionLinePoison, true, this, false);
-							}
-						}
-					}
-				}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 				CvEventReporter::getInstance().combatLogCollateral(this, pBestUnit, iDamageDone);
 // BUG - Combat Events - end
 				iDamageCount++;
@@ -24945,9 +23918,6 @@ void CvUnit::rBombardCombat(const CvPlot* pPlot, CvUnit* pFirstUnit)
 	{
 		FAssertMsg(pPlot->getX() != -1 && pPlot->getY() != -1, "Unit's X or Y is out of valid range in Ranged Assault");
 	}
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	m_iAfflictionIndex.clear();
-#endif
 }
 
 
@@ -25008,10 +23978,6 @@ void CvUnit::flankingStrikeCombat(const CvPlot* pPlot, int iAttackerStrength, in
 // BUG - Combat Events - end
 		pUnit->setDamage(iDamage, getOwner());
 		//TB Combat Mod begin
-		if (dealsColdDamage())
-		{
-			pUnit->setColdDamage(iDamage);
-		}
 		//TB Combat mod end
 		if (pUnit->isDead())
 		{
@@ -25144,50 +24110,9 @@ bool CvUnit::airStrike(CvPlot* pPlot)//
 
 	collateralCombat(pPlot, pDefender);
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	//Afflict
-	int iDistanceAttackCommunicability = 0;
-	bool bAffliction = false;
-	if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-	{
-		for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-		{
-			//Distance Communicability
-			iDistanceAttackCommunicability = getDistanceAttackCommunicability((PromotionLineTypes)iI);
-			if (iDistanceAttackCommunicability > 0)
-			{
-				bAffliction = true;
-				PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-				if (pDefender->checkContractDisease(eAfflictionLine, iDistanceAttackCommunicability))
-				{
-					pDefender->afflict(eAfflictionLine);
-				}
-				if (pCity != NULL)
-				{
-					pCity->changePromotionLineAfflictionAttackCommunicability(eAfflictionLine, iDistanceAttackCommunicability);
-				}
-			}
-			//Afflict On Attack
-			if (hasAfflictOnAttackType((PromotionLineTypes)iI)  && isAfflictOnAttackTypeDistance((PromotionLineTypes)iI) && GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction())
-			{
-				PromotionLineTypes eAfflictionLinePoison = ((PromotionLineTypes)iI);
-				int iAfflictChance = getAfflictOnAttackTypeProbability(eAfflictionLinePoison) - pDefender->fortitudeTotal() - pDefender->getUnitAfflictionTolerance(eAfflictionLinePoison);
-				int iAfflictCheckResult = GC.getGame().getSorenRandNum(100, "Air Raid Affliction Check");
-				if (iAfflictCheckResult < iAfflictChance)
-				{
-					pDefender->afflict(eAfflictionLinePoison, true, this, false);
-				}
-			}
-		}
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	pDefender->setDamage(iUnitDamage, getOwner());
 	//TB Combat Mod Begin
-	if (dealsColdDamage())
-	{
-		pDefender->setColdDamage(iUnitDamage);
-	}
 	//TB Combat mod end
 
 	if (GC.getGame().isModderGameOption(MODDERGAMEOPTION_IMPROVED_XP))
@@ -25327,52 +24252,9 @@ bool CvUnit::rangeStrike(int iX, int iY)
 
 	collateralCombat(pPlot, pDefender);
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	//Afflict
-	int iDistanceAttackCommunicability = 0;
-	bool bAffliction = false;
-	if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-	{
-		CvCity* pCity = pPlot->getPlotCity();
-
-		for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-		{
-			//Distance Communicability
-			iDistanceAttackCommunicability = getDistanceAttackCommunicability((PromotionLineTypes)iI);
-			if (iDistanceAttackCommunicability > 0)
-			{
-				bAffliction = true;
-				PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-				if (pDefender->checkContractDisease(eAfflictionLine, iDistanceAttackCommunicability))
-				{
-					pDefender->afflict(eAfflictionLine);
-				}
-				if (pCity != NULL)
-				{
-					pCity->changePromotionLineAfflictionAttackCommunicability(eAfflictionLine, iDistanceAttackCommunicability);
-				}
-			}
-			//Afflict On Attack
-			if (hasAfflictOnAttackType((PromotionLineTypes)iI) && isAfflictOnAttackTypeDistance((PromotionLineTypes)iI) && GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction())
-			{
-				PromotionLineTypes eAfflictionLinePoison = ((PromotionLineTypes)iI);
-				int iAfflictChance = getAfflictOnAttackTypeProbability(eAfflictionLinePoison) - pDefender->fortitudeTotal() - pDefender->getUnitAfflictionTolerance(eAfflictionLinePoison);
-				int iAfflictCheckResult = GC.getGame().getSorenRandNum(100, "Air Raid Affliction Check");
-				if (iAfflictCheckResult < iAfflictChance)
-				{
-					pDefender->afflict(eAfflictionLinePoison, true, this, false);
-				}
-			}
-		}
-	}
-#endif
 	//set damage but don't update entity damage visibility
 	pDefender->setDamage(iUnitDamage, getOwner(), false);
 	//TB Combat Mod begin
-	if (dealsColdDamage())
-	{
-		pDefender->setColdDamage(iUnitDamage);
-	}
 	//TB Combat Mod end
 
 	// Range strike entity mission
@@ -25725,16 +24607,6 @@ void CvUnit::getDefenderCombatValues(const CvUnit& kDefender, const CvPlot* pPlo
 	iTheirStrength = std::max(1,kDefender.currCombatStr(pPlot, this, pTheirDetails));
 	int iTheirFirepower = std::max(1, kDefender.currFirepower(pPlot, this));
 
-	if (kDefender.getCombatPowerShots() > 0)
-	{
-		iTheirStrength += ((iTheirStrength * kDefender.powerShotCombatModifierTotal())/100);
-		iTheirFirepower += ((iTheirFirepower * kDefender.powerShotCombatModifierTotal())/100);
-	}
-	if (getCombatPowerShots() > 0)
-	{
-		iOurStrength += ((iOurStrength * powerShotCombatModifierTotal())/100);
-		iOurFirepower += ((iOurFirepower * powerShotCombatModifierTotal())/100);
-	}
 
 #ifdef STRENGTH_IN_NUMBERS
 	if (GC.getGame().isOption(GAMEOPTION_COMBAT_STRENGTH_IN_NUMBERS))
@@ -25775,14 +24647,6 @@ void CvUnit::getDefenderCombatValues(const CvUnit& kDefender, const CvPlot* pPlo
 	int iDefendPunctureTotal = kDefender.punctureVSOpponentProbTotal(pAttacker);
 	int iAttackPunctureTotal = punctureVSOpponentProbTotal(pDefender);
 	int iDefendArmorTotal = kDefender.armorVSOpponentProbTotal(pAttacker);
-	if (kDefender.getCombatPowerShots() > 0)
-	{
-		iDefendPunctureTotal += kDefender.powerShotPunctureModifierTotal();
-	}
-	if (getCombatPowerShots() > 0)
-	{
-		iAttackPunctureTotal += powerShotPunctureModifierTotal();
-	}
 
 	int iUnmodifiedDefenderArmor = (iDefendArmorTotal - iAttackPunctureTotal);
 	int iUnmodifiedAttackerArmor = (iAttackArmorTotal - iDefendPunctureTotal);
@@ -26267,45 +25131,6 @@ bool CvUnit::airBomb1(int iX, int iY)
 
 				pPlot->setImprovementType(GC.getImprovementInfo(pPlot->getImprovementType()).getImprovementPillage());
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-				//Afflict
-				int iDistanceAttackCommunicability = 0;
-				bool bAffliction = false;
-				if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-				{
-					for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-					{
-						if (GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction() && !GC.getPromotionLineInfo((PromotionLineTypes)iI).isCritical())
-						{
-							//Distance Communicability
-							iDistanceAttackCommunicability = getDistanceAttackCommunicability((PromotionLineTypes)iI);
-							bool bDistAttComm = iDistanceAttackCommunicability > 0;
-							PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-							bool bAffonAtt = (hasAfflictOnAttackType(eAfflictionLine) && isAfflictOnAttackTypeDistance(eAfflictionLine));
-							if (bDistAttComm || bAffonAtt)
-							{
-								bAffliction = true;
-								foreach_(CvUnit* pLoopUnit, pPlot->units())
-								{
-									if (bDistAttComm && pLoopUnit->checkContractDisease(eAfflictionLine, iDistanceAttackCommunicability))
-									{
-										pLoopUnit->afflict(eAfflictionLine);
-									}
-									if (bAffonAtt)
-									{
-										int iAttackersPoisonChance = getAfflictOnAttackTypeProbability(eAfflictionLine) - pLoopUnit->fortitudeTotal() - pLoopUnit->getUnitAfflictionTolerance(eAfflictionLine);
-
-										if (GC.getGame().getSorenRandNum(100, "AttackersPoisonRoll") < iAttackersPoisonChance)
-										{
-											pLoopUnit->afflict(eAfflictionLine, true, this);
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 			}
 			else
 			{
@@ -26470,52 +25295,6 @@ bool CvUnit::airBomb2(int iX, int iY)
 					AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_BOMBARD", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN(), pCity->getX(), pCity->getY(), true, true);
 				}
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-				//Afflict
-				int iDistanceAttackCommunicability = 0;
-				bool bAffliction = false;
-				if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-				{
-					for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-					{
-						if (GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction() && !GC.getPromotionLineInfo((PromotionLineTypes)iI).isCritical())
-						{
-							//Distance Communicability
-							iDistanceAttackCommunicability = getDistanceAttackCommunicability((PromotionLineTypes)iI);
-							bool bDistAttComm = iDistanceAttackCommunicability > 0;
-							PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-							bool bAffonAtt = (hasAfflictOnAttackType(eAfflictionLine) && isAfflictOnAttackTypeDistance(eAfflictionLine));
-							if (bDistAttComm || bAffonAtt)
-							{
-								bAffliction = true;
-								foreach_(CvUnit* pLoopUnit, pPlot->units())
-								{
-									if (bDistAttComm)
-									{
-										if (pLoopUnit->checkContractDisease(eAfflictionLine, iDistanceAttackCommunicability))
-										{
-											pLoopUnit->afflict(eAfflictionLine);
-										}
-										if (pCity != NULL)
-										{
-											pCity->changePromotionLineAfflictionAttackCommunicability(eAfflictionLine, iDistanceAttackCommunicability);
-										}
-									}
-									if (bAffonAtt)
-									{
-										int iAttackersPoisonChance = getAfflictOnAttackTypeProbability(eAfflictionLine) - pLoopUnit->fortitudeTotal() - pLoopUnit->getUnitAfflictionTolerance(eAfflictionLine);
-
-										if (GC.getGame().getSorenRandNum(100, "AttackersPoisonRoll") < iAttackersPoisonChance)
-										{
-											pLoopUnit->afflict(eAfflictionLine, true, this);
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 			}
 			else
 			{
@@ -26739,55 +25518,6 @@ bool CvUnit::airBomb3(int iX, int iY)
 	setReconPlot(pPlot);
 	setMadeAttack(true);
 	changeMoves(GC.getMOVE_DENOMINATOR());
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if (bSuccess)
-	{
-		//Afflict
-		int iDistanceAttackCommunicability = 0;
-		bool bAffliction = false;
-		if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-		{
-			for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-			{
-				if (GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction() && !GC.getPromotionLineInfo((PromotionLineTypes)iI).isCritical())
-				{
-					//Distance Communicability
-					iDistanceAttackCommunicability = getDistanceAttackCommunicability((PromotionLineTypes)iI);
-					bool bDistAttComm = iDistanceAttackCommunicability > 0;
-					PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-					bool bAffonAtt = (hasAfflictOnAttackType(eAfflictionLine) && isAfflictOnAttackTypeDistance(eAfflictionLine));
-					if (bDistAttComm || bAffonAtt)
-					{
-						bAffliction = true;
-						foreach_(CvUnit* pLoopUnit, pPlot->units())
-						{
-							if (bDistAttComm)
-							{
-								if (pLoopUnit->checkContractDisease(eAfflictionLine, iDistanceAttackCommunicability))
-								{
-									pLoopUnit->afflict(eAfflictionLine);
-								}
-								if (pCity != NULL)
-								{
-									pCity->changePromotionLineAfflictionAttackCommunicability(eAfflictionLine, iDistanceAttackCommunicability);
-								}
-							}
-							if (bAffonAtt)
-							{
-								int iAttackersPoisonChance = getAfflictOnAttackTypeProbability(eAfflictionLine) - pLoopUnit->fortitudeTotal() - pLoopUnit->getUnitAfflictionTolerance(eAfflictionLine);
-
-								if (GC.getGame().getSorenRandNum(100, "AttackersPoisonRoll") < iAttackersPoisonChance)
-								{
-									pLoopUnit->afflict(eAfflictionLine, true, this);
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 	addMission(CvAirMissionDefinition(MISSION_AIRBOMB, pPlot, this));
 
 	if (isSuicide())
@@ -26913,10 +25643,6 @@ bool CvUnit::airBomb4(int iX, int iY)
 			bSuccess = true;
 			pUnit->setDamage(iUnitDamage, getOwner());
 			//TB Combat Mod begin
-			if (dealsColdDamage())
-			{
-				pUnit->setColdDamage(iUnitDamage);
-			}
 			//TB Combat mod end
 			if (GC.getGame().getSorenRandNum(100, "Spin the dice") < 50)
 			{
@@ -26965,55 +25691,6 @@ bool CvUnit::airBomb4(int iX, int iY)
 	setReconPlot(pPlot);
 	setMadeAttack(true);
 	changeMoves(GC.getMOVE_DENOMINATOR());
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if (bSuccess)
-	{
-		//Afflict
-		int iDistanceAttackCommunicability = 0;
-		bool bAffliction = false;
-		if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-		{
-			for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-			{
-				if (GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction() && !GC.getPromotionLineInfo((PromotionLineTypes)iI).isCritical())
-				{
-					//Distance Communicability
-					iDistanceAttackCommunicability = getDistanceAttackCommunicability((PromotionLineTypes)iI);
-					bool bDistAttComm = iDistanceAttackCommunicability > 0;
-					PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-					bool bAffonAtt = (hasAfflictOnAttackType(eAfflictionLine) && isAfflictOnAttackTypeDistance(eAfflictionLine));
-					if (bDistAttComm || bAffonAtt)
-					{
-						bAffliction = true;
-						foreach_(CvUnit* pLoopUnit, pPlot->units())
-						{
-							if (bDistAttComm)
-							{
-								if (pLoopUnit->checkContractDisease(eAfflictionLine, iDistanceAttackCommunicability))
-								{
-									pLoopUnit->afflict(eAfflictionLine);
-								}
-								if (pCity != NULL)
-								{
-									pCity->changePromotionLineAfflictionAttackCommunicability(eAfflictionLine, iDistanceAttackCommunicability);
-								}
-							}
-							if (bAffonAtt)
-							{
-								int iAttackersPoisonChance = getAfflictOnAttackTypeProbability(eAfflictionLine) - pLoopUnit->fortitudeTotal() - pLoopUnit->getUnitAfflictionTolerance(eAfflictionLine);
-
-								if (GC.getGame().getSorenRandNum(100, "AttackersPoisonRoll") < iAttackersPoisonChance)
-								{
-									pLoopUnit->afflict(eAfflictionLine, true, this);
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 	addMission(CvAirMissionDefinition(MISSION_AIRBOMB, pPlot, this));
 
 	if (isSuicide())
@@ -27144,55 +25821,6 @@ bool CvUnit::airBomb5(int iX, int iY)
 	setReconPlot(pPlot);
 	setMadeAttack(true);
 	changeMoves(GC.getMOVE_DENOMINATOR());
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if (bSuccess)
-	{
-		//Afflict
-		int iDistanceAttackCommunicability = 0;
-		bool bAffliction = false;
-		if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-		{
-			for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-			{
-				if (GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction() && !GC.getPromotionLineInfo((PromotionLineTypes)iI).isCritical())
-				{
-					//Distance Communicability
-					iDistanceAttackCommunicability = getDistanceAttackCommunicability((PromotionLineTypes)iI);
-					bool bDistAttComm = iDistanceAttackCommunicability > 0;
-					PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-					bool bAffonAtt = (hasAfflictOnAttackType(eAfflictionLine) && isAfflictOnAttackTypeDistance(eAfflictionLine));
-					if (bDistAttComm || bAffonAtt)
-					{
-						bAffliction = true;
-						foreach_(CvUnit* pLoopUnit, pPlot->units())
-						{
-							if (bDistAttComm)
-							{
-								if (pLoopUnit->checkContractDisease(eAfflictionLine, iDistanceAttackCommunicability))
-								{
-									pLoopUnit->afflict(eAfflictionLine);
-								}
-								if (pCity != NULL)
-								{
-									pCity->changePromotionLineAfflictionAttackCommunicability(eAfflictionLine, iDistanceAttackCommunicability);
-								}
-							}
-							if (bAffonAtt)
-							{
-								int iAttackersPoisonChance = getAfflictOnAttackTypeProbability(eAfflictionLine) - pLoopUnit->fortitudeTotal() - pLoopUnit->getUnitAfflictionTolerance(eAfflictionLine);
-
-								if (GC.getGame().getSorenRandNum(100, "AttackersPoisonRoll") < iAttackersPoisonChance)
-								{
-									pLoopUnit->afflict(eAfflictionLine, true, this);
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 	addMission(CvAirMissionDefinition(MISSION_AIRBOMB, pPlot, this));
 
 	if (isSuicide())
@@ -27521,10 +26149,6 @@ void CvUnit::doOpportunityFire()
 			iUnitDamage = (GC.getGame().getSorenRandNum(getBombardRate(), "Bombard damage") * 5);
 			pDefender->changeDamage(iUnitDamage, getOwner());
 			//TB Combat Mod begin
-			if (dealsColdDamage())
-			{
-				pDefender->changeColdDamage(iUnitDamage);
-			}
 			//TB Combat Mod end
 
 			{
@@ -27579,10 +26203,6 @@ void CvUnit::doActiveDefense()
 				pDefender->setDamage(iUnitDamage, getOwner());
 				bSuccess = true;
 				//TB Combat Mod begin
-				if (dealsColdDamage())
-				{
-					pDefender->setColdDamage(iUnitDamage);
-				}
 				//TB Combat mod end
 				if (pLoopPlot->isActiveVisible(false) && (!pDefender->isUsingDummyEntities() && pDefender->isInViewport()))
 				{
@@ -27593,56 +26213,6 @@ void CvUnit::doActiveDefense()
 				}
 			}
 		}
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-		if (bSuccess)
-		{
-			//Afflict
-			int iDistanceAttackCommunicability = 0;
-			bool bAffliction = false;
-			if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-			{
-				for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-				{
-					if (GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction() && !GC.getPromotionLineInfo((PromotionLineTypes)iI).isCritical())
-					{
-						//Distance Communicability
-						iDistanceAttackCommunicability = getDistanceAttackCommunicability((PromotionLineTypes)iI);
-						bool bDistAttComm = iDistanceAttackCommunicability > 0;
-						PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-						bool bAffonAtt = (hasAfflictOnAttackType(eAfflictionLine) && isAfflictOnAttackTypeDistance(eAfflictionLine));
-						if (bDistAttComm || bAffonAtt)
-						{
-							bAffliction = true;
-							foreach_(CvUnit* pLoopUnit, pLoopPlot->units())
-							{
-								if (bDistAttComm)
-								{
-									if (pLoopUnit->checkContractDisease(eAfflictionLine, iDistanceAttackCommunicability))
-									{
-										pLoopUnit->afflict(eAfflictionLine);
-									}
-									pCity = pLoopPlot->getPlotCity();
-									if (pCity != NULL)
-									{
-										pCity->changePromotionLineAfflictionAttackCommunicability(eAfflictionLine, iDistanceAttackCommunicability);
-									}
-								}
-								if (bAffonAtt)
-								{
-									int iAttackersPoisonChance = getAfflictOnAttackTypeProbability(eAfflictionLine) - pLoopUnit->fortitudeTotal() - pLoopUnit->getUnitAfflictionTolerance(eAfflictionLine);
-
-									if (GC.getGame().getSorenRandNum(100, "AttackersPoisonRoll") < iAttackersPoisonChance)
-									{
-										pLoopUnit->afflict(eAfflictionLine, true, this);
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 	}
 }
 // ! Dale - SA: Active Defense
@@ -29700,503 +28270,6 @@ bool CvUnit::isPromotionOverriden(PromotionTypes ePromotionType) const
 }
 
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-bool CvUnit::canCure(const CvPlot* pPlot, PromotionLineTypes eAfflictionLine) const
-{
-	PROFILE_EXTRA_FUNC();
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-	{
-		return false;
-	}
-
-	if (hasCureAfflictionType(eAfflictionLine))
-	{
-		//Check our current tile
-		foreach_(const CvUnit* pLoopUnit, pPlot->units())
-		{
-			if (pLoopUnit->getTeam() == getTeam())
-			{
-				if (pLoopUnit->hasAfflictionLine(eAfflictionLine))
-				{
-					return true;
-				}
-			}
-		}
-	}
-	return false;
-}
-
-bool CvUnit::CureAffliction(PromotionLineTypes eAfflictionLine)
-{
-	PROFILE_EXTRA_FUNC();
-	const CvPlot* pPlot = plot();
-
-	if (!canCure(pPlot, eAfflictionLine))
-	{
-		return false;
-	}
-
-	//Check our current tile
-	foreach_(CvUnit* pLoopUnit, pPlot->units())
-	{
-		if (pLoopUnit->getTeam() == getTeam())
-		{
-			if (pLoopUnit->hasAfflictionLine(eAfflictionLine))
-			{
-				pLoopUnit->recover(eAfflictionLine);
-
-				if (pPlot->isActiveVisible(false))
-				{
-					NotifyEntity(MISSION_CURE);
-				}
-				break;
-			}
-		}
-	}
-	return false;
-}
-
-int CvUnit::getTotalCommunicableExposure(PromotionLineTypes eAfflictionLine) const
-{
-	//const CvPromotionLineInfo& kAffliction = GC.getPromotionLineInfo(eAfflictionLine);
-	const CvPlot* pPlot = plot();
-	if (pPlot == NULL)
-	{
-		return 0;
-	}
-
-	int	iTileCommunicability = pPlot->getCommunicability(eAfflictionLine, false, true, true);
-	int iUnitCommunicability = getUnitCommunicability(eAfflictionLine);
-	int iCityCommunicability = getCityCommunicability(eAfflictionLine);
-	int iTotal = iTileCommunicability + iUnitCommunicability + iCityCommunicability;
-	return iTotal;
-}
-
-int CvUnit::getCityCommunicability(PromotionLineTypes eAfflictionLine) const
-{
-	PROFILE_EXTRA_FUNC();
-	CvPlot* pPlot = plot();
-	if (pPlot == NULL)
-	{
-		return 0;
-	}
-
-	CvCity* pCity = pPlot->getPlotCity();
-	int iCommunicability = 0;
-
-	if (pCity != NULL && pCity->hasAfflictionType(eAfflictionLine)
-	&& !GC.getPromotionLineInfo(eAfflictionLine).isNoSpreadCitytoUnit())
-	{
-		for (int iI = 0; iI < GC.getPromotionLineInfo(eAfflictionLine).getNumBuildings(); iI++)
-		{
-			BuildingTypes eAfflictionBuilding = (BuildingTypes)GC.getPromotionLineInfo(eAfflictionLine).getBuilding(iI);
-			if (pCity->isActiveBuilding(eAfflictionBuilding))
-			{
-				iCommunicability += GC.getBuildingInfo(eAfflictionBuilding).getTradeCommunicability();
-			}
-		}
-	}
-	return iCommunicability;
-}
-
-int CvUnit::getUnitCommunicability(PromotionLineTypes eAfflictionLine) const
-{
-	PROFILE_EXTRA_FUNC();
-	int iWorstCommunicability = 0;
-	int iCommunicability = 0;
-	const CvPlot* pPlot = plot();
-	if (pPlot == NULL)
-	{
-		return 0;
-	}
-
-	if (!GC.getPromotionLineInfo(eAfflictionLine).isNoSpreadUnitProximity())
-	{
-		const int iBaseCommunicability = GC.getPromotionLineInfo(eAfflictionLine).getCommunicability();
-		foreach_(const CvUnit* pLoopUnit, pPlot->units())
-		{
-			if (pLoopUnit != this && pLoopUnit->hasAfflictionLine(eAfflictionLine))
-			{
-				iCommunicability = iBaseCommunicability;
-				iCommunicability += pLoopUnit->worsenedProbabilitytoAfflict(eAfflictionLine);
-				if (iWorstCommunicability < iCommunicability)
-				{
-					iWorstCommunicability = iCommunicability;
-				}
-			}
-		}
-	}
-	return iWorstCommunicability;
-}
-
-void CvUnit::doOvercomeAttempt(PromotionLineTypes eAfflictionLine)
-{
-	CvWString szBuffer;
-	int iOvercomeChance = getChancetoOvercome(eAfflictionLine);
-	int iOvercomeRollResult;
-
-	iOvercomeRollResult = GC.getGame().getSorenRandNum(100, "Overcome");
-	if (iOvercomeRollResult < iOvercomeChance)
-	{
-		recover(eAfflictionLine);
-	}
-}
-
-int CvUnit::getChancetoOvercome(PromotionLineTypes eAfflictionLine) const
-{
-	if (eAfflictionLine == NO_PROMOTIONLINE)
-	{
-		return 0;
-	}
-	PropertyTypes eProperty = GC.getPromotionLineInfo(eAfflictionLine).getPropertyType();
-	if (eProperty == NO_PROPERTY)
-	{
-		return 0;
-	}
-
-	int iChance = GC.getPromotionLineInfo(eAfflictionLine).getOvercomeProbability();
-	iChance += fortitudeTotal();
-	iChance += getFortitudeModifierTypeAmount(eAfflictionLine);
-	iChance += aidVolume(plot(), eProperty);
-	iChance += currentOvercome(eAfflictionLine);
-	iChance += getUnitAfflictionTolerance(eAfflictionLine);
-	iChance += getOvercomeChange(eAfflictionLine);
-	iChance += (GC.getPromotionLineInfo(eAfflictionLine).getWorsenedOvercomeIncrementModifier() * (getAfflictionLineCount(eAfflictionLine)-1));
-
-	iChance *= GC.getPromotionLineInfo(eAfflictionLine).getOvercomeModifier();
-	iChance /= 100;
-	return iChance;
-}
-
-int CvUnit::currentOvercome(PromotionLineTypes eAfflictionLine) const
-{
-	return (GC.getPromotionLineInfo(eAfflictionLine).getOvercomeAdjperTurn() * getAfflictionTurnCount(eAfflictionLine));
-}
-
-int CvUnit::getAfflictionTurnCount(PromotionLineTypes ePromotionLineType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	return info == NULL ? 0 : info->m_iAfflictionTurnTypeCount;
-}
-
-void CvUnit::changeAfflictionTurnCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType);
-
-		info->m_iAfflictionTurnTypeCount += iChange;
-	}
-}
-
-void CvUnit::setAfflictionTurnCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType, iChange != 0);
-
-	if (info != NULL)
-	{
-		info->m_iAfflictionTurnTypeCount = iChange;
-	}
-}
-
-int CvUnit::aidVolume(const CvPlot* pPlot, PropertyTypes eProperty) const
-{
-	PROFILE_FUNC();
-
-	const CvCity* pCity = pPlot->getPlotCity();
-
-	int iTotalAid = 0;
-
-	if (pPlot->isCity(true, getTeam()))
-	{
-		if (pCity && !pCity->isOccupation())
-		{
-			iTotalAid += pCity->getAidRate(eProperty);
-		}
-	}
-
-	int iBestAid = 0;
-
-	foreach_(const CvUnit* pLoopUnit, pPlot->units())
-	{
-		if (pLoopUnit->getTeam() == getTeam())
-		{
-			const int iAid = pLoopUnit->aidTotal(eProperty);
-
-			if (iAid > iBestAid)
-			{
-				iBestAid = iAid;
-			}
-		}
-	}
-
-	iTotalAid += iBestAid;
-
-	return iTotalAid;
-}
-
-int CvUnit::getAfflictionHitCount(PromotionTypes ePromotionType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionInfos(), ePromotionType);
-
-	const PromotionKeyedInfo* info = findPromotionKeyedInfo(ePromotionType);
-
-	return info == NULL ? 0 : info->m_iAfflictionHitCount;
-}
-
-void CvUnit::changeAfflictionHitCount(PromotionTypes ePromotionType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionInfos(), ePromotionType);
-
-	if (iChange != 0)
-	{
-		PromotionKeyedInfo* info = findOrCreatePromotionKeyedInfo(ePromotionType);
-
-		info->m_iAfflictionHitCount += iChange;
-	}
-}
-
-void CvUnit::setAfflictionHitCount(PromotionTypes ePromotionType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionInfos(), ePromotionType);
-
-	PromotionKeyedInfo* info = findOrCreatePromotionKeyedInfo(ePromotionType, iChange != 0);
-
-	if (info != NULL)
-	{
-		info->m_iAfflictionHitCount = iChange;
-	}
-}
-
-bool CvUnit::removeAfflictionHits(PromotionTypes ePromotionType)
-{
-	int iStrChange;
-	int iCombChange;
-
-	iStrChange = -(GC.getPromotionInfo(ePromotionType).getStrAdjperTurn() * getAfflictionHitCount(ePromotionType));
-	iCombChange = -(GC.getPromotionInfo(ePromotionType).getWeakenperTurn() * getAfflictionHitCount(ePromotionType));
-	changeExtraStrength(iStrChange);
-	changeExtraCombatPercent(iCombChange);
-	return true;
-}
-
-bool CvUnit::updateAfflictionHits(PromotionTypes ePromotionType)
-{
-	int iStrChange;
-	int iCombChange;
-	int iDamageChange;
-
-	iStrChange = GC.getPromotionInfo(ePromotionType).getStrAdjperTurn();
-	iCombChange = GC.getPromotionInfo(ePromotionType).getWeakenperTurn();
-	iDamageChange = (GC.getPromotionInfo(ePromotionType).getDamageperTurn() + getDamage());
-
-	changeExtraStrength(iStrChange);
-	changeExtraCombatPercent(iCombChange);
-	changeDamage(iDamageChange);
-	return true;
-}
-
-bool CvUnit::checkContractDisease(PromotionLineTypes eAfflictionLine, int iCommunicableExposure)
-{
-	PROFILE_FUNC();
-
-	bool bCheck = false;
-	for (int iI = 0; iI < GC.getPromotionLineInfo(eAfflictionLine).getNumPromotions(); iI++)
-	{
-		PromotionTypes eAffliction = (PromotionTypes)GC.getPromotionLineInfo(eAfflictionLine).getPromotion(iI);
-		if (GC.getPromotionInfo(eAffliction).getLinePriority() == (getAfflictionLineCount(eAfflictionLine)+1))
-		{
-			if (canAcquirePromotion(eAffliction, PromotionRequirements::Afflict | PromotionRequirements::ForFree))
-			{
-				bCheck = true;
-				break;
-			}
-		}
-	}
-	if (bCheck)
-	{
-		int iChancetoContract = getChancetoContract(eAfflictionLine, iCommunicableExposure);//yeah... needing work. redundancies.
-
-		int iContractRollResult = GC.getGame().getSorenRandNum(100, "Unit Outbreak Check");
-		if (iContractRollResult < iChancetoContract)
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-int CvUnit::getChancetoContract(PromotionLineTypes eAfflictionLine, int iCommunicableExposure) const
-{
-	if (eAfflictionLine == NO_PROMOTIONLINE)
-	{
-		return 0;
-	}
-	PropertyTypes eProperty = GC.getPromotionLineInfo(eAfflictionLine).getPropertyType();
-	if (eProperty == NO_PROPERTY)
-	{
-		return 0;
-	}
-
-	int	iContract = GC.getPromotionLineInfo(eAfflictionLine).getCommunicability();
-	if (iCommunicableExposure > 0 && iCommunicableExposure > iContract)
-	{
-		iContract = iCommunicableExposure;
-	}
-	iContract += getContractChanceChange(eAfflictionLine);
-	iContract -= fortitudeTotal();
-	iContract -= getFortitudeModifierTypeAmount(eAfflictionLine);
-	iContract -= getUnitAfflictionTolerance(eAfflictionLine);
-	if (hasAfflictionLine(eAfflictionLine))
-	{
-		iContract += (getAfflictionLineCount(eAfflictionLine) * GC.getPromotionLineInfo(eAfflictionLine).getWorseningProbabilityIncrementModifier());
-	}
-	int iChanceModifier = GC.getPromotionLineInfo(eAfflictionLine).getOutbreakModifier();
-	iContract *= iChanceModifier;
-	iContract /= 100;
-	return iContract;
-}
-
-int CvUnit::getUnitAfflictionTolerance(PromotionLineTypes ePromotionLineType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	return info == NULL ? 0 : info->m_iAfflictionTypeTolerance;
-}
-
-void CvUnit::changeUnitAfflictionTolerance(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType);
-
-		info->m_iAfflictionTypeTolerance = std::max(0, info->m_iAfflictionTypeTolerance + iChange);
-	}
-}
-
-void CvUnit::setUnitAfflictionTolerance(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType, iChange != 0);
-
-	if (info != NULL)
-	{
-		info->m_iAfflictionTypeTolerance = iChange;
-	}
-}
-
-int CvUnit::getContractChanceChange(PromotionLineTypes eAfflictionLine) const
-{
-	PROFILE_EXTRA_FUNC();
-	int iI;
-	int iModifier = 0;
-
-	for (iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		UnitCombatTypes eUnitCombat = ((UnitCombatTypes)iI);
-		if (isHasUnitCombat(eUnitCombat))
-		{
-			iModifier += GC.getPromotionLineInfo(eAfflictionLine).getUnitCombatContractChanceChange(iI);
-		}
-	}
-
-	for (iI = 0; iI < GC.getNumTechInfos(); iI++)
-	{
-		TechTypes eTech = ((TechTypes)iI);
-		if (GET_TEAM(getTeam()).isHasTech(eTech))
-		{
-			iModifier += GC.getPromotionLineInfo(eAfflictionLine).getTechContractChanceChange(iI);
-		}
-	}
-
-	return iModifier;
-}
-
-int CvUnit::getOvercomeChange(PromotionLineTypes eAfflictionLine) const
-{
-	PROFILE_EXTRA_FUNC();
-	int iI;
-	int iModifier = 0;
-
-	for (iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		UnitCombatTypes eUnitCombat = ((UnitCombatTypes)iI);
-		if (isHasUnitCombat(eUnitCombat))
-		{
-			iModifier += GC.getPromotionLineInfo(eAfflictionLine).getUnitCombatOvercomeChange(iI);
-		}
-	}
-
-	for (iI = 0; iI < GC.getNumTechInfos(); iI++)
-	{
-		TechTypes eTech = ((TechTypes)iI);
-		if (GET_TEAM(getTeam()).isHasTech(eTech))
-		{
-			iModifier += GC.getPromotionLineInfo(eAfflictionLine).getTechOvercomeChange(iI);
-		}
-	}
-
-	return iModifier;
-}
-
-int CvUnit::getFortitudeModifierTypeAmount(PromotionLineTypes ePromotionLineType) const
-{
-	PROFILE_EXTRA_FUNC();
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	int iEvaluation = (info == NULL ? 0 : info->m_iFortitudeModifierAmount);
-	const int iNum = m_pUnitInfo->getNumAfflictionFortitudeModifiers();
-
-	for (int iI = 0; iI < iNum; iI++)
-	{
-		const PromotionLineTypes eAfflictionLine = m_pUnitInfo->getAfflictionFortitudeModifier(iI).ePromotionLine;
-		if (eAfflictionLine == ePromotionLineType)
-		{
-			iEvaluation += m_pUnitInfo->getAfflictionFortitudeModifier(iI).iModifier;
-		}
-	}
-	return iEvaluation;
-}
-
-void CvUnit::changeFortitudeModifierTypeAmount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType);
-
-		info->m_iFortitudeModifierAmount += iChange;
-	}
-}
-
-void CvUnit::setFortitudeModifierTypeAmount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType, iChange != 0);
-
-	if (info != NULL)
-	{
-		info->m_iFortitudeModifierAmount = iChange;
-	}
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 int CvUnit::getCityRepel() const
 {
@@ -31967,9 +30040,6 @@ void CvUnit::checkPromotionObsoletion()
 			bool bPromo =
 			(
 				!promotionInfo.isEquipment()
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-				&& !promotionInfo.isAffliction()
-#endif
 			);
 			bool bPromotionFree = isPromotionFree(ePromotion);
 
@@ -32000,50 +30070,7 @@ void CvUnit::checkPromotionObsoletion()
 	}
 }
 
-int CvUnit::getColdDamage() const
-{
-	return m_iColdDamage;
-}
 
-void CvUnit::changeColdDamage(int iChange)
-{
-	if (hasImmunitytoColdDamage())
-	{
-		m_iColdDamage = 0;
-	}
-	else
-	{
-		m_iColdDamage += iChange;
-	}
-}
-
-void CvUnit::setColdDamage(int iChange)
-{
-	if (hasImmunitytoColdDamage())
-	{
-		m_iColdDamage = 0;
-	}
-	else
-	{
-	m_iColdDamage = iChange;
-	}
-}
-
-int CvUnit::getCombatPowerShots() const
-{
-	return m_iCombatPowerShots;
-}
-
-void CvUnit::setCombatPowerShots(int iNewValue)
-{
-	m_iCombatPowerShots = iNewValue;
-	FASSERT_NOT_NEGATIVE(getCombatPowerShots());
-}
-
-void CvUnit::changeCombatPowerShots(int iChange)
-{
-	setCombatPowerShots(m_iCombatPowerShots + iChange);
-}
 
 int CvUnit::getCombatKnockbacks() const
 {
@@ -32081,83 +30108,6 @@ void CvUnit::changeCombatRepels(int iChange)
 	setCombatRepels(m_iCombatRepels + iChange);
 }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-void CvUnit::checkForCritical(int iDamage, CvUnit* pOpponent)
-{
-	PROFILE_FUNC();
-
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-	{
-		return;
-	}
-	int iCritChance = (iDamage * 10);
-	int iCritChanceModifier = pOpponent->criticalVSOpponentProbTotal(this);
-	if (pOpponent->getCombatPowerShots() > 0 )
-	{
-		iCritChanceModifier += pOpponent->powerShotCriticalModifierTotal();
-	}
-	iCritChance += ((iCritChance * iCritChanceModifier)/100);
-	if (GC.getGame().getSorenRandNum(10000, "CriticalHitRoll") < iCritChance)
-	{
-		assignCritical(pOpponent);
-	}
-}
-
-void CvUnit::assignCritical(CvUnit* pOpponent)
-{
-	PROFILE_EXTRA_FUNC();
-	std::vector<PromotionTypes> aAvailableCriticals;
-	PromotionLineTypes eAfflictionLine = NO_PROMOTIONLINE;
-	int iLinePriority = 0;
-	int iLowestLinePriority = MAX_INT;
-	PromotionTypes eCurrentAffliction = NO_PROMOTION;
-	for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)	//loop through promotions
-	{
-		if (GC.getPromotionLineInfo((PromotionLineTypes)iI).isCritical())
-		{
-			eAfflictionLine = (PromotionLineTypes)iI;
-			iLowestLinePriority = MAX_INT;
-			eCurrentAffliction = NO_PROMOTION;
-			for (int iJ = 0; iJ < GC.getPromotionLineInfo(eAfflictionLine).getNumPromotions(); iJ++)
-			{
-				PromotionTypes eAffliction = (PromotionTypes)GC.getPromotionLineInfo(eAfflictionLine).getPromotion(iJ);
-				iLinePriority = GC.getPromotionInfo(eAffliction).getLinePriority();
-				if (!isHasPromotion(eAffliction) && iLinePriority < iLowestLinePriority)
-				{
-					iLowestLinePriority = iLinePriority;
-					eCurrentAffliction = eAffliction;
-				}
-
-				const CvPromotionInfo& kCritical = GC.getPromotionInfo(eCurrentAffliction);
-				PromotionTypes eCritical = (eCurrentAffliction);
-				if (kCritical.isAffliction() && kCritical.isCritical())
-				{
-					if (canAcquirePromotion(eCritical, PromotionRequirements::Afflict) && pOpponent->canInflictCritical(eCritical))
-					{
-						aAvailableCriticals.push_back(eCritical);
-					}
-				}
-			}
-		}
-	}
-	if (aAvailableCriticals.size() > 0)
-	{
-		int iCritRolled = GC.getGame().getSorenRandNum(aAvailableCriticals.size(), "CriticalSelectionRoll");
-		PromotionTypes eCritical = aAvailableCriticals[iCritRolled];
-		setHasPromotion(eCritical, true);
-		eAfflictionLine = ((PromotionLineTypes)GC.getPromotionInfo(eCritical).getPromotionLine());
-		if (!hasAfflictionLine(eAfflictionLine))
-		{
-			GET_PLAYER(getOwner()).changePlayerWideAfflictionCount(eAfflictionLine, 1);
-		}
-
-		const CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_CRITICAL_SUFFERED", pOpponent->getNameKey(), getNameKey(), GC.getPromotionInfo(eCritical).getDescription());
-		AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED(), getX(), getY());
-		const CvWString szBuffer2 = gDLL->getText("TXT_KEY_MISC_CRITICAL_INFLICTED", pOpponent->getNameKey(), getNameKey(), GC.getPromotionInfo(eCritical).getDescription());
-		AddDLLMessage(pOpponent->getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer2, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN(), getX(), getY());
-	}
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 
 bool CvUnit::canKeepPromotion(PromotionTypes ePromotion, bool bAssertFree, bool bMessageOnFalse) const
@@ -32173,13 +30123,7 @@ bool CvUnit::canKeepPromotion(PromotionTypes ePromotion, bool bAssertFree, bool 
 
 	const CvPromotionInfo& promo = GC.getPromotionInfo(ePromotion);
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	const bool bAfflict = promo.isAffliction();
-#endif
 	if (promo.isEquipment()
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-		|| bAfflict
-#endif
 		)
 	{
 		bPromo = false;
@@ -32567,9 +30511,6 @@ bool CvUnit::canKeepPromotion(PromotionTypes ePromotion, bool bAssertFree, bool 
 
 	if (!bIsFreePromotion)
 	{
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-		if (!bAfflict)
-#endif
 		{
 			const PromotionTypes ePromotionPrerequisite = promo.getPrereqPromotion();
 			const PromotionTypes ePromotionPrerequisite1 = promo.getPrereqOrPromotion1();
@@ -32685,9 +30626,6 @@ void CvUnit::checkFreetoCombatClass()
 					PromotionRequirements::flags promoFlags = PromotionRequirements::None;
 
 					if (promoInfo.isEquipment()) promoFlags |= PromotionRequirements::Equip;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-					if (promoInfo.isAffliction()) promoFlags |= PromotionRequirements::Afflict;
-#endif
 					if (promoFlags == PromotionRequirements::None) promoFlags = PromotionRequirements::Promote;
 
 					if (canAcquirePromotion(ePromo, promoFlags))
@@ -33565,169 +31503,6 @@ void CvUnit::changeExtraCriticalVSUnitCombatType(UnitCombatTypes eIndex, int iCh
 }
 
 
-int CvUnit::roundStunVSUnitCombatTotal(UnitCombatTypes eCombatType) const
-{
-	return (
-		std::max(
-			0,
-			m_pUnitInfo->getRoundStunVSUnitCombatType(eCombatType)
-			+ getExtraRoundStunVSUnitCombatType(eCombatType, isCommander(), isCommodore())
-		)
-	);
-}
-
-int CvUnit::getExtraRoundStunVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander, const bool bCommodore) const
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-
-	const UnitCombatKeyedInfo* info = findUnitCombatKeyedInfo(eIndex);
-
-	if (!bCommander)
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return (info ? info->m_iExtraRoundStunVSUnitCombatType : 0) + pCommander->getExtraRoundStunVSUnitCombatType(eIndex);
-		}
-	}
-	if (!bCommodore)
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return (info ? info->m_iExtraRoundStunVSUnitCombatType : 0) + pCommodore->getExtraRoundStunVSUnitCombatType(eIndex);
-    		}
-    	}
-	return info ? info->m_iExtraRoundStunVSUnitCombatType : 0;
-}
-
-void CvUnit::changeExtraRoundStunVSUnitCombatType(UnitCombatTypes eIndex, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-
-	if (iChange != 0)
-	{
-		findOrCreateUnitCombatKeyedInfo(eIndex)->m_iExtraRoundStunVSUnitCombatType += iChange;
-	}
-}
-
-
-int CvUnit::getExtraRoundStunProb(const bool bCommander, const bool bCommodore) const
-{
-	if (!bCommander)
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return m_iExtraRoundStunProb + pCommander->m_iExtraRoundStunProb;
-		}
-	}
-	if (!bCommodore)
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return m_iExtraRoundStunProb + pCommodore->m_iExtraRoundStunProb;
-    		}
-    	}
-	return m_iExtraRoundStunProb;
-}
-
-void CvUnit::changeExtraRoundStunProb(int iChange)
-{
-	m_iExtraRoundStunProb +=iChange;
-	FASSERT_NOT_NEGATIVE(m_iExtraRoundStunProb);
-}
-
-int CvUnit::roundStunProbTotal() const
-{
-	return std::max(0, m_pUnitInfo->getRoundStunProb() + getExtraRoundStunProb(isCommander(), isCommodore()));
-}
-
-int CvUnit::roundStunVSOpponentProbTotal(CvUnit* pOpponent) const
-{
-	PROFILE_EXTRA_FUNC();
-	int iRoundStunBase = roundStunProbTotal();
-
-	for (std::map<UnitCombatTypes, UnitCombatKeyedInfo>::const_iterator it = pOpponent->m_unitCombatKeyedInfo.begin(), end = pOpponent->m_unitCombatKeyedInfo.end(); it != end; ++it)
-	{
-		if (it->second.m_bHasUnitCombat)
-		{
-			iRoundStunBase += roundStunVSUnitCombatTotal(it->first);
-		}
-	}
-	return std::max(0, iRoundStunBase);
-}
-
-int CvUnit::getCombatStuns() const
-{
-	return m_iCombatStuns;
-}
-
-void CvUnit::setCombatStuns(int iNewValue)
-{
-	FASSERT_NOT_NEGATIVE(iNewValue);
-	m_iCombatStuns = iNewValue;
-}
-
-void CvUnit::changeCombatStuns(int iChange)
-{
-	setCombatStuns(getCombatStuns() + iChange);
-}
-
-void CvUnit::checkForStun(int iDamage, CvUnit* pOpponent)
-{
-	PROFILE_FUNC();
-
-	int iStunChancefromDamage = (iDamage * 100);
-	int iStunChanceModifier = pOpponent->roundStunVSOpponentProbTotal(this);
-	int iStunCriticalModifier = pOpponent->criticalVSOpponentProbTotal(this);
-	int iStunResistance = enduranceTotal()*10;
-	int iStunChanceTotal = 0;
-	int iStunVolume = 0;
-
-	if (iStunChanceModifier > 0) //|| pOpponent->dealsElectricalDamage())
-	{
-		if (pOpponent->getCombatPowerShots() > 0 )
-		{
-			iStunCriticalModifier += pOpponent->powerShotCriticalModifierTotal();
-		}
-		iStunChanceModifier += iStunCriticalModifier;
-		//if (pOpponent->dealsElectricalDamage())
-		//{
-		//	iStunChanceModifier += 100;
-		//}
-		iStunChanceModifier -= iStunResistance;
-
-		iStunChanceTotal = std::min(((iStunChancefromDamage * iStunChanceModifier)/100), 9500);
-	}
-	if (iStunChanceTotal > 0)
-	{
-		if (GC.getGame().getSorenRandNum(10000, "StunRoll") < iStunChanceTotal)
-		{
-			changeCombatStuns(1);
-			iStunVolume += 1;
-			if (GC.getGame().getSorenRandNum(100000, "StunRoll2") <iStunChanceTotal)
-			{
-				changeCombatStuns(1);
-				iStunVolume += 1;
-				if (GC.getGame().getSorenRandNum(1000000, "StunRoll3") <iStunChanceTotal)
-				{
-					changeCombatStuns(1);
-					iStunVolume += 1;
-				}
-			}
-		}
-	}
-	if (iStunVolume > 0)
-	{
-
-		const CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_STUN_SUFFERED", pOpponent->getNameKey(), getNameKey(), iStunVolume);
-		AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED(), getX(), getY());
-		const CvWString szBuffer2 = gDLL->getText("TXT_KEY_MISC_STUN_INFLICTED", pOpponent->getNameKey(), getNameKey(), iStunVolume);
-		AddDLLMessage(pOpponent->getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer2, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN(), getX(), getY());
-	}
-}
 
 int CvUnit::withdrawVSOpponentProbTotal(const CvUnit* pOpponent, const CvPlot* pPlot) const
 {
@@ -33942,513 +31717,6 @@ bool CvUnit::canInflictCritical(PromotionTypes eCritical) const
 	return false;
 }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-int CvUnit::getAfflictionLineCount(PromotionLineTypes ePromotionLineType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	return info == NULL ? 0 : info->m_iAfflictionLineCount;
-}
-
-bool CvUnit::hasAfflictionLine(PromotionLineTypes ePromotionLineType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-	return (getAfflictionLineCount(ePromotionLineType) > 0);
-}
-
-void CvUnit::changeAfflictionLineCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType);
-
-		info->m_iAfflictionLineCount += iChange;
-	}
-}
-
-void CvUnit::afflict(PromotionLineTypes eAfflictionLine, bool bPoisoned, CvUnit* pOpponent, bool bTrap, int iTrapDmg)
-{
-	PROFILE_EXTRA_FUNC();
-	int iI;
-	CvWString szBuffer;
-	PromotionTypes eAfflictionHad = NO_PROMOTION;
-	PromotionTypes eAfflictionGained = NO_PROMOTION;
-	bool bAfflicted = false;
-	for (iI = 0; iI < GC.getPromotionLineInfo(eAfflictionLine).getNumPromotions(); iI++)
-	{
-		const PromotionTypes eAffliction = (PromotionTypes)GC.getPromotionLineInfo(eAfflictionLine).getPromotion(iI);
-		if (GC.getPromotionInfo(eAffliction).getLinePriority() == getAfflictionLineCount(eAfflictionLine))
-		{
-			eAfflictionHad = eAffliction;
-		}
-		if (GC.getPromotionInfo(eAffliction).getLinePriority() == (getAfflictionLineCount(eAfflictionLine)+1))
-		{
-			eAfflictionGained = eAffliction;
-			bAfflicted = true;
-		}
-	}
-	if (bAfflicted)
-	{
-		changeAfflictionLineCount(eAfflictionLine, 1);
-		setHasPromotion(eAfflictionGained, true, true, false);
-		{
-			if (getAfflictionLineCount(eAfflictionLine) == 1)
-			{
-				GET_PLAYER(getOwner()).changePlayerWideAfflictionCount(eAfflictionLine, 1);
-				if (!bTrap)
-				{
-					if (pOpponent != NULL)
-					{
-						if (bPoisoned)
-						{
-							//messages that introduce the affliction from battle as a poisoning
-
-							const CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_AFFLICT_SUFFERED_POISON_BATTLE_FIRST", getNameKey(), pOpponent->getNameKey(), GC.getPromotionInfo(eAfflictionGained).getTextKeyWide());
-							AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED(), getX(), getY());
-							const CvWString szBuffer2 = gDLL->getText("TXT_KEY_MISC_AFFLICT_DELIVERED_POISON_BATTLE_FIRST", getNameKey(), pOpponent->getNameKey(), GC.getPromotionInfo(eAfflictionGained).getTextKeyWide());
-							AddDLLMessage(pOpponent->getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer2, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN(), getX(), getY());
-						}
-						else
-						{
-							//messages that introduce the affliction from battle as a disease
-
-							const CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_AFFLICT_SUFFERED_DISEASE_BATTLE_FIRST", getNameKey(), GC.getPromotionInfo(eAfflictionGained).getTextKeyWide(), pOpponent->getNameKey());
-							AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED(), getX(), getY());
-							const CvWString szBuffer2 = gDLL->getText("TXT_KEY_MISC_AFFLICT_DELIVERED_DISEASE_BATTLE_FIRST", pOpponent->getNameKey(), GC.getPromotionInfo(eAfflictionGained).getTextKeyWide(), getNameKey());
-							AddDLLMessage(pOpponent->getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer2, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN(), getX(), getY());
-						}
-					}
-					else
-					{
-						//message that introduces the disease affliction to the unit (only to the owner)
-
-						const CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_AFFLICT_SUFFERED_DISEASE_FIRST", getNameKey(), GC.getPromotionInfo(eAfflictionGained).getTextKeyWide());
-						AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED(), getX(), getY());
-					}
-				}
-			}
-			else
-			{
-				if (!bTrap)
-				{
-					if (pOpponent != NULL)
-					{
-						if (bPoisoned)
-						{
-							//messages that worsen the affliction from battle as a poisoning
-
-							const CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_AFFLICT_SUFFERED_POISON_BATTLE_ADDITIONAL", getNameKey(), pOpponent->getNameKey(), GC.getPromotionInfo(eAfflictionGained).getTextKeyWide());
-							AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED(), getX(), getY());
-							const CvWString szBuffer2 = gDLL->getText("TXT_KEY_MISC_AFFLICT_DELIVERED_POISON_BATTLE_ADDITIONAL", getNameKey(), pOpponent->getNameKey(), GC.getPromotionInfo(eAfflictionGained).getTextKeyWide());
-							AddDLLMessage(pOpponent->getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer2, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN(), getX(), getY());
-						}
-						else
-						{
-							//messages that worsen the affliction from battle as a disease
-
-							const CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_AFFLICT_SUFFERED_DISEASE_BATTLE_ADDITIONAL", getNameKey(), GC.getPromotionInfo(eAfflictionGained).getTextKeyWide(), pOpponent->getNameKey());
-							AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED(), getX(), getY());
-							const CvWString szBuffer2 = gDLL->getText("TXT_KEY_MISC_AFFLICT_DELIVERED_DISEASE_BATTLE_ADDITIONAL", pOpponent->getNameKey(), GC.getPromotionInfo(eAfflictionGained).getTextKeyWide(), getNameKey());
-							AddDLLMessage(pOpponent->getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer2, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN(), getX(), getY());
-						}
-					}
-					else
-					{
-						//message that states the affliction to the unit has worsened (only to the owner)
-
-						const CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_AFFLICT_SUFFERED_DISEASE_ADDITIONAL", getNameKey(), GC.getPromotionInfo(eAfflictionHad).getTextKeyWide(), GC.getPromotionInfo(eAfflictionGained).getTextKeyWide());
-						AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED(), getX(), getY());
-					}
-				}
-			}
-			if (bTrap)
-			{
-				if (iTrapDmg > 0)
-				{
-
-					const CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_TRAP_TRIGGERED_ALSO_AFFLICTION_SUFFERED", getNameKey(), GC.getPromotionInfo(eAfflictionGained).getTextKeyWide(), pOpponent->getNameKey());
-					AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED(), getX(), getY());
-					const CvWString szBuffer2 = gDLL->getText("TXT_KEY_MISC_TRAP_TRIGGERED_ALSO_AFFLICTION_INFLICTED", getNameKey(), GC.getPromotionInfo(eAfflictionGained).getTextKeyWide(), pOpponent->getNameKey());
-					AddDLLMessage(pOpponent->getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer2, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN(), getX(), getY());
-				}
-				else
-				{
-
-					const CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_TRAP_TRIGGERED_AFFLICTION_SUFFERED", getNameKey(), GC.getPromotionInfo(eAfflictionGained).getTextKeyWide(), pOpponent->getNameKey());
-					AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED(), getX(), getY());
-					const CvWString szBuffer2 = gDLL->getText("TXT_KEY_MISC_TRAP_TRIGGERED_AFFLICTION_INFLICTED", getNameKey(), GC.getPromotionInfo(eAfflictionGained).getTextKeyWide(), pOpponent->getNameKey());
-					AddDLLMessage(pOpponent->getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer2, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN(), getX(), getY());
-				}
-			}
-		}
-	}
-}
-
-void CvUnit::recover(PromotionLineTypes eAfflictionLine)
-{
-	PROFILE_EXTRA_FUNC();
-	int iI;
-	CvWString szBuffer;
-	PromotionTypes eAfflictionHad = NO_PROMOTION;
-	PromotionTypes eAfflictionGained = NO_PROMOTION;
-	for (iI = 0; iI < GC.getPromotionLineInfo(eAfflictionLine).getNumPromotions(); iI++)
-	{
-		const PromotionTypes eAffliction = (PromotionTypes)GC.getPromotionLineInfo(eAfflictionLine).getPromotion(iI);
-		if (GC.getPromotionInfo(eAffliction).getLinePriority() == (getAfflictionLineCount(eAfflictionLine)))
-		{
-			eAfflictionHad = eAffliction;
-			changeAfflictionLineCount(eAfflictionLine, -1);
-			setHasPromotion(eAffliction, false, true, false);
-			break;
-		}
-	}
-	if (getAfflictionLineCount(eAfflictionLine) > 0)
-	{
-		for (iI = 0; iI < GC.getPromotionLineInfo(eAfflictionLine).getNumPromotions(); iI++)
-		{
-			const PromotionTypes eAffliction = (PromotionTypes)GC.getPromotionLineInfo(eAfflictionLine).getPromotion(iI);
-			if (GC.getPromotionInfo(eAffliction).getLinePriority() == (getAfflictionLineCount(eAfflictionLine)))
-			{
-				eAfflictionGained = eAffliction;
-				setHasPromotion(eAffliction, true, true, false);
-
-
-				const CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_OVERCOME_IMPROVE", getNameKey(), eAfflictionHad, eAfflictionGained);
-				AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED(), getX(), getY());
-				break;
-			}
-		}
-	}
-	else
-	{
-		GET_PLAYER(getOwner()).changePlayerWideAfflictionCount(eAfflictionLine, -1);
-
-		const CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_OVERCOME_COMPLETE", getNameKey(), eAfflictionHad);
-		AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED(), getX(), getY());
-	}
-}
-
-int CvUnit::getAfflictOnAttackTypeProbability(PromotionLineTypes ePromotionLineType) const
-{
-	PROFILE_EXTRA_FUNC();
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	int iEvaluation = (info == NULL ? 0 : info->m_iAfflictOnAttackTypeProbability);
-	const int iNum = m_pUnitInfo->getNumAfflictOnAttackTypes();
-
-	for (int iI = 0; iI < iNum; iI++)
-	{
-		const PromotionLineTypes eAfflictionLine = m_pUnitInfo->getAfflictOnAttackType(iI).eAfflictionLine;
-		if (eAfflictionLine == ePromotionLineType)
-		{
-			iEvaluation += m_pUnitInfo->getAfflictOnAttackType(iI).iProbability;
-		}
-	}
-	if (GC.getPromotionLineInfo(ePromotionLineType).isPoison())
-	{
-		iEvaluation += poisonProbabilityModifierTotal();
-	}
-	return std::max(0, iEvaluation);
-}
-
-void CvUnit::changeAfflictOnAttackTypeProbability(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType);
-
-		info->m_iAfflictOnAttackTypeProbability += iChange;
-	}
-}
-
-void CvUnit::setAfflictOnAttackTypeProbability(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType, iChange != 0);
-
-	if (info != NULL)
-	{
-		info->m_iAfflictOnAttackTypeProbability = iChange;
-	}
-}
-
-bool CvUnit::hasAfflictOnAttackType(PromotionLineTypes ePromotionLineType) const
-{
-	PROFILE_EXTRA_FUNC();
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	int iEvaluation = (info == NULL ? 0 : info->m_iAfflictOnAttackTypeCount);
-	const int iNum = m_pUnitInfo->getNumAfflictOnAttackTypes();
-
-	for (int iI = 0; iI < iNum; iI++)
-	{
-		const PromotionLineTypes eAfflictionLine = m_pUnitInfo->getAfflictOnAttackType(iI).eAfflictionLine;
-		if (eAfflictionLine == ePromotionLineType)
-		{
-			iEvaluation += 1;
-		}
-	}
-	return (iEvaluation > 0);
-}
-
-int CvUnit::getAfflictOnAttackTypeCount(PromotionLineTypes ePromotionLineType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	return info == NULL ? 0 : info->m_iAfflictOnAttackTypeCount;
-}
-
-void CvUnit::changeAfflictOnAttackTypeCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType);
-
-		info->m_iAfflictOnAttackTypeCount += iChange;
-	}
-
-}
-
-void CvUnit::setAfflictOnAttackTypeCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType, iChange != 0);
-
-	if (info != NULL)
-	{
-		info->m_iAfflictOnAttackTypeCount = iChange;
-	}
-}
-
-int CvUnit::getAfflictOnAttackTypeImmediateCount(PromotionLineTypes ePromotionLineType) const//
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	return info == NULL ? 0 : info->m_iAfflictOnAttackTypeImmediateCount;
-}
-
-bool CvUnit::isAfflictOnAttackTypeImmediate(PromotionLineTypes ePromotionLineType) const
-{
-	PROFILE_EXTRA_FUNC();
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	int iEvaluation = (info == NULL ? 0 : info->m_iAfflictOnAttackTypeImmediateCount);
-	const int iNum = m_pUnitInfo->getNumAfflictOnAttackTypes();
-
-	for (int iI = 0; iI < iNum; iI++)
-	{
-		const PromotionLineTypes eAfflictionLine = m_pUnitInfo->getAfflictOnAttackType(iI).eAfflictionLine;
-		if (eAfflictionLine == ePromotionLineType)
-		{
-			iEvaluation += m_pUnitInfo->getAfflictOnAttackType(iI).iImmediate;
-			break;
-		}
-	}
-	return (iEvaluation > 0);
-}
-
-void CvUnit::changeAfflictOnAttackTypeImmediateCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType);
-
-		info->m_iAfflictOnAttackTypeImmediateCount += iChange;
-	}
-}
-
-void CvUnit::setAfflictOnAttackTypeImmediateCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType, iChange != 0);
-
-	if (info != NULL)
-	{
-		info->m_iAfflictOnAttackTypeImmediateCount = iChange;
-	}
-}
-
-int CvUnit::getAfflictOnAttackTypeMeleeCount(PromotionLineTypes ePromotionLineType) const//
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	return info == NULL ? 0 : info->m_iAfflictOnAttackTypeMeleeCount;
-}
-
-bool CvUnit::isAfflictOnAttackTypeMelee(PromotionLineTypes ePromotionLineType) const
-{
-	PROFILE_EXTRA_FUNC();
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	int iEvaluation = (info == NULL ? 0 : info->m_iAfflictOnAttackTypeMeleeCount);
-	const int iNum = m_pUnitInfo->getNumAfflictOnAttackTypes();
-
-	for (int iI = 0; iI < iNum; iI++)
-	{
-		const PromotionLineTypes eAfflictionLine = m_pUnitInfo->getAfflictOnAttackType(iI).eAfflictionLine;
-		if (eAfflictionLine == ePromotionLineType)
-		{
-			iEvaluation += m_pUnitInfo->getAfflictOnAttackType(iI).iMelee;
-			break;
-		}
-	}
-	return (iEvaluation > 0);
-}
-
-void CvUnit::changeAfflictOnAttackTypeMeleeCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType);
-
-		info->m_iAfflictOnAttackTypeMeleeCount += iChange;
-	}
-}
-
-void CvUnit::setAfflictOnAttackTypeMeleeCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType, iChange != 0);
-
-	if (info != NULL)
-	{
-		info->m_iAfflictOnAttackTypeMeleeCount = iChange;
-	}
-}
-
-int CvUnit::getAfflictOnAttackTypeDistanceCount(PromotionLineTypes ePromotionLineType) const//
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	return info == NULL ? 0 : info->m_iAfflictOnAttackTypeDistanceCount;
-}
-
-bool CvUnit::isAfflictOnAttackTypeDistance(PromotionLineTypes ePromotionLineType) const
-{
-	PROFILE_EXTRA_FUNC();
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	int iEvaluation = (info == NULL ? 0 : info->m_iAfflictOnAttackTypeDistanceCount);
-	const int iNum = m_pUnitInfo->getNumAfflictOnAttackTypes();
-
-	for (int iI = 0; iI < iNum; iI++)
-	{
-		const PromotionLineTypes eAfflictionLine = m_pUnitInfo->getAfflictOnAttackType(iI).eAfflictionLine;
-		if (eAfflictionLine == ePromotionLineType)
-		{
-			iEvaluation += m_pUnitInfo->getAfflictOnAttackType(iI).iDistance;
-			break;
-		}
-	}
-	return (iEvaluation > 0);
-}
-
-void CvUnit::changeAfflictOnAttackTypeDistanceCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType);
-
-		info->m_iAfflictOnAttackTypeDistanceCount += iChange;
-	}
-}
-
-void CvUnit::setAfflictOnAttackTypeDistanceCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType, iChange!= 0);
-
-	if (info != 0)
-	{
-		info->m_iAfflictOnAttackTypeDistanceCount = iChange;
-	}
-}
-//
-int CvUnit::getAfflictOnAttackTypeAttemptedCount(PromotionLineTypes ePromotionLineType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	return info == NULL ? 0 : info->m_iAfflictOnAttackTypeAttemptedCount;
-}
-
-bool CvUnit::isAfflictOnAttackTypeAttempted(PromotionLineTypes ePromotionLineType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(ePromotionLineType);
-
-	return info ? info->m_iAfflictOnAttackTypeAttemptedCount > 0 : false;
-}
-
-void CvUnit::changeAfflictOnAttackTypeAttemptedCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType);
-
-		info->m_iAfflictOnAttackTypeAttemptedCount += iChange;
-	}
-}
-
-void CvUnit::setAfflictOnAttackTypeAttemptedCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(ePromotionLineType, iChange != 0);
-
-	if (info != NULL)
-	{
-		info->m_iAfflictOnAttackTypeAttemptedCount = iChange;
-	}
-}
-
-int CvUnit::worsenedProbabilitytoAfflict(PromotionLineTypes eAfflictionLine) const
-{
-	const int iLinePriority = getAfflictionLineCount(eAfflictionLine) - 1;
-	const int iProbabilityMultiplier = GC.getPromotionLineInfo(eAfflictionLine).getWorsenedCommunicabilityIncrementModifier();
-	return (iLinePriority * iProbabilityMultiplier);
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 
 int CvUnit::getHealUnitCombatCount() const
@@ -35446,15 +32714,6 @@ CvUnit* CvUnit::mergeUnits(CvUnit* pUnit1, CvUnit* pUnit2, CvUnit* pUnit3, CvSel
 				{
 					pkMergedUnit->setHasPromotion(ePromotion, true, true);
 				}
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-				else if (GC.getPromotionInfo(ePromotion).getPromotionLine() != NO_PROMOTIONLINE && GC.getPromotionLineInfo(GC.getPromotionInfo(ePromotion).getPromotionLine()).isAffliction())
-				{
-					if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-					{
-						pkMergedUnit->afflict(GC.getPromotionInfo(ePromotion).getPromotionLine());
-					}
-				}
-#endif
 				else if (pUnit1->isPromotionFree(ePromotion) || pUnit2->isPromotionFree((PromotionTypes)iI) || pUnit3->isPromotionFree((PromotionTypes)iI))
 				{
 					pkMergedUnit->setHasPromotion(ePromotion, true, true);
@@ -35672,19 +32931,6 @@ void CvUnit::doSplit()
 			{
 				pUnit1->setHasPromotion(ePromoX, true, true);
 			}
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-			else if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-			{
-				const PromotionLineTypes ePromoLine = GC.getPromotionInfo(ePromoX).getPromotionLine();
-
-				if (ePromoLine != NO_PROMOTIONLINE && GC.getPromotionLineInfo(ePromoLine).isAffliction())
-				{
-					pUnit1->afflict(ePromoLine);
-					pUnit2->afflict(ePromoLine);
-					pUnit3->afflict(ePromoLine);
-				}
-			}
-#endif
 			else if (GC.getPromotionInfo(ePromoX).isEquipment())
 			{
 				pUnit1->setHasPromotion(ePromoX, true, true);
@@ -38067,61 +35313,6 @@ int CvUnit::extraVisibleImprovementRange(InvisibleTypes eInvisible, ImprovementT
 	return 0;
 }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-int CvUnit::getNumExtraAidChanges() const
-{
-	return (int)m_aExtraAidChanges.size();
-}
-
-AidStruct& CvUnit::getExtraAidChange(int iIndex)
-{
-	return m_aExtraAidChanges[iIndex];
-}
-
-void CvUnit::changeExtraAidChange(PropertyTypes eProperty, int iChange)
-{
-	PROFILE_EXTRA_FUNC();
-	if (iChange == 0)
-		return;
-
-	bool bFound = false;
-	int iSize = getNumExtraAidChanges();
-	for (int iI = 0; iI < iSize; iI++)
-	{
-		if (m_aExtraAidChanges[iI].eProperty == eProperty)
-		{
-			m_aExtraAidChanges[iI].iChange += iChange;
-			if (m_aExtraAidChanges[iI].iChange == 0)
-			{
-				m_aExtraAidChanges.erase(m_aExtraAidChanges.begin()+iI);
-			}
-			bFound = true;
-			break;
-		}
-	}
-	if (!bFound)
-	{
-		const int iISize = iSize;
-		iSize++;
-		m_aExtraAidChanges.resize(iSize);
-		m_aExtraAidChanges[iISize].eProperty = eProperty;
-		m_aExtraAidChanges[iISize].iChange = iChange;
-	}
-}
-
-int CvUnit::extraAidChange(PropertyTypes eProperty) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (int iI = 0; iI < getNumExtraAidChanges(); iI++)
-	{
-		if (m_aExtraAidChanges[iI].eProperty == eProperty)
-		{
-			return m_aExtraAidChanges[iI].iChange;
-		}
-	}
-	return 0;
-}
-#endif
 
 bool CvUnit::isNegatesInvisible(InvisibleTypes eInvisible) const
 {
@@ -39170,28 +36361,6 @@ void CvUnit::doTrapTrigger(CvUnit* pUnit, bool bImmune)
 				AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer2, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN(), getX(), getY());
 			}
 		}
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-		//afflict
-		if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-		{
-			for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-			{
-				if (GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction())
-				{
-					if (hasAfflictOnAttackType((PromotionLineTypes)iI) && isAfflictOnAttackTypeMelee((PromotionLineTypes)iI))
-					{
-						const PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-						const int iAfflictChance = getAfflictOnAttackTypeProbability(eAfflictionLine) - pUnit->fortitudeTotal() - pUnit->getUnitAfflictionTolerance(eAfflictionLine);
-						const int iAfflictCheckResult = GC.getGame().getSorenRandNum(100, "Trap Affliction Check");
-						if (iAfflictCheckResult < iAfflictChance)
-						{
-							pUnit->afflict(eAfflictionLine, false, this, true, iTrapDmg);
-						}
-					}
-				}
-			}
-		}
-#endif
 		//nuclear
 		if (nukeRange() == 0 && plot() != NULL)
 		{
@@ -39269,51 +36438,6 @@ void CvUnit::makeWanted(const CvCity* pCity)
 	}
 }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-int CvUnit::getDistanceAttackCommunicability(PromotionLineTypes eAfflictionLine) const
-{
-	PROFILE_EXTRA_FUNC();
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), eAfflictionLine);
-
-	const PromotionLineKeyedInfo* info = findPromotionLineKeyedInfo(eAfflictionLine);
-
-	int iDistanceAttackCommunicability = (info == NULL ? 0 : info->m_iDistanceAttackCommunicability);
-
-	for (int iI = 0; iI < m_pUnitInfo->getNumDistanceAttackCommunicabilityTypeChanges(); iI++)
-	{
-		if (m_pUnitInfo->getDistanceAttackCommunicabilityTypeChange(iI).eAfflictionLine == eAfflictionLine)
-		{
-			iDistanceAttackCommunicability += m_pUnitInfo->getDistanceAttackCommunicabilityTypeChange(iI).iChange;
-		}
-	}
-
-	return iDistanceAttackCommunicability;
-}
-
-void CvUnit::changeDistanceAttackCommunicability(PromotionLineTypes eAfflictionLine, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), eAfflictionLine);
-
-	if (iChange != 0)
-	{
-		PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(eAfflictionLine);
-
-		info->m_iDistanceAttackCommunicability += iChange;
-	}
-}
-
-void CvUnit::setDistanceAttackCommunicability(PromotionLineTypes eAfflictionLine, int iValue)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), eAfflictionLine);
-
-	PromotionLineKeyedInfo* info = findOrCreatePromotionLineKeyedInfo(eAfflictionLine, iValue != 0);
-
-	if (info != NULL)
-	{
-		info->m_iDistanceAttackCommunicability = iValue;
-	}
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 void CvUnit::setCityOfOrigin(CvCity* pCity)
 {
