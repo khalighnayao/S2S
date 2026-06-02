@@ -194,34 +194,12 @@ public:
 
 	int getAttackCombatModifier() const;
 	int getDefenseCombatModifier() const;
-	int getPursuit() const;
-	int getEarlyWithdraw() const;
 	int getVSBarbs() const;
-	int getOverrun() const;
-	int getRepel() const;
-	int getFortRepel() const;
-	int getRepelRetries() const;
-	int getUnyielding() const;
-	int getKnockback() const;
-	int getKnockbackRetries() const;
-#ifdef BATTLEWORN
-	int getStrAdjperRnd() const;
-	int getStrAdjperAtt() const;
-	int getStrAdjperDef() const;
-	int getWithdrawAdjperAtt() const;
-#endif // BATTLEWORN
 	int getUnnerve() const;
 	int getEnclose() const;
 	int getLunge() const;
 	int getDynamicDefense() const;
 	int getFortitude() const;
-#ifdef STRENGTH_IN_NUMBERS
-	int getFrontSupportPercent() const;
-	int getShortRangeSupportPercent() const;
-	int getMediumRangeSupportPercent() const;
-	int getLongRangeSupportPercent() const;
-	int getFlankSupportPercent() const;
-#endif // STRENGTH_IN_NUMBERS
 	int getCriticalModifier() const;
 	int getEndurance() const;
 	int getPoisonProbabilityModifier() const;
@@ -358,32 +336,6 @@ public:
 	int getNumFlankingStrikesbyUnitCombatTypes() const;
 	int getFlankingStrengthbyUnitCombatType(int iUnitCombat) const;
 	bool isFlankingStrikebyUnitCombatType(int iUnitCombat) const;
-
-	int getNumWithdrawOnTerrainTypes() const;
-	int getWithdrawOnTerrainType(int iTerrain) const;
-
-	int getNumWithdrawOnFeatureTypes() const;
-	int getWithdrawOnFeatureType(int iFeature) const;
-
-	int getNumWithdrawVSUnitCombatTypes() const;
-	int getWithdrawVSUnitCombatType(int iUnitCombat) const;
-	bool isWithdrawVSUnitCombatType(int iUnitCombat) const;
-	const UnitCombatModifierArray& getWithdrawVSUnitCombatTypes() const;
-
-	int getNumPursuitVSUnitCombatTypes() const;
-	int getPursuitVSUnitCombatType(int iUnitCombat, bool bForLoad = false) const;
-	bool isPursuitVSUnitCombatType(int iUnitCombat, bool bForLoad = false) const;
-	const UnitCombatModifierArray& getPursuitVSUnitCombatTypes() const;
-
-	int getNumRepelVSUnitCombatTypes() const;
-	int getRepelVSUnitCombatType(int iUnitCombat, bool bForLoad = false) const;
-	bool isRepelVSUnitCombatType(int iUnitCombat, bool bForLoad = false) const;
-	const UnitCombatModifierArray& getRepelVSUnitCombatTypes() const;
-
-	int getNumKnockbackVSUnitCombatTypes() const;
-	int getKnockbackVSUnitCombatType(int iUnitCombat, bool bForLoad = false) const;
-	bool isKnockbackVSUnitCombatType(int iUnitCombat, bool bForLoad = false) const;
-	const UnitCombatModifierArray& getKnockbackVSUnitCombatTypes() const;
 
 	int getNumCriticalVSUnitCombatTypes() const;
 	int getCriticalVSUnitCombatType(int iUnitCombat) const;
@@ -802,34 +754,12 @@ private:
 	//integers
 	int m_iAttackCombatModifier;
 	int m_iDefenseCombatModifier;
-	int m_iPursuit;
-	int m_iEarlyWithdraw;
 	int m_iVSBarbs;
-	int m_iOverrun;
-	int m_iRepel;
-	int m_iFortRepel;
-	int m_iRepelRetries;
-	int m_iUnyielding;
-	int m_iKnockback;
-	int m_iKnockbackRetries;
-#ifdef BATTLEWORN
-	int m_iStrAdjperRnd;
-	int m_iStrAdjperAtt;
-	int m_iStrAdjperDef;
-	int m_iWithdrawAdjperAtt;
-#endif // BATTLEWORN
 	int m_iUnnerve;
 	int m_iEnclose;
 	int m_iLunge;
 	int m_iDynamicDefense;
 	int m_iFortitude;
-#ifdef STRENGTH_IN_NUMBERS
-	int m_iFrontSupportPercent;
-	int m_iShortRangeSupportPercent;
-	int m_iMediumRangeSupportPercent;
-	int m_iLongRangeSupportPercent;
-	int m_iFlankSupportPercent;
-#endif
 	int m_iCriticalModifier;
 	int m_iEndurance;
 	int m_iPoisonProbabilityModifier;
@@ -918,12 +848,6 @@ private:
 	std::vector<InvisibleImprovementChanges> m_aVisibleImprovementRangeChanges;
 	std::vector<EnabledCivilizations> m_aEnabledCivilizationTypes;
 	UnitCombatModifierArray m_aFlankingStrengthbyUnitCombatType;
-	TerrainModifierArray m_aWithdrawOnTerrainTypes;
-	FeatureModifierArray m_aWithdrawOnFeatureTypes;
-	UnitCombatModifierArray m_aWithdrawVSUnitCombatTypes;
-	UnitCombatModifierArray m_aPursuitVSUnitCombatTypes;
-	UnitCombatModifierArray m_aRepelVSUnitCombatTypes;
-	UnitCombatModifierArray m_aKnockbackVSUnitCombatTypes;
 	UnitCombatModifierArray m_aCriticalVSUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapDisableUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapAvoidanceUnitCombatTypes;

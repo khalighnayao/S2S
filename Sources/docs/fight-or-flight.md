@@ -85,3 +85,16 @@ clean `resolveCombat` calls in order. Keep the math above but:
   layers VS/terrain/pursuit/etc. on top,
 - keep all RNG via `getSorenRandNum` for OOS-safety.
 This validates the pluggable-rule architecture end-to-end.
+
+## UI seam already in place (R5c)
+The combat tooltip was rebuilt on `CvCombatModel::computeCombatPreview()` (returns a
+`CombatPreview` struct: the four outcome odds, expected end-HP/XP per outcome, needed
+rounds, strengths, and the measured first-strike win-swing). `CvGameTextMgr`'s three
+combat-help fns (`setCombatPlotHelp` / `setMinimalCombatPlotHelp` /
+`setAssassinatePlotHelp`) are now pure renderers of that struct — the ~2.2k-line ACO
+histogram + `Art/ACO` pixel-bars were deleted. `CombatPreview.detailLines`
+(`std::vector<CombatPreviewLine>`: label + value + POSITIVE/NEGATIVE/NEUTRAL category) is
+the extension point: a future `FightOrFlightRule` populates its repel/knockback/pursuit
+rows there inside `computeCombatPreview`, and the renderer prints them generically with no
+further UI edits. The itemised strength-modifier breakdown (old Ctrl/Alt power views) was
+dropped with the histogram; re-add via `detailLines` if wanted.

@@ -31,7 +31,6 @@ public:
 	int getGrowthProbability() const;
 	int getDefenseModifier() const;
 	int getAdvancedStartRemoveCost() const;
-	int getTurnDamage() const;
 	int getWarmingDefense() const; //GWMod new xml field M.A.
 	int getPopDestroys() const;
 
@@ -121,7 +120,6 @@ private:
 	int m_iGrowthProbability;
 	int m_iDefenseModifier;
 	int m_iAdvancedStartRemoveCost;
-	int m_iTurnDamage;
 	int m_iWarmingDefense; //GWMod new xml field M.A.
 	int m_iPopDestroys;
 

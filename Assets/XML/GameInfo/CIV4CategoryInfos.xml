@@ -161,26 +161,10 @@
 			</Categories>
 		</CategoryInfo>
 		<CategoryInfo>
-			<Type>CATEGORY_UNITCOMBAT_GROUP_WEAPON_STYLE</Type>
-			<Description>TXT_KEY_CATEGORY_UNITCOMBAT_GROUP_WEAPON_STYLE</Description>
-			<Categories>
-				<Category>CATEGORY_UNITCOMBAT_GROUPS</Category>
-				<Category>CATEGORY_UNITCOMBAT_EQUIPMENT_GROUPS</Category>
-			</Categories>
-		</CategoryInfo>
-		<CategoryInfo>
 			<Type>CATEGORY_UNITCOMBAT_GROUP_WEAPONS_H2H</Type>
 			<Description>TXT_KEY_CATEGORY_UNITCOMBAT_GROUP_WEAPONS_H2H</Description>
 			<Categories>
 				<Category>CATEGORY_UNITCOMBAT_GROUPS</Category>
-			</Categories>
-		</CategoryInfo>
-		<CategoryInfo>
-			<Type>CATEGORY_UNITCOMBAT_GROUP_WEAPONS_SIDEARMS</Type>
-			<Description>TXT_KEY_CATEGORY_UNITCOMBAT_GROUP_WEAPONS_SIDEARMS</Description>
-			<Categories>
-				<Category>CATEGORY_UNITCOMBAT_GROUPS</Category>
-				<Category>CATEGORY_UNITCOMBAT_EQUIPMENT_GROUPS</Category>
 			</Categories>
 		</CategoryInfo>
 		<CategoryInfo>

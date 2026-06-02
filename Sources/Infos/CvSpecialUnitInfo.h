@@ -32,7 +32,6 @@ public:
 
 	int getCombatPercent() const;
 	int getWithdrawalChange() const;
-	int getPursuitChange() const;
 
 	bool read(CvXMLLoadUtility* pXML);
 
@@ -50,7 +49,6 @@ protected:
 
 	int m_iCombatPercent;
 	int m_iWithdrawalChange;
-	int m_iPursuitChange;
 
 	// Arrays
 	bool* m_pbCarrierUnitAITypes;

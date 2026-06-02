@@ -438,20 +438,6 @@
 		<Russian>[COLOR_WARNING_TEXT]Если отряд с этой квалификацией не имеет защитных бонусов, он не получает от них несовместимые преимущества.[COLOR_REVERT]</Russian>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_PROMOTIONHELP_DEMORALIZATION</Tag>
-		<English>[ICON_BULLET]%D1_Change%% Demoralization (less strength per Defense in a given turn.)</English>
-		<French>[ICON_BULLET]%D1_Change%% Démoralisation (moins de puissance en Défense lors d'un tour.)</French>
-		<Italian>[ICON_BULLET]%D1_Change%% Demoralizzazione (forza persa dalla difesa in un certo turno.)</Italian>
-		<Polish>[ICON_BULLET]%D1_Change%% z Demoralizacji</Polish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTIONHELP_DETERMINATION</Tag>
-		<English>[ICON_BULLET]%D1_Change%% Determination (additional strength per Defense in a given turn.)</English>
-		<French>[ICON_BULLET]%D1_Change%% Détermination (Puissance supplémentaire en Défense lors d'un tour.)</French>
-		<Italian>[ICON_BULLET]%D1_Change%% Determinazione (forza aggiunta alla difesa in un certo turno.)</Italian>
-		<Polish>[ICON_BULLET]%D1_Change%% z Determinacji</Polish>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_PROMOTIONHELP_DODGE_MODIFIER</Tag>
 		<English>[ICON_BULLET]Additional %D1_Change%% Dodge</English>
 		<French>[ICON_BULLET]Esquive supplémentaire: %D1_Change%%</French>
@@ -528,13 +514,6 @@
 		<Russian>[ICON_BULLET]%D1_Change к стойкости</Russian>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_PROMOTIONHELP_EQUIPMENT</Tag>
-		<English>[ICON_BULLET]Equipment Promotion</English>
-		<French>[ICON_BULLET]Promotion Equipement</French>
-		<Italian>[ICON_BULLET]Promozioni dell'equipaggiamento</Italian>
-		<Polish>[ICON_BULLET]Promocje (Ekwipunek)</Polish>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_PROMOTIONHELP_ESCAPE_SPY</Tag>
 		<English>[ICON_BULLET]%d1_percent%% Bonus Escape Chance</English>
 		<French>[ICON_BULLET]%d1_percent%% Bonus de Fuite (s'échapper)</French>
@@ -579,14 +558,6 @@
 		<German>[ICON_BULLET]+%d1 Reichweite für Fallschirmsprünge</German>
 		<Spanish>[ICON_BULLET]+%d1 al alcance de las misiones de paracaidismo</Spanish>
 		<Polish>[ICON_BULLET]+%d1 do Zasi&#234;gu Spadochroniarzy</Polish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTIONHELP_FATIGUE</Tag>
-		<English>[ICON_BULLET]%D1_Change%% Fatigue (less strength per round.)</English>
-		<French>[ICON_BULLET]%D1_Change%% Fatigue (moins de puissance par round.)</French>
-		<Italian>[ICON_BULLET]%D1_Change%% Fatica (forza persa ogni turno.)</Italian>
-		<Polish>[ICON_BULLET]%D1_Change%% ze Zm&#234;czenia</Polish>
-		<Russian>[ICON_BULLET]%D1_Change%% истощения (меньше силы за раунд.)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_PROMOTIONHELP_FEATURE_PREREQ</Tag>
@@ -735,16 +706,6 @@
 		<Italian>[ICON_BULLET]Rimuove una causa per cui l'unità è in grado di ignorare il livello minimo di difesa di una città.</Italian>
 		<Polish>[ICON_BULLET]Usuwa jeden pow&#243;d by zignorowa&#230; Minimaln&#185; Obron&#234; pozwalaj&#185;c&#185; na atak.</Polish>
 		<Russian>[ICON_BULLET]Устраняет причину, по которой отряд должен игнорировать требования Минимальной защиты при штурме города.</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTIONHELP_IGNORE_TERRAIN_DAMAGE</Tag>
-		<English>[ICON_BULLET]Can Safely Traverse %s1 without receiving damage.</English>
-		<French>[ICON_BULLET]Peut traverser %s1 sans recevoir de dommages</French>
-		<German>[ICON_BULLET]kann %s1 sicher passieren, ohne Schaden zu nehmen</German>
-		<Italian>[ICON_BULLET]Può attraversare %s1 senza ricevere danni</Italian>
-		<Spanish>[ICON_BULLET]Puede atravesar %s1 sin recibir daño</Spanish>
-		<Polish>[ICON_BULLET]Pozwala na bezpieczn&#185; podr&#243;&#191; %s1 bez otrzymywania obra&#191;e&#241;</Polish>
-		<Russian>[ICON_BULLET]Ìîæåò áëàãîïîëó÷íî ïåðåñå÷ü %s1 íå ïîëó÷àÿ ïîâðåæäåíèå</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_PROMOTIONHELP_IGNORE_ZONE_OF_CONTROL_ADD</Tag>
@@ -1234,21 +1195,6 @@
 		<Russian>[ICON_BULLET]Ñîçäàåò çàãðÿçíåíèå íà ñàáîòèðóåìûõ óëó÷øåíèÿõ.</Russian>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_PROMOTIONHELP_RAGE</Tag>
-		<English>[ICON_BULLET]%D1_Change%% Rage (additional strength per round.)</English>
-		<French>[ICON_BULLET]%D1_Change%% Rage (Puissance supplémentaire par round.)</French>
-		<Italian>[ICON_BULLET]%D1_Change%% Ira (forza aggiunta ogni turno.)</Italian>
-		<Polish>[ICON_BULLET]%D1_Change%% z W&#156;ciek&#179;o&#156;ci</Polish>
-		<Russian>[ICON_BULLET]%D1_Change%% к Ярости (добавочной силе за раунд.)</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTIONHELP_RAMPAGE</Tag>
-		<English>[ICON_BULLET]%D1_Change%% Rampage (additional strength per attack in a given turn.)</English>
-		<French>[ICON_BULLET]%D1_Change%% Frénésie (Puissance supplémentaire en attaque lors d'un tour.)</French>
-		<Italian>[ICON_BULLET]%D1_Change%% Frenesia (forza aggiunta per ogni attacco in un certo turno.)</Italian>
-		<Polish>[ICON_BULLET]%D1_Change%% z Sza&#179;u</Polish>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_PROMOTIONHELP_RANGED_BOMBARD_DIRECT</Tag>
 		<English>[ICON_BULLET]Ranged Assault is likely to strike lead defender</English>
 		<French>[ICON_BULLET]Assaut à distance cible le défenseur principal</French>
@@ -1492,14 +1438,6 @@
 		<Tag>TXT_KEY_PROMOTIONHELP_TERRAIN_PREREQ</Tag>
 		<English>[ICON_BULLET]May only have Promotion while on plots with %s1_Terrain terrain (or other specific terrain(s) if also is listed).</English>
 		<French>[ICON_BULLET]Peut seulement avoir la promotion lorsque situé sur des cases avec le type de terrain '%s1_Feature' (ou plusieurs types spécifiques en cas de liste).</French>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTIONHELP_TIRES</Tag>
-		<English>[ICON_BULLET]%D1_Change%% Tires (less strength per attack in a given turn.)</English>
-		<French>[ICON_BULLET]%D1_Change%% Fatigue (moins de puissance en attaque lors d'un tour.)</French>
-		<Italian>[ICON_BULLET]%D1_Change%% fatica (fatica persa per ogni attacco in un certo turno.)</Italian>
-		<Polish>[ICON_BULLET]%D1_Change%% z Przem&#234;czenia</Polish>
-		<Russian>[ICON_BULLET]%D1_Change%% к усталости (меньше силы при атаке в данный ход.)</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_PROMOTIONHELP_TOLERANCE_BUILDUP</Tag>
@@ -2007,21 +1945,6 @@
 		<Russian>В первом, третьем и пятом раундах, потраченных на фокус конспирации, отряд получает 1 к навыку [COLOR_HIGHLIGHT_TEXT]маскировки[COLOR_REVERT] до максимального бонуса +3, при условии, что каждый уровень квалификации соответствует требованиям отряда.</Russian>
 		<Italian>[NEWLINE][ICON_BULLET]Aumento di un livello dell'abilità [COLOR_HIGHLIGHT_TEXT]invisibilità mascherata[COLOR_REVERT][NEWLINE][ICON_BULLET]Max +3 (necessita delle rispettive promozioni, si attiva al 1°, 3° e 5° turno)</Italian>
 	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTIONLINE_BUILD_UP_CHASE_PLANS</Tag>
-		<English>Build Up (Chase Plans) Promotion Line</English>
-		<French>Spécialisation Stratégie de chasse</French>
-		<Polish>Linia Promocji: Koncentracja (Plany po&#156;cigu)</Polish>
-		<Russian>Ìàñòåð îáëàâû</Russian>
-		<Italian>Allenamento sulla linea di promozione piani di inseguimento</Italian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTIONLINE_BUILD_UP_CHASE_PLANS_HELP</Tag>
-		<English>Each turn spent building up Chase Plans improves the Unit's [COLOR_HIGHLIGHT_TEXT]Pursuit[COLOR_REVERT] ability up to a limit of 5 turns for maximum bonus, provided each Promotion level is qualified for by the Unit.</English>
-		<French>A chaque tour la Spécialisation Stratégie de chasse augmente [COLOR_HIGHLIGHT_TEXT]la poursuite[COLOR_REVERT] de l'unité, avec un bonus maximum au bout de 5 tours.</French>
-		<Russian>Каждый раунд, потраченный на фокус к погоне, улучшает способность отряда к [COLOR_HIGHLIGHT_TEXT]преследованию[COLOR_REVERT] до ограничения в 5 раундов для получения максимального бонуса, при условии, что каждый уровень квалификации соответствует требованиям отряда.</Russian>
-		<Italian>[NEWLINE][ICON_BULLET]Migliora l'abilità [COLOR_HIGHLIGHT_TEXT]inseguimento[COLOR_REVERT][NEWLINE][ICON_BULLET]Max 5 turni (necessita delle rispettive promozioni)</Italian>
-	</TEXT>
     <TEXT>
         <Tag>TXT_KEY_PROMOTIONLINE_BUILD_UP_EXERCISE_COMBAT_HELP</Tag>
         <English>Each turn spent building up gives 0.1xp for the unit if in city and increases the unit base upkeep cost by 50%.</English>
@@ -2463,15 +2386,6 @@
 		<Russian>Îáàÿòåëüíûé</Russian>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_PROMOTIONLINE_CHASE</Tag>
-		<English>Chase Promotion Line</English>
-		<French>Spécialisation Poursuite</French>
-		<German>Verfolgungsjagd</German>
-		<Italian>Inseguitore</Italian>
-		<Polish>Linia Promocji: Po&#156;cig</Polish>
-		<Russian>Ïîãîíÿ</Russian>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_PROMOTIONLINE_CHEMICAL</Tag>
 		<English>Chemical Promotion Line</English>
 		<French>Spécialisation Chimie</French>
@@ -2704,25 +2618,6 @@
 		<French>Spécialisation Piège</French>
 		<German>Falle</German>
 		<Polish>Linia Promocji: Usidli&#230;</Polish>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTIONLINE_EQUIPMENT_MELEE_WEAPONS</Tag>
-		<English>Melee Promotion Line</English>
-		<French>Armes de Corps Corps</French>
-		<German>Melee Weapons Promotion Line</German>
-		<Italian>Armi da corpo a corpo</Italian>
-		<Spanish>Armas cuerpo a cuerpo</Spanish>
-		<Polish>Linia Promocji: Walka Wr&#234;cz</Polish>
-		<Russian>Áëèæíèé áîé</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTIONLINE_EQUIPMENT_RANGED_WEAPONS</Tag>
-		<English>Ranged Weapons Promotion Line</English>
-		<French>Armes distance</French>
-		<Italian>Armi a distanza Promotion Line</Italian>
-		<Spanish>Armas a distancia</Spanish>
-		<Polish>Linia Promocji: Broni Dystansowej</Polish>
-		<Russian>Äàëüíîáîéíîå îðóæèå</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_PROMOTIONLINE_ESCAPE</Tag>
@@ -2998,14 +2893,6 @@
 		<Tag>TXT_KEY_PROMOTIONLINE_HUNTING_STRIKE</Tag>
 		<English>Hunting Strike Promotion Line</English>
 		<French>Spécialisation Raid de Chasse</French>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTIONLINE_HUNT_DOWN</Tag>
-		<English>Hunt Down Promotion line</English>
-		<French>Spécialisation traque</French>
-		<Italian>Stanatore</Italian>
-		<Polish>Linia Promocji: Upolowa&#230;</Polish>
-		<Russian>Òðàâëÿ</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_PROMOTIONLINE_IDEALISTIC</Tag>
@@ -4089,24 +3976,6 @@
 		<Italian>Seguace</Italian>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_AGGRESSIVE</Tag>
-		<English>Aggressive</English>
-		<French>
-			<Text>Agressif</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<German>Aggressiv</German>
-		<Italian>Aggressione</Italian>
-		<Spanish>
-			<Text>Agresiva</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Agresywny</Polish>
-		<Russian>Àãðåññèâíûé</Russian>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_AIR_DEFENSE1</Tag>
 		<English>Air Defense I</English>
 		<French>Défense Aér. I</French>
@@ -5051,27 +4920,6 @@
 		<Russian>Áîìáàðäèðîâêà III</Russian>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_BONE_ARMOR</Tag>
-		<English>Bone Armor</English>
-		<French>
-			<Text>Armure d'Os</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Armatura di ossa</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armadura de huesos</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Ko&#156;ciany Pancerz</Polish>
-		<Russian>Êîñòÿíàÿ áðîíÿ</Russian>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_BOTTLENECK1</Tag>
 		<English>Bottleneck I</English>
 		<French>
@@ -5181,90 +5029,6 @@
 		<Russian>Охотник за головами III</Russian>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_BRONZE_ARMOR</Tag>
-		<English>Bronze Armor</English>
-		<French>
-			<Text>Armure de bronze</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Corazza in bronzo</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armadura de bronce</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Pancerz z Br&#185;zu</Polish>
-		<Russian>Áðîíçîâûå äîñïåõè</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_BRONZE_CHAIN_ARMOR</Tag>
-		<English>Bronze Chainmail</English>
-		<French>
-			<Text>Cotte de mailles en bronze</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Cotta di maglia in bronzo</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Cota de malla de bronce</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Kolczuga z Br&#185;zu</Polish>
-		<Russian>Áðîíçîâàÿ êîëü÷óãà</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_BRONZE_POINTED_ARROWS</Tag>
-		<English>Bronze-Tipped Ammunition</English>
-		<French>
-			<Text>Pointes en Bronze</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Punte di bronzo</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Punta de bronce</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Groty z Br&#185;zu</Polish>
-		<Russian>Áðîíçîâîå ñíàðÿæåíèå</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_BRONZE_WEAPONS</Tag>
-		<English>Bronze Weapons</English>
-		<French>
-			<Text>Armes en bronze</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Armi di bronzo</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armas de bronce</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Bro&#241; z Br&#185;zu</Polish>
-		<Russian>Áðîíçîâîå îðóæèå</Russian>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_BUILD_UP_ANTI_AIR1</Tag>
 		<English>Build Up (Anti-Air) I</English>
 		<French>Retranchement (Anti-Aér.) I</French>
@@ -5316,41 +5080,6 @@
 		<English>Build Up (Blend Into Crowd) III</English>
 		<French>Développement (Caché dans la foule) III</French>
 		<German>(Training) In der Menge untertauchen III</German>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_BUILD_UP_CHASE_PLANS1</Tag>
-		<English>Build Up (Chase Plans) I</English>
-		<French>Retranchement (Stratégie de chasse) I</French>
-		<Polish>Koncentracja (Plany Po&#156;cigowe) I</Polish>
-		<Russian>Ïðåñëåäîâàíèå I</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_BUILD_UP_CHASE_PLANS2</Tag>
-		<English>Build Up (Chase Plans) II</English>
-		<French>Retranchement (Stratégie de chasse) II</French>
-		<Polish>Koncentracja (Plany Po&#156;cigowe) II</Polish>
-		<Russian>Ïðåñëåäîâàíèå II</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_BUILD_UP_CHASE_PLANS3</Tag>
-		<English>Build Up (Chase Plans) III</English>
-		<French>Retranchement (Stratégie de chasse) III</French>
-		<Polish>Koncentracja (Plany Po&#156;cigowe) III</Polish>
-		<Russian>Ïðåñëåäîâàíèå III</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_BUILD_UP_CHASE_PLANS4</Tag>
-		<English>Build Up (Chase Plans) IV</English>
-		<French>Retranchement (Stratégie de chasse) IV</French>
-		<Polish>Koncentracja (Plany Po&#156;cigowe) IV</Polish>
-		<Russian>Ïðåñëåäîâàíèå IV</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_BUILD_UP_CHASE_PLANS5</Tag>
-		<English>Build Up (Chase Plans) V</English>
-		<French>Retranchement (Stratégie de chasse) V</French>
-		<Polish>Koncentracja (Plany Po&#156;cigowe) V</Polish>
-		<Russian>Ïðåñëåäîâàíèå V</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_BUILD_UP_CHECKPOINTS1</Tag>
@@ -6546,116 +6275,6 @@
 		<Russian>Çàðÿä III</Russian>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_CHASE1</Tag>
-		<English>Chase I</English>
-		<French>
-			<Text>Poursuite I</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<German>Verfolgungsjagd I</German>
-		<Italian>
-			<Text>Inseguitore I</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Chase I</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Po&#156;cig I</Polish>
-		<Russian>Ïîãîíÿ I</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_CHASE2</Tag>
-		<English>Chase II</English>
-		<French>
-			<Text>Poursuite II</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<German>Verfolgungsjagd II</German>
-		<Italian>
-			<Text>Inseguitore II</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Chase II</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Po&#156;cig II</Polish>
-		<Russian>Ïîãîíÿ II</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_CHASE3</Tag>
-		<English>Chase III</English>
-		<French>
-			<Text>Poursuite III</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<German>Verfolgungsjagd III</German>
-		<Italian>
-			<Text>Inseguitore III</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Chase III</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Po&#156;cig III</Polish>
-		<Russian>Ïîãîíÿ III</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_CHASE4</Tag>
-		<English>Chase IV</English>
-		<French>
-			<Text>Poursuite IV</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<German>Verfolgungsjagd IV</German>
-		<Italian>
-			<Text>Inseguitore IV</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Chase IV</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Po&#156;cig IV</Polish>
-		<Russian>Ïîãîíÿ IV</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_CHASE5</Tag>
-		<English>Chase V</English>
-		<French>
-			<Text>Poursuite V</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<German>Verfolgungsjagd V</German>
-		<Italian>
-			<Text>Inseguitore V</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Chase V</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Po&#156;cig V</Polish>
-		<Russian>Ïîãîíÿ V</Russian>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_CHEMICAL1</Tag>
 		<English>Chemical I</English>
 		<French>Chimie I</French>
@@ -6813,27 +6432,6 @@
 		<French>Influence politique III</French>
 		<German>Politischer Einfluss III</German>
 		<Russian>Патриарх политики III</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_CLOVIS_POINTS</Tag>
-		<English>Clovis Point Ammunition</English>
-		<French>
-			<Text>Pointes de Clovis</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Punte di Clovis</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Punta de clovis</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Amunicja Kultury Clovis</Polish>
-		<Russian>Ðàííÿÿ àìóíèöèÿ</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_COASTAL_ASSAULT1</Tag>
@@ -7384,27 +6982,6 @@
 		<Russian>Êîíòðîëü</Russian>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_COPPER_ARMOR</Tag>
-		<English>Copper Armor</English>
-		<French>
-			<Text>Armure de cuivre</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Corazza in rame</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armadura de cobre</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Miedziany Pancerz</Polish>
-		<Russian>Ìåäíûå äîñïåõè</Russian>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_COPPER_PLATING</Tag>
 		<English>Copper Plating</English>
 		<French>Blindage en Cuivre</French>
@@ -7413,48 +6990,6 @@
 		<Spanish>Recubrimiento de cobre</Spanish>
 		<Polish>Miedziane Opancerzenie</Polish>
 		<Russian>Ìåäíîå ïîêðûòèå</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_COPPER_POINTS</Tag>
-		<English>Copper-Tipped Ammunition</English>
-		<French>
-			<Text>Pointes en cuivre</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Punte di rame</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Punta de cobre</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Groty z Miedzi</Polish>
-		<Russian>Ìåäíîå ñíàðÿæåíèå</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_COPPER_WEAPONS</Tag>
-		<English>Copper Weapons</English>
-		<French>
-			<Text>Armes de cuivre</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Armi di rame</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armas de cobre</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Bro&#241; z Miedzi</Polish>
-		<Russian>Ìåäíîå îðóæèå</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_CORRUPTION1</Tag>
@@ -10017,111 +9552,6 @@
 		<Russian>Твердая рука V</Russian>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_HUNT_DOWN1</Tag>
-		<English>Hunt Down I</English>
-		<French>
-			<Text>Traque I</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Stanatore I</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Hunt Down I</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Polowanie I</Polish>
-		<Russian>Òðàâëÿ I</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_HUNT_DOWN2</Tag>
-		<English>Hunt Down II</English>
-		<French>
-			<Text>Traque II</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Stanatore II</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Hunt Down II</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Polowanie II</Polish>
-		<Russian>Òðàâëÿ II</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_HUNT_DOWN3</Tag>
-		<English>Hunt Down III</English>
-		<French>
-			<Text>Traque III</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Stanatore III</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Hunt Down III</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Polowanie III</Polish>
-		<Russian>Òðàâëÿ III</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_HUNT_DOWN4</Tag>
-		<English>Hunt Down IV</English>
-		<French>
-			<Text>Traque IV</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Stanatore IV</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Hunt Down IV</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Polowanie IV</Polish>
-		<Russian>Òðàâëÿ IV</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_HUNT_DOWN5</Tag>
-		<English>Hunt Down V</English>
-		<French>
-			<Text>Traque V</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Stanatore V</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Hunt Down V</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Polowanie V</Polish>
-		<Russian>Òðàâëÿ V</Russian>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_IDENTIFY1</Tag>
 		<English>Identify I</English>
 		<French>Identification I</French>
@@ -10487,95 +9917,6 @@
 		<Russian>Ïåðåõâàò II</Russian>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_IRON_ARMOR</Tag>
-		<English>Iron Armor</English>
-		<French>
-			<Text>Armure en fer</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Corazza in ferro</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armadura de hierro</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>&#175;elazny Pancerz</Polish>
-		<Russian>Æåëåçíûå äîñïåõè</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_IRON_CHAIN_ARMOR</Tag>
-		<English>Iron Chainmail</English>
-		<French>
-			<Text>Cotte de mailles en fer</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Cotta di maglia in ferro</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Cota de malla de hierro</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>&#175;elazna Kolczuga</Polish>
-		<Russian>Æåëåçíàÿ êîëü÷óãà</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_IRON_POINTED_ARROWS</Tag>
-		<English>Iron-Tipped Ammunition</English>
-		<French>
-			<Text>Pointes en fer</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Punte di ferro</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Punta de hierro</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>&#175;elazne groty</Polish>
-		<Russian>Æåëåçíîå ñíàðÿæåíèå</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_IRON_WEAPONS</Tag>
-		<English>Iron Weapons</English>
-		<French>
-			<Text>Armes en fer</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Armi di ferro</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armas de hierro</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Bro&#241; z &#191;elaza</Polish>
-		<Russian>Æåëåçíîå îðóæèå</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_IVORY_WEAPONS</Tag>
-		<English>Ivory Weapons</English>
-		<French>Armes d'Ivoire</French>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_JADED_DECADENCE</Tag>
 		<English>Quality Down(Jaded Decadence)</English>
 		<French>
@@ -10725,27 +10066,6 @@
 		</French>
 		<Polish>Poziom Wy&#191;ej (Wyuczona Agresja)</Polish>
 		<Russian>Ó÷åíèê</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_LEATHER_ARMOR</Tag>
-		<English>Leather Armor</English>
-		<French>
-			<Text>Armure de cuir</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Corazza in pelle</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armadura de cuero</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Pancerz Sk&#243;rzany</Polish>
-		<Russian>Êîæàíàÿ áðîíÿ</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_LEGENDARY_PROWESS</Tag>
@@ -11699,27 +11019,6 @@
 		<Russian>Íàáëþäàòåëü</Russian>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_OBSIDIAN_WEAPONS</Tag>
-		<English>Obsidian Weapons</English>
-		<French>
-			<Text>Armes d'Obsidienne</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Armi di ossidiana</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armas de obsidiana</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Bro&#241; z obsydianu</Polish>
-		<Russian>Îáñèäèàíîâîå îðóæèå</Russian>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_OFFENSIVE_PROTOCOLS1</Tag>
 		<English>Offensive Protocols I</English>
 		<French>Protocoles Offensifs 1.0</French>
@@ -12452,48 +11751,6 @@
 		</French>
 		<Polish>&#175;&#185;dza Krwi Drapie&#191;cy II</Polish>
 		<Russian>Êðîâîæàäíîñòü II</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_PRIME_TIMBER_ARMOR</Tag>
-		<English>Wooden Armor</English>
-		<French>
-			<Text>Armure en Bois</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Corazza in legno</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armadura de madera</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Drewniany Pancerz</Polish>
-		<Russian>Äåðåâÿííàÿ áðîíÿ</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_PRIME_TIMBER_WEAPONS</Tag>
-		<English>Prime Timber Weapons</English>
-		<French>
-			<Text>Armes en Bois primaire</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Armi di legno pregiato</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armas de madera especial</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Bro&#241; z wysokiej jako&#156;ci drewna</Polish>
-		<Russian>Äåðåâÿííîå îðóæèå</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_PROJECTION1</Tag>
@@ -13409,27 +12666,6 @@
 		<Spanish>Veterano de guerra</Spanish>
 		<Polish>Weteran Wojenny (Bohater)</Polish>
 		<Russian>Âåòåðàí</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_RHINO_HIDE_ARMOR</Tag>
-		<English>Rhino Hide Armor</English>
-		<French>
-			<Text>Armure en Peaux de Rhino</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Corazza in pelle di rinoceronte</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armadura de piel de rinoceronte</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Pancerz ze sk&#243;ry nosoro&#191;ca</Polish>
-		<Russian>Îñâÿùåííàÿ áðîíÿ</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_ROLLING_THUNDER1</Tag>
@@ -14847,48 +14083,6 @@
 		<Russian>Íåâèäèìêà III</Russian>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_STEEL_ARMOR</Tag>
-		<English>Steel Armor</English>
-		<French>
-			<Text>Cotte de mailles en acier</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Corazza in acciaio</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armadura de acero</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Stalowy Pancerz</Polish>
-		<Russian>Ñòàëüíûå äîñïåõè</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_STEEL_WEAPONS</Tag>
-		<English>Steel Weapons</English>
-		<French>
-			<Text>Armes d'acier</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Armi di acciaio</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armas de acero</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Stalowa Bro&#241;</Polish>
-		<Russian>Ñòàëüíîå îðóæèå</Russian>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_STING1</Tag>
 		<English>Sting I</English>
 		<French>
@@ -14986,27 +14180,6 @@
 		</Italian>
 		<Polish>&#175;&#185;dl&#185;ce Wyzwiska III</Polish>
 		<Russian>Íàñìåøíèê III</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_STONE_WEAPONS</Tag>
-		<English>Stone Weapons</English>
-		<French>
-			<Text>Armes en pierre</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Armi in pietra</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armas de piedra</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Kamienna Bro&#241;</Polish>
-		<Russian>Êàìåííîå îðóæèå</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_STREET_FIGHTER1</Tag>
@@ -15356,27 +14529,6 @@
 		<Spanish>Tauro</Spanish>
 		<Polish>Byk</Polish>
 		<Russian>Òåëåö</Russian>
-	</TEXT>
-	<TEXT>
-		<Tag>TXT_KEY_PROMOTION_TEMPERED_IRON_WEAPONS</Tag>
-		<English>Tempered Iron Weapons</English>
-		<French>
-			<Text>Armes en fer trempé</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</French>
-		<Italian>
-			<Text>Armi in ferro temprato</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Italian>
-		<Spanish>
-			<Text>Armas de hierro templado</Text>
-			<Gender>Male</Gender>
-			<Plural>0</Plural>
-		</Spanish>
-		<Polish>Bro&#241; z hartowanego &#191;elaza</Polish>
-		<Russian>Çàêàëåííîå îðóæèå</Russian>
 	</TEXT>
 	<TEXT>
 		<Tag>TXT_KEY_PROMOTION_TERRAIN_ANALYSIS1</Tag>

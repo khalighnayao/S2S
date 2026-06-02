@@ -1325,76 +1325,13 @@ int CvUnitAI::AI_attackOddsAtPlotInternal(const CvPlot* pPlot, CvUnit* pDefender
 
 	int iOdds = iOurStrength * 100 / (iOurStrength + iTheirStrength);
 
-	//	Koshling - modify the calculated odds to account for withdrawal chances
-	//	and the AI player's rose-tinted-spectacles value - this used to simply add
+	//	Koshling - modify the calculated odds to account for
+	//	the AI player's rose-tinted-spectacles value - this used to simply add
 	//	to the odds, but that made it look like fights with hugely different strengths
 	//	still had 5%ish chances of voctory which was a good expected gain so caused the
 	//	AI to suicide weak units onto strong enemy ones, thinking that one in 20 or so would
 	//	win againts a massively stronger opponent.  Changed it to be multiplicative instead
-	//  TB Combat Mods (I'm hoping this calculates out right...):
-	//  Determine Withdraw odds
-	const int AdjustedWithdrawalstep1 = withdrawVSOpponentProbTotal(pDefender, pPlot) - pDefender->pursuitVSOpponentProbTotal(this);
-	const int AdjustedWithdrawalstep2 = AdjustedWithdrawalstep1 > 100 ? 100 : AdjustedWithdrawalstep1;
-
-	const int AdjustedWithdrawal = AdjustedWithdrawalstep2 < 0 ? 0 : AdjustedWithdrawalstep2;
-
-	const int expectedRndCnt = std::min(iNeededRoundsUs, iNeededRoundsThem);
-	const int timePercentage = earlyWithdrawTotal() > 100 ? 100 : earlyWithdrawTotal(); // InitialEarlyWithdrawPercentage
-
-	const int expectedRnds = expectedRndCnt * timePercentage / 100; // Don't add 1 here since z is initialised to the result of the one certain round
-
-	int y = AdjustedWithdrawal;
-	int z = AdjustedWithdrawal;
-
-	for (int Time = 0; Time < expectedRnds; ++Time)
-	{
-		z += AdjustedWithdrawal * y / 100;
-		y = AdjustedWithdrawal * (100 - z) / 100; // Prob next round is prob per round times prob you haven't already
-	}
-	const int EvaluatedWithdrawOdds = z;
-
-	// Figure out odds of repel
-	const int iFortRepelWithOverrun = pDefender->fortifyRepelModifier() - overrunTotal();
-
-	const int iFortRepelZero = iFortRepelWithOverrun < 0 ? 0 : iFortRepelWithOverrun;
-	const int iFortRepelTotal = iFortRepelZero > 100 ? 100 : iFortRepelZero;
-
-	const int iRepelWithUnyielding = pDefender->repelTotal() + iFortRepelTotal - unyieldingTotal();
-
-	const int iRepelZero = iRepelWithUnyielding < 0 ? 0 : iRepelWithUnyielding;
-	const int iRepelTotal = iRepelZero > 100 ? 100 : iRepelZero;
-
-	y = iRepelTotal;
-	z = iRepelTotal;
-
-	for (int Time = 0; Time < expectedRndCnt; ++Time)
-	{
-		z += iRepelTotal * y / 100;
-		y = iRepelTotal * (100 - z) / 100; // Prob next round is prob per round times prob you haven't already
-	}
-	const int EvaluatedRepelOdds = z;
-
-	// Figure out odds of knockback
-	const int iKnockbackVsUnyielding = knockbackVSOpponentProbTotal(pDefender) - pDefender->unyieldingTotal();
-
-	const int iKnockbackZero = iKnockbackVsUnyielding < 0 ? 0 : iKnockbackVsUnyielding;
-	const int iKnockbackTotal = iKnockbackZero > 100 ? 100 : iKnockbackZero;
-
-	const int iAttackerKnockbackTries = knockbackRetriesTotal();
-	y = iKnockbackTotal;
-	z = iKnockbackTotal;
-
-	for (int Time = 0; Time < iAttackerKnockbackTries; ++Time)
-	{
-		z += iKnockbackTotal * y / 100;
-		y = iKnockbackTotal * (100 - z) / 100; // Prob next round is prob per round times prob you haven't already
-	}
-	const int EvaluatedKnockbackOdds = z;
-
-	const int iOddsModifier = EvaluatedWithdrawOdds + EvaluatedKnockbackOdds - EvaluatedRepelOdds;
-
-	//	Surviving is not winning - give survival by withdrawal/knockback half the value of a win
-	iOdds += (iOdds * 2 * GET_PLAYER(getOwner()).AI_getAttackOddsChange() + (100 - iOdds) * iOddsModifier / 2) / 100;
+	iOdds += (iOdds * 2 * GET_PLAYER(getOwner()).AI_getAttackOddsChange()) / 100;
 
 	if (!modifyPredictedResults)
 	{
@@ -1406,12 +1343,12 @@ int CvUnitAI::AI_attackOddsAtPlotInternal(const CvPlot* pPlot, CvUnit* pDefender
 	// can pinpoint which term collapses the win chance against ~0-strength prey.
 	if (gUnitLogLevel >= 3 && iOdds < 60 && pDefender->isAnimal())
 	{
-		logHunterAI(3, "[HAI/oddscalc] atk=%d def=%s ourStr=%d theirStr=%d dmgUs=%d dmgThem=%d nrUs=%d nrThem=%d climit=%d hitLimit=%d base=%d wd=%d rep=%d kb=%d final=%d",
+		logHunterAI(3, "[HAI/oddscalc] atk=%d def=%s ourStr=%d theirStr=%d dmgUs=%d dmgThem=%d nrUs=%d nrThem=%d climit=%d hitLimit=%d base=%d final=%d",
 			getID(),
 			(pDefender->getUnitType() != NO_UNIT ? pDefender->getUnitInfo().getType() : "?"),
 			iOurStrength, iTheirStrength, iDamageToUs, iDamageToThem,
 			iNeededRoundsUs, iNeededRoundsThem, combatLimit(pDefender), iHitLimitThem,
-			iBaseOdds, EvaluatedWithdrawOdds, EvaluatedRepelOdds, EvaluatedKnockbackOdds, iOdds);
+			iBaseOdds, iOdds);
 	}
 	return range(iOdds, 1, 99);
 }
@@ -1623,20 +1560,13 @@ int CvUnitAI::AI_sacrificeValue(const CvPlot* pPlot) const
 				iCollateralDamageValue /= 5;
 			}
 		}
-		//  TB Combat Mods:
-		//  Determine Withdraw odds
+		//  Determine Withdraw odds (vanilla withdrawal)
 		const int AdjustedWithdrawalstep1 = withdrawalProbability();
 		const int AdjustedWithdrawalstep2 = AdjustedWithdrawalstep1 > 100 ? 100 : AdjustedWithdrawalstep1;
 		const int AdjustedWithdrawal = AdjustedWithdrawalstep2 < 0 ? 0 : AdjustedWithdrawalstep2;
-		const int timePercentage = ((100 - earlyWithdrawTotal()) > 100 ? 100 : (100 - earlyWithdrawTotal())); // InitialEarlyWithdrawPercentage
 
-		//TB Combat Mods (Pursuit and Early Withdraw)
-		//first method employed - keeping simply commented out as backup
-		//int AdjustedEarlyWithdraw = (((timePercentage < 0) ? 0 : timePercentage) * AdjustedWithdrawal);
-		//int EvaluationalWithdrawOdds = AdjustedEarlyWithdraw + AdjustedWithdrawal;
-
-		// Simplification: expected round count of 4 (4/100 = 1/25)
-		const int expectedRnds = 1 + timePercentage / 25;
+		// Simplification: expected round count of 4
+		const int expectedRnds = 4;
 
 		int y = AdjustedWithdrawal;
 		int z = AdjustedWithdrawal;
@@ -1647,28 +1577,10 @@ int CvUnitAI::AI_sacrificeValue(const CvPlot* pPlot) const
 		}
 		const int EvaluatedWithdrawOdds = z;
 
-		//* figure out odds of knockback
-		const int iAttackerKnockback = knockbackTotal();
-		const int iAttackerKnockbackTries = knockbackRetriesTotal();
-		const int iKnockbackZero = iAttackerKnockback < 0 ? 0 : iAttackerKnockback;
-		const int iKnockbackTotal = iKnockbackZero > 100 ? 100 : iKnockbackZero;
-
-		y = iKnockbackTotal;
-		z = iKnockbackTotal;
-		for (int Time = 0; Time < iAttackerKnockbackTries; ++Time)
-		{
-			z += iKnockbackTotal * y / 100;
-			y = iKnockbackTotal * y / 100;
-		}
-		const int EvaluatedKnockbackOdds = z;
-
 		iValue *= 100 + iCollateralDamageValue;
 		iValue /= 100 + cityDefenseModifier();
 		iValue *= 100 + EvaluatedWithdrawOdds;
 		iValue /= 100;
-		iValue *= 100 + EvaluatedKnockbackOdds;
-		iValue /= 100;
-		//TB Combat Mods End (above EvaluationalWithdrawOdds replaces EvaluatedWithdrawOdds)
 
 		iValue /= (10 + getExperience());
 
@@ -12478,13 +12390,6 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 									//	Boost plots where there is known danger
 									iValue = (iValue * (100 + pLoopPlot->getDangerCount(getTeam()))) / 100;
 
-									// ls612: If the terrain is damaging, don't guard there
-									bool	bHasTerrainDamage = (pLoopPlot->getTotalTurnDamage(getGroup()) > 0 || pLoopPlot->getFeatureTurnDamage() > 0);
-									if (bHasTerrainDamage)
-									{
-										iValue = 0;
-									}
-
 									//	The city itself is considered only as a poor option since we already
 									//	decided it wasn't really necessary to defend there in principal
 									if (pLoopPlot == pPlot)
@@ -13302,11 +13207,6 @@ bool CvUnitAI::AI_heal(int iDamagePercent, int iMaxPath)
 
 	CvSelectionGroup* pGroup = getGroup();
 
-	if (plot()->getTotalTurnDamage(pGroup) > 0)
-	{
-		OutputDebugString("AI_heal: denying heal due to terrain damage\n");
-		return false;
-	}
 	if (iDamagePercent < 1)
 	{
 		iDamagePercent = 10;
@@ -16338,15 +16238,6 @@ void CvUnitAI::AI_safetyEval(const CvPlot* plotX, const int iPass, const int iRa
 	}
 	else
 		iValue += GC.getGame().getSorenRandNum(50, "AI Safety");
-	{
-		const int iTerrainDamage = plotX->getTotalTurnDamage(getGroup());
-
-		if (iTerrainDamage > 0)
-		{
-			iValue *= std::max(1, 100 - getDamagePercent() - iTerrainDamage);
-			iValue /= 200;
-		}
-	}
 	iValue = iValue * 5 / (iPathTurns + 4);
 
 	if (iValue > iBestValue)
@@ -16796,11 +16687,6 @@ bool CvUnitAI::AI_explore()
 						iValue += 5000;
 					}
 
-					//ls612: Make exploring AI aware of terrain damage
-					if (plotX->getTotalTurnDamage(getGroup()) > 0 || plotX->getFeatureTurnDamage() > 0)
-					{
-						iValue /= 5;
-					}
 					iValue /= 3 + (std::max(1, itr.stepDistance()) / maxMoves());
 
 					if (!atPlot(plotX) && iValue > 0)
@@ -16967,11 +16853,6 @@ bool CvUnitAI::AI_exploreRange(int iRange)
 		}
 		iValue += GC.getGame().getMapRandNum(10000, "AI Explore");
 
-		//ls612: Make exploring AI aware of terrain damage
-		if (plotX->getTotalTurnDamage(getGroup()) > 0 || plotX->getFeatureTurnDamage() > 0)
-		{
-			iValue /= 5;
-		}
 		iValue /= (1 + stepDistance(getX(), getY(), plotX->getX(), plotX->getY()));
 
 		plotValue thisPlotValue;
@@ -17194,11 +17075,6 @@ bool CvUnitAI::AI_refreshExploreRange(int iRange, bool bIncludeVisibilityRefresh
 						);
 					}
 
-					//ls612: Make exploring AI aware of terrain damage
-					if (plotX->getTotalTurnDamage(getGroup()) > 0 || plotX->getFeatureTurnDamage() > 0)
-					{
-						iValue /= 5;
-					}
 
 					if (iValue > iBestValue)
 					{
@@ -18805,27 +18681,17 @@ bool CvUnitAI::AI_pirateBlockade()
 	}
 
 	const bool bIsInDanger = aiDeathZone[GC.getMap().plotNum(getX(), getY())] > 0;
-	const bool bHasTerrainDamage = plot()->getTotalTurnDamage(getGroup()) > 0 || plot()->getFeatureTurnDamage() > 0;
 	const bool bNeedsHeal = getDamage() > 0;
 	const bool bHurtAndInWildernessOrInBadShape = bNeedsHeal && (!plot()->isOwned() && !plot()->isAdjacentOwned() || getDamagePercent() > 25);
 
 	if (!bIsInDanger && bHurtAndInWildernessOrInBadShape)
 	{
-		// If we only have damage explained by the current plot for one turn
-		//	don't use that as an excuse to immediately turn around and go hide in a city!
-		if (!bHasTerrainDamage || getDamage() > (plot()->getTotalTurnDamage(getGroup()) + plot()->getFeatureTurnDamage()))
+		if (AI_retreatToCity(false, false, 1 + getDamagePercent() / 20))
 		{
-			if (AI_retreatToCity(false, false, 1 + getDamagePercent() / 20))
-			{
-				return true;
-			}
-		}
-
-		if (!bHasTerrainDamage)
-		{
-			getGroup()->pushMission(MISSION_SKIP);
 			return true;
 		}
+		getGroup()->pushMission(MISSION_SKIP);
+		return true;
 	}
 	int iPathTurns;
 	int iBestValue = 0;
@@ -18981,9 +18847,7 @@ bool CvUnitAI::AI_pirateBlockade()
 				// If an intermediary plot is one that the heal decsion logic (near the start of this method)
 				//	would choose to heal in, then just stop there on our way
 				if (bHurtAndInWildernessOrInBadShape
-				&& aiDeathZone[GC.getMap().plotNum(pPlot->getX(), pPlot->getY())] < 1
-				&& pPlot->getTotalTurnDamage(getGroup()) < 1
-				&& pPlot->getFeatureTurnDamage() < 1)
+				&& aiDeathZone[GC.getMap().plotNum(pPlot->getX(), pPlot->getY())] < 1)
 				{
 					pBestStopAndHealPlot = pPlot;
 				}
@@ -25309,14 +25173,7 @@ bool CvUnitAI::AI_defendPlot(const CvPlot* pPlot) const
 		return false;
 	}
 
-	const bool bHasTerrainDamage = (pPlot->getTotalTurnDamage(getGroup()) > 0 || pPlot->getFeatureTurnDamage() > 0);
-
 	const CvCity* pCity = pPlot->getPlotCity();
-
-	if (bHasTerrainDamage && !pPlot->isRoute() && pCity == NULL)
-	{
-		return false;
-	}
 
 	if (pCity != NULL)
 	{
@@ -25890,9 +25747,7 @@ bool CvUnitAI::AI_choke(int iRange, bool bDefensive)
 		{
 			const CvCity* pWorkingCity = pLoopPlot->getWorkingCity();
 
-			if (pWorkingCity != NULL && pWorkingCity->getTeam() == pLoopPlot->getTeam()
-			// and no terrain damage
-			&& plot()->getTotalTurnDamage(getGroup()) <= 0 && plot()->getFeatureTurnDamage() <= 0)
+			if (pWorkingCity != NULL && pWorkingCity->getTeam() == pLoopPlot->getTeam())
 			{
 				int iValue = (bDefensive ? pLoopPlot->defenseModifier(getTeam(), false) : -15);
 
@@ -28342,8 +28197,7 @@ int	CvUnitAI::AI_genericUnitValueTimes100(UnitValueFlags eFlags) const
 					//	Terrain defense
 					for (int iJ = 0; iJ < GC.getNumTerrainInfos(); iJ++)
 					{
-						if (kPromotion.getTerrainDefensePercent((TerrainTypes)iJ) != 0 ||
-							 kPromotion.getIgnoreTerrainDamage() == iJ)
+						if (kPromotion.getTerrainDefensePercent((TerrainTypes)iJ) != 0)
 						{
 							int iNumRevealedAreaTiles = std::max(1, area()->getNumRevealedTiles(getTeam()));
 							int	iNumRevealedAreaThisTerrain = area()->getNumRevealedTerrainTiles(getTeam(), (TerrainTypes)iJ);
@@ -28355,12 +28209,6 @@ int	CvUnitAI::AI_genericUnitValueTimes100(UnitValueFlags eFlags) const
 							int	iTerrainWeight = (2 * 1000 * iNumRevealedAreaThisTerrain) / iNumRevealedAreaTiles;
 
 							iResult = (iResult * (10000 + (kPromotion.getTerrainDefensePercent((TerrainTypes)iJ) * iTerrainWeight) / 10)) / 10000;
-
-							if (kPromotion.getIgnoreTerrainDamage() == iJ)
-							{
-								iResult = (iResult * (10000 + (50 * iTerrainWeight) / 10)) / 10000;
-								bPromotionHasAccountedValue = true;
-							}
 						}
 					}
 					//	Feature defense
@@ -28490,8 +28338,7 @@ int	CvUnitAI::AI_genericUnitValueTimes100(UnitValueFlags eFlags) const
 					//	Terrain attack
 					for (int iJ = 0; iJ < GC.getNumTerrainInfos(); iJ++)
 					{
-						if (kPromotion.getTerrainAttackPercent((TerrainTypes)iJ) != 0 ||
-							 kPromotion.getIgnoreTerrainDamage() == iJ)
+						if (kPromotion.getTerrainAttackPercent((TerrainTypes)iJ) != 0)
 						{
 							int iNumRevealedAreaTiles = std::max(1, area()->getNumRevealedTiles(getTeam()));
 							int	iNumRevealedAreaThisTerrain = area()->getNumRevealedTerrainTiles(getTeam(), (TerrainTypes)iJ);
@@ -28505,12 +28352,6 @@ int	CvUnitAI::AI_genericUnitValueTimes100(UnitValueFlags eFlags) const
 							iResult = (iResult * (10000 + (kPromotion.getTerrainAttackPercent((TerrainTypes)iJ) * iTerrainWeight) / 10)) / 10000;
 
 							bPromotionHasAccountedValue |= (kPromotion.getTerrainAttackPercent((TerrainTypes)iJ) > 0);
-
-							if (kPromotion.getIgnoreTerrainDamage() == iJ)
-							{
-								iResult = (iResult * (10000 + (50 * iTerrainWeight) / 10)) / 10000;
-								bPromotionHasAccountedValue = true;
-							}
 						}
 					}
 					//	Feature attack

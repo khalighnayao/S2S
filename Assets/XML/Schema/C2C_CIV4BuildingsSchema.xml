@@ -13,11 +13,6 @@
 	<ElementType name="iLinePriority" content="textOnly" dt:type="int"/>
 	<ElementType name="iAidRate" content="textOnly" dt:type="int"/>
 	<ElementType name="iTradeCommunicability" content="textOnly" dt:type="int"/>
-	<ElementType name="iFrontSupportPercentModifier" content="textOnly" dt:type="int"/>
-	<ElementType name="iShortRangeSupportPercentModifier" content="textOnly" dt:type="int"/>
-	<ElementType name="iMediumRangeSupportPercentModifier" content="textOnly" dt:type="int"/>
-	<ElementType name="iLongRangeSupportPercentModifier" content="textOnly" dt:type="int"/>
-	<ElementType name="iFlankSupportPercentModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iNationalCaptureProbabilityModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iNationalCaptureResistanceModifier" content="textOnly" dt:type="int"/>
 	<ElementType name="iLocalCaptureProbabilityModifier" content="textOnly" dt:type="int"/>
@@ -1001,11 +996,6 @@
 		<element type="iOvercomeBase" minOccurs="0"/>
 		<element type="iTradeCommunicability" minOccurs="0"/>
 		<element type="iPopulationChange" minOccurs="0"/>
-		<element type="iFrontSupportPercentModifier" minOccurs="0"/>
-		<element type="iShortRangeSupportPercentModifier" minOccurs="0"/>
-		<element type="iMediumRangeSupportPercentModifier" minOccurs="0"/>
-		<element type="iLongRangeSupportPercentModifier" minOccurs="0"/>
-		<element type="iFlankSupportPercentModifier" minOccurs="0"/>
 		<element type="iNationalCaptureProbabilityModifier" minOccurs="0"/>
 		<element type="iNationalCaptureResistanceModifier" minOccurs="0"/>
 		<element type="iLocalCaptureProbabilityModifier" minOccurs="0"/>

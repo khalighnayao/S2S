@@ -2319,7 +2319,6 @@
                     <iTerrainDefense>20</iTerrainDefense>
                 </TerrainDefense>
 			</TerrainDefenses>
-			<IgnoreTerrainDamage>TERRAIN_DESERT</IgnoreTerrainDamage>
 			<Button>,Art/Interface/Buttons/Promotions/Warmth1.dds,Art/Interface/Buttons/RoM_Promotion_Atlas2.dds,7,12</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -2361,7 +2360,6 @@
                     <iTerrainDefense>20</iTerrainDefense>
                 </TerrainDefense>
             </TerrainDefenses>
-			<IgnoreTerrainDamage>TERRAIN_DUNES</IgnoreTerrainDamage>
 			<Button>,Art/Interface/Buttons/Promotions/Warmth2.dds,Art/Interface/Buttons/RoM_Promotion_Atlas2.dds,8,12</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -2417,7 +2415,6 @@
                     <bTerrainDoubleMove>1</bTerrainDoubleMove>
                 </TerrainDoubleMove>
 			</TerrainDoubleMoves>
-			<IgnoreTerrainDamage>TERRAIN_SALT_FLATS</IgnoreTerrainDamage>
 			<Button>art/Tweaks/art/desertcombat3.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -2467,7 +2464,6 @@
                     <iTerrainDefense>10</iTerrainDefense>
                 </TerrainDefense>
 			</TerrainDefenses>
-			<IgnoreTerrainDamage>TERRAIN_TAIGA</IgnoreTerrainDamage>
 			<Button>,Art/Interface/Buttons/Promotions/Cold1.dds,Art/Interface/Buttons/RoM_Promotion_Atlas2.dds,5,3</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -2517,7 +2513,6 @@
                     <iTerrainDefense>10</iTerrainDefense>
                 </TerrainDefense>
             </TerrainDefenses>
-            <IgnoreTerrainDamage>TERRAIN_TUNDRA</IgnoreTerrainDamage>
 			<Button>,Art/Interface/Buttons/Promotions/Cold2.dds,Art/Interface/Buttons/RoM_Promotion_Atlas2.dds,6,3</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -2585,7 +2580,6 @@
                     <bTerrainDoubleMove>1</bTerrainDoubleMove>
                 </TerrainDoubleMove>
 			</TerrainDoubleMoves>
-            <IgnoreTerrainDamage>TERRAIN_PERMAFROST</IgnoreTerrainDamage>
 			<Button>art/Tweaks/art/arcticcombat3.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -2635,7 +2629,6 @@
                     <iTerrainDefense>20</iTerrainDefense>
                 </TerrainDefense>
             </TerrainDefenses>
-            <IgnoreTerrainDamage>TERRAIN_ICE</IgnoreTerrainDamage>
 			<Button>art/buttons/promotions/arcticcombat4.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -2830,7 +2823,6 @@
                     <iTerrainDefense>20</iTerrainDefense>
                 </TerrainDefense>
 			</TerrainDefenses>
-            <IgnoreTerrainDamage>TERRAIN_BADLAND</IgnoreTerrainDamage>
 			<Button>art/Tweaks/art/ruggedcombat1.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -2888,7 +2880,6 @@
                     <iTerrainDefense>20</iTerrainDefense>
                 </TerrainDefense>
             </TerrainDefenses>
-            <IgnoreTerrainDamage>TERRAIN_JAGGED</IgnoreTerrainDamage>
 			<Button>art/Tweaks/art/ruggedcombat2.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -9107,7 +9098,6 @@
 				</AIWeightbyUnitCombatType>
 			</AIWeightbyUnitCombatTypes>
 			<iChanceFirstStrikesChange>1</iChanceFirstStrikesChange>
-			<iPursuitChange>5</iPursuitChange>
 			<VisibilityIntensityChangeTypes>
 				<VisibilityIntensityChangeType>
 					<InvisibleType>INVISIBLE_SIZE</InvisibleType>
@@ -9152,7 +9142,6 @@
 				</AIWeightbyUnitCombatType>
 			</AIWeightbyUnitCombatTypes>
 			<iFirstStrikesChange>1</iFirstStrikesChange>
-			<iPursuitChange>5</iPursuitChange>
 			<VisibilityIntensityChangeTypes>
 				<VisibilityIntensityChangeType>
 					<InvisibleType>INVISIBLE_SIZE</InvisibleType>
@@ -11259,7 +11248,6 @@
 			<TechPrereq>TECH_CANINE_DOMESTICATION</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_HUNTING_DOG</PromotionLine>
 			<iLinePriority>1</iLinePriority>
-			<iPursuitChange>10</iPursuitChange>
 			<UnitCombatMods>
 				<UnitCombatMod>
 					<UnitCombatType>UNITCOMBAT_ANIMAL</UnitCombatType>
@@ -11276,7 +11264,6 @@
 			<TechPrereq>TECH_ANIMAL_HUSBANDRY</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_HUNTING_DOG</PromotionLine>
 			<iLinePriority>2</iLinePriority>
-			<iPursuitChange>10</iPursuitChange>
 			<UnitCombatMods>
 				<UnitCombatMod>
 					<UnitCombatType>UNITCOMBAT_ANIMAL</UnitCombatType>
@@ -11293,7 +11280,6 @@
 			<TechPrereq>TECH_MILITARY_TRAINING</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_HUNTING_DOG</PromotionLine>
 			<iLinePriority>3</iLinePriority>
-			<iPursuitChange>10</iPursuitChange>
 			<UnitCombatMods>
 				<UnitCombatMod>
 					<UnitCombatType>UNITCOMBAT_ANIMAL</UnitCombatType>
@@ -11309,7 +11295,6 @@
 			<TechPrereq>TECH_CANINE_DOMESTICATION</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_TRACK_SCENT</PromotionLine>
 			<iLinePriority>1</iLinePriority>
-			<iPursuitChange>10</iPursuitChange>
 			<iVisibilityChange>1</iVisibilityChange>
 			<Button>Art/Interface/Buttons/Promotions/trackscent1.dds</Button>
 			<iCaptureProbabilityModifierChange>2</iCaptureProbabilityModifierChange>
@@ -11322,7 +11307,6 @@
 			<TechPrereq>TECH_ANIMAL_HUSBANDRY</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_TRACK_SCENT</PromotionLine>
 			<iLinePriority>2</iLinePriority>
-			<iPursuitChange>10</iPursuitChange>
 			<iVisibilityChange>1</iVisibilityChange>
 			<Button>Art/Interface/Buttons/Promotions/trackscent2.dds</Button>
 			<iCaptureProbabilityModifierChange>3</iCaptureProbabilityModifierChange>
@@ -11335,7 +11319,6 @@
 			<TechPrereq>TECH_MILITARY_TRAINING</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_TRACK_SCENT</PromotionLine>
 			<iLinePriority>3</iLinePriority>
-			<iPursuitChange>10</iPursuitChange>
 			<iVisibilityChange>1</iVisibilityChange>
 			<Button>Art/Interface/Buttons/Promotions/trackscent3.dds</Button>
 			<iCaptureProbabilityModifierChange>5</iCaptureProbabilityModifierChange>
@@ -11447,7 +11430,6 @@
 			<PromotionLine>PROMOTIONLINE_BLOODHOUND</PromotionLine>
 			<iLinePriority>1</iLinePriority>
 			<iCombatPercent>5</iCombatPercent>
-			<iPursuitChange>10</iPursuitChange>
 			<UnitCombatMods>
 				<UnitCombatMod>
 					<UnitCombatType>UNITCOMBAT_CRIMINAL</UnitCombatType>
@@ -11466,7 +11448,6 @@
 			<PromotionLine>PROMOTIONLINE_BLOODHOUND</PromotionLine>
 			<iLinePriority>2</iLinePriority>
 			<iCombatPercent>5</iCombatPercent>
-			<iPursuitChange>10</iPursuitChange>
 			<UnitCombatMods>
 				<UnitCombatMod>
 					<UnitCombatType>UNITCOMBAT_CRIMINAL</UnitCombatType>
@@ -11485,7 +11466,6 @@
 			<PromotionLine>PROMOTIONLINE_BLOODHOUND</PromotionLine>
 			<iLinePriority>3</iLinePriority>
 			<iCombatPercent>5</iCombatPercent>
-			<iPursuitChange>10</iPursuitChange>
 			<UnitCombatMods>
 				<UnitCombatMod>
 					<UnitCombatType>UNITCOMBAT_CRIMINAL</UnitCombatType>
@@ -11610,284 +11590,6 @@
 			<iCaptureProbabilityModifierChange>5</iCaptureProbabilityModifierChange>
 			<iCaptureResistanceModifierChange>-2</iCaptureResistanceModifierChange>
 		</PromotionInfo>
-		<!-- <PromotionInfo>
-			<Type>PROMOTION_STONE_WEAPONS</Type>
-			<Description>TXT_KEY_PROMOTION_STONE_WEAPONS</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_MELEE_WEAPONS</PromotionLine>
-			<iLinePriority>1</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iPunctureChange>3</iPunctureChange>
-			<iStrengthChange>1</iStrengthChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_PRIME_TIMBER_WEAPONS</Type>
-			<Description>TXT_KEY_PROMOTION_PRIME_TIMBER_WEAPONS</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_MELEE_WEAPONS</PromotionLine>
-			<iLinePriority>2</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iPunctureChange>6</iPunctureChange>
-			<iStrengthChange>1</iStrengthChange>
-			<iCombatPercent>10</iCombatPercent>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_OBSIDIAN_WEAPONS</Type>
-			<Description>TXT_KEY_PROMOTION_OBSIDIAN_WEAPONS</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_MELEE_WEAPONS</PromotionLine>
-			<iLinePriority>3</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iPunctureChange>8</iPunctureChange>
-			<iStrengthChange>2</iStrengthChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_IVORY_WEAPONS</Type>
-			<Description>TXT_KEY_PROMOTION_IVORY_WEAPONS</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_MELEE_WEAPONS</PromotionLine>
-			<iLinePriority>4</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iPunctureChange>8</iPunctureChange>
-			<iStrengthChange>3</iStrengthChange>
-			<iCollateralDamageChange>10</iCollateralDamageChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_COPPER_WEAPONS</Type>
-			<Description>TXT_KEY_PROMOTION_COPPER_WEAPONS</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_MELEE_WEAPONS</PromotionLine>
-			<iLinePriority>5</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iPunctureChange>8</iPunctureChange>
-			<iStrengthChange>3</iStrengthChange>
-			<iCombatPercent>20</iCombatPercent>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_BRONZE_WEAPONS</Type>
-			<Description>TXT_KEY_PROMOTION_BRONZE_WEAPONS</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_MELEE_WEAPONS</PromotionLine>
-			<iLinePriority>6</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iPunctureChange>12</iPunctureChange>
-			<iStrengthChange>4</iStrengthChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_IRON_WEAPONS</Type>
-			<Description>TXT_KEY_PROMOTION_IRON_WEAPONS</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_MELEE_WEAPONS</PromotionLine>
-			<iLinePriority>7</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iPunctureChange>15</iPunctureChange>
-			<iStrengthChange>5</iStrengthChange>
-			<iChanceFirstStrikesChange>1</iChanceFirstStrikesChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_TEMPERED_IRON_WEAPONS</Type>
-			<Description>TXT_KEY_PROMOTION_TEMPERED_IRON_WEAPONS</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_MELEE_WEAPONS</PromotionLine>
-			<iLinePriority>8</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iPunctureChange>20</iPunctureChange>
-			<iStrengthChange>5</iStrengthChange>
-			<iCityAttack>5</iCityAttack>
-			<iCityDefense>5</iCityDefense>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_STEEL_WEAPONS</Type>
-			<Description>TXT_KEY_PROMOTION_STEEL_WEAPONS</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_MELEE_WEAPONS</PromotionLine>
-			<iLinePriority>9</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iPunctureChange>25</iPunctureChange>
-			<iStrengthChange>7</iStrengthChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_RHINO_HIDE_ARMOR</Type>
-			<Description>TXT_KEY_PROMOTION_RHINO_HIDE_ARMOR</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_EARLY_MELEE_ARMOR</PromotionLine>
-			<iLinePriority>3</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iArmorChange>15</iArmorChange>
-			<iEnemyHealChange>5</iEnemyHealChange>
-			<iNeutralHealChange>5</iNeutralHealChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_COPPER_ARMOR</Type>
-			<Description>TXT_KEY_PROMOTION_COPPER_ARMOR</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_EARLY_MELEE_ARMOR</PromotionLine>
-			<iLinePriority>2</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iArmorChange>12</iArmorChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_PRIME_TIMBER_ARMOR</Type>
-			<Description>TXT_KEY_PROMOTION_PRIME_TIMBER_ARMOR</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_EARLY_MELEE_ARMOR</PromotionLine>
-			<iLinePriority>1</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iArmorChange>7</iArmorChange>
-			<iCombatPercent>5</iCombatPercent>
-			<iCityAttack>5</iCityAttack>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_LEATHER_ARMOR</Type>
-			<Description>TXT_KEY_PROMOTION_LEATHER_ARMOR</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_EARLY_RANGED_ARMOR</PromotionLine>
-			<iLinePriority>2</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iArmorChange>8</iArmorChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_BONE_ARMOR</Type>
-			<Description>TXT_KEY_PROMOTION_BONE_ARMOR</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_EARLY_RANGED_ARMOR</PromotionLine>
-			<iLinePriority>1</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iArmorChange>5</iArmorChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_BRONZE_CHAIN_ARMOR</Type>
-			<Description>TXT_KEY_PROMOTION_BRONZE_CHAIN_ARMOR</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_EARLY_RANGED_ARMOR</PromotionLine>
-			<iLinePriority>3</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iArmorChange>12</iArmorChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_IRON_CHAIN_ARMOR</Type>
-			<Description>TXT_KEY_PROMOTION_IRON_CHAIN_ARMOR</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_EARLY_RANGED_ARMOR</PromotionLine>
-			<iLinePriority>4</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iArmorChange>20</iArmorChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_BRONZE_ARMOR</Type>
-			<Description>TXT_KEY_PROMOTION_BRONZE_ARMOR</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_EARLY_MELEE_ARMOR</PromotionLine>
-			<iLinePriority>4</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iArmorChange>25</iArmorChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_IRON_ARMOR</Type>
-			<Description>TXT_KEY_PROMOTION_IRON_ARMOR</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_EARLY_MELEE_ARMOR</PromotionLine>
-			<iLinePriority>5</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iArmorChange>35</iArmorChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_STEEL_ARMOR</Type>
-			<Description>TXT_KEY_PROMOTION_STEEL_ARMOR</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_EARLY_MELEE_ARMOR</PromotionLine>
-			<iLinePriority>6</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iArmorChange>42</iArmorChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_CLOVIS_POINTS</Type>
-			<Description>TXT_KEY_PROMOTION_CLOVIS_POINTS</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_RANGED_WEAPONS</PromotionLine>
-			<iLinePriority>1</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iPunctureChange>5</iPunctureChange>
-			<iFirstStrikesChange>1</iFirstStrikesChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_COPPER_POINTS</Type>
-			<Description>TXT_KEY_PROMOTION_COPPER_POINTS</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_RANGED_WEAPONS</PromotionLine>
-			<iLinePriority>2</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iPunctureChange>8</iPunctureChange>
-			<iFirstStrikesChange>1</iFirstStrikesChange>
-			<iChanceFirstStrikesChange>1</iChanceFirstStrikesChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_BRONZE_POINTED_ARROWS</Type>
-			<Description>TXT_KEY_PROMOTION_BRONZE_POINTED_ARROWS</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_RANGED_WEAPONS</PromotionLine>
-			<iLinePriority>3</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iPunctureChange>12</iPunctureChange>
-			<iFirstStrikesChange>2</iFirstStrikesChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_IRON_POINTED_ARROWS</Type>
-			<Description>TXT_KEY_PROMOTION_IRON_POINTED_ARROWS</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<TechPrereq>TECH_DUMMY</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_EQUIPMENT_RANGED_WEAPONS</PromotionLine>
-			<iLinePriority>4</iLinePriority>
-			<bEquipment>1</bEquipment>
-			<iPunctureChange>24</iPunctureChange>
-			<iFirstStrikesChange>2</iFirstStrikesChange>
-			<iChanceFirstStrikesChange>1</iChanceFirstStrikesChange>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-		</PromotionInfo> -->
 		<PromotionInfo>
 			<Type>PROMOTION_AGGRESSIVE</Type>
 			<Description>TXT_KEY_PROMOTION_AGGRESSIVE</Description>
@@ -12291,144 +11993,6 @@
 			<Button>art/Buttons/Promotions/StreetFighterPromotion4.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
-			<Type>PROMOTION_HUNT_DOWN1</Type>
-			<Description>TXT_KEY_PROMOTION_HUNT_DOWN1</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionLine>PROMOTIONLINE_HUNT_DOWN</PromotionLine>
-			<iLinePriority>1</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iPursuitChange>15</iPursuitChange>
-			<Button>art/Buttons/Promotions/HuntDown1Promotion.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_HUNT_DOWN2</Type>
-			<Description>TXT_KEY_PROMOTION_HUNT_DOWN2</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionPrereq>PROMOTION_HUNT_DOWN1</PromotionPrereq>
-			<TechPrereq>TECH_PERSISTENCE_HUNTING</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_HUNT_DOWN</PromotionLine>
-			<iLinePriority>2</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iPursuitChange>20</iPursuitChange>
-			<Button>art/Buttons/Promotions/HuntDown2Promotion.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_HUNT_DOWN3</Type>
-			<Description>TXT_KEY_PROMOTION_HUNT_DOWN3</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionPrereq>PROMOTION_HUNT_DOWN2</PromotionPrereq>
-			<TechPrereq>TECH_TRACKING</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_HUNT_DOWN</PromotionLine>
-			<iLinePriority>3</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iPursuitChange>25</iPursuitChange>
-			<Button>art/Buttons/Promotions/HuntDown3Promotion.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_HUNT_DOWN4</Type>
-			<Description>TXT_KEY_PROMOTION_HUNT_DOWN4</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionPrereq>PROMOTION_HUNT_DOWN3</PromotionPrereq>
-			<TechPrereq>TECH_HUNTING</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_HUNT_DOWN</PromotionLine>
-			<iLinePriority>4</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iPursuitChange>30</iPursuitChange>
-			<Button>art/Buttons/Promotions/HuntDown4Promotion.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_HUNT_DOWN5</Type>
-			<Description>TXT_KEY_PROMOTION_HUNT_DOWN5</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionPrereq>PROMOTION_HUNT_DOWN4</PromotionPrereq>
-			<TechPrereq>TECH_THE_WHEEL</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_HUNT_DOWN</PromotionLine>
-			<iLinePriority>5</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iMovesChange>1</iMovesChange>
-			<iPursuitChange>35</iPursuitChange>
-			<Button>art/Buttons/Promotions/HuntDown5Promotion.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_CHASE1</Type>
-			<Description>TXT_KEY_PROMOTION_CHASE1</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionLine>PROMOTIONLINE_CHASE</PromotionLine>
-			<iLinePriority>1</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iPursuitChange>5</iPursuitChange>
-			<Button>art/Buttons/Promotions/Chase1Promotion.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_CHASE2</Type>
-			<Description>TXT_KEY_PROMOTION_CHASE2</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionPrereq>PROMOTION_CHASE1</PromotionPrereq>
-			<TechPrereq>TECH_NOMADISM</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_CHASE</PromotionLine>
-			<iLinePriority>2</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iPursuitChange>10</iPursuitChange>
-			<Button>art/Buttons/Promotions/Chase2Promotion.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_CHASE3</Type>
-			<Description>TXT_KEY_PROMOTION_CHASE3</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionPrereq>PROMOTION_CHASE2</PromotionPrereq>
-			<TechPrereq>TECH_PERSISTENCE_HUNTING</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_CHASE</PromotionLine>
-			<iLinePriority>3</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iPursuitChange>15</iPursuitChange>
-			<Button>art/Buttons/Promotions/Chase3Promotion.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_CHASE4</Type>
-			<Description>TXT_KEY_PROMOTION_CHASE4</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionPrereq>PROMOTION_CHASE3</PromotionPrereq>
-			<TechPrereq>TECH_TRACKING</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_CHASE</PromotionLine>
-			<iLinePriority>4</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iPursuitChange>20</iPursuitChange>
-			<Button>art/Buttons/Promotions/Chase4Promotion.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_CHASE5</Type>
-			<Description>TXT_KEY_PROMOTION_CHASE5</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionPrereq>PROMOTION_CHASE4</PromotionPrereq>
-			<TechPrereq>TECH_HUNTING</TechPrereq>
-			<PromotionLine>PROMOTIONLINE_CHASE</PromotionLine>
-			<iLinePriority>5</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iMovesChange>1</iMovesChange>
-			<iPursuitChange>25</iPursuitChange>
-			<Button>art/Buttons/Promotions/Chase5Promotion.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
 			<Type>PROMOTION_BACK_DOWN1</Type>
 			<Description>TXT_KEY_PROMOTION_BACK_DOWN1</Description>
 			<Sound>AS2D_IF_LEVELUP</Sound>
@@ -12491,11 +12055,7 @@
 			<SubCombatChangeTypes>
 				<SubCombatChangeType>UNITCOMBAT_PROMOTED_CAUTIOUS</SubCombatChangeType>
 			</SubCombatChangeTypes>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>5</iWithdrawalChange>
-			<iEarlyWithdrawChange>10</iEarlyWithdrawChange>
 			<Button>art/Buttons/Promotions/Cautious1Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -12506,11 +12066,7 @@
 			<TechPrereq>TECH_GATHERING</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_CAUTIOUS</PromotionLine>
 			<iLinePriority>2</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>5</iWithdrawalChange>
-			<iEarlyWithdrawChange>10</iEarlyWithdrawChange>
 			<Button>art/Buttons/Promotions/Cautious2Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -12521,11 +12077,7 @@
 			<TechPrereq>TECH_PORTABLE_SHELTERS</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_CAUTIOUS</PromotionLine>
 			<iLinePriority>3</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>5</iWithdrawalChange>
-			<iEarlyWithdrawChange>15</iEarlyWithdrawChange>
 			<Button>art/Buttons/Promotions/Cautious3Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -12536,11 +12088,7 @@
 			<TechPrereq>TECH_ANIMAL_RIDING</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_CAUTIOUS</PromotionLine>
 			<iLinePriority>4</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>5</iWithdrawalChange>
-			<iEarlyWithdrawChange>15</iEarlyWithdrawChange>
 			<Button>art/Buttons/Promotions/Cautious4Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -12551,11 +12099,7 @@
 			<TechPrereq>TECH_COMBAT_SPORTS</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_CAUTIOUS</PromotionLine>
 			<iLinePriority>5</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>5</iWithdrawalChange>
-			<iEarlyWithdrawChange>20</iEarlyWithdrawChange>
 			<Button>art/Buttons/Promotions/Cautious5Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -12567,11 +12111,7 @@
 			<SubCombatChangeTypes>
 				<SubCombatChangeType>UNITCOMBAT_PROMOTED_STALL</SubCombatChangeType>
 			</SubCombatChangeTypes>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>5</iWithdrawalChange>
-			<iEarlyWithdrawChange>-10</iEarlyWithdrawChange>
 			<Button>art/Buttons/Promotions/Stall1Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -12582,11 +12122,7 @@
 			<TechPrereq>TECH_PERSISTENCE_HUNTING</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_STALL</PromotionLine>
 			<iLinePriority>2</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>5</iWithdrawalChange>
-			<iEarlyWithdrawChange>-10</iEarlyWithdrawChange>
 			<Button>art/Buttons/Promotions/Stall2Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -12597,11 +12133,7 @@
 			<TechPrereq>TECH_TRACKING</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_STALL</PromotionLine>
 			<iLinePriority>3</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>5</iWithdrawalChange>
-			<iEarlyWithdrawChange>-15</iEarlyWithdrawChange>
 			<Button>art/Buttons/Promotions/Stall3Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -12612,11 +12144,7 @@
 			<TechPrereq>TECH_CHIEFDOM</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_STALL</PromotionLine>
 			<iLinePriority>4</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>5</iWithdrawalChange>
-			<iEarlyWithdrawChange>-15</iEarlyWithdrawChange>
 			<Button>art/Buttons/Promotions/Stall4Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -12627,11 +12155,7 @@
 			<TechPrereq>TECH_SACRIFICE_CULT</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_STALL</PromotionLine>
 			<iLinePriority>5</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>5</iWithdrawalChange>
-			<iEarlyWithdrawChange>-20</iEarlyWithdrawChange>
 			<Button>art/Buttons/Promotions/Stall5Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -12642,9 +12166,6 @@
 			<TechPrereq>TECH_LANGUAGE</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_STINGING_INSULTS</PromotionLine>
 			<iLinePriority>1</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>5</iWithdrawalChange>
 			<iTauntChange>50</iTauntChange>
 			<Button>art/Buttons/Promotions/Insult1Promotion.fw.dds</Button>
@@ -12657,9 +12178,6 @@
 			<TechPrereq>TECH_LANGUAGE</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_STINGING_INSULTS</PromotionLine>
 			<iLinePriority>2</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>10</iWithdrawalChange>
 			<iTauntChange>100</iTauntChange>
 			<Button>art/Buttons/Promotions/Insult2Promotion.fw.dds</Button>
@@ -12672,9 +12190,6 @@
 			<TechPrereq>TECH_LANGUAGE</TechPrereq>
 			<PromotionLine>PROMOTIONLINE_STINGING_INSULTS</PromotionLine>
 			<iLinePriority>3</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>15</iWithdrawalChange>
 			<iTauntChange>200</iTauntChange>
 			<Button>art/Buttons/Promotions/Insult3Promotion.fw.dds</Button>
@@ -13692,7 +13207,6 @@
 			<iLinePriority>1</iLinePriority>
 			<iWithdrawalChange>-5</iWithdrawalChange>
 			<iAttackCombatModifierChange>20</iAttackCombatModifierChange>
-			<iUnyieldingChange>15</iUnyieldingChange>
 			<iStealthDefenseChange>1</iStealthDefenseChange>
 			<iAnimalIgnoresBordersChange>-1</iAnimalIgnoresBordersChange>
 			<Button>Art/Interface/Buttons/Promotions/Feral1.dds</Button>
@@ -13706,7 +13220,6 @@
 			<iLinePriority>2</iLinePriority>
 			<iWithdrawalChange>-5</iWithdrawalChange>
 			<iAttackCombatModifierChange>25</iAttackCombatModifierChange>
-			<iUnyieldingChange>20</iUnyieldingChange>
 			<iDefenseOnlyChange>-1</iDefenseOnlyChange>
 			<iAnimalIgnoresBordersChange>1</iAnimalIgnoresBordersChange>
 			<Button>Art/Interface/Buttons/Promotions/Feral2.dds</Button>
@@ -13720,7 +13233,6 @@
 			<iLinePriority>3</iLinePriority>
 			<iWithdrawalChange>-10</iWithdrawalChange>
 			<iAttackCombatModifierChange>30</iAttackCombatModifierChange>
-			<iUnyieldingChange>25</iUnyieldingChange>
 			<iAnimalIgnoresBordersChange>2</iAnimalIgnoresBordersChange>
 			<bStampedeChange>1</bStampedeChange>
 			<Button>Art/Interface/Buttons/Promotions/Feral3.dds</Button>
@@ -13733,7 +13245,6 @@
 			<iLinePriority>1</iLinePriority>
 			<iWithdrawalChange>-5</iWithdrawalChange>
 			<iAttackCombatModifierChange>15</iAttackCombatModifierChange>
-			<iUnyieldingChange>10</iUnyieldingChange>
 			<Button>art/Buttons/Promotions/SavageBeast1Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -13745,7 +13256,6 @@
 			<iLinePriority>2</iLinePriority>
 			<iWithdrawalChange>-5</iWithdrawalChange>
 			<iAttackCombatModifierChange>15</iAttackCombatModifierChange>
-			<iUnyieldingChange>15</iUnyieldingChange>
 			<iStealthDefenseChange>1</iStealthDefenseChange>
 			<Button>art/Buttons/Promotions/SavageBeast2Promotion.dds</Button>
 		</PromotionInfo>
@@ -13758,7 +13268,6 @@
 			<iLinePriority>3</iLinePriority>
 			<iWithdrawalChange>-10</iWithdrawalChange>
 			<iAttackCombatModifierChange>15</iAttackCombatModifierChange>
-			<iUnyieldingChange>20</iUnyieldingChange>
 			<Button>art/Buttons/Promotions/SavageBeast3Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -13770,7 +13279,6 @@
 			<iLinePriority>4</iLinePriority>
 			<iWithdrawalChange>-10</iWithdrawalChange>
 			<iAttackCombatModifierChange>15</iAttackCombatModifierChange>
-			<iUnyieldingChange>25</iUnyieldingChange>
 			<bStampedeChange>1</bStampedeChange>
 			<Button>art/Buttons/Promotions/SavageBeast4Promotion.dds</Button>
 		</PromotionInfo>
@@ -13783,7 +13291,6 @@
 			<iLinePriority>5</iLinePriority>
 			<iWithdrawalChange>-10</iWithdrawalChange>
 			<iAttackCombatModifierChange>15</iAttackCombatModifierChange>
-			<iUnyieldingChange>30</iUnyieldingChange>
 			<Button>art/Buttons/Promotions/SavageBeast5Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -16923,9 +16430,6 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<PromotionLine>PROMOTIONLINE_DARING_ESCAPE</PromotionLine>
 			<iLinePriority>1</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>5</iWithdrawalChange>
 			<iCaptureResistanceModifierChange>20</iCaptureResistanceModifierChange>
 			<Button>art/Buttons/Promotions/DaringEscape1Promotion.dds</Button>
@@ -16937,9 +16441,6 @@
 			<PromotionPrereq>PROMOTION_DARING_ESCAPE1</PromotionPrereq>
 			<PromotionLine>PROMOTIONLINE_DARING_ESCAPE</PromotionLine>
 			<iLinePriority>2</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>10</iWithdrawalChange>
 			<iCaptureResistanceModifierChange>25</iCaptureResistanceModifierChange>
 			<Button>art/Buttons/Promotions/DaringEscape2Promotion.dds</Button>
@@ -16951,9 +16452,6 @@
 			<PromotionPrereq>PROMOTION_DARING_ESCAPE2</PromotionPrereq>
 			<PromotionLine>PROMOTIONLINE_DARING_ESCAPE</PromotionLine>
 			<iLinePriority>3</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<iWithdrawalChange>15</iWithdrawalChange>
 			<iCaptureResistanceModifierChange>30</iCaptureResistanceModifierChange>
 			<Button>art/Buttons/Promotions/DaringEscape3Promotion.dds</Button>
@@ -20308,16 +19806,6 @@
 					<iUnitCombatMod>15</iUnitCombatMod>
 				</UnitCombatMod>
 			</UnitCombatMods>
-			<PursuitVSUnitCombatChangeTypes>
-				<PursuitVSUnitCombatChangeType>
-					<PursuitVSUnitCombatChange>UNITCOMBAT_STRIKE_TEAM</PursuitVSUnitCombatChange>
-					<iPursuitVSUnitCombatChange>15</iPursuitVSUnitCombatChange>
-				</PursuitVSUnitCombatChangeType>
-				<PursuitVSUnitCombatChangeType>
-					<PursuitVSUnitCombatChange>UNITCOMBAT_RECON</PursuitVSUnitCombatChange>
-					<iPursuitVSUnitCombatChange>15</iPursuitVSUnitCombatChange>
-				</PursuitVSUnitCombatChangeType>
-			</PursuitVSUnitCombatChangeTypes>
 			<Button>,Art/Buttons/Promotions/Enclose1Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -20336,16 +19824,6 @@
 					<iUnitCombatMod>20</iUnitCombatMod>
 				</UnitCombatMod>
 			</UnitCombatMods>
-			<PursuitVSUnitCombatChangeTypes>
-				<PursuitVSUnitCombatChangeType>
-					<PursuitVSUnitCombatChange>UNITCOMBAT_STRIKE_TEAM</PursuitVSUnitCombatChange>
-					<iPursuitVSUnitCombatChange>20</iPursuitVSUnitCombatChange>
-				</PursuitVSUnitCombatChangeType>
-				<PursuitVSUnitCombatChangeType>
-					<PursuitVSUnitCombatChange>UNITCOMBAT_RECON</PursuitVSUnitCombatChange>
-					<iPursuitVSUnitCombatChange>20</iPursuitVSUnitCombatChange>
-				</PursuitVSUnitCombatChangeType>
-			</PursuitVSUnitCombatChangeTypes>
 			<Button>,Art/Buttons/Promotions/Enclose2Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -20364,16 +19842,6 @@
 					<iUnitCombatMod>25</iUnitCombatMod>
 				</UnitCombatMod>
 			</UnitCombatMods>
-			<PursuitVSUnitCombatChangeTypes>
-				<PursuitVSUnitCombatChangeType>
-					<PursuitVSUnitCombatChange>UNITCOMBAT_STRIKE_TEAM</PursuitVSUnitCombatChange>
-					<iPursuitVSUnitCombatChange>25</iPursuitVSUnitCombatChange>
-				</PursuitVSUnitCombatChangeType>
-				<PursuitVSUnitCombatChangeType>
-					<PursuitVSUnitCombatChange>UNITCOMBAT_RECON</PursuitVSUnitCombatChange>
-					<iPursuitVSUnitCombatChange>25</iPursuitVSUnitCombatChange>
-				</PursuitVSUnitCombatChangeType>
-			</PursuitVSUnitCombatChangeTypes>
 			<Button>,Art/Buttons/Promotions/Enclose3Promotion.dds</Button>
 		</PromotionInfo>
 		<PromotionInfo>
@@ -21114,66 +20582,6 @@
 			<Button>Art/Interface/Buttons/Promotions/Great_Hunter.dds</Button>
 		</PromotionInfo>
 		<!--ONLY BUILDUPS (AND LATER STATUSES) PAST THIS POINT!-->
-		<PromotionInfo>
-			<Type>PROMOTION_BUILD_UP_CHASE_PLANS1</Type>
-			<Description>TXT_KEY_PROMOTION_BUILD_UP_CHASE_PLANS1</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionLine>PROMOTIONLINE_BUILD_UP_CHASE_PLANS</PromotionLine>
-			<iLinePriority>1</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iPursuitChange>4</iPursuitChange>
-			<Button>,Art/Buttons/Promotions/ChasePlans1BuildUp.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_BUILD_UP_CHASE_PLANS2</Type>
-			<Description>TXT_KEY_PROMOTION_BUILD_UP_CHASE_PLANS2</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionLine>PROMOTIONLINE_BUILD_UP_CHASE_PLANS</PromotionLine>
-			<iLinePriority>2</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iPursuitChange>4</iPursuitChange>
-			<Button>,Art/Buttons/Promotions/ChasePlans2BuildUp.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_BUILD_UP_CHASE_PLANS3</Type>
-			<Description>TXT_KEY_PROMOTION_BUILD_UP_CHASE_PLANS3</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionLine>PROMOTIONLINE_BUILD_UP_CHASE_PLANS</PromotionLine>
-			<iLinePriority>3</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iPursuitChange>4</iPursuitChange>
-			<Button>,Art/Buttons/Promotions/ChasePlans3BuildUp.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_BUILD_UP_CHASE_PLANS4</Type>
-			<Description>TXT_KEY_PROMOTION_BUILD_UP_CHASE_PLANS4</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionLine>PROMOTIONLINE_BUILD_UP_CHASE_PLANS</PromotionLine>
-			<iLinePriority>4</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iPursuitChange>4</iPursuitChange>
-			<Button>,Art/Buttons/Promotions/ChasePlans4BuildUp.dds</Button>
-		</PromotionInfo>
-		<PromotionInfo>
-			<Type>PROMOTION_BUILD_UP_CHASE_PLANS5</Type>
-			<Description>TXT_KEY_PROMOTION_BUILD_UP_CHASE_PLANS5</Description>
-			<Sound>AS2D_IF_LEVELUP</Sound>
-			<PromotionLine>PROMOTIONLINE_BUILD_UP_CHASE_PLANS</PromotionLine>
-			<iLinePriority>5</iLinePriority>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<iPursuitChange>4</iPursuitChange>
-			<Button>,Art/Buttons/Promotions/ChasePlans5BuildUp.dds</Button>
-		</PromotionInfo>
 		<PromotionInfo>
 			<Type>PROMOTION_BUILD_UP_SET_FOR_CHARGE1</Type>
 			<Description>TXT_KEY_PROMOTION_BUILD_UP_SET_FOR_CHARGE1</Description>

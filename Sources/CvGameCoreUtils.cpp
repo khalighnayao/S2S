@@ -1275,7 +1275,6 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 	int iLargestBaseCost = 0;
 	int iSmallestBaseCost = MAX_INT;
 	int iLargestMax = 0;
-	int iMaxTerrainDamage = 0;
 	static bool bHasAlwaysHostileUnit;
 	static bool bHasCanFightUnit;
 	static bool bHasCanAttackUnit;
@@ -1484,11 +1483,6 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 						bHasDefensiveBonusUnit = true;
 					}
 
-					if ( pToPlot->getTerrainTurnDamage(pLoopUnit) > iMaxTerrainDamage )
-					{
-						iMaxTerrainDamage = pToPlot->getTerrainTurnDamage(pLoopUnit);
-					}
-
 					iCost = pToPlot->movementCost(pLoopUnit, pFromPlot);
 
 					iMovesLeft = std::max(0, (iMax - iCost));
@@ -1562,20 +1556,6 @@ int pathCost(FAStarNode* parent, FAStarNode* node, int data, const void* pointer
 			if (pToPlot->getTeam() != eTeam)
 			{
 				iExtraNodeCost += PATH_TERRITORY_WEIGHT;
-			}
-
-			// Damage caused by features (mods)
-			if (0 != GC.getPATH_DAMAGE_WEIGHT())
-			{
-				if (pToPlot->getFeatureType() != NO_FEATURE)
-				{
-					iExtraNodeCost += (GC.getPATH_DAMAGE_WEIGHT() * std::max(0, GC.getFeatureInfo(pToPlot->getFeatureType()).getTurnDamage())) / GC.getMAX_HIT_POINTS();
-				}
-
-				if (iMaxTerrainDamage > 0)
-				{
-					iExtraNodeCost += (GC.getPATH_DAMAGE_WEIGHT() * std::max(0, iMaxTerrainDamage * 2)) / GC.getMAX_HIT_POINTS();
-				}
 			}
 
 			// Add additional cost for ending turn in or adjacent to enemy territory based on flags
@@ -1900,7 +1880,6 @@ int	NewPathCostFunc(const CvPathGeneratorBase* generator, const CvSelectionGroup
 	int iLargestBaseCost = -1;
 	int iSmallestBaseCost = MAX_INT;
 	int iLargestMax = 0;
-	int iMaxTerrainDamage = 0;
 	static bool bHasAlwaysHostileUnit;
 	static bool bHasCanFightUnit;
 	static bool bHasCanAttackUnit;
@@ -2136,13 +2115,6 @@ int	NewPathCostFunc(const CvPathGeneratorBase* generator, const CvSelectionGroup
 						bHasDefensiveBonusUnit = true;
 					}
 
-					{
-						const int pPlotDamage = pToPlot->getTerrainTurnDamage(pLoopUnit);
-						if (pPlotDamage > iMaxTerrainDamage)
-						{
-							iMaxTerrainDamage = pPlotDamage;
-						}
-					}
 					const int iCost = pToPlot->movementCost(pLoopUnit, pFromPlot);
 
 					const int iMovesLeft = std::max(0, iMax - iCost);
@@ -2223,18 +2195,6 @@ int	NewPathCostFunc(const CvPathGeneratorBase* generator, const CvSelectionGroup
 				iExtraNodeCost += PATH_TERRITORY_WEIGHT;
 			}
 
-			// Damage caused by features (mods)
-			if (0 != GC.getPATH_DAMAGE_WEIGHT())
-			{
-				if (pToPlot->getFeatureType() != NO_FEATURE)
-				{
-					iExtraNodeCost += (GC.getPATH_DAMAGE_WEIGHT() * std::max(0, pToPlot->getFeatureTurnDamage())) / GC.getMAX_HIT_POINTS();
-				}
-				if (iMaxTerrainDamage > 0)
-				{
-					iExtraNodeCost += (GC.getPATH_DAMAGE_WEIGHT() * std::max(0, iMaxTerrainDamage * 2)) / GC.getMAX_HIT_POINTS();
-				}
-			}
 			// Add additional cost for ending turn in or adjacent to enemy territory based on flags
 			if (iFlags & MOVE_AVOID_ENEMY_WEIGHT_3)
 			{
@@ -2781,7 +2741,6 @@ bool moveToValid(const CvSelectionGroup* pSelectionGroup, const CvPlot* pPlot, i
 
 	if ((iFlags & MOVE_HEAL_AS_NEEDED25)
 	&&  pSelectionGroup->getHeadUnit()->getDamagePercent() > 25
-	&&  pSelectionGroup->plot()->getTotalTurnDamage(pSelectionGroup) <= 0
 	&& !GET_PLAYER(pSelectionGroup->getOwner()).AI_getVisiblePlotDanger(pSelectionGroup->plot(), 2, false))
 	{
 		return false;

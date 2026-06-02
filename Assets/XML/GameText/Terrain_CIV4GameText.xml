@@ -68,14 +68,6 @@
 		<Russian>[NEWLINE][ICON_BULLET]Здесь невозможно строить города[SPACE]</Russian>
 	</TEXT>
 	<TEXT>
-		<Tag>TXT_KEY_TERRAINHELP_TURN_DAMAGE</Tag>
-		<English>[NEWLINE][ICON_BULLET]Damage per Turn: %d1_Amt%%</English>
-		<French>[NEWLINE][ICON_BULLET]Dégâts par Tour: %d1_Amt%%</French>
-		<German>[NEWLINE][ICON_BULLET]Schaden pro Runde: %d1_Amt%%</German>
-		<Russian>[NEWLINE][ICON_BULLET]Урон за ход: %d1_Amt%%</Russian>
-		<Italian>[NEWLINE][ICON_BULLET]Danno a turno: %d1_Amt%%</Italian>
-	</TEXT>
-	<TEXT>
 		<Tag>TXT_KEY_TERRAIN_BADLAND</Tag>
 		<English>Badland</English>
 		<French>Désert Calcaire</French>

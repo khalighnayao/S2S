@@ -38,7 +38,6 @@ CvSpecialUnitInfo::CvSpecialUnitInfo() :
 	m_bSMLoadSame(false),
 	m_iCombatPercent(0),
 	m_iWithdrawalChange(0),
-	m_iPursuitChange(0),
 	m_pbCarrierUnitAITypes(NULL)
 { }
 
@@ -86,16 +85,6 @@ int CvSpecialUnitInfo::getWithdrawalChange() const
 }
 
 
-int CvSpecialUnitInfo::getPursuitChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT))
-	{
-		return 0;
-	}
-	return m_iPursuitChange;
-}
-
-
 // Arrays
 
 bool CvSpecialUnitInfo::isCarrierUnitAIType(int i) const
@@ -117,7 +106,6 @@ bool CvSpecialUnitInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_bSMLoadSame, L"bSMLoadSame");
 	pXML->GetOptionalChildXmlValByName(&m_iCombatPercent, L"iCombatPercent");
 	pXML->GetOptionalChildXmlValByName(&m_iWithdrawalChange, L"iWithdrawalChange");
-	pXML->GetOptionalChildXmlValByName(&m_iPursuitChange, L"iPursuitChange");
 
 	pXML->SetVariableListTagPair(&m_pbCarrierUnitAITypes, L"CarrierUnitAITypes", NUM_UNITAI_TYPES);
 
@@ -138,7 +126,6 @@ void CvSpecialUnitInfo::copyNonDefaults(const CvSpecialUnitInfo* pClassInfo)
 	if (isSMLoadSame() == bDefault) m_bSMLoadSame = pClassInfo->isSMLoadSame();
 	if (getCombatPercent() == iDefault) m_iCombatPercent = pClassInfo->getCombatPercent();
 	if (getWithdrawalChange() == iDefault) m_iWithdrawalChange = pClassInfo->getWithdrawalChange();
-	if (m_iPursuitChange == iDefault) m_iPursuitChange = pClassInfo->m_iPursuitChange;
 
 	for ( int i = 0; i < NUM_UNITAI_TYPES; i++ )
 	{
@@ -160,7 +147,6 @@ void CvSpecialUnitInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_bSMLoadSame);
 	CheckSum(iSum, m_iCombatPercent);
 	CheckSum(iSum, m_iWithdrawalChange);
-	CheckSum(iSum, m_iPursuitChange);
 
 	CheckSum(iSum, m_pbCarrierUnitAITypes, NUM_UNITAI_TYPES);
 }

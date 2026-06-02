@@ -1073,7 +1073,6 @@
 			<Categories>
 				<Category>CATEGORY_UNITCOMBAT_GROUP_MAMMAL</Category>
 			</Categories>
-			<iPursuitChange>10</iPursuitChange>
 			<FeatureAttacks>
 				<FeatureAttack>
 					<FeatureType>FEATURE_CAVES</FeatureType>

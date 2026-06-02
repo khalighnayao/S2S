@@ -32,7 +32,7 @@ CvPromotionLineInfo::CvPromotionLineInfo() :
 									m_ePrereqTech(NO_TECH),
 									m_eObsoleteTech(NO_TECH),
 									m_ePropertyType(NO_PROPERTY),
-									m_bEquipment(false),
+									
 									m_bCritical(false),
 									m_bNoSpreadonBattle(false),
 									m_bNoSpreadUnitProximity(false),
@@ -66,7 +66,6 @@ bool CvPromotionLineInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"PropertyType");
 	m_ePropertyType = (PropertyTypes) pXML->GetInfoClass(szTextVal);
 
-	pXML->GetOptionalChildXmlValByName(&m_bEquipment, L"bEquipment");
 	pXML->GetOptionalChildXmlValByName(&m_bCritical, L"bCritical");
 	pXML->GetOptionalChildXmlValByName(&m_bNoSpreadonBattle, L"bNoSpreadonBattle");
 	pXML->GetOptionalChildXmlValByName(&m_bNoSpreadUnitProximity, L"bNoSpreadUnitProximity");
@@ -110,7 +109,6 @@ void CvPromotionLineInfo::copyNonDefaults(const CvPromotionLineInfo* pClassInfo)
 	if (getPrereqTech() == NO_TECH) m_ePrereqTech = pClassInfo->getPrereqTech();
 	if (getObsoleteTech() == NO_TECH) m_eObsoleteTech = pClassInfo->getObsoleteTech();
 
-	if (isEquipment() == bDefault) m_bEquipment = pClassInfo->isEquipment();
 	if (isCritical() == bDefault) m_bCritical = pClassInfo->isCritical();
 	if (isNoSpreadonBattle() == bDefault) m_bNoSpreadonBattle = pClassInfo->isNoSpreadonBattle();
 	if (isNoSpreadUnitProximity() == bDefault) m_bNoSpreadUnitProximity = pClassInfo->isNoSpreadUnitProximity();
@@ -226,7 +224,6 @@ void CvPromotionLineInfo::getCheckSum(uint32_t& iSum) const
 {
 	CheckSum(iSum, m_ePrereqTech);
 	CheckSum(iSum, m_eObsoleteTech);
-	CheckSum(iSum, m_bEquipment);
 	CheckSum(iSum, m_bCritical);
 	CheckSum(iSum, m_bNoSpreadonBattle);
 	CheckSum(iSum, m_bNoSpreadUnitProximity);
@@ -291,10 +288,6 @@ TechTypes CvPromotionLineInfo::getObsoleteTech() const
 
 
 
-bool CvPromotionLineInfo::isEquipment() const
-{
-	return m_bEquipment;
-}
 
 
 bool CvPromotionLineInfo::isCritical() const

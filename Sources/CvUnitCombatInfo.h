@@ -90,34 +90,13 @@ public:
 	int getVictoryStackHeal() const;
 	int getAttackCombatModifierChange() const;
 	int getDefenseCombatModifierChange() const;
-	int getPursuitChange() const;
-	int getEarlyWithdrawChange() const;
 	int getVSBarbsChange() const;
-	int getOverrunChange() const;
-	int getRepelChange() const;
-	int getFortRepelChange() const;
-	int getRepelRetriesChange() const;
-	int getUnyieldingChange() const;
-	int getKnockbackChange() const;
-	int getKnockbackRetriesChange() const;
-#ifdef BATTLEWORN
-	int getStrAdjperAttChange() const;
-	int getStrAdjperDefChange() const;
-	int getWithdrawAdjperAttChange() const;
-#endif // BATTLEWORN
 	int getUnnerveChange() const;
 	int getEncloseChange() const;
 	int getLungeChange() const;
 	int getDynamicDefenseChange() const;
 	int getStrengthChange() const;
 	int getFortitudeChange() const;
-#ifdef STRENGTH_IN_NUMBERS
-	int getFrontSupportPercentChange() const;
-	int getShortRangeSupportPercentChange() const;
-	int getMediumRangeSupportPercentChange() const;
-	int getLongRangeSupportPercentChange() const;
-	int getFlankSupportPercentChange() const;
-#endif // STRENGTH_IN_NUMBERS
 	int getCriticalModifierChange() const;
 	int getEnduranceChange() const;
 	int getPoisonProbabilityModifierChange() const;
@@ -212,10 +191,6 @@ public:
 	int getDomainModifierPercent(int i) const;
 	bool isAnyDomainModifierPercent() const;
 
-	int getTerrainIgnoreDamageChangeType(int i) const;
-	int getNumTerrainIgnoreDamageChangeTypes() const;
-	bool isTerrainIgnoreDamageChangeType(int i) const;
-
 	int getTerrainDoubleMoveChangeType(int i) const;
 	int getNumTerrainDoubleMoveChangeTypes() const;
 	bool isTerrainDoubleMoveChangeType(int i) const;
@@ -249,12 +224,6 @@ public:
 	bool isCategory(int i) const;
 
 	// int vector utilizing pairing without delayed resolution
-	int getNumWithdrawOnTerrainTypeChanges() const;
-	int getWithdrawOnTerrainTypeChange(int iTerrain) const;
-
-	int getNumWithdrawOnFeatureTypeChanges() const;
-	int getWithdrawOnFeatureTypeChange(int iFeature) const;
-
 	int getNumVisibilityIntensityChangeTypes() const;
 	int getVisibilityIntensityChangeType(int iInvisibility) const;
 	bool isVisibilityIntensityChangeType(int iInvisibility) const;
@@ -298,21 +267,6 @@ public:
 
 	int getNumFlankingStrengthbyUnitCombatTypesChange() const;
 	const UnitCombatModifier& getFlankingStrengthbyUnitCombatTypeChange(int iUnitCombat) const;
-
-	int getNumWithdrawVSUnitCombatTypesChange() const;
-	const UnitCombatModifier& getWithdrawVSUnitCombatTypeChange(int iUnitCombat) const;
-
-	//Fight or Flight only
-	int getNumPursuitVSUnitCombatTypesChange() const;
-	const UnitCombatModifier& getPursuitVSUnitCombatTypeChange(int iUnitCombat) const;
-
-	//Heart of War only
-	int getNumRepelVSUnitCombatTypesChange() const;
-	const UnitCombatModifier& getRepelVSUnitCombatTypeChange(int iUnitCombat) const;
-
-	//Heart of War only
-	int getNumKnockbackVSUnitCombatTypesChange() const;
-	const UnitCombatModifier& getKnockbackVSUnitCombatTypeChange(int iUnitCombat) const;
 
 	int getNumCriticalVSUnitCombatTypesChange() const;
 	const UnitCombatModifier& getCriticalVSUnitCombatTypeChange(int iUnitCombat) const;
@@ -362,7 +316,6 @@ protected:
 	BonusTypes m_eCulture;
 	EraTypes m_eEra;
 	//Integers
-	int m_iIgnoreTerrainDamage;
 	int m_zobristValue;
 	int m_iVisibilityChange;
 	int m_iMovesChange;
@@ -409,34 +362,13 @@ protected:
 	int m_iVictoryStackHeal;
 	int m_iAttackCombatModifierChange;
 	int m_iDefenseCombatModifierChange;
-	int m_iPursuitChange;
-	int m_iEarlyWithdrawChange;
 	int m_iVSBarbsChange;
-	int m_iOverrunChange;
-	int m_iRepelChange;
-	int m_iFortRepelChange;
-	int m_iRepelRetriesChange;
-	int m_iUnyieldingChange;
-	int m_iKnockbackChange;
-	int m_iKnockbackRetriesChange;
-#ifdef BATTLEWORN
-	int m_iStrAdjperAttChange;
-	int m_iStrAdjperDefChange;
-	int m_iWithdrawAdjperAttChange;
-#endif // BATTLEWORN
 	int m_iUnnerveChange;
 	int m_iEncloseChange;
 	int m_iLungeChange;
 	int m_iDynamicDefenseChange;
 	int m_iStrengthChange;
 	int m_iFortitudeChange;
-#ifdef STRENGTH_IN_NUMBERS
-	int m_iFrontSupportPercentChange;
-	int m_iShortRangeSupportPercentChange;
-	int m_iMediumRangeSupportPercentChange;
-	int m_iLongRangeSupportPercentChange;
-	int m_iFlankSupportPercentChange;
-#endif // STRENGTH_IN_NUMBERS
 	int m_iCriticalModifierChange;
 	int m_iEnduranceChange;
 	int m_iPoisonProbabilityModifierChange;
@@ -531,7 +463,6 @@ protected:
 
 	// bool vectors without delayed resolution
 	// bool vector with delayed resolution
-	std::vector<int> m_aiTerrainIgnoreDamageChangeTypes;
 	std::vector<int> m_aiTerrainDoubleMoveChangeTypes;
 	std::vector<int> m_aiFeatureDoubleMoveChangeTypes;
 	std::vector<int> m_aiOnGameOptions;
@@ -541,8 +472,6 @@ protected:
 	std::vector<int> m_aiTrapImmunityUnitCombatTypes;
 	std::vector<int> m_aiCategories;
 	// int vectors utilizing pairing without delayed resolution
-	TerrainModifierArray m_aWithdrawOnTerrainTypesChange;
-	FeatureModifierArray m_aWithdrawOnFeatureTypesChange;
 	InvisibilityArray m_aVisibilityIntensityChangeTypes;
 	InvisibilityArray m_aInvisibilityIntensityChangeTypes;
 	InvisibilityArray m_aVisibilityIntensityRangeChangeTypes;
@@ -557,10 +486,6 @@ protected:
 	std::vector<FeatureModifier> m_aFeatureWorkChangeModifiers;
 	std::vector<UnitCombatModifier> m_aUnitCombatChangeModifiers;
 	std::vector<UnitCombatModifier> m_aFlankingStrengthbyUnitCombatTypeChange;
-	std::vector<UnitCombatModifier> m_aWithdrawVSUnitCombatTypeChange;
-	std::vector<UnitCombatModifier> m_aPursuitVSUnitCombatTypeChange;
-	std::vector<UnitCombatModifier> m_aRepelVSUnitCombatTypeChange;
-	std::vector<UnitCombatModifier> m_aKnockbackVSUnitCombatTypeChange;
 	std::vector<UnitCombatModifier> m_aCriticalVSUnitCombatTypeChange;
 	std::vector<UnitCombatModifier> m_aTrapAvoidanceUnitCombatTypes;
 	std::vector<InvisibleTerrainChanges> m_aInvisibleTerrainChanges;

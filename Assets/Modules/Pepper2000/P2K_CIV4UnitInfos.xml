@@ -93,7 +93,6 @@
 				<SubCombatType>UNITCOMBAT_EXPLORER</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_HAND_TO_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_MOTILITY_DRIVING</SubCombatType>
 				<SubCombatType>UNITCOMBAT_QUALITY_MEDIOCRE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_GROUP_SOLO</SubCombatType>
@@ -1194,7 +1193,6 @@
 			<iXPValueDefense>3</iXPValueDefense>
 			<iChanceFirstStrikes>2</iChanceFirstStrikes>
 			<iWithdrawalProb>10</iWithdrawalProb>
-			<iEarlyWithdraw>60</iEarlyWithdraw>
 			<iCollateralDamage>3</iCollateralDamage>
 			<iCollateralDamageLimit>10</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>1</iCollateralDamageMaxUnits>
@@ -1247,7 +1245,6 @@
 			<iXPValueDefense>3</iXPValueDefense>
 			<iChanceFirstStrikes>2</iChanceFirstStrikes>
 			<iWithdrawalProb>10</iWithdrawalProb>
-			<iEarlyWithdraw>60</iEarlyWithdraw>
 			<iCollateralDamage>3</iCollateralDamage>
 			<iCollateralDamageLimit>10</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>1</iCollateralDamageMaxUnits>
@@ -1300,7 +1297,6 @@
 			<iXPValueDefense>3</iXPValueDefense>
 			<iChanceFirstStrikes>2</iChanceFirstStrikes>
 			<iWithdrawalProb>10</iWithdrawalProb>
-			<iEarlyWithdraw>60</iEarlyWithdraw>
 			<iCollateralDamage>3</iCollateralDamage>
 			<iCollateralDamageLimit>10</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>1</iCollateralDamageMaxUnits>
@@ -1353,7 +1349,6 @@
 			<iXPValueDefense>3</iXPValueDefense>
 			<iChanceFirstStrikes>2</iChanceFirstStrikes>
 			<iWithdrawalProb>10</iWithdrawalProb>
-			<iEarlyWithdraw>60</iEarlyWithdraw>
 			<iCollateralDamage>3</iCollateralDamage>
 			<iCollateralDamageLimit>10</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>1</iCollateralDamageMaxUnits>
@@ -1421,7 +1416,6 @@
 			<iXPValueDefense>3</iXPValueDefense>
 			<iChanceFirstStrikes>2</iChanceFirstStrikes>
 			<iWithdrawalProb>10</iWithdrawalProb>
-			<iEarlyWithdraw>60</iEarlyWithdraw>
 			<iCollateralDamage>3</iCollateralDamage>
 			<iCollateralDamageLimit>10</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>1</iCollateralDamageMaxUnits>
@@ -1447,11 +1441,8 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_AI</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_HYDRAULIC_APPENDAGE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_FLAMETHROWER</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_SPRAY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_HEAT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_MODERN</SubCombatType>
@@ -1497,7 +1488,6 @@
 			<iCombatLimit>100</iCombatLimit>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>5</iPursuit>
 			<iCityDefense>25</iCityDefense>
 			<UnitCombatMods>
 				<UnitCombatMod>
@@ -1528,11 +1518,8 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_AI</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_HYDRAULIC_APPENDAGE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_FLAMETHROWER</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_SPRAY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_HEAT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_MODERN</SubCombatType>
@@ -1578,7 +1565,6 @@
 			<iCombatLimit>100</iCombatLimit>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>5</iPursuit>
 			<iCityDefense>25</iCityDefense>
 			<UnitCombatMods>
 				<UnitCombatMod>
@@ -1615,11 +1601,8 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_AI</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_HYDRAULIC_APPENDAGE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_FLAMETHROWER</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_SPRAY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_HEAT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_MODERN</SubCombatType>
@@ -1665,7 +1648,6 @@
 			<iCombatLimit>170</iCombatLimit>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>5</iPursuit>
 			<iCityDefense>25</iCityDefense>
 			<UnitCombatMods>
 				<UnitCombatMod>
@@ -1702,11 +1684,8 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_AI</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_HYDRAULIC_APPENDAGE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_FLAMETHROWER</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_SPRAY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_HEAT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_MODERN</SubCombatType>
@@ -1751,7 +1730,6 @@
 			<iCombatLimit>100</iCombatLimit>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>5</iPursuit>
 			<iCityDefense>25</iCityDefense>
 			<UnitCombatMods>
 				<UnitCombatMod>
@@ -1788,11 +1766,8 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_AI</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_HYDRAULIC_APPENDAGE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_FLAMETHROWER</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_SPRAY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_HEAT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_MODERN</SubCombatType>
@@ -1837,7 +1812,6 @@
 			<iCombatLimit>100</iCombatLimit>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>5</iPursuit>
 			<iCityDefense>25</iCityDefense>
 			<UnitCombatMods>
 				<UnitCombatMod>
@@ -1874,11 +1848,8 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_AI</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_HYDRAULIC_APPENDAGE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_FLAMETHROWER</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_SPRAY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_HEAT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_MODERN</SubCombatType>
@@ -1923,7 +1894,6 @@
 			<iCombatLimit>100</iCombatLimit>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>5</iPursuit>
 			<iCityDefense>25</iCityDefense>
 			<UnitCombatMods>
 				<UnitCombatMod>
@@ -1960,11 +1930,8 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_AI</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_HYDRAULIC_APPENDAGE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_FLAMETHROWER</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_SPRAY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_HEAT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_MODERN</SubCombatType>
@@ -2006,7 +1973,6 @@
 			<iCombatLimit>100</iCombatLimit>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>5</iPursuit>
 			<iCityDefense>25</iCityDefense>
 			<UnitCombatMods>
 				<UnitCombatMod>
@@ -2043,11 +2009,8 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_AI</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_HYDRAULIC_APPENDAGE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_FLAMETHROWER</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_SPRAY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_HEAT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_MODERN</SubCombatType>
@@ -2090,7 +2053,6 @@
 			<iCombatLimit>100</iCombatLimit>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>5</iPursuit>
 			<iCityDefense>25</iCityDefense>
 			<UnitCombatMods>
 				<UnitCombatMod>
@@ -8331,8 +8293,6 @@
 				<SubCombatType>UNITCOMBAT_PACIFIST</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SHELLFIRE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SEMI_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_HYDRAULIC_APPENDAGE</SubCombatType>

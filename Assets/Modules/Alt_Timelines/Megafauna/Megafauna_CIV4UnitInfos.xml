@@ -10,7 +10,6 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_HAND_TO_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_TWO_HANDED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_SHORT_POLEARM</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_AXE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_LIGHT</SubCombatType>
@@ -79,7 +78,6 @@
 			<iCombat>7</iCombat>
 			<iXPValueAttack>4</iXPValueAttack>
 			<iXPValueDefense>2</iXPValueDefense>
-			<iPursuit>30</iPursuit>
 			<BonusProductionModifiers>
 				<BonusProductionModifier>
 					<BonusType>BONUS_FLINT</BonusType>
@@ -129,8 +127,6 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_HAND_TO_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_TWO_HANDED</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_HAND_ONLY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_SHORT_POLEARM</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_AXE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_MEDIUM</SubCombatType>
@@ -202,7 +198,6 @@
 			<iCombat>14</iCombat>
 			<iXPValueAttack>4</iXPValueAttack>
 			<iXPValueDefense>2</iXPValueDefense>
-			<iPursuit>25</iPursuit>
 			<UnitCombatMods>
 				<UnitCombatMod>
 					<UnitCombatType>UNITCOMBAT_SIEGE_WOODEN</UnitCombatType>
@@ -234,7 +229,6 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_HAND_TO_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_TWO_HANDED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_LONG_POLEARM</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_LIGHT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_THICK_SKINNED</SubCombatType>
@@ -458,7 +452,6 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_NEANDERTHAL</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_HAND_TO_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_TWO_HANDED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_LONG_POLEARM</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_LIGHT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_THICK_SKINNED</SubCombatType>
@@ -586,7 +579,6 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_HAND_TO_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_TWO_HANDED_PLUS_SHIELD</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_LONG_POLEARM</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SHIELD_TOWER</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_THICK_SKINNED</SubCombatType>
@@ -702,8 +694,6 @@
 				<SubCombatType>UNITCOMBAT_SIEGE_WOODEN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_TWO_HANDED_PLUS_SHIELD</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_TWO_HANDED_PLUS_SHIELD</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_LONG_POLEARM</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_BALLISTA</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SHIELD_TOWER</SubCombatType>
@@ -829,8 +819,6 @@
 				<SubCombatType>UNITCOMBAT_SIEGE_GUNPOWDER</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_TWO_HANDED</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_TWO_HANDED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_LONG_POLEARM</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_CANNONBALL</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SHIELD_TOWER</SubCombatType>
@@ -1189,7 +1177,6 @@
 			<iCombat>4</iCombat>
 			<iXPValueAttack>2</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
-			<iPursuit>35</iPursuit>
 			<iCityDefense>-80</iCityDefense>
 			<iAttackCombatModifier>-50</iAttackCombatModifier>
 			<iDefenseCombatModifier>100</iDefenseCombatModifier>
@@ -1363,7 +1350,6 @@
 			<iCombat>6</iCombat>
 			<iXPValueAttack>2</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
-			<iPursuit>35</iPursuit>
 			<iCityDefense>-80</iCityDefense>
 			<iAttackCombatModifier>-50</iAttackCombatModifier>
 			<iDefenseCombatModifier>100</iDefenseCombatModifier>
@@ -1455,7 +1441,6 @@
 			<iCombat>7</iCombat>
 			<iXPValueAttack>2</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
-			<iPursuit>35</iPursuit>
 			<iCityDefense>-80</iCityDefense>
 			<iAttackCombatModifier>-50</iAttackCombatModifier>
 			<iDefenseCombatModifier>100</iDefenseCombatModifier>
@@ -1543,7 +1528,6 @@
 			<iCombat>8</iCombat>
 			<iXPValueAttack>2</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
-			<iPursuit>35</iPursuit>
 			<iCityDefense>-80</iCityDefense>
 			<iAttackCombatModifier>-50</iAttackCombatModifier>
 			<iDefenseCombatModifier>100</iDefenseCombatModifier>
@@ -1579,10 +1563,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_HAND_TO_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_SINGLE_PLUS_SHIELD</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_PLUS_SHIELD</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_AXE</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_CLUB</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_HEAVY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SHIELD_LARGE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_THICK_SKINNED</SubCombatType>
@@ -1752,11 +1733,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_TWO_HANDED</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_TWO_HANDED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_SHORT_POLEARM</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_KNIFE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SHORTBOW</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_TOUGH_HIDE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_POWER_KICK</SubCombatType>
@@ -1827,8 +1804,6 @@
 			<iFirstStrikes>1</iFirstStrikes>
 			<iChanceFirstStrikes>1</iChanceFirstStrikes>
 			<iWithdrawalProb>60</iWithdrawalProb>
-			<iPursuit>40</iPursuit>
-			<iEarlyWithdraw>50</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>6</iCollateralDamageMaxUnits>
 			<TerrainAttacks>
@@ -1900,14 +1875,8 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_TWO_HANDED</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_TWO_HANDED</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_TWO_HANDED</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_SINGLE_HAND_ONLY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_BAYONETTE</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_RIFLE_BUTT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_RIFLE</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_BACKUP_HANDGUN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_TOUGH_HIDE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_POWER_KICK</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_FAST_REFLEXES</SubCombatType>
@@ -1987,8 +1956,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>50</iWithdrawalProb>
-			<iPursuit>30</iPursuit>
-			<iEarlyWithdraw>30</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>6</iCollateralDamageMaxUnits>
 			<TerrainAttacks>
@@ -2093,11 +2060,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_SINGLE_PLUS_SHIELD</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_PLUS_SHIELD</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_SINGLE_PLUS_SHIELD</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_SHORT_POLEARM</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_KNIFE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_JAVELIN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SHIELD_TOWER</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_TOUGH_HIDE</SubCombatType>
@@ -2162,8 +2125,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>35</iWithdrawalProb>
-			<iPursuit>25</iPursuit>
-			<iEarlyWithdraw>15</iEarlyWithdraw>
 			<FeatureAttacks>
 				<FeatureAttack>
 					<FeatureType>FEATURE_FOREST</FeatureType>
@@ -2209,11 +2170,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_TWO_HANDED</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_TWO_HANDED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_RIFLE_BUTT</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_KNIFE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_RIFLE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_LIGHT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_TOUGH_HIDE</SubCombatType>
@@ -2295,8 +2252,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>50</iWithdrawalProb>
-			<iPursuit>30</iPursuit>
-			<iEarlyWithdraw>30</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>6</iCollateralDamageMaxUnits>
 			<TerrainAttacks>
@@ -2395,10 +2350,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_HAND_TO_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_SINGLE_PLUS_SHIELD</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_PLUS_SHIELD</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_SHORT_POLEARM</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_AXE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_LIGHT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SHIELD_TOWER</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_TOUGH_HIDE</SubCombatType>
@@ -2470,7 +2422,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>25</iWithdrawalProb>
-			<iPursuit>10</iPursuit>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>6</iCollateralDamageMaxUnits>
 			<TerrainAttacks>
@@ -2641,8 +2592,6 @@
 			<iStealthStrikes>1</iStealthStrikes>
 			<iStealthCombatModifier>10</iStealthCombatModifier>
 			<iWithdrawalProb>30</iWithdrawalProb>
-			<iEarlyWithdraw>20</iEarlyWithdraw>
-			<iPursuit>40</iPursuit>
 			<iUnnerve>5</iUnnerve>
 			<iLunge>10</iLunge>
 			<iDynamicDefense>5</iDynamicDefense>
@@ -2766,8 +2715,6 @@
 			<iStealthStrikes>2</iStealthStrikes>
 			<iStealthCombatModifier>20</iStealthCombatModifier>
 			<iWithdrawalProb>35</iWithdrawalProb>
-			<iEarlyWithdraw>15</iEarlyWithdraw>
-			<iPursuit>45</iPursuit>
 			<iUnnerve>10</iUnnerve>
 			<iLunge>20</iLunge>
 			<FlankingStrikesbyUnitCombat>
@@ -2936,8 +2883,6 @@
 			<iStealthStrikes>3</iStealthStrikes>
 			<iStealthCombatModifier>30</iStealthCombatModifier>
 			<iWithdrawalProb>40</iWithdrawalProb>
-			<iEarlyWithdraw>10</iEarlyWithdraw>
-			<iPursuit>50</iPursuit>
 			<iUnnerve>15</iUnnerve>
 			<iLunge>30</iLunge>
 			<iDynamicDefense>15</iDynamicDefense>
@@ -3095,8 +3040,6 @@
 			<iStealthStrikes>4</iStealthStrikes>
 			<iStealthCombatModifier>40</iStealthCombatModifier>
 			<iWithdrawalProb>45</iWithdrawalProb>
-			<iEarlyWithdraw>10</iEarlyWithdraw>
-			<iPursuit>55</iPursuit>
 			<iUnnerve>20</iUnnerve>
 			<iLunge>40</iLunge>
 			<iDynamicDefense>20</iDynamicDefense>
@@ -3145,7 +3088,6 @@
 				<SubCombatType>UNITCOMBAT_ANIMAL_MAMMAL</SubCombatType>
 				<SubCombatType>UNITCOMBAT_CLONES</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_SECONDARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_SINGLE_HAND_ONLY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_HANDGUN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_MODERN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_TOUGH_HIDE</SubCombatType>
@@ -3277,8 +3219,6 @@
 			<iStealthStrikes>5</iStealthStrikes>
 			<iStealthCombatModifier>50</iStealthCombatModifier>
 			<iWithdrawalProb>50</iWithdrawalProb>
-			<iEarlyWithdraw>10</iEarlyWithdraw>
-			<iPursuit>60</iPursuit>
 			<iUnnerve>25</iUnnerve>
 			<iLunge>50</iLunge>
 			<iDynamicDefense>25</iDynamicDefense>
@@ -3324,7 +3264,6 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_HAND_TO_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_SINGLE_HAND_ONLY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_MACE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_MEDIUM</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_TOUGH_HIDE</SubCombatType>
@@ -3393,7 +3332,6 @@
 			<iXPValueAttack>4</iXPValueAttack>
 			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>20</iWithdrawalProb>
-			<iPursuit>20</iPursuit>
 			<BonusProductionModifiers>
 				<BonusProductionModifier>
 					<BonusType>BONUS_FLINT</BonusType>
@@ -3455,10 +3393,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_HAND_TO_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_HAND_ONLY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_SHORT_POLEARM</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_KNIFE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_LIGHT</SubCombatType>
                 <SubCombatType>UNITCOMBAT_WEAPON_DIST_SHORTBOW</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_SHARP_HORNED</SubCombatType>
@@ -3521,8 +3456,6 @@
 			<iXPValueDefense>3</iXPValueDefense>
 			<iChanceFirstStrikes>1</iChanceFirstStrikes>
 			<iWithdrawalProb>30</iWithdrawalProb>
-			<iPursuit>20</iPursuit>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>4</iCollateralDamageMaxUnits>
 			<TerrainAttacks>
@@ -3600,11 +3533,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_TWO_HANDED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_SHORT_BLADE</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_KNIFE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SHORTBOW</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_SHARP_HORNED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_CHARGING</SubCombatType>
@@ -3666,8 +3595,6 @@
 			<iFirstStrikes>1</iFirstStrikes>
 			<iChanceFirstStrikes>1</iChanceFirstStrikes>
 			<iWithdrawalProb>40</iWithdrawalProb>
-			<iPursuit>20</iPursuit>
-			<iEarlyWithdraw>70</iEarlyWithdraw>
 			<iCityDefense>50</iCityDefense>
 			<iHillsDefense>25</iHillsDefense>
 			<TerrainAttacks>
@@ -3735,11 +3662,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_TWO_HANDED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_SHORT_BLADE</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_KNIFE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_RIFLE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_LIGHT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_SHARP_HORNED</SubCombatType>
@@ -3806,8 +3729,6 @@
 			<iXPValueDefense>3</iXPValueDefense>
 			<iChanceFirstStrikes>1</iChanceFirstStrikes>
 			<iWithdrawalProb>25</iWithdrawalProb>
-			<iPursuit>10</iPursuit>
-			<iEarlyWithdraw>50</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>4</iCollateralDamageMaxUnits>
 			<iCityDefense>50</iCityDefense>
@@ -3877,11 +3798,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_TWO_HANDED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_SHORT_BLADE</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_KNIFE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SHORTBOW</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_LIGHT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_FLEEING</SubCombatType>
@@ -4004,11 +3921,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_TWO_HANDED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_AXE</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_KNIFE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_LIGHT_CROSSBOW</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_MEDIUM</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_FLEEING</SubCombatType>
@@ -4082,8 +3995,6 @@
 			<iXPValueDefense>3</iXPValueDefense>
 			<iFirstStrikes>2</iFirstStrikes>
 			<iWithdrawalProb>35</iWithdrawalProb>
-			<iPursuit>35</iPursuit>
-			<iEarlyWithdraw>50</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>5</iCollateralDamageMaxUnits>
 			<TerrainAttacks>
@@ -4163,11 +4074,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_TWO_HANDED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_SHORT_BLADE</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_KNIFE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_RIFLE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_HEAVY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_FLEEING</SubCombatType>
@@ -4247,8 +4154,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>30</iWithdrawalProb>
-			<iPursuit>30</iPursuit>
-			<iEarlyWithdraw>10</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>6</iCollateralDamageMaxUnits>
 			<TerrainAttacks>
@@ -4348,11 +4253,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_TWO_HANDED</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_TWO_HANDED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_RIFLE_BUTT</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_LONG_BLADE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_RIFLE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_HEAVY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_FLEEING</SubCombatType>
@@ -4430,8 +4331,6 @@
 			<iCombat>21</iCombat>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>15</iPursuit>
-			<iEarlyWithdraw>10</iEarlyWithdraw>
 			<iWithdrawalProb>15</iWithdrawalProb>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>6</iCollateralDamageMaxUnits>
@@ -4531,10 +4430,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_HAND_TO_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_SINGLE_PLUS_SHIELD</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_PLUS_SHIELD</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_LONG_BLADE</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_KNIFE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_MEDIUM</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SHIELD_SMALL</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_FLEEING</SubCombatType>
@@ -4617,7 +4513,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>20</iWithdrawalProb>
-			<iPursuit>20</iPursuit>
 			<TerrainAttacks>
 				<TerrainAttack>
 					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
@@ -4687,14 +4582,8 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_TWO_HANDED</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_BACKUP_SINGLE_HAND_ONLY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_LONG_BLADE</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_KNIFE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_RIFLE</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_BACKUP_HANDGUN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_FLEEING</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_STOMP</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_TOUGH_HIDE</SubCombatType>
@@ -4770,8 +4659,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>30</iWithdrawalProb>
-			<iPursuit>30</iPursuit>
-			<iEarlyWithdraw>10</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>6</iCollateralDamageMaxUnits>
 			<TerrainAttacks>
@@ -4875,11 +4762,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_TWO_HANDED</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_TWO_HANDED</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_TWO_HANDED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_BAYONETTE</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_RIFLE_BUTT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SEMI_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_FLEEING</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_STOMP</SubCombatType>
@@ -4963,7 +4846,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>20</iWithdrawalProb>
-			<iPursuit>40</iPursuit>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>6</iCollateralDamageMaxUnits>
 			<TerrainAttacks>
@@ -5074,10 +4956,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_HAND_TO_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_TWO_HANDED</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_HAND_ONLY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_LONG_POLEARM</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_KNIFE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_MODERN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_FLEEING</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_STOMP</SubCombatType>
@@ -5144,7 +5023,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>20</iWithdrawalProb>
-			<iPursuit>20</iPursuit>
 			<TerrainAttacks>
 				<TerrainAttack>
 					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
@@ -5213,10 +5091,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_HAND_TO_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_TWO_HANDED</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_HAND_ONLY</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_SHORT_POLEARM</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_SHORT_BLADE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_LIGHT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_TOUGH_HIDE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_POWER_KICK</SubCombatType>
@@ -5288,7 +5163,6 @@
 			<iXPValueDefense>3</iXPValueDefense>
 			<iChanceFirstStrikes>1</iChanceFirstStrikes>
 			<iWithdrawalProb>15</iWithdrawalProb>
-			<iPursuit>15</iPursuit>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>4</iCollateralDamageMaxUnits>
 			<TerrainAttacks>
@@ -5368,11 +5242,7 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_SIDEARM_SINGLE_HAND_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_TWO_HANDED</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_H2H_SHORT_BLADE</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_SIDEARM_KNIFE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SHORTBOW</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_LIGHT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ANIMAL_COMBAT_TOUGH_HIDE</SubCombatType>
@@ -5442,8 +5312,6 @@
 			<iFirstStrikes>1</iFirstStrikes>
 			<iChanceFirstStrikes>1</iChanceFirstStrikes>
 			<iWithdrawalProb>20</iWithdrawalProb>
-			<iPursuit>20</iPursuit>
-			<iEarlyWithdraw>40</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>6</iCollateralDamageMaxUnits>
 			<TerrainAttacks>

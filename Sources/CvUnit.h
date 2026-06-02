@@ -95,16 +95,6 @@ struct CombatResult
 {
 	bool bDefenderWithdrawn;
 	//TB Combat Mods Begin
-	bool bAttackerPursued;
-	bool bDefenderPursued;
-	bool bAttackerPursuedSustain;
-	bool bDefenderPursuedSustain;
-	bool bAttackerRepelled;
-	bool bAttackerRefusedtoYield;
-	bool bDefenderRefusedtoYield;
-	bool bAttackerRefusedtoYieldSustain;
-	bool bDefenderRefusedtoYieldSustain;
-	bool bDefenderKnockedBack;
 	bool bAttackerStampedes;
 	bool bAttackerWithdraws;
 	bool bAttackerOnslaught;
@@ -123,16 +113,6 @@ struct CombatResult
 	CombatResult()
 		: bDefenderWithdrawn(false)
 		//TB Combat Mods Begin
-		, bAttackerPursued(false)
-		, bDefenderPursued(false)
-		, bAttackerPursuedSustain(false)
-		, bDefenderPursuedSustain(false)
-		, bAttackerRepelled(false)
-		, bAttackerRefusedtoYield(false)
-		, bDefenderRefusedtoYield(false)
-		, bAttackerRefusedtoYieldSustain(false)
-		, bDefenderRefusedtoYieldSustain(false)
-		, bDefenderKnockedBack(false)
 		, bAttackerStampedes(false)
 		, bAttackerWithdraws(false)
 		, bAttackerOnslaught(false)
@@ -263,30 +243,24 @@ class TerrainKeyedInfo
 {
 public:
 	TerrainKeyedInfo() :
-		m_iTerrainProtected(0),
 		m_iTerrainDoubleMoveCount(0),
 		m_iExtraTerrainAttackPercent(0),
 		m_iExtraTerrainDefensePercent(0),
-		m_iExtraTerrainWorkPercent(0),
-		m_iExtraWithdrawOnTerrainType(0)
+		m_iExtraTerrainWorkPercent(0)
 	{ }
 
 	bool Empty() const
 	{
-		return (m_iTerrainProtected == 0 &&
-			m_iTerrainDoubleMoveCount == 0 &&
+		return (m_iTerrainDoubleMoveCount == 0 &&
 			m_iExtraTerrainAttackPercent == 0 &&
 			m_iExtraTerrainDefensePercent == 0 &&
-			m_iExtraTerrainWorkPercent == 0 &&
-			m_iExtraWithdrawOnTerrainType == 0);
+			m_iExtraTerrainWorkPercent == 0);
 	}
 
-	int	m_iTerrainProtected;
 	int	m_iTerrainDoubleMoveCount;
 	int	m_iExtraTerrainAttackPercent;
 	int	m_iExtraTerrainDefensePercent;
 	int m_iExtraTerrainWorkPercent;
-	int m_iExtraWithdrawOnTerrainType;
 };
 
 class FeatureKeyedInfo
@@ -296,8 +270,7 @@ public:
 		m_iFeatureDoubleMoveCount(0),
 		m_iExtraFeatureAttackPercent(0),
 		m_iExtraFeatureDefensePercent(0),
-		m_iExtraFeatureWorkPercent(0),
-		m_iExtraWithdrawOnFeatureType(0)
+		m_iExtraFeatureWorkPercent(0)
 	{ }
 
 	bool Empty() const
@@ -305,15 +278,13 @@ public:
 		return (m_iFeatureDoubleMoveCount == 0 &&
 			m_iExtraFeatureAttackPercent == 0 &&
 			m_iExtraFeatureDefensePercent == 0 &&
-			m_iExtraFeatureWorkPercent == 0 &&
-			m_iExtraWithdrawOnFeatureType == 0);
+			m_iExtraFeatureWorkPercent == 0);
 	}
 
 	int	m_iFeatureDoubleMoveCount;
 	int	m_iExtraFeatureAttackPercent;
 	int	m_iExtraFeatureDefensePercent;
 	int m_iExtraFeatureWorkPercent;
-	int m_iExtraWithdrawOnFeatureType;
 };
 
 // @SAVEBREAK Restructure/Rethink - Toffer
@@ -323,10 +294,6 @@ public:
 	UnitCombatKeyedInfo() :		m_bHasUnitCombat(false),
 								m_iExtraUnitCombatModifier(0),
 								m_iExtraFlankingStrengthbyUnitCombatType(0),
-								m_iExtraWithdrawVSUnitCombatType(0),
-								m_iExtraPursuitVSUnitCombatType(0),
-								m_iExtraRepelVSUnitCombatType(0),
-								m_iExtraKnockbackVSUnitCombatType(0),
 								m_iExtraCriticalVSUnitCombatType(0),
 								m_iHealUnitCombatTypeVolume(0),
 								m_iHealUnitCombatTypeAdjacentVolume(0),
@@ -344,10 +311,6 @@ public:
 		return (!m_bHasUnitCombat &&
 			m_iExtraUnitCombatModifier == 0 &&
 			m_iExtraFlankingStrengthbyUnitCombatType == 0 &&
-			m_iExtraWithdrawVSUnitCombatType == 0 &&
-			m_iExtraPursuitVSUnitCombatType == 0 &&
-			m_iExtraRepelVSUnitCombatType == 0 &&
-			m_iExtraKnockbackVSUnitCombatType == 0 &&
 			m_iExtraCriticalVSUnitCombatType == 0 &&
 			m_iHealUnitCombatTypeVolume == 0 &&
 			m_iHealUnitCombatTypeAdjacentVolume == 0 &&
@@ -362,10 +325,6 @@ public:
 	bool m_bHasUnitCombat;
 	int	m_iExtraUnitCombatModifier;
 	int m_iExtraFlankingStrengthbyUnitCombatType;
-	int m_iExtraWithdrawVSUnitCombatType;
-	int m_iExtraPursuitVSUnitCombatType;
-	int m_iExtraRepelVSUnitCombatType;
-	int m_iExtraKnockbackVSUnitCombatType;
 	int m_iExtraCriticalVSUnitCombatType;
 	int m_iHealUnitCombatTypeVolume;
 	int m_iHealUnitCombatTypeAdjacentVolume;
@@ -592,9 +551,6 @@ public:
 	int getVanquishDynamicXP(const int iLoseOdds, const int iInitialDamage, const int iMaxXP) const;
 	int getEngagementDynamicXP(const CvUnit* enemy, const int iLoseOdds, const int iInitialDamageEnemy, const int iInitialDamage, const int iMaxXP) const;
 
-	void changeTerrainProtected(TerrainTypes eIndex, int iNewValue);
-	bool isTerrainProtected(TerrainTypes eIndex) const;
-	int getTerrainProtectedCount(TerrainTypes eIndex) const;
 
 	bool isAutoPromoting() const;
 	void setAutoPromoting(bool bNewValue);
@@ -887,9 +843,6 @@ public:
 	int fortifyModifier() const;
 	//int establishModifier() const;
 	//int escapeModifier() const;
-	//TB Combat Mods begin
-	int fortifyRepelModifier() const;
-	//TB Combat Mods End
 	int experienceNeeded(int iLvlOffset = 0) const;
 	int attackXPValue() const;
 	int defenseXPValue() const;
@@ -922,32 +875,15 @@ public:
 //TB Combat Mods Begin
 	int attackCombatModifierTotal() const;
 	int defenseCombatModifierTotal() const;
-	int pursuitProbability() const;
-	int earlyWithdrawTotal() const;
 	int vsBarbsModifier() const;
 	int religiousCombatModifierTotal(ReligionTypes eReligion = NO_RELIGION, bool bDisplay = false) const;
 	int damageModifierTotal() const;
 	int costModifierTotal() const;
-	int overrunTotal() const;
-	int repelTotal() const;
-	int fortRepelTotal() const;
-	int repelRetriesTotal() const;
-	int unyieldingTotal() const;
-	int knockbackTotal() const;
-	int knockbackRetriesTotal() const;
 	bool canStampede() const;
 	bool canAttackOnlyCities() const;
 	bool canIgnoreNoEntryLevel() const;
 	bool canIgnoreZoneofControl() const;
 	bool canFliesToMove() const;
-	int strAdjperRndTotal() const;
-	int strAdjperAttTotal() const;
-	int strAdjperDefTotal() const;
-	int withdrawAdjperAttTotal() const;
-	int currentStrAdjperRndTotal() const;
-	int currentStrAdjperAttTotal() const;
-	int currentStrAdjperDefTotal() const;
-	int currentWithdrawAdjperAttTotal() const;
 	int unnerveTotal() const;
 	int encloseTotal() const;
 	int lungeTotal() const;
@@ -1196,12 +1132,6 @@ public:
 	int getExtraDefenseCombatModifier (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
 	void changeExtraDefenseCombatModifier (int iChange);
 
-	int getExtraPursuit (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraPursuit (int iChange);
-
-	int getExtraEarlyWithdraw (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraEarlyWithdraw (int iChange);
-
 	int getExtraVSBarbs (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
 	void changeExtraVSBarbs (int iChange);
 
@@ -1220,27 +1150,6 @@ public:
 	int getUpkeepModifier() const;
 	int getUpkeepMultiplierSM() const;
 	int getUpkeep100() const;
-
-	int getExtraOverrun(bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraOverrun (int iChange);
-
-	int getExtraRepel(bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraRepel (int iChange);
-
-	int getExtraFortRepel() const;
-	void changeExtraFortRepel (int iChange);
-
-	int getExtraRepelRetries() const;
-	void changeExtraRepelRetries (int iChange);
-
-	int getExtraUnyielding (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraUnyielding (int iChange);
-
-	int getExtraKnockback (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraKnockback (int iChange);
-
-	int getExtraKnockbackRetries (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraKnockbackRetries (int iChange);
 
 	int getStampedeCount() const;
 	bool cannotStampede() const;
@@ -1262,10 +1171,6 @@ public:
 	void setFliesToMoveCount(int iChange);
 	void changeFliesToMoveCount(int iChange);
 
-	void changeExtraStrAdjperRnd(int iChange);
-	void changeExtraStrAdjperAtt(int iChange);
-	void changeExtraStrAdjperDef(int iChange);
-	void changeExtraWithdrawAdjperAtt(int iChange);
 
 	int getExtraUnnerve (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
 	void changeExtraUnnerve (int iChange);
@@ -1708,26 +1613,13 @@ protected:
 	//TB Combat Mods Begin
 	int m_iExtraAttackCombatModifier;
 	int m_iExtraDefenseCombatModifier;
-	int m_iExtraPursuit;
-	int m_iExtraEarlyWithdraw;
 	int m_iExtraVSBarbs;
 	int m_iExtraReligiousCombatModifier;
-	int m_iExtraOverrun;
-	int m_iExtraRepel;
-	int m_iExtraFortRepel;
-	int m_iExtraRepelRetries;
-	int m_iExtraUnyielding;
-	int m_iExtraKnockback;
-	int m_iExtraKnockbackRetries;
 	int m_iStampedeCount;
 	int m_iAttackOnlyCitiesCount;
 	int m_iIgnoreNoEntryLevelCount;
 	int m_iIgnoreZoneofControlCount;
 	int m_iFliesToMoveCount;
-	int m_iExtraStrAdjperRnd;
-	int m_iExtraStrAdjperAtt;
-	int m_iExtraStrAdjperDef;
-	int m_iExtraWithdrawAdjperAtt;
 	int m_iExtraUnnerve;
 	int m_iExtraEnclose;
 	int m_iExtraLunge;
@@ -1737,16 +1629,6 @@ protected:
 	int m_iAnimalIgnoresBordersCount;
 	int m_iOnslaughtCount;
 	int m_iExtraFortitude;
-#ifdef STRENGTH_IN_NUMBERS
-	int m_iExtraFrontSupportPercent;
-	int m_iExtraShortRangeSupportPercent;
-	int m_iExtraMediumRangeSupportPercent;
-	int m_iExtraLongRangeSupportPercent;
-	int m_iExtraFlankSupportPercent;
-	int m_iSupportCount;
-	int m_iAttackFromPlotX;
-	int m_iAttackFromPlotY;
-#endif // STRENGTH_IN_NUMBERS
 	int m_iExtraSelfHealModifier;
 	int m_iExtraNumHealSupport;
 	int m_iHealSupportUsed;
@@ -1779,32 +1661,8 @@ protected:
 	bool m_bIsArmed;
 	bool m_bHasAnyInvisibility;
 	bool m_bRevealed;
-#ifdef STRENGTH_IN_NUMBERS
-	IDInfo afIUnit;
-	IDInfo afIIUnit;
-	IDInfo asrIUnit;
-	IDInfo asrIIUnit;
-	IDInfo amrIUnit;
-	IDInfo amrIIUnit;
-	IDInfo alrIUnit;
-	IDInfo alrIIUnit;
-	IDInfo aflIUnit;
-	IDInfo aflIIUnit;
-	IDInfo dfIUnit;
-	IDInfo dfIIUnit;
-	IDInfo dsrIUnit;
-	IDInfo dsrIIUnit;
-	IDInfo dmrIUnit;
-	IDInfo dmrIIUnit;
-	IDInfo dlrIUnit;
-	IDInfo dlrIIUnit;
-	IDInfo dflIUnit;
-	IDInfo dflIIUnit;
-#endif // STRENGTH_IN_NUMBERS
 	int m_iExtraCriticalModifier;
 	int m_iExtraEndurance;
-	int m_iCombatKnockbacks;
-	int m_iCombatRepels;
 	int m_iExtraPoisonProbabilityModifier;
 	int m_iRetrainsAvailable;
 	int m_iQualityBaseTotal;
@@ -2015,125 +1873,12 @@ private:
 public:
 	bool isArcher() const;
 	bool isPromotionOverriden(PromotionTypes ePromotionType) const;
-	int getCityRepel() const;
 
-#ifdef STRENGTH_IN_NUMBERS
-	int getCityFrontSupportPercentModifier() const;
-	int getCityShortRangeSupportPercentModifier() const;
-	int getCityMediumRangeSupportPercentModifier() const;
-	int getCityLongRangeSupportPercentModifier() const;
-	int getCityFlankSupportPercentModifier() const;
-
-	int getExtraFrontSupportPercent (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraFrontSupportPercent (int iChange);
-
-	int getExtraShortRangeSupportPercent (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraShortRangeSupportPercent (int iChange);
-
-	int getExtraMediumRangeSupportPercent (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraMediumRangeSupportPercent (int iChange);
-
-	int getExtraLongRangeSupportPercent (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraLongRangeSupportPercent (int iChange);
-
-	int getExtraFlankSupportPercent (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraFlankSupportPercent (int iChange);
-
-	int frontSupportPercentTotal() const;
-	int shortRangeSupportPercentTotal() const;
-	int mediumRangeSupportPercentTotal() const;
-	int longRangeSupportPercentTotal() const;
-	int flankSupportPercentTotal() const;
-	bool isFrontSupporter() const;
-	bool isShortRangeSupporter() const;
-	bool isMediumRangeSupporter() const;
-	bool isLongRangeSupporter() const;
-	bool isFlankSupporter() const;
-
-	CvPlot* getAttackFromPlot() const;
-	void setAttackFromPlot(const CvPlot* pNewValue);
-
-	int getAttackerSupportValue() const;
-	int getAttackerFirstFrontSupportValue(const CvPlot* aPlot, const CvPlot* pPlot, const CvUnit* pDefender) const;
-	int getAttackerSecondFrontSupportValue(const CvPlot* aPlot, const CvPlot* pPlot, const CvUnit* pDefender) const;
-	int getAttackerFirstShortRangeSupportValue(const CvPlot* aPlot, const CvPlot* pPlot, const CvUnit* pDefender) const;
-	int getAttackerSecondShortRangeSupportValue(const CvPlot* aPlot, const CvPlot* pPlot, const CvUnit* pDefender) const;
-	int getAttackerFirstMediumRangeSupportValue(const CvPlot* aPlot, const CvPlot* pPlot, const CvUnit* pDefender) const;
-	int getAttackerSecondMediumRangeSupportValue(const CvPlot* aPlot, const CvPlot* pPlot, const CvUnit* pDefender) const;
-	int getAttackerFirstLongRangeSupportValue(const CvPlot* aPlot, const CvPlot* pPlot, const CvUnit* pDefender) const;
-	int getAttackerSecondLongRangeSupportValue(const CvPlot* aPlot, const CvPlot* pPlot, const CvUnit* pDefender) const;
-	int getAttackerFirstFlankSupportValue(const CvPlot* aPlot, const CvPlot* pPlot, const CvUnit* pDefender) const;
-	int getAttackerSecondFlankSupportValue(const CvPlot* aPlot, const CvPlot* pPlot, const CvUnit* pDefender) const;
-	CvUnit* getAttackerFirstFrontSupportingUnit() const;
-	CvUnit* getAttackerSecondFrontSupportingUnit() const;
-	CvUnit* getAttackerFirstShortRangeSupportingUnit() const;
-	CvUnit* getAttackerSecondShortRangeSupportingUnit() const;
-	CvUnit* getAttackerFirstMediumRangeSupportingUnit() const;
-	CvUnit* getAttackerSecondMediumRangeSupportingUnit() const;
-	CvUnit* getAttackerFirstLongRangeSupportingUnit() const;
-	CvUnit* getAttackerSecondLongRangeSupportingUnit() const;
-	CvUnit* getAttackerFirstFlankSupportingUnit() const;
-	CvUnit* getAttackerSecondFlankSupportingUnit() const;
-	void setAttackerFirstFrontSupportingUnit(CvUnit* pBestUnit);
-	void setAttackerSecondFrontSupportingUnit(CvUnit* pBestUnit);
-	void setAttackerFirstShortRangeSupportingUnit(CvUnit* pBestUnit);
-	void setAttackerSecondShortRangeSupportingUnit(CvUnit* pBestUnit);
-	void setAttackerFirstMediumRangeSupportingUnit(CvUnit* pBestUnit);
-	void setAttackerSecondMediumRangeSupportingUnit(CvUnit* pBestUnit);
-	void setAttackerFirstLongRangeSupportingUnit(CvUnit* pBestUnit);
-	void setAttackerSecondLongRangeSupportingUnit(CvUnit* pBestUnit);
-	void setAttackerFirstFlankSupportingUnit(CvUnit* pBestUnit);
-	void setAttackerSecondFlankSupportingUnit(CvUnit* pBestUnit);
-
-	int getDefenderSupportValue(const CvUnit* pAttacker) const;
-	int getDefenderFirstFrontSupportValue(const CvUnit* pAttacker, const CvPlot* pPlot) const;
-	int getDefenderSecondFrontSupportValue(const CvUnit* pAttacker, const CvPlot* pPlot) const;
-	int getDefenderFirstShortRangeSupportValue(const CvUnit* pAttacker, const CvPlot* pPlot) const;
-	int getDefenderSecondShortRangeSupportValue(const CvUnit* pAttacker, const CvPlot* pPlot) const;
-	int getDefenderFirstMediumRangeSupportValue(const CvUnit* pAttacker, const CvPlot* pPlot) const;
-	int getDefenderSecondMediumRangeSupportValue(const CvUnit* pAttacker, const CvPlot* pPlot) const;
-	int getDefenderFirstLongRangeSupportValue(const CvUnit* pAttacker, const CvPlot* pPlot) const;
-	int getDefenderSecondLongRangeSupportValue(const CvUnit* pAttacker, const CvPlot* pPlot) const;
-	int getDefenderFirstFlankSupportValue(const CvUnit* pAttacker, const CvPlot* pPlot) const;
-	int getDefenderSecondFlankSupportValue(const CvUnit* pAttacker, const CvPlot* pPlot) const;
-	CvUnit* getDefenderFirstFrontSupportingUnit() const;
-	CvUnit* getDefenderSecondFrontSupportingUnit() const;
-	CvUnit* getDefenderFirstShortRangeSupportingUnit() const;
-	CvUnit* getDefenderSecondShortRangeSupportingUnit() const;
-	CvUnit* getDefenderFirstMediumRangeSupportingUnit() const;
-	CvUnit* getDefenderSecondMediumRangeSupportingUnit() const;
-	CvUnit* getDefenderFirstLongRangeSupportingUnit() const;
-	CvUnit* getDefenderSecondLongRangeSupportingUnit() const;
-	CvUnit* getDefenderFirstFlankSupportingUnit() const;
-	CvUnit* getDefenderSecondFlankSupportingUnit() const;
-	void setDefenderFirstFrontSupportingUnit(CvUnit* pBestUnit);
-	void setDefenderSecondFrontSupportingUnit(CvUnit* pBestUnit);
-	void setDefenderFirstShortRangeSupportingUnit(CvUnit* pBestUnit);
-	void setDefenderSecondShortRangeSupportingUnit(CvUnit* pBestUnit);
-	void setDefenderFirstMediumRangeSupportingUnit(CvUnit* pBestUnit);
-	void setDefenderSecondMediumRangeSupportingUnit(CvUnit* pBestUnit);
-	void setDefenderFirstLongRangeSupportingUnit(CvUnit* pBestUnit);
-	void setDefenderSecondLongRangeSupportingUnit(CvUnit* pBestUnit);
-	void setDefenderFirstFlankSupportingUnit(CvUnit* pBestUnit);
-	void setDefenderSecondFlankSupportingUnit(CvUnit* pBestUnit);
-
-	bool isSupporting();
-	void setSupportCount(int iChange);
-	void ClearSupports();
-#endif
 
 	void checkPromotionObsoletion();
 	void processPromotion(PromotionTypes eIndex, bool bAdding, bool bInitial = false);
 
 
-
-	int getCombatKnockbacks() const;
-	void setCombatKnockbacks(int iNewValue);
-	void changeCombatKnockbacks(int iChange);
-
-	int getCombatRepels() const;
-	void setCombatRepels(int iNewValue);
-	void changeCombatRepels(int iChange);
 
 	bool canKeepPromotion(PromotionTypes ePromotion, bool bAssertFree = false, bool bMessageOnFalse = false) const;
 	bool isPromotionFree(PromotionTypes ePromotion) const;
@@ -2143,48 +1888,17 @@ public:
 	//TB Combat Mods end
 	bool meetsUnitSelectionCriteria(const CvUnitSelectionCriteria* criteria) const;
 	bool shouldUseWithdrawalOddsCap() const;
-	bool isPursuitinUse() const;
-	bool canSwitchEquipment(PromotionTypes eEquipment) const;
-	void reEquip(PromotionTypes eEquipment);
 	void statusUpdate(PromotionTypes eStatus);
 
 	int flankingStrengthbyUnitCombatTotal(UnitCombatTypes eCombatType) const;
 	int getExtraFlankingStrengthbyUnitCombatType(UnitCombatTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
 	void changeExtraFlankingStrengthbyUnitCombatType(UnitCombatTypes eIndex, int iChange);
 
-	int withdrawOnTerrainTotal(TerrainTypes eTerrainType) const;
-	int getExtraWithdrawOnTerrainType(TerrainTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
-	void changeExtraWithdrawOnTerrainType(TerrainTypes eIndex, int iChange);
-
-	int withdrawOnFeatureTotal(FeatureTypes eFeatureType) const;
-	int getExtraWithdrawOnFeatureType(FeatureTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
-	void changeExtraWithdrawOnFeatureType(FeatureTypes eIndex, int iChange);
-
-	int withdrawVSUnitCombatTotal(UnitCombatTypes eCombatType) const;
-	int getExtraWithdrawVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
-	void changeExtraWithdrawVSUnitCombatType(UnitCombatTypes eIndex, int iChange);
-
-	int pursuitVSUnitCombatTotal(UnitCombatTypes eCombatType) const;
-	int getExtraPursuitVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
-	void changeExtraPursuitVSUnitCombatType(UnitCombatTypes eIndex, int iChange);
-
-	int repelVSUnitCombatTotal(UnitCombatTypes eCombatType) const;
-	int getExtraRepelVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
-	void changeExtraRepelVSUnitCombatType(UnitCombatTypes eIndex, int iChange);
-
-	int knockbackVSUnitCombatTotal(UnitCombatTypes eCombatType) const;
-	int getExtraKnockbackVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
-	void changeExtraKnockbackVSUnitCombatType(UnitCombatTypes eIndex, int iChange);
-
 	int criticalVSUnitCombatTotal(UnitCombatTypes eCombatType) const;
 	int getExtraCriticalVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
 	void changeExtraCriticalVSUnitCombatType(UnitCombatTypes eIndex, int iChange);
 
 
-	int withdrawVSOpponentProbTotal(const CvUnit* pOpponent, const CvPlot* pPlot) const;
-	int pursuitVSOpponentProbTotal(const CvUnit* pOpponent) const;
-	int repelVSOpponentProbTotal(const CvUnit* pOpponent) const;
-	int knockbackVSOpponentProbTotal(const CvUnit* pOpponent) const;
 	int criticalVSOpponentProbTotal(const CvUnit* pOpponent) const;
 
 	bool canInflictCritical(PromotionTypes eCritical) const;
@@ -2249,11 +1963,9 @@ public:
 	void checkCityAttackDefensesDamage(CvCity* pCity, const std::vector<UnitCombatTypes>& kDamagableUnitCombatTypes);
 
 	bool isBreakdownCombat(const CvPlot* pPlot, bool bSamePlot = false) const;
-	void resolveBreakdownAttack(const CvPlot* pPlot, const int AdjustedRepel);
+	void resolveBreakdownAttack(const CvPlot* pPlot);
 
 	int getDiminishingReturn(int i) const;
-
-	bool isPursuitPossible(const CvUnit* pOpponent) const;
 
 	bool hasCannotMergeSplit() const;
 	int getCannotMergeSplitCount() const;
@@ -2705,10 +2417,6 @@ private:
 	static bool* g_pabTempHasPromotion;
 	static bool* g_pabTempHasUnitCombat;
 	static int* g_paiTempExtraFlankingStrengthbyUnitCombatType;
-	static int* g_paiTempExtraWithdrawVSUnitCombatType;
-	static int* g_paiTempExtraPursuitVSUnitCombatType;
-	static int* g_paiTempExtraRepelVSUnitCombatType;
-	static int* g_paiTempExtraKnockbackVSUnitCombatType;
 	static int* g_paiTempExtraCriticalVSUnitCombatType;
 	static int*	g_paiTempHealUnitCombatTypeVolume;
 	static int*	g_paiTempHealUnitCombatTypeAdjacentVolume;

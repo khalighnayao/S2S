@@ -72,8 +72,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>35</iWithdrawalProb>
-			<iPursuit>60</iPursuit>
-			<iEarlyWithdraw>15</iEarlyWithdraw>
 			<iAsset>1</iAsset>
 			<iPower>3</iPower>
 			<UnitMeshGroups>
@@ -161,7 +159,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>25</iWithdrawalProb>
-			<iPursuit>40</iPursuit>
 			<iAsset>1</iAsset>
 			<iPower>4</iPower>
 			<UnitMeshGroups>
@@ -254,7 +251,6 @@
 			<iXPValueAttack>4</iXPValueAttack>
 			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>45</iWithdrawalProb>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<iAsset>1</iAsset>
 			<iPower>2</iPower>
@@ -346,7 +342,6 @@
 			<iXPValueAttack>2</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iWithdrawalProb>30</iWithdrawalProb>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<iAsset>1</iAsset>
 			<iPower>1</iPower>
@@ -437,7 +432,6 @@
 			<iXPValueAttack>2</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iWithdrawalProb>40</iWithdrawalProb>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<iAsset>1</iAsset>
 			<iPower>1</iPower>
@@ -561,7 +555,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>60</iWithdrawalProb>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<iAsset>1</iAsset>
 			<iPower>2</iPower>
@@ -678,7 +671,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>60</iWithdrawalProb>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<iAsset>1</iAsset>
 			<iPower>2</iPower>
@@ -1262,7 +1254,6 @@
 			<iXPValueAttack>4</iXPValueAttack>
 			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>30</iWithdrawalProb>
-			<iEarlyWithdraw>10</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<iAsset>1</iAsset>
 			<iPower>2</iPower>
@@ -1344,8 +1335,6 @@
 			<iXPValueAttack>2</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iWithdrawalProb>35</iWithdrawalProb>
-			<iPursuit>60</iPursuit>
-			<iEarlyWithdraw>15</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<UnitMeshGroups>
 				<iGroupSize>3</iGroupSize>
@@ -1431,7 +1420,6 @@
 			<iCombat>6</iCombat>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>35</iPursuit>
 			<iAsset>1</iAsset>
 			<iPower>1</iPower>
 			<UnitMeshGroups>
@@ -1520,7 +1508,6 @@
 			<iCombat>6</iCombat>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>35</iPursuit>
 			<iCityDefense>-80</iCityDefense>
 			<UnitMeshGroups>
 				<iGroupSize>3</iGroupSize>
@@ -1607,7 +1594,6 @@
 			<iCombat>6</iCombat>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>35</iPursuit>
 			<iCityDefense>-80</iCityDefense>
 			<UnitMeshGroups>
 				<iGroupSize>3</iGroupSize>
@@ -1695,7 +1681,6 @@
 			<iCombat>7</iCombat>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>25</iPursuit>
 			<iCityDefense>-80</iCityDefense>
 			<UnitMeshGroups>
 				<iGroupSize>3</iGroupSize>
@@ -1783,7 +1768,6 @@
 			<iCombat>6</iCombat>
 			<iXPValueAttack>8</iXPValueAttack>
 			<iXPValueDefense>4</iXPValueDefense>
-			<iPursuit>40</iPursuit>
 			<iCityDefense>-80</iCityDefense>
 			<UnitMeshGroups>
 				<iGroupSize>3</iGroupSize>
@@ -1954,7 +1938,6 @@
 			<iCombat>7</iCombat>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>40</iPursuit>
 			<iCityDefense>-80</iCityDefense>
 			<UnitMeshGroups>
 				<iGroupSize>3</iGroupSize>
@@ -2042,7 +2025,6 @@
 			<iXPValueAttack>2</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iWithdrawalProb>15</iWithdrawalProb>
-			<iEarlyWithdraw>80</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<UnitMeshGroups>
 				<iGroupSize>3</iGroupSize>
@@ -2130,7 +2112,6 @@
 			<iCombat>6</iCombat>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>20</iPursuit>
 			<iCityDefense>-80</iCityDefense>
 			<UnitMeshGroups>
 				<iGroupSize>3</iGroupSize>
@@ -2217,7 +2198,6 @@
 			<iCombat>6</iCombat>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>25</iPursuit>
 			<iCityDefense>-80</iCityDefense>
 			<iAsset>1</iAsset>
 			<iPower>6</iPower>
@@ -2306,7 +2286,6 @@
 			<iCombat>6</iCombat>
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
-			<iPursuit>30</iPursuit>
 			<iCityDefense>-80</iCityDefense>
 			<iAsset>1</iAsset>
 			<iPower>6</iPower>
@@ -2480,7 +2459,6 @@
 			<iXPValueAttack>4</iXPValueAttack>
 			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>40</iWithdrawalProb>
-			<iEarlyWithdraw>35</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_ANIMAL_TAMER_COMPLEX</BuildingType>
@@ -2674,7 +2652,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>30</iWithdrawalProb>
-			<iPursuit>50</iPursuit>
 			<iAsset>1</iAsset>
 			<iPower>1</iPower>
 			<UnitMeshGroups>
@@ -3116,7 +3093,6 @@
 			<iXPValueAttack>4</iXPValueAttack>
 			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>40</iWithdrawalProb>
-			<iEarlyWithdraw>35</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<iAsset>1</iAsset>
 			<iPower>2</iPower>
@@ -3206,7 +3182,6 @@
 			<iXPValueAttack>4</iXPValueAttack>
 			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>40</iWithdrawalProb>
-			<iEarlyWithdraw>35</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<iAsset>1</iAsset>
 			<iPower>2</iPower>
@@ -3296,7 +3271,6 @@
 			<iXPValueAttack>4</iXPValueAttack>
 			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>40</iWithdrawalProb>
-			<iEarlyWithdraw>35</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<iAsset>1</iAsset>
 			<iPower>2</iPower>
@@ -3386,7 +3360,6 @@
 			<iXPValueAttack>4</iXPValueAttack>
 			<iXPValueDefense>2</iXPValueDefense>
 			<iWithdrawalProb>40</iWithdrawalProb>
-			<iEarlyWithdraw>35</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<iAsset>1</iAsset>
 			<iPower>2</iPower>
@@ -3471,8 +3444,6 @@
 			<iXPValueAttack>2</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iWithdrawalProb>35</iWithdrawalProb>
-			<iPursuit>60</iPursuit>
-			<iEarlyWithdraw>15</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<UnitMeshGroups>
 				<iGroupSize>3</iGroupSize>
@@ -3565,8 +3536,6 @@
 			<iXPValueAttack>2</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iWithdrawalProb>35</iWithdrawalProb>
-			<iPursuit>60</iPursuit>
-			<iEarlyWithdraw>15</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<UnitMeshGroups>
 				<iGroupSize>3</iGroupSize>
@@ -3652,7 +3621,6 @@
 			<iCost>100</iCost>
 			<iMoves>2</iMoves>
 			<iWithdrawalProb>40</iWithdrawalProb>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<UnitMeshGroups>
 				<iGroupSize>1</iGroupSize>
@@ -3769,7 +3737,6 @@
 			<iCost>100</iCost>
 			<iMoves>3</iMoves>
 			<iWithdrawalProb>60</iWithdrawalProb>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<UnitMeshGroups>
 				<iGroupSize>1</iGroupSize>
@@ -3903,7 +3870,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>30</iWithdrawalProb>
-			<iPursuit>50</iPursuit>
 			<iAsset>1</iAsset>
 			<iPower>1</iPower>
 			<UnitMeshGroups>

@@ -25,7 +25,6 @@ public:
 	TechTypes getPrereqTech() const	{ return m_ePrereqTech; }
 	TechTypes getObsoleteTech() const;
 	PropertyTypes getPropertyType() const;
-	bool isEquipment() const;
 	bool isCritical() const;
 	bool isNoSpreadonBattle() const;
 	bool isNoSpreadUnitProximity() const;
@@ -98,7 +97,6 @@ protected:
 	TechTypes m_ePrereqTech;
 	TechTypes m_eObsoleteTech;
 	PropertyTypes m_ePropertyType;
-	bool m_bEquipment;
 	bool m_bCritical;
 	bool m_bNoSpreadonBattle;
 	bool m_bNoSpreadUnitProximity;

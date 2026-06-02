@@ -273,7 +273,6 @@
 	<ElementType name="iAppearance" content="textOnly" dt:type="int"/>
 	<ElementType name="iDisappearance" content="textOnly" dt:type="int"/>
 	<ElementType name="iGrowth" content="textOnly" dt:type="int"/>
-	<ElementType name="iTurnDamage" content="textOnly" dt:type="int"/>
 	<ElementType name="iWarmingDefense" content="textOnly" dt:type="int"/> <!-- GWMod new XML field M.A. -->
 	<ElementType name="bNoCoast" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bNoRiver" content="textOnly" dt:type="boolean"/>
@@ -330,7 +329,6 @@
 		<element type="iAppearance" minOccurs="0"/>
 		<element type="iDisappearance" minOccurs="0"/>
 		<element type="iGrowth" minOccurs="0"/>
-		<element type="iTurnDamage" minOccurs="0"/>
 		<element type="iWarmingDefense" minOccurs="0"/>
 		<element type="iPopDestroys" minOccurs="0"/>
 		<element type="bNoCoast" minOccurs="0"/>

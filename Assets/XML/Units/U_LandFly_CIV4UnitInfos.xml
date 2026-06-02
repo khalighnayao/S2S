@@ -9,8 +9,6 @@
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_GUNSHIP</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SEMI_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_AIRCRAFT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPEED_FAST</SubCombatType>
@@ -100,8 +98,6 @@
 			<iXPValueAttack>3</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iWithdrawalProb>25</iWithdrawalProb>
-			<iPursuit>35</iPursuit>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>8</iCollateralDamageMaxUnits>
 			<UnitCombatMods>
@@ -143,8 +139,6 @@
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_GUNSHIP</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SHORT_RANGE_MISSILE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_AIRCRAFT</SubCombatType>
@@ -236,8 +230,6 @@
 			<iXPValueAttack>3</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iWithdrawalProb>35</iWithdrawalProb>
-			<iPursuit>45</iPursuit>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>8</iCollateralDamageMaxUnits>
 			<UnitCombatMods>
@@ -279,8 +271,6 @@
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_GUNSHIP</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SHORT_RANGE_MISSILE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_AIRCRAFT</SubCombatType>
@@ -379,8 +369,6 @@
 			<iXPValueAttack>3</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iWithdrawalProb>40</iWithdrawalProb>
-			<iPursuit>50</iPursuit>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>8</iCollateralDamageMaxUnits>
 			<UnitCombatMods>
@@ -423,8 +411,6 @@
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_GUNSHIP</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SHORT_RANGE_MISSILE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_AIRCRAFT</SubCombatType>
@@ -522,8 +508,6 @@
 			<iXPValueAttack>3</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iWithdrawalProb>20</iWithdrawalProb>
-			<iPursuit>25</iPursuit>
-			<iEarlyWithdraw>10</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>8</iCollateralDamageMaxUnits>
 			<UnitCombatMods>
@@ -565,8 +549,6 @@
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_GUNSHIP</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SHORT_RANGE_MISSILE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_AIRCRAFT</SubCombatType>
@@ -655,8 +637,6 @@
 			<iXPValueAttack>3</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iWithdrawalProb>45</iWithdrawalProb>
-			<iPursuit>55</iPursuit>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>10</iCollateralDamageMaxUnits>
 			<UnitCombatMods>
@@ -703,8 +683,6 @@
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_GUNSHIP</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SHORT_RANGE_MISSILE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_LASER</SubCombatType>
@@ -803,8 +781,6 @@
 			<iFirstStrikes>1</iFirstStrikes>
 			<iEvasionProbability>30</iEvasionProbability>
 			<iWithdrawalProb>50</iWithdrawalProb>
-			<iPursuit>60</iPursuit>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>8</iCollateralDamageMaxUnits>
 			<UnitCombatMods>
@@ -850,8 +826,6 @@
 				<SubCombatType>UNITCOMBAT_SPECIES_AI</SubCombatType>
 				<SubCombatType>UNITCOMBAT_GUNSHIP</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SHORT_RANGE_MISSILE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_AIRCRAFT</SubCombatType>
@@ -948,8 +922,6 @@
 			<iXPValueAttack>3</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iWithdrawalProb>35</iWithdrawalProb>
-			<iPursuit>50</iPursuit>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>8</iCollateralDamageMaxUnits>
 			<UnitCombatMods>
@@ -992,8 +964,6 @@
 				<SubCombatType>UNITCOMBAT_SPECIES_AI</SubCombatType>
 				<SubCombatType>UNITCOMBAT_GUNSHIP</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_LASER</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SHORT_RANGE_MISSILE</SubCombatType>
@@ -1088,8 +1058,6 @@
 			<iXPValueAttack>3</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<iWithdrawalProb>50</iWithdrawalProb>
-			<iPursuit>55</iPursuit>
-			<iEarlyWithdraw>25</iEarlyWithdraw>
 			<iCollateralDamageLimit>100</iCollateralDamageLimit>
 			<iCollateralDamageMaxUnits>10</iCollateralDamageMaxUnits>
 			<UnitCombatMods>

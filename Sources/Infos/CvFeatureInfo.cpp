@@ -53,7 +53,6 @@ m_iDisappearanceProbability(0),
 m_iGrowthProbability(0),
 m_iDefenseModifier(0),
 m_iAdvancedStartRemoveCost(0),
-m_iTurnDamage(0),
 m_iWarmingDefense(0), //GWMod new xml field M.A.
 m_bNoCoast(false),
 m_bNoRiver(false),
@@ -148,12 +147,6 @@ int CvFeatureInfo::getDefenseModifier() const
 int CvFeatureInfo::getAdvancedStartRemoveCost() const
 {
 	return m_iAdvancedStartRemoveCost;
-}
-
-
-int CvFeatureInfo::getTurnDamage() const
-{
-	return m_iTurnDamage;
 }
 
 
@@ -431,7 +424,6 @@ bool CvFeatureInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_iHealthPercent, L"iHealthPercent");
 	pXML->GetOptionalChildXmlValByName(&m_iDefenseModifier, L"iDefense");
 	pXML->GetOptionalChildXmlValByName(&m_iAdvancedStartRemoveCost, L"iAdvancedStartRemoveCost");
-	pXML->GetOptionalChildXmlValByName(&m_iTurnDamage, L"iTurnDamage");
 	pXML->GetOptionalChildXmlValByName(&m_iWarmingDefense, L"iWarmingDefense"); //GWMod new xml field M.A.
 	pXML->GetOptionalChildXmlValByName(&m_iAppearanceProbability, L"iAppearance");
 	pXML->GetOptionalChildXmlValByName(&m_iDisappearanceProbability, L"iDisappearance");
@@ -516,7 +508,6 @@ void CvFeatureInfo::copyNonDefaults(const CvFeatureInfo* pClassInfo)
 	if (getHealthPercent() == iDefault) m_iHealthPercent = pClassInfo->getHealthPercent();
 	if (getDefenseModifier() == iDefault) m_iDefenseModifier = pClassInfo->getDefenseModifier();
 	if (getAdvancedStartRemoveCost() == iDefault) m_iAdvancedStartRemoveCost = pClassInfo->getAdvancedStartRemoveCost();
-	if (getTurnDamage() == iDefault) m_iTurnDamage = pClassInfo->getTurnDamage();
 	if (getAppearanceProbability() == iDefault) m_iAppearanceProbability = pClassInfo->getAppearanceProbability();
 	if (getDisappearanceProbability() == iDefault) m_iDisappearanceProbability = pClassInfo->getDisappearanceProbability();
 	if (getGrowthProbability() == iDefault) m_iGrowthProbability = pClassInfo->getGrowthProbability();
@@ -592,7 +583,6 @@ void CvFeatureInfo::getCheckSum(uint32_t &iSum) const
 	CheckSum(iSum, m_iGrowthProbability);
 	CheckSum(iSum, m_iDefenseModifier);
 	CheckSum(iSum, m_iAdvancedStartRemoveCost);
-	CheckSum(iSum, m_iTurnDamage);
 	CheckSum(iSum, m_iWarmingDefense);
 	CheckSum(iSum, m_iPopDestroys);
 

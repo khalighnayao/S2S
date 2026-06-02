@@ -392,27 +392,10 @@ public:
 
 	int getUnitCombatProductionModifier(UnitCombatTypes eIndex) const;
 	void changeUnitCombatProductionModifier(UnitCombatTypes eIndex, int iChange);
-	int getUnitCombatRepelModifierTotal(UnitCombatTypes eIndex) const;
-	void changeUnitCombatRepelModifierTotal(UnitCombatTypes eIndex, int iChange);
-	int getUnitCombatRepelAgainstModifierTotal(UnitCombatTypes eIndex) const;
-	void changeUnitCombatRepelAgainstModifierTotal(UnitCombatTypes eIndex, int iChange);
 	int getUnitCombatDefenseAgainstModifierTotal(UnitCombatTypes eIndex) const;
 	void changeUnitCombatDefenseAgainstModifierTotal(UnitCombatTypes eIndex, int iChange);
 
-#ifdef STRENGTH_IN_NUMBERS
-	int getTotalFrontSupportPercentModifier() const;
-	void changeTotalFrontSupportPercentModifier(int iChange);
-	int getTotalShortRangeSupportPercentModifier() const;
-	void changeTotalShortRangeSupportPercentModifier(int iChange);
-	int getTotalMediumRangeSupportPercentModifier() const;
-	void changeTotalMediumRangeSupportPercentModifier(int iChange);
-	int getTotalLongRangeSupportPercentModifier() const;
-	void changeTotalLongRangeSupportPercentModifier(int iChange);
-	int getTotalFlankSupportPercentModifier() const;
-	void changeTotalFlankSupportPercentModifier(int iChange);
-#endif // STRENGTH_IN_NUMBERS
 
-	bool canEquip(const CvUnit* pUnit, PromotionTypes eEquipment) const;
 
 	void assignPromotionsFromBuildingChecked(const CvBuildingInfo& kBuilding, CvUnit* pLoopUnit) const;
 
@@ -1705,13 +1688,6 @@ protected:
 	int m_iReinforcementCounter;
 
 	//TB Combat Mod (Buildings)
-#ifdef STRENGTH_IN_NUMBERS
-	int m_iTotalFrontSupportPercentModifier;
-	int m_iTotalShortRangeSupportPercentModifier;
-	int m_iTotalMediumRangeSupportPercentModifier;
-	int m_iTotalLongRangeSupportPercentModifier;
-	int m_iTotalFlankSupportPercentModifier;
-#endif
 	int* m_paiNewAfflictionTypeCount;
 	int* m_paiAidRate;
 	int** m_ppaaiExtraBonusAidModifier;
@@ -1719,8 +1695,6 @@ protected:
 	int* m_paiNewAfflictionToleranceChange;
 	int* m_paiNewCurrentOvercomeChange;
 	int* m_paiUnitCombatProductionModifier;
-	int* m_paiUnitCombatRepelModifier;
-	int* m_paiUnitCombatRepelAgainstModifier;
 	int* m_paiUnitCombatDefenseAgainstModifier;
 	int* m_paiPromotionLineAfflictionAttackCommunicability;
 	//TB Building Tags
@@ -1728,7 +1702,6 @@ protected:
 	int m_iExtraLocalCaptureResistanceModifier;
 	int m_iExtraLocalDynamicDefense;
 	int m_iExtraRiverDefensePenalty;
-	int m_iExtraLocalRepel;
 	int m_iExtraMinDefense;
 	int m_iExtraBuildingDefenseRecoverySpeedModifier;
 	int m_iModifiedBuildingDefenseRecoverySpeedCap;
@@ -1950,10 +1923,6 @@ public:
 	int getExtraRiverDefensePenalty() const;
 	void setExtraRiverDefensePenalty(int iValue);
 	void changeExtraRiverDefensePenalty(int iChange);
-
-	int getExtraLocalRepel() const;
-	void setExtraLocalRepel(int iValue);
-	void changeExtraLocalRepel(int iChange);
 
 	int getExtraMinDefense() const;
 	void setExtraMinDefense(int iValue);
