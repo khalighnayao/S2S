@@ -2100,23 +2100,12 @@
 		<element type="PrereqTech" minOccurs="0"/>
 		<element type="ObsoleteTech" minOccurs="0"/>
 		<element type="Categories" minOccurs="0"/>
-		<element type="iCommunicability" minOccurs="0"/>
-		<element type="iOutbreakModifier" minOccurs="0"/>
-		<element type="iOvercomeModifier" minOccurs="0"/>
-		<element type="iOvercomeProbability" minOccurs="0"/>
-		<element type="iOvercomeAdjperTurn" minOccurs="0"/>
-		<element type="iToleranceBuildup" minOccurs="0"/>
-		<element type="iToleranceDecay" minOccurs="0"/>
-		<element type="iWorseningProbabilityIncrementModifier" minOccurs="0"/>
-		<element type="iWorsenedCommunicabilityIncrementModifier" minOccurs="0"/>
-		<element type="iWorsenedOvercomeIncrementModifier" minOccurs="0"/>
 		<element type="UnitCombatContractChanceChanges" minOccurs="0"/>
 		<element type="TechContractChanceChanges" minOccurs="0"/>
 		<element type="bNoSpreadonBattle" minOccurs="0"/>
 		<element type="bNoSpreadUnitProximity" minOccurs="0"/>
 		<element type="bNoSpreadUnittoCity" minOccurs="0"/>
 		<element type="bNoSpreadCitytoUnit" minOccurs="0"/>
-		<element type="bAffliction" minOccurs="0"/>
 		<element type="bBuildUp" minOccurs="0"/>
 		<element type="bPoison" minOccurs="0"/>
 	</ElementType>
