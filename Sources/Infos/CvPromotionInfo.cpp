@@ -142,11 +142,9 @@ m_iLungeChange(0),
 m_iDynamicDefenseChange(0),
 m_iStrengthChange(0),
 m_iLinePriority(0),
-m_iFortitudeChange(0),
 m_iDamageperTurn(0),
 m_iStrAdjperTurn(0),
 m_iWeakenperTurn(0),
-m_iCriticalModifierChange(0),
 m_iEnduranceChange(0),
 m_iPoisonProbabilityModifierChange(0),
 
@@ -204,7 +202,6 @@ m_bStampedeChange(false),
 m_bRemoveStampede(false),
 m_bOnslaughtChange(false),
 m_bParalyze(false),
-m_bCritical(false),
 m_bAttackOnlyCitiesAdd(false),
 m_bAttackOnlyCitiesSubtract(false),
 m_bIgnoreNoEntryLevelAdd(false),
@@ -992,13 +989,6 @@ int CvPromotionInfo::getLinePriority() const
 }
 
 
-//Realm of the Serpent
-int CvPromotionInfo::getFortitudeChange() const
-{
-	return m_iFortitudeChange;
-}
-
-
 int CvPromotionInfo::getDamageperTurn() const
 {
 	return m_iDamageperTurn;
@@ -1020,12 +1010,6 @@ int CvPromotionInfo::getWeakenperTurn() const
 
 
 
-
-
-int CvPromotionInfo::getCriticalModifierChange() const
-{
-	return m_iCriticalModifierChange;
-}
 
 
 int CvPromotionInfo::getEnduranceChange() const
@@ -1386,18 +1370,6 @@ bool CvPromotionInfo::isParalyze() const
 }
 
 
-
-
-bool CvPromotionInfo::isCritical() const
-{
-	if ( getPromotionLine() == NO_PROMOTIONLINE)
-	{
-		return false; // require afflictions to always be parts of lines
-	}
-
-	// return the value from the line
-	return GC.getPromotionLineInfo(getPromotionLine()).isCritical();
-}
 
 
 bool CvPromotionInfo::isAttackOnlyCitiesAdd() const
@@ -1873,42 +1845,6 @@ bool CvPromotionInfo::isFlankingStrikebyUnitCombatTypeChange(int iUnitCombat) co
 }
 
 
-int CvPromotionInfo::getNumCriticalVSUnitCombatChangeTypes() const
-{
-	return m_aCriticalVSUnitCombatChangeTypes.size();
-}
-
-
-int CvPromotionInfo::getCriticalVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aCriticalVSUnitCombatChangeTypes.begin(); it != m_aCriticalVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-bool CvPromotionInfo::isCriticalVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aCriticalVSUnitCombatChangeTypes.begin(); it != m_aCriticalVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-
-
-
 int CvPromotionInfo::getNumTrapDisableUnitCombatTypes() const
 {
 	return m_aTrapDisableUnitCombatTypes.size();
@@ -2275,18 +2211,6 @@ const InvisibleImprovementChanges& CvPromotionInfo::getVisibleImprovementRangeCh
 }
 
 
-int CvPromotionInfo::getNumDistanceAttackCommunicabilityTypeChanges() const
-{
-	return (int)m_aDistanceAttackCommunicabilityTypeChanges.size();
-}
-
-
-const AfflictionLineChanges& CvPromotionInfo::getDistanceAttackCommunicabilityTypeChange(int iIndex) const
-{
-	return m_aDistanceAttackCommunicabilityTypeChanges[iIndex];
-}
-
-
 int CvPromotionInfo::getNumHealUnitCombatChangeTypes() const
 {
 	return (int)m_aHealUnitCombatChangeTypes.size();
@@ -2427,7 +2351,6 @@ void CvPromotionInfo::setDisqualifiedUnitCombatTypes()
 bool CvPromotionInfo::hasNegativeEffects() const
 {
 	return getLungeChange() < 0 ||
-		getCriticalModifierChange() < 0 ||
 		getEnduranceChange() < 0 ||
 		getFirstStrikesChange() < 0 ||
 		getChanceFirstStrikesChange() < 0 ||
@@ -2609,11 +2532,9 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_iDynamicDefenseChange, L"iDynamicDefenseChange");
 	pXML->GetOptionalChildXmlValByName(&m_iStrengthChange, L"iStrengthChange");
 	pXML->GetOptionalChildXmlValByName(&m_iLinePriority, L"iLinePriority");
-	pXML->GetOptionalChildXmlValByName(&m_iFortitudeChange, L"iFortitudeChange");
 	pXML->GetOptionalChildXmlValByName(&m_iDamageperTurn, L"iDamageperTurn");
 	pXML->GetOptionalChildXmlValByName(&m_iStrAdjperTurn, L"iStrAdjperTurn");
 	pXML->GetOptionalChildXmlValByName(&m_iWeakenperTurn, L"iWeakenperTurn");
-	pXML->GetOptionalChildXmlValByName(&m_iCriticalModifierChange, L"iCriticalModifierChange");
 	pXML->GetOptionalChildXmlValByName(&m_iEnduranceChange, L"iEnduranceChange");
 	pXML->GetOptionalChildXmlValByName(&m_iPoisonProbabilityModifierChange, L"iPoisonProbabilityModifierChange");
 
@@ -2671,7 +2592,6 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_bRemoveStampede, L"bRemoveStampede");
 	pXML->GetOptionalChildXmlValByName(&m_bOnslaughtChange, L"bOnslaughtChange");
 	pXML->GetOptionalChildXmlValByName(&m_bParalyze, L"bParalyze");
-	pXML->GetOptionalChildXmlValByName(&m_bCritical, L"bCritical");
 	pXML->GetOptionalChildXmlValByName(&m_bAttackOnlyCitiesAdd, L"bAttackOnlyCitiesAdd");
 	pXML->GetOptionalChildXmlValByName(&m_bAttackOnlyCitiesSubtract, L"bAttackOnlyCitiesSubtract");
 	pXML->GetOptionalChildXmlValByName(&m_bIgnoreNoEntryLevelAdd, L"bIgnoreNoEntryLevelAdd");
@@ -2717,9 +2637,6 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 
 	// int vector utilizing pairing without delayed resolution
 	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aFlankingStrengthbyUnitCombatTypeChange, L"FlankingStrikesbyUnitCombatChange");
-
-	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aCriticalVSUnitCombatChangeTypes, L"CriticalVSUnitCombatChangeTypes");
-
 
 	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aTrapDisableUnitCombatTypes, L"TrapDisableUnitCombatTypes");
 
@@ -3000,28 +2917,7 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	if(pXML->TryMoveToXmlFirstChild(L"DistanceAttackCommunicabilityTypeChanges"))
-	{
-		int i = 0;
-		const int iNum = pXML->GetXmlChildrenNumber(L"DistanceAttackCommunicabilityTypeChange" );
-		m_aDistanceAttackCommunicabilityTypeChanges.resize(iNum);
-		if(pXML->TryMoveToXmlFirstChild())
-		{
-			if (pXML->TryMoveToXmlFirstOfSiblings(L"DistanceAttackCommunicabilityTypeChange"))
-			{
-				do
-				{
-					pXML->GetChildXmlValByName(szTextVal, L"PromotionLineType");
-					m_aDistanceAttackCommunicabilityTypeChanges[i].eAfflictionLine = (PromotionLineTypes)pXML->GetInfoClass(szTextVal);
-					pXML->GetChildXmlValByName(&(m_aDistanceAttackCommunicabilityTypeChanges[i].iChange), L"iChange");
-					i++;
-				} while(pXML->TryMoveToXmlNextSibling(L"DistanceAttackCommunicabilityTypeChange"));
-			}
-			pXML->MoveToXmlParent();
-		}
-		pXML->MoveToXmlParent();
-	}
-		//TB Combat Mod End
+	//TB Combat Mod End
 	//pXML->SetOptionalVectorWithDelayedResolution(PromotionOverwrites, L"PromotionOverwrites");
 
 	return true;
@@ -3271,11 +3167,9 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 	if (m_iDynamicDefenseChange == iDefault) m_iDynamicDefenseChange = pClassInfo->m_iDynamicDefenseChange;
 	if (getStrengthChange() == iDefault) m_iStrengthChange = pClassInfo->getStrengthChange();
 	if (getLinePriority() == iDefault) m_iLinePriority = pClassInfo->getLinePriority();
-	if (getFortitudeChange() == iDefault) m_iFortitudeChange = pClassInfo->getFortitudeChange();
 	if (getDamageperTurn() == iDefault) m_iDamageperTurn = pClassInfo->getDamageperTurn();
 	if (getStrAdjperTurn() == iDefault) m_iStrAdjperTurn = pClassInfo->getStrAdjperTurn();
 	if (getWeakenperTurn() == iDefault) m_iWeakenperTurn = pClassInfo->getWeakenperTurn();
-	if (getCriticalModifierChange() == iDefault) m_iCriticalModifierChange = pClassInfo->getCriticalModifierChange();
 	if (getEnduranceChange() == iDefault) m_iEnduranceChange = pClassInfo->getEnduranceChange();
 	if (getPoisonProbabilityModifierChange() == iDefault) m_iPoisonProbabilityModifierChange = pClassInfo->getPoisonProbabilityModifierChange();
 
@@ -3335,7 +3229,6 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 	if (isRemoveStampede() == bDefault) m_bRemoveStampede = pClassInfo->isRemoveStampede();
 	if (isOnslaughtChange() == bDefault) m_bOnslaughtChange = pClassInfo->isOnslaughtChange();
 	if (isParalyze() == bDefault) m_bParalyze = pClassInfo->isParalyze();
-	if (isCritical() == bDefault) m_bCritical = pClassInfo->isCritical();
 	if (isAttackOnlyCitiesAdd() == bDefault) m_bAttackOnlyCitiesAdd = pClassInfo->isAttackOnlyCitiesAdd();
 	if (isAttackOnlyCitiesSubtract() == bDefault) m_bAttackOnlyCitiesSubtract = pClassInfo->isAttackOnlyCitiesSubtract();
 	if (isIgnoreNoEntryLevelAdd() == bDefault) m_bIgnoreNoEntryLevelAdd = pClassInfo->isIgnoreNoEntryLevelAdd();
@@ -3499,17 +3392,6 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 		}
 	}
 
-	if (getNumCriticalVSUnitCombatChangeTypes()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumCriticalVSUnitCombatChangeTypes(); i++)
-		{
-			UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
-			int iChange = pClassInfo->getCriticalVSUnitCombatChangeType(i);
-			m_aCriticalVSUnitCombatChangeTypes.push_back(std::make_pair(eUnitCombat, iChange));
-		}
-	}
-
-
 	if (getNumTrapDisableUnitCombatTypes()==0)
 	{
 		for (int i=0; i < pClassInfo->getNumTrapDisableUnitCombatTypes(); i++)
@@ -3636,10 +3518,6 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aVisibleImprovementRangeChanges, pClassInfo->m_aVisibleImprovementRangeChanges);
 	}
 
-	if (getNumDistanceAttackCommunicabilityTypeChanges() == 0)
-	{
-		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aDistanceAttackCommunicabilityTypeChanges, pClassInfo->m_aDistanceAttackCommunicabilityTypeChanges);
-	}
 	//TB Combat Mods End  TB SubCombat Mods end
 
 	if (isCanMovePeaks() == bDefault) m_bCanMovePeaks = pClassInfo->isCanMovePeaks();
@@ -3773,11 +3651,9 @@ void CvPromotionInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_iDynamicDefenseChange);
 	CheckSum(iSum, m_iStrengthChange);
 	CheckSum(iSum, m_iLinePriority);
-	CheckSum(iSum, m_iFortitudeChange);
 	CheckSum(iSum, m_iDamageperTurn);
 	CheckSum(iSum, m_iStrAdjperTurn);
 	CheckSum(iSum, m_iWeakenperTurn);
-	CheckSum(iSum, m_iCriticalModifierChange);
 	CheckSum(iSum, m_iEnduranceChange);
 	CheckSum(iSum, m_iPoisonProbabilityModifierChange);
 
@@ -3837,7 +3713,6 @@ void CvPromotionInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_bRemoveStampede);
 	CheckSum(iSum, m_bOnslaughtChange);
 	CheckSum(iSum, m_bParalyze);
-	CheckSum(iSum, m_bCritical);
 	CheckSum(iSum, m_bAttackOnlyCitiesAdd);
 	CheckSum(iSum, m_bAttackOnlyCitiesSubtract);
 	CheckSum(iSum, m_bIgnoreNoEntryLevelAdd);
@@ -3884,7 +3759,6 @@ void CvPromotionInfo::getCheckSum(uint32_t& iSum) const
 	CheckSumC(iSum, m_aiCategories);
 	// int vectors utilizing pairing without delayed resolution
 	CheckSumC(iSum, m_aFlankingStrengthbyUnitCombatTypeChange);
-	CheckSumC(iSum, m_aCriticalVSUnitCombatChangeTypes);
 	CheckSumC(iSum, m_aTrapDisableUnitCombatTypes);
 	CheckSumC(iSum, m_aTrapAvoidanceUnitCombatTypes);
 	CheckSumC(iSum, m_aTrapTriggerUnitCombatTypes);
@@ -3984,12 +3858,6 @@ void CvPromotionInfo::getCheckSum(uint32_t& iSum) const
 		CheckSum(iSum, m_aVisibleImprovementRangeChanges[i].iIntensity);
 	}
 
-	iNumElements = m_aDistanceAttackCommunicabilityTypeChanges.size();
-	for (int i = 0; i < iNumElements; ++i)
-	{
-		CheckSum(iSum, m_aDistanceAttackCommunicabilityTypeChanges[i].eAfflictionLine);
-		CheckSum(iSum, m_aDistanceAttackCommunicabilityTypeChanges[i].iChange);
-	}
 	//TB Combat Mods End  TB SubCombat Mod end
 }
 

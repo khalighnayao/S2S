@@ -199,8 +199,6 @@ public:
 	int getEnclose() const;
 	int getLunge() const;
 	int getDynamicDefense() const;
-	int getFortitude() const;
-	int getCriticalModifier() const;
 	int getEndurance() const;
 	int getPoisonProbabilityModifier() const;
 	int getCaptureProbabilityModifier() const;
@@ -265,10 +263,6 @@ public:
 	bool isSubCombatType(UnitCombatTypes e) const;
 	const std::vector<UnitCombatTypes>& getSubCombatTypes() const;
 
-	int getCureAfflictionType(int i) const;
-	int getNumCureAfflictionTypes() const;
-	bool isCureAfflictionType(int i) const;
-
 	int getHealAsType(int i) const;
 	int getNumHealAsTypes() const;
 	bool isHealAsType(int i) const;
@@ -324,11 +318,9 @@ public:
 	int getNumVisibleFeatureRangeChanges() const;
 	const InvisibleFeatureChanges& getVisibleFeatureRangeChange(int iIndex) const;
 
-	int getNumDistanceAttackCommunicabilityTypeChanges() const;
 	const InvisibleImprovementChanges& getVisibleImprovementRangeChange(int iIndex) const;
 
 	int getNumVisibleImprovementRangeChanges() const;
-	const AfflictionLineChanges& getDistanceAttackCommunicabilityTypeChange(int iIndex) const;
 
 	int getNumEnabledCivilizationTypes() const;
 	const EnabledCivilizations& getEnabledCivilizationType(int iIndex) const;
@@ -336,12 +328,6 @@ public:
 	int getNumFlankingStrikesbyUnitCombatTypes() const;
 	int getFlankingStrengthbyUnitCombatType(int iUnitCombat) const;
 	bool isFlankingStrikebyUnitCombatType(int iUnitCombat) const;
-
-	int getNumCriticalVSUnitCombatTypes() const;
-	int getCriticalVSUnitCombatType(int iUnitCombat) const;
-	bool isCriticalVSUnitCombatType(int iUnitCombat) const;
-	const UnitCombatModifierArray& getCriticalVSUnitCombatTypes() const;
-
 
 	int getNumTrapDisableUnitCombatTypes() const;
 	int getTrapDisableUnitCombatType(int iUnitCombat) const;
@@ -759,8 +745,6 @@ private:
 	int m_iEnclose;
 	int m_iLunge;
 	int m_iDynamicDefense;
-	int m_iFortitude;
-	int m_iCriticalModifier;
 	int m_iEndurance;
 	int m_iPoisonProbabilityModifier;
 	int m_iCaptureProbabilityModifier;
@@ -826,7 +810,6 @@ private:
 	bool m_bCanMergeSplit;
 
 	std::vector<UnitCombatTypes> m_aiSubCombatTypes;
-	std::vector<int> m_aiCureAfflictionTypes;
 	std::vector<int> m_aiHealAsTypes;
 	std::vector<TerrainTypes> m_vTerrainImpassableTypes;
 	std::vector<FeatureTypes> m_vFeatureImpassableTypes;
@@ -848,7 +831,6 @@ private:
 	std::vector<InvisibleImprovementChanges> m_aVisibleImprovementRangeChanges;
 	std::vector<EnabledCivilizations> m_aEnabledCivilizationTypes;
 	UnitCombatModifierArray m_aFlankingStrengthbyUnitCombatType;
-	UnitCombatModifierArray m_aCriticalVSUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapDisableUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapAvoidanceUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapTriggerUnitCombatTypes;

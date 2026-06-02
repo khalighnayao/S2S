@@ -68,8 +68,6 @@ CvUnitCombatInfo::CvUnitCombatInfo()
 	, m_iLungeChange(0)
 	, m_iDynamicDefenseChange(0)
 	, m_iStrengthChange(0)
-	, m_iFortitudeChange(0)
-	, m_iCriticalModifierChange(0)
 	, m_iEnduranceChange(0)
 	, m_iPoisonProbabilityModifierChange(0)
 	, m_iCaptureProbabilityModifierChange(0)
@@ -183,12 +181,6 @@ CvUnitCombatInfo::~CvUnitCombatInfo()
 	{
 		GC.removeDelayedResolution((int*)&(m_aFlankingStrengthbyUnitCombatTypeChange[i]));
 	}
-
-	for (int i=0; i<(int)m_aCriticalVSUnitCombatTypeChange.size(); i++)
-	{
-		GC.removeDelayedResolution((int*)&(m_aCriticalVSUnitCombatTypeChange[i]));
-	}
-
 
 	for (int i=0; i<(int)m_aTrapAvoidanceUnitCombatTypes.size(); i++)
 	{
@@ -488,17 +480,6 @@ int CvUnitCombatInfo::getDynamicDefenseChange() const
 int CvUnitCombatInfo::getStrengthChange() const
 {
 	return m_iStrengthChange;
-}
-
-int CvUnitCombatInfo::getFortitudeChange() const
-{
-	return m_iFortitudeChange;
-}
-
-
-int CvUnitCombatInfo::getCriticalModifierChange() const
-{
-	return m_iCriticalModifierChange;
 }
 
 int CvUnitCombatInfo::getEnduranceChange() const
@@ -1313,18 +1294,6 @@ const UnitCombatModifier& CvUnitCombatInfo::getFlankingStrengthbyUnitCombatTypeC
 	return m_aFlankingStrengthbyUnitCombatTypeChange[iUnitCombat];
 }
 
-int CvUnitCombatInfo::getNumCriticalVSUnitCombatTypesChange() const
-{
-	return (int)m_aCriticalVSUnitCombatTypeChange.size();
-}
-
-const UnitCombatModifier& CvUnitCombatInfo::getCriticalVSUnitCombatTypeChange(int iUnitCombat) const
-{
-	FASSERT_BOUNDS(0, getNumCriticalVSUnitCombatTypesChange(), iUnitCombat);
-	return m_aCriticalVSUnitCombatTypeChange[iUnitCombat];
-}
-
-
 int CvUnitCombatInfo::getNumTrapAvoidanceUnitCombatTypes() const
 {
 	return (int)m_aTrapAvoidanceUnitCombatTypes.size();
@@ -1527,8 +1496,6 @@ bool CvUnitCombatInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_iLungeChange, L"iLungeChange");
 	pXML->GetOptionalChildXmlValByName(&m_iDynamicDefenseChange, L"iDynamicDefenseChange");
 	pXML->GetOptionalChildXmlValByName(&m_iStrengthChange, L"iStrengthChange");
-	pXML->GetOptionalChildXmlValByName(&m_iFortitudeChange, L"iFortitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCriticalModifierChange, L"iCriticalModifierChange");
 	pXML->GetOptionalChildXmlValByName(&m_iEnduranceChange, L"iEnduranceChange");
 	pXML->GetOptionalChildXmlValByName(&m_iPoisonProbabilityModifierChange, L"iPoisonProbabilityModifierChange");
 	pXML->GetOptionalChildXmlValByName(&m_iCaptureProbabilityModifierChange, L"iCaptureProbabilityModifierChange");
@@ -1980,31 +1947,6 @@ bool CvUnitCombatInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	if(pXML->TryMoveToXmlFirstChild(L"CriticalVSUnitCombatTypesChanges"))
-	{
-		int i = 0;
-		const int iNum = pXML->GetXmlChildrenNumber(L"CriticalVSUnitCombatTypesChange" );
-		m_aCriticalVSUnitCombatTypeChange.resize(iNum); // Important to keep the delayed resolution pointers correct
-
-		if(pXML->TryMoveToXmlFirstChild())
-		{
-
-			if (pXML->TryMoveToXmlFirstOfSiblings(L"CriticalVSUnitCombatTypesChange"))
-			{
-				do
-				{
-					pXML->GetChildXmlValByName(szTextVal, L"UnitCombatType");
-					pXML->GetChildXmlValByName(&(m_aCriticalVSUnitCombatTypeChange[i].iModifier), L"iModifier");
-					GC.addDelayedResolution((int*)&(m_aCriticalVSUnitCombatTypeChange[i].eUnitCombat), szTextVal);
-					i++;
-				} while(pXML->TryMoveToXmlNextSibling(L"CriticalVSUnitCombatTypesChange"));
-			}
-			pXML->MoveToXmlParent();
-		}
-		pXML->MoveToXmlParent();
-	}
-
-
 	if(pXML->TryMoveToXmlFirstChild(L"TrapAvoidanceUnitCombatTypes"))
 	{
 		int i = 0;
@@ -2337,8 +2279,6 @@ void CvUnitCombatInfo::copyNonDefaults(CvUnitCombatInfo* pClassInfo)
 	if (m_iLungeChange == iDefault) m_iLungeChange = pClassInfo->m_iLungeChange;
 	if (m_iDynamicDefenseChange == iDefault) m_iDynamicDefenseChange = pClassInfo->m_iDynamicDefenseChange;
 	if (getStrengthChange() == iDefault) m_iStrengthChange = pClassInfo->getStrengthChange();
-	if (getFortitudeChange() == iDefault) m_iFortitudeChange = pClassInfo->getFortitudeChange();
-	if (getCriticalModifierChange() == iDefault) m_iCriticalModifierChange = pClassInfo->getCriticalModifierChange();
 	if (getEnduranceChange() == iDefault) m_iEnduranceChange = pClassInfo->getEnduranceChange();
 	if (getPoisonProbabilityModifierChange() == iDefault) m_iPoisonProbabilityModifierChange = pClassInfo->getPoisonProbabilityModifierChange();
 	if (getCaptureProbabilityModifierChange() == iDefault) m_iCaptureProbabilityModifierChange = pClassInfo->getCaptureProbabilityModifierChange();
@@ -2597,18 +2537,6 @@ void CvUnitCombatInfo::copyNonDefaults(CvUnitCombatInfo* pClassInfo)
 		}
 	}
 
-	if (getNumCriticalVSUnitCombatTypesChange() == 0)
-	{
-		const int iNum = pClassInfo->getNumCriticalVSUnitCombatTypesChange();
-		m_aCriticalVSUnitCombatTypeChange.resize(iNum);
-		for (int i=0; i<iNum; i++)
-		{
-			m_aCriticalVSUnitCombatTypeChange[i].iModifier = pClassInfo->m_aCriticalVSUnitCombatTypeChange[i].iModifier;
-			GC.copyNonDefaultDelayedResolution((int*)&(m_aCriticalVSUnitCombatTypeChange[i].eUnitCombat), (int*)&(pClassInfo->m_aCriticalVSUnitCombatTypeChange[i].eUnitCombat));
-		}
-	}
-
-
 	if (getNumTrapAvoidanceUnitCombatTypes() == 0)
 	{
 		const int iNum = pClassInfo->getNumTrapAvoidanceUnitCombatTypes();
@@ -2734,8 +2662,6 @@ void CvUnitCombatInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_iLungeChange);
 	CheckSum(iSum, m_iDynamicDefenseChange);
 	CheckSum(iSum, m_iStrengthChange);
-	CheckSum(iSum, m_iFortitudeChange);
-	CheckSum(iSum, m_iCriticalModifierChange);
 	CheckSum(iSum, m_iEnduranceChange);
 	CheckSum(iSum, m_iPoisonProbabilityModifierChange);
 	CheckSum(iSum, m_iCaptureProbabilityModifierChange);
@@ -2903,14 +2829,6 @@ void CvUnitCombatInfo::getCheckSum(uint32_t& iSum) const
 		CheckSum(iSum, m_aFlankingStrengthbyUnitCombatTypeChange[i].eUnitCombat);
 		CheckSum(iSum, m_aFlankingStrengthbyUnitCombatTypeChange[i].iModifier);
 	}
-
-	iNumElements = m_aCriticalVSUnitCombatTypeChange.size();
-	for (int i = 0; i < iNumElements; ++i)
-	{
-		CheckSum(iSum, m_aCriticalVSUnitCombatTypeChange[i].eUnitCombat);
-		CheckSum(iSum, m_aCriticalVSUnitCombatTypeChange[i].iModifier);
-	}
-
 
 	iNumElements = m_aTrapAvoidanceUnitCombatTypes.size();
 	for (int i = 0; i < iNumElements; ++i)

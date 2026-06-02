@@ -19,7 +19,6 @@
 #include "CvBonusInfo.h"
 #include "CvPromotionLineInfo.h"
 
-
 //TB Promotion Line Info
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
@@ -32,8 +31,6 @@ CvPromotionLineInfo::CvPromotionLineInfo() :
 									m_ePrereqTech(NO_TECH),
 									m_eObsoleteTech(NO_TECH),
 									m_ePropertyType(NO_PROPERTY),
-									
-									m_bCritical(false),
 									m_bNoSpreadonBattle(false),
 									m_bNoSpreadUnitProximity(false),
 									m_bNoSpreadUnittoCity(false),
@@ -43,11 +40,9 @@ CvPromotionLineInfo::CvPromotionLineInfo() :
 {
 }
 
-
 CvPromotionLineInfo::~CvPromotionLineInfo()
 {
 }
-
 
 bool CvPromotionLineInfo::read(CvXMLLoadUtility* pXML)
 {
@@ -66,7 +61,6 @@ bool CvPromotionLineInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"PropertyType");
 	m_ePropertyType = (PropertyTypes) pXML->GetInfoClass(szTextVal);
 
-	pXML->GetOptionalChildXmlValByName(&m_bCritical, L"bCritical");
 	pXML->GetOptionalChildXmlValByName(&m_bNoSpreadonBattle, L"bNoSpreadonBattle");
 	pXML->GetOptionalChildXmlValByName(&m_bNoSpreadUnitProximity, L"bNoSpreadUnitProximity");
 	pXML->GetOptionalChildXmlValByName(&m_bNoSpreadUnittoCity, L"bNoSpreadUnittoCity");
@@ -80,22 +74,16 @@ bool CvPromotionLineInfo::read(CvXMLLoadUtility* pXML)
 	pXML->SetOptionalVector(&m_aiNotOnDomainTypes, L"NotOnDomainTypes");
 	pXML->SetOptionalVector(&m_aiOnGameOptions, L"OnGameOptions");
 	pXML->SetOptionalVector(&m_aiNotOnGameOptions, L"NotOnGameOptions");
-	pXML->SetOptionalVector(&m_aiCriticalOriginCombatClassTypes, L"CriticalOriginCombatClassTypes");
 
 	// int vector utilizing pairing without delayed resolution
 	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aUnitCombatContractChanceChanges, L"UnitCombatContractChanceChanges");
 
-	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aUnitCombatOvercomeChanges, L"UnitCombatOvercomeChanges");
-
 	pXML->SetOptionalPairVector<TechModifierArray, TechTypes, int>(&m_aTechContractChanceChanges, L"TechContractChanceChanges");
-
-	pXML->SetOptionalPairVector<TechModifierArray, TechTypes, int>(&m_aTechOvercomeChanges, L"TechOvercomeChanges");
 
 	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
 
 	return true;
 }
-
 
 void CvPromotionLineInfo::copyNonDefaults(const CvPromotionLineInfo* pClassInfo)
 {
@@ -109,7 +97,6 @@ void CvPromotionLineInfo::copyNonDefaults(const CvPromotionLineInfo* pClassInfo)
 	if (getPrereqTech() == NO_TECH) m_ePrereqTech = pClassInfo->getPrereqTech();
 	if (getObsoleteTech() == NO_TECH) m_eObsoleteTech = pClassInfo->getObsoleteTech();
 
-	if (isCritical() == bDefault) m_bCritical = pClassInfo->isCritical();
 	if (isNoSpreadonBattle() == bDefault) m_bNoSpreadonBattle = pClassInfo->isNoSpreadonBattle();
 	if (isNoSpreadUnitProximity() == bDefault) m_bNoSpreadUnitProximity = pClassInfo->isNoSpreadUnitProximity();
 	if (isNoSpreadUnittoCity() == bDefault) m_bNoSpreadUnittoCity = pClassInfo->isNoSpreadUnittoCity();
@@ -165,15 +152,6 @@ void CvPromotionLineInfo::copyNonDefaults(const CvPromotionLineInfo* pClassInfo)
 		}
 	}
 
-	if (getNumCriticalOriginCombatClassTypes() == 0)
-	{
-		m_aiCriticalOriginCombatClassTypes.clear();
-		for ( int i = 0; i < pClassInfo->getNumCriticalOriginCombatClassTypes(); i++)
-		{
-			m_aiCriticalOriginCombatClassTypes.push_back(pClassInfo->getCriticalOriginCombatClassType(i));
-		}
-	}
-
 	// int vector utilizing pairing without delayed resolution
 	if (getNumUnitCombatContractChanceChanges()==0)
 	{
@@ -182,16 +160,6 @@ void CvPromotionLineInfo::copyNonDefaults(const CvPromotionLineInfo* pClassInfo)
 			const UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
 			const int iChange = pClassInfo->getUnitCombatContractChanceChange(i);
 			m_aUnitCombatContractChanceChanges.push_back(std::make_pair(eUnitCombat, iChange));
-		}
-	}
-
-	if (getNumUnitCombatOvercomeChanges()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumUnitCombatOvercomeChanges(); i++)
-		{
-			const UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
-			const int iChange = pClassInfo->getUnitCombatOvercomeChange(i);
-			m_aUnitCombatOvercomeChanges.push_back(std::make_pair(eUnitCombat, iChange));
 		}
 	}
 
@@ -205,26 +173,14 @@ void CvPromotionLineInfo::copyNonDefaults(const CvPromotionLineInfo* pClassInfo)
 		}
 	}
 
-	if (getNumTechOvercomeChanges()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumTechOvercomeChanges(); i++)
-		{
-			const TechTypes eTech = ((TechTypes)i);
-			const int iChange = pClassInfo->getTechOvercomeChange(i);
-			m_aTechOvercomeChanges.push_back(std::make_pair(eTech, iChange));
-		}
-	}
-
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
 
 }
-
 
 void CvPromotionLineInfo::getCheckSum(uint32_t& iSum) const
 {
 	CheckSum(iSum, m_ePrereqTech);
 	CheckSum(iSum, m_eObsoleteTech);
-	CheckSum(iSum, m_bCritical);
 	CheckSum(iSum, m_bNoSpreadonBattle);
 	CheckSum(iSum, m_bNoSpreadUnitProximity);
 	CheckSum(iSum, m_bNoSpreadUnittoCity);
@@ -239,14 +195,10 @@ void CvPromotionLineInfo::getCheckSum(uint32_t& iSum) const
 	CheckSumC(iSum, m_aiNotOnDomainTypes);
 	CheckSumC(iSum, m_aiOnGameOptions);
 	CheckSumC(iSum, m_aiNotOnGameOptions);
-	CheckSumC(iSum, m_aiCriticalOriginCombatClassTypes);
 	// int vector utilizing pairing without delayed resolution
 	CheckSumC(iSum, m_aUnitCombatContractChanceChanges);
-	CheckSumC(iSum, m_aUnitCombatOvercomeChanges);
 	CheckSumC(iSum, m_aTechContractChanceChanges);
-	CheckSumC(iSum, m_aTechOvercomeChanges);
 }
-
 
 void CvPromotionLineInfo::doPostLoadCaching(uint32_t iThis)
 {
@@ -271,96 +223,65 @@ void CvPromotionLineInfo::doPostLoadCaching(uint32_t iThis)
 	}
 }
 
-
 TechTypes CvPromotionLineInfo::getObsoleteTech() const
 {
 	return m_eObsoleteTech;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-bool CvPromotionLineInfo::isCritical() const
-{
-	return m_bCritical;
-}
-
 
 bool CvPromotionLineInfo::isNoSpreadonBattle() const
 {
 	return m_bNoSpreadonBattle;
 }
 
-
 bool CvPromotionLineInfo::isNoSpreadUnitProximity() const
 {
 	return m_bNoSpreadUnitProximity;
 }
-
 
 bool CvPromotionLineInfo::isNoSpreadUnittoCity() const
 {
 	return m_bNoSpreadUnittoCity;
 }
 
-
 bool CvPromotionLineInfo::isNoSpreadCitytoUnit() const
 {
 	return m_bNoSpreadCitytoUnit;
 }
-
 
 bool CvPromotionLineInfo::isBuildUp() const
 {
 	return m_bBuildUp;
 }
 
-
 bool CvPromotionLineInfo::isPoison() const
 {
 	return m_bPoison;
 }
-
 
 PropertyTypes CvPromotionLineInfo::getPropertyType() const
 {
 	return m_ePropertyType;
 }
 
-
 int CvPromotionLineInfo::getUnitCombatPrereqType(int i) const
 {
 	return m_aiUnitCombatPrereqTypes[i];
 }
-
 
 int CvPromotionLineInfo::getNumUnitCombatPrereqTypes() const
 {
 	return (int)m_aiUnitCombatPrereqTypes.size();
 }
 
-
 int CvPromotionLineInfo::getNotOnUnitCombatType(int i) const
 {
 	return m_aiNotOnUnitCombatTypes[i];
 }
 
-
 int CvPromotionLineInfo::getNumNotOnUnitCombatTypes() const
 {
 	return (int)m_aiNotOnUnitCombatTypes.size();
 }
-
 
 bool CvPromotionLineInfo::isNotOnUnitCombatType(int i) const
 {
@@ -368,18 +289,15 @@ bool CvPromotionLineInfo::isNotOnUnitCombatType(int i) const
 	return algo::any_of_equal(m_aiNotOnUnitCombatTypes, i);
 }
 
-
 int CvPromotionLineInfo::getNotOnDomainType(int i) const
 {
 	return m_aiNotOnDomainTypes[i];
 }
 
-
 int CvPromotionLineInfo::getNumNotOnDomainTypes() const
 {
 	return (int)m_aiNotOnDomainTypes.size();
 }
-
 
 bool CvPromotionLineInfo::isNotOnDomainType(int i) const
 {
@@ -387,18 +305,15 @@ bool CvPromotionLineInfo::isNotOnDomainType(int i) const
 	return algo::any_of_equal(m_aiNotOnDomainTypes, i);
 }
 
-
 int CvPromotionLineInfo::getOnGameOption(int i) const
 {
 	return m_aiOnGameOptions[i];
 }
 
-
 int CvPromotionLineInfo::getNumOnGameOptions() const
 {
 	return (int)m_aiOnGameOptions.size();
 }
-
 
 bool CvPromotionLineInfo::isOnGameOption(int i) const
 {
@@ -406,18 +321,15 @@ bool CvPromotionLineInfo::isOnGameOption(int i) const
 	return algo::any_of_equal(m_aiOnGameOptions, i);
 }
 
-
 int CvPromotionLineInfo::getNotOnGameOption(int i) const
 {
 	return m_aiNotOnGameOptions[i];
 }
 
-
 int CvPromotionLineInfo::getNumNotOnGameOptions() const
 {
 	return (int)m_aiNotOnGameOptions.size();
 }
-
 
 bool CvPromotionLineInfo::isNotOnGameOption(int i) const
 {
@@ -425,50 +337,26 @@ bool CvPromotionLineInfo::isNotOnGameOption(int i) const
 	return algo::any_of_equal(m_aiNotOnGameOptions, i);
 }
 
-
 int CvPromotionLineInfo::getCategory(int i) const
 {
 	return m_aiCategories[i];
 }
-
 
 int CvPromotionLineInfo::getNumCategories() const
 {
 	return (int)m_aiCategories.size();
 }
 
-
 bool CvPromotionLineInfo::isCategory(int i) const
 {
 	return algo::any_of_equal(m_aiCategories, i);
 }
-
-
-int CvPromotionLineInfo::getCriticalOriginCombatClassType(int i) const
-{
-	return m_aiCriticalOriginCombatClassTypes[i];
-}
-
-
-int CvPromotionLineInfo::getNumCriticalOriginCombatClassTypes() const
-{
-	return (int)m_aiCriticalOriginCombatClassTypes.size();
-}
-
-
-bool CvPromotionLineInfo::isCriticalOriginCombatClassType(int i) const
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), i);
-	return algo::any_of_equal(m_aiCriticalOriginCombatClassTypes, i);
-}
-
 
 // int vector utilizing pairing without delayed resolution
 int CvPromotionLineInfo::getNumUnitCombatContractChanceChanges() const
 {
 	return m_aUnitCombatContractChanceChanges.size();
 }
-
 
 int CvPromotionLineInfo::getUnitCombatContractChanceChange(int iUnitCombat) const
 {
@@ -483,7 +371,6 @@ int CvPromotionLineInfo::getUnitCombatContractChanceChange(int iUnitCombat) cons
 	return 0;
 }
 
-
 bool CvPromotionLineInfo::isUnitCombatContractChanceChange(int iUnitCombat) const
 {
 	PROFILE_EXTRA_FUNC();
@@ -497,46 +384,10 @@ bool CvPromotionLineInfo::isUnitCombatContractChanceChange(int iUnitCombat) cons
 	return false;
 }
 
-
-int CvPromotionLineInfo::getNumUnitCombatOvercomeChanges() const
-{
-	return m_aUnitCombatOvercomeChanges.size();
-}
-
-
-int CvPromotionLineInfo::getUnitCombatOvercomeChange(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aUnitCombatOvercomeChanges.begin(); it != m_aUnitCombatOvercomeChanges.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-bool CvPromotionLineInfo::isUnitCombatOvercomeChange(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aUnitCombatOvercomeChanges.begin(); it != m_aUnitCombatOvercomeChanges.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-
 int CvPromotionLineInfo::getNumTechContractChanceChanges() const
 {
 	return m_aTechContractChanceChanges.size();
 }
-
 
 int CvPromotionLineInfo::getTechContractChanceChange(int iTech) const
 {
@@ -551,7 +402,6 @@ int CvPromotionLineInfo::getTechContractChanceChange(int iTech) const
 	return 0;
 }
 
-
 bool CvPromotionLineInfo::isTechContractChanceChange(int iTech) const
 {
 	PROFILE_EXTRA_FUNC();
@@ -565,52 +415,15 @@ bool CvPromotionLineInfo::isTechContractChanceChange(int iTech) const
 	return false;
 }
 
-
-int CvPromotionLineInfo::getNumTechOvercomeChanges() const
-{
-	return m_aTechOvercomeChanges.size();
-}
-
-
-int CvPromotionLineInfo::getTechOvercomeChange(int iTech) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (TechModifierArray::const_iterator it = m_aTechOvercomeChanges.begin(); it != m_aTechOvercomeChanges.end(); ++it)
-	{
-		if ((*it).first == (TechTypes)iTech)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-bool CvPromotionLineInfo::isTechOvercomeChange(int iTech) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (TechModifierArray::const_iterator it = m_aTechOvercomeChanges.begin(); it != m_aTechOvercomeChanges.end(); ++it)
-	{
-		if ((*it).first == (TechTypes)iTech)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-
 int CvPromotionLineInfo::getPromotion(int i) const
 {
 	return m_aiPromotions[i];
 }
 
-
 int CvPromotionLineInfo::getNumPromotions() const
 {
 	return (int)m_aiPromotions.size();
 }
-
 
 bool CvPromotionLineInfo::isPromotion(int i) const
 {
@@ -618,18 +431,15 @@ bool CvPromotionLineInfo::isPromotion(int i) const
 	return algo::any_of_equal(m_aiPromotions, i);
 }
 
-
 int CvPromotionLineInfo::getBuilding(int i) const
 {
 	return m_aiBuildings[i];
 }
 
-
 int CvPromotionLineInfo::getNumBuildings() const
 {
 	return (int)m_aiBuildings.size();
 }
-
 
 bool CvPromotionLineInfo::isBuilding(int i) const
 {

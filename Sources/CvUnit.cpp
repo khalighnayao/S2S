@@ -48,37 +48,18 @@ static bool		 g_bUseDummyEntities = false;
 
 //	static buffers allocated once and used during read and write only
 int*	CvUnit::g_paiTempPromotionFreeCount = NULL;
-int*	CvUnit::g_paiTempAfflictOnAttackCount = NULL;
-int*	CvUnit::g_paiTempCureAfflictionCount = NULL;
-int*	CvUnit::g_paiTempCureAfflictionTypeCount = NULL;
-int*	CvUnit::g_paiTempAfflictionLineCount = NULL;
-int*	CvUnit::g_paiTempAfflictionTurnCount = NULL;
-int*	CvUnit::g_paiTempAfflictionTurnTypeCount = NULL;
-int*	CvUnit::g_paiTempAfflictionHitCount = NULL;
-int*	CvUnit::g_paiTempAfflictionTolerance = NULL;
 int*	CvUnit::g_paiTempTrapImmunityUnitCombatCount = NULL;
 int*	CvUnit::g_paiTempTargetUnitCombatCount = NULL;
 int*	CvUnit::g_paiTempExtraTrapDisableUnitCombatType = NULL;
 int*	CvUnit::g_paiTempExtraTrapAvoidanceUnitCombatType = NULL;
 int*	CvUnit::g_paiTempExtraTrapTriggerUnitCombatType = NULL;
-int*	CvUnit::g_paiTempAfflictionTypeTolerance = NULL;
-int*	CvUnit::g_paiTempFortitudeModifierTypeAmount = NULL;
-int*	CvUnit::g_paiTempFortitudeModifierAmount = NULL;
 int*	CvUnit::g_paiTempTrapSetWithPromotionCount = NULL;
 int*	CvUnit::g_paiTempPromotionFromTraitCount = NULL;
-int*	CvUnit::g_paiTempAfflictOnAttackTypeProbability = NULL;
-int*	CvUnit::g_paiTempAfflictOnAttackTypeCount = NULL;
-int*	CvUnit::g_paiTempAfflictOnAttackTypeImmediateCount = NULL;
-int*	CvUnit::g_paiTempAfflictOnAttackTypeMeleeCount = NULL;
-int*	CvUnit::g_paiTempAfflictOnAttackTypeDistanceCount = NULL;
-int*	CvUnit::g_paiTempAfflictOnAttackTypeAttemptedCount = NULL;
-int*	CvUnit::g_paiTempDistanceAttackCommunicability = NULL;
 bool*	CvUnit::g_pabTempValidBuildUp = NULL;
 int*	CvUnit::g_paiTempExtraUnitCombatModifier = NULL;
 bool*	CvUnit::g_pabTempHasPromotion = NULL;
 bool*	CvUnit::g_pabTempHasUnitCombat = NULL;
 int*	CvUnit::g_paiTempExtraFlankingStrengthbyUnitCombatType = NULL;
-int*	CvUnit::g_paiTempExtraCriticalVSUnitCombatType = NULL;
 int*	CvUnit::g_paiTempHealUnitCombatTypeVolume = NULL;
 int*	CvUnit::g_paiTempHealUnitCombatTypeAdjacentVolume = NULL;
 int*	CvUnit::g_paiTempHealAsDamage = NULL;
@@ -151,37 +132,18 @@ m_Properties(this)
 	{
 		//	Allocate static buffers to be used during read and write
 		g_paiTempPromotionFreeCount = new int[GC.getNumPromotionInfos()];
-		g_paiTempAfflictOnAttackCount = new int[GC.getNumPromotionInfos()];
-		g_paiTempCureAfflictionCount = new int[GC.getNumPromotionInfos()];
-		g_paiTempCureAfflictionTypeCount = new int[GC.getNumPromotionLineInfos()];
-		g_paiTempAfflictionLineCount = new int[GC.getNumPromotionLineInfos()];
-		g_paiTempAfflictionTurnCount = new int[GC.getNumPromotionInfos()];
-		g_paiTempAfflictionTurnTypeCount = new int[GC.getNumPromotionLineInfos()];
-		g_paiTempAfflictionHitCount = new int[GC.getNumPromotionInfos()];
-		g_paiTempAfflictionTolerance = new int[GC.getNumPromotionInfos()];
 		g_paiTempTrapImmunityUnitCombatCount = new int[GC.getNumUnitCombatInfos()]();
 		g_paiTempTargetUnitCombatCount = new int[GC.getNumUnitCombatInfos()]();
 		g_paiTempExtraTrapDisableUnitCombatType = new int[GC.getNumUnitCombatInfos()]();
 		g_paiTempExtraTrapAvoidanceUnitCombatType = new int[GC.getNumUnitCombatInfos()]();
 		g_paiTempExtraTrapTriggerUnitCombatType = new int[GC.getNumUnitCombatInfos()]();
-		g_paiTempAfflictionTypeTolerance = new int[GC.getNumPromotionLineInfos()];
-		g_paiTempFortitudeModifierTypeAmount = new int[GC.getNumPromotionInfos()];
-		g_paiTempFortitudeModifierAmount = new int[GC.getNumPromotionLineInfos()];
 		g_paiTempTrapSetWithPromotionCount = new int[GC.getNumPromotionInfos()];
 		g_paiTempPromotionFromTraitCount = new int [GC.getNumPromotionInfos()];
-		g_paiTempAfflictOnAttackTypeProbability = new int[GC.getNumPromotionLineInfos()];
-		g_paiTempAfflictOnAttackTypeCount = new int[GC.getNumPromotionLineInfos()];
-		g_paiTempAfflictOnAttackTypeImmediateCount = new int[GC.getNumPromotionLineInfos()];
-		g_paiTempAfflictOnAttackTypeMeleeCount = new int[GC.getNumPromotionLineInfos()];
-		g_paiTempAfflictOnAttackTypeDistanceCount = new int[GC.getNumPromotionLineInfos()];
-		g_paiTempAfflictOnAttackTypeAttemptedCount = new int[GC.getNumPromotionLineInfos()];
-		g_paiTempDistanceAttackCommunicability = new int[GC.getNumPromotionLineInfos()];
 		g_pabTempValidBuildUp = new bool[GC.getNumPromotionLineInfos()];
 		g_paiTempExtraUnitCombatModifier = new int[GC.getNumUnitCombatInfos()];
 		g_pabTempHasPromotion = new bool[GC.getNumPromotionInfos()];
 		g_pabTempHasUnitCombat = new bool[GC.getNumUnitCombatInfos()];
 		g_paiTempExtraFlankingStrengthbyUnitCombatType = new int[GC.getNumUnitCombatInfos()];
-		g_paiTempExtraCriticalVSUnitCombatType = new int[GC.getNumUnitCombatInfos()];
 		g_paiTempHealUnitCombatTypeVolume = new int[GC.getNumUnitCombatInfos()]();
 		g_paiTempHealUnitCombatTypeAdjacentVolume = new int[GC.getNumUnitCombatInfos()]();
 		g_paiTempHealAsDamage = new int[GC.getNumUnitCombatInfos()];
@@ -590,8 +552,6 @@ void CvUnit::reset(int iID, UnitTypes eUnit, PlayerTypes eOwner, bool bConstruct
 	m_iSMStrength = 0;
 	m_iAnimalIgnoresBordersCount = 0;
 	m_iOnslaughtCount = 0;
-	m_iExtraFortitude = 0;
-	m_iExtraCriticalModifier = 0;
 	m_iExtraEndurance = 0;
 	m_iExtraPoisonProbabilityModifier = 0;
 	m_iRetrainsAvailable = 0;
@@ -900,8 +860,6 @@ CvUnit& CvUnit::operator=(const CvUnit& other)
 	m_iSMStrength = other.m_iSMStrength;
 	m_iAnimalIgnoresBordersCount = other.m_iAnimalIgnoresBordersCount;
 	m_iOnslaughtCount = other.m_iOnslaughtCount;
-	m_iExtraFortitude = other.m_iExtraFortitude;
-	m_iExtraCriticalModifier = other.m_iExtraCriticalModifier;
 	m_iExtraEndurance = other.m_iExtraEndurance;
 	m_iExtraPoisonProbabilityModifier = other.m_iExtraPoisonProbabilityModifier;
 	m_iRetrainsAvailable = other.m_iRetrainsAvailable;
@@ -13218,11 +13176,6 @@ bool CvUnit::canOnslaught() const
 
 
 
-int CvUnit::criticalModifierTotal() const
-{
-	return m_pUnitInfo->getCriticalModifier() + getExtraCriticalModifier();
-}
-
 int CvUnit::enduranceTotal() const
 {
 	return m_pUnitInfo->getEndurance() + getExtraEndurance();
@@ -16128,60 +16081,6 @@ void CvUnit::changeOnslaughtCount(int iChange)
 
 
 
-int CvUnit::getExtraFortitude(bool bIgnoreCommanders, bool bIgnoreCommodores) const
-{
-	if (!bIgnoreCommanders && !isCommander())
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return m_iExtraFortitude + pCommander->m_iExtraFortitude;
-		}
-	}
-	if (!bIgnoreCommodores && !isCommodore())
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return m_iExtraFortitude + pCommodore->m_iExtraFortitude;
-    		}
-    	}
-	return m_iExtraFortitude;
-}
-
-void CvUnit::changeExtraFortitude(int iChange)
-{
-	m_iExtraFortitude += iChange;
-	FASSERT_NOT_NEGATIVE(m_iExtraFortitude);
-}
-
-int CvUnit::getExtraCriticalModifier(bool bIgnoreCommanders, bool bIgnoreCommodores) const
-{
-	if (!bIgnoreCommanders && !isCommander())
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return m_iExtraCriticalModifier + pCommander->m_iExtraCriticalModifier;
-		}
-	}
-	if (!bIgnoreCommodores && !isCommodore())
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return m_iExtraCriticalModifier + pCommodore->m_iExtraCriticalModifier;
-    		}
-    	}
-	return m_iExtraCriticalModifier;
-}
-
-void CvUnit::changeExtraCriticalModifier(int iChange)
-{
-	m_iExtraCriticalModifier += iChange;
-	FASSERT_NOT_NEGATIVE(m_iExtraCriticalModifier);
-}
-
 int CvUnit::getExtraEndurance(bool bIgnoreCommanders, bool bIgnoreCommodores) const
 {
 	if (!bIgnoreCommanders && !isCommander())
@@ -17813,7 +17712,7 @@ bool CvUnit::canAcquirePromotion(PromotionTypes ePromotion, bool bIgnoreHas, boo
 	//TB SubCombat Mod End
 
 	// Must have the next less promotionline priority unless this is an affliction, equipment, or BuildUp or Status.
-	if (ePromotionLine != NO_PROMOTIONLINE && !bAfflict && !bEquip && !promo.isCritical() && !bForBuildUp && !bForStatus && promo.getLinePriority() > 1)
+	if (ePromotionLine != NO_PROMOTIONLINE && !bAfflict && !bEquip && !bForBuildUp && !bForStatus && promo.getLinePriority() > 1)
 	{
 		const CvPromotionLineInfo& promoLine = GC.getPromotionLineInfo(ePromotionLine);
 		const int numPromotions = promoLine.getNumPromotions();
@@ -18542,9 +18441,6 @@ void CvUnit::processUnitCombat(UnitCombatTypes eIndex, bool bAdding, bool bByPro
 	changeExtraLunge(kUnitCombat.getLungeChange() * iChange);//no merge/split
 	changeExtraDynamicDefense(kUnitCombat.getDynamicDefenseChange() * iChange);//no merge/split
 	changeExtraStrength(kUnitCombat.getStrengthChange() * iChange);//no merge/split (but included into merge/split mult)
-	changeExtraFortitude(kUnitCombat.getFortitudeChange() * iChange);//no merge/split
-
-	changeExtraCriticalModifier(kUnitCombat.getCriticalModifierChange() * iChange);//no merge/split
 	changeExtraEndurance(kUnitCombat.getEnduranceChange() * iChange);//no merge/split
 	changeExtraPoisonProbabilityModifier(kUnitCombat.getPoisonProbabilityModifierChange() * iChange);//no merge/split
 	changeExtraCaptureProbabilityModifier(kUnitCombat.getCaptureProbabilityModifierChange() * iChange);//no merge/split
@@ -18746,12 +18642,6 @@ void CvUnit::processUnitCombat(UnitCombatTypes eIndex, bool bAdding, bool bByPro
 	{
 		changeExtraFlankingStrengthbyUnitCombatType(((UnitCombatTypes)kUnitCombat.getFlankingStrengthbyUnitCombatTypeChange(iI).eUnitCombat), kUnitCombat.getFlankingStrengthbyUnitCombatTypeChange(iI).iModifier * iChange);
 	}
-
-	for (iI = 0; iI < kUnitCombat.getNumCriticalVSUnitCombatTypesChange(); iI++)
-	{
-		changeExtraCriticalVSUnitCombatType(((UnitCombatTypes)kUnitCombat.getCriticalVSUnitCombatTypeChange(iI).eUnitCombat), kUnitCombat.getCriticalVSUnitCombatTypeChange(iI).iModifier * iChange);
-	}
-
 
 	for (iI = 0; iI < kUnitCombat.getNumTrapAvoidanceUnitCombatTypes(); iI++)
 	{
@@ -18992,9 +18882,6 @@ void CvUnit::processPromotion(PromotionTypes eIndex, bool bAdding, bool bInitial
 	}
 	changeAnimalIgnoresBordersCount(kPromotion.getAnimalIgnoresBordersChange() * iChange);
 	changeOnslaughtCount((kPromotion.isOnslaughtChange()) ? iChange : 0);
-	changeExtraFortitude(kPromotion.getFortitudeChange() * iChange);
-
-	changeExtraCriticalModifier(kPromotion.getCriticalModifierChange() * iChange);
 	changeExtraEndurance(kPromotion.getEnduranceChange() * iChange);
 	changeExtraPoisonProbabilityModifier(kPromotion.getPoisonProbabilityModifierChange() * iChange);
 
@@ -19236,7 +19123,6 @@ void CvUnit::processPromotion(PromotionTypes eIndex, bool bAdding, bool bInitial
 	{
 		changeExtraUnitCombatModifier(((UnitCombatTypes)iI), (kPromotion.getUnitCombatModifierPercent(iI) * iChange));
 		changeExtraFlankingStrengthbyUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getFlankingStrengthbyUnitCombatTypeChange(iI) * iChange));
-		changeExtraCriticalVSUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getCriticalVSUnitCombatChangeType(iI) * iChange));
 		changeExtraTrapDisableUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getTrapDisableUnitCombatType(iI) * iChange));
 		changeExtraTrapAvoidanceUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getTrapAvoidanceUnitCombatType(iI) * iChange));
 		changeExtraTrapTriggerUnitCombatType(((UnitCombatTypes)iI), (kPromotion.getTrapTriggerUnitCombatType(iI) * iChange));
@@ -19807,17 +19693,10 @@ void CvUnit::read(FDataStreamBase* pStream)
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraStrength);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iAnimalIgnoresBordersCount);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iOnslaughtCount);
-	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraFortitude);
 
 	// Read compressed data format
 	for (int iI = 0; iI < GC.getNumPromotionInfos(); iI++)
 	{
-		g_paiTempAfflictOnAttackCount[iI] = 0;
-		g_paiTempCureAfflictionCount[iI] = 0;
-		g_paiTempAfflictionTurnCount[iI] = 0;
-		g_paiTempAfflictionHitCount[iI] = 0;
-		g_paiTempAfflictionTolerance[iI] = 0;
-		g_paiTempFortitudeModifierTypeAmount[iI] = 0;
 		g_paiTempTrapSetWithPromotionCount[iI] = 0;
 		g_paiTempPromotionFromTraitCount[iI] = 0;
 	}
@@ -19831,12 +19710,6 @@ void CvUnit::read(FDataStreamBase* pStream)
 
 			if ( iNewIndex != NO_PROMOTION )
 			{
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempAfflictOnAttackCount[iNewIndex], "afflictOnAttack");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempCureAfflictionCount[iNewIndex], "cureAffliction");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempAfflictionTurnCount[iNewIndex], "afflictionTurn");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempAfflictionHitCount[iNewIndex], "afflictionHit");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempAfflictionTolerance[iNewIndex], "afflictionTolerance");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempFortitudeModifierTypeAmount[iNewIndex], "fortitudeModifierType");
 				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempTrapSetWithPromotionCount[iNewIndex], "trapSetWithPromotionType");
 				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempPromotionFromTraitCount[iNewIndex], "promotionFromTraitCount");
 			}
@@ -19846,23 +19719,11 @@ void CvUnit::read(FDataStreamBase* pStream)
 	for (int iI = 0; iI < GC.getNumPromotionInfos(); iI++)
 	{
 		if (
-		   0 != g_paiTempAfflictOnAttackCount[iI]
-		|| 0 != g_paiTempCureAfflictionCount[iI]
-		|| 0 != g_paiTempAfflictionTurnCount[iI]
-		|| 0 != g_paiTempAfflictionHitCount[iI]
-		|| 0 != g_paiTempAfflictionTolerance[iI]
-		|| 0 != g_paiTempFortitudeModifierTypeAmount[iI]
-		|| 0 != g_paiTempTrapSetWithPromotionCount[iI]
+		   0 != g_paiTempTrapSetWithPromotionCount[iI]
 		|| 0 != g_paiTempPromotionFromTraitCount[iI])
 		{
 			PromotionKeyedInfo* info = findOrCreatePromotionKeyedInfo((PromotionTypes)iI);
 
-			info->m_iAfflictOnAttackCount = g_paiTempAfflictOnAttackCount[iI];
-			info->m_iCureAfflictionCount = g_paiTempCureAfflictionCount[iI];
-			info->m_iAfflictionTurnCount = g_paiTempAfflictionTurnCount[iI];
-			info->m_iAfflictionHitCount = g_paiTempAfflictionHitCount[iI];
-			info->m_iAfflictionTolerance = g_paiTempAfflictionTolerance[iI];
-			info->m_iFortitudeModifierTypeAmount = g_paiTempFortitudeModifierTypeAmount[iI];
 			info->m_iTrapSetWithPromotionCount = g_paiTempTrapSetWithPromotionCount[iI];
 			info->m_iPromotionFromTraitCount = g_paiTempPromotionFromTraitCount[iI];
 		}
@@ -19872,7 +19733,6 @@ void CvUnit::read(FDataStreamBase* pStream)
 	WRAPPER_READ(wrapper, "CvUnit", &m_iAttackCount);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iDefenseCount);
 
-	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraCriticalModifier);
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraEndurance);
 
 	// Read compressed data format
@@ -19934,36 +19794,6 @@ void CvUnit::read(FDataStreamBase* pStream)
 		}
 	}
 
-	// Read compressed data format
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		g_paiTempExtraCriticalVSUnitCombatType[iI] = 0;
-	}
-	do
-	{
-		iI= -1;
-		WRAPPER_READ_DECORATED(wrapper, "CvUnit", &iI, "hasUnitCombatInfo13");
-		if ( iI != -1 )
-		{
-			int iNewIndex = wrapper.getNewClassEnumValue(REMAPPED_CLASS_TYPE_COMBATINFOS, iI, true);
-
-			if ( iNewIndex != NO_UNITCOMBAT )
-			{
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempExtraCriticalVSUnitCombatType[iNewIndex], "extraCriticalVSUnitCombatType");
-			}
-		}
-	} while(iI != -1);
-
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		if ( g_paiTempExtraCriticalVSUnitCombatType[iI] != 0 )
-		{
-			UnitCombatKeyedInfo* info = findOrCreateUnitCombatKeyedInfo((UnitCombatTypes)iI);
-
-			info->m_iExtraCriticalVSUnitCombatType = g_paiTempExtraCriticalVSUnitCombatType[iI];
-		}
-	}
-
 	WRAPPER_READ(wrapper, "CvUnit", &m_iExtraPoisonProbabilityModifier);
 
 	// Read compressed data format
@@ -19982,19 +19812,6 @@ void CvUnit::read(FDataStreamBase* pStream)
 			if ( iNewIndex != NO_PROMOTIONLINE )
 			{
 				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_pabTempValidBuildUp[iNewIndex], "validBuildUp");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempAfflictOnAttackTypeProbability[iNewIndex], "afflictOnAttackTypeProb");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempAfflictOnAttackTypeCount[iNewIndex], "afflictOnAttackTypeCount");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempAfflictOnAttackTypeImmediateCount[iNewIndex], "afflictOnAttackTypeImmediateCount");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempAfflictOnAttackTypeAttemptedCount[iNewIndex], "afflictOnAttackTypeAttemptedCount");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempCureAfflictionTypeCount[iNewIndex], "cureAfflictionType");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempAfflictionTurnTypeCount[iNewIndex], "afflictionTurnType");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempAfflictionLineCount[iNewIndex], "hasAfflictionLine");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempAfflictionTypeTolerance[iNewIndex], "afflictionToleranceType");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempFortitudeModifierAmount[iNewIndex], "fortitudeModifier");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempDistanceAttackCommunicability[iNewIndex], "distanceAttackCommunicability");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempAfflictOnAttackTypeMeleeCount[iNewIndex], "afflictOnAttackTypeMeleeCount");
-				WRAPPER_READ_DECORATED(wrapper, "CvUnit", &g_paiTempAfflictOnAttackTypeDistanceCount[iNewIndex], "afflictOnAttackTypeDistanceCount");
-//#endif
 			}
 		}
 	} while(iI != -1);
@@ -20776,7 +20593,6 @@ void CvUnit::write(FDataStreamBase* pStream)
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraStrength);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iAnimalIgnoresBordersCount);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iOnslaughtCount);
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraFortitude);
 
 
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iRoundCount);
@@ -20785,7 +20601,6 @@ void CvUnit::write(FDataStreamBase* pStream)
 
 
 
-	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraCriticalModifier);
 	WRAPPER_WRITE(wrapper, "CvUnit", m_iExtraEndurance);
 
 	//	Use condensed format now - only save non-default array elements
@@ -20805,16 +20620,6 @@ void CvUnit::write(FDataStreamBase* pStream)
 		{
 			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", iI, "hasUnitCombatInfo5");
 			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getExtraFlankingStrengthbyUnitCombatType((UnitCombatTypes)iI), "extraFlankingStrengthbyUnitCombatType");
-		}
-	}
-
-	//	Use condensed format now - only save non-default array elements
-	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-	{
-		if (getExtraCriticalVSUnitCombatType((UnitCombatTypes)iI) != 0)
-		{
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", iI, "hasUnitCombatInfo13");
-			WRAPPER_WRITE_DECORATED(wrapper, "CvUnit", getExtraCriticalVSUnitCombatType((UnitCombatTypes)iI), "extraCriticalVSUnitCombatType");
 		}
 	}
 
@@ -25168,11 +24973,6 @@ void CvUnit::doBattleFieldPromotions(CvUnit* pDefender, const CombatDetails& cdD
 			{
 				aAttackerAvailablePromotions.push_back(promotionType);
 			}
-			//* attacker is developing critical chance
-			if (kPromotion.getCriticalModifierChange() > 0 && (criticalVSOpponentProbTotal(pDefender) > 0))
-			{
-				aAttackerAvailablePromotions.push_back(promotionType);
-			}
 			//* attacker is developing endurance
 			if (kPromotion.getEnduranceChange() > 0 && (enduranceTotal() > 0))
 			{
@@ -25332,11 +25132,6 @@ void CvUnit::doBattleFieldPromotions(CvUnit* pDefender, const CombatDetails& cdD
 			}
 
 			if (!noDefensiveBonus() && kPromotion.getDefenseCombatModifierChange() > 0)
-			{
-				aDefenderAvailablePromotions.push_back(promotionType);
-			}
-			//* defender is developing critical chance
-			if (kPromotion.getCriticalModifierChange() > 0 && (pDefender->criticalVSOpponentProbTotal(this) > 0))
 			{
 				aDefenderAvailablePromotions.push_back(promotionType);
 			}
@@ -26429,92 +26224,6 @@ void CvUnit::changeExtraFlankingStrengthbyUnitCombatType(UnitCombatTypes eIndex,
 		findOrCreateUnitCombatKeyedInfo(eIndex)->m_iExtraFlankingStrengthbyUnitCombatType += iChange;
 	}
 }
-
-
-int CvUnit::criticalVSUnitCombatTotal(UnitCombatTypes eCombatType) const
-{
-	return (
-		std::max(
-			0,
-			m_pUnitInfo->getCriticalVSUnitCombatType(eCombatType)
-			+ getExtraCriticalVSUnitCombatType(eCombatType, isCommander(), isCommodore())
-		)
-	);
-}
-
-int CvUnit::getExtraCriticalVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander, const bool bCommodore) const
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-
-	const UnitCombatKeyedInfo* info = findUnitCombatKeyedInfo(eIndex);
-
-	if (!bCommander)
-	{
-		const CvUnit* pCommander = getCommander();
-		if (pCommander)
-		{
-			return (info ? info->m_iExtraCriticalVSUnitCombatType : 0) + pCommander->getExtraCriticalVSUnitCombatType(eIndex);
-		}
-	}
-	if (!bCommodore)
-    	{
-    		const CvUnit* pCommodore = getCommodore();
-    		if (pCommodore)
-    		{
-    			return (info ? info->m_iExtraCriticalVSUnitCombatType : 0) + pCommodore->getExtraCriticalVSUnitCombatType(eIndex);
-    		}
-    	}
-	return info ? info->m_iExtraCriticalVSUnitCombatType : 0;
-}
-
-void CvUnit::changeExtraCriticalVSUnitCombatType(UnitCombatTypes eIndex, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-
-	if (iChange != 0)
-	{
-		findOrCreateUnitCombatKeyedInfo(eIndex)->m_iExtraCriticalVSUnitCombatType += iChange;
-	}
-}
-
-
-
-int CvUnit::criticalVSOpponentProbTotal(const CvUnit* pOpponent) const
-{
-	PROFILE_EXTRA_FUNC();
-	int iBase = criticalModifierTotal();
-	for (std::map<UnitCombatTypes, UnitCombatKeyedInfo>::const_iterator it = pOpponent->m_unitCombatKeyedInfo.begin(), end = pOpponent->m_unitCombatKeyedInfo.end(); it != end; ++it)
-	{
-		if (it->second.m_bHasUnitCombat)
-		{
-			iBase += criticalVSUnitCombatTotal(it->first);
-		}
-	}
-	int iTotal = std::max(0, iBase);
-
-	return iTotal;
-}
-
-bool CvUnit::canInflictCritical(PromotionTypes eCritical) const
-{
-	PROFILE_EXTRA_FUNC();
-	if (GC.getPromotionLineInfo((PromotionLineTypes)GC.getPromotionInfo(eCritical).getPromotionLine()).getNumCriticalOriginCombatClassTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			if (isHasUnitCombat((UnitCombatTypes)iI) && GC.getPromotionLineInfo((PromotionLineTypes)GC.getPromotionInfo(eCritical).getPromotionLine()).isCriticalOriginCombatClassType(iI))
-			{
-				return true;
-			}
-		}
-	}
-	else
-	{
-		return true;
-	}
-	return false;
-}
-
 
 
 int CvUnit::getHealUnitCombatCount() const

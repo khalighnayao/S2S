@@ -213,7 +213,6 @@ m_cachedBonusCount(NULL)
 	m_ppiBonusCommerceModifier = NULL;
 	m_aiLandmarkYield = new int[NUM_YIELD_TYPES];
 	m_aiModderOptions = new int[NUM_MODDEROPTION_TYPES];
-	m_paiPlayerWideAfflictionCount = NULL;
 
 	m_bHasLanguage = false;
 
@@ -670,7 +669,6 @@ void CvPlayer::uninit()
 	SAFE_DELETE_ARRAY(m_bCanConstructCached);
 	SAFE_DELETE_ARRAY(m_bCanConstructDefaultParam);
 	SAFE_DELETE_ARRAY(m_bCanConstructCachedDefaultParam);
-	SAFE_DELETE_ARRAY(m_paiPlayerWideAfflictionCount);
 
 	m_upgradeCache.reset();
 
@@ -1184,14 +1182,6 @@ void CvPlayer::reset(PlayerTypes eID, bool bConstructorCall)
 			m_paeCivics[iI] = NO_CIVIC;
 		}
 
-
-		FAssertMsg(m_paiPlayerWideAfflictionCount==NULL, "about to leak memory, CvPlayer::m_paiPlayerWideAfflictionCount");
-		m_paiPlayerWideAfflictionCount = new int[GC.getNumPromotionLineInfos()];
-
-		for (iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-		{
-			m_paiPlayerWideAfflictionCount[iI] = 0;
-		}
 
 		FAssertMsg(m_bCanConstruct==NULL, "about to leak memory, CvPlayer::m_bCanConstruct");
 		m_bCanConstruct = new bool[GC.getNumBuildingInfos()];
@@ -19449,7 +19439,6 @@ void CvPlayer::read(FDataStreamBase* pStream)
 			pCurrUnitNode = pNextUnitNode;
 		}
 		//TB Combat Mod begin
-		WRAPPER_READ_CLASS_ARRAY(wrapper, "CvPlayer", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiPlayerWideAfflictionCount);
 		//TB Traits begin
 		WRAPPER_READ(wrapper, "CvPlayer", &m_iCivicAnarchyModifier);
 		WRAPPER_READ(wrapper, "CvPlayer", &m_iReligiousAnarchyModifier);
@@ -20468,7 +20457,6 @@ void CvPlayer::write(FDataStreamBase* pStream)
 		int	iTempUnitId = (m_pTempUnit ? m_pTempUnit->getID() : -1);
 		WRAPPER_WRITE(wrapper, "CvPlayer", iTempUnitId);
 		//TB Combat mod begin
-		WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvPlayer", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiPlayerWideAfflictionCount);
 		//TB Combat mod end
 		//TB Traits begin
 		WRAPPER_WRITE(wrapper, "CvPlayer", m_iCivicAnarchyModifier);
@@ -28325,11 +28313,6 @@ void CvPlayer::clearModifierTotals()
 	{
 		m_paiHasCivicOptionCount[iI] = 0;
 		m_paiNoCivicUpkeepCount[iI] = 0;
-	}
-
-	for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-	{
-		m_paiPlayerWideAfflictionCount[iI] = 0;
 	}
 
 	for (int iI = 0; iI < GC.getNumSpecialistInfos(); iI++)

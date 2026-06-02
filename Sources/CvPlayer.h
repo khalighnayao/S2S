@@ -1566,7 +1566,6 @@ protected:
 	int** m_ppiBuildingCommerceModifier;
 	int** m_ppiBuildingCommerceChange;
 	int** m_ppiBonusCommerceModifier;
-	int* m_paiPlayerWideAfflictionCount;
 	bool* m_pabAutomatedCanBuild;
 	int* m_paiResourceConsumption;
 	int* m_paiFreeSpecialistCount;

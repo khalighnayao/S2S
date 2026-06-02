@@ -96,8 +96,6 @@ public:
 	int getLungeChange() const;
 	int getDynamicDefenseChange() const;
 	int getStrengthChange() const;
-	int getFortitudeChange() const;
-	int getCriticalModifierChange() const;
 	int getEnduranceChange() const;
 	int getPoisonProbabilityModifierChange() const;
 	int getCaptureProbabilityModifierChange() const;
@@ -268,10 +266,6 @@ public:
 	int getNumFlankingStrengthbyUnitCombatTypesChange() const;
 	const UnitCombatModifier& getFlankingStrengthbyUnitCombatTypeChange(int iUnitCombat) const;
 
-	int getNumCriticalVSUnitCombatTypesChange() const;
-	const UnitCombatModifier& getCriticalVSUnitCombatTypeChange(int iUnitCombat) const;
-
-
 	int getNumTrapAvoidanceUnitCombatTypes() const;
 	const UnitCombatModifier& getTrapAvoidanceUnitCombatType(int iIndex) const;
 
@@ -301,9 +295,6 @@ public:
 
 	int getNumVisibleImprovementRangeChanges() const;
 	const InvisibleImprovementChanges& getVisibleImprovementRangeChange(int iIndex) const;
-
-	int getNumDistanceAttackCommunicabilityTypeChanges() const;
-	const AfflictionLineChanges& getDistanceAttackCommunicabilityTypeChange(int iIndex) const;
 
 	const CvPropertyManipulators* getPropertyManipulators() const { return &m_PropertyManipulators; }
 
@@ -368,8 +359,6 @@ protected:
 	int m_iLungeChange;
 	int m_iDynamicDefenseChange;
 	int m_iStrengthChange;
-	int m_iFortitudeChange;
-	int m_iCriticalModifierChange;
 	int m_iEnduranceChange;
 	int m_iPoisonProbabilityModifierChange;
 	int m_iCaptureProbabilityModifierChange;
@@ -486,7 +475,6 @@ protected:
 	std::vector<FeatureModifier> m_aFeatureWorkChangeModifiers;
 	std::vector<UnitCombatModifier> m_aUnitCombatChangeModifiers;
 	std::vector<UnitCombatModifier> m_aFlankingStrengthbyUnitCombatTypeChange;
-	std::vector<UnitCombatModifier> m_aCriticalVSUnitCombatTypeChange;
 	std::vector<UnitCombatModifier> m_aTrapAvoidanceUnitCombatTypes;
 	std::vector<InvisibleTerrainChanges> m_aInvisibleTerrainChanges;
 	std::vector<InvisibleFeatureChanges> m_aInvisibleFeatureChanges;

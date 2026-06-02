@@ -249,9 +249,6 @@ m_ppaiBonusYieldModifier(NULL)
 ,m_pExprConstructCondition(NULL)
 //TB Combat Mods (Buildings) begin
 ,m_iLinePriority(0)
-,m_iOutbreakBase(0)
-,m_iOvercomeBase(0)
-,m_iTradeCommunicability(0)
 //TB Combat Mods (Buildings) end
 ,m_bAutoBuild(false)
 ,m_bEnablesOtherBuildings(false)
@@ -1075,21 +1072,6 @@ int CvBuildingInfo::getLinePriority() const
 	return m_iLinePriority;
 }
 
-int CvBuildingInfo::getOutbreakBase() const
-{
-	return m_iOutbreakBase;
-}
-
-int CvBuildingInfo::getOvercomeBase() const
-{
-	return m_iOvercomeBase;
-}
-
-int CvBuildingInfo::getTradeCommunicability() const
-{
-	return m_iTradeCommunicability;
-}
-
 int CvBuildingInfo::getNationalCaptureProbabilityModifier() const
 {
 	return m_iNationalCaptureProbabilityModifier;
@@ -1307,43 +1289,6 @@ int CvBuildingInfo::getUnitCombatProdModifier(int iUnitCombat) const
 		}
 	}
 
-	return 0;
-}
-
-int CvBuildingInfo::getNumAfflictionOutbreakLevelChanges() const
-{
-	return m_aAfflictionOutbreakLevelChanges.size();
-}
-
-int CvBuildingInfo::getAfflictionOutbreakLevelChange(int iAfflictionLine) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (PromotionLineModifierArray::const_iterator it = m_aAfflictionOutbreakLevelChanges.begin(); it != m_aAfflictionOutbreakLevelChanges.end(); ++it)
-	{
-		if ((*it).first == (PromotionLineTypes)iAfflictionLine)
-		{
-			return (*it).second;
-		}
-	}
-
-	return 0;
-}
-
-int CvBuildingInfo::getNumTechOutbreakLevelChanges() const
-{
-	return m_aTechOutbreakLevelChanges.size();
-}
-
-int CvBuildingInfo::getTechOutbreakLevelChange(int iTech) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (TechModifierArray::const_iterator it = m_aTechOutbreakLevelChanges.begin(); it != m_aTechOutbreakLevelChanges.end(); ++it)
-	{
-		if ((*it).first == (TechTypes)iTech)
-		{
-			return (*it).second;
-		}
-	}
 	return 0;
 }
 
@@ -1804,9 +1749,6 @@ void CvBuildingInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, (int)m_ePromotionLineType);
 	//integers
 	CheckSum(iSum, m_iLinePriority);
-	CheckSum(iSum, m_iOutbreakBase);
-	CheckSum(iSum, m_iOvercomeBase);
-	CheckSum(iSum, m_iTradeCommunicability);
 	CheckSum(iSum, m_iNationalCaptureProbabilityModifier);
 	CheckSum(iSum, m_iNationalCaptureResistanceModifier);
 	CheckSum(iSum, m_iLocalCaptureProbabilityModifier);
@@ -1869,8 +1811,6 @@ void CvBuildingInfo::getCheckSum(uint32_t& iSum) const
 	CheckSumC(iSum, m_aeMapCategoryTypes);
 	CheckSumC(iSum, m_aUnitCombatDefenseAgainstModifiers);
 	CheckSumC(iSum, m_aUnitCombatProdModifiers);
-	CheckSumC(iSum, m_aAfflictionOutbreakLevelChanges);
-	CheckSumC(iSum, m_aTechOutbreakLevelChanges);
 	CheckSumC(iSum, m_aiFreeTraitTypes);
 	CheckSumC(iSum, m_freeBonuses);
 	CheckSumC(iSum, m_aePrereqOrRawVicinityBonuses);
@@ -2925,9 +2865,6 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	m_ePromotionLineType = (PromotionLineTypes) pXML->GetInfoClass(szTextVal);
 	//integers
 	pXML->GetOptionalChildXmlValByName(&m_iLinePriority, L"iLinePriority");
-	pXML->GetOptionalChildXmlValByName(&m_iOutbreakBase, L"iOutbreakBase");
-	pXML->GetOptionalChildXmlValByName(&m_iOvercomeBase, L"iOvercomeBase");
-	pXML->GetOptionalChildXmlValByName(&m_iTradeCommunicability, L"iTradeCommunicability");
 	pXML->GetOptionalChildXmlValByName(&m_iNationalCaptureProbabilityModifier, L"iNationalCaptureProbabilityModifier");
 	pXML->GetOptionalChildXmlValByName(&m_iNationalCaptureResistanceModifier, L"iNationalCaptureResistanceModifier");
 	pXML->GetOptionalChildXmlValByName(&m_iLocalCaptureProbabilityModifier, L"iLocalCaptureProbabilityModifier");
@@ -3090,9 +3027,6 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 
 	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aUnitCombatProdModifiers, L"UnitCombatProdModifiers");
 
-	pXML->SetOptionalPairVector<PromotionLineModifierArray, PromotionLineTypes, int>(&m_aAfflictionOutbreakLevelChanges, L"AfflictionOutbreakLevelChanges");
-
-	pXML->SetOptionalPairVector<TechModifierArray, TechTypes, int>(&m_aTechOutbreakLevelChanges, L"TechOutbreakLevelChanges");
 
 	//Arrays
 	pXML->SetVariableListTagPair(&m_pabHurry, L"Hurrys", GC.getNumHurryInfos());
@@ -3978,9 +3912,6 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 	if (getPromotionLineType() == NO_PROMOTIONLINE) m_ePromotionLineType = pClassInfo->getPromotionLineType();
 	//integers
 	if (getLinePriority() == iDefault) m_iLinePriority = pClassInfo->getLinePriority();
-	if (getOutbreakBase() == iDefault) m_iOutbreakBase = pClassInfo->getOutbreakBase();
-	if (getOvercomeBase() == iDefault) m_iOvercomeBase = pClassInfo->getOvercomeBase();
-	if (getTradeCommunicability() == iDefault) m_iTradeCommunicability = pClassInfo->getTradeCommunicability();
 	if (getNationalCaptureProbabilityModifier() == iDefault) m_iNationalCaptureProbabilityModifier = pClassInfo->getNationalCaptureProbabilityModifier();
 	if (getNationalCaptureResistanceModifier() == iDefault) m_iNationalCaptureResistanceModifier = pClassInfo->getNationalCaptureResistanceModifier();
 	if (getLocalCaptureProbabilityModifier() == iDefault) m_iLocalCaptureProbabilityModifier = pClassInfo->getLocalCaptureProbabilityModifier();
@@ -4063,25 +3994,6 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 		}
 	}
 
-	if (getNumAfflictionOutbreakLevelChanges()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumAfflictionOutbreakLevelChanges(); i++)
-		{
-			const PromotionLineTypes ePromotionLine = ((PromotionLineTypes)i);
-			const int iChange = pClassInfo->getAfflictionOutbreakLevelChange(i);
-			m_aAfflictionOutbreakLevelChanges.push_back(std::make_pair(ePromotionLine, iChange));
-		}
-	}
-
-	if (getNumTechOutbreakLevelChanges()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumTechOutbreakLevelChanges(); i++)
-		{
-			const TechTypes eTech = ((TechTypes)i);
-			const int iChange = pClassInfo->getTechOutbreakLevelChange(i);
-			m_aTechOutbreakLevelChanges.push_back(std::make_pair(eTech, iChange));
-		}
-	}
 
 	//Arrays
 	for ( int i = 0; i < GC.getNumHurryInfos(); i++ )

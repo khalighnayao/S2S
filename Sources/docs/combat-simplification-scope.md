@@ -24,22 +24,36 @@ Priorities: OOS-safe > maintainable/sane > save-compat (save-compat downprioriti
   + accessors; Info vectors+XML+schema; UI combat-odds preview + help; AI valuation;
   Assert build OK; zero functional stun refs, only 2 harmless comments left for R4).
 - R3 Power-shots — **DONE** (5 scalar modifier sub-types; build OK).
-- R4 Afflictions + critical + `OUTBREAKS_AND_AFFLICTIONS` option — **PARTIAL**:
-  - DONE: `#define OUTBREAKS_AND_AFFLICTIONS` confirmed commented-out → purged ~400 dead
-    `#ifdef` blocks across 32 files via a Python unifdef-equivalent (keeps `#else`
-    live branches). Build-verified, behavior-neutral (never compiled).
-  - REMAINING (deferred as ONE coupled task — see findings): live afflict (216) +
-    critical (189) + `GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS` enum/Python/XML +
-    runtime isOption checks.
-  - **FINDING 1:** live afflictions is a disease/property SUBSYSTEM (CvCity 39,
-    CvBuildingInfo 11, CvStructs 14, property manipulators), not just combat.
-  - **FINDING 2:** critical is NOT cleanly separable from afflictions — the combat
-    stat (criticalVSOpponentProbTotal/criticalModifier/criticalVSUnitCombat) is
-    removable, but isCritical() (promotion-line flag), canInflictCritical(),
-    assignCritical are affliction-trigger concepts wired into the promotion-line/
-    disease system. And the GAMEOPTION enum can't be removed while deferred
-    afflictions still uses isOption(). => Do afflictions + critical + option as ONE
-    dedicated task, not a partial critical removal.
+- R4 Afflictions + critical + `OUTBREAKS_AND_AFFLICTIONS` option — **DONE**:
+  - Phase 1: `OUTBREAKS_AND_AFFLICTIONS` `#define` + `GAMEOPTION_COMBAT_*` enum/Python/
+    GameOptionInfos/GameText removed (build green).
+  - Phases 2-7: the entire inert affliction/critical/fortitude scaffolding removed
+    wholesale (~600 refs, 14 .cpp/.h + 3 XML). Confirmed behavior-neutral (no runtime
+    processing, no XML data drove it — only `iFortitudeChange` had live data, also pulled).
+    - CvUnit: keyed-info affliction members, m_iExtraFortitude/CriticalModifier, all
+      `g_paiTempAfflict*/Fortitude*/CriticalVS*` temp arrays + alloc, interleaved
+      read/write serialization (kept trapSetWithPromotion/promotionFromTrait/validBuildUp/
+      flanking), criticalModifierTotal/criticalVS{UnitCombat,Opponent}Total/canInflictCritical/
+      getExtra{Fortitude,CriticalModifier,CriticalVSUnitCombatType}, promotion/unitcombat
+      apply-sites, two "developing critical chance" combat hints.
+    - Info classes (CvUnitInfo/CvPromotionInfo/CvPromotionLineInfo/CvUnitCombatInfo/
+      CvBuildingInfo): Fortitude/CriticalModifier/CriticalVSUnitCombat/CureAffliction/
+      isCritical/CriticalOriginCombatClass/Overcome (UnitCombat+Tech+OvercomeBase)/
+      Outbreak (TechOutbreakLevel+AfflictionOutbreakLevel)/TradeCommunicability/
+      DistanceAttackCommunicability/AfflictionFortitudeChangeModifier.
+    - CvStructs: AfflictOnAttack(Change), AfflictionLineChanges, PromotionLineAfflictionModifier.
+    - CvCity: 5 affliction arrays (NewAffliction*/Overcome/Communicability) + serialization.
+    - CvPlayer: m_paiPlayerWideAfflictionCount.
+    - Consumers: CvGameTextMgr UI help blocks, CvPlayerAI critical valuation.
+    - XML: orphaned schema ElementTypes + refs in both schemas + dead `iFortitudeChange` data.
+  - **KEPT (inert, intentional — removing would need a codebase-wide caller sweep):**
+    `PromotionRequirements::Afflict` flag; `bAfflict` param on canAcquirePromotion;
+    `bAffliction` param on CvCity/CvPlayer canConstruct (always false now). The property/
+    disease system (CvProperties/PropertyManipulators/PROPERTY_*, AidRate/BonusAid),
+    PromotionLine class itself + its `m_ePropertyType`, keyed-info structs, endurance,
+    and vanilla withdrawal are all untouched. Serialization sentinel key strings
+    ("hasAfflicationInfo"/"hasAfflictOnAttackInfo") kept (now key the surviving blocks).
+    Build green, all 461 XML valid.
 - R5 modifier family (dodge/precision/armor/puncture/withdraw/repel/...).  R6 terrain damage.
 
 ## REMOVE — TB Combat Mods come out wholesale (user-confirmed)

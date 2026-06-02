@@ -223,8 +223,6 @@ m_iUnnerve(0),
 m_iEnclose(0),
 m_iLunge(0),
 m_iDynamicDefense(0),
-m_iFortitude(0),
-m_iCriticalModifier(0),
 m_iEndurance(0),
 m_iPoisonProbabilityModifier(0),
 m_iCaptureProbabilityModifier(0),
@@ -1886,17 +1884,6 @@ int CvUnitInfo::getDynamicDefense() const
 	return m_iDynamicDefense;
 }
 
-int CvUnitInfo::getFortitude() const
-{
-	return m_iFortitude;
-}
-
-
-int CvUnitInfo::getCriticalModifier() const
-{
-	return m_iCriticalModifier;
-}
-
 int CvUnitInfo::getEndurance() const
 {
 	return m_iEndurance;
@@ -2238,22 +2225,6 @@ const std::vector<UnitCombatTypes>& CvUnitInfo::getSubCombatTypes() const
 	return m_aiSubCombatTypes;
 }
 
-int CvUnitInfo::getCureAfflictionType(int i) const
-{
-	return m_aiCureAfflictionTypes[i];
-}
-
-int CvUnitInfo::getNumCureAfflictionTypes() const
-{
-	return (int)m_aiCureAfflictionTypes.size();
-}
-
-bool CvUnitInfo::isCureAfflictionType(int i) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), i);
-	return algo::any_of_equal(m_aiCureAfflictionTypes, i);
-}
-
 int CvUnitInfo::getHealAsType(int i) const
 {
 	return m_aiHealAsTypes[i];
@@ -2468,43 +2439,6 @@ bool CvUnitInfo::isFlankingStrikebyUnitCombatType(int iUnitCombat) const
 	}
 	return false;
 }
-
-int CvUnitInfo::getNumCriticalVSUnitCombatTypes() const
-{
-	return m_aCriticalVSUnitCombatTypes.size();
-}
-
-int CvUnitInfo::getCriticalVSUnitCombatType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aCriticalVSUnitCombatTypes.begin(); it != m_aCriticalVSUnitCombatTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-bool CvUnitInfo::isCriticalVSUnitCombatType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aCriticalVSUnitCombatTypes.begin(); it != m_aCriticalVSUnitCombatTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-const UnitCombatModifierArray& CvUnitInfo::getCriticalVSUnitCombatTypes() const
-{
-	return m_aCriticalVSUnitCombatTypes;
-}
-
 
 int CvUnitInfo::getNumTrapDisableUnitCombatTypes() const
 {
@@ -3057,8 +2991,6 @@ void CvUnitInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_iEnclose);
 	CheckSum(iSum, m_iLunge);
 	CheckSum(iSum, m_iDynamicDefense);
-	CheckSum(iSum, m_iFortitude);
-	CheckSum(iSum, m_iCriticalModifier);
 	CheckSum(iSum, m_iEndurance);
 	CheckSum(iSum, m_iPoisonProbabilityModifier);
 
@@ -3121,7 +3053,6 @@ void CvUnitInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_bCanMergeSplit);
 	//boolean vectors without delayed resolution
 	CheckSumC(iSum, m_aiSubCombatTypes);
-	CheckSumC(iSum, m_aiCureAfflictionTypes);
 	CheckSumC(iSum, m_aiHealAsTypes);
 	CheckSumC(iSum, m_vTerrainImpassableTypes);
 	CheckSumC(iSum, m_vFeatureImpassableTypes);
@@ -3223,7 +3154,6 @@ void CvUnitInfo::getCheckSum(uint32_t& iSum) const
 	}
 	// int vectors utilizing pairing without delayed resolution
 	CheckSumC(iSum, m_aFlankingStrengthbyUnitCombatType);
-	CheckSumC(iSum, m_aCriticalVSUnitCombatTypes);
 	CheckSumC(iSum, m_aTrapDisableUnitCombatTypes);
 	CheckSumC(iSum, m_aTrapAvoidanceUnitCombatTypes);
 	CheckSumC(iSum, m_aTrapTriggerUnitCombatTypes);
@@ -3664,8 +3594,6 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_iEnclose, L"iEnclose");
 	pXML->GetOptionalChildXmlValByName(&m_iLunge, L"iLunge");
 	pXML->GetOptionalChildXmlValByName(&m_iDynamicDefense, L"iDynamicDefense");
-	pXML->GetOptionalChildXmlValByName(&m_iFortitude, L"iFortitude");
-	pXML->GetOptionalChildXmlValByName(&m_iCriticalModifier, L"iCriticalModifier");
 	pXML->GetOptionalChildXmlValByName(&m_iEndurance, L"iEndurance");
 	pXML->GetOptionalChildXmlValByName(&m_iPoisonProbabilityModifier, L"iPoisonProbabilityModifier");
 
@@ -3723,7 +3651,6 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_bGatherHerd, L"bGatherHerd");
 
 	pXML->SetOptionalVector(&m_aiSubCombatTypes, L"SubCombatTypes");
-	pXML->SetOptionalVector(&m_aiCureAfflictionTypes, L"CureAfflictionTypes");
 	pXML->SetOptionalVector(&m_vTerrainImpassableTypes, L"TerrainImpassableTypes");
 	pXML->SetOptionalVector(&m_vFeatureImpassableTypes, L"FeatureImpassableTypes");
 	pXML->SetOptionalVector(&m_aeMapCategoryTypes, L"MapCategoryTypes");
@@ -4014,9 +3941,6 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 
 	// int vector utilizing pairing without delayed resolution
 	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aFlankingStrengthbyUnitCombatType, L"FlankingStrikesbyUnitCombat");
-
-	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aCriticalVSUnitCombatTypes, L"CriticalVSUnitCombatTypes");
-
 
 	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aTrapDisableUnitCombatTypes, L"TrapDisableUnitCombatTypes");
 
@@ -4525,8 +4449,6 @@ void CvUnitInfo::copyNonDefaults(CvUnitInfo* pClassInfo)
 	if ( m_iEnclose == iDefault ) m_iEnclose = pClassInfo->m_iEnclose;
 	if ( m_iLunge == iDefault ) m_iLunge = pClassInfo->m_iLunge;
 	if ( m_iDynamicDefense == iDefault ) m_iDynamicDefense = pClassInfo->m_iDynamicDefense;
-	if ( m_iFortitude == iDefault ) m_iFortitude = pClassInfo->m_iFortitude;
-	if ( m_iCriticalModifier == iDefault ) m_iCriticalModifier = pClassInfo->getCriticalModifier();
 	if ( m_iEndurance == iDefault ) m_iEndurance = pClassInfo->getEndurance();
 	if ( m_iPoisonProbabilityModifier == iDefault ) m_iPoisonProbabilityModifier = pClassInfo->getPoisonProbabilityModifier();
 
@@ -4584,7 +4506,6 @@ void CvUnitInfo::copyNonDefaults(CvUnitInfo* pClassInfo)
 	if ( m_bGatherHerd == bDefault ) m_bGatherHerd = pClassInfo->isGatherHerd();
 	// int vectors without delayed resolution
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiSubCombatTypes, pClassInfo->m_aiSubCombatTypes);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCureAfflictionTypes, pClassInfo->m_aiCureAfflictionTypes);
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_vTerrainImpassableTypes, pClassInfo->m_vTerrainImpassableTypes);
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_vFeatureImpassableTypes, pClassInfo->m_vFeatureImpassableTypes);
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeMapCategoryTypes, pClassInfo->getMapCategories());
@@ -4621,17 +4542,6 @@ void CvUnitInfo::copyNonDefaults(CvUnitInfo* pClassInfo)
 			m_aFlankingStrengthbyUnitCombatType.push_back(std::make_pair(eUnitCombat, iChange));
 		}
 	}
-
-	if (getNumCriticalVSUnitCombatTypes()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumCriticalVSUnitCombatTypes(); i++)
-		{
-			UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
-			int iChange = pClassInfo->getCriticalVSUnitCombatType(i);
-			m_aCriticalVSUnitCombatTypes.push_back(std::make_pair(eUnitCombat, iChange));
-		}
-	}
-
 
 	if (getNumTrapDisableUnitCombatTypes()==0)
 	{

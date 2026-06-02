@@ -1688,15 +1688,10 @@ protected:
 	int m_iReinforcementCounter;
 
 	//TB Combat Mod (Buildings)
-	int* m_paiNewAfflictionTypeCount;
 	int* m_paiAidRate;
 	int** m_ppaaiExtraBonusAidModifier;
-	int* m_paiNewExtraAfflictionOutbreakLevelChange;
-	int* m_paiNewAfflictionToleranceChange;
-	int* m_paiNewCurrentOvercomeChange;
 	int* m_paiUnitCombatProductionModifier;
 	int* m_paiUnitCombatDefenseAgainstModifier;
-	int* m_paiPromotionLineAfflictionAttackCommunicability;
 	//TB Building Tags
 	int m_iExtraLocalCaptureProbabilityModifier;
 	int m_iExtraLocalCaptureResistanceModifier;

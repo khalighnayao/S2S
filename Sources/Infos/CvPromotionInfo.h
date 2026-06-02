@@ -167,11 +167,9 @@ public:
 	//
 	int getStrengthChange() const;
 	int getLinePriority() const;
-	int getFortitudeChange() const;
 	int getDamageperTurn() const;
 	int getStrAdjperTurn() const;
 	int getWeakenperTurn() const;
-	int getCriticalModifierChange() const;
 	int getEnduranceChange() const;
 	int getPoisonProbabilityModifierChange() const;
 
@@ -233,7 +231,6 @@ public:
 	bool isRemoveStampede() const;
 	bool isOnslaughtChange() const;
 	bool isParalyze() const;
-	bool isCritical() const;
 	bool isAttackOnlyCitiesAdd() const;
 	bool isAttackOnlyCitiesSubtract() const;
 	bool isIgnoreNoEntryLevelAdd() const;
@@ -343,11 +340,6 @@ public:
 	int getFlankingStrengthbyUnitCombatTypeChange(int iUnitCombat) const;
 	bool isFlankingStrikebyUnitCombatTypeChange(int iUnitCombat) const;
 
-	int getNumCriticalVSUnitCombatChangeTypes() const;
-	int getCriticalVSUnitCombatChangeType(int iUnitCombat) const;
-	bool isCriticalVSUnitCombatChangeType(int iUnitCombat) const;
-
-
 	int getNumTrapDisableUnitCombatTypes() const;
 	int getTrapDisableUnitCombatType(int iUnitCombat) const;
 	bool isTrapDisableUnitCombatType(int iUnitCombat) const;
@@ -380,9 +372,6 @@ public:
 	int getNumAIWeightbyUnitCombatTypes() const;
 	const UnitCombatModifier& getAIWeightbyUnitCombatType(int iUnitCombat) const;
 
-	int getNumAfflictionFortitudeChangeModifiers() const;
-	const PromotionLineModifier& getAfflictionFortitudeChangeModifier(int iAfflictionLine) const;
-
 	int getNumHealUnitCombatChangeTypes() const;
 	const HealUnitCombat& getHealUnitCombatChangeType(int iUnitCombat) const;
 
@@ -412,9 +401,6 @@ public:
 
 	int getNumVisibleImprovementRangeChanges() const;
 	const InvisibleImprovementChanges& getVisibleImprovementRangeChange(int iIndex) const;
-
-	int getNumDistanceAttackCommunicabilityTypeChanges() const;
-	const AfflictionLineChanges& getDistanceAttackCommunicabilityTypeChange(int iIndex) const;
 
 	// TB Combat Mods End  TB SubCombat Mod end
 
@@ -569,11 +555,9 @@ protected:
 	int m_iDynamicDefenseChange;
 	int m_iStrengthChange;
 	int m_iLinePriority;
-	int m_iFortitudeChange;
 	int m_iDamageperTurn;
 	int m_iStrAdjperTurn;
 	int m_iWeakenperTurn;
-	int m_iCriticalModifierChange;
 	int m_iEnduranceChange;
 	int m_iPoisonProbabilityModifierChange;
 
@@ -636,7 +620,6 @@ protected:
 	bool m_bRemoveStampede;
 	bool m_bOnslaughtChange;
 	bool m_bParalyze;
-	bool m_bCritical;
 	bool m_bAttackOnlyCitiesAdd;
 	bool m_bAttackOnlyCitiesSubtract;
 	bool m_bIgnoreNoEntryLevelAdd;
@@ -683,7 +666,6 @@ protected:
 	std::vector<int> m_aiTargetUnitCombatTypes;
 	// int vectors utilizing pairing without delayed resolution
 	UnitCombatModifierArray m_aFlankingStrengthbyUnitCombatTypeChange;
-	UnitCombatModifierArray m_aCriticalVSUnitCombatChangeTypes;
 	UnitCombatModifierArray m_aTrapDisableUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapAvoidanceUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapTriggerUnitCombatTypes;
@@ -704,7 +686,6 @@ protected:
 	std::vector<InvisibleFeatureChanges> m_aVisibleFeatureRangeChanges;
 	std::vector<InvisibleImprovementChanges> m_aVisibleImprovementRangeChanges;
 	std::vector<InvisibleTerrainChanges> m_aVisibleTerrainRangeChanges;
-	std::vector<AfflictionLineChanges> m_aDistanceAttackCommunicabilityTypeChanges;
 	//TB Combat Mods End  TB SubCombat Mod end
 
 	//Pediahelp

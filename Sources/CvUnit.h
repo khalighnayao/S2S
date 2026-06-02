@@ -182,12 +182,6 @@ class PromotionKeyedInfo
 {
 public:
 	PromotionKeyedInfo() :	m_bHasPromotion(false),
-							m_iAfflictOnAttackCount(0),
-							m_iCureAfflictionCount(0),
-							m_iAfflictionTurnCount(0),
-							m_iAfflictionHitCount(0),
-							m_iAfflictionTolerance(0),
-							m_iFortitudeModifierTypeAmount(0),
 							m_iPromotionFreeCount(0),
 							m_iTrapSetWithPromotionCount(0),
 							m_iPromotionFromTraitCount(0)
@@ -197,12 +191,6 @@ public:
 	bool Empty() const
 	{
 		return (!m_bHasPromotion &&
-			m_iAfflictOnAttackCount == 0 &&
-			m_iCureAfflictionCount == 0 &&
-			m_iAfflictionTurnCount == 0 &&
-			m_iAfflictionHitCount == 0 &&
-			m_iAfflictionTolerance == 0 &&
-			m_iFortitudeModifierTypeAmount == 0 &&
 			m_iPromotionFreeCount == 0 &&
 			m_iTrapSetWithPromotionCount == 0 &&
 			m_iPromotionFromTraitCount == 0);
@@ -210,12 +198,6 @@ public:
 
 	//TB Combat Mods Begin
 	bool	m_bHasPromotion;
-	int		m_iAfflictOnAttackCount;
-	int		m_iCureAfflictionCount;
-	int		m_iAfflictionTurnCount;
-	int		m_iAfflictionHitCount;
-	int		m_iAfflictionTolerance;
-	int		m_iFortitudeModifierTypeAmount;
 	int		m_iPromotionFreeCount;
 	int		m_iTrapSetWithPromotionCount;
 	int		m_iPromotionFromTraitCount;
@@ -294,7 +276,6 @@ public:
 	UnitCombatKeyedInfo() :		m_bHasUnitCombat(false),
 								m_iExtraUnitCombatModifier(0),
 								m_iExtraFlankingStrengthbyUnitCombatType(0),
-								m_iExtraCriticalVSUnitCombatType(0),
 								m_iHealUnitCombatTypeVolume(0),
 								m_iHealUnitCombatTypeAdjacentVolume(0),
 								m_iHealAsDamage(0),
@@ -311,7 +292,6 @@ public:
 		return (!m_bHasUnitCombat &&
 			m_iExtraUnitCombatModifier == 0 &&
 			m_iExtraFlankingStrengthbyUnitCombatType == 0 &&
-			m_iExtraCriticalVSUnitCombatType == 0 &&
 			m_iHealUnitCombatTypeVolume == 0 &&
 			m_iHealUnitCombatTypeAdjacentVolume == 0 &&
 			m_iHealAsDamage == 0 &&
@@ -325,7 +305,6 @@ public:
 	bool m_bHasUnitCombat;
 	int	m_iExtraUnitCombatModifier;
 	int m_iExtraFlankingStrengthbyUnitCombatType;
-	int m_iExtraCriticalVSUnitCombatType;
 	int m_iHealUnitCombatTypeVolume;
 	int m_iHealUnitCombatTypeAdjacentVolume;
 	int m_iHealAsDamage;
@@ -892,9 +871,7 @@ public:
 	bool canAnimalIgnoresImprovements() const;
 	bool canAnimalIgnoresCities() const;
 	bool canOnslaught() const;
-	bool hasCureAfflictionType(PromotionLineTypes ePromotionLineType) const;
 	int aidTotal(PropertyTypes eProperty) const;
-	int criticalModifierTotal() const;
 	int enduranceTotal() const;
 	int poisonProbabilityModifierTotal() const;
 //TB Combat Mods End
@@ -1196,17 +1173,6 @@ public:
 	int getOnslaughtCount() const;
 	bool mayOnslaught() const;
 	void changeOnslaughtCount(int iChange);
-
-	int getCureAfflictionCount(PromotionLineTypes ePromotionLineType) const;
-	bool hasExtraCureAffliction(PromotionLineTypes ePromotionLineType) const;
-	void changeCureAfflictionCount(PromotionLineTypes ePromotionLineType, int iChange);
-
-	int getExtraFortitude (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraFortitude (int iChange);
-
-
-	int getExtraCriticalModifier (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
-	void changeExtraCriticalModifier (int iChange);
 
 	int getExtraEndurance (bool bIgnoreCommanders = false, bool bIgnoreCommodores = false) const;
 	void changeExtraEndurance (int iChange);
@@ -1628,7 +1594,6 @@ protected:
 	int m_iSMStrength;
 	int m_iAnimalIgnoresBordersCount;
 	int m_iOnslaughtCount;
-	int m_iExtraFortitude;
 	int m_iExtraSelfHealModifier;
 	int m_iExtraNumHealSupport;
 	int m_iHealSupportUsed;
@@ -1661,7 +1626,6 @@ protected:
 	bool m_bIsArmed;
 	bool m_bHasAnyInvisibility;
 	bool m_bRevealed;
-	int m_iExtraCriticalModifier;
 	int m_iExtraEndurance;
 	int m_iExtraPoisonProbabilityModifier;
 	int m_iRetrainsAvailable;
@@ -1893,15 +1857,6 @@ public:
 	int flankingStrengthbyUnitCombatTotal(UnitCombatTypes eCombatType) const;
 	int getExtraFlankingStrengthbyUnitCombatType(UnitCombatTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
 	void changeExtraFlankingStrengthbyUnitCombatType(UnitCombatTypes eIndex, int iChange);
-
-	int criticalVSUnitCombatTotal(UnitCombatTypes eCombatType) const;
-	int getExtraCriticalVSUnitCombatType(UnitCombatTypes eIndex, const bool bCommander = true, const bool bCommodore = true) const;
-	void changeExtraCriticalVSUnitCombatType(UnitCombatTypes eIndex, int iChange);
-
-
-	int criticalVSOpponentProbTotal(const CvUnit* pOpponent) const;
-
-	bool canInflictCritical(PromotionTypes eCritical) const;
 
 
 	int getHealUnitCombatCount() const;
@@ -2387,37 +2342,18 @@ public:
 private:
 	//	static buffers allocated once and used during read and write only
 	static int*	g_paiTempPromotionFreeCount;
-	static int*	g_paiTempAfflictOnAttackCount;
-	static int*	g_paiTempCureAfflictionCount;
-	static int*	g_paiTempCureAfflictionTypeCount;
-	static int*	g_paiTempAfflictionLineCount;
-	static int*	g_paiTempAfflictionTurnCount;
-	static int*	g_paiTempAfflictionTurnTypeCount;
-	static int*	g_paiTempAfflictionHitCount;
-	static int*	g_paiTempAfflictionTolerance;
 	static int*	g_paiTempTrapImmunityUnitCombatCount;
 	static int*	g_paiTempTargetUnitCombatCount;
 	static int*	g_paiTempExtraTrapDisableUnitCombatType;
 	static int*	g_paiTempExtraTrapAvoidanceUnitCombatType;
 	static int*	g_paiTempExtraTrapTriggerUnitCombatType;
-	static int*	g_paiTempAfflictionTypeTolerance;
-	static int*	g_paiTempFortitudeModifierTypeAmount;
-	static int*	g_paiTempFortitudeModifierAmount;
 	static int*	g_paiTempTrapSetWithPromotionCount;
 	static int* g_paiTempPromotionFromTraitCount;
 	static bool*	g_pabTempValidBuildUp;
-	static int* g_paiTempAfflictOnAttackTypeProbability;
-	static int* g_paiTempAfflictOnAttackTypeCount;
-	static int* g_paiTempAfflictOnAttackTypeImmediateCount;
-	static int* g_paiTempAfflictOnAttackTypeAttemptedCount;
-	static int* g_paiTempDistanceAttackCommunicability;
-	static int* g_paiTempAfflictOnAttackTypeMeleeCount;
-	static int* g_paiTempAfflictOnAttackTypeDistanceCount;
 	static int*	g_paiTempExtraUnitCombatModifier;
 	static bool* g_pabTempHasPromotion;
 	static bool* g_pabTempHasUnitCombat;
 	static int* g_paiTempExtraFlankingStrengthbyUnitCombatType;
-	static int* g_paiTempExtraCriticalVSUnitCombatType;
 	static int*	g_paiTempHealUnitCombatTypeVolume;
 	static int*	g_paiTempHealUnitCombatTypeAdjacentVolume;
 	static int* g_paiTempHealAsDamage;

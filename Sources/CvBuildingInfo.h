@@ -196,9 +196,6 @@ public:
 	int getHappinessPercentPerPopulation() const	{ return m_iHappinessPercentPerPopulation; }
 	int getHealthPercentPerPopulation() const		{ return m_iHealthPercentPerPopulation; }
 	int getLinePriority() const;
-	int getOutbreakBase() const;
-	int getOvercomeBase() const;
-	int getTradeCommunicability() const;
 	int getNationalCaptureProbabilityModifier() const;
 	int getNationalCaptureResistanceModifier() const;
 	int getLocalCaptureProbabilityModifier() const;
@@ -403,12 +400,6 @@ public:
 
 	int getNumUnitCombatProdModifiers() const;
 	int getUnitCombatProdModifier(int iUnitCombat) const;
-
-	int getNumAfflictionOutbreakLevelChanges() const;
-	int getAfflictionOutbreakLevelChange(int iAfflictionLine) const;
-
-	int getNumTechOutbreakLevelChanges() const;
-	int getTechOutbreakLevelChange(int iTech) const;
 
 	int getLocalSpecialistYieldChange(int i, int j) const;
 	int* getLocalSpecialistYieldChangeArray(int i) const;
@@ -655,9 +646,6 @@ private:
 	int m_iMaxPlayerInstances;
 	int m_iExtraPlayerInstances;
 	int m_iLinePriority;
-	int m_iOutbreakBase;
-	int m_iOvercomeBase;
-	int m_iTradeCommunicability;
 	int m_iNationalCaptureProbabilityModifier;
 	int m_iNationalCaptureResistanceModifier;
 	int m_iLocalCaptureProbabilityModifier;
@@ -756,8 +744,6 @@ private:
 	std::vector<AidRateChanges> m_aAidRateChanges;
 	UnitCombatModifierArray m_aUnitCombatDefenseAgainstModifiers;
 	UnitCombatModifierArray m_aUnitCombatProdModifiers;
-	PromotionLineModifierArray m_aAfflictionOutbreakLevelChanges;
-	TechModifierArray m_aTechOutbreakLevelChanges;
 	IDValueMap<BonusTypes, int> m_piBonusHealthChanges;
 	IDValueMap<BonusTypes, int> m_piBonusHappinessChanges;
 	IDValueMap<BuildingTypes, int> m_aBuildingProductionModifier;

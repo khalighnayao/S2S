@@ -13963,7 +13963,6 @@
 			<iLinePriority>1</iLinePriority>
 			<iSelfHealModifier>1</iSelfHealModifier>
 			<iNeutralHealChange>1</iNeutralHealChange>
-			<!-- <iFortitudeChange>5</iFortitudeChange> -->
 			<iMaxHPChange>1</iMaxHPChange>
 			<iVictoryHeal>3</iVictoryHeal>
 			<Button>,Art/Buttons/Promotions/SelfHeal1Promotion.dds</Button>
@@ -13978,7 +13977,6 @@
 			<iLinePriority>2</iLinePriority>
 			<iSelfHealModifier>1</iSelfHealModifier>
 			<iNeutralHealChange>1</iNeutralHealChange>
-			<!-- <iFortitudeChange>5</iFortitudeChange> -->
 			<iMaxHPChange>2</iMaxHPChange>
 			<iVictoryHeal>3</iVictoryHeal>
 			<Button>,Art/Buttons/Promotions/SelfHeal2Promotion.dds</Button>
@@ -13992,7 +13990,6 @@
 			<PromotionLine>PROMOTIONLINE_SELF_HEAL</PromotionLine>
 			<iLinePriority>3</iLinePriority>
 			<iSelfHealModifier>2</iSelfHealModifier>
-			<!-- <iFortitudeChange>5</iFortitudeChange> -->
 			<iMaxHPChange>3</iMaxHPChange>
 			<iVictoryHeal>3</iVictoryHeal>
 			<Button>,Art/Buttons/Promotions/SelfHeal3Promotion.dds</Button>
@@ -14007,7 +14004,6 @@
 			<iLinePriority>4</iLinePriority>
 			<iSelfHealModifier>2</iSelfHealModifier>
 			<iEnemyHealChange>1</iEnemyHealChange>
-			<!-- <iFortitudeChange>5</iFortitudeChange> -->
 			<iMaxHPChange>4</iMaxHPChange>
 			<iVictoryHeal>3</iVictoryHeal>
 			<Button>,Art/Buttons/Promotions/SelfHeal4Promotion.dds</Button>
@@ -14022,7 +14018,6 @@
 			<iLinePriority>5</iLinePriority>
 			<iSelfHealModifier>1</iSelfHealModifier>
 			<iEnemyHealChange>3</iEnemyHealChange>
-			<!-- <iFortitudeChange>5</iFortitudeChange> -->
 			<iMaxHPChange>5</iMaxHPChange>
 			<iVictoryHeal>4</iVictoryHeal>
 			<Button>,Art/Buttons/Promotions/SelfHeal5Promotion.dds</Button>
@@ -14035,7 +14030,6 @@
 			<iLinePriority>1</iLinePriority>
 			<iSelfHealModifier>1</iSelfHealModifier>
 			<iNeutralHealChange>1</iNeutralHealChange>
-			<iFortitudeChange>5</iFortitudeChange>
 			<iMaxHPChange>1</iMaxHPChange>
 			<iVictoryHeal>3</iVictoryHeal>
 			<Button>,Art/Buttons/Promotions/SelfRepair1Promotion.dds</Button>
@@ -14049,7 +14043,6 @@
 			<iLinePriority>2</iLinePriority>
 			<iSelfHealModifier>1</iSelfHealModifier>
 			<iNeutralHealChange>1</iNeutralHealChange>
-			<iFortitudeChange>5</iFortitudeChange>
 			<iMaxHPChange>2</iMaxHPChange>
 			<iVictoryHeal>3</iVictoryHeal>
 			<Button>,Art/Buttons/Promotions/SelfRepair2Promotion.dds</Button>
@@ -14063,7 +14056,6 @@
 			<PromotionLine>PROMOTIONLINE_SELF_REPAIR</PromotionLine>
 			<iLinePriority>3</iLinePriority>
 			<iSelfHealModifier>2</iSelfHealModifier>
-			<iFortitudeChange>5</iFortitudeChange>
 			<iMaxHPChange>3</iMaxHPChange>
 			<iVictoryHeal>3</iVictoryHeal>
 			<Button>,Art/Buttons/Promotions/SelfRepair3Promotion.dds</Button>
@@ -14078,7 +14070,6 @@
 			<iLinePriority>4</iLinePriority>
 			<iSelfHealModifier>2</iSelfHealModifier>
 			<iEnemyHealChange>1</iEnemyHealChange>
-			<iFortitudeChange>5</iFortitudeChange>
 			<iMaxHPChange>4</iMaxHPChange>
 			<bAlwaysHeal>1</bAlwaysHeal>
 			<iVictoryHeal>3</iVictoryHeal>
@@ -14094,7 +14085,6 @@
 			<iLinePriority>5</iLinePriority>
 			<iSelfHealModifier>1</iSelfHealModifier>
 			<iEnemyHealChange>3</iEnemyHealChange>
-			<iFortitudeChange>5</iFortitudeChange>
 			<iMaxHPChange>5</iMaxHPChange>
 			<bAlwaysHeal>1</bAlwaysHeal>
 			<iVictoryHeal>4</iVictoryHeal>

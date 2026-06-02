@@ -118,15 +118,10 @@ CvCity::CvCity()
 	m_pabHasRawVicinityBonusCached = NULL;
 	m_paiUnitCombatExtraStrength = NULL;
 	m_pabAutomatedCanBuild = NULL;
-	m_paiNewAfflictionTypeCount = NULL;
 	m_paiAidRate = NULL;
 	m_ppaaiExtraBonusAidModifier = NULL;
-	m_paiNewExtraAfflictionOutbreakLevelChange = NULL;
-	m_paiNewAfflictionToleranceChange = NULL;
-	m_paiNewCurrentOvercomeChange = NULL;
 	m_paiUnitCombatProductionModifier = NULL;
 	m_paiUnitCombatDefenseAgainstModifier = NULL;
-	m_paiPromotionLineAfflictionAttackCommunicability = NULL;
 	m_ppaaiLocalSpecialistExtraYield = NULL;
 	m_ppaaiLocalSpecialistExtraCommerce = NULL;
 
@@ -441,15 +436,10 @@ void CvCity::uninit()
 	SAFE_DELETE_ARRAY(m_pabHasReligion);
 	SAFE_DELETE_ARRAY(m_pabHasCorporation);
 
-	SAFE_DELETE_ARRAY(m_paiNewAfflictionTypeCount);
 	SAFE_DELETE_ARRAY(m_paiAidRate);
 	SAFE_DELETE_ARRAY2(m_ppaaiExtraBonusAidModifier, GC.getNumBonusInfos());
-	SAFE_DELETE_ARRAY(m_paiNewExtraAfflictionOutbreakLevelChange);
-	SAFE_DELETE_ARRAY(m_paiNewAfflictionToleranceChange);
-	SAFE_DELETE_ARRAY(m_paiNewCurrentOvercomeChange);
 	SAFE_DELETE_ARRAY(m_paiUnitCombatProductionModifier);
 	SAFE_DELETE_ARRAY(m_paiUnitCombatDefenseAgainstModifier);
-	SAFE_DELETE_ARRAY(m_paiPromotionLineAfflictionAttackCommunicability);
 	SAFE_DELETE_ARRAY(m_paiStartDeferredSectionNumBonuses);
 	SAFE_DELETE_ARRAY(m_paiSpecialistBannedCount);
 	SAFE_DELETE_ARRAY(m_paiDamageAttackingUnitCombatCount);
@@ -777,12 +767,6 @@ void CvCity::reset(int iID, PlayerTypes eOwner, int iX, int iY, bool bConstructo
 			m_paiProjectProduction[iI] = 0;
 		}
 
-		m_paiPromotionLineAfflictionAttackCommunicability = new int[GC.getNumPromotionLineInfos()];
-		for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-		{
-			m_paiPromotionLineAfflictionAttackCommunicability[iI] = 0;
-		}
-
 		for (int iI = GC.getNumBuildingInfos() - 1; iI > -1; iI--)
 		{
 			m_bHasBuildings[iI] = false;
@@ -853,19 +837,6 @@ void CvCity::reset(int iID, PlayerTypes eOwner, int iX, int iY, bool bConstructo
 			m_paiUnitCombatDefenseAgainstModifier[iI] = 0;
 			m_paiDamageAttackingUnitCombatCount[iI] = 0;
 			m_paiHealUnitCombatTypeVolume[iI] = 0;
-		}
-
-		FAssertMsg((0 < GC.getNumPromotionLineInfos()), "GC.getNumPromotionLineInfos() is not greater than zero but an array is being allocated in CvCity::reset");
-		m_paiNewAfflictionTypeCount = new int[GC.getNumPromotionLineInfos()];
-		m_paiNewExtraAfflictionOutbreakLevelChange = new int[GC.getNumPromotionLineInfos()];
-		m_paiNewAfflictionToleranceChange = new int[GC.getNumPromotionLineInfos()];
-		m_paiNewCurrentOvercomeChange = new int[GC.getNumPromotionLineInfos()];
-		for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-		{
-			m_paiNewAfflictionTypeCount[iI] = 0;
-			m_paiNewExtraAfflictionOutbreakLevelChange[iI] = 0;
-			m_paiNewAfflictionToleranceChange[iI] = 0;
-			m_paiNewCurrentOvercomeChange[iI] = 0;
 		}
 
 		FAssertMsg((0 < GC.getNumPropertyInfos()), "GC.getNumPropertyInfos() is not greater than zero but an array is being allocated in CvCity::reset");
@@ -17235,10 +17206,6 @@ void CvCity::read(FDataStreamBase* pStream)
 	WRAPPER_READ(wrapper, "CvCity", &m_bVisibilitySetup);
 	m_bVisibilitySetup = false;
 
-	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewAfflictionTypeCount);
-	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewExtraAfflictionOutbreakLevelChange);
-	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewAfflictionToleranceChange);
-	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewCurrentOvercomeChange);
 
 	for (int i = 0; i < wrapper.getNumClassEnumValues(REMAPPED_CLASS_TYPE_BONUSES); ++i)
 	{
@@ -17254,7 +17221,6 @@ void CvCity::read(FDataStreamBase* pStream)
 		}
 	}
 	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROPERTIES, GC.getNumPropertyInfos(), m_paiAidRate);
-	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiPromotionLineAfflictionAttackCommunicability);
 	WRAPPER_READ(wrapper, "CvCity", &m_iQuarantinedCount);
 	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_BONUSES, GC.getNumBonusInfos(), m_pabHadRawVicinityBonus);
 	WRAPPER_READ(wrapper, "CvCity", &m_bPropertyControlBuildingQueued);
@@ -17851,10 +17817,6 @@ void CvCity::write(FDataStreamBase* pStream)
 	}
 	WRAPPER_WRITE_ARRAY(wrapper, "CvCity", NUM_YIELD_TYPES, m_aiBaseYieldPerPopRate);
 	WRAPPER_WRITE(wrapper, "CvCity", m_bVisibilitySetup);
-	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewAfflictionTypeCount);
-	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewExtraAfflictionOutbreakLevelChange);
-	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewAfflictionToleranceChange);
-	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewCurrentOvercomeChange);
 
 	for (int iI = 0; iI < GC.getNumBonusInfos(); iI++)
 	{
@@ -17862,7 +17824,6 @@ void CvCity::write(FDataStreamBase* pStream)
 	}
 
 	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROPERTIES, GC.getNumPropertyInfos(), m_paiAidRate);
-	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiPromotionLineAfflictionAttackCommunicability);
 	WRAPPER_WRITE(wrapper, "CvCity", m_iQuarantinedCount);
 	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_BONUSES, GC.getNumBonusInfos(), m_pabHadRawVicinityBonus);
 	WRAPPER_WRITE(wrapper, "CvCity", m_bPropertyControlBuildingQueued);
@@ -22100,14 +22061,6 @@ void CvCity::clearModifierTotals()
 		m_paiUnitCombatDefenseAgainstModifier[iI] = 0;
 		m_paiDamageAttackingUnitCombatCount[iI] = 0;
 		m_paiHealUnitCombatTypeVolume[iI] = 0;
-	}
-
-	for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-	{
-		m_paiNewAfflictionTypeCount[iI] = 0;
-		m_paiNewExtraAfflictionOutbreakLevelChange[iI] = 0;
-		m_paiNewAfflictionToleranceChange[iI] = 0;
-		m_paiNewCurrentOvercomeChange[iI] = 0;
 	}
 
 	for (int iI = 0; iI < GC.getNumPropertyInfos(); iI++)

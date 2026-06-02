@@ -29069,16 +29069,6 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 		iValue += iTemp;
 	}
 
-	iTemp = kPromotion.getCriticalModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getCriticalModifier() : pUnit->criticalModifierTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-
 	iTemp = kPromotion.getEnduranceChange();
 	if (iTemp != 0)
 	{
@@ -29733,46 +29723,6 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 		}
 	}
 
-
-	if (kPromotion.getNumCriticalVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getCriticalVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->criticalVSUnitCombatTotal((UnitCombatTypes)iI) >= 0 || !pUnit && kUnit.getCriticalVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->criticalVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getCriticalVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-				iValue += (iTemp * iCombatWeight) / 100;
-			}
-		}
-	}
 
 	//TB Combat Mods
 	//TB Modification note:adjusted City Attack promo value to balance better against withdraw promos for city attack ai units.
@@ -32294,16 +32244,6 @@ int CvPlayerAI::AI_unitCombatValue(UnitCombatTypes eUnitCombat, UnitTypes eUnit,
 		iValue += iTemp;
 	}
 
-	iTemp = kUnitCombat.getCriticalModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getCriticalModifier() : pUnit->criticalModifierTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-
 	iTemp = kUnitCombat.getEnduranceChange();
 	if (iTemp != 0)
 	{
@@ -32881,12 +32821,6 @@ int CvPlayerAI::AI_unitCombatValue(UnitCombatTypes eUnitCombat, UnitTypes eUnit,
 			}
 			else iValue -= 5;
 		}
-	}
-
-
-	for (int iI = 0; iI < kUnitCombat.getNumCriticalVSUnitCombatTypesChange(); iI++)
-	{
-		iValue += kUnitCombat.getCriticalVSUnitCombatTypeChange(iI).iModifier;
 	}
 
 
