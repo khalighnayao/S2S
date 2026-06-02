@@ -89,7 +89,7 @@ Footprint measured as functional C++ refs (excludes the 3 boilerplate refs every
 has: enum decl + 2 Python registrations).
 - **KEEP:** `SIZE_MATTERS` (~129, core feature), `STRENGTH_IN_NUMBERS` *(see below — now
   slated remove)*, `VANILLA_ENGINE` (1, the lean-core switch), `NEW_RANDOM_SEED` (~1,
-  RNG/reload infra, not combat spaghetti), `WITHOUT_WARNING` *(undecided — keep for now)*.
+  RNG/reload infra, not combat spaghetti), `WITHOUT_WARNING` *(user-confirmed keep — see below)*.
 - **REMOVE — dead enum** (0 functional C++ refs, no XML content): `HEART_OF_WAR` (was
   repel/knockback/unyielding — gutted by R5c; only a commented building line + def + text).
   Trivial: enum + 2 Python + XML option def + GameText.
@@ -122,10 +122,11 @@ has: enum decl + 2 Python registrations).
   `bSINView` Alt-key preview mode + option enum/Python/GameOptionInfos/GameText + schema
   (Unit + Buildings) + `TB_PRESSALT_STR`. No XML data used these fields (confirms "never
   implemented"). Build green, XML valid. Concept in good-ideas list.
-- **UNDECIDED — keep for now, revisit:** `REALISTIC_SIEGE` (~4, breakdown/bombard siege),
-  `AMNESTY` (~3, Hidden-Nationality RoP attack block), `HIDE_SEEK` (~31, multi-layer
-  invisibility), `WITHOUT_WARNING` (~23, ambush/assassination/stealth — a real gameplay
-  feature with assassination missions + UI).
+- **KEEP (user-confirmed):** `REALISTIC_SIEGE` (~4, breakdown/bombard siege), `AMNESTY`
+  (~3, Hidden-Nationality RoP attack block), `HIDE_SEEK` (~31, multi-layer invisibility),
+  `WITHOUT_WARNING` (~23, ambush/assassination/stealth — a real gameplay feature with
+  assassination missions + UI). These are functional gameplay options (like
+  `SURROUND_DESTROY`), not the broken/non-functioning TB cruft — they stay.
 - **DEFER:** `OUTBREAKS_AND_AFFLICTIONS` — handled by the R4 afflictions+critical task.
 - NOTE: GAMEOPTION enum order must stay aligned with `CIV4GameOptionInfos.xml`; removing a
   value shifts later options' save bits (save-compat downprioritized) and requires deleting
