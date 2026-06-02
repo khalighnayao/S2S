@@ -2198,6 +2198,7 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition&
 		iAttackerStrength = currCombatStr(NULL, NULL, &cdAttackerDetails);
 		iAttackerFirepower = currFirepower(NULL, NULL);
 		getDefenderCombatValues(*pDefender, pPlot, iAttackerStrength, iAttackerFirepower, iDefenderOdds, iDefenderStrength, iAttackerDamage, iDefenderDamage, &cdDefenderDetails, pDefender);
+		iAttackerOdds = std::max((GC.getCOMBAT_DIE_SIDES() - iDefenderOdds), 0);
 		iDefenderHitChance = std::max(5, iDefenderOdds + ((iDefenderHitModifier * iDefenderOdds)/100));
 		iAttackerHitChance = std::max(5, iAttackerOdds + ((iAttackerHitModifier * iAttackerOdds)/100));
 	}
@@ -2211,6 +2212,7 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition&
 			iAttackerStrength = currCombatStr(NULL, NULL, &cdAttackerDetails);
 			iAttackerFirepower = currFirepower(NULL, NULL);
 			getDefenderCombatValues(*pDefender, pPlot, iAttackerStrength, iAttackerFirepower, iDefenderOdds, iDefenderStrength, iAttackerDamage, iDefenderDamage, &cdDefenderDetails, pDefender);
+			iAttackerOdds = std::max((GC.getCOMBAT_DIE_SIDES() - iDefenderOdds), 0);
 			iDefenderHitChance = std::max(5, iDefenderOdds + ((iDefenderHitModifier * iDefenderOdds)/100));
 			iAttackerHitChance = std::max(5, iAttackerOdds + ((iAttackerHitModifier * iAttackerOdds)/100));
 		}
@@ -2225,8 +2227,9 @@ void CvUnit::resolveCombat(CvUnit* pDefender, CvPlot* pPlot, CvBattleDefinition&
 			bBreakdown = false;
 		}
 
-		// dodge/precision hit-modifier removed; modifiers stay 0 (plain odds).
-		iAttackerOdds = std::max((GC.getCOMBAT_DIE_SIDES() - iDefenderOdds), 0);
+		// dodge/precision hit-modifier removed; iAttackerHitChance/iDefenderHitChance
+		// are computed above from the same-round odds (was lagging a round, which gave
+		// the attacker a ~0.5% round-1 hit chance).
 		iDefenderCombatRoll = GC.getGame().getSorenRandNum(GC.getCOMBAT_DIE_SIDES(), "DefenderCombatRoll");
 		iAttackerCombatRoll = GC.getGame().getSorenRandNum(GC.getCOMBAT_DIE_SIDES(), "AttackerCombatRoll");
 		WithdrawalRollResult = GC.getGame().getSorenRandNum(100, "Withdrawal");
@@ -21984,46 +21987,14 @@ int CvUnit::getDropRange() const
 
 void CvUnit::getDefenderCombatValues(const CvUnit& kDefender, const CvPlot* pPlot, int iOurStrength, int iOurFirepower, int& iTheirOdds, int& iTheirStrength, int& iOurDamage, int& iTheirDamage, CombatDetails* pTheirDetails, const CvUnit* pDefender) const
 {
-	//TB Combat Mod begin
-	iTheirStrength = std::max(1,kDefender.currCombatStr(pPlot, this, pTheirDetails));
-	int iTheirFirepower = std::max(1, kDefender.currFirepower(pPlot, this));
-
-
-
-	//TB Combat Mod end
-
-	FAssert((iOurStrength + iTheirStrength) > 0);
-	FAssert((iOurFirepower + iTheirFirepower) > 0);
-
-	iTheirOdds = ((GC.getCOMBAT_DIE_SIDES() * iTheirStrength) / (iOurStrength + iTheirStrength));
-
-	// Free wins against NPC
-	if (isNPC())
-	{
-		if (!kDefender.isNPC() && GET_PLAYER(kDefender.getOwner()).getWinsVsBarbs() < GC.getHandicapInfo(GET_PLAYER(kDefender.getOwner()).getHandicapType()).getFreeWinsVsBarbs())
-		{
-			iTheirOdds =  std::max((90 * GC.getCOMBAT_DIE_SIDES()) / 100, iTheirOdds);
-		}
-	}
-	else if (kDefender.isNPC() && GET_PLAYER(getOwner()).getWinsVsBarbs() < GC.getHandicapInfo(GET_PLAYER(getOwner()).getHandicapType()).getFreeWinsVsBarbs())
-	{
-		iTheirOdds = std::min((10 * GC.getCOMBAT_DIE_SIDES()) / 100, iTheirOdds);
-	}
-
-	int iStrengthFactor = ((iOurFirepower + iTheirFirepower + 1) / 2);
-
-	// Damage: firepower ratio + damageModifier (armor/puncture mitigation removed).
-	int iDefendDamageModifierTotal = kDefender.damageModifierTotal();
-	int iAttackDamageModifierTotal = damageModifierTotal();
-
-	int iOurDamageBase = ((GC.getCOMBAT_DAMAGE() * (iTheirFirepower + iStrengthFactor)) / std::max(1, (iOurFirepower + iStrengthFactor)));
-	int iTheirDamageBase = ((GC.getCOMBAT_DAMAGE() * (iOurFirepower + iStrengthFactor)) / std::max(1, (iTheirFirepower + iStrengthFactor)));
-	iOurDamage = std::max(1, iOurDamageBase + ((iOurDamageBase * iDefendDamageModifierTotal)/100));
-	iTheirDamage = std::max(1, iTheirDamageBase + ((iTheirDamageBase * iAttackDamageModifierTotal)/100));
-/************************************************************************************************/
-/* BETTER_BTS_AI_MOD                       END                                                  */
-/************************************************************************************************/
-	iTheirStrength = std::max(1,iTheirStrength);
+	// Thin adapter over the shared Layer-1 RoundModel (CvCombatModel). This is the
+	// canonical per-round formula; resolveCombat, flankingStrikeCombat, and the AI
+	// (AI_attackOddsAtPlotInternal) all reach the engine through here.
+	const RoundModel m = buildRoundModel(this, iOurStrength, iOurFirepower, &kDefender, pPlot, pTheirDetails);
+	iTheirOdds = m.iDefenderOdds;
+	iTheirStrength = m.iDefenderStrength;
+	iOurDamage = m.iDamageToAttacker;
+	iTheirDamage = m.iDamageToDefender;
 }
 
 int CvUnit::getTriggerValue(EventTriggerTypes eTrigger, const CvPlot* pPlot, bool bCheckPlot) const

@@ -20,6 +20,62 @@
 // AI and resolution paths through here. See CvCombatModel.h.
 // ---------------------------------------------------------------------------
 
+// Layer 1 -- the single per-round formula. The body is the canonical version
+// from CvUnit::getDefenderCombatValues (strength-ratio odds + barb free-wins +
+// firepower-ratio damage), extended with the combat limit and first-strike
+// inputs so every consumer shares one source of truth.
+RoundModel buildRoundModel(const CvUnit* pAttacker, int iAttackerStrength, int iAttackerFirepower,
+	const CvUnit* pDefender, const CvPlot* pPlot, CombatDetails* pDefenderDetails)
+{
+	PROFILE_EXTRA_FUNC();
+
+	RoundModel m;
+	m.iAttackerStrength = iAttackerStrength;
+	m.iAttackerFirepower = iAttackerFirepower;
+	m.iDefenderStrength = std::max(1, pDefender->currCombatStr(pPlot, pAttacker, pDefenderDetails));
+	m.iDefenderFirepower = std::max(1, pDefender->currFirepower(pPlot, pAttacker));
+
+	// Defender hit odds (strength ratio).
+	m.iDefenderOdds = (GC.getCOMBAT_DIE_SIDES() * m.iDefenderStrength) / std::max(1, iAttackerStrength + m.iDefenderStrength);
+
+	// Free wins against NPC (barbarians/animals). Authoritative behaviour, matched
+	// by resolution; the odds preview now agrees instead of ignoring it.
+	if (pAttacker->isNPC())
+	{
+		if (!pDefender->isNPC()
+			&& GET_PLAYER(pDefender->getOwner()).getWinsVsBarbs() < GC.getHandicapInfo(GET_PLAYER(pDefender->getOwner()).getHandicapType()).getFreeWinsVsBarbs())
+		{
+			m.iDefenderOdds = std::max((90 * GC.getCOMBAT_DIE_SIDES()) / 100, m.iDefenderOdds);
+		}
+	}
+	else if (pDefender->isNPC()
+		&& GET_PLAYER(pAttacker->getOwner()).getWinsVsBarbs() < GC.getHandicapInfo(GET_PLAYER(pAttacker->getOwner()).getHandicapType()).getFreeWinsVsBarbs())
+	{
+		m.iDefenderOdds = std::min((10 * GC.getCOMBAT_DIE_SIDES()) / 100, m.iDefenderOdds);
+	}
+
+	m.iAttackerOdds = GC.getCOMBAT_DIE_SIDES() - m.iDefenderOdds;
+
+	// Per-round damage (firepower ratio + damage modifier; natural HP scale).
+	m.iStrengthFactor = (iAttackerFirepower + m.iDefenderFirepower + 1) / 2;
+	const int iDamageToAttackerBase = (GC.getCOMBAT_DAMAGE() * (m.iDefenderFirepower + m.iStrengthFactor)) / std::max(1, iAttackerFirepower + m.iStrengthFactor);
+	const int iDamageToDefenderBase = (GC.getCOMBAT_DAMAGE() * (iAttackerFirepower + m.iStrengthFactor)) / std::max(1, m.iDefenderFirepower + m.iStrengthFactor);
+	m.iDamageToAttacker = std::max(1, iDamageToAttackerBase + (iDamageToAttackerBase * pDefender->damageModifierTotal()) / 100);
+	m.iDamageToDefender = std::max(1, iDamageToDefenderBase + (iDamageToDefenderBase * pAttacker->damageModifierTotal()) / 100);
+
+	m.iCombatLimit = pAttacker->combatLimit(pDefender);
+
+	m.bAttackerImmuneFS = pAttacker->immuneToFirstStrikes();
+	m.bDefenderImmuneFS = pDefender->immuneToFirstStrikes();
+	m.iAttackerFirstStrikes = pAttacker->firstStrikes();
+	m.iAttackerChanceFirstStrikes = pAttacker->chanceFirstStrikes();
+	m.iDefenderFirstStrikes = pDefender->firstStrikes();
+	m.iDefenderChanceFirstStrikes = pDefender->chanceFirstStrikes();
+
+	return m;
+}
+// ---------------------------------------------------------------------------
+
 // FUNCTION: getCombatOdds
 // Calculates combat odds, given two units
 // Returns value from 0-1000
@@ -34,18 +90,12 @@ static int getCombatOddsImpl(const CvUnit* pAttacker, const CvUnit* pDefender, b
 	// setup battle, calculate strengths and odds
 
 	//TB Combat Mod begin
-	//Added ST
-	int iAttackerStrength = pAttacker->currCombatStr(NULL, NULL);
-	int iAttackerFirepower = pAttacker->currFirepower(NULL, NULL);
-	int iDefenderStrength = pDefender->currCombatStr(pDefender->plot(), pAttacker);
-	int iDefenderFirepower = pDefender->currFirepower(pDefender->plot(), pAttacker);
+	const int iAttackerStrength = pAttacker->currCombatStr(NULL, NULL);
+	const int iAttackerFirepower = pAttacker->currFirepower(NULL, NULL);
+	const RoundModel m = buildRoundModel(pAttacker, iAttackerStrength, iAttackerFirepower, pDefender, pDefender->plot());
 
-	FAssert(iAttackerStrength + iDefenderStrength > 0);
-	FAssert(iAttackerFirepower + iDefenderFirepower > 0);
-
-	// Plain strength-ratio odds (precision/dodge hit-modifier removed).
-	const int iDefenderOdds = GC.getCOMBAT_DIE_SIDES() * iDefenderStrength / std::max(1, iAttackerStrength + iDefenderStrength);
-	const int iAttackerOdds = GC.getCOMBAT_DIE_SIDES() - iDefenderOdds;
+	const int iDefenderOdds = m.iDefenderOdds;
+	const int iAttackerOdds = m.iAttackerOdds;
 	if (iDefenderOdds == 0)
 	{
 		return 1000;
@@ -55,19 +105,13 @@ static int getCombatOddsImpl(const CvUnit* pAttacker, const CvUnit* pDefender, b
 		return 0;
 	}
 	int iOdds = 0;
-	const int iStrengthFactor = (iAttackerFirepower + iDefenderFirepower + 1) / 2;
 
-	// calculate damage done in one round (armor/puncture mitigation removed)
-	const int iDamageToAttackerBase = GC.getCOMBAT_DAMAGE() * (iDefenderFirepower + iStrengthFactor) / std::max(1, iAttackerFirepower + iStrengthFactor);
-	const int iDamageToDefenderBase = GC.getCOMBAT_DAMAGE() * (iAttackerFirepower + iStrengthFactor) / std::max(1, iDefenderFirepower + iStrengthFactor);
+	const int iDamageToAttacker = m.iDamageToAttacker;
+	const int iDamageToDefender = m.iDamageToDefender;
 
-	const int iDamageToAttacker = std::max(1, iDamageToAttackerBase * (100 + pDefender->damageModifierTotal()));
-	const int iDamageToDefender = std::max(1, iDamageToDefenderBase * (100 + pAttacker->damageModifierTotal()));
-
-	// calculate needed rounds.
-	// Needed rounds = round_up(health/damage)
-	int iNeededRoundsAttacker = (std::max(0, 100*pDefender->getHP() + 100*pAttacker->combatLimit(pDefender) - 100*pDefender->getMaxHP()) + iDamageToDefender - 100) / iDamageToDefender;
-	int iNeededRoundsDefender = (100*pAttacker->getHP() + iDamageToAttacker - 100) / iDamageToAttacker;
+	// calculate needed rounds = round_up(health/damage), combat limit folded in.
+	int iNeededRoundsAttacker = (std::max(0, pDefender->getHP() + m.iCombatLimit - pDefender->getMaxHP()) + iDamageToDefender - 1) / iDamageToDefender;
+	int iNeededRoundsDefender = (pAttacker->getHP() + iDamageToAttacker - 1) / iDamageToAttacker;
 	if (iNeededRoundsAttacker > 20 * iNeededRoundsDefender || iNeededRoundsDefender > 20 * iNeededRoundsAttacker || iNeededRoundsAttacker + iNeededRoundsDefender > 100)
 	{
 		// Solves inaccuracies that arise when combat involves an extremely weak unit like a pigeon
@@ -88,13 +132,12 @@ static int getCombatOddsImpl(const CvUnit* pAttacker, const CvUnit* pDefender, b
 	if (iNeededRoundsDefender < 1) iNeededRoundsDefender = 1;
 	const int iMaxRounds = iNeededRoundsAttacker + iNeededRoundsDefender - 1;
 
-	// calculate possible first strikes distribution.
-	// We can't use the getCombatFirstStrikes() function (only one result, no distribution), so we need to mimic it.
-	const int iAttackerLowFS = (bSuppressFirstStrikes || pDefender->immuneToFirstStrikes()) ? 0 : pAttacker->firstStrikes();
-	const int iAttackerHighFS = (bSuppressFirstStrikes || pDefender->immuneToFirstStrikes()) ? 0 : pAttacker->firstStrikes() + pAttacker->chanceFirstStrikes();
+	// possible first strikes distribution (from the shared model; suppress-aware).
+	const int iAttackerLowFS = (bSuppressFirstStrikes || m.bDefenderImmuneFS) ? 0 : m.iAttackerFirstStrikes;
+	const int iAttackerHighFS = (bSuppressFirstStrikes || m.bDefenderImmuneFS) ? 0 : m.iAttackerFirstStrikes + m.iAttackerChanceFirstStrikes;
 
-	const int iDefenderLowFS = (bSuppressFirstStrikes || pAttacker->immuneToFirstStrikes()) ? 0 : pDefender->firstStrikes();
-	const int iDefenderHighFS = (bSuppressFirstStrikes || pAttacker->immuneToFirstStrikes()) ? 0 : (pDefender->firstStrikes() + pDefender->chanceFirstStrikes());
+	const int iDefenderLowFS = (bSuppressFirstStrikes || m.bAttackerImmuneFS) ? 0 : m.iDefenderFirstStrikes;
+	const int iDefenderHighFS = (bSuppressFirstStrikes || m.bAttackerImmuneFS) ? 0 : (m.iDefenderFirstStrikes + m.iDefenderChanceFirstStrikes);
 
 	// For every possible first strike event, calculate the odds of combat.
 	// Then, add these to the total, weighted to the chance of that first strike event occurring
@@ -201,7 +244,7 @@ static int getCombatOddsImpl(const CvUnit* pAttacker, const CvUnit* pDefender, b
 
 	// Weigh the total to the number of possible combinations of first strikes events
 	// note: the integer math breaks down when #FS > 656 (with a die size of 1000)
-	iOdds /= ((bSuppressFirstStrikes || pDefender->immuneToFirstStrikes() ? 0 : pAttacker->chanceFirstStrikes()) + 1) * ((bSuppressFirstStrikes || pAttacker->immuneToFirstStrikes() ? 0 : pDefender->chanceFirstStrikes()) + 1);
+	iOdds /= ((bSuppressFirstStrikes || m.bDefenderImmuneFS ? 0 : m.iAttackerChanceFirstStrikes) + 1) * ((bSuppressFirstStrikes || m.bAttackerImmuneFS ? 0 : m.iDefenderChanceFirstStrikes) + 1);
 
 	FASSERT_BOUNDS(0, 1001, iOdds);
 	return iOdds;
@@ -225,59 +268,24 @@ float getCombatOddsSpecific(const CvUnit* pAttacker, const CvUnit* pDefender, in
 {
 	PROFILE_EXTRA_FUNC();
 
-	int iAttackerStrength = pAttacker->currCombatStr(NULL, NULL);
-	int iAttackerFirepower = pAttacker->currFirepower(NULL, NULL);
-	int iDefenderStrength = pDefender->currCombatStr(pDefender->plot(), pAttacker);
-	int iDefenderFirepower = pDefender->currFirepower(pDefender->plot(), pAttacker);
+	const int iAttackerStrength = pAttacker->currCombatStr(NULL, NULL);
+	const int iAttackerFirepower = pAttacker->currFirepower(NULL, NULL);
+	const RoundModel m = buildRoundModel(pAttacker, iAttackerStrength, iAttackerFirepower, pDefender, pDefender->plot());
 
-	//TB Combat Mods End
+	const int iDamageToAttacker = m.iDamageToAttacker;
+	const int iDamageToDefender = m.iDamageToDefender;
+	const int iDefenderOdds = m.iDefenderOdds;   // barb free-wins applied in buildRoundModel
+	const int iAttackerOdds = m.iAttackerOdds;
+	const int iCombatLimit = m.iCombatLimit;
 
-	const int iStrengthFactor = ((iAttackerFirepower + iDefenderFirepower + 1) / 2);
-
-	const int iDamageToAttackerBase = GC.getCOMBAT_DAMAGE() * (iDefenderFirepower + iStrengthFactor) / std::max(1, iAttackerFirepower + iStrengthFactor);
-	const int iDamageToDefenderBase = GC.getCOMBAT_DAMAGE() * (iAttackerFirepower + iStrengthFactor) / std::max(1, iDefenderFirepower + iStrengthFactor);
-
-	const int iDamageToAttacker = std::max(1, iDamageToAttackerBase + iDamageToAttackerBase * pDefender->damageModifierTotal() / 100);
-	const int iDamageToDefender = std::max(1, iDamageToDefenderBase + iDamageToDefenderBase * pAttacker->damageModifierTotal() / 100);
-
-	// Plain strength-ratio odds (precision/dodge hit-modifier removed).
-	int iDefenderOdds = GC.getCOMBAT_DIE_SIDES() * iDefenderStrength / (iAttackerStrength + iDefenderStrength);
-	int iAttackerOdds = GC.getCOMBAT_DIE_SIDES() - iDefenderOdds;
-
-	if (GC.getDefineINT("ACO_IgnoreBarbFreeWins")==0)
-	{
-		if (pDefender->isHominid())
-		{
-			//defender is barbarian
-			if (!GET_PLAYER(pAttacker->getOwner()).isHominid() && GET_PLAYER(pAttacker->getOwner()).getWinsVsBarbs() < GC.getHandicapInfo(GET_PLAYER(pAttacker->getOwner()).getHandicapType()).getFreeWinsVsBarbs())
-			{
-				//attacker is not barb and attacker player has free wins left
-				//I have assumed in the following code only one of the units (attacker and defender) can be a barbarian
-
-				iDefenderOdds = std::min((10 * GC.getCOMBAT_DIE_SIDES()) / 100, iDefenderOdds);
-				iAttackerOdds = std::max((90 * GC.getCOMBAT_DIE_SIDES()) / 100, iAttackerOdds);
-			}
-		}
-		else if (pAttacker->isHominid())
-		{
-			//attacker is barbarian
-			if (!GET_PLAYER(pDefender->getOwner()).isHominid() && GET_PLAYER(pDefender->getOwner()).getWinsVsBarbs() < GC.getHandicapInfo(GET_PLAYER(pDefender->getOwner()).getHandicapType()).getFreeWinsVsBarbs())
-			{
-				//defender is not barbarian and defender has free wins left and attacker is barbarian
-				iAttackerOdds = std::min((10 * GC.getCOMBAT_DIE_SIDES()) / 100, iAttackerOdds);
-				iDefenderOdds = std::max((90 * GC.getCOMBAT_DIE_SIDES()) / 100, iDefenderOdds);
-			}
-		}
-	}
-
-	const int iNeededRoundsAttacker = (pDefender->getHP() - pDefender->getMaxHP() + pAttacker->combatLimit(pDefender) - (((pAttacker->combatLimit(pDefender))==pDefender->getMaxHP())?1:0))/iDamageToDefender + 1;
-	const int iNeededRoundsDefender = (pAttacker->getHP() + iDamageToAttacker - 1 ) / iDamageToAttacker;
+	const int iNeededRoundsAttacker = (pDefender->getHP() - pDefender->getMaxHP() + iCombatLimit - ((iCombatLimit == pDefender->getMaxHP()) ? 1 : 0)) / iDamageToDefender + 1;
+	const int iNeededRoundsDefender = (pAttacker->getHP() + iDamageToAttacker - 1) / iDamageToAttacker;
 
 	const int N_D = (
 		(
-			std::max(0, pDefender->getHP() + pAttacker->combatLimit(pDefender) - pDefender->getMaxHP())
+			std::max(0, pDefender->getHP() + iCombatLimit - pDefender->getMaxHP())
 			+ iDamageToDefender
-			- (pAttacker->combatLimit(pDefender) == pDefender->getMaxHP())
+			- (iCombatLimit == pDefender->getMaxHP())
 		)
 		/ iDamageToDefender
 	);
@@ -286,12 +294,12 @@ float getCombatOddsSpecific(const CvUnit* pAttacker, const CvUnit* pDefender, in
 	// Vanilla attacker withdrawal only (TB pursuit/knockback/repel/defender-withdrawal removed).
 	const float RetreatOdds = range(pAttacker->withdrawalProbability(), 0, 100) / 100.0f;
 
-	const int AttFSnet = (pDefender->immuneToFirstStrikes() ? 0 : pAttacker->firstStrikes()) - (pAttacker->immuneToFirstStrikes() ? 0 : pDefender->firstStrikes());
-	const int AttFSC = pDefender->immuneToFirstStrikes() ? 0 : pAttacker->chanceFirstStrikes();
-	const int DefFSC = (pAttacker->immuneToFirstStrikes()) ? 0 : (pDefender->chanceFirstStrikes());
+	const int AttFSnet = (m.bDefenderImmuneFS ? 0 : m.iAttackerFirstStrikes) - (m.bAttackerImmuneFS ? 0 : m.iDefenderFirstStrikes);
+	const int AttFSC = m.bDefenderImmuneFS ? 0 : m.iAttackerChanceFirstStrikes;
+	const int DefFSC = m.bAttackerImmuneFS ? 0 : m.iDefenderChanceFirstStrikes;
 
-	const float P_A = ((float)iAttackerOdds) / GC.getDefineINT("COMBAT_DIE_SIDES");
-	const float P_D = ((float)iDefenderOdds) / GC.getDefineINT("COMBAT_DIE_SIDES");
+	const float P_A = ((float)iAttackerOdds) / GC.getCOMBAT_DIE_SIDES();
+	const float P_D = ((float)iDefenderOdds) / GC.getCOMBAT_DIE_SIDES();
 	float answer = 0.0f;
 	// (1) Defender dies or is taken to combat limit
 	if (n_A < N_A && n_D == iNeededRoundsAttacker)
@@ -443,22 +451,19 @@ CombatPreview computeCombatPreview(const CvUnit* pAttacker, const CvUnit* pDefen
 
 	const int iAttackerStrength = pAttacker->currCombatStr(NULL, NULL);
 	const int iAttackerFirepower = pAttacker->currFirepower(NULL, NULL);
-	const int iDefenderStrength = std::max(1, pDefender->currCombatStr(pPlot, pAttacker));
-	const int iDefenderFirepower = std::max(1, pDefender->currFirepower(pPlot, pAttacker));
 
 	if (iAttackerStrength <= 0)
 	{
 		return kP;
 	}
 
-	// --- per-round damage and needed rounds (matches setCombatPlotHelp) ---
-	const int iStrengthFactor = (iAttackerFirepower + iDefenderFirepower + 1) / 2;
-	const int iDamageToAttackerBase = (GC.getCOMBAT_DAMAGE() * (iDefenderFirepower + iStrengthFactor)) / std::max(1, iAttackerFirepower + iStrengthFactor);
-	const int iDamageToDefenderBase = (GC.getCOMBAT_DAMAGE() * (iAttackerFirepower + iStrengthFactor)) / std::max(1, iDefenderFirepower + iStrengthFactor);
-	const int iDamageToAttacker = std::max(1, iDamageToAttackerBase + (iDamageToAttackerBase * pDefender->damageModifierTotal()) / 100);
-	const int iDamageToDefender = std::max(1, iDamageToDefenderBase + (iDamageToDefenderBase * pAttacker->damageModifierTotal()) / 100);
+	// --- per-round damage and needed rounds (shared Layer-1 RoundModel) ---
+	const RoundModel m = buildRoundModel(pAttacker, iAttackerStrength, iAttackerFirepower, pDefender, pPlot);
+	const int iDefenderStrength = m.iDefenderStrength;
+	const int iDamageToAttacker = m.iDamageToAttacker;
+	const int iDamageToDefender = m.iDamageToDefender;
 
-	const int iCombatLimit = pAttacker->combatLimit(pDefender);
+	const int iCombatLimit = m.iCombatLimit;
 	const bool bCanKill = (iCombatLimit >= pDefender->getMaxHP());
 	const int iNeededRoundsAttacker = (pDefender->getHP() - pDefender->getMaxHP() + iCombatLimit - (bCanKill ? 1 : 0)) / iDamageToDefender + 1;
 	const int iNeededRoundsDefender = (pAttacker->getHP() + iDamageToAttacker - 1) / iDamageToAttacker;
@@ -492,8 +497,7 @@ CombatPreview computeCombatPreview(const CvUnit* pAttacker, const CvUnit* pDefen
 		DefenderKillOdds += getCombatOddsSpecific(pAttacker, pDefender, iNeededRoundsDefender, n_D);
 	}
 
-	const int iDefenderOdds = (GC.getCOMBAT_DIE_SIDES() * iDefenderStrength) / std::max(1, iAttackerStrength + iDefenderStrength);
-	if (iDefenderOdds == 0)
+	if (m.iDefenderOdds == 0)
 	{
 		DefenderKillOdds = 0.0f; // guaranteed no defender hit
 	}
@@ -524,7 +528,7 @@ CombatPreview computeCombatPreview(const CvUnit* pAttacker, const CvUnit* pDefen
 	kP.fExpHPAttackerWin = (AttackerKillOdds > 0.0f) ? E_HP_Att / AttackerKillOdds : 0.0f;
 	kP.fExpHPAttackerPullOut = (PullOutOdds > 0.0f) ? E_HP_Att / PullOutOdds : 0.0f;
 	kP.iExpHPAttackerRetreat = iExpHPAttackerRetreat;
-	kP.fExpHPDefenderWin = (iDefenderOdds != 0 && (RetreatOdds + DefenderKillOdds) > 0.0f)
+	kP.fExpHPDefenderWin = (m.iDefenderOdds != 0 && (RetreatOdds + DefenderKillOdds) > 0.0f)
 		? E_HP_Def_Defeat / (RetreatOdds + DefenderKillOdds) : 0.0f;
 	kP.iDefenderHitLimitHP = iDefenderHitLimit;
 

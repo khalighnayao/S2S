@@ -1,5 +1,22 @@
 # CvCombatModel — Engine API Sketch (for review)
 
+## STATUS — Phase 3a landed (Layer 1 RoundModel)
+`buildRoundModel()` (CvCombatModel.h/.cpp) is now the single per-round formula:
+strength-ratio odds (with barb free-wins via `isNPC`), firepower-ratio damage,
+combat limit, first-strike inputs. Consumers routed through it:
+`CvUnit::getDefenderCombatValues` (a thin adapter — so resolveCombat, flanking,
+and the AI's `AI_attackOddsAtPlotInternal` damage inputs all share it),
+`getCombatOddsImpl`, `getCombatOddsSpecific`, and `computeCombatPreview`. The
+divergences were reconciled to one behaviour (prediction == resolution): barb
+free-wins now apply uniformly (incl. `getCombatOdds`, dropping the old
+`isHominid`/`ACO_IgnoreBarbFreeWins` split), and the `resolveCombat` round-1
+attacker hit-chance bug (~0.5% via a one-round lag) is fixed.
+DEFERRED (Phase 3b, opt-in): routing the AI's *win-%* through the binomial engine
+(replacing its strength-ratio heuristic) — needs threshold re-tuning + preserving
+the personality bias and predicted-HP contract. The AI heuristic is unchanged for now.
+
+---
+
 Draft of the unified combat engine so we can spot gaps before building Phase 1b.
 Priorities (per user): **maintainability > outcome parity**; **game options pluggable
 as rules**; **deterministic/OOS-safe** (synced `getSorenRandNum`, integer applied

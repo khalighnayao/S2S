@@ -7,6 +7,49 @@
 #include <vector>
 
 class CvUnit;
+class CvPlot;
+struct CombatDetails;
+
+// ---------------------------------------------------------------------------
+// RoundModel -- Layer 1 of the unified engine: the single per-round formula.
+//
+// buildRoundModel() is the ONE place that turns a matchup into per-round combat
+// numbers: hit odds (with barb free-wins), per-round damage, combat limit, and
+// first-strike inputs. Every consumer -- the odds functions, the UI preview,
+// CvUnit::getDefenderCombatValues (and through it resolveCombat, flanking, and
+// the AI's damage inputs) -- reads these instead of recomputing, so prediction
+// and resolution can never diverge on the per-round math.
+//
+// The attacker's strength/firepower are passed in (not computed) because some
+// callers substitute a different value (e.g. airCurrCombatStr for air combat).
+// pDefenderDetails, if non-NULL, is populated by the defender currCombatStr call
+// for the combat-log breakdown.
+// ---------------------------------------------------------------------------
+
+struct RoundModel
+{
+	int iAttackerStrength;
+	int iAttackerFirepower;
+	int iDefenderStrength;          // max(1, ...)
+	int iDefenderFirepower;         // max(1, ...)
+	int iStrengthFactor;
+
+	int iAttackerOdds;              // attacker hit chance, out of COMBAT_DIE_SIDES
+	int iDefenderOdds;              // defender hit chance, out of COMBAT_DIE_SIDES (incl. barb free-wins)
+
+	int iDamageToAttacker;          // HP lost per landed defender hit (>= 1), natural scale
+	int iDamageToDefender;          // HP lost per landed attacker hit (>= 1)
+
+	int iCombatLimit;               // attacker's combat limit vs this defender
+
+	// Raw first-strike inputs (consumers may suppress, e.g. the no-FS win swing).
+	int  iAttackerFirstStrikes, iAttackerChanceFirstStrikes;
+	int  iDefenderFirstStrikes, iDefenderChanceFirstStrikes;
+	bool bAttackerImmuneFS, bDefenderImmuneFS;
+};
+
+RoundModel buildRoundModel(const CvUnit* pAttacker, int iAttackerStrength, int iAttackerFirepower,
+	const CvUnit* pDefender, const CvPlot* pPlot, CombatDetails* pDefenderDetails = NULL);
 
 // ---------------------------------------------------------------------------
 // CvCombatModel -- the single home for combat-probability math.
