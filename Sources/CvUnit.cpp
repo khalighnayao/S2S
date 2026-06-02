@@ -17566,7 +17566,6 @@ bool CvUnit::canAcquirePromotion(PromotionTypes ePromotion, PromotionRequirement
 	return canAcquirePromotion(ePromotion,
 		requirements & PromotionRequirements::IgnoreHas,
 		requirements & PromotionRequirements::Equip,
-		requirements & PromotionRequirements::Afflict,
 		requirements & PromotionRequirements::ForLeader,
 		requirements & PromotionRequirements::ForOffset,
 		requirements & PromotionRequirements::ForFree,
@@ -17575,7 +17574,7 @@ bool CvUnit::canAcquirePromotion(PromotionTypes ePromotion, PromotionRequirement
 	);
 }
 
-bool CvUnit::canAcquirePromotion(PromotionTypes ePromotion, bool bIgnoreHas, bool bEquip, bool bAfflict, bool bForLeader, bool bForOffset, bool bForFree, bool bForBuildUp, bool bForStatus) const
+bool CvUnit::canAcquirePromotion(PromotionTypes ePromotion, bool bIgnoreHas, bool bEquip, bool bForLeader, bool bForOffset, bool bForFree, bool bForBuildUp, bool bForStatus) const
 {
 	PROFILE_FUNC();
 
@@ -17712,7 +17711,7 @@ bool CvUnit::canAcquirePromotion(PromotionTypes ePromotion, bool bIgnoreHas, boo
 	//TB SubCombat Mod End
 
 	// Must have the next less promotionline priority unless this is an affliction, equipment, or BuildUp or Status.
-	if (ePromotionLine != NO_PROMOTIONLINE && !bAfflict && !bEquip && !bForBuildUp && !bForStatus && promo.getLinePriority() > 1)
+	if (ePromotionLine != NO_PROMOTIONLINE && !bEquip && !bForBuildUp && !bForStatus && promo.getLinePriority() > 1)
 	{
 		const CvPromotionLineInfo& promoLine = GC.getPromotionLineInfo(ePromotionLine);
 		const int numPromotions = promoLine.getNumPromotions();

@@ -31,10 +31,6 @@ CvPromotionLineInfo::CvPromotionLineInfo() :
 									m_ePrereqTech(NO_TECH),
 									m_eObsoleteTech(NO_TECH),
 									m_ePropertyType(NO_PROPERTY),
-									m_bNoSpreadonBattle(false),
-									m_bNoSpreadUnitProximity(false),
-									m_bNoSpreadUnittoCity(false),
-									m_bNoSpreadCitytoUnit(false),
 									m_bBuildUp(false),
 									m_bPoison(false)
 {
@@ -61,10 +57,6 @@ bool CvPromotionLineInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"PropertyType");
 	m_ePropertyType = (PropertyTypes) pXML->GetInfoClass(szTextVal);
 
-	pXML->GetOptionalChildXmlValByName(&m_bNoSpreadonBattle, L"bNoSpreadonBattle");
-	pXML->GetOptionalChildXmlValByName(&m_bNoSpreadUnitProximity, L"bNoSpreadUnitProximity");
-	pXML->GetOptionalChildXmlValByName(&m_bNoSpreadUnittoCity, L"bNoSpreadUnittoCity");
-	pXML->GetOptionalChildXmlValByName(&m_bNoSpreadCitytoUnit, L"bNoSpreadCitytoUnit");
 	pXML->GetOptionalChildXmlValByName(&m_bBuildUp, L"bBuildUp");
 	pXML->GetOptionalChildXmlValByName(&m_bPoison, L"bPoison");
 
@@ -97,10 +89,6 @@ void CvPromotionLineInfo::copyNonDefaults(const CvPromotionLineInfo* pClassInfo)
 	if (getPrereqTech() == NO_TECH) m_ePrereqTech = pClassInfo->getPrereqTech();
 	if (getObsoleteTech() == NO_TECH) m_eObsoleteTech = pClassInfo->getObsoleteTech();
 
-	if (isNoSpreadonBattle() == bDefault) m_bNoSpreadonBattle = pClassInfo->isNoSpreadonBattle();
-	if (isNoSpreadUnitProximity() == bDefault) m_bNoSpreadUnitProximity = pClassInfo->isNoSpreadUnitProximity();
-	if (isNoSpreadUnittoCity() == bDefault) m_bNoSpreadUnittoCity = pClassInfo->isNoSpreadUnittoCity();
-	if (isNoSpreadCitytoUnit() == bDefault) m_bNoSpreadCitytoUnit = pClassInfo->isNoSpreadCitytoUnit();
 	if (isBuildUp() == bDefault) m_bBuildUp = pClassInfo->isBuildUp();
 	if (isPoison() == bDefault) m_bPoison = pClassInfo->isPoison();
 
@@ -181,10 +169,6 @@ void CvPromotionLineInfo::getCheckSum(uint32_t& iSum) const
 {
 	CheckSum(iSum, m_ePrereqTech);
 	CheckSum(iSum, m_eObsoleteTech);
-	CheckSum(iSum, m_bNoSpreadonBattle);
-	CheckSum(iSum, m_bNoSpreadUnitProximity);
-	CheckSum(iSum, m_bNoSpreadUnittoCity);
-	CheckSum(iSum, m_bNoSpreadCitytoUnit);
 	CheckSum(iSum, m_bBuildUp);
 	CheckSum(iSum, m_bPoison);
 
@@ -226,26 +210,6 @@ void CvPromotionLineInfo::doPostLoadCaching(uint32_t iThis)
 TechTypes CvPromotionLineInfo::getObsoleteTech() const
 {
 	return m_eObsoleteTech;
-}
-
-bool CvPromotionLineInfo::isNoSpreadonBattle() const
-{
-	return m_bNoSpreadonBattle;
-}
-
-bool CvPromotionLineInfo::isNoSpreadUnitProximity() const
-{
-	return m_bNoSpreadUnitProximity;
-}
-
-bool CvPromotionLineInfo::isNoSpreadUnittoCity() const
-{
-	return m_bNoSpreadUnittoCity;
-}
-
-bool CvPromotionLineInfo::isNoSpreadCitytoUnit() const
-{
-	return m_bNoSpreadCitytoUnit;
 }
 
 bool CvPromotionLineInfo::isBuildUp() const

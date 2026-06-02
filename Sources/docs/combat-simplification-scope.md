@@ -46,9 +46,14 @@ Priorities: OOS-safe > maintainable/sane > save-compat (save-compat downprioriti
     - CvPlayer: m_paiPlayerWideAfflictionCount.
     - Consumers: CvGameTextMgr UI help blocks, CvPlayerAI critical valuation.
     - XML: orphaned schema ElementTypes + refs in both schemas + dead `iFortitudeChange` data.
-  - **KEPT (inert, intentional — removing would need a codebase-wide caller sweep):**
-    `PromotionRequirements::Afflict` flag; `bAfflict` param on canAcquirePromotion;
-    `bAffliction` param on CvCity/CvPlayer canConstruct (always false now). The property/
+  - **Follow-up orphan sweep — DONE:** removed the remaining inert remnants too —
+    `PromotionRequirements::Afflict` flag + `bAfflict` param (canAcquirePromotion);
+    `bAffliction` param (CvCity/CvPlayer canConstruct, the always-false `!bAffliction`
+    gates unwrapped — `bExposed` is a separate live concept, kept); the `NoSpread*`
+    affliction disease-spread flags (CvPromotionLineInfo + promotion-help UI + schema);
+    the `CATEGORY_UNITCOMBAT_EQUIPMENT_GROUPS` category (def + 5 weapon-category parent
+    links + GameText); dead Pedia.py Equipment/Affliction promotion categories; and
+    orphaned affliction schema element refs. KEPT: the property/
     disease system (CvProperties/PropertyManipulators/PROPERTY_*, AidRate/BonusAid),
     PromotionLine class itself + its `m_ePropertyType`, keyed-info structs, endurance,
     and vanilla withdrawal are all untouched. Serialization sentinel key strings

@@ -2102,10 +2102,6 @@
 		<element type="Categories" minOccurs="0"/>
 		<element type="UnitCombatContractChanceChanges" minOccurs="0"/>
 		<element type="TechContractChanceChanges" minOccurs="0"/>
-		<element type="bNoSpreadonBattle" minOccurs="0"/>
-		<element type="bNoSpreadUnitProximity" minOccurs="0"/>
-		<element type="bNoSpreadUnittoCity" minOccurs="0"/>
-		<element type="bNoSpreadCitytoUnit" minOccurs="0"/>
 		<element type="bBuildUp" minOccurs="0"/>
 		<element type="bPoison" minOccurs="0"/>
 	</ElementType>

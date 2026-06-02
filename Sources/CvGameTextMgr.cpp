@@ -8211,11 +8211,6 @@ void CvGameTextMgr::parsePromotionHelpInternal(CvWStringBuffer &szBuffer, Promot
 	std::vector<PromotionTypes>	linePromotionsOwned;
 	linePromotionsOwned.push_back(ePromotion);
 
-	bool bIsNoSpreadonBattle = false;
-	bool bIsNoSpreadUnitProximity = false;
-	bool bIsNoSpreadUnittoCity = false;
-	bool bIsNoSpreadCitytoUnit = false;
-
 	if (ePromoLine != NO_PROMOTIONLINE)
 	{
 		if (bAccrueLines)
@@ -8242,22 +8237,6 @@ void CvGameTextMgr::parsePromotionHelpInternal(CvWStringBuffer &szBuffer, Promot
 			szBuffer.append(gDLL->getText("TXT_KEY_PROMOTIONHELP_LINE_PRIORITY", iLinePriority));
 		}
 
-		if (promoLine->isNoSpreadonBattle())
-		{
-			bIsNoSpreadonBattle = true;
-		}
-		if (promoLine->isNoSpreadUnitProximity())
-		{
-			bIsNoSpreadUnitProximity = true;
-		}
-		if (promoLine->isNoSpreadUnittoCity())
-		{
-			bIsNoSpreadUnittoCity = true;
-		}
-		if (promoLine->isNoSpreadCitytoUnit())
-		{
-			bIsNoSpreadCitytoUnit = true;
-		}
 	}
 
 	bool bIsBlitz = false;
@@ -8572,26 +8551,6 @@ void CvGameTextMgr::parsePromotionHelpInternal(CvWStringBuffer &szBuffer, Promot
 	{
 		szBuffer.append(pcNewline);
 		szBuffer.append(gDLL->getText("TXT_KEY_PROMOTIONHELP_PARALYZE"));
-	}
-	if (bIsNoSpreadonBattle)
-	{
-		szBuffer.append(pcNewline);
-		szBuffer.append(gDLL->getText("TXT_KEY_PROMOTIONHELP_NO_SPREAD_ON_BATTLE"));
-	}
-	if (bIsNoSpreadUnitProximity)
-	{
-		szBuffer.append(pcNewline);
-		szBuffer.append(gDLL->getText("TXT_KEY_PROMOTIONHELP_NO_SPREAD_UNIT_PROXIMITY"));
-	}
-	if (bIsNoSpreadUnittoCity)
-	{
-		szBuffer.append(pcNewline);
-		szBuffer.append(gDLL->getText("TXT_KEY_PROMOTIONHELP_NO_SPREAD_UNIT_TO_CITY"));
-	}
-	if (bIsNoSpreadCitytoUnit)
-	{
-		szBuffer.append(pcNewline);
-		szBuffer.append(gDLL->getText("TXT_KEY_PROMOTIONHELP_NO_SPREAD_CITY_TO_UNIT"));
 	}
 	if (bIsDefensiveVictoryMove)
 	{
