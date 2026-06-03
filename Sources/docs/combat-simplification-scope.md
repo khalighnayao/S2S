@@ -65,17 +65,16 @@ Priorities: OOS-safe > maintainable/sane > save-compat (save-compat downprioriti
 TB Combat Mods are overcomplicated, unmaintainable, poorly implemented. Remove the suite
 now; note the good ideas for proper reimplementation later (below). Boundary = "keep
 vanilla BTS combat, remove TB additions."
-- **R5 modifier family** (~250 refs) decomposes into THREE removals:
-  - **R5a accuracy:** dodge + precision (hit-chance modifiers; in getDefenderCombatValues
-    + resolveCombat hit-modifier). Always-on, no option, cleanly separable.
-  - **R5b mitigation:** armor + puncture (damage reduction in getDefenderCombatValues).
-    Always-on, cleanly separable.
-  - **R5c escape/control = `GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT`** (live option): withdraw/
-    pursuit/repel/overrun/unyielding/knockback TB layer + the option itself. **Badly
-    implemented per user — document for reimplementation** (good-ideas list). NUANCE:
-    keep **vanilla** withdrawalProbability(); note getWithdrawalProbability() currently
-    halves it unless FIGHT_OR_FLIGHT is on (CvUnitInfo.cpp:668) — drop that conditional
-    so vanilla withdrawal works unconditionally. Its own dedicated task like OUTBREAKS.
+- **R5 modifier family** (~250 refs) decomposed into THREE removals, **all DONE**:
+  - **R5a accuracy:** dodge + precision — **DONE** (commit b6e35a42). Hit-chance modifiers
+    gone; per-round odds are now plain strength-ratio (the resolveCombat hit-modifier is a
+    no-op). The leftover ordering bug it exposed was fixed in Phase 3a (round-1 hit chance).
+  - **R5b mitigation:** armor + puncture — **DONE** (commit b6e35a42). Damage-reduction
+    terms gone; per-round damage is firepower-ratio + damageModifier only.
+  - **R5c escape/control = `GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT`** — **DONE**. Removed the
+    withdraw/pursuit/repel/overrun/unyielding/knockback TB layer + the option/enum/Python/
+    XML. KEPT **vanilla** `withdrawalProbability()` and dropped the old halving conditional
+    so vanilla withdrawal works unconditionally. Concept kept in the good-ideas list.
 - **R6 terrain/feature turn damage** — **DONE** (removed wholesale across ~15 files:
   CvUnit::doTurn application + XP; CvPlot getTotalTurnDamage/getTerrainTurnDamage/
   getFeatureTurnDamage; CvUnit isTerrainProtected/getTerrainProtectedCount/
@@ -166,9 +165,24 @@ Captured so the spirit survives the removal:
   effect). Reimplement cleanly as an optional rule.
 These become future "rules" plugged into the unified engine, not inline spaghetti.
 
-## Sequencing
-Removals first (each builds), then unify the lean core into the engine with pluggable
-rules. The modifier-family removal (R5) sharply simplifies `getCombatOdds` /
-`getDefenderCombatValues` / `resolveCombat` (precision/dodge feed hit chance; armor/
-puncture feed damage; withdraw/repel/knockback are per-round branches), so it should
-land before the resolution unification (Phase 3).
+## Status (current)
+The removal phase is **complete**: R1 cold, R2 stun, R3 power-shot, R4 afflictions+critical
+(+ orphan sweep), R5a dodge/precision, R5b armor/puncture, R5c FIGHT_OR_FLIGHT, R6 terrain
+damage — all removed and building green. Dead game options removed: HEART_OF_WAR, BATTLEWORN,
+STRENGTH_IN_NUMBERS, EQUIPMENT, UPRANGE, FIGHT_OR_FLIGHT, OUTBREAKS_AND_AFFLICTIONS,
+TERRAIN_DAMAGE. Kept (functional) options: SIZE_MATTERS, SURROUND_DESTROY, VANILLA_ENGINE,
+NEW_RANDOM_SEED, REALISTIC_SIEGE, AMNESTY, HIDE_SEEK, WITHOUT_WARNING. A follow-up assert
+pass surfaced no combat-path asserts; first real combat ran clean.
+
+Schema note: a prior bulk schema edit had wrongly deleted ~177 *live* `<ElementType>` defs
+from `C2C_CIV4UnitSchema.xml` (alongside the dead ones) — restored from baseline so every
+referenced element is declared again (validator clean).
+
+## Unify phase
+Removals done → now unifying the lean core onto `CvCombatModel`:
+- **Phase 3a — DONE.** Layer-1 `buildRoundModel()` is the single per-round formula;
+  resolution, the odds functions, the preview, and the AI's damage inputs all consume it
+  (prediction == resolution; barb free-wins + the round-1 hit-chance bug reconciled).
+  See `combat-model-sketch.md`.
+- **Phase 3b — planned** (route the AI's win-% through the binomial engine). Its own
+  branch when stable. Full plan in `combat-phase3b-plan.md`.
