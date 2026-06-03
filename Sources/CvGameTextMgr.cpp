@@ -3494,6 +3494,10 @@ bool CvGameTextMgr::setMinimalCombatPlotHelp(CvWStringBuffer& szString, CvPlot* 
 		CvWString szTmp;
 		szString.append(NEWLINE);
 
+		// Graphical odds bar (green = win, yellow = retreat, red = defeat).
+		appendCombatOddsBar(szString, kP);
+		szString.append(NEWLINE);
+
 		if (kP.iDefenderHitLimitHP == 0)
 		{
 			szString.append(gDLL->getText("TXT_ACO_VICTORY"));
@@ -3593,6 +3597,10 @@ bool CvGameTextMgr::setAssassinatePlotHelp(CvWStringBuffer& szString, CvPlot* pP
 	if (kP.bValid)
 	{
 		CvWString szTmp;
+		szString.append(NEWLINE);
+
+		// Graphical odds bar (green = win, yellow = retreat, red = defeat).
+		appendCombatOddsBar(szString, kP);
 		szString.append(NEWLINE);
 
 		if (kP.iDefenderHitLimitHP == 0)
