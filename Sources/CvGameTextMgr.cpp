@@ -3144,6 +3144,38 @@ namespace {
 	}
 }
 
+// Draws the at-a-glance combat-odds bar: a fixed 200px strip (1% = 2px) split into
+// green (attacker wins -- kills or reaches the combat limit), yellow (attacker
+// retreats) and red (attacker is defeated), proportional to the outcome odds in
+// the CombatPreview. Art ships in the C2C FPK (Art/ACO/{green,yellow,red}_bar_*.dds).
+static void appendCombatOddsBar(CvWStringBuffer& szString, const CombatPreview& kP)
+{
+	const float prob1 = 100.0f * (kP.fAttackerKillOdds + kP.fPullOutOdds); // cumulative: up to a win
+	const float prob2 = prob1 + 100.0f * kP.fRetreatOdds;                  // cumulative: up to a retreat
+
+	CvWString szImg;
+	int pixels_left = 199; // total bar is 200px; 1 reserved for the right end cap
+
+	// Green (victory).
+	int greenPixels = (2 * (int)(prob1 + 0.5f)) - 1; // -1 for the left end cap
+	if (greenPixels < 0) greenPixels = 0;
+	szString.append(L"<img=Art/ACO/green_bar_left_end.dds>");
+	for (int i = 0; i < greenPixels / 10; ++i) { szString.append(L"<img=Art/ACO/green_bar_10.dds>"); pixels_left -= 10; }
+	if (greenPixels % 10 > 0) { szImg.Format(L"<img=Art/ACO/green_bar_%d.dds>", greenPixels % 10); szString.append(szImg.GetCString()); pixels_left -= greenPixels % 10; }
+
+	// Yellow (retreat) -- the span from the green end to the retreat end.
+	int yellowPixels = 2 * (int)(prob2 + 0.5f) - (greenPixels + 1);
+	if (yellowPixels < 0) yellowPixels = 0;
+	for (int i = 0; i < yellowPixels / 10; ++i) { szString.append(L"<img=Art/ACO/yellow_bar_10.dds>"); pixels_left -= 10; }
+	if (yellowPixels % 10 > 0) { szImg.Format(L"<img=Art/ACO/yellow_bar_%d.dds>", yellowPixels % 10); szString.append(szImg.GetCString()); pixels_left -= yellowPixels % 10; }
+
+	// Red (defeat) -- fills the remainder.
+	if (pixels_left < 0) pixels_left = 0;
+	for (int i = 0; i < pixels_left / 10; ++i) { szString.append(L"<img=Art/ACO/red_bar_10.dds>"); }
+	if (pixels_left % 10 > 0) { szImg.Format(L"<img=Art/ACO/red_bar_%d.dds>", pixels_left % 10); szString.append(szImg.GetCString()); }
+	szString.append(L"<img=Art/ACO/red_bar_right_end.dds>");
+}
+
 // Returns true if help was given...
 bool CvGameTextMgr::setCombatPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot, bool bAssassinate)
 {
@@ -3288,6 +3320,10 @@ bool CvGameTextMgr::setCombatPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot, 
 					}
 					szString.append(NEWLINE);
 					szString.append(gDLL->getText("TXT_ACO_VS", szTempBuffer.GetCString(), szTempBuffer2.GetCString()));
+
+					// --- Visual odds bar: green = win, yellow = retreat, red = defeat ---
+					szString.append(NEWLINE);
+					appendCombatOddsBar(szString, kP);
 
 					// --- Primary outcome: kill, or pull-out at the combat limit ---
 					szString.append(NEWLINE);
