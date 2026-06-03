@@ -2320,4 +2320,208 @@
 		<element type="Category" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="Category" content="textOnly"/>
+	<!-- Restored: element definitions accidentally removed during the combat-stat/affliction/equipment XML cleanup (these are live, still referenced and read by the DLL). -->
+	<ElementType name="AIWeightbyUnitCombatTypes" content="eltOnly">
+		<element type="AIWeightbyUnitCombatType" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="CultureType" content="textOnly"/>
+	<ElementType name="EraType" content="textOnly"/>
+	<ElementType name="FeatureDoubleMoveChangeTypes" content="eltOnly">
+		<element type="FeatureType" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="FontButtonIndex" content="textOnly" dt:type="int"/>
+	<ElementType name="GameOptionType" content="textOnly"/>
+	<ElementType name="MaxEraType" content="textOnly"/>
+	<ElementType name="MinEraType" content="textOnly"/>
+	<ElementType name="NotOnGameOptions" content="eltOnly">
+		<element type="GameOptionType" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="PlayerType" content="textOnly"/>
+	<ElementType name="PrereqBonusTypes" content="eltOnly">
+		<element type="PrereqBonusType" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="PromotionOverwrites" content="eltOnly">
+		<element type="Promotion" minOccurs="0"/>
+	</ElementType>
+	<ElementType name="RemovesUnitCombatTypes" content="eltOnly">
+		<element type="RemovesUnitCombatType" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="RenamesUnitTo" content="textOnly"/>
+	<ElementType name="SetSpecialUnit" content="textOnly"/>
+	<ElementType name="SubCombatChangeTypes" content="eltOnly">
+		<element type="SubCombatChangeType" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="SubCombatTypes" content="eltOnly">
+		<element type="SubCombatType" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="TerrainDoubleMoveChangeTypes" content="eltOnly">
+		<element type="TerrainType" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="TerrainWorkRateModifierTypes" content="eltOnly">
+		<element type="TerrainWorkRateModifierType" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="Title" content="textOnly"/>
+	<ElementType name="bAssassin" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bAttackOnlyCities" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bAttackOnlyCitiesAdd" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bAttackOnlyCitiesSubtract" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bBarbCoExist" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bBlendIntoCity" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bBuildUp" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bCannotMergeSplit" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bExcile" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bFliesToMove" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bFliesToMoveAdd" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bFliesToMoveSubtract" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bForMilitary" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bForNavalMilitary" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bForOffset" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bGatherHerd" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bHealsAs" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bIgnoreNoEntryLevel" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bIgnoreNoEntryLevelAdd" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bIgnoreNoEntryLevelSubtract" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bIgnoreZoneofControl" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bIgnoreZoneofControlAdd" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bIgnoreZoneofControlSubtract" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bIntrinsic" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bNoInvisibility" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bNoNonOwnedCityEntry" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bNoNonTypeProdMods" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bNoSelfHeal" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bOnslaught" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bOnslaughtChange" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bParalyze" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bPassage" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bPoison" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bRBombardDirect" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bRBombardForceAbility" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bRBombardPrereq" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bRemoveStampede" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bSMLoadSame" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bStampede" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bStampedeChange" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bStealthDefense" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bTriggerBeforeAttack" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bUnlimitedException" content="textOnly" dt:type="boolean"/>
+	<ElementType name="bZeroesXP" content="textOnly" dt:type="boolean"/>
+	<ElementType name="iAggression" content="textOnly" dt:type="int"/>
+	<ElementType name="iAidChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iAnimalIgnoresBorders" content="textOnly" dt:type="int"/>
+	<ElementType name="iAnimalIgnoresBordersChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iAssassinChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iAttackCombatModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iAttackCombatModifierChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iBarbCoExistChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iBaseFoodChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iBlendIntoCityChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iBreakdownChance" content="textOnly" dt:type="int"/>
+	<ElementType name="iBreakdownChanceChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iBreakdownDamage" content="textOnly" dt:type="int"/>
+	<ElementType name="iBreakdownDamageChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iCaptureProbabilityModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iCaptureProbabilityModifierChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iCaptureResistanceModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iCaptureResistanceModifierChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iCombatModifierPerSizeLess" content="textOnly" dt:type="int"/>
+	<ElementType name="iCombatModifierPerSizeLessChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iCombatModifierPerSizeMore" content="textOnly" dt:type="int"/>
+	<ElementType name="iCombatModifierPerSizeMoreChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iCombatModifierPerVolumeLess" content="textOnly" dt:type="int"/>
+	<ElementType name="iCombatModifierPerVolumeLessChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iCombatModifierPerVolumeMore" content="textOnly" dt:type="int"/>
+	<ElementType name="iCombatModifierPerVolumeMoreChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iDCMBombAccuracyBase" content="textOnly" dt:type="int"/>
+	<ElementType name="iDCMBombAccuracyChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iDCMBombRangeBase" content="textOnly" dt:type="int"/>
+	<ElementType name="iDCMBombRangeChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iDamageModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iDamageModifierChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iDamageperTurn" content="textOnly" dt:type="int"/>
+	<ElementType name="iDefenseCombatModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iDefenseCombatModifierChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iDefenseOnlyChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iDynamicDefense" content="textOnly" dt:type="int"/>
+	<ElementType name="iDynamicDefenseChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iEnclose" content="textOnly" dt:type="int"/>
+	<ElementType name="iEncloseChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iEndurance" content="textOnly" dt:type="int"/>
+	<ElementType name="iEnduranceChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iExcileChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iExtraUpkeep100" content="textOnly" dt:type="int"/>
+	<ElementType name="iGatherHerdChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iGroupBase" content="textOnly" dt:type="int"/>
+	<ElementType name="iGroupChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iHiddenNationalityChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iHillsWorkModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iInsidiousness" content="textOnly" dt:type="int"/>
+	<ElementType name="iInsidiousnessChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iInvestigation" content="textOnly" dt:type="int"/>
+	<ElementType name="iInvestigationChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iLevelPrereq" content="textOnly" dt:type="int"/>
+	<ElementType name="iLinePriority" content="textOnly" dt:type="int"/>
+	<ElementType name="iLunge" content="textOnly" dt:type="int"/>
+	<ElementType name="iLungeChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iMaxHP" content="textOnly" dt:type="int"/>
+	<ElementType name="iMaxHPChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iNoCaptureChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iNoDefensiveBonusChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iNoInvisibilityChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iNoNonOwnedCityEntryChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iNumHealSupport" content="textOnly" dt:type="int"/>
+	<ElementType name="iNumTriggers" content="textOnly" dt:type="int"/>
+	<ElementType name="iPassageChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iPeaksWorkModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iPoisonProbabilityModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iPoisonProbabilityModifierChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iQualityBase" content="textOnly" dt:type="int"/>
+	<ElementType name="iQualityChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iRBombardDamage" content="textOnly" dt:type="int"/>
+	<ElementType name="iRBombardDamageBase" content="textOnly" dt:type="int"/>
+	<ElementType name="iRBombardDamageChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iRBombardDamageLimit" content="textOnly" dt:type="int"/>
+	<ElementType name="iRBombardDamageLimitBase" content="textOnly" dt:type="int"/>
+	<ElementType name="iRBombardDamageLimitChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iRBombardDamageMaxUnits" content="textOnly" dt:type="int"/>
+	<ElementType name="iRBombardDamageMaxUnitsBase" content="textOnly" dt:type="int"/>
+	<ElementType name="iRBombardDamageMaxUnitsChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iReligiousCombatModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iReligiousCombatModifierChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iSelfHealModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iSizeBase" content="textOnly" dt:type="int"/>
+	<ElementType name="iStealthCombatModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iStealthCombatModifierChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iStealthDefenseChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iStealthStrikes" content="textOnly" dt:type="int"/>
+	<ElementType name="iStealthStrikesChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iStrAdjperTurn" content="textOnly" dt:type="int"/>
+	<ElementType name="iStrengthChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iStrengthModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iTaunt" content="textOnly" dt:type="int"/>
+	<ElementType name="iTauntChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iTrapComplexity" content="textOnly" dt:type="int"/>
+	<ElementType name="iTrapDamageMax" content="textOnly" dt:type="int"/>
+	<ElementType name="iTrapDamageMin" content="textOnly" dt:type="int"/>
+	<ElementType name="iTriggerBeforeAttackChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iUnnerve" content="textOnly" dt:type="int"/>
+	<ElementType name="iUnnerveChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iUpgradeAnywhereChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iUpkeepModifier" content="textOnly" dt:type="int"/>
+	<ElementType name="iVSBarbs" content="textOnly" dt:type="int"/>
+	<ElementType name="iVSBarbsChange" content="textOnly" dt:type="int"/>
+	<ElementType name="iWeakenperTurn" content="textOnly" dt:type="int"/>
+	<ElementType name="AIWeightbyUnitCombatType" content="eltOnly">
+		<element type="UnitCombatType"/>
+		<element type="iAIWeight"/>
+	</ElementType>
+	<ElementType name="PrereqBonusType" content="textOnly"/>
+	<ElementType name="RemovesUnitCombatType" content="textOnly"/>
+	<ElementType name="SubCombatChangeType" content="textOnly"/>
+	<ElementType name="SubCombatType" content="textOnly"/>
+	<ElementType name="TerrainWorkRateModifierType" content="eltOnly">
+		<element type="TerrainType"/>
+		<element type="iModifier"/>
+	</ElementType>
 </Schema>
