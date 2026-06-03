@@ -213,7 +213,6 @@ m_cachedBonusCount(NULL)
 	m_ppiBonusCommerceModifier = NULL;
 	m_aiLandmarkYield = new int[NUM_YIELD_TYPES];
 	m_aiModderOptions = new int[NUM_MODDEROPTION_TYPES];
-	m_paiPlayerWideAfflictionCount = NULL;
 
 	m_bHasLanguage = false;
 
@@ -517,6 +516,7 @@ void CvPlayer::init(PlayerTypes eID)
 	}
 	m_contractBroker.init(eID);
 	m_workerAI.setOwner(eID);
+	m_hunterAI.setOwner(eID);
 	AI_init();
 }
 
@@ -612,6 +612,7 @@ void CvPlayer::initInGame(PlayerTypes eID, bool bSetAlive)
 	resetPlotAndCityData();
 	m_contractBroker.init(eID);
 	m_workerAI.setOwner(eID);
+	m_hunterAI.setOwner(eID);
 	AI_init();
 }
 
@@ -668,7 +669,6 @@ void CvPlayer::uninit()
 	SAFE_DELETE_ARRAY(m_bCanConstructCached);
 	SAFE_DELETE_ARRAY(m_bCanConstructDefaultParam);
 	SAFE_DELETE_ARRAY(m_bCanConstructCachedDefaultParam);
-	SAFE_DELETE_ARRAY(m_paiPlayerWideAfflictionCount);
 
 	m_upgradeCache.reset();
 
@@ -1182,14 +1182,6 @@ void CvPlayer::reset(PlayerTypes eID, bool bConstructorCall)
 			m_paeCivics[iI] = NO_CIVIC;
 		}
 
-
-		FAssertMsg(m_paiPlayerWideAfflictionCount==NULL, "about to leak memory, CvPlayer::m_paiPlayerWideAfflictionCount");
-		m_paiPlayerWideAfflictionCount = new int[GC.getNumPromotionLineInfos()];
-
-		for (iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-		{
-			m_paiPlayerWideAfflictionCount[iI] = 0;
-		}
 
 		FAssertMsg(m_bCanConstruct==NULL, "about to leak memory, CvPlayer::m_bCanConstruct");
 		m_bCanConstruct = new bool[GC.getNumBuildingInfos()];
@@ -3710,6 +3702,7 @@ void CvPlayer::doTurn()
 	CvPlot::flushMovementCostCache();
 
 	m_workerAI.onTurnBegin(GC.getGame().getGameTurn());
+	m_hunterAI.onTurnBegin(GC.getGame().getGameTurn());
 
 #ifdef CAN_TRAIN_CACHING
 	//	Clear training caches at the start of each turn
@@ -3922,6 +3915,7 @@ void CvPlayer::doMultiMapTurn()
 	CvPlot::flushMovementCostCache();
 
 	m_workerAI.onTurnBegin(GC.getGame().getGameTurn());
+	m_hunterAI.onTurnBegin(GC.getGame().getGameTurn());
 
 #ifdef CAN_TRAIN_CACHING
 	//	Clear training caches at the start of each turn
@@ -6680,7 +6674,7 @@ bool CvPlayer::canTrain(UnitTypes eUnit, bool bContinue, bool bTestVisible, bool
 }
 
 
-bool CvPlayer::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestVisible, bool bIgnoreCost, TechTypes eIgnoreTechReq, int* probabilityEverConstructable, bool bAffliction, bool bExposed) const
+bool CvPlayer::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestVisible, bool bIgnoreCost, TechTypes eIgnoreTechReq, int* probabilityEverConstructable, bool bExposed) const
 {
 	PROFILE_FUNC();
 
@@ -6691,7 +6685,7 @@ bool CvPlayer::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestV
 
 	//	Cache the param variant with false, true, true as this is used VERY heavily and
 	//	also the default param flavor
-	if ( !bContinue && bTestVisible && bIgnoreCost && eIgnoreTechReq == NO_TECH && probabilityEverConstructable == NULL && !bAffliction && !bExposed)
+	if ( !bContinue && bTestVisible && bIgnoreCost && eIgnoreTechReq == NO_TECH && probabilityEverConstructable == NULL && !bExposed)
 	{
 		if ( m_bCanConstructCached[eBuilding] )
 		{
@@ -6711,7 +6705,7 @@ bool CvPlayer::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestV
 			m_bCanConstructCached[eBuilding] = true;
 		}
 	}
-	else if ( !bContinue && !bTestVisible && !bIgnoreCost && eIgnoreTechReq == NO_TECH && probabilityEverConstructable == NULL && !bAffliction && !bExposed)
+	else if ( !bContinue && !bTestVisible && !bIgnoreCost && eIgnoreTechReq == NO_TECH && probabilityEverConstructable == NULL && !bExposed)
 	{
 		if ( m_bCanConstructCachedDefaultParam[eBuilding] )
 		{
@@ -19445,7 +19439,6 @@ void CvPlayer::read(FDataStreamBase* pStream)
 			pCurrUnitNode = pNextUnitNode;
 		}
 		//TB Combat Mod begin
-		WRAPPER_READ_CLASS_ARRAY(wrapper, "CvPlayer", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiPlayerWideAfflictionCount);
 		//TB Traits begin
 		WRAPPER_READ(wrapper, "CvPlayer", &m_iCivicAnarchyModifier);
 		WRAPPER_READ(wrapper, "CvPlayer", &m_iReligiousAnarchyModifier);
@@ -20464,7 +20457,6 @@ void CvPlayer::write(FDataStreamBase* pStream)
 		int	iTempUnitId = (m_pTempUnit ? m_pTempUnit->getID() : -1);
 		WRAPPER_WRITE(wrapper, "CvPlayer", iTempUnitId);
 		//TB Combat mod begin
-		WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvPlayer", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiPlayerWideAfflictionCount);
 		//TB Combat mod end
 		//TB Traits begin
 		WRAPPER_WRITE(wrapper, "CvPlayer", m_iCivicAnarchyModifier);
@@ -28323,11 +28315,6 @@ void CvPlayer::clearModifierTotals()
 		m_paiNoCivicUpkeepCount[iI] = 0;
 	}
 
-	for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-	{
-		m_paiPlayerWideAfflictionCount[iI] = 0;
-	}
-
 	for (int iI = 0; iI < GC.getNumSpecialistInfos(); iI++)
 	{
 		m_paiSpecialistValidCount[iI] = 0;
@@ -28890,9 +28877,6 @@ void CvPlayer::recalculateModifiers()
 
 	AI_updateBonusValue();
 	AI_updateFoundValues(true);
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	recalculateAfflictedUnitCount();
-#endif
 	//	Re-establish blockades
 	updatePlunder(1, false);
 	resetCivTypeEffects();
@@ -29170,64 +29154,6 @@ typedef struct buildingCommerceStruct
 	float			fContribution;
 } buildingCommerceStruct;
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-int CvPlayer::getPlayerWideAfflictionCount(PromotionLineTypes ePromotionLineType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-	return m_paiPlayerWideAfflictionCount[ePromotionLineType];
-}
-
-void CvPlayer::changePlayerWideAfflictionCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		m_paiPlayerWideAfflictionCount[ePromotionLineType] += iChange;
-		FASSERT_NOT_NEGATIVE(getPlayerWideAfflictionCount(ePromotionLineType));
-
-		if (getID() == GC.getGame().getActivePlayer())
-		{
-			gDLL->getInterfaceIFace()->setDirty(GameData_DIRTY_BIT, true);
-		}
-	}
-}
-
-void CvPlayer::setPlayerWideAfflictionCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-
-	if (iChange != 0)
-	{
-		m_paiPlayerWideAfflictionCount[ePromotionLineType] = iChange;
-		FASSERT_NOT_NEGATIVE(getPlayerWideAfflictionCount(ePromotionLineType));
-
-		if (getID() == GC.getGame().getActivePlayer())
-		{
-			gDLL->getInterfaceIFace()->setDirty(GameData_DIRTY_BIT, true);
-		}
-	}
-}
-
-int CvPlayer::countAfflictedUnits (PromotionLineTypes eAfflictionLine)
-{
-	return algo::count_if(units(), CvUnit::fn::hasAfflictionLine(eAfflictionLine));
-}
-
-void CvPlayer::recalculateAfflictedUnitCount()
-{
-	PROFILE_EXTRA_FUNC();
-	for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-	{
-		if (GC.getPromotionLineInfo((PromotionLineTypes)iI).isAffliction())
-		{
-			PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-			const int iRecalc = countAfflictedUnits(eAfflictionLine);
-			setPlayerWideAfflictionCount(eAfflictionLine, iRecalc);
-		}
-	}
-}
-#endif
 
 CvCity*	CvPlayer::findClosestCity(const CvPlot* pPlot) const
 {

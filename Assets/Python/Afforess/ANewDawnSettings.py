@@ -70,8 +70,6 @@ class ANewDawnSettings:
 				ANewDawnOpt.setReligionDecay(data3)
 			elif data2 == int(ModderGameOptionTypes.MODDERGAMEOPTION_MULTIPLE_RELIGION_SPREAD):
 				ANewDawnOpt.setMultipleReligionSpread(data3)
-			elif data2 == int(ModderGameOptionTypes.MODDERGAMEOPTION_TERRAIN_DAMAGE):
-				ANewDawnOpt.setTerrainDamage(data3)
 			elif data2 == int(ModderGameOptionTypes.MODDERGAMEOPTION_FOGWAR_DECAY):
 				ANewDawnOpt.setFogWarDecay(data3)
 			elif data2 == int(ModderGameOptionTypes.MODDERGAMEOPTION_FOGWAR_NBTURNS):
@@ -257,10 +255,6 @@ def changedMultipleReligionSpread(option, value):
 	GC.getGame().setModderGameOption(ModderGameOptionTypes.MODDERGAMEOPTION_MULTIPLE_RELIGION_SPREAD, value)
 	CyMessageControl().sendModNetMessage(MODDERGAMEOPTION_EVENT_ID, GC.getGame().getActivePlayer(), int(ModderGameOptionTypes.MODDERGAMEOPTION_MULTIPLE_RELIGION_SPREAD), int(value), 0)
 
-def changedTerrainDamage(option, value):
-	GC.getGame().setModderGameOption(ModderGameOptionTypes.MODDERGAMEOPTION_TERRAIN_DAMAGE, value)
-	CyMessageControl().sendModNetMessage(MODDERGAMEOPTION_EVENT_ID, GC.getGame().getActivePlayer(), int(ModderGameOptionTypes.MODDERGAMEOPTION_TERRAIN_DAMAGE), int(value), 0)
-
 def changedAllowTerraforming(option, value):
 	CyMessageControl().sendModNetMessage(CANBUILD_EVENT_ID, GC.getGame().getActivePlayer(), GC.getInfoTypeForString("BUILD_TERRAFORM_GRASS"), not value, 0)
 	CyMessageControl().sendModNetMessage(CANBUILD_EVENT_ID, GC.getGame().getActivePlayer(), GC.getInfoTypeForString("BUILD_TERRAFORM_PLAINS"), not value, 0)
@@ -350,7 +344,6 @@ def setXMLOptionsfromIniFile():
 	changedIgnoreDisabledBuildingAlerts(ANewDawnOpt, ANewDawnOpt.isIgnoreDisabledBuildingAlerts())
 	changedReligionDecay(ANewDawnOpt, ANewDawnOpt.isReligionDecay())
 	changedMultipleReligionSpread(ANewDawnOpt, ANewDawnOpt.isMultipleReligionSpread())
-	changedTerrainDamage(ANewDawnOpt, ANewDawnOpt.isTerrainDamage())
 	changedAllowTerraforming(ANewDawnOpt, ANewDawnOpt.isAllowTerraforming())
 	changedReforestation(ANewDawnOpt, ANewDawnOpt.isReforestation())
 	changedSeaTunnels(ANewDawnOpt, ANewDawnOpt.isSeaTunnels())

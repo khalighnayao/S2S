@@ -118,17 +118,10 @@ CvCity::CvCity()
 	m_pabHasRawVicinityBonusCached = NULL;
 	m_paiUnitCombatExtraStrength = NULL;
 	m_pabAutomatedCanBuild = NULL;
-	m_paiNewAfflictionTypeCount = NULL;
 	m_paiAidRate = NULL;
 	m_ppaaiExtraBonusAidModifier = NULL;
-	m_paiNewExtraAfflictionOutbreakLevelChange = NULL;
-	m_paiNewAfflictionToleranceChange = NULL;
-	m_paiNewCurrentOvercomeChange = NULL;
 	m_paiUnitCombatProductionModifier = NULL;
-	m_paiUnitCombatRepelModifier = NULL;
-	m_paiUnitCombatRepelAgainstModifier = NULL;
 	m_paiUnitCombatDefenseAgainstModifier = NULL;
-	m_paiPromotionLineAfflictionAttackCommunicability = NULL;
 	m_ppaaiLocalSpecialistExtraYield = NULL;
 	m_ppaaiLocalSpecialistExtraCommerce = NULL;
 
@@ -443,17 +436,10 @@ void CvCity::uninit()
 	SAFE_DELETE_ARRAY(m_pabHasReligion);
 	SAFE_DELETE_ARRAY(m_pabHasCorporation);
 
-	SAFE_DELETE_ARRAY(m_paiNewAfflictionTypeCount);
 	SAFE_DELETE_ARRAY(m_paiAidRate);
 	SAFE_DELETE_ARRAY2(m_ppaaiExtraBonusAidModifier, GC.getNumBonusInfos());
-	SAFE_DELETE_ARRAY(m_paiNewExtraAfflictionOutbreakLevelChange);
-	SAFE_DELETE_ARRAY(m_paiNewAfflictionToleranceChange);
-	SAFE_DELETE_ARRAY(m_paiNewCurrentOvercomeChange);
 	SAFE_DELETE_ARRAY(m_paiUnitCombatProductionModifier);
-	SAFE_DELETE_ARRAY(m_paiUnitCombatRepelModifier);
-	SAFE_DELETE_ARRAY(m_paiUnitCombatRepelAgainstModifier);
 	SAFE_DELETE_ARRAY(m_paiUnitCombatDefenseAgainstModifier);
-	SAFE_DELETE_ARRAY(m_paiPromotionLineAfflictionAttackCommunicability);
 	SAFE_DELETE_ARRAY(m_paiStartDeferredSectionNumBonuses);
 	SAFE_DELETE_ARRAY(m_paiSpecialistBannedCount);
 	SAFE_DELETE_ARRAY(m_paiDamageAttackingUnitCombatCount);
@@ -620,18 +606,10 @@ void CvCity::reset(int iID, PlayerTypes eOwner, int iX, int iY, bool bConstructo
 	m_iReinforcementCounter = 0;
 
 	//TB Combat Mod (Buildings) begin
-#ifdef STRENGTH_IN_NUMBERS
-	m_iTotalFrontSupportPercentModifier = 0;
-	m_iTotalShortRangeSupportPercentModifier = 0;
-	m_iTotalMediumRangeSupportPercentModifier = 0;
-	m_iTotalLongRangeSupportPercentModifier = 0;
-	m_iTotalFlankSupportPercentModifier = 0;
-#endif
 	m_iExtraLocalCaptureProbabilityModifier = 0;
 	m_iExtraLocalCaptureResistanceModifier = 0;
 	m_iExtraLocalDynamicDefense = 0;
 	m_iExtraRiverDefensePenalty = 0;
-	m_iExtraLocalRepel = 0;
 	m_iExtraMinDefense = 0;
 	m_iExtraBuildingDefenseRecoverySpeedModifier = 0;
 	m_iModifiedBuildingDefenseRecoverySpeedCap = 0;
@@ -789,12 +767,6 @@ void CvCity::reset(int iID, PlayerTypes eOwner, int iX, int iY, bool bConstructo
 			m_paiProjectProduction[iI] = 0;
 		}
 
-		m_paiPromotionLineAfflictionAttackCommunicability = new int[GC.getNumPromotionLineInfos()];
-		for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-		{
-			m_paiPromotionLineAfflictionAttackCommunicability[iI] = 0;
-		}
-
 		for (int iI = GC.getNumBuildingInfos() - 1; iI > -1; iI--)
 		{
 			m_bHasBuildings[iI] = false;
@@ -853,8 +825,6 @@ void CvCity::reset(int iID, PlayerTypes eOwner, int iX, int iY, bool bConstructo
 		m_paiUnitCombatFreeExperience = new int[GC.getNumUnitCombatInfos()];
 		m_paiUnitCombatExtraStrength = new int[GC.getNumUnitCombatInfos()];
 		m_paiUnitCombatProductionModifier = new int[GC.getNumUnitCombatInfos()];
-		m_paiUnitCombatRepelModifier = new int[GC.getNumUnitCombatInfos()];
-		m_paiUnitCombatRepelAgainstModifier = new int[GC.getNumUnitCombatInfos()];
 		m_paiUnitCombatDefenseAgainstModifier = new int[GC.getNumUnitCombatInfos()];
 		m_paiDamageAttackingUnitCombatCount = new int[GC.getNumUnitCombatInfos()];
 		m_paiHealUnitCombatTypeVolume = new int[GC.getNumUnitCombatInfos()];
@@ -864,24 +834,9 @@ void CvCity::reset(int iID, PlayerTypes eOwner, int iX, int iY, bool bConstructo
 			m_paiUnitCombatFreeExperience[iI] = 0;
 			m_paiUnitCombatExtraStrength[iI] = 0;
 			m_paiUnitCombatProductionModifier[iI] = 0;
-			m_paiUnitCombatRepelModifier[iI] = 0;
-			m_paiUnitCombatRepelAgainstModifier[iI] = 0;
 			m_paiUnitCombatDefenseAgainstModifier[iI] = 0;
 			m_paiDamageAttackingUnitCombatCount[iI] = 0;
 			m_paiHealUnitCombatTypeVolume[iI] = 0;
-		}
-
-		FAssertMsg((0 < GC.getNumPromotionLineInfos()), "GC.getNumPromotionLineInfos() is not greater than zero but an array is being allocated in CvCity::reset");
-		m_paiNewAfflictionTypeCount = new int[GC.getNumPromotionLineInfos()];
-		m_paiNewExtraAfflictionOutbreakLevelChange = new int[GC.getNumPromotionLineInfos()];
-		m_paiNewAfflictionToleranceChange = new int[GC.getNumPromotionLineInfos()];
-		m_paiNewCurrentOvercomeChange = new int[GC.getNumPromotionLineInfos()];
-		for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-		{
-			m_paiNewAfflictionTypeCount[iI] = 0;
-			m_paiNewExtraAfflictionOutbreakLevelChange[iI] = 0;
-			m_paiNewAfflictionToleranceChange[iI] = 0;
-			m_paiNewCurrentOvercomeChange[iI] = 0;
 		}
 
 		FAssertMsg((0 < GC.getNumPropertyInfos()), "GC.getNumPropertyInfos() is not greater than zero but an array is being allocated in CvCity::reset");
@@ -1358,37 +1313,6 @@ void CvCity::doTurn()
 
 	doPropertyUnitSpawn();
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	//TB Combat Mod (Buildings) begin
-	if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-	{
-		for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-		{
-			PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)iI);
-
-			if (GC.getPromotionLineInfo(eAfflictionLine).isAffliction())
-			{
-				doOutbreakCheck(eAfflictionLine);
-
-				if (hasAfflictionType(eAfflictionLine))
-				{
-					changeCurrentOvercomeChange(eAfflictionLine, GC.getPromotionLineInfo(eAfflictionLine).getOvercomeAdjperTurn());
-					doOvercomeCheck(eAfflictionLine);
-				}
-
-				setPromotionLineAfflictionAttackCommunicability(eAfflictionLine, 0);
-				if (getAfflictionToleranceChange(eAfflictionLine) > 0)
-				{
-					int iDecay = GC.getPromotionLineInfo(eAfflictionLine).getToleranceDecay();
-					if (iDecay != 0)
-					{
-						changeAfflictionToleranceChange(eAfflictionLine, -iDecay);
-					}
-				}
-			}
-		}
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	//TB Combat Mod (Buildings) end
 
@@ -1518,18 +1442,12 @@ void CvCity::doAutobuild()
 void CvCity::checkPropertyBuildings()
 {
 	PROFILE_EXTRA_FUNC();
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	const bool bOaA = GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS);
-#endif
 
 	for (int iI = GC.getNumPropertyInfos() - 1; iI > -1; iI--)
 	{
 		const PropertyTypes eProperty = static_cast<PropertyTypes>(iI);
 		const int iValue = getProperties()->getValueByProperty(eProperty);
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-		if (!bOaA || !GC.getPropertyInfo(eProperty).isOAType())
-#endif
 		{
 			foreach_(const PropertyBuilding& kBuilding, GC.getPropertyInfo(eProperty).getPropertyBuildings())
 			{
@@ -2501,7 +2419,7 @@ void CvCity::NoteBuildingNoLongerConstructable(BuildingTypes eBuilding) const
 	}
 }
 
-bool CvCity::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestVisible, bool bIgnoreCost, bool bIgnoreAmount, bool bIgnoreBuildings, TechTypes eIgnoreTechReq, int* probabilityEverConstructable, bool bAffliction, bool bExposed) const
+bool CvCity::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestVisible, bool bIgnoreCost, bool bIgnoreAmount, bool bIgnoreBuildings, TechTypes eIgnoreTechReq, int* probabilityEverConstructable, bool bExposed) const
 {
 	PROFILE_FUNC();
 
@@ -2509,7 +2427,7 @@ bool CvCity::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestVis
 	{
 		return false;
 	}
-	if (!bContinue && !bTestVisible && !bIgnoreCost && !bIgnoreAmount && !bIgnoreBuildings && eIgnoreTechReq == NO_TECH && probabilityEverConstructable == NULL && !bAffliction && !bExposed)
+	if (!bContinue && !bTestVisible && !bIgnoreCost && !bIgnoreAmount && !bIgnoreBuildings && eIgnoreTechReq == NO_TECH && probabilityEverConstructable == NULL && !bExposed)
 	{
 		bool bResult;
 		bool bHaveCachedResult;
@@ -2533,7 +2451,7 @@ bool CvCity::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestVis
 				bHaveCachedResult = true;
 #ifdef VALIDATE_CAN_CONSTRUCT_CACHE
 				//	Verify if required
-				if (bResult != canConstructInternal(eBuilding, bContinue, bTestVisible, bIgnoreCost, bIgnoreAmount, NO_BUILDING, bIgnoreBuildings, eIgnoreTechReq, NULL, bAffliction, bExposed))
+				if (bResult != canConstructInternal(eBuilding, bContinue, bTestVisible, bIgnoreCost, bIgnoreAmount, NO_BUILDING, bIgnoreBuildings, eIgnoreTechReq, NULL, bExposed))
 				{
 					MessageBox(NULL, "canConstruct cached result mismatch", "cvGameCore", MB_OK);
 					FErrorMsg("canConstruct cached result mismatch");
@@ -2544,7 +2462,7 @@ bool CvCity::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestVis
 
 		if (!bHaveCachedResult)
 		{
-			bResult = canConstructInternal(eBuilding, bContinue, bTestVisible, bIgnoreCost, bIgnoreAmount, NO_BUILDING, bIgnoreBuildings, eIgnoreTechReq, NULL, bAffliction, bExposed);
+			bResult = canConstructInternal(eBuilding, bContinue, bTestVisible, bIgnoreCost, bIgnoreAmount, NO_BUILDING, bIgnoreBuildings, eIgnoreTechReq, NULL, bExposed);
 			{
 
 				if (m_bCanConstruct == NULL)
@@ -2558,11 +2476,11 @@ bool CvCity::canConstruct(BuildingTypes eBuilding, bool bContinue, bool bTestVis
 
 		return bResult;
 	}
-	return canConstructInternal(eBuilding, bContinue, bTestVisible, bIgnoreCost, bIgnoreAmount, NO_BUILDING, bIgnoreBuildings, eIgnoreTechReq, probabilityEverConstructable, bAffliction, bExposed);
+	return canConstructInternal(eBuilding, bContinue, bTestVisible, bIgnoreCost, bIgnoreAmount, NO_BUILDING, bIgnoreBuildings, eIgnoreTechReq, probabilityEverConstructable, bExposed);
 }
 //	KOSHLING - Can construct cache end
 
-bool CvCity::canConstructInternal(BuildingTypes eBuilding, bool bContinue, bool bTestVisible, bool bIgnoreCost, bool bIgnoreAmount, BuildingTypes withExtraBuilding, bool bIgnoreBuildings, TechTypes eIgnoreTechReq, int* probabilityEverConstructable, bool bAffliction, bool bExposed) const
+bool CvCity::canConstructInternal(BuildingTypes eBuilding, bool bContinue, bool bTestVisible, bool bIgnoreCost, bool bIgnoreAmount, BuildingTypes withExtraBuilding, bool bIgnoreBuildings, TechTypes eIgnoreTechReq, int* probabilityEverConstructable, bool bExposed) const
 {
 	PROFILE_FUNC();
 
@@ -2610,7 +2528,7 @@ bool CvCity::canConstructInternal(BuildingTypes eBuilding, bool bContinue, bool 
 	if (
 		!GET_PLAYER(getOwner()).canConstruct(
 			eBuilding, bContinue, bTestVisible, bIgnoreCost, eIgnoreTechReq,
-			probabilityEverConstructable, bAffliction, bExposed
+			probabilityEverConstructable, bExposed
 		)
 	) return false;
 
@@ -2697,7 +2615,6 @@ bool CvCity::canConstructInternal(BuildingTypes eBuilding, bool bContinue, bool 
 
 	if (!bTestVisible && !bExposed)
 	{
-		if (!bAffliction)
 		{
 			if (!bContinue && getFirstBuildingOrder(eBuilding) != -1)
 			{
@@ -2752,7 +2669,7 @@ bool CvCity::canConstructInternal(BuildingTypes eBuilding, bool bContinue, bool 
 
 		const CorporationTypes foundsCorp = (CorporationTypes)kBuilding.getFoundsCorporation();
 
-		if (foundsCorp != NO_CORPORATION && !bAffliction)
+		if (foundsCorp != NO_CORPORATION)
 		{
 			if (GC.getGame().isCorporationFounded(foundsCorp)
 			|| GET_PLAYER(getOwner()).isNoCorporations())
@@ -2781,7 +2698,6 @@ bool CvCity::canConstructInternal(BuildingTypes eBuilding, bool bContinue, bool 
 			}
 		}
 
-		if (!bAffliction) //bAffliction ONLY applies during the Outbreaks and Afflictions option being on!
 		{
 			if (!(*getPropertiesConst() <= *(kBuilding.getPrereqMaxProperties()))
 			|| !(*getPropertiesConst() >= *(kBuilding.getPrereqMinProperties())))
@@ -2904,7 +2820,7 @@ bool CvCity::canConstructInternal(BuildingTypes eBuilding, bool bContinue, bool 
 		}
 	}
 
-	if (!bTestVisible && !bIgnoreBuildings || bAffliction)
+	if (!bTestVisible && !bIgnoreBuildings)
 	{
 		for (int iI = 0; iI < kBuilding.getNumPrereqNotInCityBuildings(); ++iI)
 		{
@@ -2948,7 +2864,6 @@ bool CvCity::canConstructInternal(BuildingTypes eBuilding, bool bContinue, bool 
 		}
 	}
 
-	if (!bAffliction)
 	{
 		//Can not construct replaced buildings.
 		for (int iI = 0; iI < kBuilding.getNumReplacementBuilding(); ++iI)
@@ -4801,55 +4716,8 @@ void CvCity::processBuilding(const BuildingTypes eBuilding, const int iChange, c
 		changeHealthPercentPerPopulation(kBuilding.getHealthPercentPerPopulation() * iChange);
 		changeHappinessPercentPerPopulation(kBuilding.getHappinessPercentPerPopulation() * iChange);
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-		//TB Combat Mods (Buildings) begin
-		for (int iI = 0; iI < kBuilding.getNumAidRateChanges(); iI++)
-		{
-			PropertyTypes eProperty = kBuilding.getAidRateChange(iI).ePropertyType;
-			changeAidRate(eProperty, kBuilding.getAidRateChange(iI).iChange * iChange);
-		}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
-#ifdef STRENGTH_IN_NUMBERS
-		changeTotalFrontSupportPercentModifier(kBuilding.getFrontSupportPercentModifier() * iChange);
-		changeTotalShortRangeSupportPercentModifier(kBuilding.getShortRangeSupportPercentModifier() * iChange);
-		changeTotalMediumRangeSupportPercentModifier(kBuilding.getMediumRangeSupportPercentModifier() * iChange);
-		changeTotalLongRangeSupportPercentModifier(kBuilding.getLongRangeSupportPercentModifier() * iChange);
-		changeTotalFlankSupportPercentModifier(kBuilding.getFlankSupportPercentModifier() * iChange);
-#endif // STRENGTH_IN_NUMBERS
 	}
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if (kBuilding.getPromotionLineType() != NO_PROMOTIONLINE && GC.getPromotionLineInfo(kBuilding.getPromotionLineType()).isAffliction())
-	{
-		changeAfflictionTypeCount(kBuilding.getPromotionLineType(), iChange);
-	}
-
-
-	for (int iI = 0; iI < kBuilding.getNumBonusAidModifiers(); iI++)
-	{
-		BonusTypes eBonus = kBuilding.getBonusAidModifier(iI).eBonusType;
-		PropertyTypes ePropertyType = kBuilding.getBonusAidModifier(iI).ePropertyType;
-
-		changeExtraBonusAidModifier(eBonus, ePropertyType, kBuilding.getBonusAidModifier(iI).iModifier);
-	}
-
-
-	for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-	{
-		PROFILE("CvCity::processBuilding.PromotionLines");
-		const PromotionLineTypes eAfflictionLine = static_cast<PromotionLineTypes>(iI);
-		changeExtraAfflictionOutbreakLevelChange(eAfflictionLine, kBuilding.getAfflictionOutbreakLevelChange(iI) * iChange);
-
-		if (iChange == -1 && kBuilding.getPromotionLineType() == eAfflictionLine)
-		{
-			changeAfflictionToleranceChange(eAfflictionLine, GC.getPromotionLineInfo(eAfflictionLine).getToleranceBuildup());
-			if (!hasAfflictionType(eAfflictionLine))
-			{
-				setCurrentOvercomeChange(eAfflictionLine, 0);
-			}
-		}
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
 	{
@@ -4861,9 +4729,7 @@ void CvCity::processBuilding(const BuildingTypes eBuilding, const int iChange, c
 
 		if (!bReligiously)
 		{
-			changeUnitCombatRepelModifierTotal(eCombatX, kBuilding.getUnitCombatRepelModifier(iI) * iChange);
 			//TB Defense Mod
-			changeUnitCombatRepelAgainstModifierTotal(eCombatX, kBuilding.getUnitCombatRepelAgainstModifier(iI) * iChange);
 			changeUnitCombatDefenseAgainstModifierTotal(eCombatX, kBuilding.getUnitCombatDefenseAgainstModifier(iI) * iChange);
 		}
 	}
@@ -4880,7 +4746,6 @@ void CvCity::processBuilding(const BuildingTypes eBuilding, const int iChange, c
 	{
 		changeExtraLocalDynamicDefense(kBuilding.getLocalDynamicDefense() * iChange);
 		changeExtraRiverDefensePenalty(kBuilding.getRiverDefensePenalty() * iChange);
-		changeExtraLocalRepel(kBuilding.getLocalRepel() * iChange);
 		changeExtraMinDefense(kBuilding.getMinDefense() * iChange);
 		if (kBuilding.getBuildingDefenseRecoverySpeedModifier() > 0 && kBuilding.getDefenseModifier() > 0)
 		{
@@ -17269,20 +17134,6 @@ void CvCity::read(FDataStreamBase* pStream)
 
 	//TB Combat Mod (Buildings) begin
 	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_COMBATINFOS, GC.getNumUnitCombatInfos(), m_paiUnitCombatProductionModifier);
-	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_COMBATINFOS, GC.getNumUnitCombatInfos(), m_paiUnitCombatRepelModifier);
-#ifdef STRENGTH_IN_NUMBERS
-	WRAPPER_READ(wrapper, "CvCity", &m_iTotalFrontSupportPercentModifier);
-	WRAPPER_READ(wrapper, "CvCity", &m_iTotalShortRangeSupportPercentModifier);
-	WRAPPER_READ(wrapper, "CvCity", &m_iTotalMediumRangeSupportPercentModifier);
-	WRAPPER_READ(wrapper, "CvCity", &m_iTotalLongRangeSupportPercentModifier);
-	WRAPPER_READ(wrapper, "CvCity", &m_iTotalFlankSupportPercentModifier);
-#else
-	WRAPPER_SKIP_ELEMENT(wrapper, "CvCity", &m_iTotalFrontSupportPercentModifier, SAVE_VALUE_TYPE_INT);
-	WRAPPER_SKIP_ELEMENT(wrapper, "CvCity", &m_iTotalShortRangeSupportPercentModifier, SAVE_VALUE_TYPE_INT);
-	WRAPPER_SKIP_ELEMENT(wrapper, "CvCity", &m_iTotalMediumRangeSupportPercentModifier, SAVE_VALUE_TYPE_INT);
-	WRAPPER_SKIP_ELEMENT(wrapper, "CvCity", &m_iTotalLongRangeSupportPercentModifier, SAVE_VALUE_TYPE_INT);
-	WRAPPER_SKIP_ELEMENT(wrapper, "CvCity", &m_iTotalFlankSupportPercentModifier, SAVE_VALUE_TYPE_INT);
-#endif
 
 	WRAPPER_READ(wrapper, "CvCity", &m_iExtraTechSpecialistHappiness);
 	WRAPPER_READ(wrapper, "CvCity", &m_iExtraBuildingHappinessFromTech);
@@ -17311,12 +17162,10 @@ void CvCity::read(FDataStreamBase* pStream)
 	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_SPECIALISTS, GC.getNumSpecialistInfos(), m_paiSpecialistBannedCount);
 	WRAPPER_READ(wrapper, "CvCity", &m_iExtraLocalDynamicDefense);
 	WRAPPER_READ(wrapper, "CvCity", &m_iExtraRiverDefensePenalty);
-	WRAPPER_READ(wrapper, "CvCity", &m_iExtraLocalRepel);
 	WRAPPER_READ(wrapper, "CvCity", &m_iExtraMinDefense);
 	WRAPPER_READ(wrapper, "CvCity", &m_iExtraBuildingDefenseRecoverySpeedModifier);
 	WRAPPER_READ(wrapper, "CvCity", &m_iModifiedBuildingDefenseRecoverySpeedCap);
 	WRAPPER_READ(wrapper, "CvCity", &m_iExtraCityDefenseRecoverySpeedModifier);
-	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_COMBATINFOS, GC.getNumUnitCombatInfos(), m_paiUnitCombatRepelAgainstModifier);
 	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_COMBATINFOS, GC.getNumUnitCombatInfos(), m_paiUnitCombatDefenseAgainstModifier);
 	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_COMBATINFOS, GC.getNumUnitCombatInfos(), m_paiDamageAttackingUnitCombatCount);
 	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_COMBATINFOS, GC.getNumUnitCombatInfos(), m_paiHealUnitCombatTypeVolume);
@@ -17354,10 +17203,6 @@ void CvCity::read(FDataStreamBase* pStream)
 	WRAPPER_READ(wrapper, "CvCity", &m_bVisibilitySetup);
 	m_bVisibilitySetup = false;
 
-	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewAfflictionTypeCount);
-	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewExtraAfflictionOutbreakLevelChange);
-	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewAfflictionToleranceChange);
-	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewCurrentOvercomeChange);
 
 	for (int i = 0; i < wrapper.getNumClassEnumValues(REMAPPED_CLASS_TYPE_BONUSES); ++i)
 	{
@@ -17373,7 +17218,6 @@ void CvCity::read(FDataStreamBase* pStream)
 		}
 	}
 	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROPERTIES, GC.getNumPropertyInfos(), m_paiAidRate);
-	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiPromotionLineAfflictionAttackCommunicability);
 	WRAPPER_READ(wrapper, "CvCity", &m_iQuarantinedCount);
 	WRAPPER_READ_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_BONUSES, GC.getNumBonusInfos(), m_pabHadRawVicinityBonus);
 	WRAPPER_READ(wrapper, "CvCity", &m_bPropertyControlBuildingQueued);
@@ -17927,14 +17771,6 @@ void CvCity::write(FDataStreamBase* pStream)
 
 	//TB Combat Mod (Buildings) begin
 	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_COMBATINFOS, GC.getNumUnitCombatInfos(), m_paiUnitCombatProductionModifier);
-	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_COMBATINFOS, GC.getNumUnitCombatInfos(), m_paiUnitCombatRepelModifier);
-#ifdef STRENGTH_IN_NUMBERS
-	WRAPPER_WRITE(wrapper, "CvCity", m_iTotalFrontSupportPercentModifier);
-	WRAPPER_WRITE(wrapper, "CvCity", m_iTotalShortRangeSupportPercentModifier);
-	WRAPPER_WRITE(wrapper, "CvCity", m_iTotalMediumRangeSupportPercentModifier);
-	WRAPPER_WRITE(wrapper, "CvCity", m_iTotalLongRangeSupportPercentModifier);
-	WRAPPER_WRITE(wrapper, "CvCity", m_iTotalFlankSupportPercentModifier);
-#endif
 
 	WRAPPER_WRITE(wrapper, "CvCity", m_iExtraTechSpecialistHappiness);
 	WRAPPER_WRITE(wrapper, "CvCity", m_iExtraBuildingHappinessFromTech);
@@ -17951,12 +17787,10 @@ void CvCity::write(FDataStreamBase* pStream)
 	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_SPECIALISTS, GC.getNumSpecialistInfos(), m_paiSpecialistBannedCount);
 	WRAPPER_WRITE(wrapper, "CvCity", m_iExtraLocalDynamicDefense);
 	WRAPPER_WRITE(wrapper, "CvCity", m_iExtraRiverDefensePenalty);
-	WRAPPER_WRITE(wrapper, "CvCity", m_iExtraLocalRepel);
 	WRAPPER_WRITE(wrapper, "CvCity", m_iExtraMinDefense);
 	WRAPPER_WRITE(wrapper, "CvCity", m_iExtraBuildingDefenseRecoverySpeedModifier);
 	WRAPPER_WRITE(wrapper, "CvCity", m_iModifiedBuildingDefenseRecoverySpeedCap);
 	WRAPPER_WRITE(wrapper, "CvCity", m_iExtraCityDefenseRecoverySpeedModifier);
-	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_COMBATINFOS, GC.getNumUnitCombatInfos(), m_paiUnitCombatRepelAgainstModifier);
 	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_COMBATINFOS, GC.getNumUnitCombatInfos(), m_paiUnitCombatDefenseAgainstModifier);
 	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_COMBATINFOS, GC.getNumUnitCombatInfos(), m_paiDamageAttackingUnitCombatCount);
 	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_COMBATINFOS, GC.getNumUnitCombatInfos(), m_paiHealUnitCombatTypeVolume);
@@ -17980,10 +17814,6 @@ void CvCity::write(FDataStreamBase* pStream)
 	}
 	WRAPPER_WRITE_ARRAY(wrapper, "CvCity", NUM_YIELD_TYPES, m_aiBaseYieldPerPopRate);
 	WRAPPER_WRITE(wrapper, "CvCity", m_bVisibilitySetup);
-	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewAfflictionTypeCount);
-	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewExtraAfflictionOutbreakLevelChange);
-	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewAfflictionToleranceChange);
-	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiNewCurrentOvercomeChange);
 
 	for (int iI = 0; iI < GC.getNumBonusInfos(); iI++)
 	{
@@ -17991,7 +17821,6 @@ void CvCity::write(FDataStreamBase* pStream)
 	}
 
 	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROPERTIES, GC.getNumPropertyInfos(), m_paiAidRate);
-	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_PROMOTIONLINES, GC.getNumPromotionLineInfos(), m_paiPromotionLineAfflictionAttackCommunicability);
 	WRAPPER_WRITE(wrapper, "CvCity", m_iQuarantinedCount);
 	WRAPPER_WRITE_CLASS_ARRAY(wrapper, "CvCity", REMAPPED_CLASS_TYPE_BONUSES, GC.getNumBonusInfos(), m_pabHadRawVicinityBonus);
 	WRAPPER_WRITE(wrapper, "CvCity", m_bPropertyControlBuildingQueued);
@@ -22226,19 +22055,9 @@ void CvCity::clearModifierTotals()
 		m_paiUnitCombatFreeExperience[iI] = 0;
 		m_paiUnitCombatExtraStrength[iI] = 0;
 		m_paiUnitCombatProductionModifier[iI] = 0;
-		m_paiUnitCombatRepelModifier[iI] = 0;
-		m_paiUnitCombatRepelAgainstModifier[iI] = 0;
 		m_paiUnitCombatDefenseAgainstModifier[iI] = 0;
 		m_paiDamageAttackingUnitCombatCount[iI] = 0;
 		m_paiHealUnitCombatTypeVolume[iI] = 0;
-	}
-
-	for (int iI = 0; iI < GC.getNumPromotionLineInfos(); iI++)
-	{
-		m_paiNewAfflictionTypeCount[iI] = 0;
-		m_paiNewExtraAfflictionOutbreakLevelChange[iI] = 0;
-		m_paiNewAfflictionToleranceChange[iI] = 0;
-		m_paiNewCurrentOvercomeChange[iI] = 0;
 	}
 
 	for (int iI = 0; iI < GC.getNumPropertyInfos(); iI++)
@@ -22312,18 +22131,10 @@ void CvCity::clearModifierTotals()
 	//	city yields based on plots being worked until we explicitly add them back in
 	m_bPlotWorkingMasked = true;
 
-#ifdef STRENGTH_IN_NUMBERS
-	m_iTotalFrontSupportPercentModifier = 0;
-	m_iTotalShortRangeSupportPercentModifier = 0;
-	m_iTotalMediumRangeSupportPercentModifier = 0;
-	m_iTotalLongRangeSupportPercentModifier = 0;
-	m_iTotalFlankSupportPercentModifier = 0;
-#endif
 	m_iExtraLocalCaptureProbabilityModifier = 0;
 	m_iExtraLocalCaptureResistanceModifier = 0;
 	m_iExtraLocalDynamicDefense = 0;
 	m_iExtraRiverDefensePenalty = 0;
-	m_iExtraLocalRepel = 0;
 	m_iExtraMinDefense = 0;
 	m_iExtraBuildingDefenseRecoverySpeedModifier = 0;
 	m_iModifiedBuildingDefenseRecoverySpeedCap = 0;
@@ -22779,464 +22590,6 @@ int CvCity::getGlobalSourcedProperty(PropertyTypes eProperty) const
 	return iSum;
 }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-int CvCity::getPropertyValue(PropertyTypes eProperty) const
-{
-	return getPropertiesConst()->getValueByProperty(eProperty);
-}
-
-//TB Combat Mods (Buildings) begin
-int CvCity::getUnitAidPresent(PropertyTypes eProperty) const
-{
-	PROFILE_FUNC();
-
-	return algo::max_element(
-		plot()->units() | filtered(CvUnit::fn::getTeam() == getTeam())
-						| transformed(CvUnit::fn::aidTotal(eProperty))
-	).get_value_or(0);
-}
-
-int CvCity::getCityAidTotal(PromotionLineTypes ePromotionLineType) const
-{
-	PROFILE_EXTRA_FUNC();
-	if (ePromotionLineType != NO_PROMOTIONLINE)
-	{
-		const PropertyTypes ePropertyType = GC.getPromotionLineInfo(ePromotionLineType).getPropertyType();
-		if (ePropertyType != NO_PROPERTY)
-		{
-			int iBonusTotal = 0;
-			for (int iI = 0; iI < GC.getNumBonusInfos(); iI++)
-			{
-				iBonusTotal += getExtraBonusAidModifier((BonusTypes)iI, ePropertyType);
-			}
-			return (getAidRate(ePropertyType) + getUnitAidPresent(ePropertyType) + iBonusTotal);
-		}
-	}
-	return 0;
-}
-
-int CvCity::getAidRate(PropertyTypes ePropertyType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPropertyInfos(), ePropertyType);
-	return std::max(0, m_paiAidRate[ePropertyType]);
-}
-
-void CvCity::changeAidRate(PropertyTypes ePropertyType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPropertyInfos(), ePropertyType);
-	m_paiAidRate[ePropertyType] += iChange;
-}
-
-void CvCity::setAidRate(PropertyTypes ePropertyType, int iChange)//may be unnecessary
-{
-	FASSERT_BOUNDS(0, GC.getNumPropertyInfos(), ePropertyType);
-	m_paiAidRate[ePropertyType] = iChange;
-}
-
-bool CvCity::hasAfflictionType(PromotionLineTypes ePromotionLineType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-	return m_paiNewAfflictionTypeCount[ePromotionLineType] > 0;
-}
-
-void CvCity::changeAfflictionTypeCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-	m_paiNewAfflictionTypeCount[ePromotionLineType] += iChange;
-}
-
-void CvCity::setAfflictionTypeCount(PromotionLineTypes ePromotionLineType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLineType);
-	m_paiNewAfflictionTypeCount[ePromotionLineType] = iChange;
-}
-
-int CvCity::getExtraBonusAidModifier(BonusTypes eBonusType, PropertyTypes ePropertyType) const
-{
-	FASSERT_BOUNDS(0, GC.getNumBonusInfos(), eBonusType);
-	return m_ppaaiExtraBonusAidModifier[eBonusType][ePropertyType];
-}
-
-void CvCity::changeExtraBonusAidModifier(BonusTypes eBonusType, PropertyTypes ePropertyType, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumBonusInfos(), eBonusType);
-	m_ppaaiExtraBonusAidModifier[eBonusType][ePropertyType] += iChange;
-}
-
-int CvCity::getExtraAfflictionOutbreakLevelChange(PromotionLineTypes ePromotionLine) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLine);
-	return m_paiNewExtraAfflictionOutbreakLevelChange[ePromotionLine];
-}
-
-void CvCity::changeExtraAfflictionOutbreakLevelChange(PromotionLineTypes ePromotionLine, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLine);
-	m_paiNewExtraAfflictionOutbreakLevelChange[ePromotionLine] += iChange;
-}
-
-void CvCity::setExtraAfflictionOutbreakLevelChange(PromotionLineTypes ePromotionLine, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLine);
-	m_paiNewExtraAfflictionOutbreakLevelChange[ePromotionLine] = iChange;
-}
-
-int CvCity::getAfflictionToleranceChange(PromotionLineTypes ePromotionLine) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLine);
-	return m_paiNewAfflictionToleranceChange[ePromotionLine];
-}
-
-void CvCity::changeAfflictionToleranceChange(PromotionLineTypes ePromotionLine, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLine);
-	m_paiNewAfflictionToleranceChange[ePromotionLine] = std::max(0, (m_paiNewAfflictionToleranceChange[ePromotionLine] + iChange));
-}
-
-void CvCity::setAfflictionToleranceChange(PromotionLineTypes ePromotionLine, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLine);
-	m_paiNewAfflictionToleranceChange[ePromotionLine] = iChange;
-}
-
-int CvCity::getCurrentOvercomeChange(PromotionLineTypes ePromotionLine) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLine);
-	return m_paiNewCurrentOvercomeChange[ePromotionLine];
-}
-
-void CvCity::changeCurrentOvercomeChange(PromotionLineTypes ePromotionLine, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLine);
-	m_paiNewCurrentOvercomeChange[ePromotionLine] += iChange;
-}
-
-void CvCity::setCurrentOvercomeChange(PromotionLineTypes ePromotionLine, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), ePromotionLine);
-	m_paiNewCurrentOvercomeChange[ePromotionLine] = iChange;
-}
-
-int CvCity::getTotalTechOutbreakLevelChange(BuildingTypes eBuilding) const
-{
-	PROFILE_EXTRA_FUNC();
-	int iTotalTechOutbreakLevelChange = 0;
-	for (int iI = 0; iI < GC.getNumTechInfos(); iI++)
-	{
-		const TechTypes eTech = ((TechTypes)iI);
-		if (GET_TEAM(getTeam()).isHasTech(eTech))
-		{
-			iTotalTechOutbreakLevelChange += GC.getBuildingInfo(eBuilding).getTechOutbreakLevelChange(iI);
-		}
-	}
-	return iTotalTechOutbreakLevelChange;
-}
-
-int CvCity::getOutbreakChangesTotal(BuildingTypes eAfflictionBuilding, PromotionLineTypes eAfflictionLine) const
-{
-	int iTotal = 0;
-	//iTotal -= getTradeCommunicabilityTotal(eAfflictionBuilding, eAfflictionLine);
-	//iTotal -= getUnitCommunicability(eAfflictionLine);
-	//iTotal += getCityAidTotal();
-	//TB Note: Communicability is tallied in the Outbreak Check function earlier than this function is called, then subtracted there
-	iTotal += getExtraAfflictionOutbreakLevelChange(eAfflictionLine);
-	iTotal += getTotalTechOutbreakLevelChange(eAfflictionBuilding);
-	iTotal += getAfflictionToleranceChange(eAfflictionLine);
-
-	return iTotal;
-}
-
-int CvCity::getOvercomeChangesTotal(BuildingTypes eAfflictionBuilding, PromotionLineTypes eAfflictionLine) const
-{
-	int iTotal = 0;
-	iTotal -= getTotalCommunicableExposure(eAfflictionLine);
-	iTotal += getCityAidTotal(eAfflictionLine);
-	iTotal += getAfflictionToleranceChange(eAfflictionLine);
-	iTotal -= getCurrentOvercomeChange(eAfflictionLine);
-	/*iTotal += getExtraAfflictionOutbreakLevelChange(eAfflictionLine);*/
-	/*iTotal += getTotalTechOutbreakLevelChange(eAfflictionBuilding);*/
-	/*iTotal -= getUnitCommunicability(eAfflictionLine);*///Now included in Total Communicable Exposure
-
-	return iTotal;
-}
-
-int CvCity::getUnitCommunicability(PromotionLineTypes eAfflictionLine) const
-{
-	PROFILE_FUNC();
-
-
-	if (GC.getPromotionLineInfo(eAfflictionLine).isNoSpreadUnittoCity())
-		return 0;
-
-	// Find unit with the highest probability to afflict
-	bst::optional<int> worstAffliction = algo::max_element(
-		plot()->units() | filtered(CvUnit::fn::hasAfflictionLine(eAfflictionLine))
-						| transformed(CvUnit::fn::worsenedProbabilitytoAfflict(eAfflictionLine))
-	);
-
-	if (worstAffliction)
-	{
-		return *worstAffliction + GC.getPromotionLineInfo(eAfflictionLine).getCommunicability();
-	}
-	return 0;
-}
-
-int CvCity::getTradeCommunicabilityTotal(BuildingTypes eAfflictionBuilding, PromotionLineTypes eAfflictionLine) const
-{
-	PROFILE_EXTRA_FUNC();
-	int iTradeCommunicabilityTotal = 0;
-	for (int iI = 0; iI < getTradeRoutes(); ++iI)
-	{
-		const CvCity* pCity = getTradeCity(iI);
-		if (pCity->hasAfflictionType(eAfflictionLine) && pCity->isActiveBuilding(eAfflictionBuilding))
-		{
-			iTradeCommunicabilityTotal += GC.getBuildingInfo(eAfflictionBuilding).getTradeCommunicability();
-		}
-	}
-	return iTradeCommunicabilityTotal;
-}
-
-bool CvCity::canAcquireAffliction(BuildingTypes eDisease, PromotionLineTypes eAfflictionLine) const
-{
-	if (eDisease == NO_BUILDING || hasBuilding(eDisease))
-	{
-		return false;
-	}
-	return true;
-}
-
-int CvCity::getTotalCommunicableExposure(PromotionLineTypes eAfflictionLine) const
-{
-	PROFILE_EXTRA_FUNC();
-	const CvPromotionLineInfo& kAffliction = GC.getPromotionLineInfo(eAfflictionLine);
-
-	int iTradeCommunicability = 0;
-	for (int iI = 0; iI < kAffliction.getNumBuildings(); iI++)
-	{
-		iTradeCommunicability += getTradeCommunicabilityTotal((BuildingTypes)kAffliction.getBuilding(iI), eAfflictionLine);
-	}
-	int iUnitCommunicability = getUnitCommunicability(eAfflictionLine);
-	int iWorkedTileCommunicability = 0;
-	int iVicinityTileCommunicability = 0;
-
-	for (int iI = 0; iI < getNumCityPlots(); iI++)
-	{
-		const CvPlot* pLoopPlot = ::plotCity(getX(), getY(), iI);
-		if (isWorkingPlot(iI))
-		{
-			iWorkedTileCommunicability += pLoopPlot->getCommunicability(eAfflictionLine, true, false, false);
-		}
-		iVicinityTileCommunicability += pLoopPlot->getCommunicability(eAfflictionLine, false, true, false);
-	}
-
-	int iAccessVolumeBonusCommunicability = 0;
-
-	for (int iI = 0; iI < GC.getNumBonusInfos(); iI++)
-	{
-		const BonusTypes eBonus = (BonusTypes)iI;
-		iAccessVolumeBonusCommunicability += (getNumBonuses(eBonus) * GC.getBonusInfo(eBonus).getAfflictionCommunicabilityType(eAfflictionLine, false, false, true).iModifier);
-	}
-
-	int iTotalCommunicableExposure = iTradeCommunicability + iUnitCommunicability + iWorkedTileCommunicability + iVicinityTileCommunicability + iAccessVolumeBonusCommunicability;
-	return iTotalCommunicableExposure;
-}
-
-void CvCity::doOutbreakCheck(PromotionLineTypes eAfflictionLine)
-{
-	PROFILE_EXTRA_FUNC();
-	const PropertyTypes ePropertyType = GC.getPromotionLineInfo(eAfflictionLine).getPropertyType();
-	const CvPromotionLineInfo& kAffliction = GC.getPromotionLineInfo(eAfflictionLine);
-	BuildingTypes eBuilding;
-	int iLowestLinePriority = MAX_INT;
-
-	if (kAffliction.getObsoleteTech() != NO_TECH)
-	{
-		if (GET_TEAM(getTeam()).isHasTech(kAffliction.getObsoleteTech()))
-		{
-			return;
-		}
-	}
-
-	if (kAffliction.getPrereqTech() != NO_TECH)
-	{
-		if (!GET_TEAM(getTeam()).isHasTech(kAffliction.getPrereqTech()))
-		{
-			return;
-		}
-	}
-
-	for (int iI = 0; iI < kAffliction.getNumBuildings(); iI++)
-	{
-		if (canAcquireAffliction((BuildingTypes)kAffliction.getBuilding(iI), eAfflictionLine))
-		{
-			const int iLinePriority = GC.getBuildingInfo((BuildingTypes)kAffliction.getBuilding(iI)).getLinePriority();
-			if (iLinePriority < iLowestLinePriority)
-			{
-				iLowestLinePriority = iLinePriority;
-				eBuilding = (BuildingTypes)kAffliction.getBuilding(iI);
-			}
-		}
-	}
-
-	if (iLowestLinePriority == MAX_INT)
-	{
-		//can't acquire
-		return;
-	}
-	//set bonuses with promotionlines like buildings with promotionlines on promotionlineinfos so we can loop here
-	int iTotalCommunicableExposure = getTotalCommunicableExposure(eAfflictionLine);
-
-	bool bExposed = (iTotalCommunicableExposure > 0);
-	bool bDoCheck = false;
-
-	if (iLowestLinePriority <= 1)
-	{
-		//we do not have an outbreak at all and must check to see if we're exposed.
-		//If not exposed, we check canconstruct with a fair amount of prerequisite details.  The base likelihood is used for the check.
-		//Otherwise, many canconstruct factors won't matter.  And the degree to which we are exposed will make a difference in the likelihood.
-		bDoCheck = canConstruct(eBuilding, false, false, true/*bIgnoreCost - must be true for affliction checks*/, false, false, NO_TECH, 0, true, bExposed);
-		//<-Add bools for bAffliction and bExposed - bAffliction would be true and bExposed would be bExposed
-	}
-	else
-	{
-		//We already are in an outbreak.
-		//Exposed has nothing to do with it.  The likelihood for getting worse is entirely a matter of the disease threshhold for this lowest building.
-		bDoCheck = true;
-	}
-
-	if (!bDoCheck)
-	{
-		return;
-	}
-
-	const CvBuildingInfo& kBuilding = GC.getBuildingInfo(eBuilding);
-
-	//Design the check portion.
-	int iOutbreakBase = kBuilding.getOutbreakBase();
-	int iOutbreakTotal = iOutbreakBase - iTotalCommunicableExposure + getOutbreakChangesTotal(eBuilding, eAfflictionLine);
-
-	int iChancetoOutbreak = getPropertyValue(ePropertyType) - iOutbreakTotal;
-	int iChanceModifier = kAffliction.getOutbreakModifier();
-	iChancetoOutbreak *= iChanceModifier;//spreads the chance of an outbreak across a wider range of property totals if low and condenses it into a smaller range if high.
-	iChancetoOutbreak /= 100; //in short, this is a % modifier to the value of 1 of the property value.  Thus, if you would normally have a 100% chance to have an outbreak at 100 property value (0 base threshold with no modifiers) and a 50% chance at 50 property value, a 50% modifier here (half) would make it so you have a 100% chance at 200, a 50% chance at 100 and a 25% chance at 50.  This halving increased the RANGE by twice as much and diluted the value of a given point of the modifier.
-
-	int iOutbreakRollResult = GC.getGame().getSorenRandNum(100, "Outbreak Check");
-
-	if (iOutbreakRollResult < iChancetoOutbreak)
-	{
-		const CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_OUTBREAK", getNameKey(), kBuilding.getDescription());
-		AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_RED(), getX(), getY());
-		changeHasBuilding(eBuilding, true);
-	}
-
-	return;
-}
-
-void CvCity::doOvercomeCheck(PromotionLineTypes eAfflictionLine)
-{
-	PROFILE_EXTRA_FUNC();
-	const PropertyTypes ePropertyType = GC.getPromotionLineInfo(eAfflictionLine).getPropertyType();
-	const CvPromotionLineInfo& kAffliction = GC.getPromotionLineInfo(eAfflictionLine);
-	int iHighestLinePriority = 0;
-	BuildingTypes eBuilding;
-
-	for (int iI = 0; iI < kAffliction.getNumBuildings(); iI++)
-	{
-		if (isActiveBuilding((BuildingTypes)kAffliction.getBuilding(iI)))
-		{
-			const int iLinePriority = GC.getBuildingInfo((BuildingTypes)kAffliction.getBuilding(iI)).getLinePriority();
-			if (iLinePriority > iHighestLinePriority)
-			{
-				iHighestLinePriority = iLinePriority;
-				eBuilding = (BuildingTypes)kAffliction.getBuilding(iI);
-			}
-		}
-	}
-
-	const CvBuildingInfo& kBuilding = GC.getBuildingInfo(eBuilding);
-
-	int iOvercomeBase = kBuilding.getOvercomeBase();
-	int iOvercomeTotal = iOvercomeBase + getOvercomeChangesTotal(eBuilding, eAfflictionLine);
-	int iChancetoOvercome = iOvercomeTotal - getPropertyValue(ePropertyType);
-	int iChanceModifier = kAffliction.getOvercomeModifier();
-	iChancetoOvercome *= iChanceModifier;
-	iChancetoOvercome /= 100;
-
-	int iOvercomeRollResult = GC.getGame().getSorenRandNum(100, "Overcome Check");
-
-	if (iOvercomeRollResult < iChancetoOvercome)
-	{
-		const CvWString szBuffer = gDLL->getText("TXT_KEY_MISC_OVERCOME_CITY", getNameKey(), GC.getBuildingInfo(eBuilding).getDescription());
-		AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN(), getX(), getY());
-		changeHasBuilding(eBuilding, false);
-	}
-	//PropertyTypes eDiseaseType = GC.getPROPERTY_DISEASE();
-	//PropertyTypes eProperty;
-	//PromotionLineTypes eCityDisease;
-	//CvPropertyInfo& kInfo = GC.getPropertyInfo(eDiseaseType);
-	//CvWString szBuffer;
-	//int iNum = kInfo.getNumPropertyBuildings();
-	//int iI;
-	//int iJ;
-	//int iOutbreakBase;
-	//int iOvercomeTotal;
-	//int iChancetoOvercome;
-	//int iOvercomeRollResult;
-
-	//for (iI=0; iI<iNum; iI++)
-	//{
-	//	eProperty = ((PropertyTypes)iI);
-	//	if (eProperty == eDiseaseType)
-	//	{
-	//		PropertyBuilding& kBuilding = kInfo.getPropertyBuilding(iI);
-
-	//		for (int iJ = 0; iJ < GC.getBuildingInfo(kBuilding.eBuilding).getNumDiseaseTypes(); iJ++)
-	//		{
-	//			eCityDisease = (PromotionLineTypes)GC.getBuildingInfo(kBuilding.eBuilding).getDiseaseType(iJ);
-	//			if (eCityDisease == eAfflictionLine)
-	//			{
-	//				iOutbreakBase = kBuilding.iMinValue;
-	//				iOvercomeTotal = iOutbreakBase + getOvercomeChangesTotal(kBuilding.eBuilding, eAfflictionLine);
-	//				iChancetoOvercome = iOvercomeTotal - getDiseasePropertyValue();
-
-	//				if (getDiseasePropertyValue() < iOvercomeTotal)
-	//				{
-	//					if (isActiveBuilding(kBuilding.eBuilding))
-	//					{
-	//						iOvercomeRollResult = GC.getGame().getSorenRandNum(100, "Overcome");
-	//						if (iOvercomeRollResult < iChancetoOvercome)
-	//						{
-
-	//							const CvWString szBuffer = DLL_SERIALIZE(gDLL->getText("TXT_KEY_MISC_OVERCOME_CITY", getNameKey(), GC.getBuildingInfo(kBuilding.eBuilding).getDescription()));
-	//							AddDLLMessage(getOwner(), true, GC.getEVENT_MESSAGE_TIME(), szBuffer, "AS2D_POSITIVE_DINK", MESSAGE_TYPE_INFO, NULL, GC.getCOLOR_GREEN(), getX(), getY());
-	//							changeHasBuilding(kBuilding.eBuilding, false);
-	//						}
-	//					}
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
-}
-
-int CvCity::getPromotionLineAfflictionAttackCommunicability(PromotionLineTypes eAffliction) const
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), eAffliction);
-	return m_paiPromotionLineAfflictionAttackCommunicability[eAffliction];
-}
-
-void CvCity::changePromotionLineAfflictionAttackCommunicability(PromotionLineTypes eAffliction, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), eAffliction);
-	m_paiPromotionLineAfflictionAttackCommunicability[eAffliction] += iChange;
-}
-
-void CvCity::setPromotionLineAfflictionAttackCommunicability(PromotionLineTypes eAffliction, int iValue)
-{
-	FASSERT_BOUNDS(0, GC.getNumPromotionLineInfos(), eAffliction);
-	m_paiPromotionLineAfflictionAttackCommunicability[eAffliction] = iValue;
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 int CvCity::getUnitCombatProductionModifier(UnitCombatTypes eIndex) const
 {
@@ -23250,29 +22603,6 @@ void CvCity::changeUnitCombatProductionModifier(UnitCombatTypes eIndex, int iCha
 	m_paiUnitCombatProductionModifier[eIndex] += iChange;
 }
 
-int CvCity::getUnitCombatRepelModifierTotal(UnitCombatTypes eIndex) const
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-	return m_paiUnitCombatRepelModifier[eIndex];
-}
-
-void CvCity::changeUnitCombatRepelModifierTotal(UnitCombatTypes eIndex, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-	m_paiUnitCombatRepelModifier[eIndex] += iChange;
-}
-
-int CvCity::getUnitCombatRepelAgainstModifierTotal(UnitCombatTypes eIndex) const
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-	return m_paiUnitCombatRepelAgainstModifier[eIndex];
-}
-
-void CvCity::changeUnitCombatRepelAgainstModifierTotal(UnitCombatTypes eIndex, int iChange)
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), eIndex);
-	m_paiUnitCombatRepelAgainstModifier[eIndex] += iChange;
-}
 
 int CvCity::getUnitCombatDefenseAgainstModifierTotal(UnitCombatTypes eIndex) const
 {
@@ -23286,62 +22616,6 @@ void CvCity::changeUnitCombatDefenseAgainstModifierTotal(UnitCombatTypes eIndex,
 	m_paiUnitCombatDefenseAgainstModifier[eIndex] += iChange;
 }
 
-#ifdef STRENGTH_IN_NUMBERS
-int CvCity::getTotalFrontSupportPercentModifier() const
-{
-	return m_iTotalFrontSupportPercentModifier;
-}
-
-void CvCity::changeTotalFrontSupportPercentModifier(int iChange)
-{
-	m_iTotalFrontSupportPercentModifier += iChange;
-	FASSERT_NOT_NEGATIVE(getTotalFrontSupportPercentModifier());
-}
-
-int CvCity::getTotalShortRangeSupportPercentModifier() const
-{
-	return m_iTotalShortRangeSupportPercentModifier;
-}
-
-void CvCity::changeTotalShortRangeSupportPercentModifier(int iChange)
-{
-	m_iTotalShortRangeSupportPercentModifier += iChange;
-	FASSERT_NOT_NEGATIVE(getTotalShortRangeSupportPercentModifier());
-}
-
-int CvCity::getTotalMediumRangeSupportPercentModifier() const
-{
-	return m_iTotalMediumRangeSupportPercentModifier;
-}
-
-void CvCity::changeTotalMediumRangeSupportPercentModifier(int iChange)
-{
-	m_iTotalMediumRangeSupportPercentModifier += iChange;
-	FASSERT_NOT_NEGATIVE(getTotalMediumRangeSupportPercentModifier());
-}
-
-int CvCity::getTotalLongRangeSupportPercentModifier() const
-{
-	return m_iTotalLongRangeSupportPercentModifier;
-}
-
-void CvCity::changeTotalLongRangeSupportPercentModifier(int iChange)
-{
-	m_iTotalLongRangeSupportPercentModifier += iChange;
-	FASSERT_NOT_NEGATIVE(getTotalLongRangeSupportPercentModifier());
-}
-
-int CvCity::getTotalFlankSupportPercentModifier() const
-{
-	return m_iTotalFlankSupportPercentModifier;
-}
-
-void CvCity::changeTotalFlankSupportPercentModifier(int iChange)
-{
-	m_iTotalFlankSupportPercentModifier += iChange;
-	FASSERT_NOT_NEGATIVE(getTotalFlankSupportPercentModifier());
-}
-#endif
 
 void CvCity::assignPromotionsFromBuildingChecked(const CvBuildingInfo& building, CvUnit* unit) const
 {
@@ -23349,9 +22623,6 @@ void CvCity::assignPromotionsFromBuildingChecked(const CvBuildingInfo& building,
 	foreach_(const FreePromoTypes& freePromoType, building.getFreePromoTypes())
 	{
 		if (unit->canAcquirePromotion(freePromoType.ePromotion, PromotionRequirements::Promote | PromotionRequirements::ForFree)
-#ifdef COMBAT_MOD_EQUIPTMENT
-		|| GC.getPromotionInfo(freePromoType.ePromotion).isEquipment() && canEquip(unit, freePromoType.ePromotion)
-#endif COMBAT_MOD_EQUIPTMENT
 		) {
 			if (!freePromoType.m_pExprFreePromotionCondition ||
 				freePromoType.m_pExprFreePromotionCondition->evaluate(unit->getGameObject()))
@@ -23360,42 +22631,6 @@ void CvCity::assignPromotionsFromBuildingChecked(const CvBuildingInfo& building,
 			}
 		}
 	}
-}
-
-bool CvCity::canEquip(const CvUnit* pUnit, PromotionTypes eEquipment) const
-{
-	PROFILE_EXTRA_FUNC();
-	//Some of this could be a bit misleading if its not understood that the result should be true if its NOT an equipment at all.
-	if (GC.getPromotionInfo(eEquipment).isEquipment())
-	{
-		for (int iI = 0; iI < GC.getNumPromotionInfos(); iI++)
-		{
-			const PromotionTypes eMayDeny = ((PromotionTypes)iI);
-			if (pUnit->isHasPromotion(eMayDeny) && GC.getPromotionInfo(eMayDeny).isEquipment())
-			{
-				if (GC.getPromotionInfo(eEquipment).getPromotionLine() != NO_PROMOTIONLINE && GC.getPromotionInfo(eMayDeny).getPromotionLine() != NO_PROMOTIONLINE)
-				{
-					if (GC.getPromotionInfo(eEquipment).getPromotionLine() == GC.getPromotionInfo(eMayDeny).getPromotionLine())
-					{
-						if (GC.getPromotionInfo(eEquipment).getLinePriority() <= GC.getPromotionInfo(eMayDeny).getLinePriority())
-						{
-							return false;
-						}
-					}
-				}
-			}
-		}
-
-		for (int iJ = 0; iJ < GC.getPromotionInfo(eEquipment).getNumNoAutoEquiptoCombatClassTypes(); iJ++)
-		{
-			const UnitCombatTypes eNoAuto = (UnitCombatTypes)GC.getPromotionInfo(eEquipment).getNoAutoEquiptoCombatClassType(iJ);
-			if (pUnit->isHasUnitCombat(eNoAuto))
-			{
-				return false;
-			}
-		}
-	}
-	return true;
 }
 
 
@@ -23471,19 +22706,6 @@ void CvCity::setExtraRiverDefensePenalty(int iValue)
 void CvCity::changeExtraRiverDefensePenalty(int iChange)
 {
 	m_iExtraRiverDefensePenalty += iChange;
-}
-
-int CvCity::getExtraLocalRepel() const
-{
-	return m_iExtraLocalRepel;
-}
-void CvCity::setExtraLocalRepel(int iValue)
-{
-	m_iExtraLocalRepel = iValue;
-}
-void CvCity::changeExtraLocalRepel(int iChange)
-{
-	m_iExtraLocalRepel += iChange;
 }
 
 int CvCity::getExtraMinDefense() const

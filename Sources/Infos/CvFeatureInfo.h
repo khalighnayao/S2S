@@ -31,7 +31,6 @@ public:
 	int getGrowthProbability() const;
 	int getDefenseModifier() const;
 	int getAdvancedStartRemoveCost() const;
-	int getTurnDamage() const;
 	int getWarmingDefense() const; //GWMod new xml field M.A.
 	int getPopDestroys() const;
 
@@ -78,10 +77,6 @@ public:
 
 	const std::vector<MapCategoryTypes>& getMapCategories() const { return m_aeMapCategoryTypes; }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int getNumAfflictionCommunicabilityTypes() const;
-	PromotionLineAfflictionModifier getAfflictionCommunicabilityType(int iPromotionLine, bool bWorkedTile = false, bool bVicinity = false, bool bAccessVolume = false);
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	DllExport const CvArtInfoFeature* getArtInfo() const;
 	const char* getButton() const;
@@ -125,7 +120,6 @@ private:
 	int m_iGrowthProbability;
 	int m_iDefenseModifier;
 	int m_iAdvancedStartRemoveCost;
-	int m_iTurnDamage;
 	int m_iWarmingDefense; //GWMod new xml field M.A.
 	int m_iPopDestroys;
 
@@ -158,9 +152,6 @@ private:
 
 	bool* m_pbTerrain;
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	std::vector<PromotionLineAfflictionModifier> m_aAfflictionCommunicabilityTypes;
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 private:
 	CvString m_szArtDefineTag;

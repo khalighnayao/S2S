@@ -88,7 +88,6 @@
 			<bCityLoad>0</bCityLoad>
 			<iCombatPercent>-5</iCombatPercent>
 			<iWithdrawalChange>-10</iWithdrawalChange>
-			<iPursuitChange>-10</iPursuitChange>
 			<CarrierUnitAIs/>
 		</SpecialUnitInfo>
 	</SpecialUnitInfos>

@@ -1087,7 +1087,6 @@
 			<iHealthPercent>-100</iHealthPercent>
 			<iDisappearance>350</iDisappearance>
 			<iSpread>500</iSpread>
-			<iTurnDamage>25</iTurnDamage>
 			<iPopDestroys>-1</iPopDestroys>
 			<iCultureDistance>5</iCultureDistance>
 			<TerrainBooleans>
@@ -1274,7 +1273,6 @@
 			<iHealthPercent>-80</iHealthPercent>
 			<iDisappearance>800</iDisappearance>
 			<iGrowth>60</iGrowth>
-			<iTurnDamage>20</iTurnDamage>
 			<iPopDestroys>-1</iPopDestroys>
 			<!-- GWMod new XML field M.A. -->
 			<bNoImprovement>1</bNoImprovement>
@@ -1365,7 +1363,6 @@
 			<iHealthPercent>-200</iHealthPercent>
 			<iDisappearance>150</iDisappearance>
 			<iSpread>1000</iSpread>
-			<iTurnDamage>50</iTurnDamage>
 			<iPopDestroys>-1</iPopDestroys>
 			<iCultureDistance>6</iCultureDistance>
 			<TerrainBooleans>
@@ -4264,7 +4261,6 @@
 			<iMovement>4</iMovement>
 			<iAppearance>500</iAppearance>
 			<iGrowth>5</iGrowth>
-			<iTurnDamage>15</iTurnDamage>
 			<TerrainBooleans>
 				<TerrainBoolean>
 					<TerrainType>TERRAIN_COAST</TerrainType>
@@ -4311,7 +4307,6 @@
 				<iYieldChange>3</iYieldChange>
 			</YieldChanges>
 			<iMovement>2</iMovement>
-			<iTurnDamage>5</iTurnDamage>
 			<iAppearance>-1</iAppearance>
 			<TerrainBooleans>
 				<TerrainBoolean>
@@ -4751,7 +4746,6 @@
 			<iMovement>5</iMovement>
 			<iAppearance>400</iAppearance>
 			<iSeeThrough>1</iSeeThrough>
-			<iTurnDamage>20</iTurnDamage>
 			<bNukeImmune>1</bNukeImmune>
 			<TerrainBooleans>
 				<TerrainBoolean>
@@ -4916,7 +4910,6 @@
 			</YieldChanges>
 			<iMovement>2</iMovement>
 			<iSeeThrough>1</iSeeThrough>
-			<iTurnDamage>10</iTurnDamage>
 			<iAppearance>-1</iAppearance>
 			<TerrainBooleans>
 				<TerrainBoolean>
@@ -5657,7 +5650,6 @@
 			<Civilopedia>TXT_KEY_FEATURE_RADIATION_CLOUD_PEDIA</Civilopedia>
 			<ArtDefineTag>ART_DEF_FEATURE_RADIATION_CLOUD</ArtDefineTag>
 			<iMovement>1</iMovement>
-			<iTurnDamage>25</iTurnDamage>
 			<iPopDestroys>-1</iPopDestroys>
 			<bNoImprovement>1</bNoImprovement>
 			<bNukeImmune>1</bNukeImmune>
@@ -5766,7 +5758,6 @@
 			</YieldChanges>
 			<iMovement>5</iMovement>
 			<iSeeThrough>1</iSeeThrough>
-			<iTurnDamage>15</iTurnDamage>
 			<bNoCity>1</bNoCity>
 			<bNukeImmune>1</bNukeImmune>
 			<iCultureDistance>2</iCultureDistance>
@@ -5801,7 +5792,6 @@
 			</YieldChanges>
 			<iMovement>2</iMovement>
 			<iSeeThrough>1</iSeeThrough>
-			<iTurnDamage>5</iTurnDamage>
 			<iAppearance>-1</iAppearance>
 			<bNoCity>1</bNoCity>
 			<bNukeImmune>1</bNukeImmune>

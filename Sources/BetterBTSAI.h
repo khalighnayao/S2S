@@ -77,4 +77,5 @@ void logToFile(CvString message, const char* filename);
 void logContractBroker(int level, const char* format, ...);
 void logAiEvaluations(int level, const char* format, ...);
 void logBuildEvaluation(int level, const char* format, ...);
+void logHunterAI(int level, const char* format, ...);
 #endif

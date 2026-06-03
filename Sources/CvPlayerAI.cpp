@@ -10882,38 +10882,6 @@ int CvPlayerAI::AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, const CvArea*
 				{
 					iValue -= (iCombatValue * (125 - kUnitInfo.getCombatLimit())) / 100;
 				}
-				//TB Combat Mods Begin
-				if (GC.getGame().isModderGameOption(MODDERGAMEOPTION_DEFENDER_WITHDRAW))
-				{
-					iValue += ((iCombatValue * kUnitInfo.getPursuit()) / 100);
-				}
-				if (kUnitInfo.getOverrun() > 0)
-				{
-					iValue += ((iCombatValue * kUnitInfo.getOverrun()) / 100);
-				}
-				if (kUnitInfo.getUnyielding() > 0)
-				{
-					iValue += ((iCombatValue * kUnitInfo.getUnyielding()) / 100);
-				}
-				if (kUnitInfo.getKnockback() > 0)
-				{
-					iValue += ((iCombatValue * kUnitInfo.getKnockback()) / 100);
-				}
-#ifdef BATTLEWORN
-				if (kUnitInfo.getStrAdjperRnd() != 0)
-				{
-					iValue += ((iCombatValue * kUnitInfo.getStrAdjperRnd()) / 100);
-				}
-				if (kUnitInfo.getStrAdjperAtt() != 0)
-				{
-					iValue += ((iCombatValue * kUnitInfo.getStrAdjperAtt()) / 100);
-				}
-				if (kUnitInfo.getWithdrawAdjperAtt() != 0)
-				{
-					iValue += ((iCombatValue * kUnitInfo.getWithdrawAdjperAtt()) / 100);
-				}
-#endif // BATTLEWORN
-				//TB Combat Mods End
 				//	Also useful if attack stacks can make use of defensive terrain, though
 				//	its not a huge factor since we can assume some defensive units will be
 				//	along for the ride
@@ -11110,34 +11078,6 @@ int CvPlayerAI::AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, const CvArea*
 						iValue += ((iCombatValue * (kUnitInfo.getMoves() - 1) * iFastMoverMultiplier) / 4); // K-Mod put in -1 !
 					}
 					iValue += ((iCombatValue * kUnitInfo.getWithdrawalProbability()) / 100);
-					//TB Combat Mods Begin
-
-					if (kUnitInfo.getOverrun() > 0)
-					{
-						iValue += ((iCombatValue * kUnitInfo.getOverrun()) / 80);
-					}
-					if (kUnitInfo.getUnyielding() > 0)
-					{
-						iValue += ((iCombatValue * kUnitInfo.getUnyielding()) / 100);
-					}
-					if (kUnitInfo.getKnockback() > 0)
-					{
-						iValue += ((iCombatValue * kUnitInfo.getKnockback()) / 80);
-					}
-#ifdef BATTLEWORN
-					if (kUnitInfo.getStrAdjperRnd() != 0)
-					{
-						iValue += ((iCombatValue * kUnitInfo.getStrAdjperRnd()) / 100);
-					}
-					if (kUnitInfo.getStrAdjperAtt() != 0)
-					{
-						iValue += ((iCombatValue * kUnitInfo.getStrAdjperAtt()) / 100);
-					}
-					if (kUnitInfo.getWithdrawAdjperAtt() != 0)
-					{
-						iValue += ((iCombatValue * kUnitInfo.getWithdrawAdjperAtt()) / 100);
-					}
-#endif // BATTLEWORN
 				}
 
 				if (kUnitInfo.canMergeSplit() && GC.getGame().isOption(GAMEOPTION_COMBAT_SIZE_MATTERS)){
@@ -11152,12 +11092,7 @@ int CvPlayerAI::AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, const CvArea*
 				iValue += ((iCombatValue * kUnitInfo.getCollateralDamage()) / 50);
 				iValue += ((iCombatValue * (kUnitInfo.getMoves()-1)) / 4);
 				iValue += ((iCombatValue * kUnitInfo.getWithdrawalProbability()) / 25);
-				//TB Combat Mods Begin
-				iValue += ((iCombatValue * kUnitInfo.getWithdrawalProbability() * kUnitInfo.getEarlyWithdraw()) / 25);
-				iValue += ((iCombatValue * kUnitInfo.getOverrun()) / 75);
-				iValue += ((iCombatValue * kUnitInfo.getKnockback()) / 100);
 				iValue += ((iCombatValue * kUnitInfo.getCityAttackModifier()) / 100);// was -= ???
-				//TB Combat Mods End
 				break;
 			}
 			case UNITAI_PILLAGE:
@@ -11165,7 +11100,6 @@ int CvPlayerAI::AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, const CvArea*
 				iValue -= AI_unitPropertyValue(eUnit) / 30;	//	Bad properties are good for pillagers
 				iValue += iCombatValue;
 				iValue += ((iCombatValue * (kUnitInfo.getMoves() - 1)) /4); //Calvitix Try to limit impact of moves
-				iValue += ((iCombatValue * kUnitInfo.getRepel()) / 100);
 				break;
 			}
 			case UNITAI_RESERVE:
@@ -11196,13 +11130,9 @@ int CvPlayerAI::AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, const CvArea*
 					iValue = 0;
 					break;
 				}
-				//TB Combat Mods Begin
 				iValue += iCombatValue;
-				iValue += ((iCombatValue * kUnitInfo.getUnyielding()) / 100);
-				iValue += ((iCombatValue * kUnitInfo.getPursuit()) / 100);
 				iValue += ((iCombatValue * (kUnitInfo.getMoves() - 1)) / 4);  // Calvitix 2
 				break;
-				//TB Combat Mods End
 			}
 			case UNITAI_COUNTER:
 			{
@@ -11242,11 +11172,6 @@ int CvPlayerAI::AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, const CvArea*
 
 				iValue += ((iCombatValue * (kUnitInfo.getMoves() - 1)) / 4);  //Calvitix /2
 				iValue += ((iCombatValue * kUnitInfo.getWithdrawalProbability()) / 100);
-				//TB Combat Mods Begin
-				iValue += ((iCombatValue * kUnitInfo.getPursuit()) / 150);
-				iValue += ((iCombatValue * kUnitInfo.getOverrun()) / 50);
-				iValue += ((iCombatValue * kUnitInfo.getUnyielding()) / 50);
-				//TB Combat Mods End
 
 				if (kUnitInfo.getInterceptionProbability() > 0)
 				{
@@ -11293,22 +11218,6 @@ int CvPlayerAI::AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, const CvArea*
 					iValue /= 5;
 				}
 
-				//TB Combat Mods Begin
-				iValue += ((iCombatValue * kUnitInfo.getPursuit()) / 100);
-				iValue += ((iCombatValue * kUnitInfo.getRepel()) / 85);
-				iValue += ((iCombatValue * kUnitInfo.getFortRepel()) / 100);
-				iValue += ((iCombatValue * kUnitInfo.getUnyielding()) / 100);
-#ifdef BATTLEWORN
-				if (kUnitInfo.getStrAdjperRnd() != 0)
-				{
-					iValue += ((iCombatValue * kUnitInfo.getStrAdjperRnd()) / 100);
-				}
-				if (kUnitInfo.getStrAdjperDef() != 0)
-				{
-					iValue += ((iCombatValue * kUnitInfo.getStrAdjperDef()) / 100);
-				}
-#endif // BATTLEWORN
-				//TB Combat Mods End
 				break;
 
 				if (kUnitInfo.canMergeSplit() && GC.getGame().isOption(GAMEOPTION_COMBAT_SIZE_MATTERS)){
@@ -11343,20 +11252,6 @@ int CvPlayerAI::AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, const CvArea*
 					iValue /= 5;
 				}
 
-				iValue += ((iCombatValue * kUnitInfo.getPursuit()) / 100);
-				iValue += ((iCombatValue * kUnitInfo.getRepel()) / 85);
-				iValue += ((iCombatValue * kUnitInfo.getFortRepel()) / 100);
-				iValue += ((iCombatValue * kUnitInfo.getUnyielding()) / 100);
-#ifdef BATTLEWORN
-				if (kUnitInfo.getStrAdjperRnd() != 0)
-				{
-					iValue += ((iCombatValue * kUnitInfo.getStrAdjperRnd()) / 100);
-				}
-				if (kUnitInfo.getStrAdjperDef() != 0)
-				{
-					iValue += ((iCombatValue * kUnitInfo.getStrAdjperDef()) / 100);
-				}
-#endif // BATTLEWORN
 				break;
 			}
 			case UNITAI_HEALER:
@@ -11430,10 +11325,8 @@ int CvPlayerAI::AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, const CvArea*
 				iValue = (
 					getModifiedIntValue(
 						iValue,
-						  kUnitInfo.getPursuit()
-						+ kUnitInfo.getAnimalCombatModifier()
+						  kUnitInfo.getAnimalCombatModifier()
 						+ kUnitInfo.getUnitCombatModifier(GC.getUNITCOMBAT_ANIMAL())
-						+ kUnitInfo.getPursuitVSUnitCombatType(GC.getUNITCOMBAT_ANIMAL())
 					)
 				);
 
@@ -29106,75 +28999,6 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 	}
 
 	//TB Combat Mods Begin
-	//#56 Effects for Promotions that Give Pursuit...
-	iTemp = kPromotion.getPursuitChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getPursuit() : pUnit->getExtraPursuit();
-		iTemp *= (100 + iExtra * 2);
-		iTemp /= 100;
-		if ((eUnitAI == UNITAI_COUNTER) ||
-			(eUnitAI == UNITAI_CITY_COUNTER) ||
-			(eUnitAI == UNITAI_CITY_SPECIAL) ||
-			((GC.getGame().isModderGameOption(MODDERGAMEOPTION_DEFENDER_WITHDRAW) && (eUnitAI == UNITAI_ATTACK_SEA)) ||
-				(eUnitAI == UNITAI_RESERVE_SEA) ||
-				(eUnitAI == UNITAI_ESCORT_SEA) ||
-				(eUnitAI == UNITAI_EXPLORE) ||
-				(eUnitAI == UNITAI_HUNTER)) ||
-			(eUnitAI == UNITAI_HUNTER_ESCORT) ||
-			(eUnitAI == UNITAI_PIRATE_SEA) ||
-			(eUnitAI == UNITAI_GREAT_HUNTER) ||
-			(eUnitAI == UNITAI_ATTACK))
-		{
-			iValue += ((iTemp * 4) / 3);
-		}
-		else if (eUnitAI == UNITAI_INVESTIGATOR ||
-			eUnitAI == UNITAI_ESCORT ||
-			eUnitAI == UNITAI_SEE_INVISIBLE ||
-			eUnitAI == UNITAI_SEE_INVISIBLE_SEA)
-		{
-			iValue += iTemp;
-		}
-		else
-		{
-			iValue += (iTemp / 16);
-		}
-	}
-
-	//#57 Effects for Promotions that Give early Withdraw...
-	iTemp = kPromotion.getEarlyWithdrawChange();
-	int itempwithdraw = 0;
-	if ((kUnit.getWithdrawalProbability() + (pUnit == NULL ? 0 : pUnit->getExtraWithdrawal() * 4)) > 0)
-	{
-		itempwithdraw += ((kUnit.getWithdrawalProbability() + (pUnit == NULL ? 0 : pUnit->getExtraWithdrawal() * 4)) / 2);
-	}
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? 0 : (itempwithdraw + pUnit->earlyWithdrawTotal());
-		iTemp *= (100 + iExtra * 2);
-		iTemp /= 100;
-		if ((eUnitAI == UNITAI_ATTACK) ||
-			(eUnitAI == UNITAI_ATTACK_CITY) ||
-			(eUnitAI == UNITAI_COLLATERAL) ||
-			(eUnitAI == UNITAI_RESERVE) ||
-			(eUnitAI == UNITAI_ATTACK_SEA) ||
-			(eUnitAI == UNITAI_RESERVE_SEA) ||
-			(eUnitAI == UNITAI_EXPLORE) ||
-			(eUnitAI == UNITAI_PIRATE_SEA) ||
-			(eUnitAI == UNITAI_INFILTRATOR))
-		{
-			iValue += (iTemp * 2);
-		}
-		else if (eUnitAI == UNITAI_ESCORT)
-		{
-			iValue -= (iTemp * 2);
-		}
-		else
-		{
-			iValue += (iTemp / 16);
-		}
-	}
-
 	//#58 Effects for Promotions that Change Upkeep...
 	iTemp = kPromotion.getUpkeepModifier();
 	if (iTemp != 0)
@@ -29236,27 +29060,6 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 		iTemp /= 400;
 		iValue += iTemp;
 	}
-	//TB Notes: assume that our units value Armor and Puncture in a rather generic accross the board value
-	//(at least for now.  Attackers should probably favor puncture while defenders would favor armor
-	//as armor should come with mobility dampeners (though would likely be included in the eval anyhow...)
-	iTemp = kPromotion.getArmorChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getArmor() : pUnit->armorTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	iTemp = kPromotion.getPunctureChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getPuncture() : pUnit->punctureTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
 	iTemp = kPromotion.getDamageModifierChange();
 	if (iTemp != 0)
 	{
@@ -29266,174 +29069,14 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 		iValue += iTemp;
 	}
 
-	iTemp = kPromotion.getDodgeModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getDodgeModifier() : pUnit->dodgeTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	iTemp = kPromotion.getPrecisionModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getPrecisionModifier() : pUnit->precisionTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	iTemp = kPromotion.getCriticalModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getCriticalModifier() : pUnit->criticalModifierTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	{
-		const int iNumPowerShots = kPromotion.getPowerShotsChange() + (pUnit ? pUnit->powerShotsTotal() : kUnit.getPowerShots());
-
-		iTemp = kPromotion.getPowerShotsChange();
-		if (iTemp != 0)
-		{
-			iTemp *= (
-				100
-				+ (pUnit ? pUnit->powerShotCombatModifierTotal() : kUnit.getPowerShotCombatModifier())
-				+ (pUnit ? pUnit->powerShotCriticalModifierTotal() : kUnit.getPowerShotCriticalModifier())
-				+ (pUnit ? pUnit->powerShotPunctureModifierTotal() : kUnit.getPowerShotPunctureModifier())
-				+ (pUnit ? pUnit->powerShotPrecisionModifierTotal() : kUnit.getPowerShotPrecisionModifier())
-				+ kPromotion.getPowerShotCombatModifierChange()
-				+ kPromotion.getPowerShotCriticalModifierChange()
-				+ kPromotion.getPowerShotPunctureModifierChange()
-				+ kPromotion.getPowerShotPrecisionModifierChange()
-			);
-			if (iNumPowerShots > 0)
-			{
-				iValue += iTemp / 10;
-			}
-			else iValue += iTemp / 100;
-		}
-
-		if (iNumPowerShots > 0)
-		{
-			iTemp = kPromotion.getPowerShotCombatModifierChange();
-			if (iTemp != 0)
-			{
-				iTemp *= (100 + 2*(pUnit ? pUnit->powerShotCombatModifierTotal() : kUnit.getPowerShotCombatModifier()));
-				iValue += iTemp * iNumPowerShots / 500;
-			}
-
-			iTemp = kPromotion.getPowerShotCriticalModifierChange();
-			if (iTemp != 0)
-			{
-				iTemp *= (100 + 2*(pUnit ? pUnit->powerShotCriticalModifierTotal() : kUnit.getPowerShotCriticalModifier()));
-				iValue += iTemp * iNumPowerShots / 500;
-			}
-
-			iTemp = kPromotion.getPowerShotPrecisionModifierChange();
-			if (iTemp != 0)
-			{
-				iTemp *= (100 + 2*(pUnit ? pUnit->powerShotPrecisionModifierTotal() : kUnit.getPowerShotPrecisionModifier()));
-				iValue += iTemp * iNumPowerShots / 500;
-			}
-
-			iTemp = kPromotion.getPowerShotPunctureModifierChange();
-			if (iTemp != 0)
-			{
-				iTemp *= (100 + 2*(pUnit ? pUnit->powerShotPunctureModifierTotal() : kUnit.getPowerShotPunctureModifier()));
-				iValue += iTemp * iNumPowerShots / 500;
-			}
-		}
-	}
-
 	iTemp = kPromotion.getEnduranceChange();
 	if (iTemp != 0)
 	{
 		iValue += (iTemp + (100 + 2*(pUnit ? pUnit->enduranceTotal() : kUnit.getEndurance()))) / 10;
 	}
 
-	iTemp = kPromotion.getOverrunChange();
-	if (iTemp != 0)
-	{
-		if ((eUnitAI == UNITAI_ATTACK) ||
-			  (eUnitAI == UNITAI_ATTACK_CITY) ||
-			  (eUnitAI == UNITAI_COLLATERAL))
-		{
-			iExtra = kUnit.getOverrun() + (pUnit == NULL ? 0 : pUnit->getExtraOverrun() * 2);
-			iValue += ((iTemp * (100 + iExtra)) / 100);
-		}
-		else
-		{
-			iValue += (iTemp / 4);
-		}
-	}
-
 	if (!bNoDefensiveBonus)
 	{
-		iTemp = kPromotion.getRepelChange();
-		if (iTemp != 0)
-		{
-			if (eUnitAI == UNITAI_CITY_DEFENSE
-			||	eUnitAI == UNITAI_CITY_SPECIAL
-			||	eUnitAI == UNITAI_CITY_COUNTER
-			||	eUnitAI == UNITAI_COUNTER
-			||	eUnitAI == UNITAI_RESERVE
-			||	eUnitAI == UNITAI_ESCORT)
-			{
-				iExtra = kUnit.getRepel() + (pUnit ? pUnit->getExtraRepel() * 2 : 0);
-				iValue += ((iTemp * (100 + iExtra)) / 100);
-			}
-			else
-			{
-				iValue += (iTemp / 4);
-			}
-		}
-		iTemp = kPromotion.getFortRepelChange();
-		if (iTemp != 0)
-		{
-			if (eUnitAI == UNITAI_CITY_DEFENSE
-			||	eUnitAI == UNITAI_CITY_SPECIAL
-			||	eUnitAI == UNITAI_CITY_COUNTER
-			||	eUnitAI == UNITAI_COUNTER
-			||	eUnitAI == UNITAI_RESERVE)
-			{
-				iExtra = kUnit.getFortRepel() + (pUnit ? pUnit->getExtraFortRepel() * 2 : 0);
-				iValue += iTemp * (100 + iExtra) / 110;
-			}
-			else
-			{
-				iValue += iTemp / 4;
-			}
-		}
-		iTemp = kPromotion.getRepelRetriesChange();
-		if (iTemp != 0)
-		{
-			iExtra = kUnit.getRepel();
-			if (pUnit)
-			{
-				iExtra += pUnit->getExtraRepel() * 4 + pUnit->repelRetriesTotal();
-			}
-			iTemp *= 100 + 2*iExtra;
-			iTemp /= 100;
-			if (eUnitAI == UNITAI_CITY_DEFENSE
-			||  eUnitAI == UNITAI_CITY_SPECIAL
-			||  eUnitAI == UNITAI_CITY_COUNTER
-			||  eUnitAI == UNITAI_COUNTER
-			||  eUnitAI == UNITAI_RESERVE
-			||  eUnitAI == UNITAI_ESCORT)
-			{
-				iValue += iTemp * 25;
-			}
-			else
-			{
-				iValue += iTemp;
-			}
-		}
-
-		if (!bNoDefensiveBonus)
 		{
 			iTemp = kPromotion.getCityDefensePercent();
 			if (iTemp != 0)
@@ -29490,68 +29133,6 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 				}
 				else iValue += iTemp / 1000;
 			}
-		}
-	}
-
-	iTemp = kPromotion.getUnyieldingChange();
-	if (iTemp != 0)
-	{
-		iTemp *= 100 + kUnit.getUnyielding() + (pUnit ? pUnit->getExtraUnyielding() : 0);
-
-		if (eUnitAI == UNITAI_CITY_DEFENSE
-		||  eUnitAI == UNITAI_CITY_SPECIAL
-		||  eUnitAI == UNITAI_CITY_COUNTER
-		||  eUnitAI == UNITAI_COUNTER
-		||  eUnitAI == UNITAI_ATTACK
-		||  eUnitAI == UNITAI_ATTACK_CITY
-		||  eUnitAI == UNITAI_PILLAGE_COUNTER
-		||  eUnitAI == UNITAI_HUNTER
-		||  eUnitAI == UNITAI_HUNTER_ESCORT
-		||  eUnitAI == UNITAI_GREAT_HUNTER
-		||  eUnitAI == UNITAI_RESERVE)
-		{
-			iValue += iTemp / 100;
-		}
-		else iValue += iTemp / 400;
-	}
-
-	iTemp = kPromotion.getKnockbackChange();
-	if (iTemp != 0)
-	{
-		iTemp *= (
-			100
-			+
-			2 * (kUnit.getKnockback() + (pUnit ? pUnit->getExtraKnockback() : 0))
-			*
-			(
-				1 + kPromotion.getKnockbackRetriesChange()
-				+ (pUnit ? (pUnit->knockbackRetriesTotal()) : kUnit.getKnockbackRetries())
-			)
-		);
-		if (eUnitAI == UNITAI_COUNTER
-		||  eUnitAI == UNITAI_ATTACK
-		||  eUnitAI == UNITAI_ATTACK_CITY)
-		{
-			iValue += iTemp / 100;
-		}
-		else iValue += iTemp / 400;
-	}
-
-	iTemp = kPromotion.getKnockbackRetriesChange();
-	if (iTemp != 0)
-	{
-		const int iKnockbackChance = kPromotion.getKnockbackChange() + kUnit.getKnockback() + (pUnit ? pUnit->getExtraKnockback() : 0);
-		if (iKnockbackChance > 0)
-		{
-			iTemp *= 100 + 2 * iKnockbackChance * (1 + (pUnit ? (pUnit->knockbackRetriesTotal()) : kUnit.getKnockbackRetries()));
-
-			if (eUnitAI == UNITAI_COUNTER
-			||  eUnitAI == UNITAI_ATTACK
-			||  eUnitAI == UNITAI_ATTACK_CITY)
-			{
-				iValue += iTemp * 4/100;
-			}
-			else iValue += iTemp / 100;
 		}
 	}
 
@@ -29641,224 +29222,18 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 		iValue -= 25;
 	}
 
-	if (kPromotion.isMakesDamageCold())
-	{
-		iValue += 25;
-	}
-
-	if (kPromotion.isAddsColdImmunity())
-	{
-		iValue += 25;
-	}
-
 	if (pUnit)
 	{
 		if (kPromotion.isRemoveStampede() && pUnit->mayStampede())
 		{
 			iValue += 25;
 		}
-
-		if (kPromotion.isMakesDamageNotCold() && pUnit->dealsColdDamage())
-		{
-			iValue -= 25;
-		}
-
-		if (kPromotion.isRemovesColdImmunity() && pUnit->hasImmunitytoColdDamage())
-		{
-			iValue -= 25;
-		}
 	}
 
 
-#ifdef BATTLEWORN
-	iTemp = kPromotion.getStrAdjperRndChange();
-	if (iTemp != 0)
-	{
-		iValue += iTemp * 5;
-	}
 
-	iTemp = kPromotion.getStrAdjperAttChange();
-	if (iTemp != 0)
-	{
-		if ((eUnitAI == UNITAI_ATTACK) ||
-			  (eUnitAI == UNITAI_ATTACK_CITY))
-		{
-			iValue += iTemp * 5;
-		}
-		else
-		{
-			iValue += iTemp;
-		}
-	}
 
-	iTemp = kPromotion.getWithdrawAdjperAttChange();
-	if (iTemp != 0)
-	{
-		if ((eUnitAI == UNITAI_ATTACK) ||
-			  (eUnitAI == UNITAI_ATTACK_CITY))
-		{
-			iValue += iTemp * 5;
-		}
-		else
-		{
-			iValue += iTemp;
-		}
-	}
 
-	iTemp = kPromotion.getStrAdjperDefChange();
-	if (iTemp != 0)
-	{
-		if ((eUnitAI == UNITAI_CITY_DEFENSE) ||
-			  (eUnitAI == UNITAI_COUNTER) ||
-			  (eUnitAI == UNITAI_CITY_COUNTER) ||
-			  (eUnitAI == UNITAI_ESCORT) ||
-			  (eUnitAI == UNITAI_ESCORT_SEA))
-		{
-			iValue += iTemp * 5;
-		}
-		else
-		{
-			iValue += iTemp;
-		}
-	}
-#endif // BATTLEWORN
-
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	for (int iI = 0; iI < kPromotion.getNumAfflictOnAttackChangeTypes(); ++iI)
-	{
-		if (kPromotion.getAfflictOnAttackChangeType(iI).eAfflictionLine > 0)
-		{
-			iTemp = kPromotion.getAfflictOnAttackChangeType(iI).iProbabilityChange;
-
-			int iTempWithdraw = 0;
-
-			if (pUnit == NULL ? 0 : pUnit->withdrawalProbability() > 0)
-			{
-				iTempWithdraw += pUnit->withdrawalProbability();
-			}
-			if (pUnit == NULL ? 0 : pUnit->earlyWithdrawTotal() > 0)
-			{
-				iTempWithdraw += ((iTempWithdraw * pUnit->earlyWithdrawTotal()) / 100);
-			}
-
-			iTemp += ((iTemp * iTempWithdraw) / 100);
-
-			int iImmediate = kPromotion.getAfflictOnAttackChangeType(iI).iImmediate;
-			iImmediate *= 25;
-
-			iTemp += iImmediate;
-
-			iValue += iTemp;
-		}
-	}
-
-	if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-	{
-		for (int iI = 0; iI < GC.getPromotionInfo(ePromotion).getNumCureAfflictionChangeTypes(); ++iI)
-		{
-			if (kPromotion.getCureAfflictionChangeType(iI) > 0)
-			{
-				PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)kPromotion.getCureAfflictionChangeType(iI));
-				iTemp = 10;
-				int iAfflictionCount = getPlayerWideAfflictionCount(eAfflictionLine);
-				int iPlotAfflictedCount = 0;
-				if (pUnit)
-				{
-					CvPlot* pUnitPlot = pPlot;
-					iPlotAfflictedCount = pUnitPlot->getNumAfflictedUnits(pUnit->getOwner(), eAfflictionLine);
-				}
-				iPlotAfflictedCount *= 100;
-				iAfflictionCount += ((iAfflictionCount * iPlotAfflictedCount) / 100);
-				iTemp *= iAfflictionCount;
-				if ((eUnitAI == UNITAI_HEALER) ||
-					  (eUnitAI == UNITAI_HEALER_SEA))
-				{
-					iTemp *= 2;
-				}
-
-				iValue += iTemp;
-			}
-		}
-
-		for (int iI = 0; iI < GC.getPromotionInfo(ePromotion).getNumAfflictionFortitudeChangeModifiers(); ++iI)
-		{
-			iValue += GC.getPromotionInfo(ePromotion).getAfflictionFortitudeChangeModifier(iI).iModifier;
-		}
-
-		iTemp = kPromotion.getFortitudeChange();
-		if (iTemp != 0)
-		{
-			iTemp *= 100 + 2*(kUnit.getFortitude() + (pUnit ? pUnit->getExtraFortitude() : 0));
-			iTemp /= 100;
-			iValue += iTemp * 3/4;
-		}
-
-		for (int iI = 0; iI < GC.getNumPropertyInfos(); iI++)
-		{
-			iTemp = kPromotion.getAidChange(iI);
-			if (iTemp != 0)
-			{
-				iTemp *= 100 + 2*(kUnit.getAidChange(iI) + (pUnit ? pUnit->extraAidChange((PropertyTypes)iI) : 0));
-				iTemp /= 100;
-				if (eUnitAI == UNITAI_HEALER
-				||  eUnitAI == UNITAI_HEALER_SEA
-				||  eUnitAI == UNITAI_PROPERTY_CONTROL
-				||  eUnitAI == UNITAI_PROPERTY_CONTROL_SEA)
-				{
-					iValue += iTemp * 6/4;
-				}
-				else iValue += iTemp * 3/4;
-			}
-		}
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
-
-#ifdef STRENGTH_IN_NUMBERS
-	if (GC.getGame().isOption(GAMEOPTION_COMBAT_STRENGTH_IN_NUMBERS))
-	{
-		iTemp = kPromotion.getFrontSupportPercentChange();
-		if (iTemp != 0)
-		{
-			iTemp *= 100 + 2*(pUnit ? pUnit->getExtraFrontSupportPercent() : kUnit.getFrontSupportPercent());
-			iValue += iTemp / 25;
-		}
-
-		iTemp = kPromotion.getShortRangeSupportPercentChange();
-		if (iTemp != 0)
-		{
-			iTemp *= 100 + 2*(pUnit ? pUnit->getExtraShortRangeSupportPercent() : kUnit.getShortRangeSupportPercent());
-			iValue += iTemp / 25;
-		}
-
-		iTemp = kPromotion.getMediumRangeSupportPercentChange();
-		if (iTemp != 0)
-		{
-			iTemp *= 100 + 2*(pUnit ? pUnit->getExtraMediumRangeSupportPercent() : kUnit.getMediumRangeSupportPercent());
-			iValue += iTemp / 25;
-		}
-
-		iTemp = kPromotion.getLongRangeSupportPercentChange();
-		if (iTemp != 0)
-		{
-			iTemp *= 100 + 2*(pUnit ? pUnit->getExtraLongRangeSupportPercent() : kUnit.getLongRangeSupportPercent());
-			iValue += iTemp / 25;
-		}
-
-		iTemp = kPromotion.getFlankSupportPercentChange();
-		if (iTemp != 0)
-		{
-			iTemp *= 100 + 2*(pUnit ? pUnit->getExtraFlankSupportPercent() : kUnit.getFlankSupportPercent());
-			iValue += iTemp / 25;
-		}
-}
-#endif // STRENGTH_IN_NUMBERS
-
-	iTemp = kPromotion.getRoundStunProbChange();
-	if (iTemp != 0)
-	{
-		iTemp *= 100 + 2*(kUnit.getRoundStunProb() + (pUnit ? pUnit->getExtraRoundStunProb() : 0));
-		iValue += iTemp / 25;
-	}
 	//TB Combat Mods End
 
 	iTemp = kPromotion.getCollateralDamageChange();
@@ -30349,475 +29724,6 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 	}
 
 
-	if (kPromotion.getNumWithdrawVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getWithdrawVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->withdrawVSUnitCombatTotal((UnitCombatTypes)iI) >= 0 || !pUnit && kUnit.getWithdrawVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->withdrawVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getWithdrawVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-
-				if ((eUnitAI == UNITAI_ATTACK) || (eUnitAI == UNITAI_ATTACK_CITY) ||
-					(eUnitAI == UNITAI_COLLATERAL) ||
-					(eUnitAI == UNITAI_EXPLORE) ||
-					(eUnitAI == UNITAI_ATTACK_SEA) ||
-					(eUnitAI == UNITAI_EXPLORE_SEA) ||
-					(eUnitAI == UNITAI_CARRIER_SEA) ||
-					(eUnitAI == UNITAI_PIRATE_SEA) ||
-					(eUnitAI == UNITAI_ATTACK_CITY_LEMMING) ||
-					(eUnitAI == UNITAI_INFILTRATOR))
-				{
-					iValue += (iTemp * iCombatWeight) / 100;
-				}
-				else if ((eUnitAI == UNITAI_MISSILE_CARRIER_SEA) ||
-						   (eUnitAI == UNITAI_HUNTER) ||
-						   (eUnitAI == UNITAI_HUNTER_ESCORT) ||
-						(eUnitAI == UNITAI_GREAT_HUNTER))
-				{
-					iValue += (iTemp * iCombatWeight) / 200;
-				}
-				else
-				{
-					iValue += (iTemp * iCombatWeight) / 400;
-				}
-			}
-		}
-	}
-
-	if (kPromotion.getNumPursuitVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getPursuitVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->pursuitVSUnitCombatTotal((UnitCombatTypes)iI) >= 0 || !pUnit && kUnit.getPursuitVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->pursuitVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getPursuitVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-
-				if ((eUnitAI == UNITAI_ATTACK) ||
-					(eUnitAI == UNITAI_COUNTER) ||
-					(eUnitAI == UNITAI_CITY_DEFENSE) ||
-					(eUnitAI == UNITAI_ATTACK_SEA) ||
-					(eUnitAI == UNITAI_ESCORT_SEA) ||
-					(eUnitAI == UNITAI_MISSILE_CARRIER_SEA) ||
-					(eUnitAI == UNITAI_PIRATE_SEA) ||
-					(eUnitAI == UNITAI_INVESTIGATOR))
-				{
-					iValue += (iTemp * iCombatWeight) / 100;
-				}
-				else if (eUnitAI == UNITAI_HUNTER ||
-					(eUnitAI == UNITAI_HUNTER_ESCORT) ||
-					(eUnitAI == UNITAI_GREAT_HUNTER))
-				{
-					iValue += (iTemp * iCombatWeight) / 200;
-				}
-				else
-				{
-					iValue += (iTemp * iCombatWeight) / 400;
-				}
-			}
-		}
-	}
-
-	if (kPromotion.getNumRepelVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getRepelVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->repelVSUnitCombatTotal((UnitCombatTypes)iI) >= 0 || !pUnit && kUnit.getRepelVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->repelVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getRepelVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-
-				if ((eUnitAI == UNITAI_COUNTER) ||
-					(eUnitAI == UNITAI_CITY_DEFENSE) ||
-					(eUnitAI == UNITAI_CITY_COUNTER) ||
-					(eUnitAI == UNITAI_ESCORT))
-				{
-					iValue += (iTemp * iCombatWeight) / 100;
-				}
-				else if ((eUnitAI == UNITAI_CITY_SPECIAL) ||
-						   (eUnitAI == UNITAI_ESCORT_SEA))
-				{
-					iValue += (iTemp * iCombatWeight) / 200;
-				}
-				else
-				{
-					iValue += (iTemp * iCombatWeight) / 400;
-				}
-			}
-		}
-	}
-
-	if (kPromotion.getNumKnockbackVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getKnockbackVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->knockbackVSUnitCombatTotal((UnitCombatTypes)iI) >= 0 || !pUnit && kUnit.getKnockbackVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->knockbackVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getKnockbackVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-
-				if ((eUnitAI == UNITAI_ATTACK) ||
-					(eUnitAI == UNITAI_ATTACK_CITY) ||
-					(eUnitAI == UNITAI_COLLATERAL))
-				{
-					iValue += (iTemp * iCombatWeight) / 100;
-				}
-				else
-				{
-					iValue += (iTemp * iCombatWeight) / 400;
-				}
-			}
-		}
-	}
-
-	if (kPromotion.getNumPunctureVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getPunctureVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->punctureVSUnitCombatTotal((UnitCombatTypes)iI) >= 0 || !pUnit && kUnit.getPunctureVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->punctureVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getPunctureVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-				iValue += (iTemp * iCombatWeight) / 100;
-			}
-		}
-	}
-
-	if (kPromotion.getNumArmorVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getArmorVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->armorVSUnitCombatTotal((UnitCombatTypes)iI) >= 0 || !pUnit && kUnit.getArmorVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->armorVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getArmorVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-				iValue += (iTemp * iCombatWeight) / 100;
-			}
-		}
-	}
-
-	if (kPromotion.getNumDodgeVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getDodgeVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->dodgeVSUnitCombatTotal((UnitCombatTypes)iI) >= 0 || !pUnit && kUnit.getDodgeVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->dodgeVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getDodgeVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-				iValue += iTemp * iCombatWeight / 100;
-			}
-		}
-	}
-
-	if (kPromotion.getNumPrecisionVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getPrecisionVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->precisionVSUnitCombatTotal((UnitCombatTypes)iI) >= 0 || !pUnit && kUnit.getPrecisionVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->precisionVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getPrecisionVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-				iValue += (iTemp * iCombatWeight) / 100;
-			}
-		}
-	}
-
-	if (kPromotion.getNumCriticalVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getCriticalVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->criticalVSUnitCombatTotal((UnitCombatTypes)iI) >= 0 || !pUnit && kUnit.getCriticalVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->criticalVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getCriticalVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-				iValue += (iTemp * iCombatWeight) / 100;
-			}
-		}
-	}
-
-	if (kPromotion.getNumRoundStunVSUnitCombatChangeTypes() > 0)
-	{
-		for (int iI = 0; iI < GC.getNumUnitCombatInfos(); iI++)
-		{
-			iTemp = kPromotion.getRoundStunVSUnitCombatChangeType(iI);
-			if (iTemp != 0)
-			{
-				int iCombatWeight = 0;
-				//Fighting their own kind
-				if (!pUnit && kUnit.hasUnitCombat((UnitCombatTypes)iI) || pUnit && pUnit->isHasUnitCombat((UnitCombatTypes)iI))
-				{
-					if (pUnit && pUnit->roundStunVSUnitCombatTotal((UnitCombatTypes)iI) >=0 || !pUnit && kUnit.getRoundStunVSUnitCombatType(iI) >= 0)
-					{
-						iCombatWeight = 70;//"axeman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-				else
-				{
-					//fighting other kinds
-					if (pUnit && pUnit->roundStunVSUnitCombatTotal((UnitCombatTypes)iI) > 10 || !pUnit && kUnit.getRoundStunVSUnitCombatType(iI) > 10)
-					{
-						iCombatWeight = 70;//"spearman takes formation"
-					}
-					else
-					{
-						iCombatWeight = 30;
-					}
-				}
-
-				iCombatWeight *= AI_getUnitCombatWeight((UnitCombatTypes)iI);
-				iCombatWeight /= 100;
-				iValue += (iTemp * iCombatWeight) / 100;
-			}
-		}
-	}
 	//TB Combat Mods
 	//TB Modification note:adjusted City Attack promo value to balance better against withdraw promos for city attack ai units.
 	iTemp = kPromotion.getCityAttackPercent();
@@ -31051,7 +29957,6 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 	iValue += iTempValue;
 
 	{
-		const bool bTerrainDamage = GC.getGame().isModderGameOption(MODDERGAMEOPTION_TERRAIN_DAMAGE);
 		int iPass = 0;
 		int iTempValue = 0;
 		for (int iI = 0; iI < GC.getNumTerrainInfos(); iI++)
@@ -31059,9 +29964,7 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 			if (kPromotion.getTerrainAttackPercent(iI)
 			||  kPromotion.getTerrainDefensePercent(iI)
 			||  kPromotion.getTerrainWorkPercent(iI)
-			||  kPromotion.getTerrainDoubleMove(iI)
-			||  bTerrainDamage && kPromotion.getIgnoreTerrainDamage() == iI
-			||  kPromotion.getWithdrawOnTerrainTypeChange(iI))
+			||  kPromotion.getTerrainDoubleMove(iI))
 			{
 				iPass++;
 				const int iTerrainWeight = (
@@ -31166,81 +30069,6 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 					else iTempValue++;
 				}
 
-				if (bTerrainDamage && kPromotion.getIgnoreTerrainDamage() == iI)
-				{
-					if (pUnit && pUnit->isTerrainProtected((TerrainTypes)iI))
-					{
-						iTempValue++;
-					}
-					else
-					{
-						iTemp = -GC.getTerrainInfo((TerrainTypes)kPromotion.getIgnoreTerrainDamage()).getHealthPercent();
-
-						if (bOnTerrain)
-						{
-							iTemp *= 2;
-						}
-
-						if (eUnitAI == UNITAI_EXPLORE
-						||  eUnitAI == UNITAI_HUNTER
-						||  eUnitAI == UNITAI_HUNTER_ESCORT
-						||  eUnitAI == UNITAI_GREAT_HUNTER
-						||  eUnitAI == UNITAI_ESCORT)
-						{
-							iTempValue += iTemp * iTerrainWeight / 100;
-						}
-						else if (
-						    eUnitAI == UNITAI_ATTACK
-						||  eUnitAI == UNITAI_PILLAGE
-						||  eUnitAI == UNITAI_COUNTER)
-						{
-							iTempValue += iTemp * iTerrainWeight / 200;
-						}
-						else iTempValue += iTemp * iTerrainWeight / 500;
-					}
-				}
-
-				iTemp = kPromotion.getWithdrawOnTerrainTypeChange(iI);
-				if (iTemp != 0)
-				{
-					iTemp *= 100 + 2*(pUnit ? pUnit->getExtraWithdrawOnTerrainType((TerrainTypes)iI) : kUnit.getWithdrawOnTerrainType(iI));
-
-					if (bOnTerrain)
-					{
-						iTemp /= 50;
-					}
-					else iTemp /= 100;
-
-					switch (eUnitAI)
-					{
-						case UNITAI_ANIMAL:
-						case UNITAI_COLLATERAL:
-						case UNITAI_PILLAGE:
-						case UNITAI_EXPLORE:
-						case UNITAI_ATTACK_SEA:
-						case UNITAI_EXPLORE_SEA:
-						case UNITAI_CARRIER_SEA:
-						case UNITAI_PIRATE_SEA:
-						case UNITAI_SUBDUED_ANIMAL:
-						{
-							if (pUnit && pUnit->withdrawalProbability() > 0)
-							{
-								iTempValue += iTemp * iTerrainWeight / 1000;
-							}
-							else iTempValue += iTemp * iTerrainWeight / 1400;
-
-							break;
-						}
-						default:
-						{
-							if (pUnit && pUnit->withdrawalProbability() > 0)
-							{
-								iTempValue += iTemp * iTerrainWeight / 1800;
-							}
-							else iTempValue += iTemp * iTerrainWeight / 2200;
-						}
-					}
-				}
 			}
 		}
 		if (iPass > 0)
@@ -31257,8 +30085,7 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 			if (kPromotion.getFeatureAttackPercent(iI)
 			||  kPromotion.getFeatureDefensePercent(iI)
 			||  kPromotion.getFeatureWorkPercent(iI)
-			||  kPromotion.getFeatureDoubleMove(iI)
-			||  kPromotion.getWithdrawOnFeatureTypeChange(iI))
+			||  kPromotion.getFeatureDoubleMove(iI))
 			{
 				iPass++;
 				const int iFeatureWeight = (
@@ -31343,48 +30170,6 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 						iTempValue += iTemp * iFeatureWeight / 500;
 					}
 					else iTempValue += iTemp * iFeatureWeight / 1000;
-				}
-
-				iTemp = kPromotion.getWithdrawOnFeatureTypeChange(iI);
-				if (iTemp != 0)
-				{
-					iTemp *= 100 + 2*(pUnit ? pUnit->getExtraWithdrawOnFeatureType((FeatureTypes)iI, true) : kUnit.getWithdrawOnFeatureType(iI));
-
-					if (bOnFeature)
-					{
-						iTemp /= 50;
-					}
-					else iTemp /= 100;
-
-					switch (eUnitAI)
-					{
-						case UNITAI_ANIMAL:
-						case UNITAI_COLLATERAL:
-						case UNITAI_PILLAGE:
-						case UNITAI_EXPLORE:
-						case UNITAI_ATTACK_SEA:
-						case UNITAI_EXPLORE_SEA:
-						case UNITAI_CARRIER_SEA:
-						case UNITAI_PIRATE_SEA:
-						case UNITAI_SUBDUED_ANIMAL:
-						{
-							if (pUnit && pUnit->withdrawalProbability() > 0)
-							{
-								iTempValue += iTemp * iFeatureWeight / 1000;
-							}
-							else iTempValue += iTemp * iFeatureWeight / 1400;
-
-							break;
-						}
-						default:
-						{
-							if (pUnit && pUnit->withdrawalProbability() > 0)
-							{
-								iTempValue += iTemp * iFeatureWeight / 1800;
-							}
-							else iTempValue += iTemp * iFeatureWeight / 2200;
-						}
-					}
 				}
 
 				//ls612: Terrain Work Modifiers //TB Edited for WorkRateMod (THANK you for thinking this out ls!)
@@ -33313,73 +32098,6 @@ int CvPlayerAI::AI_unitCombatValue(UnitCombatTypes eUnitCombat, UnitTypes eUnit,
 	}
 
 	//TB Combat Mods Begin
-	iTemp = kUnitCombat.getPursuitChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit ? pUnit->getExtraPursuit() : kUnit.getPursuit();
-		iTemp *= 100 + iExtra * 2;
-		iTemp /= 100;
-		if ((eUnitAI == UNITAI_COUNTER) ||
-			(eUnitAI == UNITAI_CITY_COUNTER) ||
-			(eUnitAI == UNITAI_CITY_SPECIAL) ||
-			((GC.getGame().isModderGameOption(MODDERGAMEOPTION_DEFENDER_WITHDRAW) && (eUnitAI == UNITAI_ATTACK_SEA)) ||
-				(eUnitAI == UNITAI_RESERVE_SEA) ||
-				(eUnitAI == UNITAI_ESCORT_SEA) ||
-				(eUnitAI == UNITAI_EXPLORE) ||
-				(eUnitAI == UNITAI_HUNTER)) ||
-			(eUnitAI == UNITAI_HUNTER_ESCORT) ||
-			(eUnitAI == UNITAI_PIRATE_SEA) ||
-			(eUnitAI == UNITAI_GREAT_HUNTER) ||
-			(eUnitAI == UNITAI_ATTACK))
-		{
-			iValue += ((iTemp * 4) / 3);
-		}
-		else if (eUnitAI == UNITAI_INVESTIGATOR ||
-			eUnitAI == UNITAI_ESCORT ||
-			eUnitAI == UNITAI_SEE_INVISIBLE ||
-			eUnitAI == UNITAI_SEE_INVISIBLE_SEA)
-		{
-			iValue += iTemp;
-		}
-		else
-		{
-			iValue += (iTemp / 16);
-		}
-	}
-
-	iTemp = kUnitCombat.getEarlyWithdrawChange();
-	int itempwithdraw = 0;
-	if ((kUnit.getWithdrawalProbability() + (pUnit == NULL ? 0 : pUnit->getExtraWithdrawal() * 4)) > 0)
-	{
-		itempwithdraw += ((kUnit.getWithdrawalProbability() + (pUnit == NULL ? 0 : pUnit->getExtraWithdrawal() * 4)) / 2);
-	}
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? 0 : (itempwithdraw + pUnit->earlyWithdrawTotal());
-		iTemp *= (100 + iExtra * 2);
-		iTemp /= 100;
-		if ((eUnitAI == UNITAI_ATTACK) ||
-			(eUnitAI == UNITAI_ATTACK_CITY) ||
-			(eUnitAI == UNITAI_COLLATERAL) ||
-			(eUnitAI == UNITAI_RESERVE) ||
-			(eUnitAI == UNITAI_ATTACK_SEA) ||
-			(eUnitAI == UNITAI_RESERVE_SEA) ||
-			(eUnitAI == UNITAI_EXPLORE) ||
-			(eUnitAI == UNITAI_PIRATE_SEA) ||
-			(eUnitAI == UNITAI_INFILTRATOR))
-		{
-			iValue += (iTemp * 2);
-		}
-		else if (eUnitAI == UNITAI_ESCORT)
-		{
-			iValue -= (iTemp * 2);
-		}
-		else
-		{
-			iValue += (iTemp / 16);
-		}
-	}
-
 	iValue -= kUnitCombat.getUpkeepModifier();
 
 	iTemp = kUnitCombat.getRBombardDamageBase();
@@ -33517,111 +32235,12 @@ int CvPlayerAI::AI_unitCombatValue(UnitCombatTypes eUnitCombat, UnitTypes eUnit,
 			iValue += iTemp;
 		}
 	}
-	//TB Notes: assume that our units value Armor and Puncture in a rather generic accross the board value
-	//(at least for now.  Attackers should probably favor puncture while defenders would favor armor
-	//as armor should come with mobility dampeners (though would likely be included in the eval anyhow...)
-	iTemp = kUnitCombat.getArmorChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getArmor() : pUnit->armorTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	iTemp = kUnitCombat.getPunctureChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getPuncture() : pUnit->punctureTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
 	iTemp = kUnitCombat.getDamageModifierChange();
 	if (iTemp != 0)
 	{
 		iExtra = pUnit == NULL ? kUnit.getDamageModifier() : pUnit->damageModifierTotal();
 		iTemp *= (100 + iExtra);
 		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	iTemp = kUnitCombat.getDodgeModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getDodgeModifier() : pUnit->dodgeTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	iTemp = kUnitCombat.getPrecisionModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getPrecisionModifier() : pUnit->precisionTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	iTemp = kUnitCombat.getCriticalModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getCriticalModifier() : pUnit->criticalModifierTotal();
-		iTemp *= (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp;
-	}
-
-	iTemp = kUnitCombat.getPowerShotsChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getPowerShotCombatModifier() : pUnit->powerShotCombatModifierTotal();
-		iExtra += pUnit == NULL ? kUnit.getPowerShotCriticalModifier() : pUnit->powerShotCriticalModifierTotal();
-		iExtra += pUnit == NULL ? kUnit.getPowerShotPunctureModifier() : pUnit->powerShotPunctureModifierTotal();
-		iExtra += pUnit == NULL ? kUnit.getPowerShotPrecisionModifier() : pUnit->powerShotPrecisionModifierTotal();
-		iExtra += kUnitCombat.getPowerShotCombatModifierChange() == 0 ? 0 : kUnitCombat.getPowerShotCombatModifierChange();
-		iExtra += kUnitCombat.getPowerShotCriticalModifierChange() == 0 ? 0 : kUnitCombat.getPowerShotCriticalModifierChange();
-		iExtra += kUnitCombat.getPowerShotPunctureModifierChange() == 0 ? 0 : kUnitCombat.getPowerShotPunctureModifierChange();
-		iExtra += kUnitCombat.getPowerShotPrecisionModifierChange() == 0 ? 0 : kUnitCombat.getPowerShotPrecisionModifierChange();
-		iTemp *= (100 + iExtra);
-		iValue += iTemp;
-	}
-
-	iTemp = kUnitCombat.getPowerShotCombatModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getPowerShots() : pUnit->powerShotsTotal();
-		iTemp *= iExtra;
-		iTemp /= 5;
-		iValue += iTemp;
-	}
-
-	iTemp = kUnitCombat.getPowerShotCriticalModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getPowerShots() : pUnit->powerShotsTotal();
-		iTemp *= iExtra;
-		iTemp /= 5;
-		iValue += iTemp;
-	}
-
-	iTemp = kUnitCombat.getPowerShotPrecisionModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getPowerShots() : pUnit->powerShotsTotal();
-		iTemp *= iExtra;
-		iTemp /= 4;
-		iValue += iTemp;
-	}
-
-	iTemp = kUnitCombat.getPowerShotPunctureModifierChange();
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? kUnit.getPowerShots() : pUnit->powerShotsTotal();
-		iTemp *= iExtra;
-		iTemp /= 4;
 		iValue += iTemp;
 	}
 
@@ -33632,150 +32251,6 @@ int CvPlayerAI::AI_unitCombatValue(UnitCombatTypes eUnitCombat, UnitTypes eUnit,
 		iTemp += iExtra;
 		iTemp *= 10;
 		iValue += iTemp;
-	}
-
-	iTemp = kUnitCombat.getOverrunChange();
-	if (iTemp != 0)
-	{
-		if ((eUnitAI == UNITAI_ATTACK) ||
-			  (eUnitAI == UNITAI_ATTACK_CITY) ||
-			  (eUnitAI == UNITAI_COLLATERAL))
-		{
-			iExtra = kUnit.getOverrun() + (pUnit == NULL ? 0 : pUnit->getExtraOverrun() * 2);
-			iValue += ((iTemp * (100 + iExtra)) / 100);
-		}
-		else
-		{
-			iValue += (iTemp / 4);
-		}
-	}
-
-	iTemp = kUnitCombat.getRepelChange();
-	if (iTemp != 0)
-	{
-		if ((eUnitAI == UNITAI_CITY_DEFENSE) ||
-			  (eUnitAI == UNITAI_CITY_SPECIAL) ||
-			  (eUnitAI == UNITAI_CITY_COUNTER) ||
-			  (eUnitAI == UNITAI_COUNTER) ||
-			  (eUnitAI == UNITAI_RESERVE) ||
-			  (eUnitAI == UNITAI_ESCORT))
-		{
-			iExtra = kUnit.getRepel() + (pUnit == NULL ? 0 : pUnit->getExtraRepel() * 2);
-			iValue += ((iTemp * (100 + iExtra)) / 100);
-		}
-		else
-		{
-			iValue += (iTemp / 4);
-		}
-	}
-
-	iTemp = kUnitCombat.getFortRepelChange();
-	if (iTemp != 0)
-	{
-		if ((eUnitAI == UNITAI_CITY_DEFENSE) ||
-			  (eUnitAI == UNITAI_CITY_SPECIAL) ||
-			  (eUnitAI == UNITAI_CITY_COUNTER) ||
-			  (eUnitAI == UNITAI_COUNTER) ||
-			  (eUnitAI == UNITAI_RESERVE))
-		{
-			iExtra = kUnit.getFortRepel() + (pUnit == NULL ? 0 : pUnit->getExtraFortRepel() * 2);
-			iValue += ((iTemp * (100 + iExtra)) / 110);
-		}
-		else
-		{
-			iValue += (iTemp / 4);
-		}
-	}
-
-	iTemp = kUnitCombat.getRepelRetriesChange();
-	int itemprepel = 0;
-	if ((kUnit.getRepel() + (pUnit == NULL ? 0 : pUnit->getExtraRepel() * 4)) > 0)
-	{
-		itemprepel += ((kUnit.getRepel() + (pUnit == NULL ? 0 : pUnit->getExtraRepel() * 4)) / 2);
-	}
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? 0 : (itemprepel + pUnit->repelRetriesTotal());
-		iTemp *= (100 + iExtra * 2);
-		iTemp /= 100;
-		if ((eUnitAI == UNITAI_CITY_DEFENSE) ||
-			  (eUnitAI == UNITAI_CITY_SPECIAL) ||
-			  (eUnitAI == UNITAI_CITY_COUNTER) ||
-			  (eUnitAI == UNITAI_COUNTER) ||
-			  (eUnitAI == UNITAI_RESERVE) ||
-			  (eUnitAI == UNITAI_ESCORT))
-		{
-			iValue += (iTemp * 25);
-		}
-		else
-		{
-			iValue += iTemp;
-		}
-	}
-
-	iTemp = kUnitCombat.getUnyieldingChange();
-	if (iTemp != 0)
-	{
-		if ((eUnitAI == UNITAI_CITY_DEFENSE) ||
-			  (eUnitAI == UNITAI_CITY_SPECIAL) ||
-			  (eUnitAI == UNITAI_CITY_COUNTER) ||
-			  (eUnitAI == UNITAI_COUNTER) ||
-			  (eUnitAI == UNITAI_ATTACK) ||
-			  (eUnitAI == UNITAI_ATTACK_CITY) ||
-			  (eUnitAI == UNITAI_PILLAGE_COUNTER) ||
-			  (eUnitAI == UNITAI_HUNTER) ||
-			  (eUnitAI == UNITAI_HUNTER_ESCORT) ||
-			  (eUnitAI == UNITAI_GREAT_HUNTER) ||
-			  (eUnitAI == UNITAI_RESERVE) ||
-			  (eUnitAI == UNITAI_HEALER) ||
-			  (eUnitAI == UNITAI_PROPERTY_CONTROL))
-		{
-			iExtra = kUnit.getUnyielding() + (pUnit == NULL ? 0 : pUnit->getExtraUnyielding() * 2);
-			iValue += ((iTemp * (100 + iExtra)) / 110);
-		}
-		else
-		{
-			iValue += (iTemp / 4);
-		}
-	}
-
-	iTemp = kUnitCombat.getKnockbackChange();
-	if (iTemp != 0)
-	{
-		if ((eUnitAI == UNITAI_COUNTER) ||
-			  (eUnitAI == UNITAI_ATTACK) ||
-			  (eUnitAI == UNITAI_ATTACK_CITY))
-		{
-			iExtra = kUnit.getKnockback() + (pUnit == NULL ? 0 : pUnit->getExtraKnockback() * 2);
-			iValue += ((iTemp * (100 + iExtra)) / 100);
-		}
-		else
-		{
-			iValue += (iTemp / 4);
-		}
-	}
-
-	iTemp = kUnitCombat.getKnockbackRetriesChange();
-	int itempknockback = 0;
-	if ((kUnit.getKnockback() + (pUnit == NULL ? 0 : pUnit->getExtraKnockback() * 4)) > 0)
-	{
-		itempknockback += ((kUnit.getKnockback() + (pUnit == NULL ? 0 : pUnit->getExtraKnockback() * 4)) / 2);
-	}
-	if (iTemp != 0)
-	{
-		iExtra = pUnit == NULL ? 0 : (itempknockback + pUnit->knockbackRetriesTotal());
-		iTemp *= (100 + iExtra * 2);
-		iTemp /= 100;
-		if ((eUnitAI == UNITAI_COUNTER) ||
-			  (eUnitAI == UNITAI_ATTACK) ||
-			  (eUnitAI == UNITAI_ATTACK_CITY))
-		{
-			iValue += (iTemp * 25);
-		}
-		else
-		{
-			iValue += iTemp;
-		}
 	}
 
 	for (int iI = 0; iI < kUnitCombat.getNumFlankingStrengthbyUnitCombatTypesChange(); iI++)
@@ -33874,204 +32349,9 @@ int CvPlayerAI::AI_unitCombatValue(UnitCombatTypes eUnitCombat, UnitTypes eUnit,
 		iValue -= 25;
 	}
 
-	if (kUnitCombat.isMakesDamageCold())
-	{
-		iValue += 25;
-	}
 
-	if (kUnitCombat.isAddsColdImmunity())
-	{
-		iValue += 25;
-	}
 
-#ifdef BATTLEWORN
-	iTemp = kUnitCombat.getStrAdjperAttChange();
-	if (iTemp != 0)
-	{
-		if ((eUnitAI == UNITAI_ATTACK) ||
-			  (eUnitAI == UNITAI_ATTACK_CITY))
-		{
-			iValue += iTemp * 5;
-		}
-		else
-		{
-			iValue += iTemp;
-		}
-	}
 
-	iTemp = kUnitCombat.getWithdrawAdjperAttChange();
-	if (iTemp != 0)
-	{
-		if ((eUnitAI == UNITAI_ATTACK) ||
-			  (eUnitAI == UNITAI_ATTACK_CITY))
-		{
-			iValue += iTemp * 5;
-		}
-		else
-		{
-			iValue += iTemp;
-		}
-	}
-
-	iTemp = kUnitCombat.getStrAdjperDefChange();
-	if (iTemp != 0)
-	{
-		if ((eUnitAI == UNITAI_CITY_DEFENSE) ||
-			  (eUnitAI == UNITAI_COUNTER) ||
-			  (eUnitAI == UNITAI_CITY_COUNTER) ||
-			  (eUnitAI == UNITAI_ESCORT) ||
-			  (eUnitAI == UNITAI_ESCORT_SEA))
-		{
-			iValue += iTemp * 5;
-		}
-		else
-		{
-			iValue += iTemp;
-		}
-	}
-#endif // BATTLEWORN
-
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	for (int iI = 0; iI < kUnitCombat.getNumAfflictOnAttackChangeTypes(); ++iI)
-	{
-		if (kUnitCombat.getAfflictOnAttackChangeType(iI).eAfflictionLine > 0)
-		{
-			iTemp = kUnitCombat.getAfflictOnAttackChangeType(iI).iProbabilityChange;
-
-			int iTempWithdraw = 0;
-
-			if (pUnit == NULL ? 0 : pUnit->withdrawalProbability() > 0)
-			{
-				iTempWithdraw += pUnit->withdrawalProbability();
-			}
-			if (pUnit == NULL ? 0 : pUnit->earlyWithdrawTotal() > 0)
-			{
-				iTempWithdraw += ((iTempWithdraw * pUnit->earlyWithdrawTotal()) / 100);
-			}
-
-			iTemp += ((iTemp * iTempWithdraw) / 100);
-
-			int iImmediate = kUnitCombat.getAfflictOnAttackChangeType(iI).iImmediate;
-			iImmediate *= 25;
-
-			iTemp += iImmediate;
-
-			iValue += iTemp;
-		}
-	}
-
-	if (GC.getGame().isOption(GAMEOPTION_COMBAT_OUTBREAKS_AND_AFFLICTIONS))
-	{
-		for (int iI = 0; iI < kUnitCombat.getNumCureAfflictionChangeTypes(); ++iI)
-		{
-			if (kUnitCombat.getCureAfflictionChangeType(iI) > 0)
-			{
-				PromotionLineTypes eAfflictionLine = ((PromotionLineTypes)kUnitCombat.getCureAfflictionChangeType(iI));
-				iTemp = 10;
-				int iAfflictionCount = getPlayerWideAfflictionCount(eAfflictionLine);
-				int iPlotAfflictedCount = 0;
-				if (pUnit)
-				{
-					CvPlot* pUnitPlot = pUnit->plot();
-					iPlotAfflictedCount = pUnitPlot->getNumAfflictedUnits(pUnit->getOwner(), eAfflictionLine);
-				}
-				iPlotAfflictedCount *= 100;
-				iAfflictionCount += ((iAfflictionCount * iPlotAfflictedCount) / 100);
-				iTemp *= iAfflictionCount;
-
-				iValue += iTemp;
-			}
-		}
-
-		for (int iI = 0; iI < kUnitCombat.getNumAfflictionFortitudeChangeModifiers(); ++iI)
-		{
-			iValue += (kUnitCombat.getAfflictionFortitudeChangeModifier(iI).iModifier);
-		}
-
-		iTemp = kUnitCombat.getFortitudeChange();
-		if (iTemp != 0)
-		{
-			iExtra = kUnit.getFortitude() + (pUnit == NULL ? 0 : pUnit->getExtraFortitude());
-			iTemp *= (100 + iExtra);
-			iTemp /= 100;
-			iValue += ((iTemp * 3) / 4);
-		}
-
-		for (int iI = 0; iI < GC.getNumPropertyInfos(); iI++)
-		{
-			iTemp = kUnitCombat.getAidChange(iI);
-			if (iTemp != 0)
-			{
-				iExtra = kUnit.getAidChange(iI) + (pUnit == NULL ? 0 : pUnit->extraAidChange((PropertyTypes)iI));
-				iTemp *= (100 + iExtra);
-				iTemp /= 100;
-				iValue += ((iTemp * 3) / 4);
-			}
-		}
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
-
-#ifdef STRENGTH_IN_NUMBERS
-	if (GC.getGame().isOption(GAMEOPTION_COMBAT_STRENGTH_IN_NUMBERS))
-	{
-		iTemp = kUnitCombat.getFrontSupportPercentChange();
-		if (iTemp != 0)
-		{
-			iExtra = pUnit == NULL ? kUnit.getFrontSupportPercent() : pUnit->getExtraFrontSupportPercent();
-			iTemp *= (100 + iExtra * 2);
-			iTemp /= 100;
-			iValue += iTemp * 4;
-		}
-
-		iTemp = kUnitCombat.getShortRangeSupportPercentChange();
-		if (iTemp != 0)
-		{
-			iExtra = pUnit == NULL ? kUnit.getShortRangeSupportPercent() : pUnit->getExtraShortRangeSupportPercent();
-			iTemp *= (100 + iExtra * 2);
-			iTemp /= 100;
-			iValue += iTemp * 4;
-		}
-
-		iTemp = kUnitCombat.getMediumRangeSupportPercentChange();
-		if (iTemp != 0)
-		{
-			iExtra = pUnit == NULL ? kUnit.getMediumRangeSupportPercent() : pUnit->getExtraMediumRangeSupportPercent();
-			iTemp *= (100 + iExtra * 2);
-			iTemp /= 100;
-			iValue += iTemp * 4;
-		}
-
-		iTemp = kUnitCombat.getLongRangeSupportPercentChange();
-		if (iTemp != 0)
-		{
-			iExtra = pUnit == NULL ? kUnit.getLongRangeSupportPercent() : pUnit->getExtraLongRangeSupportPercent();
-			iTemp *= (100 + iExtra * 2);
-			iTemp /= 100;
-			iValue += iTemp * 4;
-		}
-
-		iTemp = kUnitCombat.getFlankSupportPercentChange();
-		if (iTemp != 0)
-		{
-			iExtra = pUnit == NULL ? kUnit.getFlankSupportPercent() : pUnit->getExtraFlankSupportPercent();
-			iTemp *= (100 + iExtra * 2);
-			iTemp /= 100;
-			iValue += iTemp * 4;
-		}
-}
-#endif // STRENGTH_IN_NUMBERS
-
-	iTemp = kUnitCombat.getRoundStunProbChange();
-	if (iTemp != 0)
-	{
-		iExtra = kUnit.getRoundStunProb();
-		if (pUnit) iExtra += pUnit->getExtraRoundStunProb();
-
-		// 2x strengthens synergy
-		iTemp *= 2 * (100 + iExtra);
-		iTemp /= 100;
-		iValue += iTemp * 2;
-	}
 	//TB Combat Mods End
 
 	iTemp = kUnitCombat.getCollateralDamageChange();
@@ -34435,16 +32715,6 @@ int CvPlayerAI::AI_unitCombatValue(UnitCombatTypes eUnitCombat, UnitTypes eUnit,
 			iValue += 25;
 		}
 
-		if (kUnitCombat.isMakesDamageNotCold() && pUnit->dealsColdDamage())
-		{
-			iValue -= 25;
-		}
-
-		if (kUnitCombat.isRemovesColdImmunity() && pUnit->hasImmunitytoColdDamage())
-		{
-			iValue -= 25;
-		}
-
 		if (kUnitCombat.getAnimalIgnoresBordersChange() > 0 && pUnit->isAnimal() && !GC.getGame().isOption(GAMEOPTION_ANIMAL_STAY_OUT))
 		{
 			iValue += 50;
@@ -34553,63 +32823,6 @@ int CvPlayerAI::AI_unitCombatValue(UnitCombatTypes eUnitCombat, UnitTypes eUnit,
 		}
 	}
 
-
-	for (int iI = 0; iI < kUnitCombat.getNumWithdrawVSUnitCombatTypesChange(); iI++)
-	{
-		iValue += kUnitCombat.getWithdrawVSUnitCombatTypeChange(iI).iModifier;
-	}
-
-	if (GC.getGame().isOption(GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT))
-	{
-		for (int iI = 0; iI < kUnitCombat.getNumPursuitVSUnitCombatTypesChange(); iI++)
-		{
-			iValue += kUnitCombat.getPursuitVSUnitCombatTypeChange(iI).iModifier;
-		}
-	}
-
-	if (GC.getGame().isOption(GAMEOPTION_COMBAT_HEART_OF_WAR))
-	{
-		for (int iI = 0; iI < kUnitCombat.getNumRepelVSUnitCombatTypesChange(); iI++)
-		{
-			iValue += kUnitCombat.getRepelVSUnitCombatTypeChange(iI).iModifier;
-		}
-
-		for (int iI = 0; iI < kUnitCombat.getNumKnockbackVSUnitCombatTypesChange(); iI++)
-		{
-			iValue += kUnitCombat.getKnockbackVSUnitCombatTypeChange(iI).iModifier;
-		}
-	}
-
-	for (int iI = 0; iI < kUnitCombat.getNumPunctureVSUnitCombatTypesChange(); iI++)
-	{
-		iValue += kUnitCombat.getPunctureVSUnitCombatTypeChange(iI).iModifier;
-	}
-
-
-	for (int iI = 0; iI < kUnitCombat.getNumArmorVSUnitCombatTypesChange(); iI++)
-	{
-		iValue += kUnitCombat.getArmorVSUnitCombatTypeChange(iI).iModifier;
-	}
-
-	for (int iI = 0; iI < kUnitCombat.getNumDodgeVSUnitCombatTypesChange(); iI++)
-	{
-		iValue += kUnitCombat.getDodgeVSUnitCombatTypeChange(iI).iModifier;
-	}
-
-	for (int iI = 0; iI < kUnitCombat.getNumPrecisionVSUnitCombatTypesChange(); iI++)
-	{
-		iValue += kUnitCombat.getPrecisionVSUnitCombatTypeChange(iI).iModifier;
-	}
-
-	for (int iI = 0; iI < kUnitCombat.getNumCriticalVSUnitCombatTypesChange(); iI++)
-	{
-		iValue += kUnitCombat.getCriticalVSUnitCombatTypeChange(iI).iModifier;
-	}
-
-	for (int iI = 0; iI < kUnitCombat.getNumRoundStunVSUnitCombatTypesChange(); iI++)
-	{
-		iValue += kUnitCombat.getRoundStunVSUnitCombatTypeChange(iI).iModifier;
-	}
 
 	//TB Combat Mods
 	//TB Modification note:adjusted City Attack promo value to balance better against withdraw promos for city attack ai units.
@@ -34862,132 +33075,6 @@ int CvPlayerAI::AI_unitCombatValue(UnitCombatTypes eUnitCombat, UnitTypes eUnit,
 		else
 		{
 			iValue += (iTemp / 64);
-		}
-	}
-
-	for (int iI = 0; iI < GC.getNumTerrainInfos(); iI++)
-	{
-		if (kUnitCombat.getWithdrawOnTerrainTypeChange(iI) != 0)
-		{
-			iTemp = kUnitCombat.getWithdrawOnTerrainTypeChange(iI);
-			int iTerrainWeight;
-			//ls612: Weight values by Terrain in area
-			//General form of the calculation is to change a value of 'x' (old version) to '(x * iTerrainWeight)/250'
-			//The 250 normalizes the calculation to give the old values for a terrain that covers 25% of the area
-			if (pUnit)
-			{
-				int iNumRevealedAreaTiles = pUnit->area()->getNumRevealedTiles(getTeam());
-				int	iNumRevealedAreaThisTerrain = pUnit->area()->getNumRevealedTerrainTiles(getTeam(), (TerrainTypes)iI);
-				iTerrainWeight = (1000 * iNumRevealedAreaThisTerrain) / iNumRevealedAreaTiles;
-			}
-			else
-			{
-				iTerrainWeight = 1000;
-			}
-
-			if (iTemp != 0)
-			{
-
-				iExtra = pUnit ? pUnit->getExtraWithdrawOnTerrainType((TerrainTypes)iI) : kUnit.getWithdrawOnTerrainType(iI);
-				iTemp *= (100 + iExtra);
-				iTemp /= 100;
-
-				if (eUnitAI == UNITAI_ANIMAL ||
-					eUnitAI == UNITAI_COLLATERAL ||
-					eUnitAI == UNITAI_PILLAGE ||
-					eUnitAI == UNITAI_EXPLORE ||
-					eUnitAI == UNITAI_ATTACK_SEA ||
-					eUnitAI == UNITAI_EXPLORE_SEA ||
-					eUnitAI == UNITAI_CARRIER_SEA ||
-					eUnitAI == UNITAI_PIRATE_SEA ||
-					eUnitAI == UNITAI_SUBDUED_ANIMAL)
-				{
-					if (pUnit != NULL && pUnit->plot()->getTerrainType() == (TerrainTypes)iI && pUnit->withdrawalProbability() > 0)
-					{
-						iValue += (iTerrainWeight * iTemp) / 2500;
-					}
-					else
-					{
-						iValue += (iTerrainWeight * iTemp) / 5000;
-					}
-				}
-				else
-				{
-					if (pUnit != NULL && pUnit->withdrawalProbability() > 0)
-					{
-						iValue += (iTerrainWeight * iTemp) / 75500;
-					}
-					else
-					{
-						iValue += (iTerrainWeight * iTemp) / 12500;
-					}
-				}
-			}
-		}
-	}
-
-	for (int iI = 0; iI < GC.getNumFeatureInfos(); iI++)
-	{
-		if (kUnitCombat.getWithdrawOnFeatureTypeChange(iI))
-		{
-			iTemp = kUnitCombat.getWithdrawOnFeatureTypeChange(iI);
-			if (iTemp != 0)
-			{
-				//ls612: Feature Weights
-				//General form of the calculation is to change a value of 'x' (old version) to '(x * iFeatureWeight)/100'
-				//The 100 normalizes the calculation to give the old values for a feature that covers 10% of the area - note
-				//that we use 10% for features where we used 25% for terrains because most plots don't have features at all
-				int iFeatureWeight;
-				if (pUnit)
-				{
-					int iNumRevealedAreaFeatures = std::max(1, pUnit->area()->getNumRevealedTiles(getTeam()));
-					int iNumRevealedAreaFeatureTiles = pUnit->area()->getNumRevealedFeatureTiles(getTeam(), (FeatureTypes)iI);
-					iFeatureWeight = ((iNumRevealedAreaFeatureTiles * 1000) / iNumRevealedAreaFeatures);
-				}
-				else
-				{
-					iFeatureWeight = 1000;
-				}
-
-				if (iTemp != 0)
-				{
-
-					iExtra = pUnit ? pUnit->getExtraWithdrawOnFeatureType((FeatureTypes)iI, true) : kUnit.getWithdrawOnFeatureType(iI);
-					iTemp *= (100 + iExtra);
-					iTemp /= 100;
-
-					if (eUnitAI == UNITAI_ANIMAL ||
-						eUnitAI == UNITAI_COLLATERAL ||
-						eUnitAI == UNITAI_PILLAGE ||
-						eUnitAI == UNITAI_EXPLORE ||
-						eUnitAI == UNITAI_ATTACK_SEA ||
-						eUnitAI == UNITAI_EXPLORE_SEA ||
-						eUnitAI == UNITAI_CARRIER_SEA ||
-						eUnitAI == UNITAI_PIRATE_SEA ||
-						eUnitAI == UNITAI_SUBDUED_ANIMAL)
-					{
-						if (pUnit != NULL && pUnit->plot()->getFeatureType() == (FeatureTypes)iI && pUnit->withdrawalProbability() > 0)
-						{
-							iValue += (iFeatureWeight * iTemp) / 1200;
-						}
-						else
-						{
-							iValue += (iFeatureWeight * iTemp) / 1600;
-						}
-					}
-					else
-					{
-						if (pUnit != NULL && pUnit->withdrawalProbability() > 0)
-						{
-							iValue += (iFeatureWeight * iTemp) / 2000;
-						}
-						else
-						{
-							iValue++;
-						}
-					}
-				}
-			}
 		}
 	}
 

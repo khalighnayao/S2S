@@ -119,7 +119,6 @@ m_bCanMovePeaks(false)
 ,m_iObsoleteTech(NO_TECH)
 ,m_iControlPoints(0)
 ,m_iCommandRange(0)
-,m_iIgnoreTerrainDamage(NO_TERRAIN)
 ,m_bZoneOfControl(false)
 
 ,m_PropertyManipulators()
@@ -136,51 +135,17 @@ m_eSetSpecialUnit(NO_SPECIALUNIT),
 //integers
 m_iAttackCombatModifierChange(0),
 m_iDefenseCombatModifierChange(0),
-m_iPursuitChange(0),
-m_iEarlyWithdrawChange(0),
 m_iVSBarbsChange(0),
-m_iArmorChange(0),
-m_iPunctureChange(0),
-m_iOverrunChange(0),
-m_iRepelChange(0),
-m_iFortRepelChange(0),
-m_iRepelRetriesChange(0),
-m_iUnyieldingChange(0),
-m_iKnockbackChange(0),
-m_iKnockbackRetriesChange(0),
-#ifdef BATTLEWORN
-m_iStrAdjperRndChange(0),
-m_iStrAdjperAttChange(0),
-m_iStrAdjperDefChange(0),
-m_iWithdrawAdjperAttChange(0),
-#endif // BATTLEWORN
 m_iUnnerveChange(0),
 m_iEncloseChange(0),
 m_iLungeChange(0),
 m_iDynamicDefenseChange(0),
 m_iStrengthChange(0),
 m_iLinePriority(0),
-m_iFortitudeChange(0),
 m_iDamageperTurn(0),
 m_iStrAdjperTurn(0),
 m_iWeakenperTurn(0),
-#ifdef STRENGTH_IN_NUMBERS
-m_iFrontSupportPercentChange(0),
-m_iShortRangeSupportPercentChange(0),
-m_iMediumRangeSupportPercentChange(0),
-m_iLongRangeSupportPercentChange(0),
-m_iFlankSupportPercentChange(0),
-#endif
-m_iDodgeModifierChange(0),
-m_iPrecisionModifierChange(0),
-m_iPowerShotsChange(0),
-m_iPowerShotCombatModifierChange(0),
-m_iPowerShotPunctureModifierChange(0),
-m_iPowerShotPrecisionModifierChange(0),
-m_iPowerShotCriticalModifierChange(0),
-m_iCriticalModifierChange(0),
 m_iEnduranceChange(0),
-m_iRoundStunProbChange(0),
 m_iPoisonProbabilityModifierChange(0),
 
 m_iCaptureProbabilityModifierChange(0),
@@ -236,16 +201,7 @@ m_iReligiousCombatModifierChange(0),
 m_bStampedeChange(false),
 m_bRemoveStampede(false),
 m_bOnslaughtChange(false),
-m_bEquipment(false),
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-m_bAffliction(false),
-#endif
 m_bParalyze(false),
-m_bMakesDamageCold(false),
-m_bMakesDamageNotCold(false),
-m_bAddsColdImmunity(false),
-m_bRemovesColdImmunity(false),
-m_bCritical(false),
 m_bAttackOnlyCitiesAdd(false),
 m_bAttackOnlyCitiesSubtract(false),
 m_bIgnoreNoEntryLevelAdd(false),
@@ -894,12 +850,6 @@ int CvPromotionInfo::getCommandRange() const
 }
 
 
-int CvPromotionInfo::getIgnoreTerrainDamage() const
-{
-	return m_iIgnoreTerrainDamage;
-}
-
-
 bool CvPromotionInfo::isZoneOfControl() const
 {
 	return m_bZoneOfControl;
@@ -975,161 +925,14 @@ int CvPromotionInfo::getDefenseCombatModifierChange() const
 }
 
 
-int CvPromotionInfo::getPursuitChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT))
-	{
-		return 0;
-	}
-	return m_iPursuitChange;
-}
-
-
-int CvPromotionInfo::getEarlyWithdrawChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT))
-	{
-		return 0;
-	}
-	return m_iEarlyWithdrawChange;
-}
-
-
 int CvPromotionInfo::getVSBarbsChange() const
 {
 	return m_iVSBarbsChange;
 }
 
 
-int CvPromotionInfo::getArmorChange() const
-{
-	return m_iArmorChange;
-}
 
 
-int CvPromotionInfo::getPunctureChange() const
-{
-	return m_iPunctureChange;
-}
-
-
-//Heart of War
-int CvPromotionInfo::getOverrunChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_HEART_OF_WAR))
-	{
-		return 0;
-	}
-	return m_iOverrunChange;
-}
-
-
-int CvPromotionInfo::getRepelChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_HEART_OF_WAR))
-	{
-		return 0;
-	}
-	return m_iRepelChange;
-}
-
-
-int CvPromotionInfo::getFortRepelChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_HEART_OF_WAR))
-	{
-		return 0;
-	}
-	return m_iFortRepelChange;
-}
-
-
-int CvPromotionInfo::getRepelRetriesChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_HEART_OF_WAR))
-	{
-		return 0;
-	}
-	return m_iRepelRetriesChange;
-}
-
-
-int CvPromotionInfo::getUnyieldingChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_HEART_OF_WAR))
-	{
-		return 0;
-	}
-	return m_iUnyieldingChange;
-}
-
-
-int CvPromotionInfo::getKnockbackChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_HEART_OF_WAR))
-	{
-		return 0;
-	}
-	return m_iKnockbackChange;
-}
-
-
-int CvPromotionInfo::getKnockbackRetriesChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_HEART_OF_WAR))
-	{
-		return 0;
-	}
-	return m_iKnockbackRetriesChange;
-}
-
-#ifdef BATTLEWORN
-//Battleworn
-int CvPromotionInfo::getStrAdjperRndChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_BATTLEWORN))
-	{
-		return 0;
-	}
-	return m_iStrAdjperRndChange;
-}
-#endif // BATTLEWORN
-
-#ifdef BATTLEWORN
-
-int CvPromotionInfo::getStrAdjperAttChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_BATTLEWORN))
-	{
-		return 0;
-	}
-	return m_iStrAdjperAttChange;
-}
-#endif // BATTLEWORN
-
-#ifdef BATTLEWORN
-
-int CvPromotionInfo::getStrAdjperDefChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_BATTLEWORN))
-	{
-		return 0;
-	}
-	return m_iStrAdjperDefChange;
-}
-#endif // BATTLEWORN
-
-#ifdef BATTLEWORN
-
-int CvPromotionInfo::getWithdrawAdjperAttChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_BATTLEWORN))
-	{
-		return 0;
-	}
-	return m_iWithdrawAdjperAttChange;
-}
-#endif // BATTLEWORN
 
 
 //S&D extended
@@ -1186,13 +989,6 @@ int CvPromotionInfo::getLinePriority() const
 }
 
 
-//Realm of the Serpent
-int CvPromotionInfo::getFortitudeChange() const
-{
-	return m_iFortitudeChange;
-}
-
-
 int CvPromotionInfo::getDamageperTurn() const
 {
 	return m_iDamageperTurn;
@@ -1210,112 +1006,10 @@ int CvPromotionInfo::getWeakenperTurn() const
 	return m_iWeakenperTurn;
 }
 
-#ifdef STRENGTH_IN_NUMBERS
-int CvPromotionInfo::getFrontSupportPercentChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_STRENGTH_IN_NUMBERS))
-	{
-		return 0;
-	}
-	return m_iFrontSupportPercentChange;
-}
-#endif
-
-#ifdef STRENGTH_IN_NUMBERS
-
-int CvPromotionInfo::getShortRangeSupportPercentChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_STRENGTH_IN_NUMBERS))
-	{
-		return 0;
-	}
-	return m_iShortRangeSupportPercentChange;
-}
-#endif
-
-#ifdef STRENGTH_IN_NUMBERS
-
-int CvPromotionInfo::getMediumRangeSupportPercentChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_STRENGTH_IN_NUMBERS))
-	{
-		return 0;
-	}
-	return m_iMediumRangeSupportPercentChange;
-}
-#endif
-
-#ifdef STRENGTH_IN_NUMBERS
-
-int CvPromotionInfo::getLongRangeSupportPercentChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_STRENGTH_IN_NUMBERS))
-	{
-		return 0;
-	}
-	return m_iLongRangeSupportPercentChange;
-}
-#endif
-
-#ifdef STRENGTH_IN_NUMBERS
-
-int CvPromotionInfo::getFlankSupportPercentChange() const
-{
-	if (!GC.getGame().isOption(GAMEOPTION_COMBAT_STRENGTH_IN_NUMBERS))
-	{
-		return 0;
-	}
-	return m_iFlankSupportPercentChange;
-}
-#endif
 
 
-int CvPromotionInfo::getDodgeModifierChange() const
-{
-	return m_iDodgeModifierChange;
-}
 
 
-int CvPromotionInfo::getPrecisionModifierChange() const
-{
-	return m_iPrecisionModifierChange;
-}
-
-
-int CvPromotionInfo::getPowerShotsChange() const
-{
-	return m_iPowerShotsChange;
-}
-
-
-int CvPromotionInfo::getPowerShotCombatModifierChange() const
-{
-	return m_iPowerShotCombatModifierChange;
-}
-
-
-int CvPromotionInfo::getPowerShotPunctureModifierChange() const
-{
-	return m_iPowerShotPunctureModifierChange;
-}
-
-
-int CvPromotionInfo::getPowerShotPrecisionModifierChange() const
-{
-	return m_iPowerShotPrecisionModifierChange;
-}
-
-
-int CvPromotionInfo::getPowerShotCriticalModifierChange() const
-{
-	return m_iPowerShotCriticalModifierChange;
-}
-
-
-int CvPromotionInfo::getCriticalModifierChange() const
-{
-	return m_iCriticalModifierChange;
-}
 
 
 int CvPromotionInfo::getEnduranceChange() const
@@ -1324,10 +1018,6 @@ int CvPromotionInfo::getEnduranceChange() const
 }
 
 
-int CvPromotionInfo::getRoundStunProbChange() const
-{
-	return m_iRoundStunProbChange;
-}
 
 
 int CvPromotionInfo::getPoisonProbabilityModifierChange() const
@@ -1672,29 +1362,6 @@ bool CvPromotionInfo::isOnslaughtChange() const
 }
 
 
-bool CvPromotionInfo::isEquipment() const
-{
-	if ( getPromotionLine() == NO_PROMOTIONLINE)
-	{
-		return false; // require afflictions to always be parts of lines
-	}
-
-	// return the value from the line
-	return GC.getPromotionLineInfo(getPromotionLine()).isEquipment();
-}
-
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-bool CvPromotionInfo::isAffliction() const
-{
-	if ( getPromotionLine() == NO_PROMOTIONLINE)
-	{
-		return false; // require afflictions to always be parts of lines
-	}
-
-	// return the value from the line
-	return GC.getPromotionLineInfo(getPromotionLine()).isAffliction();
-}
-#endif
 
 
 bool CvPromotionInfo::isParalyze() const
@@ -1703,40 +1370,6 @@ bool CvPromotionInfo::isParalyze() const
 }
 
 
-bool CvPromotionInfo::isMakesDamageCold() const
-{
-	return m_bMakesDamageCold;
-}
-
-
-bool CvPromotionInfo::isMakesDamageNotCold() const
-{
-	return m_bMakesDamageNotCold;
-}
-
-
-bool CvPromotionInfo::isAddsColdImmunity() const
-{
-	return m_bAddsColdImmunity;
-}
-
-
-bool CvPromotionInfo::isRemovesColdImmunity() const
-{
-	return m_bRemovesColdImmunity;
-}
-
-
-bool CvPromotionInfo::isCritical() const
-{
-	if ( getPromotionLine() == NO_PROMOTIONLINE)
-	{
-		return false; // require afflictions to always be parts of lines
-	}
-
-	// return the value from the line
-	return GC.getPromotionLineInfo(getPromotionLine()).isCritical();
-}
 
 
 bool CvPromotionInfo::isAttackOnlyCitiesAdd() const
@@ -1974,46 +1607,9 @@ bool CvPromotionInfo::isNotOnDomainType(int i) const
 }
 
 
-int CvPromotionInfo::getNoAutoEquiptoCombatClassType(int i) const
-{
-	return m_aiNoAutoEquiptoCombatClassTypes[i];
-}
 
 
-int CvPromotionInfo::getNumNoAutoEquiptoCombatClassTypes() const
-{
-	return (int)m_aiNoAutoEquiptoCombatClassTypes.size();
-}
 
-
-bool CvPromotionInfo::isNoAutoEquiptoCombatClassType(int i) const
-{
-	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), i);
-	return algo::any_of_equal(m_aiNoAutoEquiptoCombatClassTypes, i);
-}
-
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-int CvPromotionInfo::getCureAfflictionChangeType(int i) const
-{
-	return m_aiCureAfflictionChangeTypes[i];
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
-
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-
-int CvPromotionInfo::getNumCureAfflictionChangeTypes() const
-{
-	return (int)m_aiCureAfflictionChangeTypes.size();
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
-
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-
-bool CvPromotionInfo::isCureAfflictionChangeType(int i) const
-{
-	return algo::any_of_equal(m_aiCureAfflictionChangeTypes, i);
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 
 int CvPromotionInfo::getAddsBuildType(int i) const
@@ -2249,411 +1845,6 @@ bool CvPromotionInfo::isFlankingStrikebyUnitCombatTypeChange(int iUnitCombat) co
 }
 
 
-int CvPromotionInfo::getNumWithdrawOnTerrainTypeChanges() const
-{
-	return m_aWithdrawOnTerrainTypesChange.size();
-}
-
-
-int CvPromotionInfo::getWithdrawOnTerrainTypeChange(int iTerrain) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (TerrainModifierArray::const_iterator it = m_aWithdrawOnTerrainTypesChange.begin(); it != m_aWithdrawOnTerrainTypesChange.end(); ++it)
-	{
-		if ((*it).first == (TerrainTypes)iTerrain)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-int CvPromotionInfo::getNumWithdrawOnFeatureTypeChanges() const
-{
-	return m_aWithdrawOnFeatureTypesChange.size();
-}
-
-
-int CvPromotionInfo::getWithdrawOnFeatureTypeChange(int iFeature) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (FeatureModifierArray::const_iterator it = m_aWithdrawOnFeatureTypesChange.begin(); it != m_aWithdrawOnFeatureTypesChange.end(); ++it)
-	{
-		if ((*it).first == (FeatureTypes)iFeature)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-int CvPromotionInfo::getNumWithdrawVSUnitCombatChangeTypes() const
-{
-	return m_aWithdrawVSUnitCombatChangeTypes.size();
-}
-
-
-int CvPromotionInfo::getWithdrawVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aWithdrawVSUnitCombatChangeTypes.begin(); it != m_aWithdrawVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-bool CvPromotionInfo::isWithdrawVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aWithdrawVSUnitCombatChangeTypes.begin(); it != m_aWithdrawVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-
-int CvPromotionInfo::getNumPursuitVSUnitCombatChangeTypes() const
-{
-	return m_aPursuitVSUnitCombatChangeTypes.size();
-}
-
-
-int CvPromotionInfo::getPursuitVSUnitCombatChangeType(int iUnitCombat, bool bForLoad) const
-{
-	PROFILE_EXTRA_FUNC();
-	if (!bForLoad && !GC.getGame().isOption(GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT))
-	{
-		return 0;
-	}
-	for (UnitCombatModifierArray::const_iterator it = m_aPursuitVSUnitCombatChangeTypes.begin(); it != m_aPursuitVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-bool CvPromotionInfo::isPursuitVSUnitCombatChangeType(int iUnitCombat, bool bForLoad) const
-{
-	PROFILE_EXTRA_FUNC();
-	if (!bForLoad && !GC.getGame().isOption(GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT))
-	{
-		return false;
-	}
-
-	for (UnitCombatModifierArray::const_iterator it = m_aPursuitVSUnitCombatChangeTypes.begin(); it != m_aPursuitVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-
-int CvPromotionInfo::getNumRepelVSUnitCombatChangeTypes() const
-{
-	return m_aRepelVSUnitCombatChangeTypes.size();
-}
-
-
-int CvPromotionInfo::getRepelVSUnitCombatChangeType(int iUnitCombat, bool bForLoad) const
-{
-	PROFILE_EXTRA_FUNC();
-	if (!bForLoad && !GC.getGame().isOption(GAMEOPTION_COMBAT_HEART_OF_WAR))
-	{
-		return 0;
-	}
-	for (UnitCombatModifierArray::const_iterator it = m_aRepelVSUnitCombatChangeTypes.begin(); it != m_aRepelVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-bool CvPromotionInfo::isRepelVSUnitCombatChangeType(int iUnitCombat, bool bForLoad) const
-{
-	PROFILE_EXTRA_FUNC();
-	if (!bForLoad && !GC.getGame().isOption(GAMEOPTION_COMBAT_HEART_OF_WAR))
-	{
-		return false;
-	}
-	for (UnitCombatModifierArray::const_iterator it = m_aRepelVSUnitCombatChangeTypes.begin(); it != m_aRepelVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-
-int CvPromotionInfo::getNumKnockbackVSUnitCombatChangeTypes() const
-{
-	return m_aKnockbackVSUnitCombatChangeTypes.size();
-}
-
-
-int CvPromotionInfo::getKnockbackVSUnitCombatChangeType(int iUnitCombat, bool bForLoad) const
-{
-	PROFILE_EXTRA_FUNC();
-	if (!bForLoad && !GC.getGame().isOption(GAMEOPTION_COMBAT_HEART_OF_WAR))
-	{
-		return 0;
-	}
-	for (UnitCombatModifierArray::const_iterator it = m_aKnockbackVSUnitCombatChangeTypes.begin(); it != m_aKnockbackVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-bool CvPromotionInfo::isKnockbackVSUnitCombatChangeType(int iUnitCombat, bool bForLoad) const
-{
-	PROFILE_EXTRA_FUNC();
-	if (!bForLoad && !GC.getGame().isOption(GAMEOPTION_COMBAT_HEART_OF_WAR))
-	{
-		return false;
-	}
-	for (UnitCombatModifierArray::const_iterator it = m_aKnockbackVSUnitCombatChangeTypes.begin(); it != m_aKnockbackVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-
-int CvPromotionInfo::getNumPunctureVSUnitCombatChangeTypes() const
-{
-	return m_aPunctureVSUnitCombatChangeTypes.size();
-}
-
-
-int CvPromotionInfo::getPunctureVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aPunctureVSUnitCombatChangeTypes.begin(); it != m_aPunctureVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-bool CvPromotionInfo::isPunctureVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aPunctureVSUnitCombatChangeTypes.begin(); it != m_aPunctureVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-
-int CvPromotionInfo::getNumArmorVSUnitCombatChangeTypes() const
-{
-	return m_aArmorVSUnitCombatChangeTypes.size();
-}
-
-
-int CvPromotionInfo::getArmorVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aArmorVSUnitCombatChangeTypes.begin(); it != m_aArmorVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-bool CvPromotionInfo::isArmorVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aArmorVSUnitCombatChangeTypes.begin(); it != m_aArmorVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-
-int CvPromotionInfo::getNumDodgeVSUnitCombatChangeTypes() const
-{
-	return m_aDodgeVSUnitCombatChangeTypes.size();
-}
-
-
-int CvPromotionInfo::getDodgeVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aDodgeVSUnitCombatChangeTypes.begin(); it != m_aDodgeVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-bool CvPromotionInfo::isDodgeVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aDodgeVSUnitCombatChangeTypes.begin(); it != m_aDodgeVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-
-int CvPromotionInfo::getNumPrecisionVSUnitCombatChangeTypes() const
-{
-	return m_aPrecisionVSUnitCombatChangeTypes.size();
-}
-
-
-int CvPromotionInfo::getPrecisionVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aPrecisionVSUnitCombatChangeTypes.begin(); it != m_aPrecisionVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-bool CvPromotionInfo::isPrecisionVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aPrecisionVSUnitCombatChangeTypes.begin(); it != m_aPrecisionVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-
-int CvPromotionInfo::getNumCriticalVSUnitCombatChangeTypes() const
-{
-	return m_aCriticalVSUnitCombatChangeTypes.size();
-}
-
-
-int CvPromotionInfo::getCriticalVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aCriticalVSUnitCombatChangeTypes.begin(); it != m_aCriticalVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-bool CvPromotionInfo::isCriticalVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aCriticalVSUnitCombatChangeTypes.begin(); it != m_aCriticalVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-
-int CvPromotionInfo::getNumRoundStunVSUnitCombatChangeTypes() const
-{
-	return m_aRoundStunVSUnitCombatChangeTypes.size();
-}
-
-
-int CvPromotionInfo::getRoundStunVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aRoundStunVSUnitCombatChangeTypes.begin(); it != m_aRoundStunVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-
-
-bool CvPromotionInfo::isRoundStunVSUnitCombatChangeType(int iUnitCombat) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (UnitCombatModifierArray::const_iterator it = m_aRoundStunVSUnitCombatChangeTypes.begin(); it != m_aRoundStunVSUnitCombatChangeTypes.end(); ++it)
-	{
-		if ((*it).first == (UnitCombatTypes)iUnitCombat)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-
 int CvPromotionInfo::getNumTrapDisableUnitCombatTypes() const
 {
 	return m_aTrapDisableUnitCombatTypes.size();
@@ -2755,44 +1946,8 @@ bool CvPromotionInfo::isTrapTriggerUnitCombatType(int iUnitCombat) const
 	return false;
 }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-int CvPromotionInfo::getNumAidChanges() const
-{
-	return m_aAidChanges.size();
-}
-#endif
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
 
-int CvPromotionInfo::getAidChange(int iProperty) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (AidArray::const_iterator it = m_aAidChanges.begin(); it != m_aAidChanges.end(); ++it)
-	{
-		if ((*it).first == (PropertyTypes)iProperty)
-		{
-			return (*it).second;
-		}
-	}
-	return 0;
-}
-#endif
-
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-
-bool CvPromotionInfo::isAidChange(int iProperty) const
-{
-	PROFILE_EXTRA_FUNC();
-	for (AidArray::const_iterator it = m_aAidChanges.begin(); it != m_aAidChanges.end(); ++it)
-	{
-		if ((*it).first == (PropertyTypes)iProperty)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-#endif
 
 
 int CvPromotionInfo::getNumBuildWorkRateModifierChangeTypes() const
@@ -2943,38 +2098,9 @@ const UnitCombatModifier& CvPromotionInfo::getAIWeightbyUnitCombatType(int iUnit
 	return m_aAIWeightbyUnitCombatTypes[iUnitCombat];
 }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-int CvPromotionInfo::getNumAfflictionFortitudeChangeModifiers() const
-{
-	return (int)m_aAfflictionFortitudeChangeModifiers.size();
-}
-#endif
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
 
-const PromotionLineModifier& CvPromotionInfo::getAfflictionFortitudeChangeModifier(int iAfflictionLine) const
-{
-	FASSERT_BOUNDS(0, getNumAfflictionFortitudeChangeModifiers(), iAfflictionLine);
-	return m_aAfflictionFortitudeChangeModifiers[iAfflictionLine];
-}
-#endif
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-
-int CvPromotionInfo::getNumAfflictOnAttackChangeTypes() const
-{
-	return (int)m_aAfflictOnAttackChangeTypes.size();
-}
-#endif
-
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-
-const AfflictOnAttackChange& CvPromotionInfo::getAfflictOnAttackChangeType(int iAfflictionLine) const
-{
-	FASSERT_BOUNDS(0, getNumAfflictOnAttackChangeTypes(), iAfflictionLine);
-	return m_aAfflictOnAttackChangeTypes[iAfflictionLine];
-}
-#endif
 
 
 int CvPromotionInfo::getNumInvisibleTerrainChanges() const
@@ -3082,18 +2208,6 @@ int CvPromotionInfo::getNumVisibleImprovementRangeChanges() const
 const InvisibleImprovementChanges& CvPromotionInfo::getVisibleImprovementRangeChange(int iIndex) const
 {
 	return m_aVisibleImprovementRangeChanges[iIndex];
-}
-
-
-int CvPromotionInfo::getNumDistanceAttackCommunicabilityTypeChanges() const
-{
-	return (int)m_aDistanceAttackCommunicabilityTypeChanges.size();
-}
-
-
-const AfflictionLineChanges& CvPromotionInfo::getDistanceAttackCommunicabilityTypeChange(int iIndex) const
-{
-	return m_aDistanceAttackCommunicabilityTypeChanges[iIndex];
 }
 
 
@@ -3236,14 +2350,7 @@ void CvPromotionInfo::setDisqualifiedUnitCombatTypes()
 
 bool CvPromotionInfo::hasNegativeEffects() const
 {
-	return getPursuitChange() < 0 ||
-		getOverrunChange() < 0 ||
-		getUnyieldingChange() < 0 ||
-		getKnockbackChange() < 0 ||
-		getLungeChange() < 0 ||
-		getDodgeModifierChange() < 0 ||
-		getPrecisionModifierChange() < 0 ||
-		getCriticalModifierChange() < 0 ||
+	return getLungeChange() < 0 ||
 		getEnduranceChange() < 0 ||
 		getFirstStrikesChange() < 0 ||
 		getChanceFirstStrikesChange() < 0 ||
@@ -3384,8 +2491,6 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_iCommandRange, L"iCommandRange");
 	pXML->GetOptionalChildXmlValByName(&m_bZoneOfControl, L"bZoneOfControl");
 
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"IgnoreTerrainDamage");
-	m_iIgnoreTerrainDamage = pXML->GetInfoClass(szTextVal);
 
 	m_PropertyManipulators.read(pXML);
 
@@ -3420,51 +2525,17 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 	//integers
 	pXML->GetOptionalChildXmlValByName(&m_iAttackCombatModifierChange, L"iAttackCombatModifierChange");
 	pXML->GetOptionalChildXmlValByName(&m_iDefenseCombatModifierChange, L"iDefenseCombatModifierChange");
-	pXML->GetOptionalChildXmlValByName(&m_iPursuitChange, L"iPursuitChange");
-	pXML->GetOptionalChildXmlValByName(&m_iEarlyWithdrawChange, L"iEarlyWithdrawChange");
 	pXML->GetOptionalChildXmlValByName(&m_iVSBarbsChange, L"iVSBarbsChange");
-	pXML->GetOptionalChildXmlValByName(&m_iArmorChange, L"iArmorChange");
-	pXML->GetOptionalChildXmlValByName(&m_iPunctureChange, L"iPunctureChange");
-	pXML->GetOptionalChildXmlValByName(&m_iOverrunChange, L"iOverrunChange");
-	pXML->GetOptionalChildXmlValByName(&m_iRepelChange, L"iRepelChange");
-	pXML->GetOptionalChildXmlValByName(&m_iFortRepelChange, L"iFortRepelChange");
-	pXML->GetOptionalChildXmlValByName(&m_iRepelRetriesChange, L"iRepelRetriesChange");
-	pXML->GetOptionalChildXmlValByName(&m_iUnyieldingChange, L"iUnyieldingChange");
-	pXML->GetOptionalChildXmlValByName(&m_iKnockbackChange, L"iKnockbackChange");
-	pXML->GetOptionalChildXmlValByName(&m_iKnockbackRetriesChange, L"iKnockbackRetriesChange");
-#ifdef BATTLEWORN
-	pXML->GetOptionalChildXmlValByName(&m_iStrAdjperRndChange, L"iStrAdjperRndChange");
-	pXML->GetOptionalChildXmlValByName(&m_iStrAdjperAttChange, L"iStrAdjperAttChange");
-	pXML->GetOptionalChildXmlValByName(&m_iStrAdjperDefChange, L"iStrAdjperDefChange");
-	pXML->GetOptionalChildXmlValByName(&m_iWithdrawAdjperAttChange, L"iWithdrawAdjperAttChange");
-#endif // BATTLEWORN
 	pXML->GetOptionalChildXmlValByName(&m_iUnnerveChange, L"iUnnerveChange");
 	pXML->GetOptionalChildXmlValByName(&m_iEncloseChange, L"iEncloseChange");
 	pXML->GetOptionalChildXmlValByName(&m_iLungeChange, L"iLungeChange");
 	pXML->GetOptionalChildXmlValByName(&m_iDynamicDefenseChange, L"iDynamicDefenseChange");
 	pXML->GetOptionalChildXmlValByName(&m_iStrengthChange, L"iStrengthChange");
 	pXML->GetOptionalChildXmlValByName(&m_iLinePriority, L"iLinePriority");
-	pXML->GetOptionalChildXmlValByName(&m_iFortitudeChange, L"iFortitudeChange");
 	pXML->GetOptionalChildXmlValByName(&m_iDamageperTurn, L"iDamageperTurn");
 	pXML->GetOptionalChildXmlValByName(&m_iStrAdjperTurn, L"iStrAdjperTurn");
 	pXML->GetOptionalChildXmlValByName(&m_iWeakenperTurn, L"iWeakenperTurn");
-#ifdef STRENGTH_IN_NUMBERS
-	pXML->GetOptionalChildXmlValByName(&m_iFrontSupportPercentChange, L"iFrontSupportPercentChange");
-	pXML->GetOptionalChildXmlValByName(&m_iShortRangeSupportPercentChange, L"iShortRangeSupportPercentChange");
-	pXML->GetOptionalChildXmlValByName(&m_iMediumRangeSupportPercentChange, L"iMediumRangeSupportPercentChange");
-	pXML->GetOptionalChildXmlValByName(&m_iLongRangeSupportPercentChange, L"iLongRangeSupportPercentChange");
-	pXML->GetOptionalChildXmlValByName(&m_iFlankSupportPercentChange, L"iFlankSupportPercentChange");
-#endif
-	pXML->GetOptionalChildXmlValByName(&m_iDodgeModifierChange, L"iDodgeModifierChange");
-	pXML->GetOptionalChildXmlValByName(&m_iPrecisionModifierChange, L"iPrecisionModifierChange");
-	pXML->GetOptionalChildXmlValByName(&m_iPowerShotsChange, L"iPowerShotsChange");
-	pXML->GetOptionalChildXmlValByName(&m_iPowerShotCombatModifierChange, L"iPowerShotCombatModifierChange");
-	pXML->GetOptionalChildXmlValByName(&m_iPowerShotPunctureModifierChange, L"iPowerShotPunctureModifierChange");
-	pXML->GetOptionalChildXmlValByName(&m_iPowerShotPrecisionModifierChange, L"iPowerShotPrecisionModifierChange");
-	pXML->GetOptionalChildXmlValByName(&m_iPowerShotCriticalModifierChange, L"iPowerShotCriticalModifierChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCriticalModifierChange, L"iCriticalModifierChange");
 	pXML->GetOptionalChildXmlValByName(&m_iEnduranceChange, L"iEnduranceChange");
-	pXML->GetOptionalChildXmlValByName(&m_iRoundStunProbChange, L"iRoundStunProbChange");
 	pXML->GetOptionalChildXmlValByName(&m_iPoisonProbabilityModifierChange, L"iPoisonProbabilityModifierChange");
 
 	pXML->GetOptionalChildXmlValByName(&m_iCaptureProbabilityModifierChange, L"iCaptureProbabilityModifierChange");
@@ -3520,16 +2591,7 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_bStampedeChange, L"bStampedeChange");
 	pXML->GetOptionalChildXmlValByName(&m_bRemoveStampede, L"bRemoveStampede");
 	pXML->GetOptionalChildXmlValByName(&m_bOnslaughtChange, L"bOnslaughtChange");
-	pXML->GetOptionalChildXmlValByName(&m_bEquipment, L"bEquipment");
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	pXML->GetOptionalChildXmlValByName(&m_bAffliction, L"bAffliction");
-#endif
 	pXML->GetOptionalChildXmlValByName(&m_bParalyze, L"bParalyze");
-	pXML->GetOptionalChildXmlValByName(&m_bMakesDamageCold, L"bMakesDamageCold");
-	pXML->GetOptionalChildXmlValByName(&m_bMakesDamageNotCold, L"bMakesDamageNotCold");
-	pXML->GetOptionalChildXmlValByName(&m_bAddsColdImmunity, L"bAddsColdImmunity");
-	pXML->GetOptionalChildXmlValByName(&m_bRemovesColdImmunity, L"bRemovesColdImmunity");
-	pXML->GetOptionalChildXmlValByName(&m_bCritical, L"bCritical");
 	pXML->GetOptionalChildXmlValByName(&m_bAttackOnlyCitiesAdd, L"bAttackOnlyCitiesAdd");
 	pXML->GetOptionalChildXmlValByName(&m_bAttackOnlyCitiesSubtract, L"bAttackOnlyCitiesSubtract");
 	pXML->GetOptionalChildXmlValByName(&m_bIgnoreNoEntryLevelAdd, L"bIgnoreNoEntryLevelAdd");
@@ -3559,11 +2621,7 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 	pXML->SetOptionalVector(&m_aiFreetoUnitCombats, L"FreetoUnitCombats");
 	pXML->SetOptionalVector(&m_aiNotOnUnitCombatTypes, L"NotOnUnitCombatTypes");
 	pXML->SetOptionalVector(&m_aiNotOnDomainTypes, L"NotOnDomainTypes");
-	pXML->SetOptionalVector(&m_aiNoAutoEquiptoCombatClassTypes, L"NoAutoEquiptoCombatClassTypes");
 	pXML->SetOptionalVector(&m_aeMapCategoryTypes, L"MapCategoryTypes");
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	pXML->SetOptionalVector(&m_aiCureAfflictionChangeTypes, L"CureAfflictionChangeTypes");
-#endif // OUTBREAKS_AND_AFFLICTIONS
 	pXML->SetOptionalVector(&m_aiPrereqBonusTypes, L"PrereqBonusTypes");
 	pXML->SetOptionalVectorWithDelayedResolution(m_aiAddsBuildTypes, L"AddsBuildTypes");
 	pXML->SetOptionalVector(&m_aiNegatesInvisibilityTypes, L"NegatesInvisibilityTypes");
@@ -3580,39 +2638,12 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 	// int vector utilizing pairing without delayed resolution
 	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aFlankingStrengthbyUnitCombatTypeChange, L"FlankingStrikesbyUnitCombatChange");
 
-	pXML->SetOptionalPairVector<TerrainModifierArray, TerrainTypes, int>(&m_aWithdrawOnTerrainTypesChange, L"WithdrawModifierOnTerrainTypeChanges");
-
-	pXML->SetOptionalPairVector<FeatureModifierArray, FeatureTypes, int>(&m_aWithdrawOnFeatureTypesChange, L"WithdrawModifierOnFeatureTypeChanges");
-
-	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aWithdrawVSUnitCombatChangeTypes, L"WithdrawVSUnitCombatChangeTypes");
-
-	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aPursuitVSUnitCombatChangeTypes, L"PursuitVSUnitCombatChangeTypes");
-
-	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aRepelVSUnitCombatChangeTypes, L"RepelVSUnitCombatChangeTypes");
-
-	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aKnockbackVSUnitCombatChangeTypes, L"KnockbackVSUnitCombatChangeTypes");
-
-	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aPunctureVSUnitCombatChangeTypes, L"PunctureVSUnitCombatChangeTypes");
-
-	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aArmorVSUnitCombatChangeTypes, L"ArmorVSUnitCombatChangeTypes");
-
-	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aDodgeVSUnitCombatChangeTypes, L"DodgeVSUnitCombatChangeTypes");
-
-	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aPrecisionVSUnitCombatChangeTypes, L"PrecisionVSUnitCombatChangeTypes");
-
-	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aCriticalVSUnitCombatChangeTypes, L"CriticalVSUnitCombatChangeTypes");
-
-	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aRoundStunVSUnitCombatChangeTypes, L"RoundStunVSUnitCombatChangeTypes");
-
 	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aTrapDisableUnitCombatTypes, L"TrapDisableUnitCombatTypes");
 
 	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aTrapAvoidanceUnitCombatTypes, L"TrapAvoidanceUnitCombatTypes");
 
 	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aTrapTriggerUnitCombatTypes, L"TrapTriggerUnitCombatTypes");
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	pXML->SetOptionalPairVector<AidArray, PropertyTypes, int>(&m_aAidChanges, L"AidChanges");
-#endif
 	//pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(m_aAIWeightbyUnitCombatTypes, L"AIWeightbyUnitCombatTypes");
 
 	pXML->SetOptionalPairVector<BuildModifierArray, BuildTypes, int>(&m_aBuildWorkRateModifierChangeTypes, L"BuildWorkRateModifierChangeTypes");
@@ -3646,54 +2677,6 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if(pXML->TryMoveToXmlFirstChild(L"AfflictionFortitudeChangeModifiers"))
-	{
-		int i = 0;
-		const int iNum = pXML->GetXmlChildrenNumber(L"AfflictionFortitudeChangeModifier" );
-		m_aAfflictionFortitudeChangeModifiers.resize(iNum);
-		if(pXML->TryMoveToXmlFirstChild())
-		{
-			if (pXML->TryMoveToXmlFirstOfSiblings(L"AfflictionFortitudeChangeModifier"))
-			{
-				do
-				{
-					pXML->GetChildXmlValByName(szTextVal, L"PromotionLineType");
-					m_aAfflictionFortitudeChangeModifiers[i].ePromotionLine = (PromotionLineTypes)pXML->GetInfoClass(szTextVal);
-					pXML->GetChildXmlValByName(&(m_aAfflictionFortitudeChangeModifiers[i].iModifier), L"iModifier");
-					i++;
-				} while(pXML->TryMoveToXmlNextSibling(L"AfflictionFortitudeChangeModifier"));
-			}
-			pXML->MoveToXmlParent();
-		}
-		pXML->MoveToXmlParent();
-	}
-
-	if(pXML->TryMoveToXmlFirstChild(L"AfflictOnAttackChangeTypes"))
-	{
-		int i = 0;
-		const int iNum = pXML->GetXmlChildrenNumber(L"AfflictOnAttackChangeType" );
-		m_aAfflictOnAttackChangeTypes.resize(iNum);
-		if(pXML->TryMoveToXmlFirstChild())
-		{
-			if (pXML->TryMoveToXmlFirstOfSiblings(L"AfflictOnAttackChangeType"))
-			{
-				do
-				{
-					pXML->GetChildXmlValByName(szTextVal, L"PromotionLineType");
-					m_aAfflictOnAttackChangeTypes[i].eAfflictionLine = (PromotionLineTypes)pXML->GetInfoClass(szTextVal);
-					pXML->GetChildXmlValByName(&(m_aAfflictOnAttackChangeTypes[i].iProbabilityChange), L"iProbability");
-					pXML->GetChildXmlValByName(&(m_aAfflictOnAttackChangeTypes[i].iMelee), L"iMelee");
-					pXML->GetChildXmlValByName(&(m_aAfflictOnAttackChangeTypes[i].iDistance), L"iDistance");
-					pXML->GetChildXmlValByName(&(m_aAfflictOnAttackChangeTypes[i].iImmediate), L"iImmediate");
-					i++;
-				} while(pXML->TryMoveToXmlNextSibling(L"AfflictOnAttackChangeType"));
-			}
-			pXML->MoveToXmlParent();
-		}
-		pXML->MoveToXmlParent();
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	if(pXML->TryMoveToXmlFirstChild(L"HealUnitCombatChangeTypes"))
 	{
@@ -3934,28 +2917,7 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	if(pXML->TryMoveToXmlFirstChild(L"DistanceAttackCommunicabilityTypeChanges"))
-	{
-		int i = 0;
-		const int iNum = pXML->GetXmlChildrenNumber(L"DistanceAttackCommunicabilityTypeChange" );
-		m_aDistanceAttackCommunicabilityTypeChanges.resize(iNum);
-		if(pXML->TryMoveToXmlFirstChild())
-		{
-			if (pXML->TryMoveToXmlFirstOfSiblings(L"DistanceAttackCommunicabilityTypeChange"))
-			{
-				do
-				{
-					pXML->GetChildXmlValByName(szTextVal, L"PromotionLineType");
-					m_aDistanceAttackCommunicabilityTypeChanges[i].eAfflictionLine = (PromotionLineTypes)pXML->GetInfoClass(szTextVal);
-					pXML->GetChildXmlValByName(&(m_aDistanceAttackCommunicabilityTypeChanges[i].iChange), L"iChange");
-					i++;
-				} while(pXML->TryMoveToXmlNextSibling(L"DistanceAttackCommunicabilityTypeChange"));
-			}
-			pXML->MoveToXmlParent();
-		}
-		pXML->MoveToXmlParent();
-	}
-		//TB Combat Mod End
+	//TB Combat Mod End
 	//pXML->SetOptionalVectorWithDelayedResolution(PromotionOverwrites, L"PromotionOverwrites");
 
 	return true;
@@ -4198,51 +3160,17 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 	//integers
 	if (getAttackCombatModifierChange() == iDefault) m_iAttackCombatModifierChange = pClassInfo->getAttackCombatModifierChange();
 	if (getDefenseCombatModifierChange() == iDefault) m_iDefenseCombatModifierChange = pClassInfo->getDefenseCombatModifierChange();
-	if (m_iPursuitChange == iDefault) m_iPursuitChange = pClassInfo->m_iPursuitChange;
-	if (m_iEarlyWithdrawChange == iDefault) m_iEarlyWithdrawChange = pClassInfo->m_iEarlyWithdrawChange;
 	if (getVSBarbsChange() == iDefault) m_iVSBarbsChange = pClassInfo->getVSBarbsChange();
-	if (getArmorChange() == iDefault) m_iArmorChange = pClassInfo->getArmorChange();
-	if (getPunctureChange() == iDefault) m_iPunctureChange = pClassInfo->getPunctureChange();
-	if (m_iOverrunChange == iDefault) m_iOverrunChange = pClassInfo->m_iOverrunChange;
-	if (m_iRepelChange == iDefault) m_iRepelChange = pClassInfo->m_iRepelChange;
-	if (m_iFortRepelChange == iDefault) m_iFortRepelChange = pClassInfo->m_iFortRepelChange;
-	if (m_iRepelRetriesChange == iDefault) m_iRepelRetriesChange = pClassInfo->m_iRepelRetriesChange;
-	if (m_iUnyieldingChange == iDefault) m_iUnyieldingChange = pClassInfo->m_iUnyieldingChange;
-	if (m_iKnockbackChange == iDefault) m_iKnockbackChange = pClassInfo->m_iKnockbackChange;
-	if (m_iKnockbackRetriesChange == iDefault) m_iKnockbackRetriesChange = pClassInfo->m_iKnockbackRetriesChange;
-#ifdef BATTLEWORN
-	if (m_iStrAdjperRndChange == iDefault) m_iStrAdjperRndChange = pClassInfo->m_iStrAdjperRndChange;
-	if (m_iStrAdjperAttChange == iDefault) m_iStrAdjperAttChange = pClassInfo->m_iStrAdjperAttChange;
-	if (m_iStrAdjperDefChange == iDefault) m_iStrAdjperDefChange = pClassInfo->m_iStrAdjperDefChange;
-	if (m_iWithdrawAdjperAttChange == iDefault) m_iWithdrawAdjperAttChange = pClassInfo->m_iWithdrawAdjperAttChange;
-#endif // BATTLEWORN
 	if (m_iUnnerveChange == iDefault) m_iUnnerveChange = pClassInfo->m_iUnnerveChange;
 	if (m_iEncloseChange == iDefault) m_iEncloseChange = pClassInfo->m_iEncloseChange;
 	if (m_iLungeChange == iDefault) m_iLungeChange = pClassInfo->m_iLungeChange;
 	if (m_iDynamicDefenseChange == iDefault) m_iDynamicDefenseChange = pClassInfo->m_iDynamicDefenseChange;
 	if (getStrengthChange() == iDefault) m_iStrengthChange = pClassInfo->getStrengthChange();
 	if (getLinePriority() == iDefault) m_iLinePriority = pClassInfo->getLinePriority();
-	if (getFortitudeChange() == iDefault) m_iFortitudeChange = pClassInfo->getFortitudeChange();
 	if (getDamageperTurn() == iDefault) m_iDamageperTurn = pClassInfo->getDamageperTurn();
 	if (getStrAdjperTurn() == iDefault) m_iStrAdjperTurn = pClassInfo->getStrAdjperTurn();
 	if (getWeakenperTurn() == iDefault) m_iWeakenperTurn = pClassInfo->getWeakenperTurn();
-#ifdef STRENGTH_IN_NUMBERS
-	if (m_iFrontSupportPercentChange == iDefault) m_iFrontSupportPercentChange = pClassInfo->m_iFrontSupportPercentChange;
-	if (m_iShortRangeSupportPercentChange == iDefault) m_iShortRangeSupportPercentChange = pClassInfo->m_iShortRangeSupportPercentChange;
-	if (m_iMediumRangeSupportPercentChange == iDefault) m_iMediumRangeSupportPercentChange = pClassInfo->m_iMediumRangeSupportPercentChange;
-	if (m_iLongRangeSupportPercentChange == iDefault) m_iLongRangeSupportPercentChange = pClassInfo->m_iLongRangeSupportPercentChange;
-	if (m_iFlankSupportPercentChange == iDefault) m_iFlankSupportPercentChange = pClassInfo->m_iFlankSupportPercentChange;
-#endif
-	if (getDodgeModifierChange() == iDefault) m_iDodgeModifierChange = pClassInfo->getDodgeModifierChange();
-	if (getPrecisionModifierChange() == iDefault) m_iPrecisionModifierChange = pClassInfo->getPrecisionModifierChange();
-	if (getPowerShotsChange() == iDefault) m_iPowerShotsChange = pClassInfo->getPowerShotsChange();
-	if (getPowerShotCombatModifierChange() == iDefault) m_iPowerShotCombatModifierChange = pClassInfo->getPowerShotCombatModifierChange();
-	if (getPowerShotPunctureModifierChange() == iDefault) m_iPowerShotPunctureModifierChange = pClassInfo->getPowerShotPunctureModifierChange();
-	if (getPowerShotPrecisionModifierChange() == iDefault) m_iPowerShotPrecisionModifierChange = pClassInfo->getPowerShotPrecisionModifierChange();
-	if (getPowerShotCriticalModifierChange() == iDefault) m_iPowerShotCriticalModifierChange = pClassInfo->getPowerShotCriticalModifierChange();
-	if (getCriticalModifierChange() == iDefault) m_iCriticalModifierChange = pClassInfo->getCriticalModifierChange();
 	if (getEnduranceChange() == iDefault) m_iEnduranceChange = pClassInfo->getEnduranceChange();
-	if (getRoundStunProbChange() == iDefault) m_iRoundStunProbChange = pClassInfo->getRoundStunProbChange();
 	if (getPoisonProbabilityModifierChange() == iDefault) m_iPoisonProbabilityModifierChange = pClassInfo->getPoisonProbabilityModifierChange();
 
 	if (getCaptureProbabilityModifierChange() == iDefault) m_iCaptureProbabilityModifierChange = pClassInfo->getCaptureProbabilityModifierChange();
@@ -4300,16 +3228,7 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 	if (isStampedeChange() == bDefault) m_bStampedeChange = pClassInfo->isStampedeChange();
 	if (isRemoveStampede() == bDefault) m_bRemoveStampede = pClassInfo->isRemoveStampede();
 	if (isOnslaughtChange() == bDefault) m_bOnslaughtChange = pClassInfo->isOnslaughtChange();
-	if (isEquipment() == bDefault) m_bEquipment = pClassInfo->isEquipment();
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if (isAffliction() == bDefault) m_bAffliction = pClassInfo->isAffliction();
-#endif
 	if (isParalyze() == bDefault) m_bParalyze = pClassInfo->isParalyze();
-	if (isMakesDamageCold() == bDefault) m_bMakesDamageCold = pClassInfo->isMakesDamageCold();
-	if (isMakesDamageNotCold() == bDefault) m_bMakesDamageNotCold = pClassInfo->isMakesDamageNotCold();
-	if (isAddsColdImmunity() == bDefault) m_bAddsColdImmunity = pClassInfo->isAddsColdImmunity();
-	if (isRemovesColdImmunity() == bDefault) m_bRemovesColdImmunity = pClassInfo->isRemovesColdImmunity();
-	if (isCritical() == bDefault) m_bCritical = pClassInfo->isCritical();
 	if (isAttackOnlyCitiesAdd() == bDefault) m_bAttackOnlyCitiesAdd = pClassInfo->isAttackOnlyCitiesAdd();
 	if (isAttackOnlyCitiesSubtract() == bDefault) m_bAttackOnlyCitiesSubtract = pClassInfo->isAttackOnlyCitiesSubtract();
 	if (isIgnoreNoEntryLevelAdd() == bDefault) m_bIgnoreNoEntryLevelAdd = pClassInfo->isIgnoreNoEntryLevelAdd();
@@ -4395,19 +3314,8 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 		}
 	}
 
-	if (getNumNoAutoEquiptoCombatClassTypes() == 0)
-	{
-		m_aiNoAutoEquiptoCombatClassTypes.clear();
-		for ( int i = 0; i < pClassInfo->getNumNoAutoEquiptoCombatClassTypes(); i++)
-		{
-			m_aiNoAutoEquiptoCombatClassTypes.push_back(pClassInfo->getNoAutoEquiptoCombatClassType(i));
-		}
-	}
 
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeMapCategoryTypes, pClassInfo->getMapCategories());
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCureAfflictionChangeTypes, pClassInfo->m_aiCureAfflictionChangeTypes);
-#endif // OUTBREAKS_AND_AFFLICTIONS
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiPrereqBonusTypes, pClassInfo->m_aiPrereqBonusTypes);
 
 	if (getNumAddsBuildTypes() == 0)
@@ -4468,17 +3376,6 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if (getNumAidChanges()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumAidChanges(); i++)
-		{
-			PropertyTypes eProperty = ((PropertyTypes)i);
-			int iChange = pClassInfo->getAidChange(i);
-			m_aAidChanges.push_back(std::make_pair(eProperty, iChange));
-		}
-	}
-#endif
 	if (getNumTargetUnitCombatTypes() == 0)
 	{
 		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiTargetUnitCombatTypes, pClassInfo->m_aiTargetUnitCombatTypes);
@@ -4492,126 +3389,6 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 			UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
 			int iChange = pClassInfo->getFlankingStrengthbyUnitCombatTypeChange(i);
 			m_aFlankingStrengthbyUnitCombatTypeChange.push_back(std::make_pair(eUnitCombat, iChange));
-		}
-	}
-
-	if (getNumWithdrawOnTerrainTypeChanges()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumWithdrawOnTerrainTypeChanges(); i++)
-		{
-			TerrainTypes eTerrain = ((TerrainTypes)i);
-			int iChange = pClassInfo->getWithdrawOnTerrainTypeChange(i);
-			m_aWithdrawOnTerrainTypesChange.push_back(std::make_pair(eTerrain, iChange));
-		}
-	}
-
-	if (getNumWithdrawOnFeatureTypeChanges()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumWithdrawOnFeatureTypeChanges(); i++)
-		{
-			FeatureTypes eFeature = ((FeatureTypes)i);
-			int iChange = pClassInfo->getWithdrawOnFeatureTypeChange(i);
-			m_aWithdrawOnFeatureTypesChange.push_back(std::make_pair(eFeature, iChange));
-		}
-	}
-
-	if (getNumWithdrawVSUnitCombatChangeTypes()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumWithdrawVSUnitCombatChangeTypes(); i++)
-		{
-			UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
-			int iChange = pClassInfo->getWithdrawVSUnitCombatChangeType(i);
-			m_aWithdrawVSUnitCombatChangeTypes.push_back(std::make_pair(eUnitCombat, iChange));
-		}
-	}
-
-	if (getNumPursuitVSUnitCombatChangeTypes()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumPursuitVSUnitCombatChangeTypes(); i++)
-		{
-			UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
-			int iChange = pClassInfo->getPursuitVSUnitCombatChangeType(i, true);
-			m_aPursuitVSUnitCombatChangeTypes.push_back(std::make_pair(eUnitCombat, iChange));
-		}
-	}
-
-	if (getNumRepelVSUnitCombatChangeTypes()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumRepelVSUnitCombatChangeTypes(); i++)
-		{
-			UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
-			int iChange = pClassInfo->getRepelVSUnitCombatChangeType(i, true);
-			m_aRepelVSUnitCombatChangeTypes.push_back(std::make_pair(eUnitCombat, iChange));
-		}
-	}
-
-	if (getNumKnockbackVSUnitCombatChangeTypes()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumKnockbackVSUnitCombatChangeTypes(); i++)
-		{
-			UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
-			int iChange = pClassInfo->getKnockbackVSUnitCombatChangeType(i, true);
-			m_aKnockbackVSUnitCombatChangeTypes.push_back(std::make_pair(eUnitCombat, iChange));
-		}
-	}
-
-	if (getNumPunctureVSUnitCombatChangeTypes()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumPunctureVSUnitCombatChangeTypes(); i++)
-		{
-			UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
-			int iChange = pClassInfo->getPunctureVSUnitCombatChangeType(i);
-			m_aPunctureVSUnitCombatChangeTypes.push_back(std::make_pair(eUnitCombat, iChange));
-		}
-	}
-
-	if (getNumArmorVSUnitCombatChangeTypes()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumArmorVSUnitCombatChangeTypes(); i++)
-		{
-			UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
-			int iChange = pClassInfo->getArmorVSUnitCombatChangeType(i);
-			m_aArmorVSUnitCombatChangeTypes.push_back(std::make_pair(eUnitCombat, iChange));
-		}
-	}
-
-	if (getNumDodgeVSUnitCombatChangeTypes()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumDodgeVSUnitCombatChangeTypes(); i++)
-		{
-			UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
-			int iChange = pClassInfo->getDodgeVSUnitCombatChangeType(i);
-			m_aDodgeVSUnitCombatChangeTypes.push_back(std::make_pair(eUnitCombat, iChange));
-		}
-	}
-
-	if (getNumPrecisionVSUnitCombatChangeTypes()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumPrecisionVSUnitCombatChangeTypes(); i++)
-		{
-			UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
-			int iChange = pClassInfo->getPrecisionVSUnitCombatChangeType(i);
-			m_aPrecisionVSUnitCombatChangeTypes.push_back(std::make_pair(eUnitCombat, iChange));
-		}
-	}
-
-	if (getNumCriticalVSUnitCombatChangeTypes()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumCriticalVSUnitCombatChangeTypes(); i++)
-		{
-			UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
-			int iChange = pClassInfo->getCriticalVSUnitCombatChangeType(i);
-			m_aCriticalVSUnitCombatChangeTypes.push_back(std::make_pair(eUnitCombat, iChange));
-		}
-	}
-
-	if (getNumRoundStunVSUnitCombatChangeTypes()==0)
-	{
-		for (int i=0; i < pClassInfo->getNumRoundStunVSUnitCombatChangeTypes(); i++)
-		{
-			UnitCombatTypes eUnitCombat = ((UnitCombatTypes)i);
-			int iChange = pClassInfo->getRoundStunVSUnitCombatChangeType(i);
-			m_aRoundStunVSUnitCombatChangeTypes.push_back(std::make_pair(eUnitCombat, iChange));
 		}
 	}
 
@@ -4691,17 +3468,6 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aAIWeightbyUnitCombatTypes, pClassInfo->m_aAIWeightbyUnitCombatTypes);
 	}
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if (getNumAfflictionFortitudeChangeModifiers() == 0)
-	{
-		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aAfflictionFortitudeChangeModifiers, pClassInfo->m_aAfflictionFortitudeChangeModifiers);
-	}
-
-	if (getNumAfflictOnAttackChangeTypes() == 0)
-	{
-		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aAfflictOnAttackChangeTypes, pClassInfo->m_aAfflictOnAttackChangeTypes);
-	}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 	if (getNumHealUnitCombatChangeTypes() == 0)
 	{
 		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aHealUnitCombatChangeTypes, pClassInfo->m_aHealUnitCombatChangeTypes);
@@ -4752,10 +3518,6 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aVisibleImprovementRangeChanges, pClassInfo->m_aVisibleImprovementRangeChanges);
 	}
 
-	if (getNumDistanceAttackCommunicabilityTypeChanges() == 0)
-	{
-		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aDistanceAttackCommunicabilityTypeChanges, pClassInfo->m_aDistanceAttackCommunicabilityTypeChanges);
-	}
 	//TB Combat Mods End  TB SubCombat Mods end
 
 	if (isCanMovePeaks() == bDefault) m_bCanMovePeaks = pClassInfo->isCanMovePeaks();
@@ -4767,7 +3529,6 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 	if (getControlPoints() == iDefault) m_iControlPoints = pClassInfo->getControlPoints();
 	if (getCommandRange() == iDefault) m_iCommandRange = pClassInfo->getCommandRange();
 	if (isZoneOfControl() == bDefault) m_bZoneOfControl = pClassInfo->isZoneOfControl();
-	if (getIgnoreTerrainDamage() == NO_TERRAIN) m_iIgnoreTerrainDamage = pClassInfo->getIgnoreTerrainDamage();
 
 	//GC.copyNonDefaultDelayedResolutionVector(m_vPromotionOverwrites, pClassInfo->getPromotionOverwrites());
 
@@ -4848,7 +3609,6 @@ void CvPromotionInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_iObsoleteTech);
 	CheckSum(iSum, m_iControlPoints);
 	CheckSum(iSum, m_iCommandRange);
-	CheckSum(iSum, m_iIgnoreTerrainDamage);
 	CheckSum(iSum, m_bZoneOfControl);
 	m_PropertyManipulators.getCheckSum(iSum);
 	CheckSum(iSum, m_bDefensiveVictoryMove);
@@ -4884,51 +3644,17 @@ void CvPromotionInfo::getCheckSum(uint32_t& iSum) const
 	//integers
 	CheckSum(iSum, m_iAttackCombatModifierChange);
 	CheckSum(iSum, m_iDefenseCombatModifierChange);
-	CheckSum(iSum, m_iPursuitChange);
-	CheckSum(iSum, m_iEarlyWithdrawChange);
 	CheckSum(iSum, m_iVSBarbsChange);
-	CheckSum(iSum, m_iArmorChange);
-	CheckSum(iSum, m_iPunctureChange);
-	CheckSum(iSum, m_iOverrunChange);
-	CheckSum(iSum, m_iRepelChange);
-	CheckSum(iSum, m_iFortRepelChange);
-	CheckSum(iSum, m_iRepelRetriesChange);
-	CheckSum(iSum, m_iUnyieldingChange);
-	CheckSum(iSum, m_iKnockbackChange);
-	CheckSum(iSum, m_iKnockbackRetriesChange);
-#ifdef BATTLEWORN
-	CheckSum(iSum, m_iStrAdjperRndChange);
-	CheckSum(iSum, m_iStrAdjperAttChange);
-	CheckSum(iSum, m_iStrAdjperDefChange);
-	CheckSum(iSum, m_iWithdrawAdjperAttChange);
-#endif // BATTLEWORN
 	CheckSum(iSum, m_iUnnerveChange);
 	CheckSum(iSum, m_iEncloseChange);
 	CheckSum(iSum, m_iLungeChange);
 	CheckSum(iSum, m_iDynamicDefenseChange);
 	CheckSum(iSum, m_iStrengthChange);
 	CheckSum(iSum, m_iLinePriority);
-	CheckSum(iSum, m_iFortitudeChange);
 	CheckSum(iSum, m_iDamageperTurn);
 	CheckSum(iSum, m_iStrAdjperTurn);
 	CheckSum(iSum, m_iWeakenperTurn);
-#ifdef STRENGTH_IN_NUMBERS
-	CheckSum(iSum, m_iFrontSupportPercentChange);
-	CheckSum(iSum, m_iShortRangeSupportPercentChange);
-	CheckSum(iSum, m_iMediumRangeSupportPercentChange);
-	CheckSum(iSum, m_iLongRangeSupportPercentChange);
-	CheckSum(iSum, m_iFlankSupportPercentChange);
-#endif
-	CheckSum(iSum, m_iDodgeModifierChange);
-	CheckSum(iSum, m_iPrecisionModifierChange);
-	CheckSum(iSum, m_iPowerShotsChange);
-	CheckSum(iSum, m_iPowerShotCombatModifierChange);
-	CheckSum(iSum, m_iPowerShotPunctureModifierChange);
-	CheckSum(iSum, m_iPowerShotPrecisionModifierChange);
-	CheckSum(iSum, m_iPowerShotCriticalModifierChange);
-	CheckSum(iSum, m_iCriticalModifierChange);
 	CheckSum(iSum, m_iEnduranceChange);
-	CheckSum(iSum, m_iRoundStunProbChange);
 	CheckSum(iSum, m_iPoisonProbabilityModifierChange);
 
 	CheckSum(iSum, m_iCaptureProbabilityModifierChange);
@@ -4986,16 +3712,7 @@ void CvPromotionInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_bStampedeChange);
 	CheckSum(iSum, m_bRemoveStampede);
 	CheckSum(iSum, m_bOnslaughtChange);
-	CheckSum(iSum, m_bEquipment);
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	CheckSum(iSum, m_bAffliction);
-#endif
 	CheckSum(iSum, m_bParalyze);
-	CheckSum(iSum, m_bMakesDamageCold);
-	CheckSum(iSum, m_bMakesDamageNotCold);
-	CheckSum(iSum, m_bAddsColdImmunity);
-	CheckSum(iSum, m_bRemovesColdImmunity);
-	CheckSum(iSum, m_bCritical);
 	CheckSum(iSum, m_bAttackOnlyCitiesAdd);
 	CheckSum(iSum, m_bAttackOnlyCitiesSubtract);
 	CheckSum(iSum, m_bIgnoreNoEntryLevelAdd);
@@ -5027,11 +3744,7 @@ void CvPromotionInfo::getCheckSum(uint32_t& iSum) const
 	CheckSumC(iSum, m_aiFreetoUnitCombats);
 	CheckSumC(iSum, m_aiNotOnUnitCombatTypes);
 	CheckSumC(iSum, m_aiNotOnDomainTypes);
-	CheckSumC(iSum, m_aiNoAutoEquiptoCombatClassTypes);
 	CheckSumC(iSum, m_aeMapCategoryTypes);
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	CheckSumC(iSum, m_aiCureAfflictionChangeTypes);
-#endif // OUTBREAKS_AND_AFFLICTIONS
 	CheckSumC(iSum, m_aiPrereqBonusTypes);
 	CheckSumC(iSum, m_aiAddsBuildTypes);
 	CheckSumC(iSum, m_aiNegatesInvisibilityTypes);
@@ -5046,24 +3759,9 @@ void CvPromotionInfo::getCheckSum(uint32_t& iSum) const
 	CheckSumC(iSum, m_aiCategories);
 	// int vectors utilizing pairing without delayed resolution
 	CheckSumC(iSum, m_aFlankingStrengthbyUnitCombatTypeChange);
-	CheckSumC(iSum, m_aWithdrawOnTerrainTypesChange);
-	CheckSumC(iSum, m_aWithdrawOnFeatureTypesChange);
-	CheckSumC(iSum, m_aWithdrawVSUnitCombatChangeTypes);
-	CheckSumC(iSum, m_aPursuitVSUnitCombatChangeTypes);
-	CheckSumC(iSum, m_aRepelVSUnitCombatChangeTypes);
-	CheckSumC(iSum, m_aKnockbackVSUnitCombatChangeTypes);
-	CheckSumC(iSum, m_aPunctureVSUnitCombatChangeTypes);
-	CheckSumC(iSum, m_aArmorVSUnitCombatChangeTypes);
-	CheckSumC(iSum, m_aDodgeVSUnitCombatChangeTypes);
-	CheckSumC(iSum, m_aPrecisionVSUnitCombatChangeTypes);
-	CheckSumC(iSum, m_aCriticalVSUnitCombatChangeTypes);
-	CheckSumC(iSum, m_aRoundStunVSUnitCombatChangeTypes);
 	CheckSumC(iSum, m_aTrapDisableUnitCombatTypes);
 	CheckSumC(iSum, m_aTrapAvoidanceUnitCombatTypes);
 	CheckSumC(iSum, m_aTrapTriggerUnitCombatTypes);
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	CheckSumC(iSum, m_aAidChanges);
-#endif
 //Team Project (4)
 		//WorkRateMod
 	CheckSumC(iSum, m_aBuildWorkRateModifierChangeTypes);
@@ -5080,24 +3778,6 @@ void CvPromotionInfo::getCheckSum(uint32_t& iSum) const
 		CheckSum(iSum, m_aAIWeightbyUnitCombatTypes[i].iModifier);
 	}
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	iNumElements = m_aAfflictionFortitudeChangeModifiers.size();
-	for (int i = 0; i < iNumElements; ++i)
-	{
-		CheckSum(iSum, m_aAfflictionFortitudeChangeModifiers[i].ePromotionLine);
-		CheckSum(iSum, m_aAfflictionFortitudeChangeModifiers[i].iModifier);
-	}
-
-	iNumElements = m_aAfflictOnAttackChangeTypes.size();
-	for (int i = 0; i < iNumElements; ++i)
-	{
-		CheckSum(iSum, m_aAfflictOnAttackChangeTypes[i].eAfflictionLine);
-		CheckSum(iSum, m_aAfflictOnAttackChangeTypes[i].iProbabilityChange);
-		CheckSum(iSum, m_aAfflictOnAttackChangeTypes[i].iMelee);
-		CheckSum(iSum, m_aAfflictOnAttackChangeTypes[i].iDistance);
-		CheckSum(iSum, m_aAfflictOnAttackChangeTypes[i].iImmediate);
-	}
-#endif
 	iNumElements = m_aHealUnitCombatChangeTypes.size();
 	for (int i = 0; i < iNumElements; ++i)
 	{
@@ -5178,12 +3858,6 @@ void CvPromotionInfo::getCheckSum(uint32_t& iSum) const
 		CheckSum(iSum, m_aVisibleImprovementRangeChanges[i].iIntensity);
 	}
 
-	iNumElements = m_aDistanceAttackCommunicabilityTypeChanges.size();
-	for (int i = 0; i < iNumElements; ++i)
-	{
-		CheckSum(iSum, m_aDistanceAttackCommunicabilityTypeChanges[i].eAfflictionLine);
-		CheckSum(iSum, m_aDistanceAttackCommunicabilityTypeChanges[i].iChange);
-	}
 	//TB Combat Mods End  TB SubCombat Mod end
 }
 

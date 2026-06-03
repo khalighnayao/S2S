@@ -53,7 +53,6 @@ m_iDisappearanceProbability(0),
 m_iGrowthProbability(0),
 m_iDefenseModifier(0),
 m_iAdvancedStartRemoveCost(0),
-m_iTurnDamage(0),
 m_iWarmingDefense(0), //GWMod new xml field M.A.
 m_bNoCoast(false),
 m_bNoRiver(false),
@@ -148,12 +147,6 @@ int CvFeatureInfo::getDefenseModifier() const
 int CvFeatureInfo::getAdvancedStartRemoveCost() const
 {
 	return m_iAdvancedStartRemoveCost;
-}
-
-
-int CvFeatureInfo::getTurnDamage() const
-{
-	return m_iTurnDamage;
 }
 
 
@@ -378,12 +371,6 @@ bool CvFeatureInfo::canBeSecondary() const
 	return !(getArtInfo()->isRiverArt() || (getArtInfo()->getTileArtType() != TILE_ART_TYPE_NONE));
 }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-int CvFeatureInfo::getNumAfflictionCommunicabilityTypes() const
-{
-	return (int)m_aAfflictionCommunicabilityTypes.size();
-}
-#endif
 
 int CvFeatureInfo::getCategory(int i) const
 {
@@ -402,22 +389,6 @@ bool CvFeatureInfo::isCategory(int i) const
 	return algo::any_of_equal(m_aiCategories, i);
 }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-PromotionLineAfflictionModifier CvFeatureInfo::getAfflictionCommunicabilityType(int iPromotionLine, bool bWorkedTile, bool bVicinity, bool bAccessVolume)
-{
-	FASSERT_BOUNDS(0, getNumAfflictionCommunicabilityTypes(), iPromotionLine);
-
-	if ((bWorkedTile && !m_aAfflictionCommunicabilityTypes[iPromotionLine].bWorkedTile) ||
-		(bVicinity && !m_aAfflictionCommunicabilityTypes[iPromotionLine].bVicinity) ||
-		(bAccessVolume && !m_aAfflictionCommunicabilityTypes[iPromotionLine].bAccessVolume))
-	{
-		PromotionLineAfflictionModifier kMod = m_aAfflictionCommunicabilityTypes[iPromotionLine];
-		kMod.iModifier = 0;
-		return kMod;
-	}
-	return m_aAfflictionCommunicabilityTypes[iPromotionLine];
-}
-#endif
 
 
 bool CvFeatureInfo::read(CvXMLLoadUtility* pXML)
@@ -453,7 +424,6 @@ bool CvFeatureInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_iHealthPercent, L"iHealthPercent");
 	pXML->GetOptionalChildXmlValByName(&m_iDefenseModifier, L"iDefense");
 	pXML->GetOptionalChildXmlValByName(&m_iAdvancedStartRemoveCost, L"iAdvancedStartRemoveCost");
-	pXML->GetOptionalChildXmlValByName(&m_iTurnDamage, L"iTurnDamage");
 	pXML->GetOptionalChildXmlValByName(&m_iWarmingDefense, L"iWarmingDefense"); //GWMod new xml field M.A.
 	pXML->GetOptionalChildXmlValByName(&m_iAppearanceProbability, L"iAppearance");
 	pXML->GetOptionalChildXmlValByName(&m_iDisappearanceProbability, L"iDisappearance");
@@ -495,33 +465,6 @@ bool CvFeatureInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(m_szGrowthSound, L"GrowthSound");
 	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
 	pXML->SetOptionalVector(&m_aeMapCategoryTypes, L"MapCategoryTypes");
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if(pXML->TryMoveToXmlFirstChild(L"AfflictionCommunicabilityTypes"))
-	{
-		int i = 0;
-		int iNum = pXML->GetXmlChildrenNumber(L"AfflictionCommunicabilityType" );
-		m_aAfflictionCommunicabilityTypes.resize(iNum);
-		if(pXML->TryMoveToXmlFirstChild())
-		{
-
-			if (pXML->TryMoveToXmlFirstOfSiblings(L"AfflictionCommunicabilityType"))
-			{
-				do
-				{
-					pXML->GetChildXmlValByName(szTextVal, L"PromotionLineType");
-					m_aAfflictionCommunicabilityTypes[i].ePromotionLine = (PromotionLineTypes)pXML->GetInfoClass(szTextVal);
-					pXML->GetChildXmlValByName(&(m_aAfflictionCommunicabilityTypes[i].iModifier), L"iCommunicability");
-					pXML->GetChildXmlValByName(&(m_aAfflictionCommunicabilityTypes[i].bWorkedTile), L"bWorkedTile");
-					pXML->GetChildXmlValByName(&(m_aAfflictionCommunicabilityTypes[i].bVicinity), L"bVicinity");
-					pXML->GetChildXmlValByName(&(m_aAfflictionCommunicabilityTypes[i].bAccessVolume), L"bAccessVolume");
-					i++;
-				} while(pXML->TryMoveToXmlNextSibling(L"PromotionLineType"));
-			}
-			pXML->MoveToXmlParent();
-		}
-		pXML->MoveToXmlParent();
-	}
-#endif
 
 	m_PropertyManipulators.read(pXML);
 	return true;
@@ -565,7 +508,6 @@ void CvFeatureInfo::copyNonDefaults(const CvFeatureInfo* pClassInfo)
 	if (getHealthPercent() == iDefault) m_iHealthPercent = pClassInfo->getHealthPercent();
 	if (getDefenseModifier() == iDefault) m_iDefenseModifier = pClassInfo->getDefenseModifier();
 	if (getAdvancedStartRemoveCost() == iDefault) m_iAdvancedStartRemoveCost = pClassInfo->getAdvancedStartRemoveCost();
-	if (getTurnDamage() == iDefault) m_iTurnDamage = pClassInfo->getTurnDamage();
 	if (getAppearanceProbability() == iDefault) m_iAppearanceProbability = pClassInfo->getAppearanceProbability();
 	if (getDisappearanceProbability() == iDefault) m_iDisappearanceProbability = pClassInfo->getDisappearanceProbability();
 	if (getGrowthProbability() == iDefault) m_iGrowthProbability = pClassInfo->getGrowthProbability();
@@ -622,21 +564,6 @@ void CvFeatureInfo::copyNonDefaults(const CvFeatureInfo* pClassInfo)
 
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeMapCategoryTypes, pClassInfo->getMapCategories());
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	if (getNumAfflictionCommunicabilityTypes() == 0)
-	{
-		const int iNum = pClassInfo->getNumAfflictionCommunicabilityTypes();
-		m_aAfflictionCommunicabilityTypes.resize(iNum);
-		for (int i=0; i<iNum; i++)
-		{
-			m_aAfflictionCommunicabilityTypes[i].ePromotionLine = pClassInfo->m_aAfflictionCommunicabilityTypes[i].ePromotionLine;
-			m_aAfflictionCommunicabilityTypes[i].iModifier = pClassInfo->m_aAfflictionCommunicabilityTypes[i].iModifier;
-			m_aAfflictionCommunicabilityTypes[i].bAccessVolume = pClassInfo->m_aAfflictionCommunicabilityTypes[i].bAccessVolume;
-			m_aAfflictionCommunicabilityTypes[i].bVicinity = pClassInfo->m_aAfflictionCommunicabilityTypes[i].bVicinity;
-			m_aAfflictionCommunicabilityTypes[i].bWorkedTile = pClassInfo->m_aAfflictionCommunicabilityTypes[i].bWorkedTile;
-		}
-	}
-#endif
 	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
 }
 
@@ -656,7 +583,6 @@ void CvFeatureInfo::getCheckSum(uint32_t &iSum) const
 	CheckSum(iSum, m_iGrowthProbability);
 	CheckSum(iSum, m_iDefenseModifier);
 	CheckSum(iSum, m_iAdvancedStartRemoveCost);
-	CheckSum(iSum, m_iTurnDamage);
 	CheckSum(iSum, m_iWarmingDefense);
 	CheckSum(iSum, m_iPopDestroys);
 
@@ -684,15 +610,6 @@ void CvFeatureInfo::getCheckSum(uint32_t &iSum) const
 	CheckSum(iSum, m_piRiverYieldChange, NUM_YIELD_TYPES);
 
 	CheckSum(iSum, m_pbTerrain, GC.getNumTerrainInfos());
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	const int iNumElements = m_aAfflictionCommunicabilityTypes.size();
-	for (int i = 0; i < iNumElements; ++i)
-	{
-		CheckSum(iSum, m_aAfflictionCommunicabilityTypes[i].ePromotionLine);
-		CheckSum(iSum, m_aAfflictionCommunicabilityTypes[i].iModifier);
-	}
-
-#endif
 	m_PropertyManipulators.getCheckSum(iSum);
 }
 

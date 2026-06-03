@@ -7174,18 +7174,6 @@ void CvPlot::setFeatureType(FeatureTypes eNewValue, int iVariety, bool bImprovem
 				setImprovementType(NO_IMPROVEMENT);
 			}
 		}
-		else if (GC.getFeatureInfo(getFeatureType()).getTurnDamage() > 0)
-		{
-			foreach_(const CvUnit* pLoopUnit, units())
-			{
-				// AIAndy: Only awaken units that take damage from features
-				if (pLoopUnit->getUnitInfo().getCombat() > 0)
-				{
-					pLoopUnit->getGroup()->clearMissionQueue();
-					pLoopUnit->getGroup()->setActivityType(ACTIVITY_AWAKE);
-				}
-			}
-		}
 	}
 }
 
@@ -13106,87 +13094,6 @@ bool CvPlot::isInCityZoneOfControl(PlayerTypes ePlayer) const
 }
 
 
-int CvPlot::getTotalTurnDamage(const CvSelectionGroup* pGroup) const
-{
-	PROFILE_EXTRA_FUNC();
-	int iMaxDamage = 0;
-
-	foreach_(const CvUnit* pLoopUnit, pGroup->units())
-	{
-		const int iDamage = getTotalTurnDamage(pLoopUnit);
-
-		if ( iDamage > iMaxDamage )
-		{
-			iMaxDamage = iDamage;
-		}
-	}
-
-	return iMaxDamage;
-}
-
-int CvPlot::getTerrainTurnDamage(const CvUnit* pUnit) const
-{
-	//PROFILE_FUNC();
-
-	int iDamagePercent = -GC.getTerrainInfo(getTerrainType()).getHealthPercent();
-	if (iDamagePercent == 0 || !GC.getGame().isModderGameOption(MODDERGAMEOPTION_TERRAIN_DAMAGE))
-	{
-		return 0;
-	}
-	if (getFeatureType() != NO_FEATURE)
-	{
-		// No damage on Oasis or Flood Plain or Ancient Forest
-		if (GC.getFeatureInfo(getFeatureType()).getYieldChange(YIELD_FOOD) > 0)
-		{
-			return 0;
-		}
-		// No damage on Cave
-		if (getFeatureType() == GC.getInfoTypeForString("FEATURE_CAVES"))
-		{
-			return 0;
-		}
-	}
-	if (isCity(true))
-	{
-		return 0;
-	}
-	if (getImprovementType() != NO_IMPROVEMENT)
-	{
-		iDamagePercent /= 2;
-	}
-	if (pUnit != NULL)
-	{
-		if (pUnit->isTerrainProtected(getTerrainType()))
-		{
-			return 0;
-		}
-		if (pUnit->getTeam() == getTeam())
-		{
-			iDamagePercent /= 3;
-		}
-		if (pUnit->isAnimal())
-		{
-			return 0;
-		}
-		if (pUnit->isHominid())
-		{
-			iDamagePercent /= 3;
-		}
-	}
-
-	return iDamagePercent;
-}
-
-int CvPlot::getFeatureTurnDamage() const
-{
-	return getFeatureType() != NO_FEATURE ? GC.getFeatureInfo(getFeatureType()).getTurnDamage() : 0;
-}
-
-int CvPlot::getTotalTurnDamage(const CvUnit* pUnit) const
-{
-	return getTerrainTurnDamage(pUnit) + getFeatureTurnDamage();
-}
-
 CvUnit* CvPlot::getWorstDefender(PlayerTypes eOwner, PlayerTypes eAttackingPlayer, const CvUnit* pAttacker, bool bTestAtWar, bool bTestPotentialEnemy, bool bTestCanMove, bool bAssassinate) const
 {
 	PROFILE_EXTRA_FUNC();
@@ -13638,34 +13545,6 @@ int CvPlot::countSeeInvisibleActive(PlayerTypes ePlayer, InvisibleTypes eVisible
 	return iCount;
 }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-int CvPlot::getNumAfflictedUnits(PlayerTypes eOwner, PromotionLineTypes eAfflictionLine) const
-{
-	return plotCount(PUF_isAfflicted, eAfflictionLine, -1, NULL, eOwner);
-}
-
-int CvPlot::getCommunicability(PromotionLineTypes ePromotionLine, bool bWorkedTile, bool bVicinity, bool bAccessVolume) const
-{
-	int iCommunicability = 0;
-	TerrainTypes eTerrain = getTerrainType();
-	if (eTerrain != NO_TERRAIN)
-	{
-		iCommunicability += GC.getTerrainInfo(eTerrain).getAfflictionCommunicabilityType(ePromotionLine, bWorkedTile, bVicinity, false).iModifier;
-	}
-	FeatureTypes eFeature = getFeatureType();
-	if (eFeature != NO_FEATURE)
-	{
-		iCommunicability += GC.getFeatureInfo(eFeature).getAfflictionCommunicabilityType(ePromotionLine, bWorkedTile, bVicinity, false).iModifier;
-	}
-	BonusTypes eBonus = getBonusType();
-	if (eBonus != NO_BONUS)
-	{
-		iCommunicability += GC.getBonusInfo(eBonus).getAfflictionCommunicabilityType(ePromotionLine, bWorkedTile, bVicinity, bAccessVolume).iModifier;
-	}
-
-	return iCommunicability;
-}
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 CvUnit* CvPlot::unit_iterator::resolve(const IDInfo& info) const
 {

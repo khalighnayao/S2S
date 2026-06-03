@@ -136,7 +136,6 @@ public:
 	int getControlPoints() const;
 	int getCommandRange() const;
 	bool isZoneOfControl() const;
-	int getIgnoreTerrainDamage() const;
 
 	void getCheckSum(uint32_t& iSum) const;
 
@@ -157,28 +156,9 @@ public:
 	// integers
 	int getAttackCombatModifierChange() const;
 	int getDefenseCombatModifierChange() const;
-	// Fight or Flight
-	int getPursuitChange() const;
-	int getEarlyWithdrawChange() const;
 	int getTauntChange() const;
 	//
 	int getVSBarbsChange() const;
-	int getArmorChange() const;
-	int getPunctureChange() const;
-	// Heart of War
-	int getOverrunChange() const;
-	int getRepelChange() const;
-	int getFortRepelChange() const;
-	int getRepelRetriesChange() const;
-	int getUnyieldingChange() const;
-	int getKnockbackChange() const;
-	int getKnockbackRetriesChange() const;
-#ifdef BATTLEWORN
-	int getStrAdjperRndChange() const;
-	int getStrAdjperAttChange() const;
-	int getStrAdjperDefChange() const;
-	int getWithdrawAdjperAttChange() const;
-#endif // BATTLEWORN
 	// S&D Extended
 	int getUnnerveChange() const;
 	int getEncloseChange() const;
@@ -187,27 +167,10 @@ public:
 	//
 	int getStrengthChange() const;
 	int getLinePriority() const;
-	int getFortitudeChange() const;
 	int getDamageperTurn() const;
 	int getStrAdjperTurn() const;
 	int getWeakenperTurn() const;
-#ifdef STRENGTH_IN_NUMBERS
-	int getFrontSupportPercentChange() const;
-	int getShortRangeSupportPercentChange() const;
-	int getMediumRangeSupportPercentChange() const;
-	int getLongRangeSupportPercentChange() const;
-	int getFlankSupportPercentChange() const;
-#endif
-	int getDodgeModifierChange() const;
-	int getPrecisionModifierChange() const;
-	int getPowerShotsChange() const;
-	int getPowerShotCombatModifierChange() const;
-	int getPowerShotPunctureModifierChange() const;
-	int getPowerShotPrecisionModifierChange() const;
-	int getPowerShotCriticalModifierChange() const;
-	int getCriticalModifierChange() const;
 	int getEnduranceChange() const;
-	int getRoundStunProbChange() const;
 	int getPoisonProbabilityModifierChange() const;
 
 	int getCaptureProbabilityModifierChange() const;
@@ -267,16 +230,7 @@ public:
 	bool isStampedeChange() const;
 	bool isRemoveStampede() const;
 	bool isOnslaughtChange() const;
-	bool isEquipment() const;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	bool isAffliction() const;
-#endif
 	bool isParalyze() const;
-	bool isMakesDamageCold() const;
-	bool isMakesDamageNotCold() const;
-	bool isAddsColdImmunity() const;
-	bool isRemovesColdImmunity() const;
-	bool isCritical() const;
 	bool isAttackOnlyCitiesAdd() const;
 	bool isAttackOnlyCitiesSubtract() const;
 	bool isIgnoreNoEntryLevelAdd() const;
@@ -330,9 +284,6 @@ public:
 	int getNumNotOnDomainTypes() const;
 	bool isNotOnDomainType(int i) const;
 
-	int getNoAutoEquiptoCombatClassType(int i) const;
-	int getNumNoAutoEquiptoCombatClassTypes() const;
-	bool isNoAutoEquiptoCombatClassType(int i) const;
 
 	int getCategory(int i) const;
 	int getNumCategories() const;
@@ -340,11 +291,6 @@ public:
 
 	const std::vector<MapCategoryTypes>& getMapCategories() const { return m_aeMapCategoryTypes; }
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int getCureAfflictionChangeType(int i) const;
-	int getNumCureAfflictionChangeTypes() const;
-	bool isCureAfflictionChangeType(int i) const;
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 	const std::vector<BonusTypes>& getPrereqBonuses() const { return m_aiPrereqBonusTypes; }
 
@@ -394,52 +340,6 @@ public:
 	int getFlankingStrengthbyUnitCombatTypeChange(int iUnitCombat) const;
 	bool isFlankingStrikebyUnitCombatTypeChange(int iUnitCombat) const;
 
-	int getNumWithdrawOnTerrainTypeChanges() const;
-	int getWithdrawOnTerrainTypeChange(int iTerrain) const;
-
-	int getNumWithdrawOnFeatureTypeChanges() const;
-	int getWithdrawOnFeatureTypeChange(int iFeature) const;
-
-	int getNumWithdrawVSUnitCombatChangeTypes() const;
-	int getWithdrawVSUnitCombatChangeType(int iUnitCombat) const;
-	bool isWithdrawVSUnitCombatChangeType(int iUnitCombat) const;
-
-	int getNumPursuitVSUnitCombatChangeTypes() const;
-	int getPursuitVSUnitCombatChangeType(int iUnitCombat, bool bForLoad = false) const;
-	bool isPursuitVSUnitCombatChangeType(int iUnitCombat, bool bForLoad = false) const;
-
-	int getNumRepelVSUnitCombatChangeTypes() const;
-	int getRepelVSUnitCombatChangeType(int iUnitCombat, bool bForLoad = false) const;
-	bool isRepelVSUnitCombatChangeType(int iUnitCombat, bool bForLoad = false) const;
-
-	int getNumKnockbackVSUnitCombatChangeTypes() const;
-	int getKnockbackVSUnitCombatChangeType(int iUnitCombat, bool bForLoad = false) const;
-	bool isKnockbackVSUnitCombatChangeType(int iUnitCombat, bool bForLoad = false) const;
-
-	int getNumPunctureVSUnitCombatChangeTypes() const;
-	int getPunctureVSUnitCombatChangeType(int iUnitCombat) const;
-	bool isPunctureVSUnitCombatChangeType(int iUnitCombat) const;
-
-	int getNumArmorVSUnitCombatChangeTypes() const;
-	int getArmorVSUnitCombatChangeType(int iUnitCombat) const;
-	bool isArmorVSUnitCombatChangeType(int iUnitCombat) const;
-
-	int getNumDodgeVSUnitCombatChangeTypes() const;
-	int getDodgeVSUnitCombatChangeType(int iUnitCombat) const;
-	bool isDodgeVSUnitCombatChangeType(int iUnitCombat) const;
-
-	int getNumPrecisionVSUnitCombatChangeTypes() const;
-	int getPrecisionVSUnitCombatChangeType(int iUnitCombat) const;
-	bool isPrecisionVSUnitCombatChangeType(int iUnitCombat) const;
-
-	int getNumCriticalVSUnitCombatChangeTypes() const;
-	int getCriticalVSUnitCombatChangeType(int iUnitCombat) const;
-	bool isCriticalVSUnitCombatChangeType(int iUnitCombat) const;
-
-	int getNumRoundStunVSUnitCombatChangeTypes() const;
-	int getRoundStunVSUnitCombatChangeType(int iUnitCombat) const;
-	bool isRoundStunVSUnitCombatChangeType(int iUnitCombat) const;
-
 	int getNumTrapDisableUnitCombatTypes() const;
 	int getTrapDisableUnitCombatType(int iUnitCombat) const;
 	bool isTrapDisableUnitCombatType(int iUnitCombat) const;
@@ -452,11 +352,6 @@ public:
 	int getTrapTriggerUnitCombatType(int iUnitCombat) const;
 	bool isTrapTriggerUnitCombatType(int iUnitCombat) const;
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int getNumAidChanges() const;
-	int getAidChange(int iProperty) const;
-	bool isAidChange(int iProperty) const;
-#endif
 
 	int getNumBuildWorkRateModifierChangeTypes() const;
 	int getBuildWorkRateModifierChangeType(int iBuild) const;
@@ -477,13 +372,6 @@ public:
 	int getNumAIWeightbyUnitCombatTypes() const;
 	const UnitCombatModifier& getAIWeightbyUnitCombatType(int iUnitCombat) const;
 
-	int getNumAfflictionFortitudeChangeModifiers() const;
-	const PromotionLineModifier& getAfflictionFortitudeChangeModifier(int iAfflictionLine) const;
-
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int getNumAfflictOnAttackChangeTypes() const;
-	const AfflictOnAttackChange& getAfflictOnAttackChangeType(int iAfflictionLine) const;
-#endif
 	int getNumHealUnitCombatChangeTypes() const;
 	const HealUnitCombat& getHealUnitCombatChangeType(int iUnitCombat) const;
 
@@ -514,9 +402,6 @@ public:
 	int getNumVisibleImprovementRangeChanges() const;
 	const InvisibleImprovementChanges& getVisibleImprovementRangeChange(int iIndex) const;
 
-	int getNumDistanceAttackCommunicabilityTypeChanges() const;
-	const AfflictionLineChanges& getDistanceAttackCommunicabilityTypeChange(int iIndex) const;
-
 	// TB Combat Mods End  TB SubCombat Mod end
 
 	//Pediahelp
@@ -543,7 +428,6 @@ protected:
 	int m_iControlPoints;
 	int m_iCommandRange;
 	bool m_bZoneOfControl;
-	int m_iIgnoreTerrainDamage;
 	int m_zobristValue;
 public:
 	void getDataMembers(CvInfoUtil& util);
@@ -664,51 +548,17 @@ protected:
 	//integers
 	int m_iAttackCombatModifierChange;
 	int m_iDefenseCombatModifierChange;
-	int m_iPursuitChange;
-	int m_iEarlyWithdrawChange;
 	int m_iVSBarbsChange;
-	int m_iArmorChange;
-	int m_iPunctureChange;
-	int m_iOverrunChange;
-	int m_iRepelChange;
-	int m_iFortRepelChange;
-	int m_iRepelRetriesChange;
-	int m_iUnyieldingChange;
-	int m_iKnockbackChange;
-	int m_iKnockbackRetriesChange;
-#ifdef BATTLEWORN
-	int m_iStrAdjperRndChange;
-	int m_iStrAdjperAttChange;
-	int m_iStrAdjperDefChange;
-	int m_iWithdrawAdjperAttChange;
-#endif // BATTLEWORN
 	int m_iUnnerveChange;
 	int m_iEncloseChange;
 	int m_iLungeChange;
 	int m_iDynamicDefenseChange;
 	int m_iStrengthChange;
 	int m_iLinePriority;
-	int m_iFortitudeChange;
 	int m_iDamageperTurn;
 	int m_iStrAdjperTurn;
 	int m_iWeakenperTurn;
-#ifdef STRENGTH_IN_NUMBERS
-	int m_iFrontSupportPercentChange;
-	int m_iShortRangeSupportPercentChange;
-	int m_iMediumRangeSupportPercentChange;
-	int m_iLongRangeSupportPercentChange;
-	int m_iFlankSupportPercentChange;
-#endif
-	int m_iDodgeModifierChange;
-	int m_iPrecisionModifierChange;
-	int m_iPowerShotsChange;
-	int m_iPowerShotCombatModifierChange;
-	int m_iPowerShotPunctureModifierChange;
-	int m_iPowerShotPrecisionModifierChange;
-	int m_iPowerShotCriticalModifierChange;
-	int m_iCriticalModifierChange;
 	int m_iEnduranceChange;
-	int m_iRoundStunProbChange;
 	int m_iPoisonProbabilityModifierChange;
 
 	int m_iCaptureProbabilityModifierChange;
@@ -769,16 +619,7 @@ protected:
 	bool m_bStampedeChange;
 	bool m_bRemoveStampede;
 	bool m_bOnslaughtChange;
-	bool m_bEquipment;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	bool m_bAffliction;
-#endif
 	bool m_bParalyze;
-	bool m_bMakesDamageCold;
-	bool m_bMakesDamageNotCold;
-	bool m_bAddsColdImmunity;
-	bool m_bRemovesColdImmunity;
-	bool m_bCritical;
 	bool m_bAttackOnlyCitiesAdd;
 	bool m_bAttackOnlyCitiesSubtract;
 	bool m_bIgnoreNoEntryLevelAdd;
@@ -810,7 +651,6 @@ protected:
 	std::vector<int> m_aiFreetoUnitCombats;
 	std::vector<int> m_aiNotOnUnitCombatTypes;
 	std::vector<int> m_aiNotOnDomainTypes;
-	std::vector<int> m_aiNoAutoEquiptoCombatClassTypes;
 	std::vector<int> m_aiCategories;
 	std::vector<MapCategoryTypes> m_aeMapCategoryTypes;
 	std::vector<BonusTypes> m_aiPrereqBonusTypes;
@@ -826,24 +666,9 @@ protected:
 	std::vector<int> m_aiTargetUnitCombatTypes;
 	// int vectors utilizing pairing without delayed resolution
 	UnitCombatModifierArray m_aFlankingStrengthbyUnitCombatTypeChange;
-	TerrainModifierArray m_aWithdrawOnTerrainTypesChange;
-	FeatureModifierArray m_aWithdrawOnFeatureTypesChange;
-	UnitCombatModifierArray m_aWithdrawVSUnitCombatChangeTypes;
-	UnitCombatModifierArray m_aPursuitVSUnitCombatChangeTypes;
-	UnitCombatModifierArray m_aRepelVSUnitCombatChangeTypes;
-	UnitCombatModifierArray m_aKnockbackVSUnitCombatChangeTypes;
-	UnitCombatModifierArray m_aPunctureVSUnitCombatChangeTypes;
-	UnitCombatModifierArray m_aArmorVSUnitCombatChangeTypes;
-	UnitCombatModifierArray m_aDodgeVSUnitCombatChangeTypes;
-	UnitCombatModifierArray m_aPrecisionVSUnitCombatChangeTypes;
-	UnitCombatModifierArray m_aCriticalVSUnitCombatChangeTypes;
-	UnitCombatModifierArray m_aRoundStunVSUnitCombatChangeTypes;
 	UnitCombatModifierArray m_aTrapDisableUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapAvoidanceUnitCombatTypes;
 	UnitCombatModifierArray m_aTrapTriggerUnitCombatTypes;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	AidArray m_aAidChanges;
-#endif
 
 	BuildModifierArray m_aBuildWorkRateModifierChangeTypes;
 	InvisibilityArray m_aVisibilityIntensityChangeTypes;
@@ -851,11 +676,6 @@ protected:
 	InvisibilityArray m_aVisibilityIntensityRangeChangeTypes;
 	// int vector utilizing struct with delayed resolution
 	std::vector<UnitCombatModifier> m_aAIWeightbyUnitCombatTypes;
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	std::vector<int> m_aiCureAfflictionChangeTypes;
-	std::vector<PromotionLineModifier> m_aAfflictionFortitudeChangeModifiers;
-	std::vector<AfflictOnAttackChange> m_aAfflictOnAttackChangeTypes;
-#endif
 	std::vector<HealUnitCombat> m_aHealUnitCombatChangeTypes;
 	std::vector<InvisibleTerrainChanges> m_aInvisibleTerrainChanges;
 	std::vector<InvisibleFeatureChanges> m_aInvisibleFeatureChanges;
@@ -866,7 +686,6 @@ protected:
 	std::vector<InvisibleFeatureChanges> m_aVisibleFeatureRangeChanges;
 	std::vector<InvisibleImprovementChanges> m_aVisibleImprovementRangeChanges;
 	std::vector<InvisibleTerrainChanges> m_aVisibleTerrainRangeChanges;
-	std::vector<AfflictionLineChanges> m_aDistanceAttackCommunicabilityTypeChanges;
 	//TB Combat Mods End  TB SubCombat Mod end
 
 	//Pediahelp

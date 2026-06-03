@@ -10,8 +10,6 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SHELLFIRE</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_A2G_BOMBS</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPEED_SLOW</SubCombatType>
@@ -137,8 +135,6 @@
 				<SubCombatType>UNITCOMBAT_TRANSPORT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_ONLY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_TORPEDO</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_NAVAL</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPEED_FAST</SubCombatType>
@@ -235,13 +231,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>50</iWithdrawalProb>
-			<iEarlyWithdraw>75</iEarlyWithdraw>
-			<PursuitVSUnitCombatTypes>
-				<PursuitVSUnitCombatType>
-					<PursuitVSUnitCombat>UNITCOMBAT_SUBMARINE</PursuitVSUnitCombat>
-					<iPursuitVSUnitCombat>5</iPursuitVSUnitCombat>
-				</PursuitVSUnitCombatType>
-			</PursuitVSUnitCombatTypes>
 			<UnitCombatMods>
 				<UnitCombatMod>
 					<UnitCombatType>UNITCOMBAT_WOODEN_SHIPS</UnitCombatType>
@@ -280,10 +269,7 @@
 				<SubCombatType>UNITCOMBAT_EXPLORER</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_BACKUP_HANDGUN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPEED_FAST</SubCombatType>
 				<SubCombatType>UNITCOMBAT_MOTILITY_RIDING</SubCombatType>
 				<SubCombatType>UNITCOMBAT_QUALITY_SUPERIOR</SubCombatType>
@@ -333,7 +319,6 @@
 			<iXPValueAttack>6</iXPValueAttack>
 			<iXPValueDefense>3</iXPValueDefense>
 			<iWithdrawalProb>80</iWithdrawalProb>
-			<iEarlyWithdraw>50</iEarlyWithdraw>
 			<iAsset>5</iAsset>
 			<iPower>70</iPower>
 			<UnitMeshGroups>
@@ -373,11 +358,8 @@
 				<SubCombatType>UNITCOMBAT_COMBATANT</SubCombatType>
 				<SubCombatType>UNITCOMBAT_SPECIES_HUMAN</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_METHOD_DISTANCE_PRIMARY</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_H2H_VEHICULAR</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_STYLE_DIST_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_FULLY_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_WEAPON_DIST_SHELLFIRE</SubCombatType>
-				<SubCombatType>UNITCOMBAT_WEAPON_BACKUP_SEMI_AUTOMATIC</SubCombatType>
 				<SubCombatType>UNITCOMBAT_ARMOR_VEHICULAR</SubCombatType>
 				<SubCombatType>UNITCOMBAT_MOTILITY_DRIVING</SubCombatType>
 				<SubCombatType>UNITCOMBAT_QUALITY_SUPERIOR</SubCombatType>

@@ -1106,7 +1106,6 @@
 			<iDCMBombAccuracyChange>10</iDCMBombAccuracyChange>
 			<iRBombardDamageChange>10</iRBombardDamageChange>
 			<iWithdrawalChange>5</iWithdrawalChange>
-			<iEarlyWithdrawChange>10</iEarlyWithdrawChange>
 			<UnitCombats>
 				<UnitCombat>
 					<UnitCombatType>UNITCOMBAT_ARCHER</UnitCombatType>
@@ -1147,7 +1146,6 @@
 			<iChanceFirstStrikesChange>1</iChanceFirstStrikesChange>
 			<iDCMBombAccuracyChange>10</iDCMBombAccuracyChange>
 			<iWithdrawalChange>5</iWithdrawalChange>
-			<iEarlyWithdrawChange>10</iEarlyWithdrawChange>
 			<UnitCombats>
 				<UnitCombat>
 					<UnitCombatType>UNITCOMBAT_ARCHER</UnitCombatType>

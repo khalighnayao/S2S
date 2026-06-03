@@ -1493,50 +1493,6 @@
 			<Button>Art/Interface/Buttons/Promotions/shadowstalker1.dds</Button>
 		</PromotionLineInfo>
 		<PromotionLineInfo>
-			<Type>PROMOTIONLINE_EQUIPMENT_MELEE_WEAPONS</Type>
-			<Description>TXT_KEY_PROMOTIONLINE_EQUIPMENT_MELEE_WEAPONS</Description>
-			<UnitCombatPrereqTypes>
-				<UnitCombatPrereqType>UNITCOMBAT_RECON</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_HUNTER</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_MOUNTED</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_MELEE</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_CIVILIAN</UnitCombatPrereqType>
-			</UnitCombatPrereqTypes>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-			<bEquipment>1</bEquipment>
-		</PromotionLineInfo>
-		<PromotionLineInfo>
-			<Type>PROMOTIONLINE_EQUIPMENT_EARLY_MELEE_ARMOR</Type>
-			<Description>TXT_KEY_PROMOTIONLINE_EQUIPMENT_EARLY_MELEE_ARMOR</Description>
-			<UnitCombatPrereqTypes>
-				<UnitCombatPrereqType>UNITCOMBAT_MOUNTED</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_MELEE</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_CIVILIAN</UnitCombatPrereqType>
-			</UnitCombatPrereqTypes>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-			<bEquipment>1</bEquipment>
-		</PromotionLineInfo>
-		<PromotionLineInfo>
-			<Type>PROMOTIONLINE_EQUIPMENT_RANGED_WEAPONS</Type>
-			<Description>TXT_KEY_PROMOTIONLINE_EQUIPMENT_RANGED_WEAPONS</Description>
-			<UnitCombatPrereqTypes>
-				<UnitCombatPrereqType>UNITCOMBAT_ARCHER</UnitCombatPrereqType>
-			</UnitCombatPrereqTypes>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-			<bEquipment>1</bEquipment>
-		</PromotionLineInfo>
-		<PromotionLineInfo>
-			<Type>PROMOTIONLINE_EQUIPMENT_EARLY_RANGED_ARMOR</Type>
-			<Description>TXT_KEY_PROMOTIONLINE_EQUIPMENT_EARLY_RANGED_ARMOR</Description>
-			<UnitCombatPrereqTypes>
-				<UnitCombatPrereqType>UNITCOMBAT_RECON</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_HUNTER</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_ARCHER</UnitCombatPrereqType>
-			</UnitCombatPrereqTypes>
-			<Button>Art/Interface/Buttons/Techtree/replaceme.dds</Button>
-			<bEquipment>1</bEquipment>
-		</PromotionLineInfo>
-		<PromotionLineInfo>
 			<Type>PROMOTIONLINE_HILL_WORKER</Type>
 			<Description>TXT_KEY_PROMOTIONLINE_HILL_WORKER</Description>
 			<UnitCombatPrereqTypes>
@@ -1596,37 +1552,6 @@
 			<Button>art/Buttons/Promotions/DiseaseControlPromotion1.dds</Button>
 			<UnitCombatPrereqTypes>
 				<UnitCombatPrereqType>UNITCOMBAT_HEALTH_CARE</UnitCombatPrereqType>
-			</UnitCombatPrereqTypes>
-		</PromotionLineInfo>
-		<PromotionLineInfo>
-			<Type>PROMOTIONLINE_HUNT_DOWN</Type>
-			<Description>TXT_KEY_PROMOTIONLINE_HUNT_DOWN</Description>
-			<Button>art/Buttons/Promotions/HuntDown1Promotion.dds</Button>
-			<UnitCombatPrereqTypes>
-				<UnitCombatPrereqType>UNITCOMBAT_CANINE</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_HUNTER</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_DESTROYER</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_CRUISER</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_MOUNTED</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_HELICOPTER</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_WHEELED</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_FELINE</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_MAMMAL_URSINE</UnitCombatPrereqType>
-			</UnitCombatPrereqTypes>
-			<NotOnUnitCombatTypes>
-				<NotOnUnitCombatType>UNITCOMBAT_PACIFIST</NotOnUnitCombatType>
-			</NotOnUnitCombatTypes>
-		</PromotionLineInfo>
-		<PromotionLineInfo>
-			<Type>PROMOTIONLINE_CHASE</Type>
-			<Description>TXT_KEY_PROMOTIONLINE_CHASE</Description>
-			<Button>art/Buttons/Promotions/Chase1Promotion.dds</Button>
-			<UnitCombatPrereqTypes>
-				<UnitCombatPrereqType>UNITCOMBAT_WOODEN_SHIPS</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_THROWING</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_LAW_ENFORCEMENT</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_MELEE</UnitCombatPrereqType>
-				<UnitCombatPrereqType>UNITCOMBAT_GUN</UnitCombatPrereqType>
 			</UnitCombatPrereqTypes>
 		</PromotionLineInfo>
 		<PromotionLineInfo>
@@ -2110,30 +2035,6 @@
 			</NotOnUnitCombatTypes>
 		</PromotionLineInfo>
 		<PromotionLineInfo>
-			<Type>PROMOTIONLINE_BUILD_UP_CHASE_PLANS</Type>
-			<Description>TXT_KEY_PROMOTIONLINE_BUILD_UP_CHASE_PLANS</Description>
-			<Help>TXT_KEY_PROMOTIONLINE_BUILD_UP_CHASE_PLANS_HELP</Help>
-			<Button>Art/Buttons/Promotions/ChasePlans1BuildUp.dds</Button>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
-			<UnitCombatPrereqTypes>
-				<UnitCombatPrereqType>UNITCOMBAT_SPEED_FAST</UnitCombatPrereqType>
-			</UnitCombatPrereqTypes>
-			<NotOnUnitCombatTypes>
-				<NotOnUnitCombatType>UNITCOMBAT_PACIFIST</NotOnUnitCombatType>
-				<NotOnUnitCombatType>UNITCOMBAT_CIVILIAN</NotOnUnitCombatType>
-				<NotOnUnitCombatType>UNITCOMBAT_COMMANDER</NotOnUnitCombatType>
-				<NotOnUnitCombatType>UNITCOMBAT_IDEA</NotOnUnitCombatType>
-				<NotOnUnitCombatType>UNITCOMBAT_ATTACHE</NotOnUnitCombatType>
-				<NotOnUnitCombatType>UNITCOMBAT_CAPTIVE</NotOnUnitCombatType>
-			</NotOnUnitCombatTypes>
-			<NotOnDomainTypes>
-				<DomainType>DOMAIN_AIR</DomainType>
-			</NotOnDomainTypes>
-			<bBuildUp>1</bBuildUp>
-		</PromotionLineInfo>
-		<PromotionLineInfo>
 			<Type>PROMOTIONLINE_BUILD_UP_CRIME_FIGHTING</Type>
 			<Description>TXT_KEY_PROMOTIONLINE_BUILD_UP_CRIME_FIGHTING</Description>
 			<Help>TXT_KEY_PROMOTIONLINE_BUILD_UP_CRIME_FIGHTING_HELP</Help>
@@ -2245,9 +2146,6 @@
 			<Description>TXT_KEY_PROMOTIONLINE_BUILD_UP_ESCAPE_PLANS</Description>
 			<Help>TXT_KEY_PROMOTIONLINE_BUILD_UP_ESCAPE_PLANS_HELP</Help>
 			<Button>Art/Buttons/Promotions/EscapePlans1BuildUp.dds</Button>
-			<OnGameOptions>
-				<GameOptionType>GAMEOPTION_COMBAT_FIGHT_OR_FLIGHT</GameOptionType>
-			</OnGameOptions>
 			<UnitCombatPrereqTypes>
 				<UnitCombatPrereqType>UNITCOMBAT_SPEED_FAST</UnitCombatPrereqType>
 			</UnitCombatPrereqTypes>

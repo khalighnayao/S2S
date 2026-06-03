@@ -31300,7 +31300,6 @@
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
 			<iWithdrawalProb>70</iWithdrawalProb>
-			<iEarlyWithdraw>75</iEarlyWithdraw>
 			<iCityDefense>-80</iCityDefense>
 			<UnitMeshGroups>
 				<iGroupSize>2</iGroupSize>

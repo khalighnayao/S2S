@@ -244,7 +244,6 @@ void CyInfoPythonInterface2()
 		.def("getDisappearanceProbability", &CvFeatureInfo::getDisappearanceProbability, "int ()")
 		.def("getGrowthProbability", &CvFeatureInfo::getGrowthProbability, "int ()")
 		.def("getDefenseModifier", &CvFeatureInfo::getDefenseModifier, "int ()")
-		.def("getTurnDamage", &CvFeatureInfo::getTurnDamage, "int ()")
 		.def("getWarmingDefense", &CvFeatureInfo::getWarmingDefense, "int ()")
 		.def("getNumVarieties", &CvFeatureInfo::getNumVarieties, "int ()")
 

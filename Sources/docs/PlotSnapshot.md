@@ -71,8 +71,8 @@ capture metadata; the second line is the column header; remaining lines are
 one row per plot.
 
 ```
-# PlotSnapshot schema=1 tag=start turn=0 mapW=80 mapH=52 numPlots=4160
-plotIdx,x,y,terrain,feature,improvement,route,bonus,isWater,isHills,isPeak,isCity,isCityRadius,owner,workingCityId,workingCityName,area,improvementCurrentValue
+# PlotSnapshot schema=2 tag=start turn=0 mapW=80 mapH=52 numPlots=4160
+plotIdx,x,y,terrain,feature,improvement,route,bonus,isWater,isHills,isPeak,isCity,isCityRadius,owner,workingCityId,workingCityName,area,improvementCurrentValue,numUnits,animals
 ```
 
 | Column | Source | Notes |
@@ -94,6 +94,8 @@ plotIdx,x,y,terrain,feature,improvement,route,bonus,isWater,isHills,isPeak,isCit
 | `workingCityName` | `pPlot->getWorkingCity()->getName()` | sanitised: commas, quotes, newlines, and non-ASCII replaced with `_` or `?` |
 | `area` | `pPlot->area()->getID()` | useful for filtering same-landmass plots |
 | `improvementCurrentValue` | `pPlot->getImprovementCurrentValue()` | **read-only access** — the snapshot deliberately does NOT call the lazy-init mutator `setImprovementCurrentValue()`; `0` here means "field not yet initialised" |
+| `numUnits` | `pPlot->getNumUnits()` | total units on the plot (all owners) |
+| `animals` | per-animal token list | `|`-separated, one token per `isAnimal()` unit: `<UnitType>@o<owner>c<combat>a<aggression>e<enemyOfActiveTeam>`. `c` is XML `iCombat` (in-game strength = `c/100`); `a` is `iAggression` (`0` = passive prey); `e` is `1`/`0`/`-1` for at-war-with-active-team / not / no-active-team. Empty when no animals. Companion to `HunterAI.log` `[HAI/*]` lines — join on `(x,y)` to see which animal a hunter engaged or walked past, and whether it was a recognised target (`e`). |
 
 ## Cross-referencing with BuildEvaluation.log
 

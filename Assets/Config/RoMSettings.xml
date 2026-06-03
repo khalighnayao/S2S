@@ -173,10 +173,6 @@ values="Current Color|Black|Blue|Brown|Cyan|Dark Blue|Dark Cyan|Dark Green|Dark 
 			</option>
 			<option id="TelepathicReligion" key="TelepathicReligion" type="boolean" default="False" get="isTelepathicReligion" set="setTelepathicReligion"/>
 
-			<option id="TerrainDamage" key="TerrainDamage" type="boolean" default="False" get="isTerrainDamage" set="setTerrainDamage">
-				<change module="ANewDawnSettings" function="changedTerrainDamage"/>
-			</option>
-
 			<option id="FogWarDecay" key="FogWarDecay" type="boolean" default="False" get="isFogWarDecay" set="setFogWarDecay">
 				<change module="ANewDawnSettings" function="changedFogWarDecay"/>
 			</option>

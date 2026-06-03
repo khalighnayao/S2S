@@ -1383,9 +1383,8 @@ void CvXMLLoadUtility::SetGlobalActionInfo()
 		int* piPriorityList = new int[iNumPromoInfos];
 
 		const int iStatusPriority = GC.getCommandInfo((CommandTypes)GetInfoClass("COMMAND_STATUS")).getOrderPriority();
-		const int iEquipPriority = GC.getCommandInfo((CommandTypes)GetInfoClass("COMMAND_REEQUIP")).getOrderPriority();
-		const int iBigLimit = std::max(iStatusPriority, iEquipPriority);
-		const int iSmallLimit = std::min(std::min(iStatusPriority, iEquipPriority), iBigLimit - 1);
+		const int iBigLimit = iStatusPriority;
+		const int iSmallLimit = iBigLimit - 1;
 
 		int n = 0;
 
@@ -1405,19 +1404,7 @@ void CvXMLLoadUtility::SetGlobalActionInfo()
 		{
 			const CvPromotionInfo& promo = GC.getPromotionInfo((PromotionTypes)i);
 
-			if (promo.isEquipment())
-			{
-				piIndexList[n] = i;
-				piPriorityList[n] = range(iEquipPriority + promo.getOrderPriority(), iSmallLimit, iBigLimit - 1);
-				n++;
-			}
-		}
-
-		for (int i = 0; i < iNumPromoInfos; i++)
-		{
-			const CvPromotionInfo& promo = GC.getPromotionInfo((PromotionTypes)i);
-
-			if (!promo.isStatus() && !promo.isEquipment())
+			if (!promo.isStatus())
 			{
 				piIndexList[n] = i;
 				piPriorityList[n] = std::min(promo.getOrderPriority(), iSmallLimit - 1);
@@ -1438,11 +1425,7 @@ void CvXMLLoadUtility::SetGlobalActionInfo()
 
 			CvPromotionInfo& promo = GC.getPromotionInfo((PromotionTypes)piIndexList[piOrderedIndex[i]]);
 
-			if (promo.isEquipment())
-			{
-				promo.setCommandType(GetInfoClass("COMMAND_REEQUIP"));
-			}
-			else if (promo.isStatus())
+			if (promo.isStatus())
 			{
 				promo.setCommandType(GetInfoClass("COMMAND_STATUS"));
 			}

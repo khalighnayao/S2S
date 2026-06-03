@@ -387,10 +387,6 @@ public:
 	PlayerTypes controlsAdjacentZOCSource(TeamTypes eAttackingTeam) const;
 	bool isInCityZoneOfControl(PlayerTypes ePlayer) const;
 	bool isInUnitZoneOfControl(PlayerTypes ePlayer) const;
-	int getTotalTurnDamage(const CvSelectionGroup* pGroup) const;
-	int getTerrainTurnDamage(const CvUnit* pUnit = NULL) const;
-	int getFeatureTurnDamage() const;
-	int getTotalTurnDamage(const CvUnit* pUnit = NULL) const;
 	CvUnit* getWorstDefender(PlayerTypes eOwner, PlayerTypes eAttackingPlayer = NO_PLAYER, const CvUnit* pAttacker = NULL, bool bTestAtWar = false, bool bTestPotentialEnemy = false, bool bTestCanMove = false, bool bAssassinate = false) const;
 	bool isBorder(bool bIgnoreWater = false) const;
 
@@ -1160,10 +1156,6 @@ public:
 
 	int countSeeInvisibleActive(PlayerTypes ePlayer, InvisibleTypes eVisible) const;
 
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-	int getNumAfflictedUnits(PlayerTypes eOwner, PromotionLineTypes eAfflictionLine) const;
-	int getCommunicability(PromotionLineTypes ePromotionLine, bool bWorkedTile, bool bVicinity, bool bAccessVolume) const;
-#endif // OUTBREAKS_AND_AFFLICTIONS
 
 protected:
 	// AIAndy: Properties

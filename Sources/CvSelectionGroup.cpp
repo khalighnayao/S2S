@@ -725,7 +725,7 @@ bool CvSelectionGroup::canStartMission(int iMission, int iData1, int iData2, CvP
 			}
 			case MISSION_HEAL_BUILDUP:
 			{
-				if (unitX->canHeal(pPlot) && pPlot->getTotalTurnDamage(this) <= 0)
+				if (unitX->canHeal(pPlot))
 				{
 					return true;
 				}
@@ -749,8 +749,7 @@ bool CvSelectionGroup::canStartMission(int iMission, int iData1, int iData2, CvP
 			}
 			case MISSION_HEAL:
 			{
-				//ls612: Fix for Terrain damage, apparently that wasn't factored in anywhere else.
-				if (unitX->canHeal(pPlot) && pPlot->getTotalTurnDamage(this) <= 0)
+				if (unitX->canHeal(pPlot))
 				{
 					return true;
 				}
@@ -1030,12 +1029,6 @@ bool CvSelectionGroup::canStartMission(int iMission, int iData1, int iData2, CvP
 			}
 			case MISSION_CURE:
 			{
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-				if (unitX->canCure(pPlot, ((PromotionLineTypes)iData1)))
-				{
-					return true;
-				}
-#endif
 				break;
 			}
 			case MISSION_GOTO:
@@ -1660,12 +1653,6 @@ bool CvSelectionGroup::startMission()
 						}
 						case MISSION_CURE:
 						{
-#ifdef OUTBREAKS_AND_AFFLICTIONS
-							if (pLoopUnit->CureAffliction((PromotionLineTypes)(headMissionQueueNode()->m_data.iData1)))
-							{
-								bAction = true;
-							}
-#endif
 							break;
 						}
 						case MISSION_JOIN:
