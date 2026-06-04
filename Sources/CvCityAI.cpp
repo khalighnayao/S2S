@@ -2081,9 +2081,20 @@ void CvCityAI::AI_chooseProduction()
 	//#23 Minimal attack force because of Danger, both land and sea
 	if (bDanger && !bInhibitUnits)
 	{
-		const int iAttackNeeded = iNbMinimalAttackers + std::max(0, AI_neededDefenders() - (iPlotCityDefenderCount + iPlotOtherCityAICount)) + intSqrt(player.getNumCities()); //Try to add some attack units at minimum
+		const int iDefShortfall = std::max(0, AI_neededDefenders() - (iPlotCityDefenderCount + iPlotOtherCityAICount));
+		const int iSqrtCities = intSqrt(player.getNumCities());
+		const int iAttackNeeded = iNbMinimalAttackers + iDefShortfall + iSqrtCities; //Try to add some attack units at minimum
 		const int iOwnedAttackers = player.AI_totalAreaUnitAIs(pArea, UNITAI_ATTACK);
-		
+
+		// [CIT/danger] -- inputs to the dominant "minimal attack (danger)" production driver.
+		// fire=1 means this city trains a UNITAI_ATTACK unit this pass. The gate compares an
+		// AREA-wide UNITAI_ATTACK count (ownedAtk) against a PER-CITY need; if ownedAtk stays
+		// stuck below need while many cities keep firing, the trained units are being reassigned
+		// out of UNITAI_ATTACK (the role count never catches up) -> perpetual cheap-military spam.
+		logCityAI(2, "[CIT/danger] city=%S owner=%d minAtk=%d defShortfall=%d sqrtCities=%d need=%d ownedAtk=%d fire=%d",
+			getName().GetCString(), (int)eOwner, iNbMinimalAttackers, iDefShortfall, iSqrtCities,
+			iAttackNeeded, iOwnedAttackers, (iOwnedAttackers < iAttackNeeded) ? 1 : 0);
+
 		if (iOwnedAttackers < iAttackNeeded
 		&& AI_chooseUnitImmediate("minimal attack (danger)", UNITAI_ATTACK))
 		{
@@ -14416,15 +14427,8 @@ bool CvCityAI::AI_choosePropertyControlBuildingAndUnit(int iTriggerPercentOfProp
 				iEval /= iCheck;
 				iCheck *= iTrainReluctance;
 				//TBNote: May still need to take a count of units ordered... there's only so many units the AI should be willing to train at once for some tasks.  I'm thinking of polution control here.
-				//	Don't bother trying to build units for hopelessly out-of-control properties
-				//	or else we'll spam units endlessly in cases we cannot really control
-				int iLimit = 250 * ((1 + (int)player.getCurrentEra())/5);
 				int iAcceptanceLimit = 100 * ((1 + (int)player.getCurrentEra())/2); //Acceptable Value 
 				int iAcceptanceRate = iCurrentValue/100 * 5; //Accept a 5% rate increase
-				if (iTrainReluctance > 0)
-				{
-					iLimit /= iTrainReluctance;
-				}
 
 				//Calvitix : Evaluate the future evolution of the property, with actuel change, and estimate the number of turn to achieve goal 
 				#define MIN_PROPERTY_TOTAL_TO_DEAL_WITH  -1000
@@ -14451,7 +14455,20 @@ bool CvCityAI::AI_choosePropertyControlBuildingAndUnit(int iTriggerPercentOfProp
 					ismaxPropUnitsReached = true;
 				}
 
-				if (iEval > iCheck && iCurrentPercent < iLimit && !isGettingBetter && !isGoodEnough && !ismaxPropUnitsReached)
+				// [CIT/prop] -- inputs to the property-control production gate (the only source of
+				// UNITAI_PROPERTY_CONTROL units now that runtime flipping is removed). fire=1 means
+				// this city will order a property building/unit this pass. A fire=0 with a real need
+				// (val/pct high) tells us which condition vetoed it: getting=better already improving,
+				// good=isGoodEnough, maxed=prop-control units already >20% (propPct), or eval<=check
+				// (need below the train-reluctance threshold). Mirrors [CIT/danger] for the attack gate.
+				logCityAI(2, "[CIT/prop] city=%S owner=%d prop=%s val=%d change=%d pct=%d eval=%d check=%d proj=%d getting=%d good=%d maxed=%d propPct=%d fire=%d",
+					getName().GetCString(), (int)eOwner, GC.getPropertyInfo(eProperty).getType(),
+					iCurrentValue, iCurrentChange, iCurrentPercent, iEval, iCheck, iCurrentValue + iCurrentChange * 10,
+					isGettingBetter ? 1 : 0, isGoodEnough ? 1 : 0, ismaxPropUnitsReached ? 1 : 0,
+					(iPropControlInArea * 100 / (iUnitsInArea + 1)),
+					(iEval > iCheck && !isGettingBetter && !isGoodEnough && !ismaxPropUnitsReached) ? 1 : 0);
+
+				if (iEval > iCheck && !isGettingBetter && !isGoodEnough && !ismaxPropUnitsReached)
 				{
 					//	Order a suitable unit if possible
 					CvUnitSelectionCriteria criteria;

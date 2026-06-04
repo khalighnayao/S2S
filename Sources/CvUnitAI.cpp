@@ -464,6 +464,16 @@ bool CvUnitAI::AI_update()
 	return !isDelayedDeath() && AI_isAwaitingContract();
 }
 
+// [UNT/act] -- names the decision helper that won this unit's move cascade (the "why"
+// behind the [UNT/move] routine it ran). Each instrumented helper calls this at its
+// commit point, so exactly the winning action logs -- one line per unit per turn.
+void CvUnitAI::AI_logAct(const char* szDecision, const char* szReason, const CvPlot* pTarget) const
+{
+	logUnitAI(2, "[UNT/act] owner=%d unit=%d type=%d decision=%s reason=%s target=(%d,%d)",
+		(int)getOwner(), getID(), (int)AI_getUnitAIType(), szDecision, szReason ? szReason : "-",
+		pTarget ? pTarget->getX() : getX(), pTarget ? pTarget->getY() : getY());
+}
+
 void CvUnitAI::doUnitAIMove()
 {
 
@@ -4281,29 +4291,11 @@ void CvUnitAI::AI_reserveMove()
 		return;
 	}
 
-	//Check for Properties :
-	int iMaxPropertyUnitsPercent = 20;
-	const PlayerTypes eOwner = getOwner();
-	CvPlayerAI& player = GET_PLAYER(eOwner);
-	const CvArea* pArea = area();
-	int iPropControlInArea = player.AI_totalAreaUnitAIs(pArea, UNITAI_PROPERTY_CONTROL);
-	int iUnitsInArea = player.getNumUnits();
-	if ((iPropControlInArea * 100 / (iUnitsInArea + 1)) < iMaxPropertyUnitsPercent)
-	{
-		for (int iI = 0; iI < GC.getNumPropertyInfos(); iI++)
-		{
-			const PropertyTypes pProperty = (PropertyTypes)iI;
-			if (GC.getPropertyInfo(pProperty).getAIWeight() != 0)
-			{
-				int iCurrentValue = getPropertiesConst()->getValueByProperty(pProperty);
-				if (iCurrentValue > 0)
-				{   //it has properties control 
-					AI_setUnitAIType(UNITAI_PROPERTY_CONTROL);
-					getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, NO_MISSIONAI);
-				}
-			}
-		}
-	}
+	// NB: a RESERVE unit is no longer flipped to UNITAI_PROPERTY_CONTROL here. Property-control
+	// units are produced as that role from creation by the need-based path in
+	// CvCityAI::AI_chooseProduction (and the capability-checked AI_guardCity ejection); poaching
+	// general reserve units caused a RESERVE<->PROPERTY_CONTROL oscillation (the handler bounced
+	// non-capable / not-currently-needed units straight back). See AI_fulfillPropertyControlNeed.
 
 	if (!plot()->isOwned())
 	{
@@ -11227,8 +11219,10 @@ bool CvUnitAI::AI_group(const GroupingParams& params)
 			{
 				joinGroup(pBestUnit->getGroup());
 			}
+			AI_logAct("group", "mergeHere", pBestUnit->plot());
 			return true;
 		}
+		AI_logAct("group", "moveToJoin", pBestUnit->plot());
 		return getGroup()->pushMissionInternal(MISSION_MOVE_TO_UNIT, pBestUnit->getOwner(), pBestUnit->getID(), bCanDefend ? 0 : (MOVE_RECONSIDER_ON_LEAVING_OWNED | MOVE_OUR_TERRITORY | MOVE_WITH_CAUTION), false, false, MISSIONAI_GROUP, NULL, pBestUnit);
 	}
 	return false;
@@ -11575,6 +11569,7 @@ bool CvUnitAI::AI_load(UnitAITypes eUnitAI, MissionAITypes eMissionAI, UnitAITyp
 			}
 			if (isCargo())
 			{
+				AI_logAct("load", "boardTransport", bestTransportUnit->plot());
 				return true;
 			}
 		}
@@ -11605,6 +11600,7 @@ bool CvUnitAI::AI_load(UnitAITypes eUnitAI, MissionAITypes eMissionAI, UnitAITyp
 			if (pSplitGroup != NULL)
 			{
 				CvPlot* pOldPlot = pSplitGroup->plot();
+				AI_logAct("load", "moveToTransport", bestTransportUnit->plot());
 				pSplitGroup->pushMission(MISSION_MOVE_TO_UNIT, bestTransportUnit->getOwner(), bestTransportUnit->getID(), iFlags, false, false, eMissionAI, NULL, bestTransportUnit);
 				bool bMoved = (pSplitGroup->plot() != pOldPlot);
 				if (!bMoved && pOtherGroup != NULL)
@@ -11773,48 +11769,15 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 
 			if (pCity != NULL && plotSet.find(pPlot) != plotSet.end())
 			{
-				//	Check property control attributes first - they may cause us to defend in the city
-				//	regardless of other conditions
-				#define MAX_PROPCONTROL_PERCENT_TO_JOIN 20 //Calvitix Add a limit to the Join to PropControl Team (when already too much units)
-				const PlayerTypes eOwner = getOwner();
-				CvPlayerAI& player = GET_PLAYER(eOwner);
-				const CvArea* pArea = area();
-				int iPropControlInArea = player.AI_totalAreaUnitAIs(pArea, UNITAI_PROPERTY_CONTROL);
-				int iUnitsInArea = player.getNumUnits();
-				if ((iPropControlInArea * 100 / iUnitsInArea) < MAX_PROPCONTROL_PERCENT_TO_JOIN)
-				{
-
-					if (getGroup()->AI_hasBeneficialPropertyEffectForCity(pCity, NO_PROPERTY))
-					{
-						//	We have at least one unit that can help the ciy's property control (aka crime usually)
-						//	Split ou he best such unit and have it defend in the city
-						CvSelectionGroup* pOldGroup = getGroup();
-						CvUnit* pEjectedUnit = getGroup()->AI_ejectBestPropertyManipulator(pCity);
-
-						FAssert(pEjectedUnit != NULL);
-						pEjectedUnit->AI_setUnitAIType(UNITAI_PROPERTY_CONTROL);
-
-						if (atPlot(pCity->plot()))
-						{
-							//	Mark the ejected unit as part of the city garrison
-							pEjectedUnit->getGroup()->AI_setAsGarrison(pCity);
-							pEjectedUnit->getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_GUARD_CITY, NULL);
-							return (pEjectedUnit->getGroup() == pOldGroup || pEjectedUnit == this);
-						}
-						else if (pEjectedUnit->generatePath(pCity->plot(), 0, true))
-						{
-							//	Mark the ejected unit as part of the city garrison
-							pEjectedUnit->getGroup()->AI_setAsGarrison(pCity);
-							pEjectedUnit->getGroup()->pushMission(MISSION_MOVE_TO, pCity->getX(), pCity->getY(), 0, false, false, MISSIONAI_GUARD_CITY, NULL);
-							return (pEjectedUnit->getGroup() == pOldGroup || pEjectedUnit == this);
-						}
-						else
-						{
-							//	If we can't move after all regroup and continue regular defensive processing
-							pEjectedUnit->joinGroup(pOldGroup);
-						}
-					}
-				}
+				// NB: removed the property-control ejection/flip that used to re-type a garrisoned
+				// unit to UNITAI_PROPERTY_CONTROL here. It used a broad capability test
+				// (AI_hasBeneficialPropertyEffectForCity) that disagreed with the handler's narrow
+				// one (getPropertyManipulators), so non-base-manipulator units got flipped and then
+				// bounced straight back -> RESERVE<->PROPERTY_CONTROL oscillation. It also masked
+				// the real need: flipped units made the property "getting better" and filled the 20%
+				// quota, which blocked the need-based production path (CvCityAI::AI_chooseProduction
+				// ~14458). Property-control units now come ONLY from that production path, assigned
+				// the role at creation and never flipped.
 
 				const int iPlotDanger2 = GET_PLAYER(getOwner()).AI_getPlotDanger(pPlot, 2);
 
@@ -11999,6 +11962,7 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 								//	Mark the ejected unit as part of the city garrison
 								pEjectedUnit->getGroup()->AI_setAsGarrison(pCity);
 								pEjectedUnit->AI_setUnitAIType(UNITAI_CITY_DEFENSE);
+								AI_logAct("guardCity", "garrisonHere", pCity->plot());
 								pEjectedUnit->getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_GUARD_CITY, NULL);
 								return (pEjectedUnit->getGroup() == pOldGroup || pEjectedUnit == this);
 							}
@@ -12007,6 +11971,7 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 								//	Mark the ejected unit as part of the city garrison
 								pEjectedUnit->getGroup()->AI_setAsGarrison(pCity);
 								pEjectedUnit->AI_setUnitAIType(UNITAI_CITY_DEFENSE);
+								AI_logAct("guardCity", "moveToGarrison", missionPlot);
 								return (pEjectedUnit->getGroup()->pushMissionInternal(MISSION_MOVE_TO, missionPlot->getX(), missionPlot->getY(), 0, false, false, MISSIONAI_GUARD_CITY, missionPlot));
 							}
 							else
@@ -12025,6 +11990,7 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 					{
 						//This unit is not suited for defense, skip the mission
 						//to protect this city but encourage others to defend instead.
+						AI_logAct("guardCity", "skipDeferToOtherDefenders", plot());
 						getGroup()->pushMission(MISSION_SKIP);
 						finishMoves();
 					}
@@ -12098,9 +12064,11 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 			//to protect this city but encourage others to defend instead.
 			if (atPlot(pBestGuardPlot))
 			{
+				AI_logAct("guardCity", "skipAtSearchedCity", pBestGuardPlot);
 				getGroup()->pushMission(MISSION_SKIP);
 				return true;
 			}
+			AI_logAct("guardCity", "moveToSearchedCity", pBestGuardPlot);
 			return getGroup()->pushMissionInternal(MISSION_MOVE_TO, pBestPlot->getX(), pBestPlot->getY(), 0, false, false, MISSIONAI_GUARD_CITY, NULL);
 		}
 	}
@@ -12738,9 +12706,17 @@ bool CvUnitAI::AI_heal(int iDamagePercent, int iMaxPath)
 			return false;
 		}
 		OutputDebugString("AI_heal: one unit stack\n");
-		if ((plot()->isCity() || healTurns(plot()) == 1) && !isAlwaysHeal())
+		// canHeal() guard: MISSION_HEAL is a no-op when the engine can't actually start a
+		// heal here (canStartMission(MISSION_HEAL) -> canHeal() is false, e.g. healTurns==0
+		// or the unit isWaiting). Without this guard AI_heal still returned true, so the
+		// move cascade thought the unit's turn was spent while it stayed readyToMove() --
+		// the unit then re-decided "heal" every pass, spinning to the iTempHack=50 safety
+		// each turn (and risking the rare never-ending turn). Only claim the heal when it
+		// will actually take; otherwise fall through so the unit does something real / SKIPs.
+		if ((plot()->isCity() || healTurns(plot()) == 1) && !isAlwaysHeal() && canHeal(plot()))
 		{
 			OutputDebugString("AI_heal: city or 1 turn heal\n");
+			AI_logAct("heal", "healInCity", plot());
 			pGroup->pushMission(MISSION_HEAL);
 			return true;
 		}
@@ -12750,11 +12726,16 @@ bool CvUnitAI::AI_heal(int iDamagePercent, int iMaxPath)
 			if (!plot()->isCity() && AI_moveIntoCity(1))
 			{
 				OutputDebugString("AI_heal: one turn city move\n");
+				AI_logAct("heal", "moveToCityToHeal", plot());
 				return true;
 			}
-			OutputDebugString("AI_heal: healing\n");
-			pGroup->pushMission(MISSION_HEAL);
-			return true;
+			if (canHeal(plot()))
+			{
+				OutputDebugString("AI_heal: healing\n");
+				AI_logAct("heal", "healInField", plot());
+				pGroup->pushMission(MISSION_HEAL);
+				return true;
+			}
 		}
 		OutputDebugString("AI_heal: denying heal\n");
 	}
@@ -12808,6 +12789,7 @@ bool CvUnitAI::AI_heal(int iDamagePercent, int iMaxPath)
 				{
 					pGroup = getGroup();
 					bPushedMission = true;
+					AI_logAct("heal", bCanClaimTerritory ? "claimAndHeal" : "healSplit", plot());
 
 					if (bCanClaimTerritory)
 					{
@@ -13684,6 +13666,7 @@ bool CvUnitAI::AI_discover(const bool bFirstResearchOnly)
 		{
 			if (iPercentWasted <= 30 || bFirstResearchOnly && iPercentWasted <= 50)
 			{
+				AI_logAct("discover", "finishFirstTech", plot());
 				return discover(eTech);
 			}
 		}
@@ -13695,6 +13678,7 @@ bool CvUnitAI::AI_discover(const bool bFirstResearchOnly)
 	// Unit cannot finish the tech this turn, so why not speed it up some?
 	if (getDiscoverResearch(eTech) <= GET_TEAM(getTeam()).getResearchLeft(eTech))
 	{
+		AI_logAct("discover", "speedupResearch", plot());
 		return discover(eTech);
 	}
 	// Unit can finish the tech this turn.
@@ -13707,6 +13691,7 @@ bool CvUnitAI::AI_discover(const bool bFirstResearchOnly)
 	// Takes some time to invent, allow some wastage.
 	if (iPercentWasted <= 5 || iPercentWasted <= 15 && GET_PLAYER(getOwner()).getCurrentResearch() == eTech)
 	{
+		AI_logAct("discover", "investAllowWastage", plot());
 		return discover(eTech);
 	}
 	return false;
@@ -14398,6 +14383,7 @@ bool CvUnitAI::AI_construct(int iMaxCount, int iMaxSingleBuildingCount, int iThr
 
 	if (getBestConstructValue(iMaxCount, iMaxSingleBuildingCount, bDecayProbabilities ? 50 : 0, iThreshold, assumeSameValueEverywhere, pBestConstructPlot, pBestPlot, eBestTargetingUnit, eBestBuilding) > 0)
 	{
+		AI_logAct("construct", "buildSpecialBuilding", pBestConstructPlot);
 		return enactConstruct(pBestConstructPlot, pBestPlot, eBestTargetingUnit, eBestBuilding);
 	}
 	return false;
@@ -15454,6 +15440,7 @@ bool CvUnitAI::AI_protect(int iOddsThreshold, int iMaxPathTurns)
 	if (pBestPlot != NULL)
 	{
 		FAssert(!atPlot(pBestPlot));
+		AI_logAct("protect", "attackEnemyInTerritory", pBestPlot);
 		return getGroup()->pushMissionInternal(MISSION_MOVE_TO, pBestPlot->getX(), pBestPlot->getY());
 	}
 
@@ -15610,6 +15597,7 @@ bool CvUnitAI::AI_patrol(bool bIgnoreDanger)
 	if (pBestPlot != NULL)
 	{
 		FAssert(!atPlot(pBestPlot));
+		AI_logAct("patrol", bIgnoreDanger ? "ignoreDanger" : "wander", pBestPlot);
 		return getGroup()->pushMissionInternal(MISSION_MOVE_TO, pBestPlot->getX(), pBestPlot->getY());
 	}
 
@@ -15790,11 +15778,13 @@ bool CvUnitAI::AI_safety(int iRange)
 		if (atPlot(pBestPlot))
 		{
 			OutputDebugString(CvString::format("%S (%d) seeking safety stays put at (%d,%d)...\n", getDescription().c_str(), m_iID, m_iX, m_iY).c_str());
+			AI_logAct("safety", "stayPut", pBestPlot);
 			getGroup()->pushMission(MISSION_SKIP);
 			return true;
 		}
 		OutputDebugString(CvString::format("%S (%d) seeking safety moves to (%d,%d)\n", getDescription().c_str(), m_iID, pBestPlot->getX(), pBestPlot->getY()).c_str());
 		// Check iPass > 1 here because we always increment it as we exit the loop, so it will be 1 higher than when pBestPlot was assigned a value
+		AI_logAct("safety", "fleeToSafePlot", pBestPlot);
 		return getGroup()->pushMissionInternal(MISSION_MOVE_TO, pBestPlot->getX(), pBestPlot->getY(), ((iPass > 1) ? MOVE_IGNORE_DANGER : 0));
 	}
 	return false;
@@ -17204,6 +17194,7 @@ bool CvUnitAI::AI_goToTargetCity(int iFlags, int iMaxPathTurns, const CvCity* pT
 			FAssert(!(pTargetCity->at(pBestPlot)) || 0 != (iFlags & MOVE_THROUGH_ENEMY)); // no suicide missions...
 			if (!atPlot(pBestPlot))
 			{
+				AI_logAct("goToTargetCity", "advanceOnCity", pTargetCity ? pTargetCity->plot() : pBestPlot);
 				return getGroup()->pushMissionInternal(MISSION_MOVE_TO, pBestPlot->getX(), pBestPlot->getY(), iFlags);
 			}
 			else
@@ -17602,6 +17593,10 @@ bool CvUnitAI::AI_cityAttack(int iRange, int iOddsThreshold, bool bFollow)
 	if (pBestPlot)
 	{
 		FAssert(!atPlot(pBestPlot));
+		// [COM/decision] -- the attack target this unit commits to (odds vs the base bar).
+		logCombatAI(2, "[COM/decision] owner=%d unit=%d routine=cityAttack target=(%d,%d) odds=%d base=%d action=attack",
+			(int)getOwner(), getID(), pBestPlot->getX(), pBestPlot->getY(), iBestValue, iOddsThreshold);
+		AI_logAct("cityAttack", "attack", pBestPlot);
 		bool iAttackResult = getGroup()->pushMissionInternal(MISSION_MOVE_TO, pBestPlot->getX(), pBestPlot->getY(), ((bFollow) ? MOVE_DIRECT_ATTACK : 0));
 
 		if (iAttackResult)
@@ -17796,6 +17791,10 @@ bool CvUnitAI::AI_anyAttack(int iRange, int iOddsThreshold, int iMinStack, bool 
 	if (pBestPlot)
 	{
 		FAssert(!atPlot(pBestPlot));
+		// [COM/decision] -- the attack target this unit commits to (odds vs the base bar).
+		logCombatAI(2, "[COM/decision] owner=%d unit=%d routine=anyAttack target=(%d,%d) odds=%d base=%d action=attack",
+			(int)getOwner(), getID(), pBestPlot->getX(), pBestPlot->getY(), iBestValue, iOddsThreshold);
+		AI_logAct("anyAttack", "attack", pBestPlot);
 		return getGroup()->pushMissionInternal(MISSION_MOVE_TO, pBestPlot->getX(), pBestPlot->getY(), ((bFollow) ? MOVE_DIRECT_ATTACK : 0));
 	}
 	return false;
@@ -17902,6 +17901,10 @@ bool CvUnitAI::AI_leaveAttack(int iRange, int iOddsThreshold, int iStrengthThres
 		FAssert(!atPlot(pBestPlot));
 		if (!atPlot(pBestPlot))
 		{
+			// [COM/decision] -- the attack target this unit commits to (odds vs the base bar).
+			logCombatAI(2, "[COM/decision] owner=%d unit=%d routine=leaveAttack target=(%d,%d) odds=%d base=%d action=attack",
+				(int)getOwner(), getID(), pBestPlot->getX(), pBestPlot->getY(), iBestValue, iOddsThreshold);
+			AI_logAct("leaveAttack", "attack", pBestPlot);
 			return getGroup()->pushMissionInternal(MISSION_MOVE_TO, pBestPlot->getX(), pBestPlot->getY(), 0);
 		}
 	}
@@ -18797,11 +18800,13 @@ bool CvUnitAI::AI_pillageRange(int iRange, int iBonusValueThreshold)
 		if (!atPlot(pBestPillagePlot))
 		{
 			FAssert(!atPlot(pBestPlot));
+			AI_logAct("pillageRange", "moveToPillage", pBestPillagePlot);
 			return getGroup()->pushMissionInternal(MISSION_MOVE_TO, pBestPlot->getX(), pBestPlot->getY(), 0, false, false, MISSIONAI_PILLAGE, pBestPillagePlot);
 		}
 
 		if (isEnemy(pBestPillagePlot->getTeam()))
 		{
+			AI_logAct("pillageRange", "pillage", pBestPillagePlot);
 			return getGroup()->pushMissionInternal(MISSION_PILLAGE, pBestPillagePlot->getX(), pBestPillagePlot->getY(), 0, false, false, MISSIONAI_PILLAGE, pBestPillagePlot);
 		}
 	}
@@ -21885,6 +21890,7 @@ bool CvUnitAI::AI_retreatToCity(bool bPrimary, bool bAirlift, int iMaxPath)
 		{
 			joinGroup(NULL);
 		}
+		AI_logAct("retreatToCity", "alreadySafeInCity", plot());
 		getGroup()->pushMission(MISSION_SKIP);
 		return true;
 	}
@@ -21971,6 +21977,7 @@ bool CvUnitAI::AI_retreatToCity(bool bPrimary, bool bAirlift, int iMaxPath)
 			{
 				joinGroup(NULL);
 			}
+			AI_logAct("retreatToCity", "stayInThreatenedCity", plot());
 			getGroup()->pushMission(MISSION_SKIP);
 			return true;
 		}
@@ -21983,6 +21990,7 @@ bool CvUnitAI::AI_retreatToCity(bool bPrimary, bool bAirlift, int iMaxPath)
 	if (pBestPlot != NULL)
 	{
 		FAssert(!atPlot(pBestPlot));
+		AI_logAct("retreatToCity", "moveToCity", pBestPlot);
 		return getGroup()->pushMissionInternal(MISSION_MOVE_TO, pBestPlot->getX(), pBestPlot->getY(), iPass > 0 ? MOVE_IGNORE_DANGER : 0);
 	}
 
@@ -21993,6 +22001,7 @@ bool CvUnitAI::AI_retreatToCity(bool bPrimary, bool bAirlift, int iMaxPath)
 		{
 			joinGroup(NULL);
 		}
+		AI_logAct("retreatToCity", "holdFriendlyCity", plot());
 		getGroup()->pushMission(MISSION_SKIP);
 		return true;
 	}
@@ -22083,6 +22092,7 @@ bool CvUnitAI::AI_pickup(UnitAITypes eUnitAI, bool bCountProduction, int iMaxPat
 					{
 						if (GET_PLAYER(getOwner()).AI_plotTargetMissionAIs(pCity->plot(), MISSIONAI_PICKUP, getGroup()) < ((iCount + (getGroup()->getCargoSpace() - 1)) / std::max(1, getGroup()->getCargoSpace())))
 						{
+							AI_logAct("pickup", "waitForCargo", pCity->plot());
 							getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_PICKUP, pCity->plot());
 							return true;
 						}
@@ -22091,6 +22101,7 @@ bool CvUnitAI::AI_pickup(UnitAITypes eUnitAI, bool bCountProduction, int iMaxPat
 					{
 						if (GET_PLAYER(getOwner()).AI_plotTargetMissionAIsinCargoVolume(pCity->plot(), MISSIONAI_PICKUP, getGroup()) < (((iCount * 100) + (getGroup()->getCargoSpace() - 100)) / std::max(1, getGroup()->getCargoSpace())))
 						{
+							AI_logAct("pickup", "waitForCargo", pCity->plot());
 							getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_PICKUP, pCity->plot());
 							return true;
 						}
@@ -22233,6 +22244,7 @@ bool CvUnitAI::AI_pickup(UnitAITypes eUnitAI, bool bCountProduction, int iMaxPat
 		if (!isWaitingOnUnitAIAny())
 		{
 			FAssert(!atPlot(pBestPlot));
+			AI_logAct("pickup", "moveToPickup", pBestPickupPlot);
 			return getGroup()->pushMissionInternal(MISSION_MOVE_TO, pBestPlot->getX(), pBestPlot->getY(), MOVE_AVOID_ENEMY_WEIGHT_3, false, false, MISSIONAI_PICKUP, pBestPickupPlot);
 		}
 		else
@@ -28531,9 +28543,12 @@ bool CvUnitAI::AI_fulfillPropertyControlNeed()
 
 			if (iNbControlForces > MAX_TARGET_CONTROL_MAINTAIN)
 			{
-				AI_setUnitAIType(UNITAI_RESERVE);
-				getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, NO_MISSIONAI);
-				return false;
+				// Not needed right now: hold in place AS a property-control unit (the dedicated
+				// pool waits in-role) instead of flipping to RESERVE. That flip, paired with the
+				// (now removed) reserve-side conversion, caused the RESERVE<->PROPERTY_CONTROL
+				// oscillation. Property units keep their role from creation and are never flipped.
+				getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_PROPERTY_CONTROL_MAINTAIN, plot());
+				return true;
 			}
 
 
@@ -28566,9 +28581,10 @@ bool CvUnitAI::AI_fulfillPropertyControlNeed()
 		}
 	}
 	else
-	{   //No city found
-		AI_setUnitAIType(UNITAI_RESERVE);
-		getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, NO_MISSIONAI);
+	{   //No city needs control right now: hold in place as a property-control unit (the dedicated
+		//pool waits in-role); do NOT flip to RESERVE (that caused the oscillation).
+		getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_PROPERTY_CONTROL_MAINTAIN, plot());
+		return true;
 	}
 	return false;
 }
