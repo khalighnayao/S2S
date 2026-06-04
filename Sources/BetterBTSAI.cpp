@@ -98,6 +98,16 @@ void logWarAI(int level, const char* format, ...)
 		static char buf[2048];
 		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
 		gDLL->logMsg("WarAI.log", buf);
+// AI unit behaviour logging -- [UNT/*] tags, gated by gUnitLogLevel. Surfaces the
+// per-unit AI routine dispatch and UNITAI role changes (CvUnitAI). Part of the
+// per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/[DIP]/[UNT]).
+void logUnitAI(int level, const char* format, ...)
+{
+	if (level <= gUnitLogLevel)
+	{
+		static char buf[2048];
+		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
+		gDLL->logMsg("UnitAI.log", buf);
 
 		// Echo to debugger
 		strcat(buf, "\n");
