@@ -492,7 +492,7 @@ public:
 	int AI_getUnitCombatWeight(UnitCombatTypes eUnitCombat) const;
 
 #ifdef CVARMY_BREAKSAVE
-	void AI_formArmies();   // Nouvelle fonction de création des armées
+	void AI_formArmies();   // Nouvelle fonction de crï¿½ation des armï¿½es
 #endif
 
 	/**
@@ -743,6 +743,7 @@ protected:
 	void AI_invalidateCloseBordersAttitudeCache();
 
 	friend class CvGameTextMgr;
+	friend class CvDecisionAI;
 
 #ifdef PLOT_DANGER_CACHING
 public:
