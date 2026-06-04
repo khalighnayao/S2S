@@ -4,6 +4,7 @@
 #include "FProfiler.h"
 
 #include "CvGameCoreDLL.h"
+#include "BetterBTSAI.h"
 #include "CvCity.h"
 #include "CvGlobals.h"
 #include "CvMap.h"
@@ -1047,6 +1048,19 @@ void CvSelectionGroupAI::AI_setMissionAI(MissionAITypes eNewMissionAI, const CvP
 	PROFILE_FUNC();
 	const CvPlot* oldPlot = AI_getMissionAIPlot();
 	const MissionAITypes eOldMissionAI = m_eMissionAIType;
+
+	// [UNT/mission] -- a group/unit commits to a mission AI + target. This is the
+	// authoritative per-unit decision outcome and the safe place to log it (the
+	// group is valid here, unlike post-routine state in doUnitAIMove where a unit
+	// may have been consumed). The CvUnitAI move loops are the prime refactor
+	// target, so trace every committed mission intent here.
+	if (eNewMissionAI != NO_MISSIONAI && (eNewMissionAI != eOldMissionAI || newPlot != oldPlot))
+	{
+		const CvUnit* pHead = getHeadUnit();
+		logUnitAI(2, "[UNT/mission] owner=%d unit=%d unitAI=%d missionAI=%d -> target=(%d,%d) stack=%d",
+			(int)getOwner(), pHead ? pHead->getID() : -1, pHead ? (int)pHead->AI_getUnitAIType() : -1,
+			(int)eNewMissionAI, newPlot ? newPlot->getX() : -1, newPlot ? newPlot->getY() : -1, getNumUnits());
+	}
 
 	if (oldPlot && eOldMissionAI != NO_MISSIONAI)
 	{
