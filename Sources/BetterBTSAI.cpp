@@ -1,4 +1,4 @@
-﻿#include "CvGameCoreDLL.h"
+#include "CvGameCoreDLL.h"
 #include "CvGlobals.h"
 
 // Log levels:
@@ -98,26 +98,30 @@ void logWarAI(int level, const char* format, ...)
 		static char buf[2048];
 		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
 		gDLL->logMsg("WarAI.log", buf);
+
+		// Echo to debugger
+		strcat(buf, "\n");
+		OutputDebugString(buf);
+	}
+}
+
 // AI unit behaviour logging -- [UNT/*] tags, gated by gUnitLogLevel. Surfaces the
 // per-unit AI routine dispatch and UNITAI role changes (CvUnitAI). Part of the
 // per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/[DIP]/[UNT]).
 void logUnitAI(int level, const char* format, ...)
-// AI group/army coordination logging -- [GRP/*] tags, gated by gUnitLogLevel.
-// Surfaces above-unit coordination (CvArmy missions/leader, group splits) -- the
-// seam from which CvPlayer-level unit orchestration should grow. Part of the
-// per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/[DIP]/[UNT]/[GRP]).
-void logGroupAI(int level, const char* format, ...)
-// AI combat decision logging -- [COM/*] tags, gated by gUnitLogLevel. Surfaces the
-// attack odds the AI computes and the go/no-go threshold it requires (CvSelectionGroupAI
-// AI_attackOdds / CvUnitAI AI_finalOddsThreshold). Part of the per-subsystem tagged-log
-// family ([WAI]/[HAI]/[DAI]/[DIP]/[UNT]/[GRP]/[ESP]/[FND]/[COM]).
-void logCombatAI(int level, const char* format, ...)
 {
 	if (level <= gUnitLogLevel)
 	{
 		static char buf[2048];
 		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
 		gDLL->logMsg("UnitAI.log", buf);
+
+		// Echo to debugger
+		strcat(buf, "\n");
+		OutputDebugString(buf);
+	}
+}
+
 // AI city production decision logging -- [CIT/*] tags, gated by gCityLogLevel.
 // Surfaces the production-choice context and the order a city commits to
 // (CvCityAI). Part of the per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/
@@ -129,11 +133,48 @@ void logCityAI(int level, const char* format, ...)
 		static char buf[2048];
 		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
 		gDLL->logMsg("CityAI.log", buf);
+
+		// Echo to debugger
+		strcat(buf, "\n");
+		OutputDebugString(buf);
+	}
+}
+
+// AI group/army coordination logging -- [GRP/*] tags, gated by gUnitLogLevel.
+// Surfaces above-unit coordination (CvArmy missions/leader, group splits) -- the
+// seam from which CvPlayer-level unit orchestration should grow. Part of the
+// per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/[DIP]/[UNT]/[GRP]).
+void logGroupAI(int level, const char* format, ...)
+{
+	if (level <= gUnitLogLevel)
+	{
+		static char buf[2048];
+		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
 		gDLL->logMsg("GroupAI.log", buf);
+
+		// Echo to debugger
+		strcat(buf, "\n");
+		OutputDebugString(buf);
+	}
+}
+
 // AI espionage decision logging -- [ESP/*] tags, gated by gPlayerLogLevel.
 // Surfaces which espionage mission a spy chooses (CvPlayerAI). Part of the
 // per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/[DIP]/[UNT]/[GRP]/[ESP]).
 void logEspionageAI(int level, const char* format, ...)
+{
+	if (level <= gPlayerLogLevel)
+	{
+		static char buf[2048];
+		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
+		gDLL->logMsg("EspionageAI.log", buf);
+
+		// Echo to debugger
+		strcat(buf, "\n");
+		OutputDebugString(buf);
+	}
+}
+
 // AI city-founding decision logging -- [FND/*] tags, gated by gPlayerLogLevel.
 // Surfaces which city site a settler commits to (CvUnitAI::AI_found). Part of the
 // per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/[DIP]/[UNT]/[GRP]/[ESP]/[FND]).
@@ -143,14 +184,32 @@ void logFoundAI(int level, const char* format, ...)
 	{
 		static char buf[2048];
 		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
-		gDLL->logMsg("EspionageAI.log", buf);
 		gDLL->logMsg("FoundAI.log", buf);
+
+		// Echo to debugger
+		strcat(buf, "\n");
+		OutputDebugString(buf);
+	}
+}
+
+// AI combat decision logging -- [COM/*] tags, gated by gUnitLogLevel. Surfaces the
+// attack odds the AI computes and the go/no-go threshold it requires (CvSelectionGroupAI
+// AI_attackOdds / CvUnitAI AI_finalOddsThreshold). Part of the per-subsystem tagged-log
+// family ([WAI]/[HAI]/[DAI]/[DIP]/[UNT]/[GRP]/[ESP]/[FND]/[COM]).
+void logCombatAI(int level, const char* format, ...)
+{
+	if (level <= gUnitLogLevel)
+	{
+		static char buf[2048];
+		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
 		gDLL->logMsg("CombatAI.log", buf);
 
 		// Echo to debugger
 		strcat(buf, "\n");
 		OutputDebugString(buf);
 	}
+}
+
 // Game session header -- [GAME/*] -> GameInfo.log. Written once on game start/load
 // (from CvGame::onFinalInitialized) so every other AI log can be read against the
 // active options/rules/setup. No level gate; the caller decides when to emit.
