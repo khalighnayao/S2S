@@ -482,6 +482,11 @@ void CvUnitAI::doUnitAIMove()
 		return;
 	}
 
+	// [UNT/move] -- per-unit AI routine dispatch: which UNITAI behaviour the unit
+	// runs this turn (the contract/merge early-outs above are handled separately).
+	logUnitAI(2, "[UNT/move] owner=%d unit=%d type=%d at=(%d,%d) stack=%d",
+		(int)getOwner(), getID(), (int)AI_getUnitAIType(), getX(), getY(), getGroup()->getNumUnits());
+
 	switch (AI_getUnitAIType())
 	{
 	case UNITAI_UNKNOWN:
@@ -1450,6 +1455,10 @@ void CvUnitAI::AI_setUnitAIType(UnitAITypes eNewValue)
 
 	if (AI_getUnitAIType() != eNewValue)
 	{
+		// [UNT/role] -- unit changes its AI role (a deliberate reassignment decision).
+		logUnitAI(1, "[UNT/role] owner=%d unit=%d UNITAI %d -> %d",
+			(int)getOwner(), getID(), (int)AI_getUnitAIType(), (int)eNewValue);
+
 		area()->changeNumAIUnits(getOwner(), AI_getUnitAIType(), -1);
 		GET_PLAYER(getOwner()).AI_changeNumAIUnits(AI_getUnitAIType(), -1);
 

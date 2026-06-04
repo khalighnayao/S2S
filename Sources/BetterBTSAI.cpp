@@ -88,6 +88,23 @@ void logDiploAI(int level, const char* format, ...)
 	}
 }
 
+// AI unit behaviour logging -- [UNT/*] tags, gated by gUnitLogLevel. Surfaces the
+// per-unit AI routine dispatch and UNITAI role changes (CvUnitAI). Part of the
+// per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/[DIP]/[UNT]).
+void logUnitAI(int level, const char* format, ...)
+{
+	if (level <= gUnitLogLevel)
+	{
+		static char buf[2048];
+		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
+		gDLL->logMsg("UnitAI.log", buf);
+
+		// Echo to debugger
+		strcat(buf, "\n");
+		OutputDebugString(buf);
+	}
+}
+
 void logAIJson(CvWString type, CvWString identifier, CvWString squirrel, CvWString message)
 {
 	const std::wstring data = "{ type: \"" + type + "\" name: \"" + identifier + "\" function: \" " + squirrel + "\" message: \"" + message + "\" }";
