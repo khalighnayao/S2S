@@ -13,11 +13,11 @@ AI *picks* the order.
 > Line numbers are anchors against the source at time of writing; they drift, so
 > treat them as "around line N" and confirm against the named function.
 
-Related reference docs: [`CvCityAI`](../Sources/docs/CvCityAI.md),
-[`CvPlayerAI`](../Sources/docs/CvPlayerAI.md),
-[`CvUnitAI`](../Sources/docs/CvUnitAI.md),
-[`CvContractBroker`](../Sources/docs/CvContractBroker.md),
-[`CvGameAI`](../Sources/docs/CvGameAI.md).
+Related reference docs: [`CvCityAI`](CvCityAI.md),
+[`CvPlayerAI`](CvPlayerAI.md),
+[`CvUnitAI`](CvUnitAI.md),
+[`CvContractBroker`](CvContractBroker.md),
+[`CvGameAI`](CvGameAI.md).
 
 ---
 
@@ -135,7 +135,7 @@ returns and what the unit's tactical AI dispatches on every turn.
 ## 3. The production decision: `AI_chooseProduction()`
 
 **Entry:** `CvCityAI::AI_chooseProduction()`, `Sources/CvCityAI.cpp:776`, called
-from `AI_doTurn` (see [`CvCityAI`](../Sources/docs/CvCityAI.md) "Turn Entry
+from `AI_doTurn` (see [`CvCityAI`](CvCityAI.md) "Turn Entry
 Point").
 
 The function is a **priority cascade**: ~85 numbered decision branches, each
@@ -282,7 +282,7 @@ These functions sit between "I want role X" and "queue a build order"
    iUnitStrength, criteria)`. Another city may win the contract and build it. This
    is gated by a per-city cap (`m_iRequestedUnit`) and a feasibility check
    (`bestBuildableUnitForAIType != NO_UNIT`). See
-   [`CvContractBroker`](../Sources/docs/CvContractBroker.md). If tendering is off
+   [`CvContractBroker`](CvContractBroker.md). If tendering is off
    or the unit can only be built here, it falls through.
 3. **Fall through** (`8819`): `AI_chooseUnitImmediate`.
 
@@ -512,6 +512,6 @@ re-evaluates group membership (`joinGroup(NULL)`). `AI_getUnitAIType`
 ---
 
 *Companion docs:* [`doProduction.md`](doProduction.md) (advancing/completing an
-order), [`CvCityAI`](../Sources/docs/CvCityAI.md),
-[`CvPlayerAI`](../Sources/docs/CvPlayerAI.md),
-[`CvUnitAI`](../Sources/docs/CvUnitAI.md).
+order), [`CvCityAI`](CvCityAI.md),
+[`CvPlayerAI`](CvPlayerAI.md),
+[`CvUnitAI`](CvUnitAI.md).

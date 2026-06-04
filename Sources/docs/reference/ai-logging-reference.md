@@ -3,7 +3,7 @@
 Developer reference for the structured AI decision logs. Every AI subsystem writes a
 `<Domain>AI.log` of grep-friendly, tagged lines so you can see *what the AI decided and
 why* without a debugger. This complements the design plan in
-[`ai-logging-rollout.md`](ai-logging-rollout.md) — that one is the rollout plan, this one
+[`ai-logging-rollout.md`](../plans/ai-logging-rollout.md) — that one is the rollout plan, this one
 documents the system as it actually exists.
 
 The logging is **observation only**: it never changes AI behaviour. It has, however, been
