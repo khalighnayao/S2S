@@ -88,6 +88,23 @@ void logDiploAI(int level, const char* format, ...)
 	}
 }
 
+// AI team war/strategy decision logging -- [WAR/*] tags, gated by gTeamLogLevel.
+// Surfaces warplan transitions and per-area military posture (CvTeamAI). Part of
+// the per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/[DIP]/[WAR]).
+void logWarAI(int level, const char* format, ...)
+{
+	if (level <= gTeamLogLevel)
+	{
+		static char buf[2048];
+		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
+		gDLL->logMsg("WarAI.log", buf);
+
+		// Echo to debugger
+		strcat(buf, "\n");
+		OutputDebugString(buf);
+	}
+}
+
 void logAIJson(CvWString type, CvWString identifier, CvWString squirrel, CvWString message)
 {
 	const std::wstring data = "{ type: \"" + type + "\" name: \"" + identifier + "\" function: \" " + squirrel + "\" message: \"" + message + "\" }";
