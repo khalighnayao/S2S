@@ -2,7 +2,7 @@
 
 Notes for people working on the **DLL and engine** (C++/Python internals).
 Player- and end-user-facing documentation lives separately in the top-level
-[`Docs/`](../../Docs/) folder — keep the two apart.
+[`docs/`](../../docs/) folder — keep the two apart.
 
 This folder is split by intent:
 
@@ -60,4 +60,4 @@ This folder is split by intent:
 
 - A note about **how existing code behaves** → `reference/`.
 - A note about **a change you intend to make** (plan, scope, rollout, removal) → `plans/`.
-- **Player-facing** rules, manuals, FAQs, key bindings → top-level [`Docs/`](../../Docs/).
+- **Player-facing** rules, manuals, FAQs, key bindings → top-level [`docs/`](../../docs/).
