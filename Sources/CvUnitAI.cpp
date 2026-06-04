@@ -12757,9 +12757,17 @@ bool CvUnitAI::AI_heal(int iDamagePercent, int iMaxPath)
 			return false;
 		}
 		OutputDebugString("AI_heal: one unit stack\n");
-		if ((plot()->isCity() || healTurns(plot()) == 1) && !isAlwaysHeal())
+		// canHeal() guard: MISSION_HEAL is a no-op when the engine can't actually start a
+		// heal here (canStartMission(MISSION_HEAL) -> canHeal() is false, e.g. healTurns==0
+		// or the unit isWaiting). Without this guard AI_heal still returned true, so the
+		// move cascade thought the unit's turn was spent while it stayed readyToMove() --
+		// the unit then re-decided "heal" every pass, spinning to the iTempHack=50 safety
+		// each turn (and risking the rare never-ending turn). Only claim the heal when it
+		// will actually take; otherwise fall through so the unit does something real / SKIPs.
+		if ((plot()->isCity() || healTurns(plot()) == 1) && !isAlwaysHeal() && canHeal(plot()))
 		{
 			OutputDebugString("AI_heal: city or 1 turn heal\n");
+			AI_logAct("heal", "healInCity", plot());
 			pGroup->pushMission(MISSION_HEAL);
 			return true;
 		}
@@ -12769,11 +12777,16 @@ bool CvUnitAI::AI_heal(int iDamagePercent, int iMaxPath)
 			if (!plot()->isCity() && AI_moveIntoCity(1))
 			{
 				OutputDebugString("AI_heal: one turn city move\n");
+				AI_logAct("heal", "moveToCityToHeal", plot());
 				return true;
 			}
-			OutputDebugString("AI_heal: healing\n");
-			pGroup->pushMission(MISSION_HEAL);
-			return true;
+			if (canHeal(plot()))
+			{
+				OutputDebugString("AI_heal: healing\n");
+				AI_logAct("heal", "healInField", plot());
+				pGroup->pushMission(MISSION_HEAL);
+				return true;
+			}
 		}
 		OutputDebugString("AI_heal: denying heal\n");
 	}
@@ -12827,6 +12840,7 @@ bool CvUnitAI::AI_heal(int iDamagePercent, int iMaxPath)
 				{
 					pGroup = getGroup();
 					bPushedMission = true;
+					AI_logAct("heal", bCanClaimTerritory ? "claimAndHeal" : "healSplit", plot());
 
 					if (bCanClaimTerritory)
 					{
