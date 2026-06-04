@@ -145,6 +145,18 @@ void logFoundAI(int level, const char* format, ...)
 		strcat(buf, "\n");
 		OutputDebugString(buf);
 	}
+// Game session header -- [GAME/*] -> GameInfo.log. Written once on game start/load
+// (from CvGame::onFinalInitialized) so every other AI log can be read against the
+// active options/rules/setup. No level gate; the caller decides when to emit.
+void logGameInfo(const char* format, ...)
+{
+	static char buf[2048];
+	_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
+	gDLL->logMsg("GameInfo.log", buf);
+
+	// Echo to debugger
+	strcat(buf, "\n");
+	OutputDebugString(buf);
 }
 
 void logAIJson(CvWString type, CvWString identifier, CvWString squirrel, CvWString message)
