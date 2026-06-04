@@ -13512,12 +13512,10 @@ bool CvPlayer::isUnitMaxedOut(const UnitTypes eIndex, const int iExtra) const
 	{
 		return false;
 	}
-	/* Toffer: FAssertMsg(GC.getUnitInfo(eIndex).getMaxPlayerInstances() == 0 ...
-	Special assert exception rule for the initial settler unit that is never trainable.
-	Settler units are trainable even when their hammer cost is set to -1 due to their unique hammer cost calculation. */
-	FAssertMsg(GC.getUnitInfo(eIndex).getMaxPlayerInstances() == 0 || getUnitCount(eIndex) <= GC.getUnitInfo(eIndex).getMaxPlayerInstances(),
-		CvString::format("getUnitCount=%d is expected not to be greater than MaxPlayerInstances=%d for %s",
-		getUnitCount(eIndex), GC.getUnitInfo(eIndex).getMaxPlayerInstances(), GC.getUnitInfo(eIndex).getType()).c_str());
+	// NB: the national-unit cap is ERA-SCALED below (iMaxUnits), so a stale assert against the
+	// raw getMaxPlayerInstances() base wrongly fired thousands of times per turn (e.g. 7 assassins
+	// vs base 5 in a later era where the real cap is >=15). The meaningful check is against the
+	// scaled cap and lives just before the return.
 
 
 //    this scale will be used for national units only... the idea is to start them 5 at prehistoric and scale by 5 per age...
@@ -13534,6 +13532,12 @@ bool CvPlayer::isUnitMaxedOut(const UnitTypes eIndex, const int iExtra) const
    		iMaxUnits += iEra * 5;
    	}
    }
+
+   // Check against the ACTUAL (era-scaled) cap, not the raw base. Exceeding it slightly is
+   // still possible via non-training acquisition (upgrade/capture), so this is a soft signal.
+   FAssertMsg(iMaxUnits == 0 || getUnitCount(eIndex) <= iMaxUnits,
+       CvString::format("getUnitCount=%d exceeds era-scaled cap=%d for %s",
+       getUnitCount(eIndex), iMaxUnits, GC.getUnitInfo(eIndex).getType()).c_str());
 
    return (getUnitCount(eIndex) + iExtra) >= iMaxUnits;
 }

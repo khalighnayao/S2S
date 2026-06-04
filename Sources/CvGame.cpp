@@ -4695,7 +4695,16 @@ void CvGame::setHandicapType(HandicapTypes eHandicap)
 				{
 					for (int j = 0; j < MAX_PLAYERS; j++)
 					{
-						GET_PLAYER((PlayerTypes)j).setUnitExtraCost((UnitTypes)i, GET_PLAYER((PlayerTypes)j).getNewCityProductionValue());
+						// Skip empty/leaderless player slots: getNewCityProductionValue() ->
+						// getProductionModifier() -> hasTrait() asserts (getLeaderType() >= 0) for
+						// unused slots, and dead/never-used players have no city production to cost.
+						// On a mature-game load (averageHandicaps -> setHandicapType) the unguarded
+						// loop fired this assert hundreds of times, bloating Asserts.log to ~hundreds
+						// of MB and stalling the load on Assert builds.
+						if (GET_PLAYER((PlayerTypes)j).isAlive())
+						{
+							GET_PLAYER((PlayerTypes)j).setUnitExtraCost((UnitTypes)i, GET_PLAYER((PlayerTypes)j).getNewCityProductionValue());
+						}
 					}
 				}
 			}
