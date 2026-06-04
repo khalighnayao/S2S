@@ -27558,7 +27558,7 @@ int CvUnit::getPowerValueTotal() const
 void CvUnit::setSMPowerValue(bool bForLoad)
 {
 	const int oldSMPowerValue = m_iSMPowerValue;
-	const int m_iSMPowerValue = applySMRank(m_pUnitInfo->getPowerValue(), getSizeMattersOffsetValue(), GC.getSIZE_MATTERS_MOST_MULTIPLIER());
+	m_iSMPowerValue = applySMRank(m_pUnitInfo->getPowerValue(), getSizeMattersOffsetValue(), GC.getSIZE_MATTERS_MOST_MULTIPLIER());
 	FASSERT_NOT_NEGATIVE(m_iSMPowerValue);
 	if (!bForLoad)
 	{
