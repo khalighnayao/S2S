@@ -126,6 +126,9 @@ void CvContractBroker::lookingForWork(const CvUnit* pUnit, int iMinPriority)
 		return;
 	}
 
+	// [CTB/avail] -- a unit advertises itself to the broker as available for work.
+	log(2, "[CTB/avail] unit=%d type=%d minPriority=%d", pUnit->getID(), (int)pUnit->getUnitType(), iMinPriority);
+
 	advertisingUnit	unitDetails;
 	unitDetails.eUnitType = pUnit->getUnitType();
 
@@ -225,6 +228,10 @@ void CvContractBroker::advertiseWork(int iPriority, unitCapabilities eUnitFlags,
 		if (wr != NULL) return;
 	}
 
+	// [CTB/work] -- a job is advertised to the broker (a need for a unit).
+	log(2, "[CTB/work] priority=%d at=(%d,%d) aiType=%d strength=%d join=%d",
+		iPriority, iAtX, iAtY, (int)eAIType, iUnitStrength, pJoinUnit ? pJoinUnit->getID() : -1);
+
 	//	First check that there are not already units on the way to meet this need
 	//	else concurrent builds will get queued while they are in transit
 	foreach_(const CvSelectionGroup * pLoopSelectionGroup, GET_PLAYER(m_eOwner).groups())
@@ -318,7 +325,7 @@ void CvContractBroker::advertiseTender(const CvCity* pCity, int iMinPriority)
 {
 	PROFILE_FUNC();
 
-	int iNumTenders = 1; // par défaut
+	int iNumTenders = 1; // par dï¿½faut
 
 	iNumTenders = 1 + (pCity->getPopulation() / 10) + (pCity->getYieldRate(YIELD_PRODUCTION) / 100);
 	if (pCity->isCapital())
@@ -771,6 +778,11 @@ bool CvContractBroker::makeContract(CvUnit* pUnit, int& iAtX, int& iAtY, CvUnit*
 
 				pJoinUnit = findUnit(contractedRequest->iUnitId);
 				FAssert(NULL != pJoinUnit);
+				// [CTB/contract] -- the broker matches a unit to a work request (the
+				// key decision: this unit is dispatched to satisfy that need).
+				log(1, "[CTB/contract] unit=%d -> work at (%d,%d) priority=%d joinUnit=%d",
+					pUnit->getID(), iAtX, iAtY, contractedRequest->iPriority,
+					pJoinUnit ? pJoinUnit->getID() : -1);
 				return true;
 			}
 			return false;
