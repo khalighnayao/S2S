@@ -88,6 +88,24 @@ void logDiploAI(int level, const char* format, ...)
 	}
 }
 
+// AI group/army coordination logging -- [GRP/*] tags, gated by gUnitLogLevel.
+// Surfaces above-unit coordination (CvArmy missions/leader, group splits) -- the
+// seam from which CvPlayer-level unit orchestration should grow. Part of the
+// per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/[DIP]/[UNT]/[GRP]).
+void logGroupAI(int level, const char* format, ...)
+{
+	if (level <= gUnitLogLevel)
+	{
+		static char buf[2048];
+		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
+		gDLL->logMsg("GroupAI.log", buf);
+
+		// Echo to debugger
+		strcat(buf, "\n");
+		OutputDebugString(buf);
+	}
+}
+
 void logAIJson(CvWString type, CvWString identifier, CvWString squirrel, CvWString message)
 {
 	const std::wstring data = "{ type: \"" + type + "\" name: \"" + identifier + "\" function: \" " + squirrel + "\" message: \"" + message + "\" }";

@@ -4,6 +4,7 @@
 #include "FProfiler.h"
 
 #include "CvGameCoreDLL.h"
+#include "BetterBTSAI.h"
 #include "CvCity.h"
 #include "CvGlobals.h"
 #include "CvMap.h"
@@ -60,6 +61,11 @@ namespace {
 
 	void separateIf(CvSelectionGroup* group, bst::function<bool(const CvUnit*)> predicateFn)
 	{
+		// Capture identity up front: a full separate empties the group, which can
+		// delete it during the last joinGroup(NULL) -- so don't deref it afterwards.
+		const PlayerTypes eOwner = group->getOwner();
+		const int iGroupId = group->getID();
+		int iSeparated = 0;
 		foreach_(CvUnit* unit, group->units() | filtered(predicateFn))
 		{
 			unit->joinGroup(NULL);
@@ -68,6 +74,13 @@ namespace {
 			{
 				unit->getGroup()->pushMission(MISSION_SKIP);
 			}
+			iSeparated++;
+		}
+		// [GRP/split] -- a stack breaks up (units peeled off into their own groups).
+		if (iSeparated > 0)
+		{
+			logGroupAI(2, "[GRP/split] owner=%d group=%d separated=%d",
+				(int)eOwner, iGroupId, iSeparated);
 		}
 	}
 }
