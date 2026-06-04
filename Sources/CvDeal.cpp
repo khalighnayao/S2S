@@ -4,6 +4,7 @@
 #include "FProfiler.h"
 
 #include "CvGameCoreDLL.h"
+#include "BetterBTSAI.h"
 #include "CvBuildingInfo.h"
 #include "CvBonusInfo.h"
 #include "CvDeal.h"
@@ -776,6 +777,11 @@ bool CvDeal::startTrade(TradeData trade, PlayerTypes eFromPlayer, PlayerTypes eT
 {
 	PROFILE_EXTRA_FUNC();
 	bool bSave = false;
+
+	// [DIP/trade] -- realized trade item being applied (the "what was exchanged"
+	// trace; pairs with the [DIP/cand]/[DIP/decision] valuation in CvPlayerAI).
+	logDiploAI(2, "[DIP/trade] from=%d to=%d item=%d data=%d",
+		(int)eFromPlayer, (int)eToPlayer, (int)trade.m_eItemType, trade.m_iData);
 
 	switch (trade.m_eItemType)
 	{
