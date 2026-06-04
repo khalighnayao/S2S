@@ -25,7 +25,14 @@
    machinery. The release hooks in `CvSelectionGroupAI::AI_setMissionAI` and
    `CvUnit::killUnconditional` are idempotent no-ops when no claims exist.
 
-All state is turn-scoped; `onTurnBegin` wipes everything.
+5. **Stateless worker helpers** — `shouldImproveCity` and
+   `getFastestBuildForImprovementType`, consolidated from the former
+   `CvWorkerService` experiment (now deleted). Static because they carry no
+   per-player state; they live here so all worker-planning logic sits in one
+   module. The dead `CvWorkerService::IsPlotValid` (no callers) was dropped in
+   the move.
+
+All instance state is turn-scoped; `onTurnBegin` wipes everything.
 
 ## Wiring
 
@@ -329,6 +336,26 @@ itself is retained for non-AI callers (`CvGameInterface` UI hints,
 2. **Mission push** — `MISSION_MOVE_TO` vs `MISSION_ROUTE_TO` chosen by the
    same rules the legacy `AI_improveCity` used (own-city plot, route-builds,
    movement-cost terrain). `AI_betterPlotBuild` substitution kept.
+
+### Persistent target-city commitment
+
+City *selection* lives in `CvUnitAI::AI_workerMove`, not in `improveCity`
+(which only ever touches plots whose `getWorkingCity() == pCity`). A worker
+re-runs `AI_workerMove` every time its mission queue empties — i.e. after
+*every* single build, since `improveCity` queues only one
+`MOVE_TO/ROUTE_TO` + one `MISSION_BUILD`. The legacy selection picked the city
+from the tile under the worker's feet (`plot()->getWorkingCity()`), so a worker
+crossing another city's working radius mid-job (overlapping radii, or just
+passing between cities) would abandon its assignment and start improving the
+city it strayed into.
+
+The fix is a per-unit commitment, `CvUnitAI::m_iTargetImproveCity`
+(serialized; resolved via `AI_getTargetImproveCity`, which drops the commitment
+if the city is razed/captured or on a different area). `AI_workerMove` tries
+the committed city first; `AI_improveCity` re-commits on every success, and
+`AI_nextCityToImprove` commits to the city it routes toward. When the committed
+city has no work left for this worker, `improveCity` returns false and the
+commitment is cleared so the worker re-picks normally.
 
 ### Inner pick: city-precomputed reuse
 

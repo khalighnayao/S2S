@@ -1264,3 +1264,60 @@ bool CvWorkerAI::improveCity(CvUnitAI* unit, CvCity* pCity)
 	(void)iBestPathTurns; // currently informational only; shared helper logs path-independent fields
 	return pushBuildMission(unit, pBestPlot, eBestBuild, eMission, iBestValue, "WAI/city");
 }
+
+// ---------------------------------------------------------------------------
+// Stateless worker helpers (consolidated from the former CvWorkerService).
+// ---------------------------------------------------------------------------
+bool CvWorkerAI::shouldImproveCity(CvCity* pCity)
+{
+	PROFILE_EXTRA_FUNC();
+	if (pCity == NULL) return false;
+
+	foreach_(const CvPlot * pLoopPlot, pCity->plots())
+	{
+		const int iPlotIndex = pCity->getCityPlotIndex(pLoopPlot);
+		if (pLoopPlot
+		&& pLoopPlot->getWorkingCity() == pCity
+		&& pLoopPlot->getImprovementType() == NO_IMPROVEMENT
+		&& pCity->AI_getBestBuildValue(iPlotIndex) > 0)
+		{
+			const BuildTypes eBuild = pCity->AI_getBestBuild(iPlotIndex);
+
+			if (eBuild != NO_BUILD && GC.getBuildInfo(eBuild).getImprovement() != NO_IMPROVEMENT)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+BuildTypes CvWorkerAI::getFastestBuildForImprovementType(
+	const CvPlayer& player, ImprovementTypes eImprovement, const CvPlot* pPlot,
+	const CvUnitAI* unit, bool includeCurrentImprovement)
+{
+	PROFILE_EXTRA_FUNC();
+	int        iFastestTime = 10000;
+	BuildTypes eFastestBuild = NO_BUILD;
+	const ImprovementTypes eCurrentImprovement = pPlot->getImprovementType();
+	const CvImprovementInfo& kImprovement = GC.getImprovementInfo(eImprovement);
+	const bool bCheckUnitBuild = (unit != NULL);
+
+	foreach_(const BuildTypes eBuild, kImprovement.getBuildTypes())
+	{
+		if (player.canBuild(pPlot, eBuild, false, false)
+		|| (includeCurrentImprovement && eImprovement == eCurrentImprovement))
+		{
+			if (!bCheckUnitBuild || unit->canBuild(pPlot, eBuild, false))
+			{
+				const int iBuildTime = GC.getBuildInfo(eBuild).getTime();
+				if (iFastestTime > iBuildTime)
+				{
+					iFastestTime = iBuildTime;
+					eFastestBuild = eBuild;
+				}
+			}
+		}
+	}
+	return eFastestBuild;
+}
