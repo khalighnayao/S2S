@@ -542,6 +542,12 @@ int CvSelectionGroupAI::AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy,
 		}
 	}
 
+	// [COM/odds] -- attack odds the AI computed for a target plot (the core combat
+	// decision input; compare against the [COM/threshold] bar for the go/no-go).
+	logCombatAI(3, "[COM/odds] owner=%d unit=%d target=(%d,%d) odds=%d win=%d",
+		(int)getOwner(), getHeadUnit() ? getHeadUnit()->getID() : -1,
+		pPlot ? pPlot->getX() : -1, pPlot ? pPlot->getY() : -1, iResult, bIsWin ? 1 : 0);
+
 	return iResult;
 }
 

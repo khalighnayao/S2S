@@ -24779,6 +24779,11 @@ int CvUnitAI::AI_finalOddsThreshold(const CvPlot* pPlot, int iOddsThreshold) con
 		iDivisor += ((AI_getUnitAIType() == UNITAI_ATTACK_CITY || AI_getUnitAIType() == UNITAI_ATTACK) ? 2 : 0);
 		iFinalOddsThreshold /= iDivisor;
 	}
+	// [COM/threshold] -- the go/no-go odds bar the AI requires to attack this plot.
+	logCombatAI(3, "[COM/threshold] owner=%d unit=%d target=(%d,%d) base=%d final=%d",
+		(int)getOwner(), getID(), pPlot ? pPlot->getX() : -1, pPlot ? pPlot->getY() : -1,
+		iOddsThreshold, range(iFinalOddsThreshold, 0, 100));
+
 	return range(iFinalOddsThreshold, 0, 100);
 }
 

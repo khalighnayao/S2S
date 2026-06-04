@@ -27,4 +27,5 @@ void logGroupAI(int level, const char* format, ...);
 void logEspionageAI(int level, const char* format, ...);
 void logFoundAI(int level, const char* format, ...);
 void logGameInfo(const char* format, ...);
+void logCombatAI(int level, const char* format, ...);
 #endif
