@@ -2084,8 +2084,21 @@ void CvUnitAI::AI_workerMove()
 				return;
 			}
 			OutputDebugString(CvString::format("%S (%d) AI_reachHome 2 false (%d,%d)...\n", getDescription().c_str(), m_iID, m_iX, m_iY).c_str());
-			// Look for a local group we can join to be safe!
-			// We do want to take control (otherwise other unit decides where this worker goes, and can go further away)
+
+			// Prefer heading home over loitering for an escort. An undefended worker
+			// is "abroad" the moment it strays onto another player's tile (IsAbroad ==
+			// plot owner != us), e.g. when its path to an own city/bonus cut through a
+			// neighbour's borders. Make for one of our own cities first; parking next
+			// to the foreign city to wait for a passing military unit to adopt it is
+			// what left AI workers stuck in other players' cities.
+			if (AI_retreatToCity())
+			{
+				return;
+			}
+
+			// Only if we cannot path home at all do we fall back to grabbing a local
+			// escort. Take control (LEADER_PRIORITY_MAX) so the escort comes to us
+			// rather than dragging the worker even further from home.
 			AI_setLeaderPriority(LEADER_PRIORITY_MAX);
 
 			if (AI_group(GroupingParams().withUnitAI(UNITAI_ATTACK).ignoreFaster().ignoreOwnUnitType().maxPathTurns(1)))
@@ -2105,12 +2118,6 @@ void CvUnitAI::AI_workerMove()
 				return;
 			}
 			AI_setLeaderPriority(-1); // We didn't get to group so back to normal
-
-			// Nobody can join us and we cannot join anyone else - leg it!
-			if (AI_retreatToCity())
-			{
-				return;
-			}
 		}
 		// Toffer - After reaching this point the worker will always start making route from here to friendly territory... May be better things to do elsewhere.
 		//	Should check if improving this neutal plot is worthwhile and if not just start going to a more worthwhile plot/job.
@@ -11494,18 +11501,41 @@ void CvUnitAI::AI_networkAutomated()
 		return;
 	}
 
-	if (AI_connectBonus() || AI_connectCity())
+	// 1. Hook already-improved resources and cities into the trade network first --
+	//    these give immediate trade value (AI_connectBonus defaults bTestTrade=true,
+	//    i.e. only resources that already carry a trade improvement).
+	if (AI_connectBonus(true) || AI_connectCity())
 	{
 		return;
 	}
 
+	// 2. Improve nearby resources so they become connectable. Without this an
+	//    unimproved resource is invisible to AI_connectBonus and never gets hooked up.
 	if (!GET_PLAYER(getOwner()).isModderOption(MODDEROPTION_INFRASTRUCTURE_IGNORES_IMPROVEMENTS)
 	&& GET_PLAYER(getOwner()).getWorkerAI().improveBonus(this, 2))
 	{
 		return;
 	}
 
+	// 3. Connect resources that aren't improved yet (bTestTrade=false drops the
+	//    "already improved" requirement): road the tile now so it joins the network
+	//    the moment it gets an improvement, instead of waiting a full improve+connect
+	//    cycle. This is what makes "connect all your bonuses" actually reach the
+	//    not-yet-developed ones.
+	if (AI_connectBonus(false))
+	{
+		return;
+	}
+
+	// 4. Flesh out connective road: first plots whose improvement gains a route yield,
+	//    then city-to-city links, then any remaining upgradeable territory. The final
+	//    general AI_routeTerritory() pass is what lays/upgrades connective road across
+	//    plain terrain rather than only on already-improved tiles.
 	if (AI_routeTerritory(true) || AI_routeCity())
+	{
+		return;
+	}
+	if (AI_routeTerritory())
 	{
 		return;
 	}
@@ -21055,6 +21085,27 @@ bool CvUnitAI::AI_connectPlot(CvPlot* pPlot, int iRange)
 		{
 			return getGroup()->pushMissionInternal(MISSION_ROUTE_TO, pPlot->getX(), pPlot->getY(), MOVE_WITH_CAUTION, false, false, MISSIONAI_BUILD, pPlot);
 		}
+
+		// We have an ignore-danger path (the gate above proved it) but no danger-free
+		// one. Parking on WAIT_FOR_ESCORT only makes sense if an escort can actually
+		// arrive. Two cases where it never will, so the worker would stall forever:
+		//   - a human's automated worker (the player's military isn't auto-dispatched
+		//     to babysit it) -- the "Automate Network does nothing" bug; and
+		//   - any worker stranded ABROAD (on another player's soil): our military won't
+		//     path into foreign territory to reach it, which is exactly how Portuguese
+		//     workers ended up sitting in England's borders for many turns.
+		// In both cases, commit to the work via the ignore-danger path instead (which
+		// for an abroad worker also walks it back off the foreign tile toward an own
+		// target); if we're already on the plot with no reachable city, return false so
+		// the caller falls through to its next option (improve/route/retreat/safety).
+		if (isHuman() || IsAbroad())
+		{
+			if (!atPlot(pPlot))
+			{
+				return getGroup()->pushMissionInternal(MISSION_ROUTE_TO, pPlot->getX(), pPlot->getY(), MOVE_IGNORE_DANGER, false, false, MISSIONAI_BUILD, pPlot);
+			}
+			return false;
+		}
 		getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_WAIT_FOR_ESCORT);
 		return true;
 	}
@@ -22405,6 +22456,16 @@ bool CvUnitAI::AI_routeTerritory(bool bImprovementOnly)
 		if (atPlot(pBestPlot) || generateSafePathforVulnerable(pBestPlot))
 		{
 			return getGroup()->pushMissionInternal(MISSION_ROUTE_TO, pBestPlot->getX(), pBestPlot->getY(), MOVE_WITH_CAUTION, false, false, MISSIONAI_BUILD, pBestPlot);
+		}
+		// No danger-free path to the route plot. Don't stall on WAIT_FOR_ESCORT when no
+		// escort can come: a human's automated worker is never assigned one, and a
+		// worker stranded ABROAD won't be reached by our military across foreign soil.
+		// Commit via the ignore-danger path (proved to exist above) -- for an abroad
+		// worker this routes it back toward our own territory. A non-abroad AI worker
+		// keeps the old wait, since its military can still escort it at home.
+		if (isHuman() || IsAbroad())
+		{
+			return getGroup()->pushMissionInternal(MISSION_ROUTE_TO, pBestPlot->getX(), pBestPlot->getY(), MOVE_IGNORE_DANGER, false, false, MISSIONAI_BUILD, pBestPlot);
 		}
 		getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_WAIT_FOR_ESCORT);
 		return true;

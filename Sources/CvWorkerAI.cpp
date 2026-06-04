@@ -1047,6 +1047,13 @@ bool CvWorkerAI::improveCity(CvUnitAI* unit, CvCity* pCity)
 
 	if (pCity == NULL || unit == NULL) return false;
 
+	// Never service a city we don't own. Callers reach here from the tile under
+	// the worker's feet (plot()->getPlotCity()/getWorkingCity()), which can be a
+	// foreign city when borders overlap. canBuild would reject every foreign plot
+	// anyway, but bailing up front keeps a strayed worker from committing to (and
+	// pathing toward) another player's city -- see AI_workerMove / IsAbroad.
+	if (pCity->getOwner() != unit->getOwner()) return false;
+
 	const PlayerTypes ePlayer    = unit->getOwner();
 	const CvPlayerAI& kOwner     = GET_PLAYER(ePlayer);
 	const bool bSafeAutomation   = kOwner.isOption(PLAYEROPTION_SAFE_AUTOMATION);
