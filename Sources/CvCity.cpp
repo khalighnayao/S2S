@@ -4260,7 +4260,7 @@ void CvCity::conscript(bool bOnCapture)
 	{
 		return;
 	}
-	const int iNumConscripts = -getConscriptPopulation();
+	const int iNumConscripts = getConscriptPopulation();
 	const int iAngerLength = flatConscriptAngerLength();
 	changePopulation(-1);
 	changeConscriptAngerTimer(iAngerLength);
@@ -22548,7 +22548,7 @@ void unitHasSources(const CvPropertyManipulators* pMani, bool* bHasSources)
 static bool unitHasCityOrPlotPropertySources(const CvUnit* pUnit)
 {
 	PROFILE_EXTRA_FUNC();
-	bool bHasSources;
+	bool bHasSources = false;
 
 	pUnit->getGameObject()->foreachManipulator(bind(unitHasSources, _1, &bHasSources));
 
