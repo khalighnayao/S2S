@@ -18831,6 +18831,12 @@ bool CvUnitAI::AI_found()
 
 	if (pBestPlot)
 	{
+		// [FND/site] -- settler commits to a city site (best found-value / path among
+		// the player's candidate city sites); founds now if on it, else heads there.
+		logFoundAI(1, "[FND/site] owner=%d unit=%d site=(%d,%d) value=%d candidateSites=%d action=%s",
+			(int)getOwner(), getID(), pBestPlot->getX(), pBestPlot->getY(), iBestFoundValue,
+			GET_PLAYER(getOwner()).AI_getNumCitySites(), atPlot(pBestPlot) ? "FOUND" : "moveto");
+
 		if (atPlot(pBestPlot))
 		{
 			getGroup()->pushMission(MISSION_FOUND, -1, -1, 0, false, false, MISSIONAI_FOUND, pBestPlot);

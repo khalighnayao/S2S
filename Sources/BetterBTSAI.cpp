@@ -88,6 +88,23 @@ void logDiploAI(int level, const char* format, ...)
 	}
 }
 
+// AI city-founding decision logging -- [FND/*] tags, gated by gPlayerLogLevel.
+// Surfaces which city site a settler commits to (CvUnitAI::AI_found). Part of the
+// per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/[DIP]/[UNT]/[GRP]/[ESP]/[FND]).
+void logFoundAI(int level, const char* format, ...)
+{
+	if (level <= gPlayerLogLevel)
+	{
+		static char buf[2048];
+		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
+		gDLL->logMsg("FoundAI.log", buf);
+
+		// Echo to debugger
+		strcat(buf, "\n");
+		OutputDebugString(buf);
+	}
+}
+
 void logAIJson(CvWString type, CvWString identifier, CvWString squirrel, CvWString message)
 {
 	const std::wstring data = "{ type: \"" + type + "\" name: \"" + identifier + "\" function: \" " + squirrel + "\" message: \"" + message + "\" }";
