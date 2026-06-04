@@ -102,6 +102,11 @@ void logWarAI(int level, const char* format, ...)
 // per-unit AI routine dispatch and UNITAI role changes (CvUnitAI). Part of the
 // per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/[DIP]/[UNT]).
 void logUnitAI(int level, const char* format, ...)
+// AI group/army coordination logging -- [GRP/*] tags, gated by gUnitLogLevel.
+// Surfaces above-unit coordination (CvArmy missions/leader, group splits) -- the
+// seam from which CvPlayer-level unit orchestration should grow. Part of the
+// per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/[DIP]/[UNT]/[GRP]).
+void logGroupAI(int level, const char* format, ...)
 {
 	if (level <= gUnitLogLevel)
 	{
@@ -119,6 +124,7 @@ void logCityAI(int level, const char* format, ...)
 		static char buf[2048];
 		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
 		gDLL->logMsg("CityAI.log", buf);
+		gDLL->logMsg("GroupAI.log", buf);
 
 		// Echo to debugger
 		strcat(buf, "\n");
