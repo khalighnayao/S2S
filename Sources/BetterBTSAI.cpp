@@ -108,6 +108,17 @@ void logUnitAI(int level, const char* format, ...)
 		static char buf[2048];
 		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
 		gDLL->logMsg("UnitAI.log", buf);
+// AI city production decision logging -- [CIT/*] tags, gated by gCityLogLevel.
+// Surfaces the production-choice context and the order a city commits to
+// (CvCityAI). Part of the per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/
+// [DIP]/[CIT]).
+void logCityAI(int level, const char* format, ...)
+{
+	if (level <= gCityLogLevel)
+	{
+		static char buf[2048];
+		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
+		gDLL->logMsg("CityAI.log", buf);
 
 		// Echo to debugger
 		strcat(buf, "\n");

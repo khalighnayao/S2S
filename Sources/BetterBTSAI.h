@@ -22,4 +22,5 @@ void logDecisionAI(int level, const char* format, ...);
 void logDiploAI(int level, const char* format, ...);
 void logWarAI(int level, const char* format, ...);
 void logUnitAI(int level, const char* format, ...);
+void logCityAI(int level, const char* format, ...);
 #endif
