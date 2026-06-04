@@ -88,6 +88,23 @@ void logDiploAI(int level, const char* format, ...)
 	}
 }
 
+// AI espionage decision logging -- [ESP/*] tags, gated by gPlayerLogLevel.
+// Surfaces which espionage mission a spy chooses (CvPlayerAI). Part of the
+// per-subsystem tagged-log family ([WAI]/[HAI]/[DAI]/[DIP]/[UNT]/[GRP]/[ESP]).
+void logEspionageAI(int level, const char* format, ...)
+{
+	if (level <= gPlayerLogLevel)
+	{
+		static char buf[2048];
+		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
+		gDLL->logMsg("EspionageAI.log", buf);
+
+		// Echo to debugger
+		strcat(buf, "\n");
+		OutputDebugString(buf);
+	}
+}
+
 void logAIJson(CvWString type, CvWString identifier, CvWString squirrel, CvWString message)
 {
 	const std::wstring data = "{ type: \"" + type + "\" name: \"" + identifier + "\" function: \" " + squirrel + "\" message: \"" + message + "\" }";

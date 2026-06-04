@@ -20,4 +20,5 @@ void logBuildEvaluation(int level, const char* format, ...);
 void logHunterAI(int level, const char* format, ...);
 void logDecisionAI(int level, const char* format, ...);
 void logDiploAI(int level, const char* format, ...);
+void logEspionageAI(int level, const char* format, ...);
 #endif
