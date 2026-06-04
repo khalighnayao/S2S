@@ -4291,29 +4291,11 @@ void CvUnitAI::AI_reserveMove()
 		return;
 	}
 
-	//Check for Properties :
-	int iMaxPropertyUnitsPercent = 20;
-	const PlayerTypes eOwner = getOwner();
-	CvPlayerAI& player = GET_PLAYER(eOwner);
-	const CvArea* pArea = area();
-	int iPropControlInArea = player.AI_totalAreaUnitAIs(pArea, UNITAI_PROPERTY_CONTROL);
-	int iUnitsInArea = player.getNumUnits();
-	if ((iPropControlInArea * 100 / (iUnitsInArea + 1)) < iMaxPropertyUnitsPercent)
-	{
-		for (int iI = 0; iI < GC.getNumPropertyInfos(); iI++)
-		{
-			const PropertyTypes pProperty = (PropertyTypes)iI;
-			if (GC.getPropertyInfo(pProperty).getAIWeight() != 0)
-			{
-				int iCurrentValue = getPropertiesConst()->getValueByProperty(pProperty);
-				if (iCurrentValue > 0)
-				{   //it has properties control 
-					AI_setUnitAIType(UNITAI_PROPERTY_CONTROL);
-					getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, NO_MISSIONAI);
-				}
-			}
-		}
-	}
+	// NB: a RESERVE unit is no longer flipped to UNITAI_PROPERTY_CONTROL here. Property-control
+	// units are produced as that role from creation by the need-based path in
+	// CvCityAI::AI_chooseProduction (and the capability-checked AI_guardCity ejection); poaching
+	// general reserve units caused a RESERVE<->PROPERTY_CONTROL oscillation (the handler bounced
+	// non-capable / not-currently-needed units straight back). See AI_fulfillPropertyControlNeed.
 
 	if (!plot()->isOwned())
 	{
@@ -11787,48 +11769,15 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 
 			if (pCity != NULL && plotSet.find(pPlot) != plotSet.end())
 			{
-				//	Check property control attributes first - they may cause us to defend in the city
-				//	regardless of other conditions
-				#define MAX_PROPCONTROL_PERCENT_TO_JOIN 20 //Calvitix Add a limit to the Join to PropControl Team (when already too much units)
-				const PlayerTypes eOwner = getOwner();
-				CvPlayerAI& player = GET_PLAYER(eOwner);
-				const CvArea* pArea = area();
-				int iPropControlInArea = player.AI_totalAreaUnitAIs(pArea, UNITAI_PROPERTY_CONTROL);
-				int iUnitsInArea = player.getNumUnits();
-				if ((iPropControlInArea * 100 / iUnitsInArea) < MAX_PROPCONTROL_PERCENT_TO_JOIN)
-				{
-
-					if (getGroup()->AI_hasBeneficialPropertyEffectForCity(pCity, NO_PROPERTY))
-					{
-						//	We have at least one unit that can help the ciy's property control (aka crime usually)
-						//	Split ou he best such unit and have it defend in the city
-						CvSelectionGroup* pOldGroup = getGroup();
-						CvUnit* pEjectedUnit = getGroup()->AI_ejectBestPropertyManipulator(pCity);
-
-						FAssert(pEjectedUnit != NULL);
-						pEjectedUnit->AI_setUnitAIType(UNITAI_PROPERTY_CONTROL);
-
-						if (atPlot(pCity->plot()))
-						{
-							//	Mark the ejected unit as part of the city garrison
-							pEjectedUnit->getGroup()->AI_setAsGarrison(pCity);
-							pEjectedUnit->getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_GUARD_CITY, NULL);
-							return (pEjectedUnit->getGroup() == pOldGroup || pEjectedUnit == this);
-						}
-						else if (pEjectedUnit->generatePath(pCity->plot(), 0, true))
-						{
-							//	Mark the ejected unit as part of the city garrison
-							pEjectedUnit->getGroup()->AI_setAsGarrison(pCity);
-							pEjectedUnit->getGroup()->pushMission(MISSION_MOVE_TO, pCity->getX(), pCity->getY(), 0, false, false, MISSIONAI_GUARD_CITY, NULL);
-							return (pEjectedUnit->getGroup() == pOldGroup || pEjectedUnit == this);
-						}
-						else
-						{
-							//	If we can't move after all regroup and continue regular defensive processing
-							pEjectedUnit->joinGroup(pOldGroup);
-						}
-					}
-				}
+				// NB: removed the property-control ejection/flip that used to re-type a garrisoned
+				// unit to UNITAI_PROPERTY_CONTROL here. It used a broad capability test
+				// (AI_hasBeneficialPropertyEffectForCity) that disagreed with the handler's narrow
+				// one (getPropertyManipulators), so non-base-manipulator units got flipped and then
+				// bounced straight back -> RESERVE<->PROPERTY_CONTROL oscillation. It also masked
+				// the real need: flipped units made the property "getting better" and filled the 20%
+				// quota, which blocked the need-based production path (CvCityAI::AI_chooseProduction
+				// ~14458). Property-control units now come ONLY from that production path, assigned
+				// the role at creation and never flipped.
 
 				const int iPlotDanger2 = GET_PLAYER(getOwner()).AI_getPlotDanger(pPlot, 2);
 
@@ -28594,9 +28543,12 @@ bool CvUnitAI::AI_fulfillPropertyControlNeed()
 
 			if (iNbControlForces > MAX_TARGET_CONTROL_MAINTAIN)
 			{
-				AI_setUnitAIType(UNITAI_RESERVE);
-				getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, NO_MISSIONAI);
-				return false;
+				// Not needed right now: hold in place AS a property-control unit (the dedicated
+				// pool waits in-role) instead of flipping to RESERVE. That flip, paired with the
+				// (now removed) reserve-side conversion, caused the RESERVE<->PROPERTY_CONTROL
+				// oscillation. Property units keep their role from creation and are never flipped.
+				getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_PROPERTY_CONTROL_MAINTAIN, plot());
+				return true;
 			}
 
 
@@ -28629,9 +28581,10 @@ bool CvUnitAI::AI_fulfillPropertyControlNeed()
 		}
 	}
 	else
-	{   //No city found
-		AI_setUnitAIType(UNITAI_RESERVE);
-		getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, NO_MISSIONAI);
+	{   //No city needs control right now: hold in place as a property-control unit (the dedicated
+		//pool waits in-role); do NOT flip to RESERVE (that caused the oscillation).
+		getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_PROPERTY_CONTROL_MAINTAIN, plot());
+		return true;
 	}
 	return false;
 }
