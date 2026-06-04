@@ -335,30 +335,30 @@ profiler for performance measurement of hot paths.
 
 ## Navigation
 
-Individual class reference pages (in [Sources/docs/](docs/)):
+Individual class reference pages (in [Sources/docs/reference/](docs/reference/)):
 
 ### AI Classes
 | Class | Description |
 |---|---|
-| [CvGameAI](docs/CvGameAI.md) | Global AI helpers; normalised combat value; dirty-work propagation |
-| [CvPlayerAI](docs/CvPlayerAI.md) | Full per-player AI: research, diplomacy, military, danger caching |
-| [CvCityAI](docs/CvCityAI.md) | City management: citizen assignment, production, building scoring |
-| [CvUnitAI](docs/CvUnitAI.md) | Unit behaviour: missions, combat, contracts, promotion, upgrade |
-| [CvTeamAI](docs/CvTeamAI.md) | Team strategy: war planning, diplomacy, area classification |
-| [CvSelectionGroupAI](docs/CvSelectionGroupAI.md) | Group coordination: attacks, garrison, mission state |
+| [CvGameAI](docs/reference/CvGameAI.md) | Global AI helpers; normalised combat value; dirty-work propagation |
+| [CvPlayerAI](docs/reference/CvPlayerAI.md) | Full per-player AI: research, diplomacy, military, danger caching |
+| [CvCityAI](docs/reference/CvCityAI.md) | City management: citizen assignment, production, building scoring |
+| [CvUnitAI](docs/reference/CvUnitAI.md) | Unit behaviour: missions, combat, contracts, promotion, upgrade |
+| [CvTeamAI](docs/reference/CvTeamAI.md) | Team strategy: war planning, diplomacy, area classification |
+| [CvSelectionGroupAI](docs/reference/CvSelectionGroupAI.md) | Group coordination: attacks, garrison, mission state |
 
 ### Supporting Systems
 | Class | Description |
 |---|---|
-| [CvProperties](docs/CvProperties.md) | Generic extensible property container (crime, pollution, …) |
-| [CvPropertySolver](docs/CvPropertySolver.md) | Per-turn solver for the property simulation system |
-| [CvContractBroker](docs/CvContractBroker.md) | Publish/subscribe unit-need dispatch between cities and units |
-| [CvPathGenerator / CvPath](docs/CvPathGenerator.md) | Pluggable A\* pathfinder with per-unit cost and validity callbacks |
-| [CvOutcome / CvOutcomeList / CvOutcomeMission](docs/CvOutcome.md) | Probabilistic mission results defined in XML |
-| [CvArmy](docs/CvArmy.md) | Multi-stack coordinated assault groups |
-| [CvMap](docs/CvMap.md) | Map grid, areas, plot groups, viewport, multi-map support |
-| [CvPlot](docs/CvPlot.md) | Individual tile: terrain, units, properties, path cache |
-| [CvGlobals](docs/CvGlobals.md) | Master singleton (`GC`): all info arrays, engine interfaces, services |
+| [CvProperties](docs/reference/CvProperties.md) | Generic extensible property container (crime, pollution, …) |
+| [CvPropertySolver](docs/reference/CvPropertySolver.md) | Per-turn solver for the property simulation system |
+| [CvContractBroker](docs/reference/CvContractBroker.md) | Publish/subscribe unit-need dispatch between cities and units |
+| [CvPathGenerator / CvPath](docs/reference/CvPathGenerator.md) | Pluggable A\* pathfinder with per-unit cost and validity callbacks |
+| [CvOutcome / CvOutcomeList / CvOutcomeMission](docs/reference/CvOutcome.md) | Probabilistic mission results defined in XML |
+| [CvArmy](docs/reference/CvArmy.md) | Multi-stack coordinated assault groups |
+| [CvMap](docs/reference/CvMap.md) | Map grid, areas, plot groups, viewport, multi-map support |
+| [CvPlot](docs/reference/CvPlot.md) | Individual tile: terrain, units, properties, path cache |
+| [CvGlobals](docs/reference/CvGlobals.md) | Master singleton (`GC`): all info arrays, engine interfaces, services |
 
 In Doxygen the full **Classes** tab lists every `Cv*` and `Cy*` class with inheritance
 diagrams and collaboration graphs. Search for the `AI_` prefix to find all AI-specific

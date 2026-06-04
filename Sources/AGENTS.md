@@ -43,6 +43,11 @@ root `AGENTS.md`.
 - Some mod/runtime behavior depends on local tooling and setup scripts; avoid assuming clean-room runtime behavior without validation.
 
 ## Reference Docs
+- **Developer docs index: [`Sources/docs/README.md`](docs/README.md)** — split into
+  `docs/reference/` (how the code works today, one note per class/system) and
+  `docs/plans/` (refactor scopes, rollouts, removal maps, standing initiatives).
+  Player-facing documentation lives separately under the top-level `docs/` folder.
+- When you add a dev note: behaviour-as-it-is → `docs/reference/`; intended change → `docs/plans/`.
 - Setup flow: `DevSetup.bat`
 - CI flow: `appveyor.yml`
 - Source formatting policy: `Sources/.editorconfig`

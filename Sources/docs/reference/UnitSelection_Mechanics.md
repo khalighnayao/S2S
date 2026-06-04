@@ -220,5 +220,5 @@ points:
 
 *Companion:* [`UnitAI_Selection.md`](UnitAI_Selection.md),
 [`doProduction.md`](doProduction.md),
-[`CvCityAI`](../Sources/docs/CvCityAI.md),
-[`CvPlayerAI`](../Sources/docs/CvPlayerAI.md).
+[`CvCityAI`](CvCityAI.md),
+[`CvPlayerAI`](CvPlayerAI.md).
