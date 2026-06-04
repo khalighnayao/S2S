@@ -2579,7 +2579,7 @@ DenialTypes CvTeamAI::AI_makePeaceTrade(TeamTypes ePeaceTeam, TeamTypes eTeam) c
 		return DENIAL_CONTACT_THEM;
 	}
 
-	int iLandRatio = ((getTotalLand(true) * 100) / std::max(20, GET_TEAM(eTeam).getTotalLand(true)));
+	int iLandRatio = ((getTotalLand(true) * 100) / std::max(20, GET_TEAM(ePeaceTeam).getTotalLand(true)));
 	if (iLandRatio > 250)
 	{
 		return DENIAL_VICTORY;

@@ -20911,7 +20911,7 @@ bool CvPlayerAI::AI_disbandUnit(int iExpThreshold)
 				//	For now make them less valuable the more you have (strictly this should depend
 				//	on what you need in terms of their buildable buildings, but start with an
 				//	approximation that is better than nothing
-				iValue *= std::min(0, getNumCities() * 2 - AI_getNumAIUnits(UNITAI_SUBDUED_ANIMAL)) / std::min(1, getNumCities());
+				iValue *= std::max(0, getNumCities() * 2 - AI_getNumAIUnits(UNITAI_SUBDUED_ANIMAL)) / std::max(1, getNumCities());
 				break;
 
 			case UNITAI_HUNTER:
@@ -23068,8 +23068,8 @@ void CvPlayerAI::AI_calculateAverages() const
 		}
 		m_iAverageGreatPeopleMultiplier = 0;
 
-		int64_t sumBaseCommerce[NUM_COMMERCE_TYPES];
-		int64_t sumFinalCommerce[NUM_COMMERCE_TYPES];
+		int64_t sumBaseCommerce[NUM_COMMERCE_TYPES] = {};
+		int64_t sumFinalCommerce[NUM_COMMERCE_TYPES] = {};
 		{
 			int iTotalPopulation = 0;
 
@@ -26617,7 +26617,7 @@ int CvPlayerAI::AI_militaryBonusVal(BonusTypes eBonus)
 			if (bFound)
 			{
 				iValue += 300;
-				iValue /= iHasOrBonusCount;
+				iValue /= std::max(1, iHasOrBonusCount);
 			}
 		}
 	}
@@ -30127,7 +30127,7 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 		}
 		else
 		{
-			if (!pUnit->isHasUnitCombat((UnitCombatTypes)kPromotion.getRemovesUnitCombatType(iI)))
+			if (pUnit->isHasUnitCombat((UnitCombatTypes)kPromotion.getRemovesUnitCombatType(iI)))
 			{
 				iValue -= AI_unitCombatValue((UnitCombatTypes)kPromotion.getRemovesUnitCombatType(iI), eUnit, pUnit, eUnitAI);
 			}

@@ -4980,7 +4980,7 @@ int	CvSelectionGroup::getWorstDamagePercent(UnitCombatTypes eIgnoreUnitCombat) c
 	{
 		if (eIgnoreUnitCombat == NO_UNITCOMBAT || !pLoopUnit->isHasUnitCombat(eIgnoreUnitCombat))
 		{
-			if (pLoopUnit->getDamage() > iWorstDamage)
+			if (pLoopUnit->getDamagePercent() > iWorstDamage)
 			{
 				iWorstDamage = pLoopUnit->getDamagePercent();
 			}
