@@ -68,9 +68,9 @@ for the start node) so a callback can special-case the first node.
 - `m_iX`, `m_iY` — the plot coordinate of this node.
 - `m_iData1`, `m_iData2` — **finder-specific payload**, written by the NotifyChild/Add
   callback. For the **step finder**, `m_iData1` accumulates the **tile count** from the
-  start (set by `stepAdd`). For the **unit path finder**, `m_iData1`/`m_iData2` carry
+  start (set by `stepAdd`). For the legacy **unit path finder**, `m_iData1`/`m_iData2` carry
   movement bookkeeping (moves remaining / turn count) — read `pathAdd` in
-  `CvGameCoreUtils.cpp` for specifics.
+  `CvGameCoreUtils.cpp` for specifics. This legacy unit path is compiled out by default (USE_OLD_PATH_GENERATOR off; see the relationship section).
 - parent linkage — walk it to reconstruct the path.
 
 ---
@@ -83,8 +83,8 @@ defined in `Sources/CvGameCoreUtils.cpp`.
 
 | Finder | Accessor | DestValid / Heuristic / Cost | Valid | Notify | Purpose |
 |---|---|---|---|---|---|
-| Unit path (AI) | `getPathFinder` | `pathDestValid` / `pathHeuristic` / `pathCost` | `pathValid` | `pathAdd` | BtS unit-movement A\* (superseded for moves by `CvPathGenerator`). |
-| Unit path (UI) | `getInterfacePathFinder` | same as above | `pathValid` | `pathAdd` | Human-interface unit movement preview. |
+| Unit path (AI) | `getPathFinder` | `pathDestValid` / `pathHeuristic` / `pathCost` | `pathValid` | `pathAdd` | **Legacy** BtS unit-movement A\*, gated by `USE_OLD_PATH_GENERATOR` — which is **not defined** (off in fbuild + IntelliSense). Dormant: the finder is still `Initialize`d, but the DLL code that drives it (`getPathLastNode`, the old `generatePath` branch) is `#ifdef`'d out. Unit movement uses [`CvPathGenerator`](CvPathGenerator.md) instead. |
+| Unit path (UI) | `getInterfacePathFinder` | same as above | `pathValid` | `pathAdd` | Same: legacy/dormant under the off-by-default macro. |
 | **Step** | `getStepFinder` | `stepDestValid` / `stepHeuristic` / `stepCost` | `stepValid` | `stepAdd` | Tile-count distance / reachability (terrain only, no diplomacy). |
 | Route | `getRouteFinder` | — | `routeValid` | — | Connectivity along existing routes (roads). |
 | Border | `getBorderFinder` | — | `borderValid` | — | Border/culture-adjacency traversal. |
@@ -216,16 +216,41 @@ The pattern: `create` → `Initialize` (with the desired callbacks) → `SetData
 
 ---
 
-## 8. Relationship to `CvPathGenerator`
+## 8. Relationship to `CvPathGenerator` (old vs new unit pathfinder)
 
-Actual **unit movement** in S2S uses [`CvPathGenerator`](CvPathGenerator.md), an
-in-DLL pluggable A\* that replaces the engine's unit path finder (the
-`getPathFinder` / `getInterfacePathFinder` + `path*` callbacks above) with per-unit
-cost/validity callbacks, multi-turn planning, and an AI-always pathing mode. The
-engine `FAStar` finders documented here remain in active use for the non-movement
-queries: **step distance / reachability** (step finder), **route connectivity**
-(route finder), **area labelling** and **plot-group / trade-network** connectivity
-(area & plot-group finders), and **borders** (border finder).
+Unit movement has **two** implementations, selected at compile time by
+`USE_OLD_PATH_GENERATOR`. That macro is **not defined** anywhere (confirmed: absent
+from fbuild and IntelliSense), so the **old** path is compiled out and the **new**
+one is what ships.
+
+- **Old (`USE_OLD_PATH_GENERATOR` defined — OFF here):** the engine `FAStar` unit
+  finders (`getPathFinder` / `getInterfacePathFinder`) driven by the `path*`
+  callbacks. Paths are `FAStarNode*` walked via `m_pParent`, with `m_iData1`/
+  `m_iData2` carrying moves/turns (`m_iData2 == 1` = end-of-turn node), retrieved
+  through `CvSelectionGroup::getPathLastNode()`. Pulls in `FAStarNode.h` (hence the
+  `#ifdef USE_OLD_PATH_GENERATOR #include "FAStarNode.h"` guards in `CvUnit` /
+  `CvSelectionGroup`).
+- **New (default):** [`CvPathGenerator`](CvPathGenerator.md), an in-DLL pluggable A\*
+  with per-unit cost/validity callbacks, a `CvPathNode` pool, its own edge-cost
+  caching (`CachedEdgeCosts`), multi-turn planning, an AI-always pathing mode, and
+  optimization limits. Paths are `CvPath` objects iterated via `.plot()` / `.turn()`,
+  retrieved through `getPath()` / `getPathGenerator()`.
+
+In the code you can see the split directly: `generatePath`, `getPathFirstPlot`,
+`getPathEndTurnPlot`, etc. each have an `#ifdef USE_OLD_PATH_GENERATOR` (old,
+`FAStarNode`-based) / `#else` (new, `CvPath`-based) — the `#else` is what compiles.
+The richer `generatePath(pFrom, pTo, iFlags, bReuse, piPathTurns, iMaxPathLen,
+iOptimizationLimit)` signature is the new generator's. (The old engine finder also
+had a caching bug — it reused end-of-turn costs in non-end-of-turn inter-tile moves
+— which the new generator avoids; see the comment in `CvSelectionGroup::generatePath`.)
+
+**Independent of the macro**, the other engine `FAStar` finders documented here are
+always active and handle the non-movement queries: **step distance / reachability**
+(step finder), **route connectivity** (route finder), **area labelling** and
+**plot-group / trade-network** connectivity (area & plot-group finders), and
+**borders** (border finder). The unit `getPathFinder`/`getInterfacePathFinder` are
+still `Initialize`d in `CvMap::setup` but, with the macro off, are not driven for
+in-DLL unit movement.
 
 ## See also
 - [`CvPathGenerator`](CvPathGenerator.md) — the unit-movement pathfinder.
