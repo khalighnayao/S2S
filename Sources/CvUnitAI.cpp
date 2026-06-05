@@ -2993,7 +2993,7 @@ void CvUnitAI::AI_attackCityMove()
 
 	bool bHuntBarbs = false;
 
-	if (!isNPC() && area()->getCitiesPerPlayer(BARBARIAN_PLAYER) > 0 || area()->getCitiesPerPlayer(NEANDERTHAL_PLAYER) > 0)
+	if (!isNPC() && (area()->getCitiesPerPlayer(BARBARIAN_PLAYER) > 0 || area()->getCitiesPerPlayer(NEANDERTHAL_PLAYER) > 0))
 	{
 		if ((eAreaAIType != AREAAI_OFFENSIVE) && (eAreaAIType != AREAAI_DEFENSIVE) && !bAlert1 && !bTurtle)
 		{
@@ -3217,7 +3217,6 @@ void CvUnitAI::AI_attackCityMove()
 						{
 							iNeedSupportCount++;
 						}
-						iNeedSupportCount /= 4;
 						if (pLoopUnit->isHealsUnitCombat(eHealType))
 						{
 							iNeedSupportCount -= pLoopUnit->getNumHealSupportTotal();
@@ -3227,7 +3226,8 @@ void CvUnitAI::AI_attackCityMove()
 							}
 						}
 					}
-					if (iNeedSupportCount > 0 && iNeedSupportCount > iMostNeededSupportCount)
+					iNeedSupportCount /= 4;
+						if (iNeedSupportCount > 0 && iNeedSupportCount > iMostNeededSupportCount)
 					{
 						iMostNeededSupportCount = iNeedSupportCount;
 						eMostNeeded = eHealType;
@@ -12015,7 +12015,7 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 				{
 					continue;
 				}
-				if (!(pLoopCity->AI_isDefended((!AI_isCityAIType()) ? pLoopCity->plot()->plotStrength(UNITVALUE_FLAGS_DEFENSIVE, PUF_canDefendGroupHead, -1, -1, getOwner(), NO_TEAM, PUF_isNotCityAIType) : 0), 2) ||
+				if (!(pLoopCity->AI_isDefended((!AI_isCityAIType()) ? pLoopCity->plot()->plotStrength(UNITVALUE_FLAGS_DEFENSIVE, PUF_canDefendGroupHead, -1, -1, getOwner(), NO_TEAM, PUF_isNotCityAIType) : 0, 2)) ||
 					(isMilitaryHappiness() && !(pLoopCity->AI_isAdequateHappinessMilitary())))
 				{
 					if (!pLoopCity->plot()->isVisibleEnemyUnit(this))
@@ -15586,7 +15586,7 @@ bool CvUnitAI::AI_patrol(bool bIgnoreDanger)
 				}
 			}
 
-			if (iValue > iBestValue && !bIgnoreDanger && exposedToDanger(pAdjacentPlot, 60))
+			if (iValue > iBestValue && (bIgnoreDanger || !exposedToDanger(pAdjacentPlot, 60)))
 			{
 				iBestValue = iValue;
 				pBestPlot = pAdjacentPlot;
@@ -20849,7 +20849,7 @@ bool CvUnitAI::AI_irrigateTerritory()
 				if ((eImprovement == NO_IMPROVEMENT || eNonObsoleteBonus == NO_BONUS || !GC.getImprovementInfo(eImprovement).isImprovementBonusTrade(eNonObsoleteBonus))
 				&& pLoopPlot->isIrrigationAvailable(true))
 				{
-					int iBestTempBuildValue = MAX_INT;
+					int iBestTempBuildValue = 0;
 					BuildTypes eBestTempBuild = NO_BUILD;
 					int iQualified = 0;
 
@@ -20868,7 +20868,7 @@ bool CvUnitAI::AI_irrigateTerritory()
 									GC.getBuildInfo(eBuild).getTime(), iValue);
 							}
 
-							if (iValue < iBestTempBuildValue)
+							if (iValue > iBestTempBuildValue)
 							{
 								iBestTempBuildValue = iValue;
 								eBestTempBuild = eBuild;
