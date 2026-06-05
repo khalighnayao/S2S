@@ -3088,10 +3088,13 @@ int CvSelectionGroup::getMinimumRBombardRange() const
 	int iLowest = MAX_INT;
 	foreach_(const CvUnit* pLoopUnit, units())
 	{
-		const int iTemp = pLoopUnit->rBombardDamageLimit();
-		if (iTemp > 0 && iTemp < iLowest)
+		if (pLoopUnit->rBombardDamageLimit() > 0)
 		{
-			iLowest = pLoopUnit->getDCMBombRange();
+			const int iRange = pLoopUnit->getDCMBombRange();
+			if (iRange < iLowest)
+			{
+				iLowest = iRange;
+			}
 		}
 	}
 
