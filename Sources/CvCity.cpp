@@ -8686,8 +8686,8 @@ int CvCity::getAdditionalHealthByCivic(CivicTypes eCivic, int& iGood, int& iBad,
 
 		int iTempGood = 0; int iTempBad = 0; int iTempBadBuilding = 0;
 		int iHealthOld = getAdditionalHealthByCivic(GET_PLAYER(getOwner()).getCivics((CivicOptionTypes)(GC.getCivicInfo(eCivic).getCivicOptionType())), iTempGood, iTempBad, iTempBadBuilding, false, iExtraPop, bCivicOptionVacuum, iIgnoreNoUnhealthyPopulationCount, iIgnoreBuildingOnlyHealthyCount);
-		iGood += iTempBad;
-		iBad += iTempGood;
+		iGood -= iTempGood;
+		iBad -= iTempBad;
 		iBadBuilding -= iTempBadBuilding; //can become negative
 
 		return iHealthNew - iHealthOld;
@@ -10211,7 +10211,7 @@ int CvCity::getCultureUpdateTimer() const
 void CvCity::setCultureUpdateTimer(int iNewValue)
 {
 	m_iCultureUpdateTimer = iNewValue;
-	FASSERT_NOT_NEGATIVE(getOccupationTimer());
+	FASSERT_NOT_NEGATIVE(getCultureUpdateTimer());
 }
 
 
@@ -21761,19 +21761,12 @@ void CvCity::removeWorstCitizenActualEffects(int iNumCitizens, int& iGreatPeople
 	int iNumRemoved = 0;
 	int iNumSpecialistsRemoved = 0;
 
-	// if we are using more specialists than the free ones we get
-	while (getAssignedSpecialistCount() < iNumRemoved && iNumRemoved < iNumCitizens)
-	{
-		// Does generic 'citizen' specialist exist?
-		if (iGenericSpecialist != NO_SPECIALIST
-		// Do we have at least one more generic citizen than we are forcing?
-		&& getSpecialistCount((SpecialistTypes)iGenericSpecialist) > getForceSpecialistCount((SpecialistTypes)iGenericSpecialist))
-		{
-			paeRemovedSpecailists[iNumRemoved] = (SpecialistTypes)(iGenericSpecialist);
-			iNumRemoved++;
-			iNumSpecialistsRemoved++;
-		}
-	}
+	// A generic-citizen fast-removal loop used to live here; its guard
+	// (getAssignedSpecialistCount() < iNumRemoved, with iNumRemoved starting at 0)
+	// was always false, so it never executed. Removed as dead code (#64) - the
+	// valuation loop below already performs all removals. Reviving the optimisation
+	// would need the available generic-citizen count to decrement per iteration,
+	// otherwise the corrected condition loops forever.
 	bool bAvoidGrowth = false;
 	bool bIgnoreGrowth = false;
 
