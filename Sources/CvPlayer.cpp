@@ -16507,7 +16507,7 @@ bool CvPlayer::doEspionageMission(EspionageMissionTypes eMission, PlayerTypes eT
 		if (NO_PLAYER != eTargetPlayer && pSpyUnit
 		&& kMission.getBuyUnitCostFactor() > 0 && pSpyUnit->canBribe(pPlot, false))
 		{
-			CvUnit* pTargetUnit;
+			CvUnit* pTargetUnit = NULL;
 			if (pPlot->plotCheck(PUF_isOtherTeam, getID(), -1, NULL, NO_PLAYER, NO_TEAM, PUF_isVisible, getID()))
 			{
 				for (int i = 0; i < pPlot->getNumUnits(); i++)
@@ -16531,8 +16531,9 @@ bool CvPlayer::doEspionageMission(EspionageMissionTypes eMission, PlayerTypes eT
 
 				int iX = pTargetUnit->getX();
 				int iY = pTargetUnit->getY();
+				const UnitTypes eBribedType = pTargetUnit->getUnitType();
 				pTargetUnit->kill(false, getID());
-				CvUnit* acquiredWorker = initUnit(pTargetUnit->getUnitType(), iX, iY, UNITAI_WORKER, NO_DIRECTION, GC.getGame().getSorenRandNum(10000, "AI Unit Birthmark"));
+				CvUnit* acquiredWorker = initUnit(eBribedType, iX, iY, UNITAI_WORKER, NO_DIRECTION, GC.getGame().getSorenRandNum(10000, "AI Unit Birthmark"));
 				CvCity* pCapital = this->getCapitalCity();
 				if (pCapital && acquiredWorker)
 				{
@@ -17235,9 +17236,9 @@ int CvPlayer::getAdvancedStartUnitCost(UnitTypes eUnit, bool bAdd, const CvPlot*
 		{
 			return -1;
 		}
-		iCost = getModifiedIntValue(iCost, pCity->getProductionModifier(eUnit));
+		iCost = getModifiedIntValue(iCost, getProductionModifier(eUnit));
 	}
-	else iCost = getModifiedIntValue(iCost, getProductionModifier(eUnit));
+	else iCost = getModifiedIntValue(iCost, pCity->getProductionModifier(eUnit));
 
 
 	if (bAdd)
@@ -20460,7 +20461,7 @@ void CvPlayer::createGreatPeople(UnitTypes eGreatPersonUnit, bool bIncrementThre
 		if (GET_PLAYER((PlayerTypes)iI).isAlive())
 		{
 
-			if (pPlot->isRevealed(GET_PLAYER((PlayerTypes)iI).getTeam(), false))
+			if (pPlot != NULL && pPlot->isRevealed(GET_PLAYER((PlayerTypes)iI).getTeam(), false))
 			{
 				AddDLLMessage(((PlayerTypes)iI), false, GC.getEVENT_MESSAGE_TIME(), szReplayMessage, "AS2D_UNIT_GREATPEOPLE", MESSAGE_TYPE_MAJOR_EVENT, pGreatPeopleUnit->getButton(), (ColorTypes)GC.getInfoTypeForString("COLOR_UNIT_TEXT"), iX, iY, true, true);
 			}

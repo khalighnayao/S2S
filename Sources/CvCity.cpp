@@ -21680,7 +21680,7 @@ void CvCity::calculateExtraTradeRouteProfit(int iExtra, int*& aiTradeYields) con
 		}
 	}
 
-	for (int iI = 0; iI < getTradeRoutes() + iExtra; iI++)
+	for (int iI = 0; iI < std::min(getTradeRoutes() + iExtra, iMaxTradeRoutes); iI++)
 	{
 		CvCity* pLoopCity = getCity(paTradeCities[iI]);
 

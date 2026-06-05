@@ -1290,7 +1290,6 @@ short CvPlot::getVisibilityDecayBonus(const bool pSeaPlot)
 	{
 		const CvFeatureInfo& kFeatureInfo = GC.getFeatureInfo(eFeature);
 		const CvString featureString = kFeatureInfo.getType();
-		const CvBonusInfo& kBonusInfo = GC.getBonusInfo(eBonusType);
 		if (featureString == "FEATURE_OASIS" || featureString == "FEATURE_CAVES" || featureString == "FEATURE_CITY_RUINS")
 		{
 			iVisibilityDecay += 3;
@@ -4777,7 +4776,7 @@ int CvPlot::calculatePathDistanceToPlot( TeamTypes eTeam, CvPlot* pTargetPlot ) 
 	gDLL->getFAStarIFace()->SetData(pTeamStepFinder, &teamVec);
 	gDLL->getFAStarIFace()->GeneratePath(pTeamStepFinder, getX(), getY(), pTargetPlot->getX(), pTargetPlot->getY(), false, 0, true);
 
-	const FAStarNode* pNode = gDLL->getFAStarIFace()->GetLastNode(&GC.getStepFinder());
+	const FAStarNode* pNode = gDLL->getFAStarIFace()->GetLastNode(pTeamStepFinder);
 
 	const int iPathDistance = pNode ? pNode->m_iData1 : -1;
 
@@ -11111,7 +11110,7 @@ void CvPlot::read(FDataStreamBase* pStream)
 	SAFE_DELETE_ARRAY(m_aiFoundValue);
 	char cFoundValuesPresent;
 	WRAPPER_READ(wrapper, "CvPlot", &cFoundValuesPresent);
-	unsigned int* m_aiFoundValue = new unsigned int[cFoundValuesPresent];
+	m_aiFoundValue = new unsigned int[cFoundValuesPresent];
 	WRAPPER_READ_ARRAY(wrapper, "CvPlot", cFoundValuesPresent, m_aiFoundValue);
 
 	SAFE_DELETE_ARRAY(m_aiPlayerCityRadiusCount);
