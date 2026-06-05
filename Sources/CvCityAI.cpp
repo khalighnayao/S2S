@@ -1326,7 +1326,7 @@ void CvCityAI::AI_chooseProduction()
 						//int iBestAirValue = player.AI_bestCityUnitAIValue(UNITAI_ATTACK_AIR, this, &eBestAttackAircraft);
 
 						int iAircraftHave = player.AI_getNumAIUnits(UNITAI_ATTACK_AIR) + player.AI_getNumAIUnits(UNITAI_DEFENSE_AIR) + player.AI_getNumAIUnits(UNITAI_MISSILE_AIR);
-						int iAircraftNeed = (2 + player.getNumCities() * (3 * GC.getUnitInfo(eBestAttackAircraft).getAirCombat())) / (2 * std::max(1, GC.getGame().getBestLandUnitCombat()));
+						int iAircraftNeed = (2 + player.getNumCities() * (3 * (eBestAttackAircraft != NO_UNIT ? GC.getUnitInfo(eBestAttackAircraft).getAirCombat() : 0))) / (2 * std::max(1, GC.getGame().getBestLandUnitCombat()));
 
 						UnitTypeWeightArray airUnitTypes;
 						airUnitTypes.push_back(std::make_pair(UNITAI_ATTACK_AIR, 60));
@@ -4276,7 +4276,7 @@ bool CvCityAI::AI_scoreBuildingsFromListThreshold(std::vector<ScoredBuilding>& s
 				{
 					// Add value of the free building taking into account our focus, and scale it by the number of cities that don't
 					// yet have the building.
-					iValue += (AI_buildingValue(eFreeBuilding, iFocusFlags) * (player.getNumCities() - player.getBuildingCountPlusMaking(eBuilding)));
+					iValue += (AI_buildingValue(eFreeBuilding, iFocusFlags) * (player.getNumCities() - player.getBuildingCountPlusMaking(eFreeBuilding)));
 				}
 
 				// If this new building replaces an old one, subtract the old value.
@@ -8830,8 +8830,8 @@ bool CvCityAI::AI_chooseBuilding(int iFocusFlags, int iMaxTurns, int iMinThresho
 		CvPlayer& player = GET_PLAYER(getOwner());
 		if (nbBuildings > (NB_MAX_BUILDINGS + player.getCurrentEra() / 2))
 		{
+			break;
 		}
-		break;
 
 	}
 #ifdef USE_UNIT_TENDERING
@@ -10516,7 +10516,7 @@ int CvCityAI::AI_calculateCulturePressure(bool bGreatWork) const
 					iTempValue *= 2;
 					if (bGreatWork && GET_PLAYER(getOwner()).AI_getAttitude(pLoopPlot->getOwner()) == ATTITUDE_FRIENDLY)
 					{
-						iValue /= 10;
+						iTempValue /= 10;
 					}
 				}
 				else if (bGreatWork)
