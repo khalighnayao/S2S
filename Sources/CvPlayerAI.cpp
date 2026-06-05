@@ -9489,6 +9489,10 @@ DenialTypes CvPlayerAI::AI_bonusTrade(BonusTypes eBonus, PlayerTypes ePlayer) co
 
 	// Disregard obsolete units
 	const CvCity* pCapitalCity = getCapitalCity();
+	if (pCapitalCity == NULL)
+	{
+		return NO_DENIAL;
+	}
 	for (int iI = 0; iI < GC.getNumUnitInfos(); iI++)
 	{
 		if (!GC.getGame().canEverTrain((UnitTypes)iI)

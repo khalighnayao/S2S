@@ -6143,6 +6143,7 @@ void CvPlayer::doGoody(CvPlot* pPlot, CvUnit* pUnit)
 			}
 		}
 	}
+	if (!aGoodies.empty())
 	{
 		const GoodyTypes eGoody = aGoodies[GC.getGame().getSorenRandNum(aGoodies.size(), "Select Goody Type")];
 
@@ -6154,7 +6155,7 @@ void CvPlayer::doGoody(CvPlot* pPlot, CvUnit* pUnit)
 		CvEventReporter::getInstance().goodyReceived(getID(), pPlot, pUnit, eGoody);
 	}
 
-	if (hasExtraGoody())
+	if (hasExtraGoody() && !aGoodies.empty())
 	{
 		const GoodyTypes eGoody = aGoodies[GC.getGame().getSorenRandNum(aGoodies.size(), "Select Goody Type 2")];
 		receiveGoody(pPlot, eGoody, pUnit);
