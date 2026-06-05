@@ -11116,9 +11116,11 @@ bool CvUnitAI::AI_shadow(UnitAITypes eUnitAI, int iMax, int iMaxRatio, bool bWit
 	{
 		if (atPlot(pBestUnit->plot()))
 		{
+			AI_logAct("shadow", "shadowHere", pBestUnit->plot());
 			getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_SHADOW, NULL, pBestUnit);
 			return true;
 		}
+		AI_logAct("shadow", "moveToShadow", pBestUnit->plot());
 		return getGroup()->pushMissionInternal(MISSION_MOVE_TO_UNIT, pBestUnit->getOwner(), pBestUnit->getID(), 0, false, false, MISSIONAI_SHADOW, NULL, pBestUnit);
 	}
 	return false;
@@ -15468,7 +15470,11 @@ bool CvUnitAI::AI_seaAreaAttack()
 	for (CvReachablePlotSet::const_iterator itr = plotSet.begin(); itr != plotSet.end(); ++itr)
 	{
 		CvPlot* pLoopPlot = itr.plot();
-		if (pLoopPlot->area() == area() && pLoopPlot->isVisible(getTeam(), false) && pLoopPlot->getOwner() == getOwner())
+		// Relaxed (#sea-ai): pursue visible enemy ships anywhere in the sea area, not only within
+		// plots we own. The generatePath() below still blocks entering territory we'd have to declare
+		// war on, so this stays peace-safe while letting attack-sea units (incl. human-automated) leave
+		// friendly waters to engage. Was: ... && pLoopPlot->getOwner() == getOwner().
+		if (pLoopPlot->area() == area() && pLoopPlot->isVisible(getTeam(), false))
 		{
 			int iCount = pLoopPlot->plotCount(PUF_isEnemy, getOwner(), 0, NULL, NO_PLAYER, NO_TEAM, PUF_isVisible, getOwner());
 
@@ -15503,9 +15509,11 @@ bool CvUnitAI::AI_seaAreaAttack()
 	{
 		if (!atPlot(pBestPlot))
 		{
+			AI_logAct("seaAreaAttack", "pursueEnemyInArea", pBestPlot);
 			return getGroup()->pushMissionInternal(MISSION_MOVE_TO, pBestPlot->getX(), pBestPlot->getY());
 		}
 		// Sharing plot with the enemy
+		AI_logAct("seaAreaAttack", "ambush", pBestPlot);
 		FAssertMsg(canAmbush(pBestPlot), "Something is wrong. . .")
 			return getGroup()->pushMissionInternal(MISSION_AMBUSH, pBestPlot->getX(), pBestPlot->getY());
 	}
@@ -18036,6 +18044,7 @@ bool CvUnitAI::AI_blockade()
 			{
 				getGroup()->pushMission(MISSION_BOMBARD, -1, -1, 0, false, false, MISSIONAI_BLOCKADE, pBestBlockadePlot);
 			}
+			AI_logAct("blockade", "blockadeHere", pBestBlockadePlot);
 			getGroup()->pushMission(MISSION_PLUNDER, -1, -1, 0, (getGroup()->getLengthMissionQueue() > 0), false, MISSIONAI_BLOCKADE, pBestBlockadePlot);
 
 			return true;
@@ -18043,6 +18052,7 @@ bool CvUnitAI::AI_blockade()
 		else
 		{
 			FAssert(!atPlot(pBestPlot));
+			AI_logAct("blockade", "moveToBlockade", pBestBlockadePlot);
 			return getGroup()->pushMissionInternal(MISSION_MOVE_TO, pBestPlot->getX(), pBestPlot->getY(), 0, false, false, MISSIONAI_BLOCKADE, pBestBlockadePlot);
 		}
 	}
@@ -18471,9 +18481,11 @@ bool CvUnitAI::AI_seaBombardRange(int iMaxRange)
 			{
 				getGroup()->pushMission(MISSION_SKIP);
 			}
+			AI_logAct("seaBombard", "bombardOrPlunder", pBestBombardPlot);
 			return true;
 		}
 		FAssert(!atPlot(pBestPlot));
+		AI_logAct("seaBombard", "moveToBombard", pBestBombardPlot);
 		return getGroup()->pushMissionInternal(MISSION_MOVE_TO, pBestPlot->getX(), pBestPlot->getY(), 0, false, false, MISSIONAI_BLOCKADE, pBestBombardPlot);
 	}
 	return false;
