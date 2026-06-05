@@ -26095,7 +26095,7 @@ int CvUnit::flankingStrengthbyUnitCombatTotal(UnitCombatTypes eCombatType) const
 		std::max(
 			0,
 			m_pUnitInfo->getFlankingStrengthbyUnitCombatType(eCombatType)
-			+ getExtraFlankingStrengthbyUnitCombatType(eCombatType, isCommander(), isCommodore)
+			+ getExtraFlankingStrengthbyUnitCombatType(eCombatType, isCommander(), isCommodore())
 		)
 	);
 }
