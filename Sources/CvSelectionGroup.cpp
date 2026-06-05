@@ -1423,19 +1423,22 @@ bool CvSelectionGroup::startMission()
 						}
 						iMovesLeft /= 100;
 
-						iMovesLeft = std::max(iMaxMovesLeft, iMovesLeft);
-
-						if (iMovesLeft >= iMaxMovesLeft && pLoopUnit->pillage())
+						if (iMovesLeft >= iMaxMovesLeft)
 						{
-							bAction = true;
-							if( isHuman() || canAllMove() )
+							if (pLoopUnit->pillage())
 							{
-								bDidPillage = true;
-								iMovesLeft -= 1;
-								break;
+								bAction = true;
+								if( isHuman() || canAllMove() )
+								{
+									bDidPillage = true;
+									break;
+								}
 							}
 						}
-						iNextMaxMovesLeft = std::min( iNextMaxMovesLeft, iMovesLeft );
+						else
+						{
+							iNextMaxMovesLeft = std::max( iNextMaxMovesLeft, iMovesLeft );
+						}
 					}
 				}
 
@@ -2732,9 +2735,9 @@ bool CvSelectionGroup::canDoInterfaceModeAt(InterfaceModeTypes eInterfaceMode, C
 			}
 			case INTERFACEMODE_SHADOW_UNIT:
 			{
-				foreach_(CvUnit* pLoopUnit, pPlot->units())
+				foreach_(CvUnit* pPlotUnit, pPlot->units())
 				{
-					if (pLoopUnit->canShadowAt(pPlot, pLoopUnit))
+					if (pLoopUnit->canShadowAt(pPlot, pPlotUnit))
 					{
 						return true;
 					}
