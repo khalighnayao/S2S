@@ -2646,7 +2646,7 @@ int CvTeam::getResearchCost(TechTypes eTech) const
 
 	if (!isNPC() && !isHuman(true))
 	{
-		iMod =
+		iMod +=
 			(
 				GC.getHandicapInfo(GC.getGame().getHandicapType()).getAIResearchPercent() - 100
 				+
