@@ -2328,6 +2328,7 @@ bool CvSelectionGroup::continueMission(int iSteps)
 				if (!isHuman() || missionNode->m_data.eMissionType != MISSION_MOVE_TO)
 				{
 					deleteMissionQueueNode(missionNode);
+					missionNode = NULL;
 
 					// We executed this one ok but if we have no moves left don't leave
 					//	it with ACTIVITY_AWAKE as its state as that'll just cause the AI to spin wheels.
