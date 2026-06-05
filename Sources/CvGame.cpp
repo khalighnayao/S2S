@@ -10123,7 +10123,11 @@ void CvGame::doFlexibleDifficulty()
 			int stddevHandi = static_cast<int>((stddev * (basicMaxCap/diff*100))/100);
 			int handicapBias = static_cast<int>(stddevHandi*((multiplier*playerX.getHandicapType())-(multiplier*default_difficult)));
 
-			double normalized = 1.80*((double)(iCurrentScore-iLowestScore)/(double)(iBestScore-iLowestScore))-0.90;
+			const double scoreRange = (double)(iBestScore - iLowestScore);
+			double normalized = (scoreRange != 0.0) ? 1.80*((double)(iCurrentScore-iLowestScore)/scoreRange)-0.90 : 0.0;
+			// Keep normalized strictly inside (-1, 1) so the atanh logs stay finite (avoid log(0) at the extremes).
+			if (normalized > 0.999) { normalized = 0.999; }
+			else if (normalized < -0.999) { normalized = -0.999; }
 			double atanh2 = 2.0 * (std::log(1.0+normalized) - std::log(1.0-normalized))/2.0;
 
 			int increase1 = 100*(iCurrentScore+((int)((double)iCurrentScore*atanh2)))-handicapBias;
@@ -11703,7 +11707,7 @@ int CvGame::getTopPopCount() const
 
 int CvGame::getWinForLosingResearchModifier(const int iCities, const int iPop) const
 {
-	return 100 - (100 * iCities / getTopCityCount() + 100 * iPop / getTopPopCount()) / 2;
+	return 100 - (100 * iCities / std::max(1, getTopCityCount()) + 100 * iPop / std::max(1, getTopPopCount())) / 2;
 }
 
 
