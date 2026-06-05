@@ -33,6 +33,7 @@ This folder is split by intent:
 | [CvArmy](reference/CvArmy.md) | Multi-stack coordinated assault groups |
 | [CvContractBroker](reference/CvContractBroker.md) | Publish/subscribe unit-need dispatch between cities and units |
 | [CvPathGenerator / CvPath](reference/CvPathGenerator.md) | Pluggable A\* pathfinder with per-unit cost/validity callbacks |
+| [pathfinding](reference/pathfinding.md) | Engine FAStar finders (step/route/area/plot-group), the callback contract, team-restricted distance |
 | [CvOutcome](reference/CvOutcome.md) | Probabilistic mission results defined in XML |
 | [CvProperties](reference/CvProperties.md) | Generic extensible property container (crime, pollution, …) |
 | [CvPropertySolver](reference/CvPropertySolver.md) | Per-turn solver for the property simulation system |

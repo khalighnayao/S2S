@@ -63,3 +63,4 @@ vectors) to avoid per-node heap allocation during each search.
 - [`CvSelectionGroup`](CvSelectionGroup.md) — primary consumer of generated paths  
 - [`CvMap`](CvMap.md) — provides terrain data consumed by callbacks  
 - [`CvPlot`](CvPlot.md) — individual nodes in every path  
+- [pathfinding](pathfinding.md) — the engine `FAStar` finders this replaces for unit movement, still used for step distance / area / plot-group / route connectivity queries  
