@@ -23559,9 +23559,9 @@ bool CvPlayer::isValidTriggerCorporation(const CvEventTriggerInfo& kTrigger, con
 	}
 	else
 	{
-		if (getHasCorporationCount(eCorporation) > 0)
+		if (getHasCorporationCount(eCorporation) == 0)
 		{
-			return true;
+			return false;
 		}
 
 		if (kTrigger.isHeadquarters())
@@ -23574,7 +23574,7 @@ bool CvPlayer::isValidTriggerCorporation(const CvEventTriggerInfo& kTrigger, con
 		}
 	}
 
-	return false;
+	return true;
 }
 
 void CvPlayer::launch(VictoryTypes eVictory)
@@ -23925,7 +23925,7 @@ bool CvPlayer::canDoResolution(VoteSourceTypes eVoteSource, const VoteSelectionS
 				TeamTypes eMaster = getTeam();
 				for (int iMaster = 0; iMaster < MAX_PC_TEAMS; ++iMaster)
 				{
-					if (iMaster != getID() && kOurTeam.isVassal((TeamTypes)iMaster))
+					if (iMaster != (int)getTeam() && kOurTeam.isVassal((TeamTypes)iMaster))
 					{
 						if (GET_TEAM((TeamTypes)iMaster).isVotingMember(eVoteSource))
 						{
@@ -23952,7 +23952,7 @@ bool CvPlayer::canDoResolution(VoteSourceTypes eVoteSource, const VoteSelectionS
 			TeamTypes eMaster = getTeam();
 			for (int iMaster = 0; iMaster < MAX_PC_TEAMS; ++iMaster)
 			{
-				if (iMaster != getID() && kOurTeam.isVassal((TeamTypes)iMaster))
+				if (iMaster != (int)getTeam() && kOurTeam.isVassal((TeamTypes)iMaster))
 				{
 					if (GET_TEAM((TeamTypes)iMaster).isVotingMember(eVoteSource))
 					{
