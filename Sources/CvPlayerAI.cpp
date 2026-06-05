@@ -4284,7 +4284,7 @@ int CvPlayerAI::techPathValuePerUnitCost(techPath* path, TechTypes eTech, bool b
 
 	foreach_(const TechTypes & loopTech, *path)
 	{
-		int iTempCost = std::max(1, GET_TEAM(getTeam()).getResearchCost(eTech) - GET_TEAM(getTeam()).getResearchProgress(eTech));
+		int iTempCost = std::max(1, GET_TEAM(getTeam()).getResearchCost(loopTech) - GET_TEAM(getTeam()).getResearchProgress(loopTech));
 		int iTempValue = AI_TechValueCached(loopTech, bAsync);
 
 		iCost += iTempCost;
@@ -12760,7 +12760,6 @@ int CvPlayerAI::AI_unitTargetMissionAIs(const CvUnit* pUnit, MissionAITypes* aeM
 			{
 				iPathTurns++;
 			}
-			iCount = iPathTurns;
 		}
 
 		// If the mission parameters state any amount of movement is ok or the amount of movement allowed is valid
@@ -19710,7 +19709,7 @@ void CvPlayerAI::AI_doDiplo()
 															*
 															GET_TEAM(GET_PLAYER((PlayerTypes)iI).getTeam()).getResearchLeft((TechTypes)iJ)
 														);
-													if (iValue > iBestValue)
+													if (iValue > iBestValue2)
 													{
 														iBestValue2 = iValue;
 														eBestGiveTech2 = (TechTypes)iJ;
@@ -20627,6 +20626,7 @@ int CvPlayerAI::AI_eventValue(EventTypes eEvent, const EventTriggeredData& kTrig
 		{
 			int iWarValue = (GET_TEAM(getTeam()).getDefensivePower() - GET_TEAM(GET_PLAYER(kTriggeredData.m_eOtherPlayer).getTeam()).getPower(true));// / std::max(1, GET_TEAM(getTeam()).getDefensivePower());
 			iWarValue -= 30 * AI_getAttitudeVal(kTriggeredData.m_eOtherPlayer);
+			iValue += iWarValue;
 		}
 
 		if (kEvent.getMaxPillage() > 0)
@@ -20636,6 +20636,7 @@ int CvPlayerAI::AI_eventValue(EventTypes eEvent, const EventTriggeredData& kTrig
 			iPillageValue *= 25 - iOtherPlayerAttitudeWeight;
 			iPillageValue *= iGameSpeedPercent;
 			iPillageValue /= 12500;
+			iValue += iPillageValue;
 		}
 
 		iValue += (iDiploValue * iGameSpeedPercent) / 100;
@@ -25616,7 +25617,7 @@ CvCity* CvPlayerAI::getReligiousVictoryTarget(const CvUnit* pUnit, const bool bN
 		const CvTeam& kLoopTeam = GET_TEAM(kLoopPlayer.getTeam());
 
 		if (kLoopPlayer.isAlive()
-			&& (TeamTypes(kLoopPlayer.getTeam()) == getTeam() || kLoopTeam.isVassal((TeamTypes)kLoopPlayer.getTeam()))
+			&& (TeamTypes(kLoopPlayer.getTeam()) == getTeam() || kLoopTeam.isVassal(getTeam()))
 			&& pUnitPlot->isHasPathToPlayerCity(getTeam(), PlayerTypes(iI))
 			)
 		{
@@ -25633,7 +25634,7 @@ CvCity* CvPlayerAI::getReligiousVictoryTarget(const CvUnit* pUnit, const bool bN
 					{
 						tempCityValue *= 2;
 					}
-					if (kLoopTeam.isVassal((TeamTypes)kLoopPlayer.getTeam()))
+					if (kLoopTeam.isVassal(getTeam()))
 					{
 						tempCityValue -= 12;
 					}
