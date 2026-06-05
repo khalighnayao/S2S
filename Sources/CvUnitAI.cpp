@@ -17152,7 +17152,7 @@ bool CvUnitAI::AI_goToTargetCity(int iFlags, int iMaxPathTurns, const CvCity* pT
 
 					if (pPathPlot->isVisibleEnemyUnit(getOwner()))
 					{
-						bool bWin;
+						bool bWin = false;
 						int iExpectedGainOdds = getGroup()->AI_attackOdds(pPathPlot, true, false, &bWin);
 
 						if (iExpectedGainOdds < 50)
