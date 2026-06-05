@@ -2717,8 +2717,10 @@ void CvPlayer::acquireCity(CvCity* pOldCity, bool bConquest, bool bTrade, bool b
 
 				iOccupationTime *= GC.getGameSpeedInfo(GC.getGame().getGameSpeedType()).getSpeedPercent(); // Extra 100x
 
-				// Normalize: Full timer at 0 culture, no timer when culture == occupation threshold.
-				iOccupationTime *= 1000 - 1000 * iTeamCulturePercent / GC.getDefineINT("OCCUPATION_CULTURE_PERCENT_THRESHOLD"); // Extra 1000x
+				// Normalize: timer at 0 culture, no timer when culture == occupation threshold.
+				// Culture factor scale cut from 1000 to 200 so conquest occupation is ~1/5 as long (#153).
+				// Interim calibration; the conquest-anarchy mechanic may be reworked later.
+				iOccupationTime *= 200 - 200 * iTeamCulturePercent / GC.getDefineINT("OCCUPATION_CULTURE_PERCENT_THRESHOLD"); // Extra 200x (was 1000x)
 
 				iOccupationTime = getModifiedIntValue(iOccupationTime, iOccupationTimeModifier);
 
