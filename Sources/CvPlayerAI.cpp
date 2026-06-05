@@ -26253,11 +26253,21 @@ int CvPlayerAI::AI_militaryUnitTradeVal(const CvUnit* pUnit) const
 		}
 		else
 		{
-			const int iBestUnitAIValue = AI_unitValue(eBestUnit, GC.getUnitInfo(eUnit).getDefaultUnitAIType(), getCapitalCity()->area());
-			const int iThisUnitAIValue = AI_unitValue(eUnit, GC.getUnitInfo(eUnit).getDefaultUnitAIType(), getCapitalCity()->area());
+			CvCity* pCapital = getCapitalCity();
+			if (pCapital == NULL)
+			{
+				// Capital-less civ (bestBuildableUnitForAIType can still succeed via firstCity);
+				// no area to scale against, so fall back to the unit's production cost.
+				iValue = GC.getUnitInfo(eUnit).getProductionCost();
+			}
+			else
+			{
+				const int iBestUnitAIValue = AI_unitValue(eBestUnit, GC.getUnitInfo(eUnit).getDefaultUnitAIType(), pCapital->area());
+				const int iThisUnitAIValue = AI_unitValue(eUnit, GC.getUnitInfo(eUnit).getDefaultUnitAIType(), pCapital->area());
 
-			//	Value as cost of production of the unit we can build scaled by their relative AI value
-			iValue = (iThisUnitAIValue * GC.getUnitInfo(eBestUnit).getProductionCost()) / std::max(1, iBestUnitAIValue);
+				//	Value as cost of production of the unit we can build scaled by their relative AI value
+				iValue = (iThisUnitAIValue * GC.getUnitInfo(eBestUnit).getProductionCost()) / std::max(1, iBestUnitAIValue);
+			}
 		}
 
 		//	Normalise for game speed, and double as approximate hammer->gold conversion

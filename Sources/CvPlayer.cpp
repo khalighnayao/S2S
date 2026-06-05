@@ -7127,7 +7127,9 @@ int CvPlayer::getProductionNeeded(ProjectTypes eProject) const
 	iProductionNeeded *= GC.getGameSpeedInfo(GC.getGame().getGameSpeedType()).getHammerCostPercent();
 
 	const EraTypes eEra = getCurrentEra();
-	int iModifier = 0;
+	// Fall back to the current era's create percent when the project has no tech prereq;
+	// otherwise iModifier stayed 0 and zeroed the whole cost (project became ~free).
+	int iModifier = GC.getEraInfo(eEra).getCreatePercent();
 	if (GC.getProjectInfo(eProject).getTechPrereq() != NO_TECH)
     {
         iModifier = GC.getEraInfo((EraTypes)GC.getTechInfo(GC.getProjectInfo(eProject).getTechPrereq()).getEra()).getCreatePercent();
