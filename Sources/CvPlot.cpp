@@ -13476,10 +13476,16 @@ void CvPlot::unitGameStateCorrections()
 		{
 			if (!pLoopUnit->atPlot(this))
 			{
+				// removeUnit() deletes this unit's node from m_units, so capture the next node first.
+				CLLNode<IDInfo>* pNextNode = nextUnitNode(pUnitNode);
 				removeUnit(pLoopUnit);
 				bUpdate = true;
+				pUnitNode = pNextNode;
 			}
-			pUnitNode = nextUnitNode(pUnitNode);
+			else
+			{
+				pUnitNode = nextUnitNode(pUnitNode);
+			}
 		}
 	}
 
