@@ -54,6 +54,8 @@ This folder is split by intent:
 | [combat-odds-baseline](plans/combat-odds-baseline.md) | Pre-refactor combat-odds baseline (Phase 0 regression reference) |
 | [combat-phase3b-plan](plans/combat-phase3b-plan.md) | Route the AI's win-% through the binomial engine |
 | [ai-logging-rollout](plans/ai-logging-rollout.md) | Plan to roll the tagged-logging structure across the AI codebase |
+| [sea-ai-rework](plans/sea-ai-rework.md) | Naval AI weaknesses, the attack-sea cascade, and the logging driving the rework |
+| [dead-code-xml-pass](plans/dead-code-xml-pass.md) | Tiered dead-code / dead-XML removal plan; XML→JSON web-Civilopedia north-star |
 | [fight-or-flight](plans/fight-or-flight.md) | `FIGHT_OR_FLIGHT` design capture (removal + plugin reimplementation) |
 | [surround-destroy-removal-map](plans/surround-destroy-removal-map.md) | `SURROUND_DESTROY` removal map (deferred) |
 
@@ -62,3 +64,21 @@ This folder is split by intent:
 - A note about **how existing code behaves** → `reference/`.
 - A note about **a change you intend to make** (plan, scope, rollout, removal) → `plans/`.
 - **Player-facing** rules, manuals, FAQs, key bindings → top-level [`docs/`](../../docs/).
+
+## The repo is the single source of truth — mirror knowledge here
+
+**Durable project knowledge must live in this repository, not in any one
+developer's (or AI assistant's) private/local notes.** If a finding, decision,
+plan, taxonomy, or "hard-won fact" is worth remembering, it belongs in a committed
+file so everyone — every contributor and every agent — sees the same thing.
+
+- Learned how something works, or why? → add/update a `reference/` doc.
+- Started or scoped an initiative, or captured a design decision? → a `plans/` doc.
+- Cross-cutting, must-not-rediscover facts → the relevant `AGENTS.md`
+  ("Key Subsystem Knowledge").
+- Player-facing rules → top-level [`docs/`](../../docs/).
+
+Local assistant memory (e.g. a tool's per-developer memory store) is a personal
+*index/cache* only — it is **not** a substitute for the in-repo copy, and the
+in-repo copy is authoritative. When you record something locally, mirror the
+shareable part here in the same change. Keep these docs current as the code moves.

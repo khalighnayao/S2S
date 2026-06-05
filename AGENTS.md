@@ -87,6 +87,23 @@ not findings to re-discover.
 - If C++ changes touch XML/Python interfaces, run the XML + callback validators.
 - Do not modernize or replace the build chain/toolchain.
 
+## Documentation & Knowledge — keep it in the repo
+**Durable knowledge lives in the repository, never only in a developer's or AI
+assistant's local/private notes.** When you learn something worth keeping — how a
+subsystem works, a design decision, a plan, a non-obvious "gotcha", the state of a
+standing initiative — write it into the appropriate committed doc *in the same
+change*, so every contributor and every agent sees one shared source of truth:
+
+- How existing code behaves → `Sources/docs/reference/`.
+- A change or initiative you intend to make (plan, scope, rollout, removal) → `Sources/docs/plans/`.
+- Cross-cutting, must-not-rediscover facts → "Key Subsystem Knowledge" above (or the nearest `AGENTS.md`).
+- Player-facing rules, manuals, FAQs → top-level `docs/`.
+
+Any per-developer assistant memory store is a personal *index/cache* only — it is
+**not** a substitute for the in-repo copy, and the in-repo copy is authoritative.
+If you record something locally, mirror the shareable part into the repo in the same
+change, and keep these docs current as the code moves. See `Sources/docs/README.md`.
+
 ## Project Skills
 Project-exclusive Claude Code skills live in **`.claude/skills/<skill-name>/SKILL.md`**.
 These are committed with the repo, so they're shared across everyone working on S2S.
