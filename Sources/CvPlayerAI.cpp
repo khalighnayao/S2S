@@ -11086,11 +11086,11 @@ int CvPlayerAI::AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, const CvArea*
 					iValue /= 5;
 				}
 
-				break;
 
 				if (kUnitInfo.canMergeSplit() && GC.getGame().isOption(GAMEOPTION_COMBAT_SIZE_MATTERS)){
 					iValue = int(iValue * EVAL_MERGE_FACTOR);
 				}
+				break;
 
 			}
 			case UNITAI_CITY_COUNTER:
@@ -11526,11 +11526,11 @@ int CvPlayerAI::AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, const CvArea*
 					iValue /= 2;
 					//better because it enables the unit to move through opponent territory with a RoP
 				}
-				break;
 
 			if (kUnitInfo.canMergeSplit() && GC.getGame().isOption(GAMEOPTION_COMBAT_SIZE_MATTERS)){
 				iValue = int(iValue * EVAL_MERGE_FACTOR);
 			}
+				break;
 
 			}
 			default: FErrorMsg("error");
@@ -27028,6 +27028,7 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 		}
 		iValue += iTemp;
 
+		iTemp = 0;
 		if (kPromotion.isPillageMarauder())
 		{
 			if (pUnit)
@@ -27067,6 +27068,7 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 		}
 		iValue += iTemp;
 
+		iTemp = 0;
 		if (kPromotion.isPillageOnMove())
 		{
 			if (pUnit)
@@ -27090,6 +27092,7 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 		}
 		iValue += iTemp;
 
+		iTemp = 0;
 		if (kPromotion.isPillageOnVictory())
 		{
 			if (pUnit)
@@ -27113,6 +27116,7 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 		}
 		iValue += iTemp;
 
+		iTemp = 0;
 		if (kPromotion.isPillageResearch())
 		{
 			if (pUnit)
@@ -29978,7 +29982,7 @@ int CvPlayerAI::AI_promotionValue(PromotionTypes ePromotion, UnitTypes eUnit, co
 		}
 		for (int iI = 0; iI < kPromotion.getNumVisibleImprovementRangeChanges(); iI++)
 		{
-			iTemp = kPromotion.getVisibleImprovementChange(iI).iIntensity;
+			iTemp = kPromotion.getVisibleImprovementRangeChange(iI).iIntensity;
 
 			if (iTemp != 0)
 			{
