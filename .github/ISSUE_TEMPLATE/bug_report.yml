@@ -1,0 +1,73 @@
+name: Bug report
+description: Report something that is broken or behaving wrong in-game.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Just fill in what you can — only the first box is required.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the problem. What did you expect, and what happened instead?
+      placeholder: e.g. After conquering a city it stayed in revolt for over 100 turns.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: How can we reproduce it? (optional)
+      description: Rough steps are fine. A save game (drag-and-drop a .CivBeyondSwordSave file or a .zip here) helps a lot.
+      placeholder: |
+        1. ...
+        2. ...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: game-speed
+    attributes:
+      label: Game speed (optional)
+      description: Many issues depend on this.
+      options:
+        - "Not sure / not relevant"
+        - Blitz
+        - Normal
+        - Long
+        - Epic
+        - Marathon
+        - Snail
+        - Eons
+        - Eternity
+    validations:
+      required: false
+
+  - type: dropdown
+    id: map-size
+    attributes:
+      label: Map size (optional)
+      options:
+        - "Not sure / not relevant"
+        - Duel
+        - Tiny
+        - Small
+        - Standard
+        - Large
+        - Huge
+        - Giant
+        - Gigantic
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: Version / build (optional)
+      description: S2S version or build date, if you know it.
+      placeholder: e.g. v1.x or the build date shown in-game
+    validations:
+      required: false

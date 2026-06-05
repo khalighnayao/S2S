@@ -1,0 +1,6 @@
+# Keep the "open a blank issue" option for maintainers / power users.
+blank_issues_enabled: true
+contact_links:
+  - name: Questions & general discussion
+    url: https://forums.civfanatics.com/forums/civ4-caveman-2-cosmos.449/
+    about: For how-to questions, mod help, and general chat, use the CivFanatics C2C forum.
