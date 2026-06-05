@@ -30378,7 +30378,7 @@ void CvPlayer::changeFreedomFighterCount(int iChange)
 
 int CvPlayer::getExtraFreedomFighters() const
 {
-	return m_iExtraFreedomFighters;
+	return (m_iExtraFreedomFighters > 0);
 }
 
 void CvPlayer::changeExtraFreedomFighters(int iChange)
