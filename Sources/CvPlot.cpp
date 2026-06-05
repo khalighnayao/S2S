@@ -2799,7 +2799,7 @@ bool CvPlot::canSeeDisplacementPlot(TeamTypes eTeam, int dx, int dy, int dx0, in
 				return false;
 			}
 		}
-		else if (seePlot->getElevationLevel() < iTopElevation && 2*iTopElevationDistance >= std::max(dx0, dy0))
+		else if (seePlot->getElevationLevel() < iTopElevation && 2*iTopElevationDistance >= std::max(abs(dx0), abs(dy0)))
 		{
 			return false;
 		}
@@ -12095,13 +12095,10 @@ int CvPlot::getYieldWithBuild(BuildTypes eBuild, YieldTypes eYield, bool bWithUp
 		eImprovement = getImprovementType();
 		if (eImprovement != NO_IMPROVEMENT)
 		{
-			for (int iI = 0; iI < NUM_YIELD_TYPES; iI++)
+			iYield += GC.getImprovementInfo(eImprovement).getRouteYieldChanges(eRoute, eYield);
+			if (getRouteType() != NO_ROUTE)
 			{
-				iYield += GC.getImprovementInfo(eImprovement).getRouteYieldChanges(eRoute, iI);
-				if (getRouteType() != NO_ROUTE)
-				{
-					iYield -= GC.getImprovementInfo(eImprovement).getRouteYieldChanges(getRouteType(), iI);
-				}
+				iYield -= GC.getImprovementInfo(eImprovement).getRouteYieldChanges(getRouteType(), eYield);
 			}
 		}
 	}
@@ -13138,7 +13135,10 @@ bool CvPlot::isInUnitZoneOfControl(PlayerTypes ePlayer) const
 		foreach_(const CvUnit* pLoopUnit, pAdjacentPlot->units()
 		| filtered(bind(CvUnit::isZoneOfControl, _1)))
 		{
-			return GET_TEAM(pLoopUnit->getTeam()).isAtWar(GET_PLAYER(ePlayer).getTeam());
+			if (GET_TEAM(pLoopUnit->getTeam()).isAtWar(GET_PLAYER(ePlayer).getTeam()))
+			{
+				return true;
+			}
 		}
 	}
 	return false;
