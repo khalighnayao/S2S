@@ -8355,6 +8355,13 @@ void CvGame::read(FDataStreamBase* pStream)
 	WRAPPER_READ(wrapper,"CvGame",&m_bDiploVictoryEnabled);
 	WRAPPER_READ_ARRAY(wrapper,"CvGame",MAX_PLAYERS, m_aiFlexibleDifficultyTimer);
 
+	// Modder game options (BUG menu / ModderGameOptionTypes). These were previously not saved and
+	// relied on Python re-pushing them from the BUG ini on load; that left them at 0 for any consumer
+	// that runs during load/first-turn (e.g. the leader trait-promotion threshold), which read the
+	// 0 fallback instead of the player's chosen value (#156). Tag-based wrapper: absent in old saves,
+	// in which case the array keeps its reset default of 0 and the Python push still fills it.
+	WRAPPER_READ_ARRAY(wrapper,"CvGame",NUM_MODDERGAMEOPTION_TYPES, m_aiModderGameOption);
+
 	// Super forts adaptation to C2C - has this game state had its choke points calculated?
 	WRAPPER_READ(wrapper,"CvGame", &m_iChokePointCalculationVersion);
 
@@ -8653,6 +8660,10 @@ void CvGame::write(FDataStreamBase* pStream)
 	WRAPPER_WRITE(wrapper, "CvGame", m_iMercyRuleCounter);
 	WRAPPER_WRITE(wrapper, "CvGame", m_bDiploVictoryEnabled);
 	WRAPPER_WRITE_ARRAY(wrapper, "CvGame", MAX_PLAYERS, m_aiFlexibleDifficultyTimer);
+
+	// Modder game options (BUG menu / ModderGameOptionTypes) - persist so the value is authoritative
+	// on load instead of relying on a Python re-push that may land after first-turn consumers. See read().
+	WRAPPER_WRITE_ARRAY(wrapper, "CvGame", NUM_MODDERGAMEOPTION_TYPES, m_aiModderGameOption);
 
 	// Super forts adaptation to C2C - has this game state had its choke points calculated?
 	WRAPPER_WRITE(wrapper,"CvGame", m_iChokePointCalculationVersion);

@@ -29305,9 +29305,14 @@ uint64_t CvPlayer::getLeaderLevelupNextCultureTotal() const
 	uint64_t iPromoThreshold = 1000;
 	uint64_t iX = 1000;
 	// Set from the BUG menu (Stones2Stars tab) via MODDERGAMEOPTION_NEXT_TRAIT_CULTURE_REQ_PERCENT.
-	// Falls back to 25 (the former GlobalDefines default) before the BUG value has been pushed in.
+	// Falls back to 200 (the maximum dropdown value, i.e. the slowest / highest requirement) when the
+	// option has not been pushed in yet - old saves loaded with this DLL, and the first promotion
+	// checks at game start before ANewDawnSettings.setXMLOptionsfromIniFile() runs. Using the maximum
+	// guarantees an unset option can never spuriously cross the trait threshold; the real value takes
+	// over and the threshold recalculates as soon as the save load / BUG push provides it. The previous
+	// fallback of 25 made the requirement ~7x too cheap, so leaders gained traits far too fast (#156).
 	int iReqPercent = GC.getGame().getModderGameOption(MODDERGAMEOPTION_NEXT_TRAIT_CULTURE_REQ_PERCENT);
-	if (iReqPercent == 0) iReqPercent = 25;
+	if (iReqPercent == 0) iReqPercent = 200;
 	int iY = 10 * iReqPercent / 100;
 
 	if (GC.getGame().isOption(GAMEOPTION_LEADER_START_NO_POSITIVE_TRAITS))
