@@ -21496,9 +21496,11 @@ int64_t CvCity::calcCorporateMaintenance() const
 		{
 			const CorporationTypes eCorporation = (CorporationTypes)iI;
 
+			int64_t iCorpTaxes = 0;
+
 			for (int iCommerce = 0; iCommerce < NUM_COMMERCE_TYPES; ++iCommerce)
 			{
-				iTaxes += 100 * GC.getCorporationInfo(eCorporation).getHeadquarterCommerce(iCommerce);
+				iCorpTaxes += 100 * GC.getCorporationInfo(eCorporation).getHeadquarterCommerce(iCommerce);
 			}
 
 			int iNumBonuses = 0;
@@ -21507,7 +21509,7 @@ int64_t CvCity::calcCorporateMaintenance() const
 				iNumBonuses += getNumBonuses(eBonus);
 			}
 
-			iTaxes +=
+			iCorpTaxes +=
 			(
 				GC.getCorporationInfo(eCorporation).getMaintenance() * iNumBonuses *
 				GC.getWorldInfo(GC.getMap().getWorldSize()).getCorporationMaintenancePercent()
@@ -21517,13 +21519,15 @@ int64_t CvCity::calcCorporateMaintenance() const
 
 			if (iAveragePopulation > 0)
 			{
-				iTaxes *= getPopulation();
-				iTaxes /= iAveragePopulation;
+				iCorpTaxes *= getPopulation();
+				iCorpTaxes /= iAveragePopulation;
 			}
-			iTaxes = getModifiedIntValue64(iTaxes, GET_PLAYER(getOwner()).getCorporationMaintenanceModifier() + GET_TEAM(getTeam()).getCorporationMaintenanceModifier());
+			iCorpTaxes = getModifiedIntValue64(iCorpTaxes, GET_PLAYER(getOwner()).getCorporationMaintenanceModifier() + GET_TEAM(getTeam()).getCorporationMaintenanceModifier());
 
-			iTaxes *= GC.getHandicapInfo(getHandicapType()).getCorporationMaintenancePercent();
-			iTaxes /= 100;
+			iCorpTaxes *= GC.getHandicapInfo(getHandicapType()).getCorporationMaintenancePercent();
+			iCorpTaxes /= 100;
+
+			iTaxes += iCorpTaxes;
 		}
 	}
 	FASSERT_NOT_NEGATIVE(iTaxes);
