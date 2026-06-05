@@ -5102,8 +5102,6 @@ void CvCity::processSpecialist(SpecialistTypes eSpecialist, int iChange)
 		changeExtraYield((YieldTypes)iI, (GC.getSpecialistInfo(eSpecialist).getYieldChange(iI) + GET_PLAYER(getOwner()).getSpecialistYieldPercentChanges(eSpecialist, (YieldTypes)iI) / 100) * iChange);
 	}
 
-	int iCommerceChangeTotal = 0;
-	int iCommerceChangeModifierTotal = 0;
 	for (int iI = 0; iI < NUM_COMMERCE_TYPES; iI++)
 	{
 		//changeSpecialistCommerce(((CommerceTypes)iI), (GC.getSpecialistInfo(eSpecialist).getCommerceChange(iI) * iChange));
@@ -5115,8 +5113,8 @@ void CvCity::processSpecialist(SpecialistTypes eSpecialist, int iChange)
 		//every time an adjustment to SpecialistCommercePercentChanges takes place.  That would be the patient and correct way to address this.
 		if (GC.getSpecialistInfo(eSpecialist).getCommerceChange(iI) != 0)
 		{
-			iCommerceChangeTotal += (100 * GC.getSpecialistInfo(eSpecialist).getCommerceChange(iI));
-			iCommerceChangeModifierTotal += (iCommerceChangeTotal * GET_PLAYER(getOwner()).getSpecialistCommercePercentChanges(eSpecialist, (CommerceTypes)iI)) / 100;
+			int iCommerceChangeTotal = (100 * GC.getSpecialistInfo(eSpecialist).getCommerceChange(iI));
+			int iCommerceChangeModifierTotal = (iCommerceChangeTotal * GET_PLAYER(getOwner()).getSpecialistCommercePercentChanges(eSpecialist, (CommerceTypes)iI)) / 100;
 			iCommerceChangeTotal += iCommerceChangeModifierTotal;
 			changeSpecialistCommerceTimes100(((CommerceTypes)iI), iCommerceChangeTotal * iChange);
 		}
