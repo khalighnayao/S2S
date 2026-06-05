@@ -5,6 +5,7 @@
 
 #include "CvEnums.h"
 #include <map>
+#include <utility>
 
 class CvPlot;
 class CvUnitAI;
@@ -76,9 +77,18 @@ public:
 	void releaseAllClaimsBy(int unitId);
 
 private:
+	// Naval exploration for auto-hunt ships: open-ocean frontier + claim-based fleet spread.
+	bool seaExplore(CvUnitAI* unit);
+
+	// Turn-hang safety: ends a unit's turn (returns true) if it re-decides at the same plot
+	// too many times without moving -- a hunter/explore routine pushing a mission that never
+	// advances the unit would otherwise spin ~50x/turn (capped only by the engine backstop).
+	bool detectSpin(CvUnitAI* unit);
+
 	PlayerTypes m_owner;
 	int         m_lastTurn;
 	std::map<int, int> m_claims; // plotIdx -> unitId
+	std::map<int, std::pair<int, int> > m_decisionPlot; // unitId -> (plotIdx, same-plot re-decide count this turn)
 };
 
 #endif // CV_HUNTER_AI
