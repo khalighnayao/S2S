@@ -444,6 +444,32 @@ bool CvHunterAI::autoHuntMove(CvUnitAI* unit)
 		return true;
 	}
 
+	// Naval auto-hunt: before falling back to home waters, take the fight to the enemy at
+	// sea -- chase visible enemy ships across the area (AI_seaAreaAttack, not confined to our
+	// own waters), or sail to blockade an enemy coast (AI_blockade). This is what lets an
+	// automated attack ship actually leave its own borders instead of dropping to
+	// AI_moveToBorders below (which only ever moves within our own territory).
+	if (unit->getDomainType() == DOMAIN_SEA)
+	{
+		if (unit->AI_seaAreaAttack())
+		{
+			logHunterAI(1, "[HAI/engage] unit=%d action=seaAreaAttack", unit->getID());
+			return true;
+		}
+		if (unit->AI_blockade())
+		{
+			logHunterAI(1, "[HAI/engage] unit=%d action=blockade", unit->getID());
+			return true;
+		}
+		// Nothing in reach to engage. Ships have the movement to go looking, so explore the
+		// map for new targets rather than dropping back to our own borders below.
+		if (unit->AI_explore())
+		{
+			logHunterAI(2, "[HAI/explore] unit=%d action=explore", unit->getID());
+			return true;
+		}
+	}
+
 	// Spread out instead of trailing one another.
 	if (unit->AI_moveToBorders())
 	{

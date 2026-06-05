@@ -10,25 +10,35 @@ now in place to drive a data-driven improvement (see
 Attack-sea **automation never left the player's borders** — automated attack ships
 stayed in friendly waters instead of going out to engage the enemy.
 
-Root cause: a human-automated attack ship runs the same `CvUnitAI::AI_attackSeaMove`
-cascade as the AI. The only routine in that cascade that *proactively* moves toward
-enemies — `CvUnitAI::AI_seaAreaAttack` — filtered candidate plots to:
+**Two distinct dispatch paths — get this right before touching naval movement.**
+A unit's per-turn move is chosen *differently* for AI vs. human automation
+(`CvUnitAI::doUnitAIMove`, ~`263`):
 
-```cpp
-pLoopPlot->getOwner() == getOwner()   // only enemies inside OUR OWN waters
-```
+- **AI players (and un-automated units):** dispatched by **UNITAI role** →
+  `AI_attackSeaMove` for `UNITAI_ATTACK_SEA`. Its only proactive "engage" routine,
+  `AI_seaAreaAttack`, used to filter candidate plots to
+  `pLoopPlot->getOwner() == getOwner()` (only enemies that entered *our own* waters —
+  the comment calls it an "incursion"). **Fix (PR #182):** dropped that filter so it
+  pursues any *visible* enemy ship in the sea area. Peace-safe — the `generatePath()`
+  below still refuses to path into would-be-war territory, so no auto-DoW.
+- **Human automation (the actual bug report):** dispatched by **`getAutomateType()`**
+  (`switch` at `doUnitAIMove` ~`265`), *not* by UNITAI. "Attack" naval automation is
+  `AUTOMATE_HUNT` → `CvUnitAI::AI_SearchAndDestroyMove` → **`CvHunterAI::autoHuntMove`**
+  (generic combat units a player toggled to Hunt; `UNITAI_HUNTER` units go to
+  `hunterMove` instead). **So PR #182 did not touch this path at all** — which is why
+  ships were still stuck after it.
 
-i.e. it only responded to enemies that had entered our territory (the code comment
-literally calls it an "incursion"). Combined with `AI_blockade` only firing once the
-ship is *already standing on* an enemy-owned plot, nothing ever sent a ship out
-across neutral water toward a distant enemy.
+Why `autoHuntMove` kept ships home: it engages only within `AI_huntRange(1/3/6)` (~6
+tiles), and with no target in range it fell straight to `AI_moveToBorders()`, which
+*by design* only moves the unit **within its own territory** (bails if not on an owned
+plot; only steps to plots `getOwner() == getOwner()`), then `AI_patrol()`.
 
-**Fix (PR #182):** drop the own-territory filter so `AI_seaAreaAttack` pursues any
-*visible* enemy ship in the same sea area. This is **peace-safe** — the
-`generatePath()` immediately below still refuses to path into territory we'd have to
-declare war on, so automation never auto-declares war; a ship only goes where it can
-already legally move (at war, or through neutral/own water). Applies to AI and
-human-automated units alike, so it warrants a playtest.
+**Fix (this PR):** in `autoHuntMove`, for `DOMAIN_SEA` units, *before* the
+`AI_moveToBorders` fallback, take the fight out: `AI_seaAreaAttack()` (chase visible
+enemy ships, now relaxed by #182) → `AI_blockade()` (sail to an enemy coast) →
+`AI_explore()` (ships have the movement to go *find* targets, so roam the map instead
+of retreating to the border). All reachable from `CvHunterAI` via
+`friend class CvHunterAI`. New `[HAI/engage]` / `[HAI/explore]` log reasons mark them.
 
 ## The cascade to understand for the rework
 
