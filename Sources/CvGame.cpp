@@ -6737,7 +6737,7 @@ void CvGame::doHeadquarters()
 
 							for (int iK = 0; iK < GC.getNumCorporationInfos(); iK++)
 							{
-								iValue += GET_PLAYER((PlayerTypes)iJ).getHasCorporationCount((CorporationTypes)iK) * 20;
+								iValue += GET_PLAYER(kLoopTeam.getLeaderID()).getHasCorporationCount((CorporationTypes)iK) * 20;
 							}
 
 							if (iValue < iBestValue)
