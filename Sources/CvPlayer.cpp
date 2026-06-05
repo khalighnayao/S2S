@@ -7374,7 +7374,7 @@ void CvPlayer::processBuilding(BuildingTypes eBuilding, int iChange, CvArea* pAr
 		{
 			for (int iI = 0; iI < MAX_PC_PLAYERS; iI++)
 			{
-				changeTradeRoutes(iWorldTradeRoute);
+				GET_PLAYER((PlayerTypes)iI).changeTradeRoutes(iWorldTradeRoute);
 			}
 		}
 	}
@@ -8423,11 +8423,18 @@ bool CvPlayer::canDoCivics(CivicTypes eCivic) const
 	}
 
 	if (!isNPC()
-	&& GC.getCivicInfo(eCivic).getCityLimit(getID()) > 0
-	&& GC.getCivicInfo(eCivic).getCityOverLimitUnhappy() == 0
-	&& GC.getCivicInfo(eCivic).getCityLimit(getID()) < getNumCities()
-	|| !isHasCivicOption((CivicOptionTypes)GC.getCivicInfo(eCivic).getCivicOptionType())
-	&& !GET_TEAM(getTeam()).isHasTech(GC.getCivicInfo(eCivic).getTechPrereq()))
+	&& (
+		(
+			GC.getCivicInfo(eCivic).getCityLimit(getID()) > 0
+			&& GC.getCivicInfo(eCivic).getCityOverLimitUnhappy() == 0
+			&& GC.getCivicInfo(eCivic).getCityLimit(getID()) < getNumCities()
+		)
+		||
+		(
+			!isHasCivicOption((CivicOptionTypes)GC.getCivicInfo(eCivic).getCivicOptionType())
+			&& !GET_TEAM(getTeam()).isHasTech(GC.getCivicInfo(eCivic).getTechPrereq())
+		)
+	))
 	{
 		return false;
 	}
@@ -27650,7 +27657,7 @@ void CvPlayer::changeSpecialistYieldPercentChanges(SpecialistTypes eIndex1, Yiel
 
 		foreach_(CvCity* pLoopCity, cities())
 		{
-			const int iExistingValue = (pLoopCity->getSpecialistCount(eIndex1) * getSpecialistYieldPercentChanges(eIndex1, eIndex2) - iOldValue) / 100;
+			const int iExistingValue = pLoopCity->getSpecialistCount(eIndex1) * (getSpecialistYieldPercentChanges(eIndex1, eIndex2) - iOldValue) / 100;
 			// set the new
 			pLoopCity->changeExtraYield(eIndex2, iExistingValue);
 		}
@@ -28134,6 +28141,7 @@ void CvPlayer::clearModifierTotals()
 
 	// Similarly assets for pop, land, and units
 	m_iAssets = 10 * (getTotalPopulation() + getTotalLandScored());
+	m_iUnitPower = 0;
 
 	foreach_(const CvUnit* pLoopUnit, units())
 	{
@@ -28356,17 +28364,17 @@ void CvPlayer::processTrait(TraitTypes eTrait, int iChange)
 
 	foreach_(const DomainModifier2& pair, GC.getTraitInfo(eTrait).getDomainFreeExperience())
 	{
-		changeNationalDomainFreeExperience(pair.first, pair.second);
+		changeNationalDomainFreeExperience(pair.first, pair.second * iChange);
 	}
 
 	foreach_(const DomainModifier2& pair, GC.getTraitInfo(eTrait).getDomainProductionModifiers())
 	{
-		changeNationalDomainProductionModifier(pair.first, pair.second);
+		changeNationalDomainProductionModifier(pair.first, pair.second * iChange);
 	}
 
 	foreach_(const TechModifier& pair, GC.getTraitInfo(eTrait).getTechResearchModifiers())
 	{
-		changeNationalTechResearchModifier(pair.first, pair.second);
+		changeNationalTechResearchModifier(pair.first, pair.second * iChange);
 	}
 
 	for (int iI = 0; iI < GC.getTraitInfo(eTrait).getNumUnitCombatFreeExperiences(); iI++)
