@@ -4,6 +4,14 @@ version: 1.BETA.{build}
 skip_tags: true
 skip_branch_with_pr: true
 
+# Only run commit (push) builds on main and release. PR builds still run because
+# AppVeyor checks the pull request's BASE branch against this filter. This stops
+# feature-branch pushes from triggering a redundant branch build alongside the PR build.
+branches:
+  only:
+    - main
+    - release
+
 environment:
   svn_url: https://svn.code.sf.net/p/stones2stars/code/trunk
   release_prefix: Stones2Stars
