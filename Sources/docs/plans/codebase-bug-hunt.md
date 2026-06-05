@@ -48,27 +48,53 @@ pick the work up where it was left.
 
 ## Progress
 
-**Pass 1 — issues #48–#70 (filed):**
+The C++ engine sweep is essentially complete (CvUnit/AI, CvCity/AI, CvPlot,
+CvSelectionGroup/AI, CvTeam/AI, CvGame/AI, CvDeal, CvMap, CvPlayer/AI,
+CvGameTextMgr). High-value Python is swept too (CvEventManager,
+CvRandomEventInterface, Revolution, CvGameUtils, CvMapGeneratorUtil, CvDiplomacy,
+BarbarianCiv, the advisor screens). 80+ confirmed bugs were filed against
+`Stones2Stars/S2S` as `agent-found`, then worked down by tier:
 
-| Area | Files | Issues |
-|---|---|---|
-| Units | `CvUnit.cpp`, `CvUnitAI.cpp` | #48–#56 |
-| Cities | `CvCity.cpp`, `CvCityAI.cpp` | #57–#70 |
+- **Pass 1 (#48–#70):** CvUnit/AI, CvCity/AI — PR #71 landed the first three.
+- **tier-2 (high-impact):** #97, #99, #105\*, #107, #109, #114, #116, #117 — PRs
+  #167–169.
+- **tier-3 (AI quality):** #77, #79, #81, #86, #87, #89, #113, #120, #121, #124,
+  #128, #129, #132 — PRs #170–174.
+- **low-priority (latent / assert-only / crash-guards):** #59, #60, #64, #78,
+  #88, #92, #95, #102, #103, #108, #133 — PRs #178–181.
+- **Python-sweep batch (#158–#162):** PRs #163–166.
+- Plus standalone gameplay fixes: #140 (PR #154), #156 (PR #157), #153 (PR #176).
 
-Fixed so far (PR #71): #48 (`setSMPowerValue` shadow), #57 (`conscript`
-negated count), #61 (`unitHasCityOrPlotPropertySources` uninitialised). The
-remaining issues are filed but unfixed.
+Remaining open issues need a human/design call rather than an auto-fix:
+`needs-signoff` (#66; #105\* — game-start flag needs `>` semantics + a decision)
+and `ambiguous` (#68, #139).
 
-## Next targets
+## Durable lessons
 
-- **C++:** `CvPlayer` / `CvPlayerAI`, `CvTeam` / `CvTeamAI`, `CvGame`,
-  `CvPlot`, `CvSelectionGroup` / `CvSelectionGroupAI`, `CvMap`, `CvDeal`,
-  `CvGameTextMgr`, the combat / info modules.
-- **Python (`Assets/Python/`):** `CvEventManager.py`, `CvGameUtils.py`, the BUG
-  options and screens. Python-specific smells: bare `except:`, `==` vs `is`
-  misuse, mutable default arguments, wrong indentation under `if`/`for`, missing
-  `self.`, calls with the wrong argument count, off-by-one `range()` loops, and
-  integer-vs-float division.
+- **Re-verify every reviewer flag against current source.** One Python batch
+  dropped 6 of ~14 flags as false positives — precedence that actually groups
+  correctly, Py2-correct `int < str` idioms, an `if/elif` equivalent to `if`,
+  capital-invariant guards, Py2 `cmp` not raising. Reviewers (and triage agents)
+  misread lines; resolve conflicts by reading source.
+- **Some "bugs" are dead code** — the right fix can be *removal* when a
+  loop/branch provably never runs (#64's inverted-`while` fast-path), which is
+  behavior-preserving and safer than reviving it.
+- **A fix can change behaviour more than the one-line diff suggests:** #87's
+  pillage tiering would infinite-loop on a naive `min`→`max`; #113's corp-trigger
+  returned false on *every* success path, not just the filed one.
+- Always Assert-build before the PR; multi-line tab-sensitive edits often need a
+  re-read or a line-targeted `sed`.
+
+## Next targets / open fronts
+
+- Finish the Python sweep: `Screens/*` (Worldbuilder, Pedia, CvMainInterface),
+  autolog, Platyping/Sparth, RevUtils/RevEvents remainder.
+- Sea / naval AI rework — see [`sea-ai-rework.md`](sea-ai-rework.md).
+- Dead-code / dead-XML pass — see [`dead-code-xml-pass.md`](dead-code-xml-pass.md).
+- Python-specific smells to watch: bare `except:`, `==` vs `is`, mutable default
+  arguments, wrong indentation under `if`/`for`, missing `self.`, wrong argument
+  count, off-by-one `range()`, integer-vs-float division. (Runtime is **Python
+  2.4** — do not report 2.4-correct idioms; see the false-positive lesson above.)
 
 ## See also
 

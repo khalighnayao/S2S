@@ -107,7 +107,12 @@ Pipeline side (`CvCity::pushOrder`/`popOrder`/`doProduction`):
 - `[UNT/move]` (2) — which `AI_*Move` routine (UNITAI role) the unit ran this turn.
 - `[UNT/act]` (2) — **the "why":** the decision helper that won the unit's prioritised
   cascade (`decision=retreatToCity reason=danger`), emitted at each helper's commit point so
-  only the winning action logs. Read with `[UNT/move]` for the full picture.
+  only the winning action logs. Read with `[UNT/move]` for the full picture. The naval
+  attack-sea cascade is now fully covered: alongside the generic helpers (`anyAttack`,
+  `patrol`, `safety`, `pillageRange`, `protect`, `group`, `heal`), the sea-specific helpers
+  log too — `seaAreaAttack` (`pursueEnemyInArea`/`ambush`), `blockade`
+  (`blockadeHere`/`moveToBlockade`), `seaBombard` (`bombardOrPlunder`/`moveToBombard`),
+  `shadow` (`shadowHere`/`moveToShadow`). See [`../plans/sea-ai-rework.md`](../plans/sea-ai-rework.md).
 - `[UNT/role]` (1) — a UNITAI role reassignment (`UNITAI 4 -> 10`).
 - `[UNT/mission]` (2) — the committed MissionAI + target (central, in
   `CvSelectionGroupAI::AI_setMissionAI`).
