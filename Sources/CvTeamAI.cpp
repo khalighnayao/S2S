@@ -947,9 +947,9 @@ int CvTeamAI::AI_chooseElection(const VoteSelectionData& kVoteSelectionData) con
 			{
 				if (GET_PLAYER((PlayerTypes)iJ).isAliveAndTeam(getID()))
 				{
-					const PlayerVoteTypes eVote = GET_PLAYER((PlayerTypes)iJ).AI_diploVote(kVoteSelectionData.aVoteOptions[iI], eVoteSource, true);
+					const PlayerVoteTypes ePlayerVote = GET_PLAYER((PlayerTypes)iJ).AI_diploVote(kVoteSelectionData.aVoteOptions[iI], eVoteSource, true);
 
-					if (eVote != PLAYER_VOTE_YES || eVote == GC.getGame().getVoteOutcome((VoteTypes)iI))
+					if (ePlayerVote != PLAYER_VOTE_YES || ePlayerVote == GC.getGame().getVoteOutcome(eVote))
 					{
 						bValid = false;
 						break;
