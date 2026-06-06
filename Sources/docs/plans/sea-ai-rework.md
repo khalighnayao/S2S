@@ -78,7 +78,7 @@ backstop fires — ~50 expensive re-decides per stuck unit per turn (observed on
 `autoHuntMove`) counts consecutive same-plot re-decides — reset the moment the unit
 moves — and after 8 ends the unit's turn (`finishMoves` + `MISSION_SKIP`, logged
 `[HAI/spin]`). This **bounds** the spin to 8; the root cause in `AI_refreshExploreRange`
-(why it pushes a no-progress move) is still open and worth a future fix.
+(why it pushes a no-progress move) is **tracked as issue #189** — a future fix.
 
 ## The cascade to understand for the rework
 
