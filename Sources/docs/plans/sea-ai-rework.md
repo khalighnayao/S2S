@@ -10,25 +10,75 @@ now in place to drive a data-driven improvement (see
 Attack-sea **automation never left the player's borders** — automated attack ships
 stayed in friendly waters instead of going out to engage the enemy.
 
-Root cause: a human-automated attack ship runs the same `CvUnitAI::AI_attackSeaMove`
-cascade as the AI. The only routine in that cascade that *proactively* moves toward
-enemies — `CvUnitAI::AI_seaAreaAttack` — filtered candidate plots to:
+**Two distinct dispatch paths — get this right before touching naval movement.**
+A unit's per-turn move is chosen *differently* for AI vs. human automation
+(`CvUnitAI::doUnitAIMove`, ~`263`):
 
-```cpp
-pLoopPlot->getOwner() == getOwner()   // only enemies inside OUR OWN waters
-```
+- **AI players (and un-automated units):** dispatched by **UNITAI role** →
+  `AI_attackSeaMove` for `UNITAI_ATTACK_SEA`. Its only proactive "engage" routine,
+  `AI_seaAreaAttack`, used to filter candidate plots to
+  `pLoopPlot->getOwner() == getOwner()` (only enemies that entered *our own* waters —
+  the comment calls it an "incursion"). **Fix (PR #182):** dropped that filter so it
+  pursues any *visible* enemy ship in the sea area. Peace-safe — the `generatePath()`
+  below still refuses to path into would-be-war territory, so no auto-DoW.
+- **Human automation (the actual bug report):** dispatched by **`getAutomateType()`**
+  (`switch` at `doUnitAIMove` ~`265`), *not* by UNITAI. "Attack" naval automation is
+  `AUTOMATE_HUNT` → `CvUnitAI::AI_SearchAndDestroyMove` → **`CvHunterAI::autoHuntMove`**
+  (generic combat units a player toggled to Hunt; `UNITAI_HUNTER` units go to
+  `hunterMove` instead). **So PR #182 did not touch this path at all** — which is why
+  ships were still stuck after it.
 
-i.e. it only responded to enemies that had entered our territory (the code comment
-literally calls it an "incursion"). Combined with `AI_blockade` only firing once the
-ship is *already standing on* an enemy-owned plot, nothing ever sent a ship out
-across neutral water toward a distant enemy.
+Why `autoHuntMove` kept ships home: it engages only within `AI_huntRange(1/3/6)` (~6
+tiles), and with no target in range it fell straight to `AI_moveToBorders()`, which
+*by design* only moves the unit **within its own territory** (bails if not on an owned
+plot; only steps to plots `getOwner() == getOwner()`), then `AI_patrol()`.
 
-**Fix (PR #182):** drop the own-territory filter so `AI_seaAreaAttack` pursues any
-*visible* enemy ship in the same sea area. This is **peace-safe** — the
-`generatePath()` immediately below still refuses to path into territory we'd have to
-declare war on, so automation never auto-declares war; a ship only goes where it can
-already legally move (at war, or through neutral/own water). Applies to AI and
-human-automated units alike, so it warrants a playtest.
+**Fix (issue #187):** in `autoHuntMove`, for `DOMAIN_SEA` units, *before* the
+`AI_moveToBorders` fallback, take the fight out:
+`AI_seaAreaAttack()` (chase visible enemy ships, relaxed by #182) →
+`AI_blockade()` (sail to an enemy coast) →
+**`CvHunterAI::seaExplore()`** (a naval explorer, below) → `AI_explore()` as a last
+fallback. The `AI_*` helpers are reached from `CvHunterAI` via `friend class
+CvHunterAI`. Peace-safe — pathing still refuses would-be-war territory, so automation
+never auto-declares war.
+
+### `seaExplore` — naval exploration that drives into the dark
+`AI_explore` is a *land* explorer: it adds large `+adjacentToLand` / `+owned` score, so
+ships hug the coast and home waters instead of open ocean (the "doesn't explore dark
+areas / all take the same path" symptom). `CvHunterAI::seaExplore` instead:
+- scores frontier water plots (adjacent to unrevealed map) and **prefers open water**
+  (a bonus for *not* being adjacent to land), so ships head into the dark;
+- **spreads the fleet** via the per-player claim ledger (`tryClaim`/`isClaimedByOther`)
+  so ships don't trail one another down the same coastline;
+- uses a **movement-derived range** (`baseMoves()` tiles) and a cheap `rect()` scan —
+  deliberately *not* a `CvReachablePlotSet` (a movement flood-fill), which made turn
+  times explode when every ship re-ran it on every move step (same-water-area ⇒
+  reachable by sea, so the flood-fill was unnecessary);
+- has **hysteresis**: it commits to its current `MISSIONAI_EXPLORE` target and keeps
+  heading there while it is still a frontier, only re-scanning (with random jitter) for
+  a new heading once the target is reached or revealed. Without this, the per-call
+  jitter made ships dither — one ship logged 5,382 invocations across only 63 plots.
+
+  > **Hysteresis**, in plain terms, means the system's output depends on its recent
+  > *history*, not just the current input — it resists flip-flopping. Here it means a
+  > ship **sticks with the heading it already chose** instead of re-deciding from
+  > scratch every step. (Everyday example: a thermostat set to 20°C doesn't switch the
+  > heating on and off the instant the temperature wobbles by 0.1° — it waits for a
+  > margin before changing, so it doesn't rapidly cycle. Same idea: commit, then only
+  > change when there's a real reason.)
+
+  Log reasons: `seaExplore` (picked a new target) / `seaExploreKeep` (committed heading).
+
+### `detectSpin` — turn-hang safety
+A hunter/explore routine that pushes a mission which never advances the unit leaves it
+`readyToMove`, so the AI re-invokes it at the same plot until the engine's `iTempHack>50`
+backstop fires — ~50 expensive re-decides per stuck unit per turn (observed on AI
+`UNITAI_HUNTER` units in `hunterMove` → `AI_refreshExploreRange`; `detectSpin` fired
+~739× over 50 turns). `CvHunterAI::detectSpin` (called at the top of `hunterMove` and
+`autoHuntMove`) counts consecutive same-plot re-decides — reset the moment the unit
+moves — and after 8 ends the unit's turn (`finishMoves` + `MISSION_SKIP`, logged
+`[HAI/spin]`). This **bounds** the spin to 8; the root cause in `AI_refreshExploreRange`
+(why it pushes a no-progress move) is **tracked as issue #189** — a future fix.
 
 ## The cascade to understand for the rework
 

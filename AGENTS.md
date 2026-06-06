@@ -81,6 +81,18 @@ not findings to re-discover.
   `shouldHaveGraphics`; `CvMap::setupGraphical`.
 
 ## Conventions
+- **Only automatically branch / commit / PR when the work is tied to an active GitHub
+  issue.** For anything else (experiments, behaviour tuning, undocumented fixes we are
+  still iterating on), **edit the working tree only** — do not commit, create or switch
+  branches, push, or open a PR unless the user explicitly asks for a specific git action.
+  The user builds the DLL from the current working tree, so committing to a new branch or
+  `git checkout`-ing away silently removes the changes from their build. **Never switch
+  branches while the user may be mid-build.** (Read-only git — `status`/`log`/`diff` — is
+  always fine.)
+- **Confirm behaviour before opening a PR:** a behaviour/feature change needs a real
+  in-game playtest (the user runs `FinalRelease` + `rebuild deploy`), not just a green
+  Assert build. A merged or committed change does nothing in a running game until the DLL
+  is rebuilt and deployed.
 - Prefer minimal, local changes in large core files.
 - Preserve save compatibility by default; for intentional breaks, coordinate and
   mark with `@SAVEBREAK`. See `Notes for the next breaking of save game compatability cycle.txt`.
