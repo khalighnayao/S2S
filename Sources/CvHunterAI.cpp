@@ -558,6 +558,42 @@ bool CvHunterAI::seaExplore(CvUnitAI* unit)
 	const int iMoves = std::max(1, unit->baseMoves()); // tiles/turn (NOT maxMoves(), which is move-points)
 	const int iRange = iMoves; // scan as far as the ship can move in a turn -- derived from movement, not arbitrary
 
+	// Hysteresis -- i.e. stick with the heading we already chose instead of flip-flopping every
+	// step (like a thermostat that waits for a margin before switching, rather than cycling on
+	// every tiny wobble). If we already committed to an explore target that is still worth
+	// reaching, keep heading there instead of re-rolling a fresh target every step. Without this
+	// the random jitter below makes ships dither around the same few plots (one ship logged 5382
+	// invocations across only 63 plots) instead of driving into the dark; committing also skips
+	// the scan.
+	if (unit->getGroup()->AI_getMissionAIType() == MISSIONAI_EXPLORE)
+	{
+		CvPlot* pPrev = unit->getGroup()->AI_getMissionAIPlot();
+		if (pPrev != NULL
+		&& !unit->atPlot(pPrev)
+		&& pPrev->area() == unit->area()
+		&& pPrev->isRevealed(eTeam, false)
+		&& !pPrev->isVisibleEnemyDefender(unit)
+		&& !isClaimedByOther(GC.getMap().plotNum(pPrev->getX(), pPrev->getY()), unit->getID()))
+		{
+			int iStillUnrevealed = 0;
+			foreach_(const CvPlot* pAdj, pPrev->adjacent())
+			{
+				if (!pAdj->isRevealed(eTeam, false))
+				{
+					iStillUnrevealed++;
+				}
+			}
+			if (iStillUnrevealed > 0) // target is still a frontier -> stay the course
+			{
+				tryClaim(GC.getMap().plotNum(pPrev->getX(), pPrev->getY()), unit->getID());
+				logHunterAI(2, "[HAI/explore] unit=%d action=seaExploreKeep to=(%d,%d)", unit->getID(), pPrev->getX(), pPrev->getY());
+				unit->getGroup()->pushMission(MISSION_MOVE_TO, pPrev->getX(), pPrev->getY(),
+					MOVE_NO_ENEMY_TERRITORY | MOVE_AVOID_ENEMY_UNITS, false, false, MISSIONAI_EXPLORE, pPrev);
+				return true;
+			}
+		}
+	}
+
 	int iBestValue = 0;
 	int iBestPlotIdx = -1; // store the index, not the pointer -- keeps the choice deterministic (no OOS)
 

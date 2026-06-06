@@ -47,13 +47,16 @@ class CvUnitAI;
 //   [HAI/escort]       escort merge / hunter-escort contract advertise
 //   [HAI/target/skip]  candidate rejected + reason (claimed/filter/nopath/odds)
 //   [HAI/target/best]  new best target during the AI_huntRange sweep
-//   [HAI/engage]       favorable adjacent kill taken
-//   [HAI/spread]       border / patrol fallback chosen (with per-unit bias)
+//   [HAI/engage]       attack committed: adjacent kill, or auto-hunt sea seaAreaAttack/blockade
+//   [HAI/explore]      auto-hunt sea exploration: seaExplore (new heading) / seaExploreKeep
+//                      (committed heading -- hysteresis) / exploreGeneric (AI_explore fallback)
+//   [HAI/spread]       border / patrol / refreshExplore fallback chosen (with per-unit bias)
+//   [HAI/spin]         turn-hang safety: unit re-decided 8x at the same plot -> end its turn
 //   [HAI/scrap]        phase-out / scrap decision
 //   [HAI/mission]      final mission push (emitted by AI_huntRange)
 //   [HAI/end]          routine exit with success/failure
 //
-//   Levels: 1 -> begin/end/best/mission/engage; 2 -> heal/escort/spread/scrap;
+//   Levels: 1 -> begin/end/best/mission/engage/spin; 2 -> heal/escort/spread/scrap/explore;
 //           3 -> target/skip (per-candidate detail).
 // ----------------------------------------------------------------------------
 class CvHunterAI
