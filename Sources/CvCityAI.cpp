@@ -175,6 +175,7 @@ void CvCityAI::AI_reset()
 	m_neededDefenders = -1;
 
 	m_iWorkersNeeded = 0;
+	m_iLastStrandedWorkerTurn = -1000;
 
 	m_iBuildPriority = CITY_BUILD_PRIORITY_CEILING;
 	m_iRequestedUnit = 0;
@@ -920,6 +921,17 @@ void CvCityAI::AI_chooseProduction()
 	int iNeededSeaWorkers = (bMaybeWaterArea) ? AI_neededSeaWorkers() : 0;
 	const int iWorkersNeeded = AI_getWorkersNeeded() - getNumWorkers();
 	int iExistingSeaWorkers = waterArea(true) ? player.AI_totalWaterAreaUnitAIs(waterArea(true), UNITAI_WORKER_SEA) : 0;
+
+	// Diagnostic for the stranded-city local-worker fix (#12b): record every city that has
+	// improvement work outstanding but no worker present, with the guard inputs, so we can
+	// see why local-worker production does or doesn't trigger (area satisfied? danger? etc.).
+	if (getNumWorkers() == 0 && AI_getWorkersNeeded() > 0)
+	{
+		logCityAI(1, "[CIT/stranded] city=%S owner=%d wHave=%d wNeed=%d areaHave=%d areaNeed=%d danger=%d inhibit=%d turtle=%d bestBuildVal=%d",
+			getName().GetCString(), (int)getOwner(), getNumWorkers(), AI_getWorkersNeeded(),
+			iWorkersInArea, iNeededWorkersInArea, iDangerValue, bInhibitUnits ? 1 : 0,
+			bStrategyTurtle ? 1 : 0, AI_totalBestBuildValue(pArea));
+	}
 
 	const int iSpreadUnitThreshold = (
 			1000 + (bLandWar ? 800 - 10 * iWarSuccessRatio : 0)
@@ -1794,6 +1806,48 @@ void CvCityAI::AI_chooseProduction()
 	}
 
 	m_iTempBuildPriority--;
+
+	//#12b Stranded-city local worker.
+	// This city has improvement work to do (iWorkersNeeded > 0) but NO worker is present
+	// (getNumWorkers() == 0) even though the area's worker pool is nominally sufficient
+	// (iWorkersInArea >= iNeededWorkersInArea). That means the shared pool cannot reach this
+	// city -- it is cut off from the rest of our territory by closed foreign borders or
+	// terrain (confirmed root cause of unimproved border cities). Such a city must raise its
+	// own worker locally, since a worker built here spawns inside the city's own reachable
+	// region. Self-limiting: once that worker sits in the work radius getNumWorkers() > 0 and
+	// this stops firing.
+	// Build local workers for a city the shared pool can't reach, bounded two ways so it can
+	// raise MULTIPLE workers when warranted without spamming:
+	//  - getNumWorkers() < AI_countReachableUnimprovedTiles(): never build past the work the
+	//    city can actually absorb (one worker per reachable unimproved tile); a city cut off
+	//    from its own tiles counts 0 and builds nothing.
+	//  - cooldown: don't rebuild every single turn. Because the worker AI doesn't reliably
+	//    retain a freshly built worker on its home tiles (it can still wander to bonuses /
+	//    broker contracts), getNumWorkers() can fall back to 0 and re-trigger; the cooldown
+	//    caps that leak while still allowing several workers over a handful of turns.
+	const int iStrandedWorkerCooldown = 8;
+	if (!bInhibitUnits && !bChooseWorker && !bStrategyTurtle && iDangerValue < 6
+	&& iWorkersNeeded > 0
+	&& iWorkersInArea >= iNeededWorkersInArea
+	&& AI_totalBestBuildValue(pArea) > 0
+	&& (getPopulation() > 1 || GC.getGame().getGameTurn() - getGameTurnAcquired() > 15 * iHammerCostPercent / 100)
+	&& GC.getGame().getGameTurn() - m_iLastStrandedWorkerTurn >= iStrandedWorkerCooldown
+	&& getNumWorkers() < AI_countReachableUnimprovedTiles())
+	{
+		m_iLastStrandedWorkerTurn = GC.getGame().getGameTurn();
+		logCityAI(1, "[CIT/stranded/try] city=%S owner=%d wNeed=%d areaHave=%d areaNeed=%d",
+			getName().GetCString(), (int)getOwner(), iWorkersNeeded, iWorkersInArea, iNeededWorkersInArea);
+		// Build the worker LOCALLY (AI_chooseUnitImmediate), NOT via AI_chooseUnit -- the latter
+		// puts the request out to the player-wide ContractBroker tender, which fulfils it from
+		// the cheapest/closest builder (often a far city across the border that can't reach here).
+		// The whole point of the stranded-city fix is that the worker spawns in THIS city.
+		if (AI_chooseUnitImmediate("stranded city local worker", UNITAI_WORKER, NULL, NO_UNIT))
+		{
+			return;
+		}
+		logCityAI(1, "[CIT/stranded/declined] city=%S cannot build any worker unit locally", getName().GetCString());
+		bChooseWorker = true;
+	}
 
 	//#13 Workers if financial troubles, Extra Quick Settler Escort otherwise
 	if (iMaxSettlers > 0 && !bInhibitUnits && !(bDefenseWar && iWarSuccessRatio < -50))
@@ -6351,6 +6405,34 @@ int CvCityAI::AI_buildingYieldValue(YieldTypes eYield, BuildingTypes eBuilding, 
 				foreach_(const CvPlot * plotX, plots(NUM_CITY_PLOTS))
 				{
 					if (plotX->getTerrainType() == pair.first && canWork(plotX))
+					{
+						iPlotChange += pair.second[eYield];
+					}
+				}
+			}
+		}
+		// Building->improvement yield: count plots currently carrying the matching improvement.
+		// Both the city-local and player-wide variants benefit this city's worked plots.
+		foreach_(const ImprovementArray & pair, kBuilding.getImprovementYieldChanges())
+		{
+			if (pair.second[eYield] != 0)
+			{
+				foreach_(const CvPlot * plotX, plots(NUM_CITY_PLOTS))
+				{
+					if (plotX->getImprovementType() == pair.first && canWork(plotX))
+					{
+						iPlotChange += pair.second[eYield];
+					}
+				}
+			}
+		}
+		foreach_(const ImprovementArray & pair, kBuilding.getGlobalImprovementYieldChanges())
+		{
+			if (pair.second[eYield] != 0)
+			{
+				foreach_(const CvPlot * plotX, plots(NUM_CITY_PLOTS))
+				{
+					if (plotX->getImprovementType() == pair.first && canWork(plotX))
 					{
 						iPlotChange += pair.second[eYield];
 					}
@@ -11362,6 +11444,54 @@ int CvCityAI::AI_cityThreat(TeamTypes eTargetTeam, int* piThreatModifier)
 }
 
 //This needs to be serialized for human workers.
+// How many unimproved tiles this city works can a land worker spawned here actually reach,
+// travelling only over our own passable land? Flood-fills own (non-water, non-peak) land out
+// from the city centre and counts unimproved worked tiles in reach. This bounds stranded-city
+// local-worker production by the work the city can ACTUALLY absorb (one worker per tile), rather
+// than AI_getWorkersNeeded() which overestimates and caused worker spam: a city cut off from its
+// own tiles returns 0 (build nothing), a reachable city returns its reachable-tile count.
+int CvCityAI::AI_countReachableUnimprovedTiles() const
+{
+	PROFILE_EXTRA_FUNC();
+	const PlayerTypes ePlayer = getOwner();
+	std::set<int> seen;
+	std::vector<const CvPlot*> stack;
+
+	const CvPlot* pStart = plot();
+	seen.insert(GC.getMap().plotNum(pStart->getX(), pStart->getY()));
+	stack.push_back(pStart);
+
+	int iCount = 0;
+	int iExplored = 0;
+	while (!stack.empty() && iExplored < 400)
+	{
+		const CvPlot* pPlot = stack.back();
+		stack.pop_back();
+		iExplored++;
+
+		if (!pPlot->isCity()
+		&& pPlot->getWorkingCity() == this
+		&& pPlot->getImprovementType() == NO_IMPROVEMENT)
+		{
+			iCount++;
+		}
+		foreach_(const CvPlot* pAdj, pPlot->adjacent())
+		{
+			const int iIdx = GC.getMap().plotNum(pAdj->getX(), pAdj->getY());
+			if (seen.find(iIdx) != seen.end())
+			{
+				continue;
+			}
+			seen.insert(iIdx);
+			if (pAdj->getOwner() == ePlayer && !pAdj->isWater() && !pAdj->isPeak())
+			{
+				stack.push_back(pAdj);
+			}
+		}
+	}
+	return iCount;
+}
+
 void CvCityAI::AI_updateWorkersNeededHere()
 {
 	PROFILE_FUNC();

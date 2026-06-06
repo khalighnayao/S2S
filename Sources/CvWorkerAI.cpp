@@ -42,6 +42,9 @@ CvWorkerAI::CvWorkerAI(PlayerTypes owner)
 	: m_owner(owner)
 	, m_lastTurn(-1)
 	, m_weights()
+	, m_pathMemoUnitId(-1)
+	, m_pathMemoUnitPlot(-1)
+	, m_pathMemoTurn(-1)
 {
 }
 
@@ -52,6 +55,37 @@ void CvWorkerAI::onTurnBegin(int gameTurn)
 	m_cityEvalCache.clear();
 	m_outerRejected.clear();
 	m_claims.clear();
+	m_pathUnreachable.clear();
+	m_pathMemoUnitId = -1;
+	m_pathMemoUnitPlot = -1;
+	m_pathMemoTurn = -1;
+}
+
+// Per-worker path-unreachable memo. Refreshes (clears) when the planning context
+// -- (unit, unit's plot, turn) -- changes, so it only ever holds results valid for
+// the worker currently planning at its current position.
+bool CvWorkerAI::isPathKnownUnreachable(const CvUnitAI* unit, const CvPlot* pPlot)
+{
+	const int iTurn     = GC.getGame().getGameTurn();
+	const int iUnitId   = unit->getID();
+	const int iUnitPlot = GC.getMap().plotNum(unit->getX(), unit->getY());
+
+	if (m_pathMemoUnitId != iUnitId || m_pathMemoUnitPlot != iUnitPlot || m_pathMemoTurn != iTurn)
+	{
+		m_pathUnreachable.clear();
+		m_pathMemoUnitId   = iUnitId;
+		m_pathMemoUnitPlot = iUnitPlot;
+		m_pathMemoTurn     = iTurn;
+		return false;
+	}
+	return m_pathUnreachable.find(GC.getMap().plotNum(pPlot->getX(), pPlot->getY())) != m_pathUnreachable.end();
+}
+
+void CvWorkerAI::markPathUnreachable(const CvUnitAI* unit, const CvPlot* pPlot)
+{
+	// Context is current here: callers invoke isPathKnownUnreachable for the same
+	// unit/plot/turn immediately before the generatePath whose failure we record.
+	m_pathUnreachable.insert(GC.getMap().plotNum(pPlot->getX(), pPlot->getY()));
 }
 
 CvWorkerAI::OuterRejectReason CvWorkerAI::lookupOuterReject(int plotIdx, UnitTypes unitType) const
@@ -1068,6 +1102,15 @@ bool CvWorkerAI::improveCity(CvUnitAI* unit, CvCity* pCity)
 	CvPlot*    pBestPlot = NULL;
 	BuildTypes eBestBuild = NO_BUILD;
 
+	// Frontier diagnostics: confirm whether unimproved city tiles cluster near borders.
+	int iRadiusPlots   = 0; // non-null plots in the city's work radius
+	int iForeignOwned  = 0; // radius plots owned by another player (contested frontier)
+	int iNotWorkedByUs = 0; // radius plots whose working city isn't this one
+	int iConsidered    = 0; // plots that passed the outer build filters
+	int iEnemyBlocked  = 0; // skipped: visible enemy unit sitting on the plot
+	int iNoPath        = 0; // skipped: worker could not path to the plot
+	int iNoPathBorder  = 0; // of the noPath skips, how many sit on a territorial border
+
 	if (gPlayerLogLevel >= 1)
 	{
 		logBuildEvaluation(1, "[WAI/city/begin] owner=%d unit=%d at=(%d,%d) city=%S(%d) plots=%d",
@@ -1079,6 +1122,14 @@ bool CvWorkerAI::improveCity(CvUnitAI* unit, CvCity* pCity)
 	{
 		CvPlot* pLoopPlot = plotCity(pCity->getX(), pCity->getY(), iI);
 		if (pLoopPlot == NULL) continue;
+
+		// Frontier census across the whole radius (before any build filtering).
+		iRadiusPlots++;
+		{
+			const PlayerTypes ePlotOwner = pLoopPlot->getOwner();
+			if (ePlotOwner != NO_PLAYER && ePlotOwner != ePlayer) iForeignOwned++;
+			if (pLoopPlot->getWorkingCity() != pCity)             iNotWorkedByUs++;
+		}
 
 		// --- [WAI/city/plot/skip] outer filters mirror AI_bestCityBuild ---
 		if (pLoopPlot->getWorkingCity() != pCity) continue;
@@ -1096,6 +1147,7 @@ bool CvWorkerAI::improveCity(CvUnitAI* unit, CvCity* pCity)
 			}
 		}
 
+		iConsidered++;
 		const int iPlotIdx = GC.getMap().plotNum(pLoopPlot->getX(), pLoopPlot->getY());
 
 		// --- Inner pick: read from cache, else materialise from the per-city precomputed best ---
@@ -1113,10 +1165,11 @@ bool CvWorkerAI::improveCity(CvUnitAI* unit, CvCity* pCity)
 			bFromCache = true;
 
 			if (gPlayerLogLevel >= 2)
-				logBuildEvaluation(2, "[WAI/city/eval/hit] at=(%d,%d) build=%s value=%d canBuild=%d",
+				logBuildEvaluation(2, "[WAI/city/eval/hit] at=(%d,%d) build=%s value=%d canBuild=%d goldShort=%d",
 					pLoopPlot->getX(), pLoopPlot->getY(),
 					eBuild == NO_BUILD ? "NO_BUILD" : GC.getBuildInfo(eBuild).getType(),
-					iValue, bCanBuild ? 1 : 0);
+					iValue, bCanBuild ? 1 : 0,
+					(eBuild != NO_BUILD && std::max<int64_t>(0, kOwner.getGold()) < kOwner.getBuildCost(pLoopPlot, eBuild)) ? 1 : 0);
 		}
 		else
 		{
@@ -1133,10 +1186,11 @@ bool CvWorkerAI::improveCity(CvUnitAI* unit, CvCity* pCity)
 			recordCity(iPlotIdx, eUnitType, eval);
 
 			if (gPlayerLogLevel >= 2)
-				logBuildEvaluation(2, "[WAI/city/eval/new] at=(%d,%d) build=%s value=%d canBuild=%d",
+				logBuildEvaluation(2, "[WAI/city/eval/new] at=(%d,%d) build=%s value=%d canBuild=%d goldShort=%d",
 					pLoopPlot->getX(), pLoopPlot->getY(),
 					eBuild == NO_BUILD ? "NO_BUILD" : GC.getBuildInfo(eBuild).getType(),
-					iValue, bCanBuild ? 1 : 0);
+					iValue, bCanBuild ? 1 : 0,
+					(eBuild != NO_BUILD && std::max<int64_t>(0, kOwner.getGold()) < kOwner.getBuildCost(pLoopPlot, eBuild)) ? 1 : 0);
 		}
 		(void)bFromCache;
 
@@ -1144,12 +1198,58 @@ bool CvWorkerAI::improveCity(CvUnitAI* unit, CvCity* pCity)
 
 		// --- Path / dedup gate ---
 		int iPathTurns = 0;
-		if (pLoopPlot->isVisibleEnemyUnit(unit)) continue;
+		if (pLoopPlot->isVisibleEnemyUnit(unit))
+		{
+			iEnemyBlocked++;
+			if (gPlayerLogLevel >= 2)
+				logBuildEvaluation(2, "[WAI/city/plot/skip] at=(%d,%d) reason=enemyUnit build=%s owner=%d border=%d dist=%d",
+					pLoopPlot->getX(), pLoopPlot->getY(),
+					GC.getBuildInfo(eBuild).getType(),
+					(int)pLoopPlot->getOwner(),
+					pLoopPlot->isBorder(true) ? 1 : 0,
+					plotDistance(unit->getX(), unit->getY(), pLoopPlot->getX(), pLoopPlot->getY()));
+			continue;
+		}
+		// Skip the expensive pathfind if this worker already found this tile unreachable
+		// earlier in the same planning pass (overlapping city radii re-test the same plots).
+		// Counters stay accurate; the detailed line was logged on first encounter.
+		if (isPathKnownUnreachable(unit, pLoopPlot))
+		{
+			iNoPath++;
+			if (pLoopPlot->isBorder(true)) iNoPathBorder++;
+			continue;
+		}
 		if (!unit->generatePath(pLoopPlot, 0, true, &iPathTurns))
 		{
-			if (gPlayerLogLevel >= 3)
-				logBuildEvaluation(3, "[WAI/city/plot/skip] at=(%d,%d) reason=noPath",
-					pLoopPlot->getX(), pLoopPlot->getY());
+			markPathUnreachable(unit, pLoopPlot);
+			iNoPath++;
+			const bool bBorderPlot = pLoopPlot->isBorder(true);
+			if (bBorderPlot) iNoPathBorder++;
+			if (gPlayerLogLevel >= 2)
+			{
+				// Classify the barrier around the stranded tile so we can size the
+				// reachability fix: adjForeign -> Open-Borders case, adjWater -> sea
+				// transport, adjPeak -> likely unavoidable, adjOwn -> larger stranded
+				// salient (whole pocket is cut off).
+				int iAdjOwn = 0, iAdjForeign = 0, iAdjWater = 0, iAdjPeak = 0;
+				foreach_(const CvPlot* pAdj, pLoopPlot->adjacent())
+				{
+					if (pAdj->isWater())      { iAdjWater++;   continue; }
+					if (pAdj->isPeak())       { iAdjPeak++;    continue; }
+					const PlayerTypes eAdjOwner = pAdj->getOwner();
+					if (eAdjOwner == ePlayer)            iAdjOwn++;
+					else if (eAdjOwner != NO_PLAYER)     iAdjForeign++;
+				}
+				logBuildEvaluation(2, "[WAI/city/plot/skip] at=(%d,%d) reason=noPath build=%s owner=%d own=%d border=%d dist=%d enemyOnPlot=%d adjOwn=%d adjForeign=%d adjWater=%d adjPeak=%d",
+					pLoopPlot->getX(), pLoopPlot->getY(),
+					GC.getBuildInfo(eBuild).getType(),
+					(int)pLoopPlot->getOwner(),
+					pLoopPlot->getOwner() == ePlayer ? 1 : 0,
+					bBorderPlot ? 1 : 0,
+					plotDistance(unit->getX(), unit->getY(), pLoopPlot->getX(), pLoopPlot->getY()),
+					pLoopPlot->isVisibleEnemyUnit(unit) ? 1 : 0,
+					iAdjOwn, iAdjForeign, iAdjWater, iAdjPeak);
+			}
 			continue;
 		}
 
@@ -1210,6 +1310,16 @@ bool CvWorkerAI::improveCity(CvUnitAI* unit, CvCity* pCity)
 					GC.getBuildInfo(eBestBuild).getType(), iScored);
 		}
 	}
+
+	// Per-city frontier summary: aggregate this to confirm whether unimproved tiles
+	// concentrate near borders (high foreignOwned / notWorkedByUs / noPathBorder / enemyBlocked).
+	if (gPlayerLogLevel >= 1)
+		logBuildEvaluation(1, "[WAI/city/frontier] owner=%d city=%S(%d) at=(%d,%d) radius=%d foreignOwned=%d notWorkedByUs=%d considered=%d enemyBlocked=%d noPath=%d noPathBorder=%d found=%d",
+			(int)ePlayer, pCity->getName().GetCString(), iCityId,
+			unit->getX(), unit->getY(),
+			iRadiusPlots, iForeignOwned, iNotWorkedByUs, iConsidered,
+			iEnemyBlocked, iNoPath, iNoPathBorder,
+			(pBestPlot != NULL && eBestBuild != NO_BUILD) ? 1 : 0);
 
 	if (pBestPlot == NULL || eBestBuild == NO_BUILD)
 	{

@@ -17192,6 +17192,76 @@ void CvGameTextMgr::setBuildingHelp(CvWStringBuffer &szBuffer, const BuildingTyp
 			}
 		}
 
+		foreach_(const ImprovementArray& pair, kBuilding.getImprovementYieldChanges())
+		{
+			bFirst = true;
+			for (int iI = 0; iI < NUM_YIELD_TYPES; ++iI)
+			{
+				const int iValue = pair.second[iI];
+				if (iValue != 0)
+				{
+					if (bFirst)
+					{
+						szBuffer.append(
+							CvWString::format(
+								L"\n%c<link=%s>%s</link>",
+								gDLL->getSymbolID(BULLET_CHAR),
+								CvWString(GC.getImprovementInfo(pair.first).getType()).GetCString(),
+								GC.getImprovementInfo(pair.first).getDescription()
+							)
+						);
+						bFirst = false;
+
+						if (bCity)
+						{
+							int iCount = 0;
+							foreach_(const CvPlot* plotX, pCity->plots(NUM_CITY_PLOTS))
+							{
+								if (plotX->getImprovementType() == pair.first && pCity->canWork(plotX))
+								{
+									iCount++;
+								}
+							}
+							szBuffer.append(CvWString::format(L" (%d): ", iCount));
+						}
+						else szBuffer.append(L": ");
+					}
+					else szBuffer.append(L", ");
+
+					szBuffer.append(CvWString::format(L"%d%c", iValue, GC.getYieldInfo((YieldTypes) iI).getChar()));
+				}
+			}
+		}
+
+		foreach_(const ImprovementArray& pair, kBuilding.getGlobalImprovementYieldChanges())
+		{
+			bFirst = true;
+			for (int iI = 0; iI < NUM_YIELD_TYPES; ++iI)
+			{
+				const int iValue = pair.second[iI];
+				if (iValue != 0)
+				{
+					if (bFirst)
+					{
+						szBuffer.append(
+							CvWString::format(
+								L"\n%c<link=%s>%s</link>%s",
+								gDLL->getSymbolID(BULLET_CHAR),
+								CvWString(GC.getImprovementInfo(pair.first).getType()).GetCString(),
+								GC.getImprovementInfo(pair.first).getDescription(),
+								gDLL->getText("TXT_KEY_BUILDINGHELP_IMPROVEMENT_ALL_CITIES").GetCString()
+							)
+						);
+						bFirst = false;
+						szBuffer.append(L": ");
+					}
+					else szBuffer.append(L", ");
+
+					szBuffer.append(CvWString::format(L"%d%c", iValue, GC.getYieldInfo((YieldTypes) iI).getChar()));
+				}
+			}
+		}
+
 		foreach_(const ReligionModifier& pair, kBuilding.getReligionChanges())
 		{
 			szBuffer.append(NEWLINE);

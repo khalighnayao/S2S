@@ -661,6 +661,7 @@ protected:
 	int m_iNeededFloatingDefendersCacheTurn;
 
 	int m_iWorkersNeeded;
+	int m_iLastStrandedWorkerTurn; // rate-limit stranded-city local-worker builds (#12b)
 
 	int	m_iBuildPriority;
 	int	m_iTempBuildPriority;
@@ -752,6 +753,7 @@ protected:
 
 	void AI_cachePlayerCloseness(int iMaxDistance);
 	void AI_updateWorkersNeededHere();
+	int AI_countReachableUnimprovedTiles() const;
 
 	// added so under cheat mode we can call protected functions for testing
 	friend class CvGameTextMgr;

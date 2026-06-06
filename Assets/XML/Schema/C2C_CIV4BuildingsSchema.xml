@@ -142,6 +142,20 @@
 		<element type="PlotType"/>
 		<element type="Yields"/>
 	</ElementType>
+	<ElementType name="ImprovementYieldChange" content="eltOnly">
+		<element type="ImprovementType"/>
+		<element type="YieldChanges"/>
+	</ElementType>
+	<ElementType name="ImprovementYieldChanges" content="eltOnly">
+		<element type="ImprovementYieldChange" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
+	<ElementType name="GlobalImprovementYieldChange" content="eltOnly">
+		<element type="ImprovementType"/>
+		<element type="YieldChanges"/>
+	</ElementType>
+	<ElementType name="GlobalImprovementYieldChanges" content="eltOnly">
+		<element type="GlobalImprovementYieldChange" minOccurs="0" maxOccurs="*"/>
+	</ElementType>
 	<ElementType name="Yields" content="eltOnly">
 		<element type="iYield" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -906,6 +920,8 @@
 		<element type="fVisibilityPriority" minOccurs="0"/>
 		<element type="TerrainYieldChange" minOccurs="0"/>
 		<element type="PlotYieldChanges" minOccurs="0"/>
+		<element type="ImprovementYieldChanges" minOccurs="0"/>
+		<element type="GlobalImprovementYieldChanges" minOccurs="0"/>
 		<element type="RiverPlotYieldChanges" minOccurs="0"/>
 		<element type="GlobalSeaPlotYieldChanges" minOccurs="0"/>
 		<element type="YieldChanges" minOccurs="0"/>

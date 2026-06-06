@@ -2074,12 +2074,6 @@ void CvUnitAI::AI_workerMove()
 	BuildTypes eBestBonusBuild = NO_BUILD;
 	int iBestBonusValue = 0;
 
-	// find bonuses within 2 moves to improve
-	if (GET_PLAYER(getOwner()).getWorkerAI().improveBonus(this, 2))
-	{
-		return;
-	}
-
 	// Afforess - worker financial trouble check
 	if (!isHuman() && AI_getUnitAIType() == UNITAI_WORKER
 	&& GET_PLAYER(getOwner()).AI_isFinancialTrouble()
@@ -2130,6 +2124,15 @@ void CvUnitAI::AI_workerMove()
 				return;
 			}
 		}
+	}
+
+	// Improve the committed/current city BEFORE chasing nearby bonus resources, so a worker
+	// (especially one a city just built for itself) stays and improves its own tiles instead
+	// of immediately jogging off to the nearest bonus. Bonus hunting resumes here once the
+	// city the worker is standing in has no remaining work for it.
+	if (GET_PLAYER(getOwner()).getWorkerAI().improveBonus(this, 2))
+	{
+		return;
 	}
 
 	if (AI_improveLocalPlot(2, pCity))

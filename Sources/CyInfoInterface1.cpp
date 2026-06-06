@@ -536,6 +536,8 @@ void CyInfoPythonInterface1()
 		.def("getSpecialistYieldChange", &CvBuildingInfo::getSpecialistYieldChange, "int (int i, int j)")
 		.def("getTerrainYieldChange", &CvBuildingInfo::cyGetTerrainYieldChanges)
 		.def("getPlotYieldChange", &CvBuildingInfo::cyGetPlotYieldChanges)
+		.def("getImprovementYieldChange", &CvBuildingInfo::cyGetImprovementYieldChanges)
+		.def("getGlobalImprovementYieldChange", &CvBuildingInfo::cyGetGlobalImprovementYieldChanges)
 		.def("getFreePromoTypes", &CvBuildingInfo::cyGetFreePromoTypes)
 
 		.def("getBonusYieldChanges", &CvBuildingInfo::getBonusYieldChanges, "int (int i, int j)")

@@ -205,6 +205,25 @@ struct IDValueMap
 		return algo::any_of_equal(m_map | map_keys, id);
 	}
 
+	// Element-wise accumulate `value` into the entry for `id`, inserting a new entry if absent.
+	// Only valid for array-like Value_ (uses size()/operator[]); instantiated on demand.
+	void addArrayValue(ID_ id, const Value_& value)
+	{
+		PROFILE_EXTRA_FUNC();
+		for (iterator it = m_map.begin(), itEnd = m_map.end(); it != itEnd; ++it)
+		{
+			if (it->first == id)
+			{
+				for (int i = 0; i < (int)value.size(); ++i)
+				{
+					it->second[i] += value[i];
+				}
+				return;
+			}
+		}
+		m_map.push_back(std::make_pair(id, value));
+	}
+
 	bool empty() const
 	{
 		return m_map.empty();
@@ -274,6 +293,7 @@ typedef std::pair<EraTypes, CommerceArray> EraCommerceArray;
 typedef std::pair<TechTypes, YieldArray> TechArray;
 typedef std::pair<TerrainTypes, YieldArray> TerrainArray;
 typedef std::pair<PlotTypes, YieldArray> PlotArray;
+typedef std::pair<ImprovementTypes, YieldArray> ImprovementArray;
 
 typedef IDValueMap<int, int, 100> IDValueMapPercent;
 typedef IDValueMap<int, int, 0> IDValueMapModifier;

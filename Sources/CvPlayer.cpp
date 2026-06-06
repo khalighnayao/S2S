@@ -7430,6 +7430,14 @@ void CvPlayer::processBuilding(BuildingTypes eBuilding, int iChange, CvArea* pAr
 		changeYieldRateModifier(((YieldTypes)iI), (kBuilding.getGlobalYieldModifier(iI) * iChange));
 	}
 
+	foreach_(const ImprovementArray& pair, kBuilding.getGlobalImprovementYieldChanges())
+	{
+		for (int iI = 0; iI < NUM_YIELD_TYPES; iI++)
+		{
+			changeImprovementYieldChange(pair.first, ((YieldTypes)iI), (pair.second[iI] * iChange));
+		}
+	}
+
 	for (int iI = 0; iI < NUM_COMMERCE_TYPES; iI++)
 	{
 		changeCommerceRateModifierfromBuildings(((CommerceTypes)iI), (kBuilding.getGlobalCommerceModifier(iI) * iChange));
