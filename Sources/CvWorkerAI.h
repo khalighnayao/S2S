@@ -176,6 +176,17 @@ public:
 	                               int gameTurn, int cityId) const;
 	void recordCity(int plotIdx, UnitTypes unitType, const CityPlotEval& eval);
 
+	// ---- per-worker, per-turn path-unreachable memo ----
+	// generatePath is position-dependent and has side effects (it sets the unit's current
+	// path, which downstream code reads), so ONLY negative (unreachable) results are cached,
+	// and only for the one worker currently planning, at its current plot, this turn. A
+	// single worker evaluates many overlapping city radii from a fixed position, so this
+	// collapses the repeated generatePath calls to the same stranded tile. Deliberately NOT
+	// shared across workers: a worker built inside a cut-off pocket must still discover that
+	// it CAN reach the pocket's own tiles (see the stranded-city local-worker production fix).
+	bool isPathKnownUnreachable(const CvUnitAI* unit, const CvPlot* pPlot);
+	void markPathUnreachable(const CvUnitAI* unit, const CvPlot* pPlot);
+
 	// ---- outer-filter rejection cache (turn-scoped) ----
 	// Records plots that improveBonus rejected at the outer filter for a STABLE
 	// reason. Subsequent calls in the same turn (e.g. the chained allowedTurns=2,4,
@@ -227,6 +238,12 @@ private:
 	std::map<EvalKey, CityPlotEval>       m_cityEvalCache;
 	std::map<EvalKey, OuterRejectReason>  m_outerRejected;
 	std::map<int, int>                    m_claims; // plotIdx -> unitId
+
+	// per-worker path-unreachable memo context (see isPathKnownUnreachable)
+	int                                   m_pathMemoUnitId;
+	int                                   m_pathMemoUnitPlot;
+	int                                   m_pathMemoTurn;
+	std::set<int>                         m_pathUnreachable; // plotIdx, valid for the context above
 };
 
 #endif // CV_WORKER_AI

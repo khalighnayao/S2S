@@ -811,6 +811,9 @@ public:
 	int getPlotYieldChange(const PlotTypes ePlot, const YieldTypes eYield) const;
 	void changePlotYieldChanges(const PlotTypes ePlot, const YieldArray& yields);
 
+	int getImprovementYieldChange(const ImprovementTypes eImprovement, const YieldTypes eYield) const;
+	void changeImprovementYieldChanges(const ImprovementTypes eImprovement, const YieldArray& yields);
+
 	int getYieldChangeAt(const CvPlot* pPlot, const YieldTypes eYield) const;
 
 	int getBaseYieldRateFromBuilding100(const YieldTypes eIndex, const BuildingTypes eType) const;
@@ -1629,6 +1632,7 @@ protected:
 
 	std::map<short, YieldArray> m_terrainYieldChanges;
 	std::map<short, YieldArray> m_plotYieldChanges;
+	std::map<short, YieldArray> m_improvementYieldChanges;
 
 	std::map<BuildingTypes, BuiltBuildingData> m_buildingLedger;
 

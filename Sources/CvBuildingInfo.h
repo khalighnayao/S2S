@@ -330,6 +330,12 @@ public:
 	const IDValueMap<PlotTypes, YieldArray>& getPlotYieldChanges() const { return m_aPlotYieldChanges; }
 	const python::list cyGetPlotYieldChanges() const;
 
+	const IDValueMap<ImprovementTypes, YieldArray>& getImprovementYieldChanges() const { return m_aImprovementYieldChanges; }
+	const python::list cyGetImprovementYieldChanges() const;
+
+	const IDValueMap<ImprovementTypes, YieldArray>& getGlobalImprovementYieldChanges() const { return m_aGlobalImprovementYieldChanges; }
+	const python::list cyGetGlobalImprovementYieldChanges() const;
+
 	const IDValueMap<BonusTypes, int>& getFreeBonuses() const { return m_freeBonuses; }
 
 	bool isPrereqOrCivics(int iCivic) const;
@@ -766,6 +772,8 @@ private:
 	IDValueMap<TechTypes, CommerceArray> m_techCommerceModifiers;
 	IDValueMap<TerrainTypes, YieldArray> m_aTerrainYieldChanges;
 	IDValueMap<PlotTypes, YieldArray> m_aPlotYieldChanges;
+	IDValueMap<ImprovementTypes, YieldArray> m_aImprovementYieldChanges;
+	IDValueMap<ImprovementTypes, YieldArray> m_aGlobalImprovementYieldChanges;
 
 
 	CvPropertyManipulators m_PropertyManipulators;
