@@ -1488,6 +1488,14 @@
 		<Polish>Dziennik gracza</Polish>
 	</TEXT>
 	<TEXT>
+		<Tag>TXT_KEY_BUG_OPT_AUTOLOG__LOGLEVELPERF_TEXT</Tag>
+		<English>Performance / turn-timing log level</English>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_BUG_OPT_AUTOLOG__LOGLEVELPERF_HOVER</Tag>
+		<English>Wall-clock timing of turn phases, written to Performance.log [PERF/phase]. Independent of the BBAI logs and works with any DLL. 0 = off; 1 or higher times the headline phases (whole turn, the visibility rebuild, per-player doTurn, doTurnUnits, AI diplomacy, property solver, resource recompute, trade routes).</English>
+	</TEXT>
+	<TEXT>
 		<Tag>TXT_KEY_BUG_OPT_AUTOLOG__LOGLEVELTEAMBBAI_HOVER</Tag>
 		<English>Set the level of BBAI logging - 0 = off, 1 = important events, 2 = many decisions, 3 = most detailed</English>
 		<French>Définir le niveau de journalisation BBAI - 0 = désactivé, 1 = événements importants, 2 = nombreuses décisions, 3 = le plus détaillé</French>

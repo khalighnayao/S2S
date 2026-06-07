@@ -69,6 +69,7 @@
 
 CvCityAI::CvCityAI()
 {
+	m_dataRepository.init(this);
 	m_aiEmphasizeYieldCount = new int[NUM_YIELD_TYPES];
 	m_aiEmphasizeCommerceCount = new int[NUM_COMMERCE_TYPES];
 	m_bForceEmphasizeCulture = false;
@@ -246,8 +247,8 @@ void CvCityAI::AI_doTurn()
 		}
 		AI_stealPlots();
 	}
-	AI_updateBestBuild();
-	AI_updateWorkersNeededHere();
+	{ PERF_SCOPE("city.AI_updateBestBuild", getOwner()); AI_updateBestBuild(); }
+	{ PERF_SCOPE("city.AI_updateWorkersNeededHere", getOwner()); AI_updateWorkersNeededHere(); }
 
 	m_routeToCityUpdated = false; // Update on demand
 
@@ -764,6 +765,7 @@ int CvCityAI::AI_specialistValue(SpecialistTypes eSpecialist, bool bAvoidGrowth,
 void CvCityAI::AI_chooseProduction()
 {
 	PROFILE_FUNC();
+	PERF_SCOPE("city.AI_chooseProduction", getOwner());
 	//#0 START OF AI_CHOOSEPRODUCTION
 	m_iRequestedBuilding = 0;
 	m_iRequestedUnit = 0;
@@ -4023,6 +4025,7 @@ UnitTypes CvCityAI::AI_bestUnit(int& iBestUnitValue, int iNumSelectableTypes, Un
 UnitTypes CvCityAI::AI_bestUnitAI(UnitAITypes eUnitAI, int& iBestValue, bool bAsync, bool bNoRand, const CvUnitSelectionCriteria* criteria)
 {
 	PROFILE_FUNC();
+	PERF_SCOPE("city.AI_bestUnitAI", getOwner());
 
 	FAssert(eUnitAI != NO_UNITAI);
 
@@ -4588,6 +4591,7 @@ public:
 	{
 		m_iCachedFlags = 0;
 		m_bIncomplete = false;
+		m_buildingsToCalculateValid = false;
 	}
 
 	virtual ~BuildingValueCache()
@@ -4693,6 +4697,11 @@ public:
 	int			m_iCachedFlags;
 	bool		m_bIncomplete;
 	std::map<int, OneBuildingValueCache*>	m_buildingValues;
+	//	Memoized constructible-building set (constructible + buildings an enabler would unlock).
+	//	Flag-independent and stable across the CABV calls sharing this cache, so computed once per
+	//	cache lifetime instead of re-running the O(buildings^2) PreLoop on every call.
+	bool					m_buildingsToCalculateValid;
+	std::set<BuildingTypes>	m_buildingsToCalculate;
 };
 
 
@@ -12459,12 +12468,21 @@ void CvCityAI::AI_FlushBuildingValueCache(bool bRetainValues)
 	else if (cachedBuildingValues != NULL)
 	{
 		cachedBuildingValues->m_bIncomplete = true;
+		//	A retain-flush is triggered by building changes that can alter which buildings are
+		//	constructible (and which an enabler would unlock), so the memoized PreLoop set must be
+		//	rebuilt too. (The full-flush branch above handles this by deleting the cache object.)
+		cachedBuildingValues->m_buildingsToCalculateValid = false;
 	}
 }
 
 void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 {
 	PROFILE_FUNC();
+	PERF_SCOPE("city.CalculateAllBuildingValues", getOwner());
+	//	PERF sub-scope timing: accumulate ms per dimension across the building loop and log once
+	//	at function exit ([PERF/cabv]), to confirm which inner loop dominates before refactor.
+	double dDefense = 0, dNotDeveloping = 0, dSea = 0, dCommerceYields = 0, dCommerceVal = 0;
+	double dPreLoop = 0, dBuilding = 0, dHappy = 0, dHealth = 0, dExperience = 0, dMaintenance = 0, dSpecialist = 0, dFood = 0;
 
 	// KOSHLING optimisation - moved what we could outside of the building loop
 	const PlayerTypes ePlayer = getOwner();
@@ -12571,10 +12589,18 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 
 	cachedBuildingValues->m_iCachedFlags |= iFocusFlags;
 
-	std::set<BuildingTypes> buildingsToCalculate;
+	//	PERF: the constructible-building set (constructible + buildings an enabler would unlock) is
+	//	flag-independent and stable across the CABV calls that share this per-city cache, so memoize
+	//	it -- run the O(buildings^2) PreLoop ONCE per cache lifetime, not every call. The cache is
+	//	rebuilt every turn and flushed by setHasBuilding, so the set stays as fresh as the building
+	//	values; the cache invalidation lifecycle is unchanged (no new staleness, no loop risk).
+	std::set<BuildingTypes>& buildingsToCalculate = cachedBuildingValues->m_buildingsToCalculate;
 	const int iNumBuildings = GC.getNumBuildingInfos();
+	if (!cachedBuildingValues->m_buildingsToCalculateValid)
 	{
 		PROFILE("CvCityAI::CalculateAllBuildingValues.PreLoop");
+		PERF_ACCUM(dPreLoop);
+		buildingsToCalculate.clear();
 		for (int iBuilding = 0; iBuilding < iNumBuildings; iBuilding++)
 		{
 			const BuildingTypes eBuilding = static_cast<BuildingTypes>(iBuilding);
@@ -12620,6 +12646,7 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 				}
 			}
 		}
+		cachedBuildingValues->m_buildingsToCalculateValid = true;
 	}
 	{
 		PROFILE("CvCityAI::CalculateAllBuildingValues.Loop");
@@ -12636,6 +12663,7 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 			// modification that it accumulates all focus values to the cache's focus value array
 
 			PROFILE("CvCityAI::CalculateAllBuildingValues.building");
+			PERF_ACCUM(dBuilding);
 
 			const CvBuildingInfo& kBuilding = GC.getBuildingInfo(eBuilding);
 
@@ -12737,6 +12765,7 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 			}
 			{
 				PROFILE("CalculateAllBuildingValues.Defense");
+				PERF_ACCUM(dDefense);
 				int iValue = 0;
 
 				if (!bAreaAlone)
@@ -12844,6 +12873,7 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 			if (!isNoUnhappiness())
 			{
 				PROFILE("CalculateAllBuildingValues.Happy");
+				PERF_ACCUM(dHappy);
 				int iBestHappy = 0;
 
 				for (int iI = 0; iI < GC.getNumHurryInfos(); iI++)
@@ -12954,6 +12984,7 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 			if (!isNoUnhealthyPopulation())
 			{
 				PROFILE("CalculateAllBuildingValues.Health");
+				PERF_ACCUM(dHealth);
 				int iValue = 0;
 
 				iValue += healthValue(iBuildingActualHealth, iBaseHappinessLevel - iEspionageHappyCounter / 2 + std::max(0, iBuildingActualHappiness), iBaseHealthLevel, iBaseFoodDifference);
@@ -12965,6 +12996,7 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 			}
 			{ // valuesCache->Accumulate(BUILDINGFOCUSINDEX_EXPERIENCE, iValue)
 				PROFILE("CalculateAllBuildingValues.Experience");
+				PERF_ACCUM(dExperience);
 				int iValue = kBuilding.getFreeExperience() * (bMetAnyCiv ? 12 : 6);
 
 				foreach_(const UnitCombatModifier2 & modifier, kBuilding.getUnitCombatFreeExperience())
@@ -13042,6 +13074,7 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 				if ((!bDevelopingCity || bCapital) && kBuilding.EnablesUnits())
 				{
 					PROFILE("CalculateAllBuildingValues.NotDeveloping");
+					PERF_ACCUM(dNotDeveloping);
 
 					const CvGameObjectCity* pObject = getGameObject();
 					// add the extra building and its bonuses to the override to see if they influence the train condition of a unit
@@ -13220,6 +13253,7 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 			}
 			{
 				PROFILE("CalculateAllBuildingValues.Sea");
+				PERF_ACCUM(dSea);
 
 				int iValue = kBuilding.getFreeExperience() * (bMetAnyCiv ? 16 : 8);
 
@@ -13248,6 +13282,7 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 			if (kBuilding.getCommerceChange(COMMERCE_GOLD) < 0 && GC.getTREAT_NEGATIVE_GOLD_AS_MAINTENANCE())
 			{
 				PROFILE("CalculateAllBuildingValues.Maintenance");
+				PERF_ACCUM(dMaintenance);
 				const int iBaseMaintenance = getMaintenanceTimes100();
 				const int iMaintenanceMod = getEffectiveMaintenanceModifier();
 
@@ -13273,6 +13308,7 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 			}
 			{
 				PROFILE("CalculateAllBuildingValues.Specialist");
+				PERF_ACCUM(dSpecialist);
 				int iValue = 0;
 				int iSpecialistsValue = 0;
 				int iCurrentSpecialistsRunnable = 0;
@@ -13338,6 +13374,7 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 			}
 			{
 				PROFILE("CalculateAllBuildingValues.CommerceYields");
+				PERF_ACCUM(dCommerceYields);
 
 				// commerce yield
 				const int iCommerceYieldValue = (
@@ -13871,6 +13908,7 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 
 			{
 				PROFILE("CalculateAllBuildingValues.Food");
+				PERF_ACCUM(dFood);
 
 				valuesCache->AccumulateTo(
 					BUILDINGFOCUSINDEX_FOOD,
@@ -13910,11 +13948,14 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 				}
 				valuesCache->AccumulateToAny(iValue, false);
 			}
+			{
+			PERF_ACCUM(dCommerceVal);
 			valuesCache->AccumulateTo(BUILDINGFOCUSINDEX_GOLD, getBuildingCommerceValue(eBuilding, COMMERCE_GOLD, aiFreeSpecialistYield, aiFreeSpecialistCommerce, aiBaseCommerceRate, aiPlayerCommerceRate), true);
 			valuesCache->AccumulateTo(BUILDINGFOCUSINDEX_RESEARCH, getBuildingCommerceValue(eBuilding, COMMERCE_RESEARCH, aiFreeSpecialistYield, aiFreeSpecialistCommerce, aiBaseCommerceRate, aiPlayerCommerceRate), true);
 			valuesCache->AccumulateTo(BUILDINGFOCUSINDEX_CULTURE, getBuildingCommerceValue(eBuilding, COMMERCE_CULTURE, aiFreeSpecialistYield, aiFreeSpecialistCommerce, aiBaseCommerceRate, aiPlayerCommerceRate), true);
 			valuesCache->AccumulateTo(BUILDINGFOCUSINDEX_BIGCULTURE, getBuildingCommerceValue(eBuilding, COMMERCE_CULTURE, aiFreeSpecialistYield, aiFreeSpecialistCommerce, aiBaseCommerceRate, aiPlayerCommerceRate) / 5, true);
 			valuesCache->AccumulateTo(BUILDINGFOCUSINDEX_ESPIONAGE, getBuildingCommerceValue(eBuilding, COMMERCE_ESPIONAGE, aiFreeSpecialistYield, aiFreeSpecialistCommerce, aiBaseCommerceRate, aiPlayerCommerceRate), true);
+			}
 
 			if (!isHuman())
 			{
@@ -13923,6 +13964,9 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 			}
 		}
 	}
+
+	logPerf(1, "[PERF/cabv] owner=%d flags=%d preloop=%.2f building=%.2f defense=%.2f happy=%.2f health=%.2f exp=%.2f notdev=%.2f sea=%.2f maint=%.2f spec=%.2f commerceYields=%.2f commerceVal=%.2f food=%.2f",
+		getOwner(), iFocusFlags, dPreLoop, dBuilding, dDefense, dHappy, dHealth, dExperience, dNotDeveloping, dSea, dMaintenance, dSpecialist, dCommerceYields, dCommerceVal, dFood);
 }
 
 int CvCityAI::getBuildingCommerceValue(BuildingTypes eBuilding, int iI, int* aiFreeSpecialistYield, int* aiFreeSpecialistCommerce, int* aiBaseCommerceRate, int* aiPlayerCommerceRate) const

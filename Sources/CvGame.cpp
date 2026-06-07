@@ -5788,6 +5788,7 @@ void CvGame::addGreatPersonBornName(const CvWString& szName)
 void CvGame::doTurn()
 {
 	PROFILE_BEGIN("CvGame::doTurn()",DOTURN1);
+	PERF_SCOPE("CvGame::doTurn", -1);
 
 	// Capture a snapshot of every plot's state at the start of the turn so the
 	// BuildEvaluation.log entries that follow can be cross-referenced against
@@ -5866,12 +5867,15 @@ void CvGame::doTurn()
 	//Hopefully won't create a noteable delay but it may
 	//disabled when debugging only - units should now be tracking and staying within a range of 0-1 for number of positive updates - negative updates.
 	//TBVIS
-	for (int iJ = 0; iJ < GC.getMap().numPlots(); iJ++)
 	{
-		CvPlot* pLoopPlot = GC.getMap().plotByIndex(iJ);
-		pLoopPlot->clearVisibilityCounts();
+		PERF_SCOPE("doTurn.visibilityRebuild", -1);
+		for (int iJ = 0; iJ < GC.getMap().numPlots(); iJ++)
+		{
+			CvPlot* pLoopPlot = GC.getMap().plotByIndex(iJ);
+			pLoopPlot->clearVisibilityCounts();
+		}
+		GC.getMap().updateSight(true, false);
 	}
-	GC.getMap().updateSight(true, false);
 
 	CvEventReporter::getInstance().preEndGameTurn(getGameTurn());
 

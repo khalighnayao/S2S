@@ -10,6 +10,7 @@
 #include "CvGameCoreDLL.h"
 #include "CvPropertyManipulators.h"
 #include "FProfiler.h"
+#include "BetterBTSAI.h"
 #include "CvGameAI.h"
 #include "CvGlobals.h"
 #include "CvInfos.h"
@@ -447,6 +448,7 @@ void CvPropertySolver::gatherAndSolve()
 void CvPropertySolver::doTurn()
 {
 	PROFILE_FUNC();
+	PERF_SCOPE("CvPropertySolver::doTurn", -1);
 
 	resetPropertyChanges();
 

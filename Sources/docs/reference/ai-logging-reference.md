@@ -22,6 +22,12 @@ everything on. `0` = off.
 
 On a `_DEBUG` build all four are forced to `4`.
 
+**Turn timing is separate.** The `[PERF]` domain (wall-clock turn-phase timing) has its
+**own** knob — **BUG options → Autolog → "Performance / turn-timing log level"**
+(`Autolog__LogLevelPerf` → `gPerfLogLevel`) — so you can measure real performance with any
+DLL (Assert/Release) without turning on the verbose AI logs. It is deliberately *not* forced
+to 4 in `_DEBUG` (timing a debug build is meaningless). `0` = off; `1` enables the timers.
+
 Logs are written to:
 
 ```
@@ -67,6 +73,7 @@ path segments after the `/` are lowercase and may nest (`[XXX/group/detail]`).
 | Combat | `[COM]` | `CombatAI.log` | unit | `CvUnitAI`, `CvSelectionGroupAI` |
 | ContractBroker | `[CTB]` | `ContractBroker.log` | player | `CvContractBroker` |
 | Game session header | `[GAME]` | `GameInfo.log` | (ungated) | `CvGame::onFinalInitialized` |
+| Turn timing | `[PERF]` | `Performance.log` | **`gPerfLogLevel`** (own knob) | `CvGame`, `CvPlayer`, `CvPlayerAI`, `CvCity`, `CvCityAI`, `CvPropertySolver` |
 
 `GameInfo.log` is written once on game start/load (speed, handicap, map, options, players)
 so every other log can be read against the active ruleset.
@@ -137,6 +144,27 @@ The unit work/contract market. High volume by nature. Headline events
 (`[CTB/contract]` unit→work, `[CTB/tender/win]`) are level 1; per-candidate tender
 evaluation is level 3; the per-unit assess/reject/suitability spam is level 4.
 
+### `[PERF]` — turn timing (`Performance.log`, own `gPerfLogLevel` knob)
+
+Wall-clock timing of the headline turn phases, for diagnosing late-game turn-time growth.
+Implemented with a RAII scope timer (`PERF_SCOPE(phase, owner)` →
+`ScopedPerfTimer`/`win32::Stopwatch`, declared in `BetterBTSAI.h`); each emits one line on
+scope exit. Cost when off is a single integer compare, so it ships in normal DLLs.
+
+- `[PERF/phase]` (1) — `turn=<n> owner=<playerId|-1> phase=<label> ms=<elapsed>`. `owner=-1`
+  marks game/map-scope phases. ~20 scopes across the per-turn path: `CvGame::doTurn`,
+  `doTurn.visibilityRebuild`, `CvPlayer::doTurn` (per player) split into
+  `doTurn.cities`/`AI_doTurnPre`/`AI_doTurnPost`, the `AI_doTurnPre` internals (`pre.*`), and the
+  per-city tree (`city.doTurn` → `cacheFlush`/`AI_doTurn`/`doProduction`/`AI_chooseProduction`/
+  `CalculateAllBuildingValues`/…, tagged by city owner). Aggregate by label.
+- `[PERF/cabv]` (1) — one line per `CalculateAllBuildingValues` call decomposing it by dimension
+  (`preloop`/`building`/`defense`/…/`food`), via `PERF_ACCUM(double&)` accumulating timers that sum
+  each section across the building loop and log once. (Found the CABV hot spot = the `PreLoop`.)
+
+Helpers in `BetterBTSAI.h`: `PERF_SCOPE(label, owner)` times the enclosing scope; `PERF_ACCUM(acc)`
+adds the enclosing scope's ms to an accumulator (for interleaved sub-sections). Full scope inventory
++ awk recipes: [`../plans/turn-time-optimization.md`](../plans/turn-time-optimization.md).
+
 ---
 
 ## 4. Reading the logs (grep recipes)
@@ -161,6 +189,15 @@ grep -oE 'UNITAI [0-9]+ -> [0-9]+' UnitAI.log | sort | uniq -c | sort -rn
 
 # Per-unit re-evaluation spin (a unit appearing hundreds of times = a bug)
 grep -oE 'UNT/move\] owner=[0-9]+ unit=[0-9]+' UnitAI.log | sort | uniq -c | sort -rn | head
+
+# Turn-time breakdown: total ms per phase across the game (which phase dominates?)
+awk -F'phase=| ms=' '/PERF\/phase/{sum[$2]+=$3} END{for(p in sum) printf "%10.1f  %s\n", sum[p], p}' Performance.log | sort -rn
+
+# How much is the visibility "stickytape" costing each turn?
+grep 'phase=doTurn.visibilityRebuild' Performance.log
+
+# Per-player doTurn cost on one turn (which empire is slowest?)
+grep 'phase=CvPlayer::doTurn .*turn=312 ' Performance.log | sort -t= -k5 -rn
 ```
 
 The fields are `key=value`, space-separated, by design — `grep`/`awk`/`sort | uniq -c` is

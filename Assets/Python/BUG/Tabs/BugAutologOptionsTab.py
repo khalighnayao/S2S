@@ -27,6 +27,7 @@ class BugAutologOptionsTab(BugOptionsTab.BugOptionsTab):
 		self.addIntDropdown(screen, center, center, "Autolog__LogLevelPlayerBBAI")
 		self.addIntDropdown(screen, right, right, "Autolog__LogLevelUnitBBAI")
 		self.addIntDropdown(screen, right, right, "Autolog__LogLevelCityBBAI")
+		self.addIntDropdown(screen, center, center, "Autolog__LogLevelPerf")
 
 		# File and Format
 		screen.attachHSeparator(column, column + "Sep1")

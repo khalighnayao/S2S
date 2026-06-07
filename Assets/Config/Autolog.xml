@@ -15,6 +15,9 @@
 			<list id="LogLevelCityBBAI" key="LogLevelCityBBAI" type="int" default="0" listType="int" values="0,1,2,3,4" get="getLogLevelCityBBAI"/>
 			<list id="LogLevelUnitBBAI" key="LogLevelUnitBBAI" type="int" default="0" listType="int" values="0,1,2,3,4" get="getLogLevelUnitBBAI"/>
 
+			<!-- Wall-clock turn-phase timing -> Performance.log; read in the DLL as gPerfLogLevel. Independent of the BBAI levels above. -->
+			<list id="LogLevelPerf" key="LogLevelPerf" type="int" default="0" listType="int" values="0,1,2,3,4"/>
+
 			<option id="MiscLogging" key="MiscLogging" type="boolean" default="True"/>
 
 			<!-- Log file -->

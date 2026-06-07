@@ -1,5 +1,6 @@
 #include "CvGameCoreDLL.h"
 #include "CvGlobals.h"
+#include "CvGameAI.h"   // ScopedPerfTimer logs GC.getGame().getGameTurn()
 
 // Log levels:
 // 0 - None
@@ -11,6 +12,44 @@ int gPlayerLogLevel = 0;
 int gTeamLogLevel = 0;
 int gCityLogLevel = 0;
 int gUnitLogLevel = 0;
+int gPerfLogLevel = 0;
+
+// Wall-clock turn-phase timing. Mirrors the other log<Domain> helpers but is gated by its
+// own gPerfLogLevel so timing can be enabled independently of the verbose AI logs.
+void logPerf(int level, const char* format, ...)
+{
+	if (level <= gPerfLogLevel)
+	{
+		static char buf[2048];
+		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
+		gDLL->logMsg("Performance.log", buf);
+
+		// Echo to debugger
+		strcat(buf, "\n");
+		OutputDebugString(buf);
+	}
+}
+
+ScopedPerfTimer::ScopedPerfTimer(const char* szPhase, int iOwner)
+	: m_szPhase(szPhase)
+	, m_iOwner(iOwner)
+	, m_bActive(gPerfLogLevel >= 1)
+{
+	if (m_bActive)
+	{
+		m_stopwatch.Start();
+	}
+}
+
+ScopedPerfTimer::~ScopedPerfTimer()
+{
+	if (m_bActive)
+	{
+		m_stopwatch.Stop();
+		logPerf(1, "[PERF/phase] turn=%d owner=%d phase=%s ms=%.3f",
+			GC.getGame().getGameTurn(), m_iOwner, m_szPhase, m_stopwatch.ElapsedMilliseconds());
+	}
+}
 
 void logContractBroker(int level, const char* format, ...)
 {

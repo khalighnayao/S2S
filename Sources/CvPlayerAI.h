@@ -92,6 +92,8 @@ public:
  * - Contains routines for evaluating yields, commerce, military, city sites, attitudes, and more.
  * - Integrates with city and unit AI, caching, and global game state.
  */
+#include "CvDerivedData.h"
+
 class CvPlayerAI : public CvPlayer
 {
 
@@ -99,6 +101,12 @@ public:
 
 	CvPlayerAI();
 	virtual ~CvPlayerAI();
+
+	//	Player-level derived-data repository (see CvDerivedData.h). Tech/civic/promotion/bonus values,
+	//	counts, etc.; empty for now.
+	CvPlayerDataRepository&       AI_dataRepository()       { return m_dataRepository; }
+	const CvPlayerDataRepository& AI_dataRepository() const { return m_dataRepository; }
+	CvPlayerDataRepository        m_dataRepository;
 
 	// inlined for performance reasons
 	static CvPlayerAI& getPlayer(PlayerTypes ePlayer)

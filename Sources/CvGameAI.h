@@ -7,6 +7,8 @@
 
 #include "CvGame.h"
 
+#include "CvDerivedData.h"
+
 class CvGameAI : public CvGame
 {
 
@@ -14,6 +16,11 @@ public:
 
   CvGameAI();
   virtual ~CvGameAI();
+
+  //	Game-level derived-data repository (see CvDerivedData.h). Static XML-derived data; empty for now.
+  CvGameDataRepository&       AI_dataRepository()       { return m_dataRepository; }
+  const CvGameDataRepository& AI_dataRepository() const { return m_dataRepository; }
+  CvGameDataRepository        m_dataRepository;
 
   /**
    * Initializes the AI game state.

@@ -3037,6 +3037,10 @@ void cvInternalGlobals::refreshOptionsBUG()
 	gUnitLogLevel = iAILogLevel;
 	gMiscLogging = getBugOptionBOOL("Autolog__MiscLogging", false);
 
+	// Turn-timing has its own knob so wall-clock timing can run independently of the verbose
+	// AI logs. Deliberately NOT forced to 4 in _DEBUG -- timing a debug build is meaningless.
+	gPerfLogLevel = getBugOptionINT("Autolog__LogLevelPerf", 0);
+
 #ifdef _DEBUG
 	gPlayerLogLevel = 4;
 	gTeamLogLevel = 4;

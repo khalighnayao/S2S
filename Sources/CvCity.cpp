@@ -1223,6 +1223,7 @@ void CvCity::killTestCheap()
 void CvCity::doTurn()
 {
 	PROFILE("CvCity::doTurn()");
+	PERF_SCOPE("city.doTurn", getOwner());
 
 	// [CIT/proplevel] -- per-city property snapshot at the start of each turn (crime/disease/
 	// education/...), so property TRENDS are trackable from the log over turns -- hard to eyeball
@@ -1250,13 +1251,21 @@ void CvCity::doTurn()
 	//	New turn.  Generally won't really need a cache flush because
 	//	last city of previous turn won't match, but for the sake of edge cases
 	//	flush anyway to be safe
-	AI_FlushBuildingValueCache();
-	FlushCanConstructCache();
-	setBuildingListInvalid();
-	setUnitListInvalid();
+	{
+		PERF_SCOPE("city.cacheFlush", getOwner());
+		//	NOTE: experiments to retain/periodically-refresh this per-city building-value cache
+		//	(to cut the ~87% late-game CalculateAllBuildingValues cost) caused a turn HANG -- a
+		//	stale cache sends AI_chooseProduction into a re-decision loop. Reverted to the original
+		//	full per-turn flush. Redo with EVENT-DRIVEN invalidation (flush on tech / civic /
+		//	building-built) so values are never stale. See Sources/docs/plans/turn-time-optimization.md.
+		AI_FlushBuildingValueCache();
+		FlushCanConstructCache();
+		setBuildingListInvalid();
+		setUnitListInvalid();
 #ifdef CAN_TRAIN_CACHING
-	populateCanTrainCache(false);
+		populateCanTrainCache(false);
 #endif
+	}
 
 	m_unitSourcedPropertyCache.clear();
 
@@ -1291,17 +1300,18 @@ void CvCity::doTurn()
 	//Counts down the disable power timer
 	doDisabledPower();
 
-	recalculatePopulationgrowthratepercentage();
+	{ PERF_SCOPE("city.recalcPopGrowth", getOwner()); recalculatePopulationgrowthratepercentage(); }
 
 	doWarWeariness();
 
-	AI_doTurn();
+	{ PERF_SCOPE("city.AI_doTurn", getOwner()); AI_doTurn(); }
 
-	bool bAllowNoProduction = !doCheckProduction();
+	bool bAllowNoProduction;
+	{ PERF_SCOPE("city.doCheckProduction", getOwner()); bAllowNoProduction = !doCheckProduction(); }
 
 	changeFood(foodDifference(), true);
 
-	doCulture();
+	{ PERF_SCOPE("city.doCulture", getOwner()); doCulture(); }
 
 	// updating after plot culture ensures player always sees correct ownership on plot,
 	// but plot could technically wiggle back and forth during AI turns.
@@ -1313,7 +1323,7 @@ void CvCity::doTurn()
 	//	Auto-build any auto-build buildings we can
 	doAutobuild();
 
-	doProduction(bAllowNoProduction);
+	{ PERF_SCOPE("city.doProduction", getOwner()); doProduction(bAllowNoProduction); }
 
 	GET_PLAYER(getOwner()).getContractBroker().advertiseTender(this, AI_getBuildPriority());
 
