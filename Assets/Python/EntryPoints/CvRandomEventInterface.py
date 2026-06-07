@@ -6026,7 +6026,11 @@ def triggerNewWorldCities(argsList):
 	iNumUnits = GC.getNumUnitInfos()
 	MAP = GC.getMap()
 	while iNeededCities > 0:
-		iBestValue = 0
+		# Start at -1 so a foundable coastal plot whose found-value is 0 is still chosen.
+		# canDoNewWorldTrigger gates on canFound(), not found-value, so the selection here
+		# must accept value-0 plots too (otherwise a passable gate can still leave pBestPlot
+		# None and raise -- e.g. Pangaea, or a human player with unmaintained found-values).
+		iBestValue = -1
 		pBestPlot = None
 		for CyPlot in MAP.plots():
 			if not CyPlot.isWater() and CyPlot.isCoastal() and CyPlayer.canFound(CyPlot.getX(), CyPlot.getY()):
@@ -6035,15 +6039,18 @@ def triggerNewWorldCities(argsList):
 					pBestPlot = CyPlot
 					iBestValue = iValue
 		if pBestPlot is None:
-			raise "Error in TriggerNewWorldCities - No City Created!"
-			return
+			# No foundable coastal plot left this iteration (fully-settled / Pangaea, or the
+			# cities founded earlier in this event now block the rest by minimum city
+			# distance). Stop gracefully with whatever was founded instead of raising a
+			# string exception into PythonErr.log.
+			break
 
 		CyPlayer.found(pBestPlot.getX(), pBestPlot.getY())
 
 		CyCity = pBestPlot.getPlotCity()
 		if not CyCity:
-			raise "Error in TriggerNewWorldCities - No City Created!"
-			return
+			# found() unexpectedly produced no city -- bail gracefully rather than raise.
+			break
 
 		if iEvent == GC.getInfoTypeForString("EVENT_NEW_WORLD_2"):
 			CyCity.changePopulation(1)

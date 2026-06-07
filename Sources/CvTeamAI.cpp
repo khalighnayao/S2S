@@ -49,6 +49,7 @@ CvTeamAI& CvTeamAI::getTeam(TeamTypes eTeam)
 
 CvTeamAI::CvTeamAI()
 {
+	m_dataRepository.init(this);
 	m_aiWarPlanStateCounter = new int[MAX_TEAMS];
 	m_aiAtWarCounter = new int[MAX_TEAMS];
 	m_aiAtPeaceCounter = new int[MAX_TEAMS];

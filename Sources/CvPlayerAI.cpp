@@ -97,6 +97,7 @@ DllExport CvPlayerAI& CvPlayerAI::getPlayerNonInl(PlayerTypes ePlayer)
 CvPlayerAI::CvPlayerAI()
 {
 	PROFILE_EXTRA_FUNC();
+	m_dataRepository.init(this);
 	m_aiNumTrainAIUnits = new int[NUM_UNITAI_TYPES];
 	m_aiNumAIUnits = new int[NUM_UNITAI_TYPES];
 	m_aiSameReligionCounter = new int[MAX_PLAYERS];
@@ -467,9 +468,9 @@ void CvPlayerAI::AI_doTurnPre()
 		m_aiCivicValueCache[iI] = MAX_INT;
 	}
 
-	AI_updateBonusValue();
+	{ PERF_SCOPE("pre.AI_updateBonusValue", getID()); AI_updateBonusValue(); }
 
-	AI_doEnemyUnitData();
+	{ PERF_SCOPE("pre.AI_doEnemyUnitData", getID()); AI_doEnemyUnitData(); }
 
 	if (isHumanPlayer())
 	{
@@ -488,13 +489,13 @@ void CvPlayerAI::AI_doTurnPre()
 		AI_forceUpdateStrategies(); //to account for current research.
 	}
 
-	AI_doCommerce();
+	{ PERF_SCOPE("pre.AI_doCommerce", getID()); AI_doCommerce(); }
 
-	AI_doMilitary();
+	{ PERF_SCOPE("pre.AI_doMilitary", getID()); AI_doMilitary(); }
 
-	AI_doCivics();
+	{ PERF_SCOPE("pre.AI_doCivics", getID()); AI_doCivics(); }
 
-	AI_doReligion();
+	{ PERF_SCOPE("pre.AI_doReligion", getID()); AI_doReligion(); }
 
 	AI_setPushReligiousVictory();
 	AI_setConsiderReligiousVictory();
@@ -502,7 +503,7 @@ void CvPlayerAI::AI_doTurnPre()
 
 	AI_doCheckFinancialTrouble();
 
-	AI_doMilitaryProductionCity();
+	{ PERF_SCOPE("pre.AI_doMilitaryProductionCity", getID()); AI_doMilitaryProductionCity(); }
 
 	if (isNPC())
 	{
@@ -17394,6 +17395,7 @@ void CvPlayerAI::AI_beginDiplomacy(CvDiploParameters* pDiploParams, PlayerTypes 
 void CvPlayerAI::AI_doDiplo()
 {
 	PROFILE_FUNC();
+	PERF_SCOPE("CvPlayerAI::AI_doDiplo", getID());
 
 	FAssert(!isHumanPlayer());
 	FAssert(!isMinorCiv());

@@ -116,6 +116,8 @@ typedef struct
  * - The class is tightly integrated with other AI systems (CvPlayerAI, CvTeamAI, CvContractBroker, etc.).
  * - Designed for extensibility and modding, with support for new properties, yields, and AI strategies.
  */
+#include "CvDerivedData.h"
+
 class CvCityAI : public CvCity
 {
 
@@ -123,6 +125,12 @@ public:
 
 	CvCityAI();
 	virtual ~CvCityAI();
+
+	//	City-level derived-data repository (see CvDerivedData.h). Constructible set, building values,
+	//	declared needs; empty for now.
+	CvCityDataRepository&       AI_dataRepository()       { return m_dataRepository; }
+	const CvCityDataRepository& AI_dataRepository() const { return m_dataRepository; }
+	CvCityDataRepository        m_dataRepository;
 
 	void AI_init();
 	void AI_uninit();

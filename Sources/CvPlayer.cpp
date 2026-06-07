@@ -4,6 +4,7 @@
 #include "FProfiler.h"
 
 #include "CvGameCoreDLL.h"
+#include "BetterBTSAI.h"
 #include "CvArea.h"
 #include "CvArtFileMgr.h"
 #include "CvBuildingInfo.h"
@@ -3676,6 +3677,7 @@ const char* CvPlayer::getUnitButton(UnitTypes eUnit) const
 void CvPlayer::doTurn()
 {
 	PROFILE_FUNC();
+	PERF_SCOPE("CvPlayer::doTurn", getID());
 
 	// Only decrement the GA counter at the end of this function if GA started before this point, i.e last turn.
 	const bool bWasGoldenAgeLastTurn = getGoldenAgeTurns() > 0; 
@@ -3770,7 +3772,7 @@ void CvPlayer::doTurn()
 
 	GC.getGame().verifyDeals();
 
-	AI_doTurnPre();
+	{ PERF_SCOPE("doTurn.AI_doTurnPre", getID()); AI_doTurnPre(); }
 
 	if (getRevolutionTimer() > 0)
 	{
@@ -3820,6 +3822,7 @@ void CvPlayer::doTurn()
 
 	{
 		PROFILE("CvPlayer::doTurn.DoCityTurn");
+		PERF_SCOPE("doTurn.cities", getID());
 
 		algo::for_each(cities_safe(), CvCity::fn::doTurn());
 	}
@@ -3875,7 +3878,7 @@ void CvPlayer::doTurn()
 
 	gDLL->getInterfaceIFace()->setDirty(CityInfo_DIRTY_BIT, true);
 
-	AI_doTurnPost();
+	{ PERF_SCOPE("doTurn.AI_doTurnPost", getID()); AI_doTurnPost(); }
 
 	// Toffer - Completely acceptable to only cache these once per turn.
 	if (!isNPC())
@@ -3972,6 +3975,7 @@ void CvPlayer::NoteCivicsSwitched(int iNumChanges)
 void CvPlayer::doTurnUnits()
 {
 	PROFILE_FUNC();
+	PERF_SCOPE("CvPlayer::doTurnUnits", getID());
 
 	AI_doTurnUnitsPre();
 
@@ -4257,6 +4261,7 @@ void CvPlayer::updateCitySight(bool bIncrement, bool bUpdatePlotGroups)
 void CvPlayer::updateTradeRoutes()
 {
 	PROFILE_FUNC();
+	PERF_SCOPE("CvPlayer::updateTradeRoutes", getID());
 
 	CLLNode<int>* pCityNode;
 	CLinkList<int> cityList;
@@ -27065,6 +27070,7 @@ void CvPlayer::recalculateResourceConsumption(BonusTypes eBonus)
 void CvPlayer::recalculateAllResourceConsumption()
 {
 	PROFILE_EXTRA_FUNC();
+	PERF_SCOPE("CvPlayer::recalculateAllResourceConsumption", getID());
 	for (int iI = 0; iI < GC.getNumBonusInfos(); iI++)
 	{
 		recalculateResourceConsumption((BonusTypes)iI);
