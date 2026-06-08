@@ -183,9 +183,7 @@ best served by a unifying interface, not by rewriting the evaluator. `canConstru
   GOM_OPTION.
 - The constructibility enabler index now reads building prereqs **through the model**
   (GOM_BUILDING ALL+ANY = the old InCity+Or; FORBID/COUNT correctly skipped — not
-  enablers), guarded by a `FASSERT_ENABLE` fidelity assert that fires
-  `ConstructRequirement model diverges …` into `Asserts.log` at load if the model ever
-  disagrees with the typed fields. Builds clean (Assert).
+  enablers). Builds clean (Assert).
 
 **Increment 2 — DONE (unit/train side):**
 - `CvUnitInfo::getTrainRequirements()` — same model, built at load
@@ -194,10 +192,18 @@ best served by a unifying interface, not by rewriting the evaluator. `canConstru
 - The unit-enabler index dimension now reads through the model — building enablers from
   GOM_BUILDING **REQUIRE_ALL only** (the CABV unit-enabler loop checks `isPrereqAndBuilding`
   only, so OR-buildings are intentionally not enablers — preserves the Phase 1 verified
-  behaviour); bonus needs from GOM_BONUS (any op). Guarded by a `FASSERT_ENABLE`
-  `TrainRequirement model diverges …` assert. Builds clean.
+  behaviour); bonus needs from GOM_BONUS (any op). Builds clean.
 
 So **both** enabler-index dimensions (building + unit) now read through the unified model.
+
+**Model-fidelity verification — via logging, NOT asserts.** FASSERT compiles out of
+FinalRelease (only Assert/Debug/Testing define `FASSERT_ENABLE`), so a one-shot sweep
+`cvInternalGlobals::logConstructRequirementFidelity()` emits `[PERF/reqmodel]` lines
+(building + unit model vs typed-field comparison) through the gated `[PERF]` logging
+channel, which ships in every DLL. It is fired once per session from the CABV PreLoop
+(where `gPerfLogLevel` is set — it is read at game init, after the load-time index build).
+**Verify:** play with `Autolog__LogLevelPerf >= 1`, confirm `Performance.log` has a
+`[PERF/reqmodel] … mismatches=0` line and no `[PERF/reqmodel] MISMATCH …` lines.
 
 **Increment 3 — DONE (building coverage completed):**
 - Building model extended to GOM_TERRAIN (And/Or), GOM_FEATURE (Or), GOM_IMPROVEMENT (Or),

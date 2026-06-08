@@ -3253,29 +3253,6 @@ void cvInternalGlobals::buildConstructibilityEnablerIndex()
 				}
 			}
 		}
-#if FASSERT_ENABLE
-		// Fidelity: the model must reproduce the typed lists the legacy index relied on.
-		{
-			std::set<BuildingTypes> aTyped;
-			for (int i = 0, n = kC.getNumPrereqInCityBuildings(); i < n; i++)
-			{
-				aTyped.insert(static_cast<BuildingTypes>(kC.getPrereqInCityBuilding(i)));
-			}
-			for (int i = 0, n = kC.getNumPrereqOrBuilding(); i < n; i++)
-			{
-				aTyped.insert(static_cast<BuildingTypes>(kC.getPrereqOrBuilding(i)));
-			}
-			std::set<BuildingTypes> aModel;
-			foreach_(const ConstructRequirement& req, kC.getConstructRequirements())
-			{
-				if (req.eGOM == GOM_BUILDING && (req.eOp == REQOP_REQUIRE_ALL || req.eOp == REQOP_REQUIRE_ANY))
-				{
-					foreach_(const int iId, req.aiIds) aModel.insert(static_cast<BuildingTypes>(iId));
-				}
-			}
-			FAssertMsg(aTyped == aModel, CvString::format("ConstructRequirement model diverges from typed building prereqs for %s", kC.getType()).c_str());
-		}
-#endif
 
 		// Construct-condition: any building/bonus it references is a potential enabler.
 		const BoolExpr* pCondition = kC.getConstructCondition();
@@ -3357,40 +3334,6 @@ void cvInternalGlobals::buildConstructibilityEnablerIndex()
 				}
 			}
 		}
-#if FASSERT_ENABLE
-		// Fidelity: the model must reproduce the typed unit prereqs the legacy index used.
-		{
-			std::set<BuildingTypes> aTypedBld;
-			for (int i = 0, n = kU.getNumPrereqAndBuildings(); i < n; i++)
-			{
-				aTypedBld.insert(static_cast<BuildingTypes>(kU.getPrereqAndBuilding(i)));
-			}
-			std::set<BonusTypes> aTypedBonus;
-			if (kU.getPrereqAndBonus() != NO_BONUS)
-			{
-				aTypedBonus.insert(static_cast<BonusTypes>(kU.getPrereqAndBonus()));
-			}
-			foreach_(const BonusTypes eOr, kU.getPrereqOrBonuses())
-			{
-				aTypedBonus.insert(eOr);
-			}
-			std::set<BuildingTypes> aModelBld;
-			std::set<BonusTypes> aModelBonus;
-			foreach_(const ConstructRequirement& req, kU.getTrainRequirements())
-			{
-				if (req.eGOM == GOM_BUILDING && req.eOp == REQOP_REQUIRE_ALL)
-				{
-					foreach_(const int iId, req.aiIds) aModelBld.insert(static_cast<BuildingTypes>(iId));
-				}
-				else if (req.eGOM == GOM_BONUS)
-				{
-					foreach_(const int iId, req.aiIds) aModelBonus.insert(static_cast<BonusTypes>(iId));
-				}
-			}
-			FAssertMsg(aTypedBld == aModelBld && aTypedBonus == aModelBonus,
-				CvString::format("TrainRequirement model diverges from typed unit prereqs for %s", kU.getType()).c_str());
-		}
-#endif
 
 		const BoolExpr* pCondition = kU.getTrainCondition();
 		if (pCondition != NULL)
@@ -3435,6 +3378,87 @@ void cvInternalGlobals::buildConstructibilityEnablerIndex()
 			}
 		}
 	}
+}
+
+// #195 Phase 2: one-shot verification that the unified requirement model reproduces the
+// typed prereq fields the enabler index relies on. Logged via the [PERF] channel (not
+// asserted) so it surfaces in any DLL -- including FinalRelease -- when
+// Autolog__LogLevelPerf >= 1. The index itself is built at load (doPostLoadCaching) before
+// gPerfLogLevel is read at game init, so this is called once from the CABV PreLoop, by which
+// point the log level is set. mismatches=0 == the model faithfully backs the index.
+void cvInternalGlobals::logConstructRequirementFidelity() const
+{
+	int iBuildings = 0;
+	int iUnits = 0;
+	int iMismatch = 0;
+
+	for (int iC = 0, nC = getNumBuildingInfos(); iC < nC; iC++)
+	{
+		const CvBuildingInfo& kC = getBuildingInfo(static_cast<BuildingTypes>(iC));
+		std::set<BuildingTypes> aTyped;
+		std::set<BuildingTypes> aModel;
+		for (int i = 0, n = kC.getNumPrereqInCityBuildings(); i < n; i++)
+		{
+			aTyped.insert(static_cast<BuildingTypes>(kC.getPrereqInCityBuilding(i)));
+		}
+		for (int i = 0, n = kC.getNumPrereqOrBuilding(); i < n; i++)
+		{
+			aTyped.insert(static_cast<BuildingTypes>(kC.getPrereqOrBuilding(i)));
+		}
+		foreach_(const ConstructRequirement& req, kC.getConstructRequirements())
+		{
+			if (req.eGOM == GOM_BUILDING && (req.eOp == REQOP_REQUIRE_ALL || req.eOp == REQOP_REQUIRE_ANY))
+			{
+				foreach_(const int iId, req.aiIds) aModel.insert(static_cast<BuildingTypes>(iId));
+			}
+		}
+		if (aTyped != aModel)
+		{
+			iMismatch++;
+			logPerf(1, "[PERF/reqmodel] MISMATCH building=%s typed=%d model=%d", kC.getType(), (int)aTyped.size(), (int)aModel.size());
+		}
+		iBuildings++;
+	}
+
+	for (int iU = 0, nU = getNumUnitInfos(); iU < nU; iU++)
+	{
+		const CvUnitInfo& kU = getUnitInfo(static_cast<UnitTypes>(iU));
+		std::set<BuildingTypes> aTypedBld;
+		std::set<BuildingTypes> aModelBld;
+		std::set<BonusTypes> aTypedBonus;
+		std::set<BonusTypes> aModelBonus;
+		for (int i = 0, n = kU.getNumPrereqAndBuildings(); i < n; i++)
+		{
+			aTypedBld.insert(static_cast<BuildingTypes>(kU.getPrereqAndBuilding(i)));
+		}
+		if (kU.getPrereqAndBonus() != NO_BONUS)
+		{
+			aTypedBonus.insert(static_cast<BonusTypes>(kU.getPrereqAndBonus()));
+		}
+		foreach_(const BonusTypes eOr, kU.getPrereqOrBonuses())
+		{
+			aTypedBonus.insert(eOr);
+		}
+		foreach_(const ConstructRequirement& req, kU.getTrainRequirements())
+		{
+			if (req.eGOM == GOM_BUILDING && req.eOp == REQOP_REQUIRE_ALL)
+			{
+				foreach_(const int iId, req.aiIds) aModelBld.insert(static_cast<BuildingTypes>(iId));
+			}
+			else if (req.eGOM == GOM_BONUS)
+			{
+				foreach_(const int iId, req.aiIds) aModelBonus.insert(static_cast<BonusTypes>(iId));
+			}
+		}
+		if (aTypedBld != aModelBld || aTypedBonus != aModelBonus)
+		{
+			iMismatch++;
+			logPerf(1, "[PERF/reqmodel] MISMATCH unit=%s", kU.getType());
+		}
+		iUnits++;
+	}
+
+	logPerf(1, "[PERF/reqmodel] checked buildings=%d units=%d mismatches=%d", iBuildings, iUnits, iMismatch);
 }
 
 void cvInternalGlobals::checkInitialCivics()
