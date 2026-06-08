@@ -217,14 +217,21 @@ channel, which ships in every DLL. It is fired once per session from the CABV Pr
 `CvGameTextMgr::buildBuildingRequiresString` (~570 lines) hand-enumerates every typed
 prereq field. Migrating it onto the model, one cluster at a time, each visually verified.
 - **Cluster 1 — DONE:** terrain (Or/And) / improvement (Or) / feature (Or) "in city
-  vicinity" requirements — four near-identical hand-rolled loops replaced by one
-  model-driven loop + reusable `appendVicinityRequirementHelp()` (same TXT keys / AND-OR
-  separator / `IN_CITY_VICINITY` suffix; only change is block order). Builds clean. Awaiting
-  visual verification of the affected tooltips/pedia.
-- **Next clusters:** Or-/InCity-/NotInCity-buildings (active/obsolete status), tech And
-  (hasTech status + pedia/tech-chooser branches), bonus And/Or (hasBonus status), heritage
-  (REQUIRES_2 link list), civics And/Or (the elaborate have/need colour-toggle), religion
-  (`getChar`). Each migrated + verified separately.
+  vicinity" requirements — four near-identical hand-rolled loops → one model loop +
+  `appendVicinityRequirementHelp()` (no status filtering; `IN_CITY_VICINITY` suffix kept).
+- **Status-aware renderer — DONE:** `appendRequirementHelp(req, pCity)` +
+  `buildRequirementItemLink(GOM,id)`. Filters unmet items via `CvGameObject::hasGOM` (the
+  same oracle the construct-condition uses, so displayed status == real constructibility);
+  renders unmet items as a `Requires: <links>` list (AND/OR by op). Formatting normalised to
+  clickable links (old blocks mixed link / description / textkey).
+- **Cluster 2 — DONE:** prereq **Or-buildings** (was a bespoke active/obsolete `bValid`
+  scan → GOM_BUILDING REQUIRE_ANY) and prereq **bonuses** (single AND + OR list, two
+  `hasBonus` loops → GOM_BONUS). One nuance dropped: all-obsolete OR-building set no longer
+  special-cased. Builds clean. **Awaiting visual verification.**
+- **Next clusters:** InCity-buildings (REQUIRE_ALL; separate-line → joined-list change),
+  religion (`getChar` symbol → link — a UX call), tech And (`bTechChooserText` gating),
+  civics And/Or (the elaborate **show-all have/need colour-toggle** — does NOT fit the
+  show-only-unmet renderer; needs a colour mode), NotInCity (FORBID inverse). Each verified.
 
 **Increment 5+ (optional, later):** re-express `canConstruct` / `canTrain` on the model,
 shadow-verified, preserving probability hints + gate stratification.
