@@ -60,8 +60,6 @@ CvImprovementInfo::CvImprovementInfo() :
 	m_piYieldChange(NULL),
 	m_piRiverSideYieldChange(NULL),
 	m_piIrrigatedChange(NULL),
-	m_pbTerrainMakesValid(NULL),
-	m_pbFeatureMakesValid(NULL),
 	m_ppiTechYieldChanges(NULL),
 	m_ppiRouteYieldChanges(NULL),
 	m_paImprovementBonus(NULL)
@@ -99,8 +97,6 @@ CvImprovementInfo::~CvImprovementInfo()
 	SAFE_DELETE_ARRAY(m_piYieldChange);
 	SAFE_DELETE_ARRAY(m_piRiverSideYieldChange);
 	SAFE_DELETE_ARRAY(m_piIrrigatedChange);
-	SAFE_DELETE_ARRAY(m_pbTerrainMakesValid);
-	SAFE_DELETE_ARRAY(m_pbFeatureMakesValid);
 	SAFE_DELETE_ARRAY(m_paImprovementBonus); // XXX make sure this isn't leaking memory...
 	SAFE_DELETE_ARRAY2(m_ppiTechYieldChanges, GC.getNumTechInfos());
 	SAFE_DELETE_ARRAY2(m_ppiRouteYieldChanges, GC.getNumRouteInfos());
@@ -322,13 +318,13 @@ int* CvImprovementInfo::getIrrigatedYieldChangeArray() const
 bool CvImprovementInfo::getTerrainMakesValid(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumTerrainInfos(), i);
-	return m_pbTerrainMakesValid ? m_pbTerrainMakesValid[i] : false;
+	return algo::any_of_equal(m_aeTerrainMakesValid, static_cast<TerrainTypes>(i));
 }
 
 bool CvImprovementInfo::getFeatureMakesValid(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumFeatureInfos(), i);
-	return m_pbFeatureMakesValid ? m_pbFeatureMakesValid[i] : false;
+	return algo::any_of_equal(m_aeFeatureMakesValid, static_cast<FeatureTypes>(i));
 }
 
 int CvImprovementInfo::getTechYieldChanges(int i, int j) const
@@ -536,8 +532,8 @@ bool CvImprovementInfo::isCategory(int i) const
 void CvImprovementInfo::getDataMembers(CvInfoUtil& util)
 {
 	util
-		//.addEnum(m_iObsoleteTech, L"ObsoleteTech")
-		//.add(m_piBonusHealthChanges, L"BonusHealthChanges")
+		.add(m_aeTerrainMakesValid, L"TerrainMakesValids")
+		.add(m_aeFeatureMakesValid, L"FeatureMakesValids")
 	;
 }
 
@@ -600,8 +596,6 @@ void CvImprovementInfo::getCheckSum(uint32_t& iSum) const
 	CheckSumI(iSum, NUM_YIELD_TYPES, m_piYieldChange);
 	CheckSumI(iSum, NUM_YIELD_TYPES, m_piRiverSideYieldChange);
 	CheckSumI(iSum, NUM_YIELD_TYPES, m_piIrrigatedChange);
-	CheckSumI(iSum, GC.getNumTerrainInfos(), m_pbTerrainMakesValid);
-	CheckSumI(iSum, GC.getNumFeatureInfos(), m_pbFeatureMakesValid);
 
 	 int i;
 	if (m_paImprovementBonus)
@@ -749,8 +743,6 @@ bool CvImprovementInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_bIsZOCSource, L"bIsZOCSource");
 	// Super forts C2C adaptation end
 
-	pXML->SetVariableListTagPair(&m_pbTerrainMakesValid, L"TerrainMakesValids", GC.getNumTerrainInfos());
-	pXML->SetVariableListTagPair(&m_pbFeatureMakesValid, L"FeatureMakesValids", GC.getNumFeatureInfos());
 
 	pXML->SetOptionalVector(&m_aeMapCategoryTypes, L"MapCategoryTypes");
 	if (pXML->TryMoveToXmlFirstChild(L"BonusTypeStructs"))
@@ -1013,28 +1005,6 @@ void CvImprovementInfo::copyNonDefaults(const CvImprovementInfo* pClassInfo)
 	if (m_bPlacesTerrain == bDefault) m_bPlacesTerrain = pClassInfo->isPlacesTerrain();
 	if (m_bExtraterresial == bDefault) m_bExtraterresial = pClassInfo->isExtraterresial();
 
-	for (int i = 0; i < GC.getNumTerrainInfos(); i++)
-	{
-		if (getTerrainMakesValid(i) == bDefault && pClassInfo->getTerrainMakesValid(i) != bDefault)
-		{
-			if (NULL == m_pbTerrainMakesValid)
-			{
-				CvXMLLoadUtility::InitList(&m_pbTerrainMakesValid, GC.getNumTerrainInfos(), bDefault);
-			}
-			m_pbTerrainMakesValid[i] = pClassInfo->getTerrainMakesValid(i);
-		}
-	}
-	for (int i = 0; i < GC.getNumFeatureInfos(); i++)
-	{
-		if (getFeatureMakesValid(i) == bDefault && pClassInfo->getFeatureMakesValid(i) != bDefault)
-		{
-			if (NULL == m_pbFeatureMakesValid)
-			{
-				CvXMLLoadUtility::InitList(&m_pbFeatureMakesValid, GC.getNumFeatureInfos(), bDefault);
-			}
-			m_pbFeatureMakesValid[i] = pClassInfo->getFeatureMakesValid(i);
-		}
-	}
 	for (int i = 0; i < GC.getNumBonusInfos(); i++)
 	{
 		if (m_paImprovementBonus[i].m_bBonusMakesValid == bDefault)

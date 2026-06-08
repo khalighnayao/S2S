@@ -150,7 +150,7 @@ private:
 	int* m_piRiverYieldChange;
 	int* m_pi3DAudioScriptFootstepIndex;
 
-	bool* m_pbTerrain;
+	std::vector<TerrainTypes> m_aeTerrain;
 
 
 private:

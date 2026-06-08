@@ -11,6 +11,8 @@
 #include "CvXMLLoadUtility.h"
 #include "CheckSum.h"
 #include "IDValueMap.h"
+#include "BoolExpr.h"
+#include "CvPropertyManipulators.h"
 
 struct WrappedVar;
 
@@ -21,8 +23,22 @@ struct CvInfoUtil
 	template <class CvInfoClass_T>
 	CvInfoUtil(const CvInfoClass_T* info)
 		: m_eInfoClass(InfoClassTraits<CvInfoClass_T>::InfoClassEnum)
+		, m_bForceImmediate(false)
 	{
 		const_cast<CvInfoClass_T*>(info)->getDataMembers(*this);
+	}
+
+	// Struct-element overload: a nested struct (e.g. a row of a struct-vector) declares its fields
+	// the same way an info does, but its FK delayed-resolution decisions belong to the OWNING info
+	// class, which is passed explicitly here rather than derived from the struct type. Nested FKs
+	// always resolve immediately (m_bForceImmediate): the struct lives in a growable container, so a
+	// raw pointer into it can't be safely held across the parse phase for deferred resolution.
+	template <class Struct_T>
+	CvInfoUtil(InfoClassTypes eOwnerClass, Struct_T* obj)
+		: m_eInfoClass(eOwnerClass)
+		, m_bForceImmediate(true)
+	{
+		obj->getDataMembers(*this);
 	}
 
 	~CvInfoUtil()
@@ -60,6 +76,16 @@ struct CvInfoUtil
 			wrapper->readXml(pXML);
 	}
 
+	// Parse-then-link: resolve this object's deferred FK columns (captured during readXml as
+	// <Type>-string refs in the global delayed-resolution map). No-op for fields that resolved
+	// immediately. Driven per-table by InfoTable<T>::link().
+	void link()
+	{
+		PROFILE_EXTRA_FUNC();
+		foreach_(WrappedVar* wrapper, m_wrappedVars)
+			wrapper->link();
+	}
+
 	void copyNonDefaults(const CvInfoUtil otherUtil)
 	{
 		PROFILE_EXTRA_FUNC();
@@ -85,6 +111,9 @@ struct CvInfoUtil
 
 		virtual void initVar() {}
 		virtual void uninitVar() {}
+		// Parse-then-link hook: default no-op. Only FK wrappers that can defer override it to
+		// resolve their captured <Type>-string from the global delayed-resolution map.
+		virtual void link() {}
 		//virtual void copyVar() {}
 
 		//virtual void read(FDataStreamBase*) {}
@@ -152,6 +181,12 @@ struct CvInfoUtil
 		return *this;
 	}
 
+	CvInfoUtil& add(float& var, const wchar_t* tag, float defaultValue = 0.0f)
+	{
+		m_wrappedVars.push_back(new IntWrapper<float>(var, tag, defaultValue));
+		return *this;
+	}
+
 	///==============
 	/// Enum wrapper
 	///==============
@@ -185,6 +220,19 @@ struct CvInfoUtil
 		{
 			if (ref() == -1)
 				ref() = static_cast<const EnumWrapper*>(source)->ref();
+		}
+
+		// Resolve a deferred ref captured in the global delayed-resolution map (set by the delayed
+		// readXml path). No-op when this field resolved immediately.
+		virtual void link()
+		{
+			int* pField = reinterpret_cast<int*>(&ref());
+			const CvString* pszType = GC.getDelayedResolution(pField);
+			if (pszType != NULL)
+			{
+				ref() = static_cast<Enum_t>(GC.getInfoTypeForString(*pszType));
+				GC.removeDelayedResolution(pField);
+			}
 		}
 
 		Enum_t& ref() const { return *static_cast<Enum_t*>(m_ptr); }
@@ -223,7 +271,7 @@ struct CvInfoUtil
 	template <typename Enum_t>
 	CvInfoUtil& addEnum(Enum_t& var, const wchar_t* tag)
 	{
-		if (GC.isDelayedResolutionRequired(m_eInfoClass, InfoClassTraits<Enum_t>::InfoClassEnum))
+		if (!m_bForceImmediate && m_eInfoClass > NO_INFO_CLASS && GC.isDelayedResolutionRequired(m_eInfoClass, InfoClassTraits<Enum_t>::InfoClassEnum))
 			m_wrappedVars.push_back(new EnumWithDelayedResolutionWrapper<Enum_t>(var, tag));
 		else
 			m_wrappedVars.push_back(new EnumWrapper<Enum_t>(var, tag));
@@ -436,12 +484,241 @@ struct CvInfoUtil
 		return *this;
 	}
 
+	///=====================
+	/// Struct-vector wrapper
+	///=====================
+	/// For std::vector<Struct_T> serialized as <rootTag><elemTag>..fields..</elemTag>...</rootTag>,
+	/// where Struct_T exposes getDataMembers(CvInfoUtil&) just like an info class. Each element is
+	/// read/checksummed/merged by recursing the same declarative machinery (using the owning info's
+	/// class for delayed-resolution decisions).
+
+	template <typename Struct_T>
+	struct StructVectorWrapper : WrappedVar
+	{
+		friend struct CvInfoUtil;
+
+	protected:
+		StructVectorWrapper(std::vector<Struct_T>& var, const wchar_t* rootTag, const wchar_t* elemTag, InfoClassTypes eOwnerClass)
+			: WrappedVar(static_cast<void*>(&var), rootTag)
+			, m_elemTag(elemTag)
+			, m_eOwnerClass(eOwnerClass)
+		{}
+
+		std::vector<Struct_T>& ref() const { return *static_cast<std::vector<Struct_T>*>(m_ptr); }
+
+		void checkSum(uint32_t& iSum) const
+		{
+			for (uint32_t i = 0, n = ref().size(); i < n; i++)
+			{
+				CvInfoUtil util(m_eOwnerClass, &ref()[i]);
+				util.checkSum(iSum);
+			}
+		}
+
+		void readXml(CvXMLLoadUtility* pXML)
+		{
+			if (pXML->TryMoveToXmlFirstChild(m_tag.c_str()))
+			{
+				const int iNum = pXML->GetXmlChildrenNumber(m_elemTag.c_str());
+				ref().clear();
+				if (iNum > 0 && pXML->TryMoveToXmlFirstChild())
+				{
+					if (pXML->TryMoveToXmlFirstOfSiblings(m_elemTag.c_str()))
+					{
+						do
+						{
+							ref().push_back(Struct_T());
+							CvInfoUtil util(m_eOwnerClass, &ref().back());
+							util.initDataMembers();
+							util.readXml(pXML);
+						} while (pXML->TryMoveToXmlNextSibling(m_elemTag.c_str()));
+					}
+					pXML->MoveToXmlParent();
+				}
+				pXML->MoveToXmlParent();
+			}
+		}
+
+		void copyNonDefaults(const WrappedVar* source)
+		{
+			CvXMLLoadUtility::CopyNonDefaultsFromVector(ref(), static_cast<const StructVectorWrapper*>(source)->ref());
+		}
+
+	private:
+		const std::wstring m_elemTag;
+		const InfoClassTypes m_eOwnerClass;
+	};
+
+	template <typename Struct_T>
+	CvInfoUtil& addStruct(std::vector<Struct_T>& vec, const wchar_t* rootTag, const wchar_t* elemTag)
+	{
+		m_wrappedVars.push_back(new StructVectorWrapper<Struct_T>(vec, rootTag, elemTag, m_eInfoClass));
+		return *this;
+	}
+
+	///==========================
+	/// PropertyManipulators wrapper
+	///==========================
+	/// A self-contained sub-object that already knows how to read/checksum/merge itself.
+
+	struct PropertyManipulatorsWrapper : WrappedVar
+	{
+		friend struct CvInfoUtil;
+
+	protected:
+		PropertyManipulatorsWrapper(CvPropertyManipulators& var)
+			: WrappedVar(static_cast<void*>(&var), L"")
+		{}
+
+		CvPropertyManipulators& ref() const { return *static_cast<CvPropertyManipulators*>(m_ptr); }
+
+		void checkSum(uint32_t& iSum) const { ref().getCheckSum(iSum); }
+		void readXml(CvXMLLoadUtility* pXML)  { ref().read(pXML); }
+		void copyNonDefaults(const WrappedVar* source)
+		{
+			ref().copyNonDefaults(&static_cast<const PropertyManipulatorsWrapper*>(source)->ref());
+		}
+	};
+
+	CvInfoUtil& add(CvPropertyManipulators& var)
+	{
+		m_wrappedVars.push_back(new PropertyManipulatorsWrapper(var));
+		return *this;
+	}
+
+	///================
+	/// BoolExpr wrapper
+	///================
+	/// Owns the heap-allocated expression: reads it under <tag>, deletes it on uninit (so the info's
+	/// dtor must NOT also SAFE_DELETE it). copyNonDefaults STEALS ownership from the source (matching
+	/// the legacy modular-merge transfer-and-null behaviour).
+
+	struct BoolExprWrapper : WrappedVar
+	{
+		friend struct CvInfoUtil;
+
+	protected:
+		BoolExprWrapper(const BoolExpr*& var, const wchar_t* tag)
+			: WrappedVar(static_cast<void*>(&var), tag)
+		{}
+
+		const BoolExpr*& ref() const { return *static_cast<const BoolExpr**>(m_ptr); }
+
+		void initVar()   { ref() = NULL; }
+		void uninitVar() { SAFE_DELETE(ref()); }
+
+		void checkSum(uint32_t& iSum) const
+		{
+			if (ref() != NULL)
+				ref()->getCheckSum(iSum);
+		}
+
+		void readXml(CvXMLLoadUtility* pXML)
+		{
+			if (pXML->TryMoveToXmlFirstChild(m_tag.c_str()))
+			{
+				ref() = BoolExpr::read(pXML);
+				pXML->MoveToXmlParent();
+			}
+		}
+
+		void copyNonDefaults(const WrappedVar* source)
+		{
+			if (ref() == NULL)
+			{
+				BoolExprWrapper* src = const_cast<BoolExprWrapper*>(static_cast<const BoolExprWrapper*>(source));
+				ref() = src->ref();
+				src->ref() = NULL;
+			}
+		}
+	};
+
+	CvInfoUtil& addBoolExpr(const BoolExpr*& var, const wchar_t* tag)
+	{
+		m_wrappedVars.push_back(new BoolExprWrapper(var, tag));
+		return *this;
+	}
+
+	///==================================
+	/// Fixed int-array wrapper (yields / commerce)
+	///==================================
+	/// A heap `int[size]` filled by a CvXMLLoadUtility reader (SetYields / SetCommerce<int>) from
+	/// under <tag>; absent tag => array freed. The member stays `int*` (getters unchanged).
+
+	struct FixedIntArrayWrapper : WrappedVar
+	{
+		friend struct CvInfoUtil;
+
+		typedef int (CvXMLLoadUtility::*Reader)(int**);
+
+	protected:
+		FixedIntArrayWrapper(int*& var, const wchar_t* tag, Reader reader, int size)
+			: WrappedVar(static_cast<void*>(&var), tag)
+			, m_reader(reader)
+			, m_size(size)
+		{}
+
+		int*& ref() const { return *static_cast<int**>(m_ptr); }
+
+		void initVar()   { ref() = NULL; }
+		void uninitVar() { SAFE_DELETE_ARRAY(ref()); }
+
+		void checkSum(uint32_t& iSum) const { CheckSumI(iSum, m_size, ref()); }
+
+		void readXml(CvXMLLoadUtility* pXML)
+		{
+			if (pXML->TryMoveToXmlFirstChild(m_tag.c_str()))
+			{
+				(pXML->*m_reader)(&ref());
+				pXML->MoveToXmlParent();
+			}
+			else
+			{
+				SAFE_DELETE_ARRAY(ref());
+			}
+		}
+
+		void copyNonDefaults(const WrappedVar* source)
+		{
+			int* src = static_cast<const FixedIntArrayWrapper*>(source)->ref();
+			if (src == NULL)
+				return;
+			const int iDefault = 0;
+			for (int j = 0; j < m_size; j++)
+			{
+				if ((ref() == NULL || ref()[j] == iDefault) && src[j] != iDefault)
+				{
+					if (ref() == NULL)
+						CvXMLLoadUtility::InitList(&ref(), m_size, iDefault);
+					ref()[j] = src[j];
+				}
+			}
+		}
+
+	private:
+		const Reader m_reader;
+		const int    m_size;
+	};
+
+	CvInfoUtil& addYields(int*& var, const wchar_t* tag)
+	{
+		m_wrappedVars.push_back(new FixedIntArrayWrapper(var, tag, &CvXMLLoadUtility::SetYields, NUM_YIELD_TYPES));
+		return *this;
+	}
+
+	CvInfoUtil& addCommerce(int*& var, const wchar_t* tag)
+	{
+		m_wrappedVars.push_back(new FixedIntArrayWrapper(var, tag, &CvXMLLoadUtility::SetCommerce<int>, NUM_COMMERCE_TYPES));
+		return *this;
+	}
+
 private:
 	///========================================================
 	/// Wrapped pointers to the data members of an info object
 	///========================================================
 
 	const InfoClassTypes m_eInfoClass;
+	const bool m_bForceImmediate;   // nested struct-element FKs always resolve immediately (see ctor)
 	std::vector<WrappedVar*> m_wrappedVars;
 };
 

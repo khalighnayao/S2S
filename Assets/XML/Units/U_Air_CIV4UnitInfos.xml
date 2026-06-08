@@ -36,10 +36,7 @@
 				<UnitType>UNIT_BOMBER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ZEPPELINS</PrereqTech>
 			<BonusType>BONUS_HYDROGEN</BonusType>
@@ -104,10 +101,7 @@
 				<UnitType>UNIT_P51_MUSTANG</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ZEPPELINS</PrereqTech>
 			<BonusType>BONUS_HYDROGEN</BonusType>
@@ -172,10 +166,7 @@
 				<UnitType>UNIT_P51_MUSTANG</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_FLIGHT</PrereqTech>
 			<BonusType>BONUS_PETROLEUM_PRODUCTS</BonusType>
@@ -254,10 +245,7 @@
 				<UnitType>UNIT_EARLYJET</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_MILITARY_AIRBASE</BuildingType>
@@ -335,14 +323,8 @@
 				<UnitType>UNIT_F104_STARFIGHTER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
+				<UnitAI>UNITAI_CARRIER_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_JET_PROPULSION</PrereqTech>
 			<BonusType>BONUS_PETROLEUM_PRODUCTS</BonusType>
@@ -423,10 +405,7 @@
 				<UnitType>UNIT_JET_FIGHTER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_MILITARY_AIRBASE</BuildingType>
@@ -524,14 +503,8 @@
 				<UnitType>UNIT_MODERN_FIGHTER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
+				<UnitAI>UNITAI_CARRIER_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_MILITARY_AIRBASE</BuildingType>
@@ -626,14 +599,8 @@
 				<UnitType>UNIT_SCRAMJET</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
+				<UnitAI>UNITAI_CARRIER_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_STEALTH</PrereqTech>
 			<BonusType>BONUS_PETROLEUM_PRODUCTS</BonusType>
@@ -740,14 +707,8 @@
 				<UnitType>UNIT_ORBITAL_FIGHTER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
+				<UnitAI>UNITAI_CARRIER_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_HYPERSONIC_FLIGHT</PrereqTech>
 			<BonusType>BONUS_ALUMINUM_WARES</BonusType>
@@ -849,14 +810,8 @@
 			<bMechanized>1</bMechanized>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
+				<UnitAI>UNITAI_CARRIER_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ORBITAL_FLIGHT</PrereqTech>
 			<BonusType>BONUS_ALUMINUM_WARES</BonusType>
@@ -940,10 +895,7 @@
 				<UnitType>UNIT_B52_BOMBER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ADVANCED_AVIATION</PrereqTech>
 			<BonusType>BONUS_PETROLEUM_PRODUCTS</BonusType>
@@ -1022,10 +974,7 @@
 				<UnitType>UNIT_B1_LANCER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_MILITARY_AIRBASE</BuildingType>
@@ -1122,10 +1071,7 @@
 				<UnitType>UNIT_STEALTH_BOMBER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_MILITARY_AIRBASE</BuildingType>
@@ -1224,14 +1170,8 @@
 				<UnitType>UNIT_STEALTH_BOMBER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
+				<UnitAI>UNITAI_CARRIER_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_STEALTH</PrereqTech>
 			<BonusType>BONUS_PETROLEUM_PRODUCTS</BonusType>
@@ -1333,10 +1273,7 @@
 				<UnitType>UNIT_ORBITAL_BOMBER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_COMMUNICATION_NETWORKS</PrereqTech>
 			<TechTypes>
@@ -1448,10 +1385,7 @@
 			<bMechanized>1</bMechanized>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ORBITAL_FLIGHT</PrereqTech>
 			<BonusType>BONUS_ALUMINUM_WARES</BonusType>
@@ -1542,18 +1476,9 @@
 				<UnitType>UNIT_A10_BOMBER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_AIR</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
+				<UnitAI>UNITAI_CARRIER_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_AVIATION</PrereqTech>
 			<BonusType>BONUS_PETROLEUM_PRODUCTS</BonusType>
@@ -1658,10 +1583,7 @@
 				<UnitType>UNIT_UAV</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_GUIDED_WEAPONS</PrereqTech>
 			<BonusType>BONUS_PETROLEUM_PRODUCTS</BonusType>
@@ -1764,10 +1686,7 @@
 			<bMechanized>1</bMechanized>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_UNMANNED_AIR_VEHICLES</PrereqTech>
 			<BonusType>BONUS_UNMANNED_AIRCRAFTS</BonusType>
@@ -1870,14 +1789,8 @@
 				<UnitType>UNIT_FIGHTER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
+				<UnitAI>UNITAI_CARRIER_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_NAVAL_FLIGHT</PrereqTech>
 			<BonusType>BONUS_PETROLEUM_PRODUCTS</BonusType>
@@ -1986,14 +1899,8 @@
 				<UnitType>UNIT_F4_PHANTOM</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
+				<UnitAI>UNITAI_CARRIER_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ADVANCED_AVIATION</PrereqTech>
 			<BonusType>BONUS_PETROLEUM_PRODUCTS</BonusType>
@@ -2093,14 +2000,8 @@
 				<UnitType>UNIT_F18_HORNET</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
+				<UnitAI>UNITAI_CARRIER_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_MILITARY_AIRBASE</BuildingType>
@@ -2217,14 +2118,8 @@
 				<UnitType>UNIT_F18_HORNET</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
+				<UnitAI>UNITAI_CARRIER_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_MILITARY_AIRBASE</BuildingType>
@@ -2332,14 +2227,8 @@
 				<UnitType>UNIT_MODERN_FIGHTER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
+				<UnitAI>UNITAI_CARRIER_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_MILITARY_AIRBASE</BuildingType>
@@ -2451,10 +2340,7 @@
 				<UnitType>UNIT_STRIKE_FIGHTER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_MILITARY_AIRBASE</BuildingType>
@@ -2550,14 +2436,8 @@
 				<UnitType>UNIT_F22_RAPTOR</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
+				<UnitAI>UNITAI_CARRIER_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_COMPOSITES</PrereqTech>
 			<BonusType>BONUS_PETROLEUM_PRODUCTS</BonusType>
@@ -2648,10 +2528,7 @@
 				<UnitType>UNIT_SCRAMJET</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_MILITARY_AIRBASE</BuildingType>
@@ -2744,10 +2621,7 @@
 				<UnitType>UNIT_SR71</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SECRET_ARMY_BASE</BuildingType>
@@ -2790,10 +2664,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_MACHINE</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SENTRY</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_SENTRY</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<UnitInfo>
@@ -2832,10 +2703,7 @@
 				<UnitType>UNIT_DRONE</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SECRET_ARMY_BASE</BuildingType>
@@ -2882,14 +2750,8 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_MACHINE</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SENTRY</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SENTRY2</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_SENTRY</FreePromotion>
+				<FreePromotion>PROMOTION_SENTRY2</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<UnitInfo>
@@ -2924,10 +2786,7 @@
 			<bHiddenNationality>1</bHiddenNationality>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SECRET_ARMY_BASE</BuildingType>
@@ -2971,18 +2830,9 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_MACHINE</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SENTRY</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SENTRY2</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SENTRY3</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_SENTRY</FreePromotion>
+				<FreePromotion>PROMOTION_SENTRY2</FreePromotion>
+				<FreePromotion>PROMOTION_SENTRY3</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 	</UnitInfos>

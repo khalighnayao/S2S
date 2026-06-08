@@ -32,20 +32,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_PANTHER</Description>
@@ -119,20 +110,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_LION</Description>
@@ -203,20 +185,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_CAMEL</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -294,20 +267,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_LLAMA</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -384,20 +348,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_DONKEY</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -504,20 +459,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_HORSE</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -627,20 +573,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
+				<UnitAI>UNITAI_EXPLORE</UnitAI>
 			</NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_SHEEP</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -747,20 +684,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_BISON</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -842,20 +770,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_BUFFALO</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -936,20 +855,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_CATTLE</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -1029,20 +939,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_MUSKOX</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -1117,20 +1018,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_AARDVARK</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -1205,20 +1097,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_BOAR</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -1295,20 +1178,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_AMPHIBIAN</Description>
@@ -1378,20 +1252,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_ASIANBEAR</Description>
@@ -1464,20 +1329,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_BROWN_BEAR</Description>
@@ -1551,20 +1407,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_BLACKBEAR</Description>
@@ -1637,20 +1484,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_CAVE_BEAR</Description>
@@ -1724,20 +1562,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_GRIZZLY</Description>
@@ -1807,20 +1636,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_PANDA_BEAR</Description>
@@ -1894,20 +1714,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_POLARBEAR</Description>
@@ -1977,20 +1788,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_REDPANDA</Description>
@@ -2068,20 +1870,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_SLOTHBEAR</Description>
@@ -2155,20 +1948,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_SPECTACLEDBEAR</Description>
@@ -2243,20 +2027,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_SUNBEAR</Description>
@@ -2330,20 +2105,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_ELEPHANT</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -2421,20 +2187,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_GIRAFFE</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -2508,20 +2265,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_HIPPO</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -2598,20 +2346,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_WOLF</Description>
@@ -2695,20 +2434,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_BLACK_RHINO</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -2783,20 +2513,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_INDIAN_RHINO</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -2871,20 +2592,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_JAVA_RHINO</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -2959,20 +2671,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_WHITE_RHINO</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -3046,20 +2749,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_BAIRDS_TAPIR</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -3135,20 +2829,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_BRAZILIAN_TAPIR</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -3224,20 +2909,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_MALAYAN_TAPIR</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -3313,20 +2989,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_MOUNTAIN_TAPIR</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -3401,20 +3068,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_LIZARD</Description>
 			<Civilopedia>TXT_KEY_UNIT_LIZARD_PEDIA</Civilopedia>
@@ -3487,20 +3145,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_SNAKE</Description>
@@ -3576,20 +3225,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_DONKEY_PAIR</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -3692,20 +3332,11 @@
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_HORSE_PAIR</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -3812,20 +3443,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<Description>TXT_KEY_UNIT_TAMED_WOLF_PAIR</Description>
@@ -3909,20 +3531,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_DUCK</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>
@@ -3997,20 +3610,11 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_WORKER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_WORKER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
             </NotUnitAIs>
 			<Description>TXT_KEY_UNIT_TAMED_TURKEY</Description>
 			<Civilopedia>TXT_KEY_UNIT_TAMED_ANIMAL_PEDIA</Civilopedia>

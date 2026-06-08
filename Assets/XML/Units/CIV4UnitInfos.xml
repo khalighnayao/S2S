@@ -36,10 +36,7 @@ Base XP gained when defending
 			<bSuicide>1</bSuicide>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ICBM</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ICBM</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ADVANCED_ROCKETRY</PrereqTech>
 			<BonusType>BONUS_URANIUM</BonusType>
@@ -95,10 +92,7 @@ Base XP gained when defending
 			<bMechanized>1</bMechanized>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ICBM</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ICBM</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_FISSION</PrereqTech>
 			<TechTypes>
@@ -162,10 +156,7 @@ Base XP gained when defending
 			<bSuicide>1</bSuicide>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ICBM</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ICBM</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MODERN_WARFARE</PrereqTech>
 			<BonusType>BONUS_URANIUM</BonusType>
@@ -222,10 +213,7 @@ Base XP gained when defending
 			<bSuicide>1</bSuicide>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ICBM</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ICBM</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ADVANCED_ROCKETRY</PrereqTech>
 			<BonusType>BONUS_URANIUM</BonusType>
@@ -283,10 +271,7 @@ Base XP gained when defending
 			<bSuicide>1</bSuicide>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ICBM</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ICBM</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_JET_PROPULSION</PrereqTech>
 			<BonusType>BONUS_URANIUM</BonusType>
@@ -343,10 +328,7 @@ Base XP gained when defending
 			<bSuicide>1</bSuicide>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ICBM</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ICBM</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_GUIDED_WEAPONS</PrereqTech>
 			<BonusType>BONUS_URANIUM</BonusType>
@@ -405,14 +387,8 @@ Base XP gained when defending
 			<bSuicide>1</bSuicide>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_MISSILE_AIR</UnitAI>
+				<UnitAI>UNITAI_ATTACK_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_BIOLOGICAL_WARFARE_LAB</BuildingType>
@@ -474,10 +450,7 @@ Base XP gained when defending
 			<bSuicide>1</bSuicide>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ICBM</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ICBM</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_BIOLOGICAL_WARFARE_LAB</BuildingType>
@@ -537,10 +510,7 @@ Base XP gained when defending
 			<bSuicide>1</bSuicide>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ICBM</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ICBM</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_BIOLOGICAL_WARFARE_LAB</BuildingType>
@@ -601,10 +571,7 @@ Base XP gained when defending
 			<bSuicide>1</bSuicide>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ICBM</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ICBM</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_D_T_FUSION_POWER_PLANT</BuildingType>
@@ -667,10 +634,7 @@ Base XP gained when defending
 			<bSuicide>1</bSuicide>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ICBM</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ICBM</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_D_T_FUSION_POWER_PLANT</BuildingType>
@@ -733,10 +697,7 @@ Base XP gained when defending
 			<bSuicide>1</bSuicide>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ICBM</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ICBM</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_SUPERSTRONG_ALLOYS</PrereqTech>
 			<BonusType>BONUS_URANIUM</BonusType>
@@ -794,10 +755,7 @@ Base XP gained when defending
 			<bSuicide>1</bSuicide>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ICBM</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ICBM</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_MIND_CONTROL_CENTER</BuildingType>
@@ -857,10 +815,7 @@ Base XP gained when defending
 				<UnitType>UNIT_GUIDED_MISSILE</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_MISSILE_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ROCKETRY</PrereqTech>
 			<BonusType>BONUS_ROCKET_FUEL</BonusType>
@@ -926,10 +881,7 @@ Base XP gained when defending
 				<UnitType>UNIT_PRECISION_ATTACK_MISSILE</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_MISSILE_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_GUIDED_WEAPONS</PrereqTech>
 			<BonusType>BONUS_MICROCHIPS</BonusType>
@@ -995,10 +947,7 @@ Base XP gained when defending
 			<bSuicide>1</bSuicide>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_MISSILE_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MILITARY_ROBOTICS</PrereqTech>
 			<BonusType>BONUS_MICROCHIPS</BonusType>

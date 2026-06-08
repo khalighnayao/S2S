@@ -121,12 +121,6 @@
 					<iModifier>3</iModifier>
 				</UnitCombatFreeExperience>
 			</UnitCombatFreeExperiences>
-			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_COMBAT1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-			</FreePromotions>
 			<FreePromotionUnitCombatTypes>
 				<FreePromotionUnitCombatType>
 					<PromotionType>PROMOTION_COMBAT1</PromotionType>
@@ -1527,16 +1521,6 @@
 			<!-- Revolution Trait Effects Begin -->
 			<iRevIdxLocal>-1</iRevIdxLocal>
 			<!-- Revolution Trait Effects End -->
-			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_CITY_GARRISON1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_DRILL1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-			</FreePromotions>
 			<FreePromotionUnitCombatTypes>
 				<FreePromotionUnitCombatType>
 					<PromotionType>PROMOTION_CITY_GARRISON1</PromotionType>
@@ -2007,16 +1991,6 @@
 			<iMaxAnarchy>-1</iMaxAnarchy>
 			<iDomesticGreatGeneralRateModifier>-10</iDomesticGreatGeneralRateModifier>
 			<bUpgradeAnywhere>1</bUpgradeAnywhere>
-			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_FLANKING1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LOOTER</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-			</FreePromotions>
 			<FreePromotionUnitCombatTypes>
 				<FreePromotionUnitCombatType>
 					<PromotionType>PROMOTION_FLANKING1</PromotionType>

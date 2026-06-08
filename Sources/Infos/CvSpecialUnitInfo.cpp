@@ -37,8 +37,7 @@ CvSpecialUnitInfo::CvSpecialUnitInfo() :
 	m_bCityLoad(false),
 	m_bSMLoadSame(false),
 	m_iCombatPercent(0),
-	m_iWithdrawalChange(0),
-	m_pbCarrierUnitAITypes(NULL)
+	m_iWithdrawalChange(0)
 { }
 
 
@@ -51,7 +50,6 @@ CvSpecialUnitInfo::CvSpecialUnitInfo() :
 //------------------------------------------------------------------------------------------------------
 CvSpecialUnitInfo::~CvSpecialUnitInfo()
 {
-	SAFE_DELETE_ARRAY(m_pbCarrierUnitAITypes);
 }
 
 
@@ -87,12 +85,6 @@ int CvSpecialUnitInfo::getWithdrawalChange() const
 
 // Arrays
 
-bool CvSpecialUnitInfo::isCarrierUnitAIType(int i) const
-{
-	FASSERT_BOUNDS(0, NUM_UNITAI_TYPES, i);
-	return m_pbCarrierUnitAITypes ? m_pbCarrierUnitAITypes[i] : false;
-}
-
 
 bool CvSpecialUnitInfo::read(CvXMLLoadUtility* pXML)
 {
@@ -107,7 +99,6 @@ bool CvSpecialUnitInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_iCombatPercent, L"iCombatPercent");
 	pXML->GetOptionalChildXmlValByName(&m_iWithdrawalChange, L"iWithdrawalChange");
 
-	pXML->SetVariableListTagPair(&m_pbCarrierUnitAITypes, L"CarrierUnitAITypes", NUM_UNITAI_TYPES);
 
 	return true;
 }
@@ -127,17 +118,6 @@ void CvSpecialUnitInfo::copyNonDefaults(const CvSpecialUnitInfo* pClassInfo)
 	if (getCombatPercent() == iDefault) m_iCombatPercent = pClassInfo->getCombatPercent();
 	if (getWithdrawalChange() == iDefault) m_iWithdrawalChange = pClassInfo->getWithdrawalChange();
 
-	for ( int i = 0; i < NUM_UNITAI_TYPES; i++ )
-	{
-		if ( isCarrierUnitAIType(i) == bDefault && pClassInfo->isCarrierUnitAIType(i) != bDefault)
-		{
-			if ( NULL == m_pbCarrierUnitAITypes )
-			{
-				CvXMLLoadUtility::InitList(&m_pbCarrierUnitAITypes,NUM_UNITAI_TYPES,bDefault);
-			}
-			m_pbCarrierUnitAITypes[i] = pClassInfo->isCarrierUnitAIType(i);
-		}
-	}
 }
 
 
@@ -148,6 +128,5 @@ void CvSpecialUnitInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_iCombatPercent);
 	CheckSum(iSum, m_iWithdrawalChange);
 
-	CheckSum(iSum, m_pbCarrierUnitAITypes, NUM_UNITAI_TYPES);
 }
 

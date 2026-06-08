@@ -13,10 +13,7 @@
 			<TechPrereq>TECH_MINE_WARFARE</TechPrereq>
 			<bStatus>1</bStatus>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_MINE_WARFARE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_MINE_WARFARE</UnitCombat>
 			</UnitCombats>
 			<iMovesChange>-5</iMovesChange>
 			<Button>Art/Interface/Buttons/Promotions/Mine.dds</Button>

@@ -188,8 +188,8 @@ private:
 	int* m_piRiverSideYieldChange;
 	int* m_piIrrigatedChange;
 
-	bool* m_pbTerrainMakesValid;
-	bool* m_pbFeatureMakesValid;
+	std::vector<TerrainTypes> m_aeTerrainMakesValid;
+	std::vector<FeatureTypes> m_aeFeatureMakesValid;
 
 	int** m_ppiTechYieldChanges;
 	int** m_ppiRouteYieldChanges;

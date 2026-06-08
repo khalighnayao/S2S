@@ -36,10 +36,7 @@
 			<Civilopedia>TXT_KEY_UNIT_KILLERRABBIT_PEDIA</Civilopedia>
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>

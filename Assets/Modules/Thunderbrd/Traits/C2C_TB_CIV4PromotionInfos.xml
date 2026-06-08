@@ -8,14 +8,8 @@
 			<PromotionLine>PROMOTIONLINE_PROMOTION_PACIFIST</PromotionLine>
 			<iLinePriority>1</iLinePriority>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<iCombatPercent>-10</iCombatPercent>
@@ -28,14 +22,8 @@
 			<PromotionLine>PROMOTIONLINE_PROMOTION_PACIFIST</PromotionLine>
 			<iLinePriority>1</iLinePriority>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<iCombatPercent>-10</iCombatPercent>
@@ -48,14 +36,8 @@
 			<PromotionLine>PROMOTIONLINE_PROMOTION_PACIFIST</PromotionLine>
 			<iLinePriority>2</iLinePriority>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<NotOnUnitCombatTypes>
@@ -71,14 +53,8 @@
 			<PromotionLine>PROMOTIONLINE_PROMOTION_PACIFIST</PromotionLine>
 			<iLinePriority>3</iLinePriority>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<iCombatPercent>-10</iCombatPercent>
@@ -93,14 +69,8 @@
 			<iAttackCombatModifierChange>20</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>-5</iDefenseCombatModifierChange>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<NotOnUnitCombatTypes>
 				<NotOnUnitCombatType>UNITCOMBAT_MISSIONARY</NotOnUnitCombatType>
@@ -122,14 +92,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iAttackCombatModifierChange>15</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>-5</iDefenseCombatModifierChange>
@@ -143,14 +107,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iAttackCombatModifierChange>15</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>-5</iDefenseCombatModifierChange>
@@ -164,14 +122,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iAttackCombatModifierChange>15</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>-5</iDefenseCombatModifierChange>
@@ -185,14 +137,8 @@
 			<iAttackCombatModifierChange>-20</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>5</iDefenseCombatModifierChange>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<NotOnUnitCombatTypes>
 				<NotOnUnitCombatType>UNITCOMBAT_MISSIONARY</NotOnUnitCombatType>
@@ -208,14 +154,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iAttackCombatModifierChange>-15</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>5</iDefenseCombatModifierChange>
@@ -229,14 +169,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iAttackCombatModifierChange>-15</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>5</iDefenseCombatModifierChange>
@@ -250,14 +184,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iAttackCombatModifierChange>-15</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>5</iDefenseCombatModifierChange>
@@ -271,14 +199,8 @@
 			<iAttackCombatModifierChange>-5</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>20</iDefenseCombatModifierChange>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<NotOnUnitCombatTypes>
 				<NotOnUnitCombatType>UNITCOMBAT_MISSIONARY</NotOnUnitCombatType>
@@ -294,14 +216,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iAttackCombatModifierChange>-5</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>15</iDefenseCombatModifierChange>
@@ -315,14 +231,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iAttackCombatModifierChange>-5</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>15</iDefenseCombatModifierChange>
@@ -336,14 +246,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iAttackCombatModifierChange>-5</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>15</iDefenseCombatModifierChange>
@@ -357,14 +261,8 @@
 			<iAttackCombatModifierChange>5</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>-20</iDefenseCombatModifierChange>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<NotOnUnitCombatTypes>
 				<NotOnUnitCombatType>UNITCOMBAT_MISSIONARY</NotOnUnitCombatType>
@@ -380,14 +278,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iAttackCombatModifierChange>5</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>-15</iDefenseCombatModifierChange>
@@ -401,14 +293,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iAttackCombatModifierChange>5</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>-15</iDefenseCombatModifierChange>
@@ -422,14 +308,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iAttackCombatModifierChange>5</iAttackCombatModifierChange>
 			<iDefenseCombatModifierChange>-15</iDefenseCombatModifierChange>
@@ -443,10 +323,7 @@
 			<iCityDefense>20</iCityDefense>
 			<iFirstStrikesChange>1</iFirstStrikesChange>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<NotOnUnitCombatTypes>
 				<NotOnUnitCombatType>UNITCOMBAT_MISSIONARY</NotOnUnitCombatType>
@@ -462,10 +339,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iCityDefense>15</iCityDefense>
 			<iFirstStrikesChange>1</iFirstStrikesChange>
@@ -479,10 +353,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iCityDefense>15</iCityDefense>
 			<iFirstStrikesChange>1</iFirstStrikesChange>
@@ -496,10 +367,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iCityDefense>15</iCityDefense>
 			<iFirstStrikesChange>1</iFirstStrikesChange>
@@ -513,10 +381,7 @@
 			<iCityDefense>-20</iCityDefense>
 			<iFirstStrikesChange>-1</iFirstStrikesChange>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<NotOnUnitCombatTypes>
 				<NotOnUnitCombatType>UNITCOMBAT_MISSIONARY</NotOnUnitCombatType>
@@ -532,10 +397,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iCityDefense>-15</iCityDefense>
 			<iFirstStrikesChange>-1</iFirstStrikesChange>
@@ -549,10 +411,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iCityDefense>-15</iCityDefense>
 			<iFirstStrikesChange>-1</iFirstStrikesChange>
@@ -566,10 +425,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iCityDefense>-15</iCityDefense>
 			<iFirstStrikesChange>-1</iFirstStrikesChange>
@@ -592,10 +448,7 @@
 				</PropertySource>
 			</PropertyManipulators>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<NotOnUnitCombatTypes>
 				<NotOnUnitCombatType>UNITCOMBAT_MISSIONARY</NotOnUnitCombatType>
@@ -611,10 +464,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iCityAttack>15</iCityAttack>
 			<PropertyManipulators>
@@ -637,10 +487,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iCityDefense>15</iCityDefense>
 			<iFirstStrikesChange>1</iFirstStrikesChange>
@@ -655,10 +502,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iCityDefense>15</iCityDefense>
 			<iFirstStrikesChange>1</iFirstStrikesChange>
@@ -673,10 +517,7 @@
 			<iRevoltProtection>-5</iRevoltProtection>
 			<iBombardRateChange>-5</iBombardRateChange>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<NotOnUnitCombatTypes>
 				<NotOnUnitCombatType>UNITCOMBAT_MISSIONARY</NotOnUnitCombatType>
@@ -692,10 +533,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iCityAttack>-15</iCityAttack>
 			<iBreakdownChanceChange>-1</iBreakdownChanceChange>
@@ -709,10 +547,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iCityDefense>-15</iCityDefense>
 			<iBombardRateChange>-5</iBombardRateChange>
@@ -726,10 +561,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iCityDefense>-15</iCityDefense>
 			<iRevoltProtection>-5</iRevoltProtection>
@@ -744,46 +576,16 @@
 			<iRevoltProtection>-5</iRevoltProtection>
 			<iMovesChange>1</iMovesChange>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_WOODEN_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_STEAM_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_DIESEL_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NUCLEAR_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_JET_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SHOCKWAVE_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_DROID_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_LEVITATION_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_TROID_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_GRAVITY_DRIVE_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_WOODEN_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_STEAM_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_DIESEL_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NUCLEAR_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_JET_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SHOCKWAVE_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_DROID_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_LEVITATION_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_TROID_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_GRAVITY_DRIVE_SHIPS</UnitCombat>
 			</UnitCombats>
 			<Button>Art/Buttons/Promotions/PromotionSeafaring.dds</Button>
 		</PromotionInfo>
@@ -794,46 +596,16 @@
 			<iLinePriority>1</iLinePriority>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_WOODEN_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_STEAM_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_DIESEL_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NUCLEAR_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_JET_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SHOCKWAVE_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_DROID_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_LEVITATION_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_TROID_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_GRAVITY_DRIVE_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_WOODEN_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_STEAM_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_DIESEL_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NUCLEAR_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_JET_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SHOCKWAVE_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_DROID_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_LEVITATION_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_TROID_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_GRAVITY_DRIVE_SHIPS</UnitCombat>
 			</UnitCombats>
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<iCombatPercent>10</iCombatPercent>
@@ -848,46 +620,16 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_WOODEN_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_STEAM_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_DIESEL_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NUCLEAR_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_JET_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SHOCKWAVE_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_DROID_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_LEVITATION_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_TROID_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_GRAVITY_DRIVE_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_WOODEN_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_STEAM_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_DIESEL_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NUCLEAR_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_JET_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SHOCKWAVE_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_DROID_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_LEVITATION_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_TROID_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_GRAVITY_DRIVE_SHIPS</UnitCombat>
 			</UnitCombats>
 			<iCombatPercent>10</iCombatPercent>
 			<iWithdrawalChange>10</iWithdrawalChange>
@@ -901,46 +643,16 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_WOODEN_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_STEAM_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_DIESEL_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NUCLEAR_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_JET_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SHOCKWAVE_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_DROID_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_LEVITATION_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_TROID_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_GRAVITY_DRIVE_SHIPS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_WOODEN_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_STEAM_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_DIESEL_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NUCLEAR_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_JET_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SHOCKWAVE_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_DROID_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_LEVITATION_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_TROID_SHIPS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_GRAVITY_DRIVE_SHIPS</UnitCombat>
 			</UnitCombats>
 			<iCombatPercent>10</iCombatPercent>
 			<iFirstStrikesChange>1</iFirstStrikesChange>
@@ -955,30 +667,12 @@
 			<iMovesChange>1</iMovesChange>
 			<iMoveDiscountChange>1</iMoveDiscountChange>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_EXPLORER</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ANIMAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_MOUNTED</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_TRADE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NOMAD</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_WHEELED</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_EXPLORER</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ANIMAL</UnitCombat>
+				<UnitCombat>UNITCOMBAT_MOUNTED</UnitCombat>
+				<UnitCombat>UNITCOMBAT_TRADE</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NOMAD</UnitCombat>
+				<UnitCombat>UNITCOMBAT_WHEELED</UnitCombat>
 			</UnitCombats>
 			<NotOnUnitCombatTypes>
 				<NotOnUnitCombatType>UNITCOMBAT_PACIFIST</NotOnUnitCombatType>
@@ -993,30 +687,12 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_EXPLORER</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ANIMAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_MOUNTED</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_TRADE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NOMAD</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_WHEELED</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_EXPLORER</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ANIMAL</UnitCombat>
+				<UnitCombat>UNITCOMBAT_MOUNTED</UnitCombat>
+				<UnitCombat>UNITCOMBAT_TRADE</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NOMAD</UnitCombat>
+				<UnitCombat>UNITCOMBAT_WHEELED</UnitCombat>
 			</UnitCombats>
 			<iWithdrawalChange>10</iWithdrawalChange>
 			<iMovesChange>1</iMovesChange>
@@ -1031,30 +707,12 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_EXPLORER</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ANIMAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_MOUNTED</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_TRADE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NOMAD</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_WHEELED</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_EXPLORER</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ANIMAL</UnitCombat>
+				<UnitCombat>UNITCOMBAT_MOUNTED</UnitCombat>
+				<UnitCombat>UNITCOMBAT_TRADE</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NOMAD</UnitCombat>
+				<UnitCombat>UNITCOMBAT_WHEELED</UnitCombat>
 			</UnitCombats>
 			<iWithdrawalChange>20</iWithdrawalChange>
 			<iVisibilityChange>1</iVisibilityChange>
@@ -1068,30 +726,12 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_EXPLORER</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ANIMAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_MOUNTED</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_TRADE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NOMAD</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_WHEELED</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_EXPLORER</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ANIMAL</UnitCombat>
+				<UnitCombat>UNITCOMBAT_MOUNTED</UnitCombat>
+				<UnitCombat>UNITCOMBAT_TRADE</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NOMAD</UnitCombat>
+				<UnitCombat>UNITCOMBAT_WHEELED</UnitCombat>
 			</UnitCombats>
 			<iWithdrawalChange>20</iWithdrawalChange>
 			<iFirstStrikesChange>1</iFirstStrikesChange>
@@ -1107,34 +747,13 @@
 			<iRBombardDamageChange>10</iRBombardDamageChange>
 			<iWithdrawalChange>5</iWithdrawalChange>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ARCHER</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_THROWING</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_GUN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_BALLOON</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_HELICOPTER</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SIEGE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ROCKET_LAUNCHER</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ARCHER</UnitCombat>
+				<UnitCombat>UNITCOMBAT_THROWING</UnitCombat>
+				<UnitCombat>UNITCOMBAT_GUN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_BALLOON</UnitCombat>
+				<UnitCombat>UNITCOMBAT_HELICOPTER</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SIEGE</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ROCKET_LAUNCHER</UnitCombat>
 			</UnitCombats>
 			<Button>Art/Buttons/Promotions/PromotionAerial.dds</Button>
 		</PromotionInfo>
@@ -1147,26 +766,11 @@
 			<iDCMBombAccuracyChange>10</iDCMBombAccuracyChange>
 			<iWithdrawalChange>5</iWithdrawalChange>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ARCHER</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_THROWING</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_GUN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_BALLOON</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_HELICOPTER</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ARCHER</UnitCombat>
+				<UnitCombat>UNITCOMBAT_THROWING</UnitCombat>
+				<UnitCombat>UNITCOMBAT_GUN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_BALLOON</UnitCombat>
+				<UnitCombat>UNITCOMBAT_HELICOPTER</UnitCombat>
 			</UnitCombats>
 			<Button>Art/Buttons/Promotions/PromotionAerialStrategies.dds</Button>
 		</PromotionInfo>
@@ -1179,22 +783,10 @@
 			<iRBombardDamageChange>10</iRBombardDamageChange>
 			<iInterceptChange>10</iInterceptChange>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ARCHER</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_GUN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SIEGE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ROCKET_LAUNCHER</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ARCHER</UnitCombat>
+				<UnitCombat>UNITCOMBAT_GUN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SIEGE</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ROCKET_LAUNCHER</UnitCombat>
 			</UnitCombats>
 			<Button>Art/Buttons/Promotions/PromotionAerialWeaponry.dds</Button>
 		</PromotionInfo>
@@ -1206,54 +798,18 @@
 			<iCombatPercent>10</iCombatPercent>
 			<iEvasionChange>10</iEvasionChange>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_EARLY_FIGHTERS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_EARLY_BOMBERS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_JET_FIGHTERS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_BOMBERS</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SUPERSONIC_PLANES</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_STEALTH</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ORBITAL_AIRCRAFT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_EARLY_SPACESHIP</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SOLAR_SAIL_SPACESHIP</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NUCLEAR_SPACESHIP</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_WORMHOLE_SPACESHIP</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ANTIMATTER_SPACESHIP</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_EARLY_FIGHTERS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_EARLY_BOMBERS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_JET_FIGHTERS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_BOMBERS</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SUPERSONIC_PLANES</UnitCombat>
+				<UnitCombat>UNITCOMBAT_STEALTH</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ORBITAL_AIRCRAFT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_EARLY_SPACESHIP</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SOLAR_SAIL_SPACESHIP</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NUCLEAR_SPACESHIP</UnitCombat>
+				<UnitCombat>UNITCOMBAT_WORMHOLE_SPACESHIP</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ANTIMATTER_SPACESHIP</UnitCombat>
 			</UnitCombats>
 			<NotOnUnitCombatTypes>
 				<NotOnUnitCombatType>UNITCOMBAT_CIVILIAN</NotOnUnitCombatType>
@@ -1268,14 +824,8 @@
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<iReligiousCombatModifierChange>20</iReligiousCombatModifierChange>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<Button>Art/Buttons/Promotions/PromotionDevotion.dds</Button>
 		</PromotionInfo>
@@ -1287,14 +837,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iReligiousCombatModifierChange>15</iReligiousCombatModifierChange>
 			<Button>Art/Buttons/Promotions/PromotionDevotion.dds</Button>
@@ -1307,14 +851,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iReligiousCombatModifierChange>15</iReligiousCombatModifierChange>
 			<Button>Art/Buttons/Promotions/PromotionDevotion2.dds</Button>
@@ -1327,14 +865,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iReligiousCombatModifierChange>15</iReligiousCombatModifierChange>
 			<Button>Art/Buttons/Promotions/PromotionDevotion3.dds</Button>
@@ -1345,10 +877,7 @@
 			<Sound>AS2D_PING</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPY</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPY</UnitCombat>
 			</UnitCombats>
 			<iEvasionChange>20</iEvasionChange>
 			<iWithdrawalChange>20</iWithdrawalChange>
@@ -1362,10 +891,7 @@
 			<Sound>AS2D_PING</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPY</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPY</UnitCombat>
 			</UnitCombats>
 			<iEvasionChange>10</iEvasionChange>
 			<iWithdrawalChange>10</iWithdrawalChange>
@@ -1379,10 +905,7 @@
 			<Sound>AS2D_PING</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPY</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPY</UnitCombat>
 			</UnitCombats>
 			<iEvasionChange>10</iEvasionChange>
 			<iWithdrawalChange>10</iWithdrawalChange>
@@ -1396,10 +919,7 @@
 			<Sound>AS2D_PING</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPY</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPY</UnitCombat>
 			</UnitCombats>
 			<iEvasionChange>10</iEvasionChange>
 			<iWithdrawalChange>10</iWithdrawalChange>
@@ -1412,10 +932,7 @@
 			<Sound>AS2D_PING</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPY</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPY</UnitCombat>
 			</UnitCombats>
 			<iEvasionChange>-20</iEvasionChange>
 			<iWithdrawalChange>-20</iWithdrawalChange>
@@ -1429,10 +946,7 @@
 			<Sound>AS2D_PING</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPY</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPY</UnitCombat>
 			</UnitCombats>
 			<iEvasionChange>-10</iEvasionChange>
 			<iWithdrawalChange>-10</iWithdrawalChange>
@@ -1446,10 +960,7 @@
 			<Sound>AS2D_PING</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPY</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPY</UnitCombat>
 			</UnitCombats>
 			<iEvasionChange>-10</iEvasionChange>
 			<iWithdrawalChange>-10</iWithdrawalChange>
@@ -1463,10 +974,7 @@
 			<Sound>AS2D_PING</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPY</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPY</UnitCombat>
 			</UnitCombats>
 			<iEvasionChange>-10</iEvasionChange>
 			<iWithdrawalChange>-10</iWithdrawalChange>
@@ -1478,14 +986,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iDefenseCombatModifierChange>10</iDefenseCombatModifierChange>
 			<iAttackCombatModifierChange>-5</iAttackCombatModifierChange>
@@ -1500,14 +1002,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iDefenseCombatModifierChange>10</iDefenseCombatModifierChange>
 			<iAttackCombatModifierChange>-5</iAttackCombatModifierChange>
@@ -1522,14 +1018,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iDefenseCombatModifierChange>10</iDefenseCombatModifierChange>
 			<iAttackCombatModifierChange>-5</iAttackCombatModifierChange>
@@ -1544,14 +1034,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iDefenseCombatModifierChange>10</iDefenseCombatModifierChange>
 			<iAttackCombatModifierChange>-5</iAttackCombatModifierChange>
@@ -1564,14 +1048,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iDefenseCombatModifierChange>-5</iDefenseCombatModifierChange>
 			<iAttackCombatModifierChange>10</iAttackCombatModifierChange>
@@ -1586,14 +1064,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iDefenseCombatModifierChange>-5</iDefenseCombatModifierChange>
 			<iAttackCombatModifierChange>10</iAttackCombatModifierChange>
@@ -1608,14 +1080,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iDefenseCombatModifierChange>-5</iDefenseCombatModifierChange>
 			<iAttackCombatModifierChange>10</iAttackCombatModifierChange>
@@ -1630,14 +1096,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_NAVAL_COMBATANT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_COMBATANT</UnitCombat>
+				<UnitCombat>UNITCOMBAT_NAVAL_COMBATANT</UnitCombat>
 			</UnitCombats>
 			<iDefenseCombatModifierChange>-5</iDefenseCombatModifierChange>
 			<iAttackCombatModifierChange>10</iAttackCombatModifierChange>
@@ -1650,14 +1110,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_HEALTH_CARE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_RECON</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_HEALTH_CARE</UnitCombat>
+				<UnitCombat>UNITCOMBAT_RECON</UnitCombat>
 			</UnitCombats>
 			<iNumHealSupport>1</iNumHealSupport>
 			<iSameTileHealChange>5</iSameTileHealChange>
@@ -1687,14 +1141,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_HEALTH_CARE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_RECON</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_HEALTH_CARE</UnitCombat>
+				<UnitCombat>UNITCOMBAT_RECON</UnitCombat>
 			</UnitCombats>
 			<iNumHealSupport>1</iNumHealSupport>
 			<iSameTileHealChange>3</iSameTileHealChange>
@@ -1724,14 +1172,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_HEALTH_CARE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_RECON</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_HEALTH_CARE</UnitCombat>
+				<UnitCombat>UNITCOMBAT_RECON</UnitCombat>
 			</UnitCombats>
 			<iSameTileHealChange>7</iSameTileHealChange>
 			<PropertyManipulators>
@@ -1758,30 +1200,12 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_MELEE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_THROWING</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_MOUNTED</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_STRIKE_TEAM</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_CRIMINAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_GUN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_MELEE</UnitCombat>
+				<UnitCombat>UNITCOMBAT_THROWING</UnitCombat>
+				<UnitCombat>UNITCOMBAT_MOUNTED</UnitCombat>
+				<UnitCombat>UNITCOMBAT_STRIKE_TEAM</UnitCombat>
+				<UnitCombat>UNITCOMBAT_CRIMINAL</UnitCombat>
+				<UnitCombat>UNITCOMBAT_GUN</UnitCombat>
 			</UnitCombats>
 			<iWithdrawalChange>-10</iWithdrawalChange>
 			<iCombatPercent>10</iCombatPercent>
@@ -1811,30 +1235,12 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_MELEE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_THROWING</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_MOUNTED</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_STRIKE_TEAM</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_CRIMINAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_GUN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_MELEE</UnitCombat>
+				<UnitCombat>UNITCOMBAT_THROWING</UnitCombat>
+				<UnitCombat>UNITCOMBAT_MOUNTED</UnitCombat>
+				<UnitCombat>UNITCOMBAT_STRIKE_TEAM</UnitCombat>
+				<UnitCombat>UNITCOMBAT_CRIMINAL</UnitCombat>
+				<UnitCombat>UNITCOMBAT_GUN</UnitCombat>
 			</UnitCombats>
 			<iWithdrawalChange>-10</iWithdrawalChange>
 			<iCombatPercent>10</iCombatPercent>
@@ -1864,30 +1270,12 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_MELEE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_THROWING</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_MOUNTED</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_STRIKE_TEAM</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_CRIMINAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_GUN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_MELEE</UnitCombat>
+				<UnitCombat>UNITCOMBAT_THROWING</UnitCombat>
+				<UnitCombat>UNITCOMBAT_MOUNTED</UnitCombat>
+				<UnitCombat>UNITCOMBAT_STRIKE_TEAM</UnitCombat>
+				<UnitCombat>UNITCOMBAT_CRIMINAL</UnitCombat>
+				<UnitCombat>UNITCOMBAT_GUN</UnitCombat>
 			</UnitCombats>
 			<iWithdrawalChange>-10</iWithdrawalChange>
 			<iCombatPercent>10</iCombatPercent>
@@ -1915,10 +1303,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_LAW_ENFORCEMENT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_LAW_ENFORCEMENT</UnitCombat>
 			</UnitCombats>
 			<iInvestigationChange>10</iInvestigationChange>
 			<iRevoltProtection>5</iRevoltProtection>
@@ -1948,10 +1333,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_LAW_ENFORCEMENT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_LAW_ENFORCEMENT</UnitCombat>
 			</UnitCombats>
 			<iInvestigationChange>5</iInvestigationChange>
 			<iRevoltProtection>5</iRevoltProtection>
@@ -1981,10 +1363,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_LAW_ENFORCEMENT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_LAW_ENFORCEMENT</UnitCombat>
 			</UnitCombats>
 			<iInvestigationChange>10</iInvestigationChange>
 			<iRevoltProtection>5</iRevoltProtection>
@@ -2014,10 +1393,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_LAW_ENFORCEMENT</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_LAW_ENFORCEMENT</UnitCombat>
 			</UnitCombats>
 			<iInvestigationChange>15</iInvestigationChange>
 			<iRevoltProtection>5</iRevoltProtection>
@@ -2045,10 +1421,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_CRIMINAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_CRIMINAL</UnitCombat>
 			</UnitCombats>
 			<iInsidiousnessChange>10</iInsidiousnessChange>
 			<iWithdrawalChange>10</iWithdrawalChange>
@@ -2079,10 +1452,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_CRIMINAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_CRIMINAL</UnitCombat>
 			</UnitCombats>
 			<iInsidiousnessChange>5</iInsidiousnessChange>
 			<iWithdrawalChange>10</iWithdrawalChange>
@@ -2113,10 +1483,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_CRIMINAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_CRIMINAL</UnitCombat>
 			</UnitCombats>
 			<iInsidiousnessChange>10</iInsidiousnessChange>
 			<iWithdrawalChange>10</iWithdrawalChange>
@@ -2147,10 +1514,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_CRIMINAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_CRIMINAL</UnitCombat>
 			</UnitCombats>
 			<iInsidiousnessChange>15</iInsidiousnessChange>
 			<iWithdrawalChange>10</iWithdrawalChange>
@@ -2179,10 +1543,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_HEALTH_CARE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_HEALTH_CARE</UnitCombat>
 			</UnitCombats>
 			<iSameTileHealChange>5</iSameTileHealChange>
 			<iNumHealSupport>1</iNumHealSupport>
@@ -2212,10 +1573,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_HEALTH_CARE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_HEALTH_CARE</UnitCombat>
 			</UnitCombats>
 			<iSameTileHealChange>3</iSameTileHealChange>
 			<iNumHealSupport>1</iNumHealSupport>
@@ -2245,10 +1603,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_HEALTH_CARE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_HEALTH_CARE</UnitCombat>
 			</UnitCombats>
 			<iSameTileHealChange>5</iSameTileHealChange>
 			<iNumHealSupport>1</iNumHealSupport>
@@ -2278,10 +1633,7 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_HEALTH_CARE</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_HEALTH_CARE</UnitCombat>
 			</UnitCombats>
 			<iSameTileHealChange>7</iSameTileHealChange>
 			<PropertyManipulators>
@@ -2308,18 +1660,9 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_CRIMINAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_RUFFIAN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ANIMAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_CRIMINAL</UnitCombat>
+				<UnitCombat>UNITCOMBAT_RUFFIAN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ANIMAL</UnitCombat>
 			</UnitCombats>
 			<PropertyManipulators>
 				<PropertySource>
@@ -2347,18 +1690,9 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_CRIMINAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_RUFFIAN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ANIMAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_CRIMINAL</UnitCombat>
+				<UnitCombat>UNITCOMBAT_RUFFIAN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ANIMAL</UnitCombat>
 			</UnitCombats>
 			<PropertyManipulators>
 				<PropertySource>
@@ -2386,18 +1720,9 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_CRIMINAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_RUFFIAN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ANIMAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_CRIMINAL</UnitCombat>
+				<UnitCombat>UNITCOMBAT_RUFFIAN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ANIMAL</UnitCombat>
 			</UnitCombats>
 			<PropertyManipulators>
 				<PropertySource>
@@ -2425,18 +1750,9 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_CRIMINAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_RUFFIAN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_ANIMAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_CRIMINAL</UnitCombat>
+				<UnitCombat>UNITCOMBAT_RUFFIAN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_ANIMAL</UnitCombat>
 			</UnitCombats>
 			<PropertyManipulators>
 				<PropertySource>
@@ -2462,14 +1778,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_HUMAN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_HUMAN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombat>
 			</UnitCombats>
 			<PropertyManipulators>
 				<PropertySource>
@@ -2511,14 +1821,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_HUMAN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_HUMAN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombat>
 			</UnitCombats>
 			<PropertyManipulators>
 				<PropertySource>
@@ -2560,14 +1864,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_HUMAN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_HUMAN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombat>
 			</UnitCombats>
 			<PropertyManipulators>
 				<PropertySource>
@@ -2609,14 +1907,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_HUMAN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_HUMAN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombat>
 			</UnitCombats>
 			<PropertyManipulators>
 				<PropertySource>
@@ -2656,14 +1948,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_HUMAN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_HUMAN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombat>
 			</UnitCombats>
 			<PropertyManipulators>
 				<PropertySource>
@@ -2705,14 +1991,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_HUMAN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_HUMAN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombat>
 			</UnitCombats>
 			<PropertyManipulators>
 				<PropertySource>
@@ -2754,14 +2034,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_HUMAN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_HUMAN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombat>
 			</UnitCombats>
 			<PropertyManipulators>
 				<PropertySource>
@@ -2803,14 +2077,8 @@
 			<Sound>AS2D_IF_LEVELUP</Sound>
 			<TechPrereq>TECH_DUMMY</TechPrereq>
 			<UnitCombats>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_HUMAN</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
-				<UnitCombat>
-					<UnitCombatType>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombatType>
-					<bUnitCombat>1</bUnitCombat>
-				</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_HUMAN</UnitCombat>
+				<UnitCombat>UNITCOMBAT_SPECIES_NEANDERTHAL</UnitCombat>
 			</UnitCombats>
 			<PropertyManipulators>
 				<PropertySource>

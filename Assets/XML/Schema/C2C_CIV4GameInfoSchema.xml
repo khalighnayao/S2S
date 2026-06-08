@@ -337,18 +337,12 @@
 	<ElementType name="bAssignCity" content="textOnly" dt:type="boolean"/>
 	<ElementType name="CivicType" content="textOnly"/>
 	<ElementType name="bForce" content="textOnly" dt:type="boolean"/>
-	<ElementType name="ForceCivic" content="eltOnly">
-		<element type="CivicType"/>
-		<element type="bForce"/>
-	</ElementType>
+	<ElementType name="ForceCivic" content="textOnly"/>
 	<ElementType name="ForceCivics" content="eltOnly">
 		<element type="ForceCivic" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="DiploVoteType" content="textOnly"/>
-	<ElementType name="DiploVote" content="eltOnly">
-		<element type="DiploVoteType"/>
-		<element type="bValid"/>
-	</ElementType>
+	<ElementType name="DiploVote" content="textOnly"/>
 	<ElementType name="DiploVotes" content="eltOnly">
 		<element type="DiploVote" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -1555,37 +1549,25 @@
 	</ElementType>
 	<ElementType name="CivilizationType" content="textOnly"/>
 	<ElementType name="bCivilizationType" content="textOnly" dt:type="boolean"/>
-	<ElementType name="Civilization" content="eltOnly">
-		<element type="CivilizationType"/>
-		<element type="bCivilizationType"/>
-	</ElementType>
+	<ElementType name="Civilization" content="textOnly"/>
 	<ElementType name="Civilizations" content="eltOnly">
 		<element type="Civilization" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="LeaderType" content="textOnly"/>
 	<ElementType name="bLeaderType" content="textOnly" dt:type="boolean"/>
-	<ElementType name="Leader" content="eltOnly">
-		<element type="LeaderType"/>
-		<element type="bLeaderType"/>
-	</ElementType>
+	<ElementType name="Leader" content="textOnly"/>
 	<ElementType name="Leaders" content="eltOnly">
 		<element type="Leader" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="AttitudeType" content="textOnly"/>
 	<ElementType name="bAttitudeType" content="textOnly" dt:type="boolean"/>
-	<ElementType name="Attitude" content="eltOnly">
-		<element type="AttitudeType"/>
-		<element type="bAttitudeType"/>
-	</ElementType>
+	<ElementType name="Attitude" content="textOnly"/>
 	<ElementType name="Attitudes" content="eltOnly">
 		<element type="Attitude" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="DiplomacyPowerType" content="textOnly"/>
 	<ElementType name="bDiplomacyPowerType" content="textOnly" dt:type="boolean"/>
-	<ElementType name="DiplomacyPower" content="eltOnly">
-		<element type="DiplomacyPowerType"/>
-		<element type="bDiplomacyPowerType"/>
-	</ElementType>
+	<ElementType name="DiplomacyPower" content="textOnly"/>
 	<ElementType name="DiplomacyPowers" content="eltOnly">
 		<element type="DiplomacyPower" minOccurs="0" maxOccurs="*"/>
 	</ElementType>

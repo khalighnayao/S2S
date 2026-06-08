@@ -117,10 +117,7 @@
 	<ElementType name="bLanguage" content="textOnly" dt:type="boolean"/>
 	<ElementType name="TerrainType" content="textOnly"/>
 	<ElementType name="bTerrainTrade" content="textOnly" dt:type="boolean"/>
-	<ElementType name="TerrainTrade" content="eltOnly">
-		<element type="TerrainType"/>
-		<element type="bTerrainTrade"/>
-	</ElementType>
+	<ElementType name="TerrainTrade" content="textOnly"/>
 	<ElementType name="TerrainTrades" content="eltOnly">
 		<element type="TerrainTrade" minOccurs="0" maxOccurs="*"/>
 	</ElementType>

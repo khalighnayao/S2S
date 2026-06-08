@@ -230,12 +230,6 @@ m_ppaiBonusYieldModifier(NULL)
 ,m_bRequiresActiveCivics(false)
 ,m_bZoneOfControl(false)
 ,m_bProtectedCulture(false)
-//New Boolean Arrays
-,m_pbPrereqOrCivics(NULL)
-,m_pbPrereqAndCivics(NULL)
-,m_pbPrereqOrTerrain(NULL)
-,m_pbPrereqAndTerrain(NULL)
-,m_pbPrereqOrFeature(NULL)
 //New Integer Arrays
 ,m_piBonusDefenseChanges(NULL)
 //New Multidimensional Integer Arrays
@@ -303,7 +297,6 @@ CvBuildingInfo::~CvBuildingInfo()
 	SAFE_DELETE_ARRAY(m_piVictoryThreshold);
 	SAFE_DELETE_ARRAY(m_piRiverPlotYieldChange);
 	SAFE_DELETE_ARRAY(m_piGlobalSeaPlotYieldChange);
-	SAFE_DELETE_ARRAY(m_piYieldChange);
 	SAFE_DELETE_ARRAY(m_piYieldPerPopChange);
 	SAFE_DELETE_ARRAY(m_piYieldModifier);
 	SAFE_DELETE_ARRAY(m_piPowerYieldModifier);
@@ -329,11 +322,8 @@ CvBuildingInfo::~CvBuildingInfo()
 	SAFE_DELETE_ARRAY2(m_ppaiLocalSpecialistYieldChange, GC.getNumSpecialistInfos());
 	SAFE_DELETE_ARRAY2(m_ppaiLocalSpecialistCommerceChange, GC.getNumSpecialistInfos());
 	SAFE_DELETE_ARRAY2(m_ppaiBonusYieldModifier, GC.getNumSpecialistInfos());
-	SAFE_DELETE_ARRAY(m_pbPrereqOrCivics);
-	SAFE_DELETE_ARRAY(m_pbPrereqAndCivics);
-	SAFE_DELETE_ARRAY(m_pbPrereqOrTerrain);
-	SAFE_DELETE_ARRAY(m_pbPrereqAndTerrain);
-	SAFE_DELETE_ARRAY(m_pbPrereqOrFeature);
+	GC.removeDelayedResolutionVector(m_aePrereqOrCivics);
+	GC.removeDelayedResolutionVector(m_aePrereqAndCivics);
 	SAFE_DELETE_ARRAY(m_piBonusDefenseChanges);
 	SAFE_DELETE_ARRAY2(m_ppaiBonusCommerceModifier, GC.getNumBonusInfos());
 	SAFE_DELETE_ARRAY2(m_ppaiBonusYieldChanges, GC.getNumBonusInfos());
@@ -341,8 +331,6 @@ CvBuildingInfo::~CvBuildingInfo()
 	SAFE_DELETE_ARRAY2(m_ppaiVicinityBonusYieldChanges, GC.getNumBonusInfos());
 	SAFE_DELETE_ARRAY2(m_ppaiTechSpecialistChange, GC.getNumTechInfos());
 	SAFE_DELETE_ARRAY2(m_ppiImprovementYieldChanges, GC.getNumImprovementInfos());
-	SAFE_DELETE(m_pExprNewCityFree);
-	SAFE_DELETE(m_pExprConstructCondition);
 
 	//TB Building Tags
 	SAFE_DELETE_ARRAY(m_pabHurry);
@@ -957,39 +945,31 @@ int CvBuildingInfo::getNoEntryDefenseLevel() const
 bool CvBuildingInfo::isPrereqOrCivics(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumCivicInfos(), i);
-	return m_pbPrereqOrCivics ? m_pbPrereqOrCivics[i] : false;
+	return algo::any_of_equal(m_aePrereqOrCivics, static_cast<CivicTypes>(i));
 }
 
 bool CvBuildingInfo::isPrereqAndCivics(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumCivicInfos(), i);
-	return m_pbPrereqAndCivics ? m_pbPrereqAndCivics[i] : false;
+	return algo::any_of_equal(m_aePrereqAndCivics, static_cast<CivicTypes>(i));
 }
-
-//This is for the readpass3
-int CvBuildingInfo::isPrereqOrCivicsVectorSize() const						{return m_aszPrereqOrCivicsforPass3.size();}
-CvString CvBuildingInfo::isPrereqOrCivicsNamesVectorElement(int i) const	{return m_aszPrereqOrCivicsforPass3[i];}
-int CvBuildingInfo::isPrereqOrCivicsValuesVectorElement(int i) const		{return m_abPrereqOrCivicsforPass3[i];}
-int CvBuildingInfo::isPrereqAndCivicsVectorSize() const						{return m_aszPrereqAndCivicsforPass3.size();}
-CvString CvBuildingInfo::isPrereqAndCivicsNamesVectorElement(int i) const	{return m_aszPrereqAndCivicsforPass3[i];}
-int CvBuildingInfo::isPrereqAndCivicsValuesVectorElement(int i) const		{return m_abPrereqAndCivicsforPass3[i];}
 
 bool CvBuildingInfo::isPrereqOrTerrain(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumTerrainInfos(), i);
-	return m_pbPrereqOrTerrain ? m_pbPrereqOrTerrain[i] : false;
+	return algo::any_of_equal(m_aePrereqOrTerrain, static_cast<TerrainTypes>(i));
 }
 
 bool CvBuildingInfo::isPrereqAndTerrain(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumTerrainInfos(), i);
-	return m_pbPrereqAndTerrain ? m_pbPrereqAndTerrain[i] : false;
+	return algo::any_of_equal(m_aePrereqAndTerrain, static_cast<TerrainTypes>(i));
 }
 
 bool CvBuildingInfo::isPrereqOrFeature(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumFeatureInfos(), i);
-	return m_pbPrereqOrFeature ? m_pbPrereqOrFeature[i] : false;
+	return algo::any_of_equal(m_aePrereqOrFeature, static_cast<FeatureTypes>(i));
 }
 
 int CvBuildingInfo::getBonusDefenseChanges(int i) const
@@ -1670,7 +1650,6 @@ void CvBuildingInfo::getCheckSum(uint32_t& iSum) const
 	CheckSumC(iSum, m_piPrereqAndTechs);
 	CheckSumI(iSum, NUM_YIELD_TYPES, m_piRiverPlotYieldChange);
 	CheckSumI(iSum, NUM_YIELD_TYPES, m_piGlobalSeaPlotYieldChange);
-	CheckSumI(iSum, NUM_YIELD_TYPES, m_piYieldChange);
 	CheckSumI(iSum, NUM_YIELD_TYPES, m_piYieldPerPopChange);
 	CheckSumI(iSum, NUM_YIELD_TYPES, m_piYieldModifier);
 	CheckSumI(iSum, NUM_YIELD_TYPES, m_piPowerYieldModifier);
@@ -1771,11 +1750,8 @@ void CvBuildingInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_bRequiresActiveCivics);
 	CheckSum(iSum, m_bZoneOfControl);
 
-	CheckSumI(iSum, GC.getNumCivicInfos(), m_pbPrereqOrCivics);
-	CheckSumI(iSum, GC.getNumCivicInfos(), m_pbPrereqAndCivics);
-	CheckSumI(iSum, GC.getNumTerrainInfos(), m_pbPrereqOrTerrain);
-	CheckSumI(iSum, GC.getNumTerrainInfos(), m_pbPrereqAndTerrain);
-	CheckSumI(iSum, GC.getNumFeatureInfos(), m_pbPrereqOrFeature);
+	CheckSumC(iSum, m_aePrereqOrCivics);
+	CheckSumC(iSum, m_aePrereqAndCivics);
 	CheckSumC(iSum, m_aBuildingProductionModifier);
 	CheckSumC(iSum, m_aGlobalBuildingProductionModifier);
 	CheckSumC(iSum, m_aGlobalBuildingCostModifier);
@@ -1818,13 +1794,6 @@ void CvBuildingInfo::getCheckSum(uint32_t& iSum) const
 	m_PrereqPlayerMinProperties.getCheckSum(iSum);
 	m_PrereqPlayerMaxProperties.getCheckSum(iSum);
 
-	m_PropertyManipulators.getCheckSum(iSum);
-
-	if (m_pExprNewCityFree)
-		m_pExprNewCityFree->getCheckSum(iSum);
-
-	if (m_pExprConstructCondition)
-		m_pExprConstructCondition->getCheckSum(iSum);
 	//TB Combat Mods (Buildings) begin
 	CheckSum(iSum, m_ePropertySpawnUnit);
 	CheckSum(iSum, m_ePropertySpawnProperty);
@@ -1940,6 +1909,14 @@ void CvBuildingInfo::getDataMembers(CvInfoUtil& util)
 		.add(m_improvementFreeSpecialists, L"ImprovementFreeSpecialists")
 		.add(m_freeBonuses, L"ExtraFreeBonuses")
 		.add(m_aGlobalBuildingCommerceChanges, L"GlobalBuildingExtraCommerces", L"BuildingType", L"CommerceChanges")
+		.add(m_aePrereqOrTerrain, L"PrereqOrTerrain")
+		.add(m_aePrereqAndTerrain, L"PrereqAndTerrain")
+		.add(m_aePrereqOrFeature, L"PrereqOrFeature")
+		.add(m_fVisibilityPriority, L"fVisibilityPriority")
+		.add(m_PropertyManipulators)
+		.addBoolExpr(m_pExprNewCityFree, L"NewCityFree")
+		.addBoolExpr(m_pExprConstructCondition, L"ConstructCondition")
+		.addYields(m_piYieldChange, L"YieldChanges")
 	;
 }
 
@@ -2139,7 +2116,6 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 
 	pXML->GetOptionalChildXmlValByName(&m_iAssetValue, L"iAsset");
 	pXML->GetOptionalChildXmlValByName(&m_iPowerValue, L"iPower");
-	pXML->GetOptionalChildXmlValByName(&m_fVisibilityPriority, L"fVisibilityPriority");
 
 	// if we can set the current xml node to it's next sibling
 	if (pXML->TryMoveToXmlFirstChild(L"RiverPlotYieldChanges"))
@@ -2166,16 +2142,6 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	}
 
 	// if we can set the current xml node to it's next sibling
-	if (pXML->TryMoveToXmlFirstChild(L"YieldChanges"))
-	{
-		// call the function that sets the yield change variable
-		pXML->SetYields(&m_piYieldChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piYieldChange);
-	}
 
 	// if we can set the current xml node to it's next sibling
 	if (pXML->TryMoveToXmlFirstChild(L"YieldPerPopChanges"))
@@ -2591,9 +2557,6 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"RawVicinityBonus");
 	m_iPrereqRawVicinityBonus = pXML->GetInfoClass(szTextVal);
 
-	pXML->SetVariableListTagPair(&m_pbPrereqOrTerrain, L"PrereqOrTerrain", GC.getNumTerrainInfos());
-	pXML->SetVariableListTagPair(&m_pbPrereqAndTerrain, L"PrereqAndTerrain", GC.getNumTerrainInfos());
-	pXML->SetVariableListTagPair(&m_pbPrereqOrFeature, L"PrereqOrFeature", GC.getNumFeatureInfos());
 	pXML->SetVariableListTagPair(&m_piBonusDefenseChanges, L"BonusDefenseChanges", GC.getNumBonusInfos());
 	m_aUnitCombatExtraStrength.read(pXML, L"UnitCombatExtraStrengths");
 
@@ -2769,67 +2732,8 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	if (pXML->TryMoveToXmlFirstChild(L"PrereqOrCivics"))
-	{
-		const int iNumSibs = pXML->GetXmlChildrenNumber();
-		bool bTemp = false;
-		if (iNumSibs > 0)
-		{
-			if (pXML->TryMoveToXmlFirstChild())
-			{
-				for (int i = 0; i < iNumSibs; i++)
-				{
-					if (pXML->GetChildXmlVal(szTextVal))
-					{
-                        m_aszPrereqOrCivicsforPass3.push_back(szTextVal);
-                        pXML->GetNextXmlVal(&bTemp);
-                        m_abPrereqOrCivicsforPass3.push_back(bTemp);
-						pXML->MoveToXmlParent();
-					}
-
-					if (!pXML->TryMoveToXmlNextSibling())
-					{
-						break;
-					}
-				}
-
-				pXML->MoveToXmlParent();
-			}
-		}
-
-		pXML->MoveToXmlParent();
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"PrereqAndCivics"))
-	{
-		const int iNumSibs = pXML->GetXmlChildrenNumber();
-		bool bTemp = false;
-		if (iNumSibs > 0)
-		{
-			if (pXML->TryMoveToXmlFirstChild())
-			{
-				for (int i = 0; i < iNumSibs; i++)
-				{
-					if (pXML->GetChildXmlVal(szTextVal))
-					{
-						m_aszPrereqAndCivicsforPass3.push_back(szTextVal);
-						pXML->GetNextXmlVal(&bTemp);
-						m_abPrereqAndCivicsforPass3.push_back(bTemp);
-						pXML->MoveToXmlParent();
-					}
-
-					if (!pXML->TryMoveToXmlNextSibling())
-					{
-						break;
-					}
-				}
-
-				pXML->MoveToXmlParent();
-			}
-		}
-
-		pXML->MoveToXmlParent();
-	}
+	pXML->SetOptionalVectorWithDelayedResolution(m_aePrereqOrCivics, L"PrereqOrCivics");
+	pXML->SetOptionalVectorWithDelayedResolution(m_aePrereqAndCivics, L"PrereqAndCivics");
 
 	pXML->SetOptionalVector(&m_piPrereqOrVicinityBonuses, L"PrereqVicinityBonuses");
 	pXML->SetOptionalVector(&m_aePrereqOrRawVicinityBonuses, L"PrereqRawVicinityBonuses");
@@ -2925,19 +2829,6 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	m_PrereqPlayerMinProperties.read(pXML, L"PrereqPlayerMinProperties");
 	m_PrereqPlayerMaxProperties.read(pXML, L"PrereqPlayerMaxProperties");
 
-	m_PropertyManipulators.read(pXML);
-
-	if (pXML->TryMoveToXmlFirstChild(L"NewCityFree"))
-	{
-		m_pExprNewCityFree = BoolExpr::read(pXML);
-		pXML->MoveToXmlParent();
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"ConstructCondition"))
-	{
-		m_pExprConstructCondition = BoolExpr::read(pXML);
-		pXML->MoveToXmlParent();
-	}
 	//TB Combat Mods (Buildings) begin
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"PropertySpawnUnit");
 	m_aszExtraXMLforPass3.push_back(szTextVal);
@@ -3152,43 +3043,7 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 bool CvBuildingInfo::readPass3()
 {
 	PROFILE_EXTRA_FUNC();
-	m_pbPrereqOrCivics = new bool[GC.getNumCivicInfos()];
-	for (int iI = 0; iI < GC.getNumCivicInfos(); iI++)
-	{
-		m_pbPrereqOrCivics[iI] = false;
-	}
-	if (!m_abPrereqOrCivicsforPass3.empty() && !m_aszPrereqOrCivicsforPass3.empty())
-	{
-		const int iNumLoad = m_abPrereqOrCivicsforPass3.size();
-		for(int iI = 0; iI < iNumLoad; iI++)
-		{
-			//FAssertMsg(GC.getInfoTypeForString(m_aszPrereqOrCivicsforPass3[iI]) >= 0, L"Warning, about to leak memory in CvBuildingInfo::readPass3");
-			const int iTempIndex = GC.getInfoTypeForString(m_aszPrereqOrCivicsforPass3[iI]);
-			if (iTempIndex >= 0 && iTempIndex < GC.getNumCivicInfos())
-				m_pbPrereqOrCivics[iTempIndex] = m_abPrereqOrCivicsforPass3[iI];
-		}
-		m_aszPrereqOrCivicsforPass3.clear();
-		m_abPrereqOrCivicsforPass3.clear();
-	}
-
-	m_pbPrereqAndCivics = new bool[GC.getNumCivicInfos()];
-    for (int iI = 0; iI < GC.getNumCivicInfos(); iI++)
-	{
-		m_pbPrereqAndCivics[iI] = false;
-	}
-	if (!m_abPrereqAndCivicsforPass3.empty() && !m_aszPrereqAndCivicsforPass3.empty())
-	{
-		const int iNumLoad = m_abPrereqAndCivicsforPass3.size();
-		for(int iI = 0; iI < iNumLoad; iI++)
-		{
-			//FAssertMsg(GC.getInfoTypeForString(m_aszPrereqAndCivicsforPass3[iI]) >= 0, L"Warning, about to leak memory in CvBuildingInfo::readPass3");
-			const int iTempIndex = GC.getInfoTypeForString(m_aszPrereqAndCivicsforPass3[iI]);
-			if (iTempIndex >= 0 && iTempIndex < GC.getNumCivicInfos())
-				m_pbPrereqAndCivics[iTempIndex] = m_abPrereqAndCivicsforPass3[iI];
-		}
-		m_aszPrereqAndCivicsforPass3.clear();
-		m_abPrereqAndCivicsforPass3.clear();
-	}
+	// PrereqOrCivics / PrereqAndCivics now resolve via SetOptionalVectorWithDelayedResolution (no pass3).
 
 	if (m_aszExtraXMLforPass3.empty())
 	{
@@ -3353,7 +3208,6 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 
 	if (getMaxPopAllowed() == -1) m_iMaxPopAllowed = pClassInfo->getMaxPopAllowed();
 
-	if (getVisibilityPriority() == fDefault) m_fVisibilityPriority = pClassInfo->getVisibilityPriority();
 
 	for ( int j = 0; j < NUM_YIELD_TYPES; j++)
 	{
@@ -3372,14 +3226,6 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 				CvXMLLoadUtility::InitList(&m_piGlobalSeaPlotYieldChange,NUM_YIELD_TYPES,iDefault);
 			}
 			m_piGlobalSeaPlotYieldChange[j] = pClassInfo->getGlobalSeaPlotYieldChange(j);
-		}
-		if ( getYieldChange(j) == iDefault && pClassInfo->getYieldChange(j) != iDefault)
-		{
-			if ( NULL == m_piYieldChange )
-			{
-				CvXMLLoadUtility::InitList(&m_piYieldChange,NUM_YIELD_TYPES,iDefault);
-			}
-			m_piYieldChange[j] = pClassInfo->getYieldChange(j);
 		}
 		if ( getYieldPerPopChange(j) == iDefault && pClassInfo->getYieldPerPopChange(j) != iDefault)
 		{
@@ -3713,39 +3559,6 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 
 	m_aUnitCombatExtraStrength.copyNonDefaults(pClassInfo->getUnitCombatExtraStrength());
 
-	for ( int j = 0; j < GC.getNumTerrainInfos(); j++)
-	{
-		if ( isPrereqOrTerrain(j) == bDefault && pClassInfo->isPrereqOrTerrain(j) != bDefault)
-		{
-			if ( NULL == m_pbPrereqOrTerrain )
-			{
-				CvXMLLoadUtility::InitList(&m_pbPrereqOrTerrain,GC.getNumTerrainInfos(),bDefault);
-			}
-			m_pbPrereqOrTerrain[j] = pClassInfo->isPrereqOrTerrain(j);
-		}
-	}
-	for ( int j = 0; j < GC.getNumTerrainInfos(); j++)
-	{
-		if ( isPrereqAndTerrain(j) == bDefault && pClassInfo->isPrereqAndTerrain(j) != bDefault)
-		{
-			if ( NULL == m_pbPrereqAndTerrain)
-			{
-				CvXMLLoadUtility::InitList(&m_pbPrereqAndTerrain,GC.getNumTerrainInfos(),bDefault);
-			}
-			m_pbPrereqAndTerrain[j] = pClassInfo->isPrereqAndTerrain(j);
-		}
-	}
-	for ( int j = 0; j < GC.getNumFeatureInfos(); j++)
-	{
-		if ( isPrereqOrFeature(j) == bDefault && pClassInfo->isPrereqOrFeature(j) != bDefault)
-		{
-			if ( NULL == m_pbPrereqOrFeature )
-			{
-				CvXMLLoadUtility::InitList(&m_pbPrereqOrFeature,GC.getNumFeatureInfos(),bDefault);
-			}
-			m_pbPrereqOrFeature[j] = pClassInfo->isPrereqOrFeature(j);
-		}
-	}
 	for ( int j = 0; j < GC.getNumBonusInfos(); j++)
 	{
 		if ( getBonusDefenseChanges(j) == iDefault && pClassInfo->getBonusDefenseChanges(j) != iDefault)
@@ -3958,18 +3771,8 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 		}
 	}
 
-	//These are done differently because of the ReadPass3
-	for ( int i = 0; i < pClassInfo->isPrereqOrCivicsVectorSize(); i++ )
-	{
-		m_abPrereqOrCivicsforPass3.push_back(pClassInfo->isPrereqOrCivicsValuesVectorElement(i));
-		m_aszPrereqOrCivicsforPass3.push_back(pClassInfo->isPrereqOrCivicsNamesVectorElement(i));
-	}
-
-	for ( int i = 0; i < pClassInfo->isPrereqAndCivicsVectorSize(); i++ )
-	{
-		m_abPrereqAndCivicsforPass3.push_back(pClassInfo->isPrereqAndCivicsValuesVectorElement(i));
-		m_aszPrereqAndCivicsforPass3.push_back(pClassInfo->isPrereqAndCivicsNamesVectorElement(i));
-	}
+	GC.copyNonDefaultDelayedResolutionVector(m_aePrereqOrCivics, pClassInfo->m_aePrereqOrCivics);
+	GC.copyNonDefaultDelayedResolutionVector(m_aePrereqAndCivics, pClassInfo->m_aePrereqAndCivics);
 
 	m_Properties.copyNonDefaults(pClassInfo->getProperties());
 	m_PropertiesAllCities.copyNonDefaults(pClassInfo->getPropertiesAllCities());
@@ -3978,19 +3781,6 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 	m_PrereqPlayerMinProperties.copyNonDefaults(pClassInfo->getPrereqPlayerMinProperties());
 	m_PrereqPlayerMaxProperties.copyNonDefaults(pClassInfo->getPrereqPlayerMaxProperties());
 
-	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
-
-	if (!m_pExprNewCityFree)
-	{
-		m_pExprNewCityFree = pClassInfo->m_pExprNewCityFree;
-		pClassInfo->m_pExprNewCityFree = NULL;
-	}
-
-	if (!m_pExprConstructCondition)
-	{
-		m_pExprConstructCondition = pClassInfo->m_pExprConstructCondition;
-		pClassInfo->m_pExprConstructCondition = NULL;
-	}
 
 	//TB Combat Mods (Buildings) begin
 	if (m_ePropertySpawnUnit == NO_UNIT) m_ePropertySpawnUnit = pClassInfo->getPropertySpawnUnit();

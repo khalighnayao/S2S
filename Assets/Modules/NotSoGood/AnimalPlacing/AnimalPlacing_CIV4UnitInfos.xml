@@ -26,10 +26,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bFood>1</bFood>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_BONUS_DONKEY</BuildType>

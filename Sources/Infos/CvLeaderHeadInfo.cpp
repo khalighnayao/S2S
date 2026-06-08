@@ -111,7 +111,6 @@ m_iVassalPowerModifier(0),
 m_iFreedomAppreciation(0),
 m_iFavoriteCivic(NO_CIVIC),
 m_iFavoriteReligion(NO_RELIGION),
-m_pbTraits(NULL),
 m_piFlavorValue(NULL),
 m_piContactRand(NULL),
 m_piContactDelay(NULL),
@@ -141,7 +140,6 @@ m_piDiploWarMusicScriptIds(NULL)
 //------------------------------------------------------------------------------------------------------
 CvLeaderHeadInfo::~CvLeaderHeadInfo()
 {
-	SAFE_DELETE_ARRAY(m_pbTraits);
 	SAFE_DELETE_ARRAY(m_piFlavorValue);
 	SAFE_DELETE_ARRAY(m_piContactRand);
 	SAFE_DELETE_ARRAY(m_piContactDelay);
@@ -649,7 +647,7 @@ const char* CvLeaderHeadInfo::getArtDefineTag() const
 bool CvLeaderHeadInfo::hasTrait(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumTraitInfos(), i);
-	return m_pbTraits ? m_pbTraits[i] : false;
+	return algo::any_of_equal(m_aeTraits, static_cast<TraitTypes>(i));
 }
 
 
@@ -921,7 +919,7 @@ void CvLeaderHeadInfo::getCheckSum(uint32_t& iSum) const
 
 	// Arrays
 
-	CheckSumI(iSum, GC.getNumTraitInfos(), m_pbTraits);
+	CheckSumC(iSum, m_aeTraits);
 
 	CheckSumI(iSum, GC.getNumFlavorTypes(), m_piFlavorValue);
 	CheckSumI(iSum, NUM_CONTACT_TYPES, m_piContactRand);
@@ -1087,7 +1085,7 @@ bool CvLeaderHeadInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"FavoriteReligion");
 	m_iFavoriteReligion = pXML->GetInfoClass(szTextVal);
 
-	pXML->SetVariableListTagPair(&m_pbTraits, L"Traits", GC.getNumTraitInfos());
+	pXML->SetOptionalVector(&m_aeTraits, L"Traits");
 
 	pXML->SetVariableListTagPair(&m_piFlavorValue, L"Flavors", GC.getNumFlavorTypes());
 	pXML->SetVariableListTagPair(&m_piContactRand, L"ContactRands", NUM_CONTACT_TYPES);
@@ -1211,17 +1209,7 @@ void CvLeaderHeadInfo::copyNonDefaults(const CvLeaderHeadInfo* pClassInfo)
 	if (getFavoriteCivic() == -1) m_iFavoriteCivic = pClassInfo->getFavoriteCivic();
 	if (getFavoriteReligion() == -1) m_iFavoriteReligion = pClassInfo->getFavoriteReligion();
 
-	for (int j = 0; j < GC.getNumTraitInfos(); j++)
-	{
-		if (!hasTrait(j) && pClassInfo->hasTrait(j))
-		{
-			if (!m_pbTraits)
-			{
-				CvXMLLoadUtility::InitList(&m_pbTraits, GC.getNumTraitInfos(), false);
-			}
-			m_pbTraits[j] = pClassInfo->hasTrait(j);
-		}
-	}
+	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeTraits, pClassInfo->m_aeTraits);
 
 	for (int j = 0; j < GC.getNumFlavorTypes(); j++)
 	{

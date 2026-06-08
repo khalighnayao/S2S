@@ -292,10 +292,7 @@
 	<ElementType name="iSpread" content="textOnly" dt:type="int"/>
 	<!--Afforess-->
 	<ElementType name="bTerrain" content="textOnly" dt:type="boolean"/>
-	<ElementType name="TerrainBoolean" content="eltOnly">
-		<element type="TerrainType"/>
-		<element type="bTerrain"/>
-	</ElementType>
+	<ElementType name="TerrainBoolean" content="textOnly"/>
 	<ElementType name="TerrainBooleans" content="eltOnly">
 		<element type="TerrainBoolean" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -420,18 +417,12 @@
 	<ElementType name="bNoRiverSide" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bNormalize" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bFeature" content="textOnly" dt:type="boolean"/>
-	<ElementType name="FeatureBoolean" content="eltOnly">
-		<element type="FeatureType"/>
-		<element type="bFeature"/>
-	</ElementType>
+	<ElementType name="FeatureBoolean" content="textOnly"/>
 	<ElementType name="FeatureBooleans" content="eltOnly">
 		<element type="FeatureBoolean" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="bFeatureTerrain" content="textOnly" dt:type="boolean"/>
-	<ElementType name="FeatureTerrainBoolean" content="eltOnly">
-		<element type="TerrainType"/>
-		<element type="bFeatureTerrain"/>
-	</ElementType>
+	<ElementType name="FeatureTerrainBoolean" content="textOnly"/>
 	<ElementType name="FeatureTerrainBooleans" content="eltOnly">
 		<element type="FeatureTerrainBoolean" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -658,17 +649,11 @@
 	<ElementType name="iTilesPerGoody" content="textOnly" dt:type="int"/>
 	<ElementType name="iUpgradeTime" content="textOnly" dt:type="int"/>
 	<ElementType name="bMakesValid" content="textOnly" dt:type="boolean"/>
-	<ElementType name="TerrainMakesValid" content="eltOnly">
-		<element type="TerrainType"/>
-		<element type="bMakesValid"/>
-	</ElementType>
+	<ElementType name="TerrainMakesValid" content="textOnly"/>
 	<ElementType name="TerrainMakesValids" content="eltOnly">
 		<element type="TerrainMakesValid" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
-	<ElementType name="FeatureMakesValid" content="eltOnly">
-		<element type="FeatureType"/>
-		<element type="bMakesValid"/>
-	</ElementType>
+	<ElementType name="FeatureMakesValid" content="textOnly"/>
 	<ElementType name="FeatureMakesValids" content="eltOnly">
 		<element type="FeatureMakesValid" minOccurs="0" maxOccurs="*"/>
 	</ElementType>

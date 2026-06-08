@@ -398,7 +398,7 @@ protected:
 	int m_iMaxPlayerInstances;
 	bool m_bUnlimitedException;
 	int m_iInstanceCostModifier;
-	bool* m_pbPassableRouteNeeded;
+	std::vector<RouteTypes> m_aePassableRouteNeeded;
 	std::vector<BonusTypes> m_piPrereqOrVicinityBonuses;
 	bool m_bWorkerTrade;
 	bool m_bMilitaryTrade;
@@ -708,20 +708,18 @@ private:
 	int* m_piFeaturePassableTech;
 	IDValueMap<UnitTypes, int, -1> m_piFlankingStrikeUnit;
 
-	bool* m_pbPrereqOrCivics;
+	std::vector<CivicTypes> m_aePrereqOrCivics;
 
-	bool* m_pbTargetUnitCombat;
-	bool* m_pbDefenderUnitCombat;
-	bool* m_pbUnitAIType;
-	bool* m_pbNotUnitAIType;
-	bool* m_pbGreatPeoples;
+	std::vector<UnitCombatTypes> m_aeTargetUnitCombat;
+	std::vector<UnitCombatTypes> m_aeDefenderUnitCombat;
+	std::vector<UnitAITypes> m_aiUnitAIs;
+	std::vector<UnitAITypes> m_aiNotUnitAIs;
+	std::vector<SpecialistTypes> m_aeGreatPeoples;
 	std::vector<int> m_pbBuildings;
 	std::vector<int> m_addHeritage;
-	bool* m_pbTerrainNative;
-	bool* m_pbFeatureNative;
-	//bool* m_pbTerrainImpassable;
-	//bool* m_pbFeatureImpassable;
-	bool* m_pbFreePromotions;
+	std::vector<TerrainTypes> m_aeTerrainNative;
+	std::vector<FeatureTypes> m_aeFeatureNative;
+	std::vector<PromotionTypes> m_aeFreePromotions;
 
 	CvString* m_paszEarlyArtDefineTags;
 	CvString* m_paszLateArtDefineTags;

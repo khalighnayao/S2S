@@ -351,19 +351,6 @@ public:
 
 	int getBonusDefenseChanges(int i) const;
 
-	std::vector<CvString> m_aszPrereqOrCivicsforPass3;
-	std::vector<bool> m_abPrereqOrCivicsforPass3;
-
-	int isPrereqOrCivicsVectorSize() const;
-	CvString isPrereqOrCivicsNamesVectorElement(int i) const;
-	int isPrereqOrCivicsValuesVectorElement(int i) const;
-
-	int isPrereqAndCivicsVectorSize() const;
-	CvString isPrereqAndCivicsNamesVectorElement(int i) const;
-	int isPrereqAndCivicsValuesVectorElement(int i) const;
-
-	std::vector<CvString> m_aszPrereqAndCivicsforPass3;
-	std::vector<bool> m_abPrereqAndCivicsforPass3;
 
 	int getReplacementBuilding(const int i) const;
 	short getNumReplacementBuilding() const;
@@ -681,11 +668,11 @@ private:
 	CvString m_szArtDefineTag;
 	CvString m_szMovieDefineTag;
 
-	bool* m_pbPrereqOrCivics;
-	bool* m_pbPrereqAndCivics;
-	bool* m_pbPrereqOrTerrain;
-	bool* m_pbPrereqAndTerrain;
-	bool* m_pbPrereqOrFeature;
+	std::vector<CivicTypes> m_aePrereqOrCivics;
+	std::vector<CivicTypes> m_aePrereqAndCivics;
+	std::vector<TerrainTypes> m_aePrereqOrTerrain;
+	std::vector<TerrainTypes> m_aePrereqAndTerrain;
+	std::vector<FeatureTypes> m_aePrereqOrFeature;
 	bool* m_pbCommerceFlexible;
 	bool* m_pabHurry;
 

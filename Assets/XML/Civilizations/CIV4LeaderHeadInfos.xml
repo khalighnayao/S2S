@@ -11,10 +11,7 @@
 			<iBuildUnitProb>30</iBuildUnitProb>
 			<iAttackOddsChangeRand>20</iAttackOddsChangeRand>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_BARBARIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_BARBARIC</Trait>
 			</Traits>
 			<DefaultTraits>
 				<TraitType>TRAIT_BARBARIC</TraitType>
@@ -451,10 +448,7 @@
 			<iBuildUnitProb>30</iBuildUnitProb>
 			<iAttackOddsChangeRand>20</iAttackOddsChangeRand>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_BARBARIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_BARBARIC</Trait>
 			</Traits>
 			<DefaultTraits>
 				<TraitType>TRAIT_BARBARIC</TraitType>
@@ -747,30 +741,12 @@
 			<FavoriteCivic>CIVIC_DESPOTISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_HELLENISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL</Trait>
+				<Trait>TRAIT_AGGRESSIVE</Trait>
+				<Trait>TRAIT_MEGALOMANIAC</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL1</Trait>
+				<Trait>TRAIT_AGGRESSIVE1</Trait>
+				<Trait>TRAIT_MEGALOMANIAC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -1413,30 +1389,12 @@
 			<FavoriteCivic>CIVIC_STATE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_BUDDHISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_HUMANITARIAN</Trait>
+				<Trait>TRAIT_IDEALISTIC</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_HUMANITARIAN1</Trait>
+				<Trait>TRAIT_IDEALISTIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -2101,30 +2059,12 @@
 			<FavoriteCivic>CIVIC_LEGISLATURE</FavoriteCivic>
 			<FavoriteReligion>RELIGION_HELLENISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_MEGALOMANIAC</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL1</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_MEGALOMANIAC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -2773,30 +2713,12 @@
 			<FavoriteCivic>CIVIC_NATIONALIST</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_CHARISMATIC</Trait>
+				<Trait>TRAIT_POLITICIAN</Trait>
+				<Trait>TRAIT_EXCESSIVE</Trait>
+				<Trait>TRAIT_CHARISMATIC1</Trait>
+				<Trait>TRAIT_POLITICIAN1</Trait>
+				<Trait>TRAIT_EXCESSIVE1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -3454,30 +3376,12 @@
 			<FavoriteCivic>CIVIC_PROPHETS</FavoriteCivic>
 			<FavoriteReligion>RELIGION_DRUIDIC_TRADITIONS</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_CHARISMATIC</Trait>
+				<Trait>TRAIT_DECEIVER</Trait>
+				<Trait>TRAIT_EXCESSIVE</Trait>
+				<Trait>TRAIT_CHARISMATIC1</Trait>
+				<Trait>TRAIT_DECEIVER1</Trait>
+				<Trait>TRAIT_EXCESSIVE1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -4133,30 +4037,12 @@
 			<FavoriteCivic>CIVIC_STATE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_DRUIDIC_TRADITIONS</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_BARBARIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_BARBARIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_FINANCIAL</Trait>
+				<Trait>TRAIT_BARBARIC</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_FINANCIAL1</Trait>
+				<Trait>TRAIT_BARBARIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -4821,30 +4707,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_CREATIVE</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_FOREIGN</Trait>
+				<Trait>TRAIT_CREATIVE1</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_FOREIGN1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -5496,30 +5364,12 @@
 			<FavoriteCivic>CIVIC_FEUDAL</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_ISOLATIONIST</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_ISOLATIONIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -6166,30 +6016,12 @@
 			<FavoriteCivic>CIVIC_LEGISLATURE</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_CHARISMATIC</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_FOREIGN</Trait>
+				<Trait>TRAIT_CHARISMATIC1</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_FOREIGN1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -6851,30 +6683,12 @@
 			<FavoriteCivic>CIVIC_BOURGEOIS</FavoriteCivic>
 			<FavoriteReligion>RELIGION_ZOROASTRIANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_HUMANITARIAN</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_MEGALOMANIAC</Trait>
+				<Trait>TRAIT_HUMANITARIAN1</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_MEGALOMANIAC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -7542,30 +7356,12 @@
 			<FavoriteCivic>CIVIC_BUREAUCRACY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_ZOROASTRIANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_FINANCIAL</Trait>
+				<Trait>TRAIT_EXPANSIVE</Trait>
+				<Trait>TRAIT_FANATICAL</Trait>
+				<Trait>TRAIT_FINANCIAL1</Trait>
+				<Trait>TRAIT_EXPANSIVE1</Trait>
+				<Trait>TRAIT_FANATICAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -8230,30 +8026,12 @@
 			<FavoriteCivic>CIVIC_NATIONALIST</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_POLITICIAN</Trait>
+				<Trait>TRAIT_POPULIST</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_POLITICIAN1</Trait>
+				<Trait>TRAIT_POPULIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -8911,30 +8689,12 @@
 			<FavoriteCivic>CIVIC_SECULARISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ANTI_CLERICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ANTI_CLERICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SEAFARING</Trait>
+				<Trait>TRAIT_FINANCIAL</Trait>
+				<Trait>TRAIT_ANTI_CLERICAL</Trait>
+				<Trait>TRAIT_SEAFARING1</Trait>
+				<Trait>TRAIT_FINANCIAL1</Trait>
+				<Trait>TRAIT_ANTI_CLERICAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -9596,30 +9356,12 @@
 			<FavoriteCivic>CIVIC_BOURGEOIS</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PROGRESSIST</Trait>
+				<Trait>TRAIT_SCIENTIFIC</Trait>
+				<Trait>TRAIT_MEGALOMANIAC</Trait>
+				<Trait>TRAIT_PROGRESSIST1</Trait>
+				<Trait>TRAIT_SCIENTIFIC1</Trait>
+				<Trait>TRAIT_MEGALOMANIAC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -10266,30 +10008,12 @@
 			<FavoriteCivic>CIVIC_PROLETARIAT</FavoriteCivic>
 			<FavoriteReligion>RELIGION_HINDUISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_HUMANITARIAN</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL</Trait>
+				<Trait>TRAIT_IDEALISTIC</Trait>
+				<Trait>TRAIT_HUMANITARIAN1</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL1</Trait>
+				<Trait>TRAIT_IDEALISTIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -10914,30 +10638,12 @@
 			<FavoriteCivic>CIVIC_DESPOTISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_TENGRIISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_NOMAD</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_NOMAD1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_NOMAD</Trait>
+				<Trait>TRAIT_AGGRESSIVE</Trait>
+				<Trait>TRAIT_POPULIST</Trait>
+				<Trait>TRAIT_NOMAD1</Trait>
+				<Trait>TRAIT_AGGRESSIVE1</Trait>
+				<Trait>TRAIT_POPULIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -11596,30 +11302,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_MESOPOTAMISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_AGRICULTURAL</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_AGRICULTURAL1</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -12269,30 +11957,12 @@
 			<FavoriteCivic>CIVIC_BUREAUCRACY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_ZOROASTRIANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_ORGANIZED</Trait>
+				<Trait>TRAIT_AGGRESSIVE</Trait>
+				<Trait>TRAIT_ISOLATIONIST</Trait>
+				<Trait>TRAIT_ORGANIZED1</Trait>
+				<Trait>TRAIT_AGGRESSIVE1</Trait>
+				<Trait>TRAIT_ISOLATIONIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -12950,30 +12620,12 @@
 			<FavoriteCivic>CIVIC_DESPOTISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_MESOPOTAMISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_EXPANSIVE</Trait>
+				<Trait>TRAIT_ORGANIZED</Trait>
+				<Trait>TRAIT_POPULIST</Trait>
+				<Trait>TRAIT_EXPANSIVE1</Trait>
+				<Trait>TRAIT_ORGANIZED1</Trait>
+				<Trait>TRAIT_POPULIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -13634,30 +13286,12 @@
 			<FavoriteCivic>CIVIC_STATE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_KEMETISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SCIENTIFIC</Trait>
+				<Trait>TRAIT_AGRICULTURAL</Trait>
+				<Trait>TRAIT_EXCESSIVE</Trait>
+				<Trait>TRAIT_SCIENTIFIC1</Trait>
+				<Trait>TRAIT_AGRICULTURAL1</Trait>
+				<Trait>TRAIT_EXCESSIVE1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -14316,30 +13950,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_ANDEANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_FINANCIAL</Trait>
+				<Trait>TRAIT_FOREIGN</Trait>
+				<Trait>TRAIT_AGRICULTURAL</Trait>
+				<Trait>TRAIT_FINANCIAL1</Trait>
+				<Trait>TRAIT_FOREIGN1</Trait>
+				<Trait>TRAIT_AGRICULTURAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -15005,30 +14621,12 @@
 			<FavoriteCivic>CIVIC_INQUISITORIAL</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_SEAFARING</Trait>
+				<Trait>TRAIT_FANATICAL</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_SEAFARING1</Trait>
+				<Trait>TRAIT_FANATICAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -15702,30 +15300,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_SEAFARING</Trait>
+				<Trait>TRAIT_FOREIGN</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_SEAFARING1</Trait>
+				<Trait>TRAIT_FOREIGN1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -16391,30 +15971,12 @@
 			<FavoriteCivic>CIVIC_REPUBLIC</FavoriteCivic>
 			<FavoriteReligion>RELIGION_HELLENISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_ORGANIZED</Trait>
+				<Trait>TRAIT_POLITICIAN</Trait>
+				<Trait>TRAIT_POPULIST</Trait>
+				<Trait>TRAIT_ORGANIZED1</Trait>
+				<Trait>TRAIT_POLITICIAN1</Trait>
+				<Trait>TRAIT_POPULIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -17067,30 +16629,12 @@
 			<FavoriteCivic>CIVIC_FREE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_FANATICAL</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_FANATICAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -17744,30 +17288,12 @@
 			<FavoriteCivic>CIVIC_PROLETARIAT</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CONFUCIANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_NOMAD</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_NOMAD1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_NOMAD</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_MEGALOMANIAC</Trait>
+				<Trait>TRAIT_NOMAD1</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_MEGALOMANIAC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -18428,30 +17954,12 @@
 			<FavoriteCivic>CIVIC_EGALITARIAN</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SCIENTIFIC</Trait>
+				<Trait>TRAIT_HUMANITARIAN</Trait>
+				<Trait>TRAIT_IDEALISTIC</Trait>
+				<Trait>TRAIT_SCIENTIFIC1</Trait>
+				<Trait>TRAIT_HUMANITARIAN1</Trait>
+				<Trait>TRAIT_IDEALISTIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -19117,30 +18625,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_CREATIVE</Trait>
+				<Trait>TRAIT_EXCESSIVE</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_CREATIVE1</Trait>
+				<Trait>TRAIT_EXCESSIVE1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -19786,30 +19276,12 @@
 			<FavoriteCivic>CIVIC_FREE_MARKET</FavoriteCivic>
 			<FavoriteReligion>RELIGION_ISLAM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SCIENTIFIC</Trait>
+				<Trait>TRAIT_FINANCIAL</Trait>
+				<Trait>TRAIT_EXCESSIVE</Trait>
+				<Trait>TRAIT_SCIENTIFIC1</Trait>
+				<Trait>TRAIT_FINANCIAL1</Trait>
+				<Trait>TRAIT_EXCESSIVE1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -20466,30 +19938,12 @@
 			<iFreedomAppreciation>10</iFreedomAppreciation>
 			<FavoriteCivic>CIVIC_PLANNED</FavoriteCivic>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PROGRESSIST</Trait>
+				<Trait>TRAIT_POLITICIAN</Trait>
+				<Trait>TRAIT_CRUEL</Trait>
+				<Trait>TRAIT_PROGRESSIST1</Trait>
+				<Trait>TRAIT_POLITICIAN1</Trait>
+				<Trait>TRAIT_CRUEL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -21152,30 +20606,12 @@
 			<FavoriteCivic>CIVIC_DESPOTISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_ISLAM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_EXPANSIVE</Trait>
+				<Trait>TRAIT_FANATICAL</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_EXPANSIVE1</Trait>
+				<Trait>TRAIT_FANATICAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -21840,30 +21276,12 @@
 			<FavoriteCivic>CIVIC_DIVINE_RIGHT</FavoriteCivic>
 			<FavoriteReligion>RELIGION_NAGHUALISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_AGGRESSIVE</Trait>
+				<Trait>TRAIT_AGRICULTURAL</Trait>
+				<Trait>TRAIT_CRUEL</Trait>
+				<Trait>TRAIT_AGGRESSIVE1</Trait>
+				<Trait>TRAIT_AGRICULTURAL1</Trait>
+				<Trait>TRAIT_CRUEL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -22525,30 +21943,12 @@
 			<FavoriteCivic>CIVIC_REPUBLIC</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_EXPANSIVE</Trait>
+				<Trait>TRAIT_CHARISMATIC</Trait>
+				<Trait>TRAIT_MEGALOMANIAC</Trait>
+				<Trait>TRAIT_EXPANSIVE1</Trait>
+				<Trait>TRAIT_CHARISMATIC1</Trait>
+				<Trait>TRAIT_MEGALOMANIAC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -23209,30 +22609,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_NAGHUALISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_FINANCIAL</Trait>
+				<Trait>TRAIT_AGRICULTURAL</Trait>
+				<Trait>TRAIT_CRUEL</Trait>
+				<Trait>TRAIT_FINANCIAL1</Trait>
+				<Trait>TRAIT_AGRICULTURAL1</Trait>
+				<Trait>TRAIT_CRUEL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -23891,30 +23273,12 @@
 			<FavoriteCivic>CIVIC_DEMOCRACY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_HELLENISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL</Trait>
+				<Trait>TRAIT_CREATIVE</Trait>
+				<Trait>TRAIT_POPULIST</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL1</Trait>
+				<Trait>TRAIT_CREATIVE1</Trait>
+				<Trait>TRAIT_POPULIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -24575,30 +23939,12 @@
 			<FavoriteCivic>CIVIC_FEUDAL</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ANTI_CLERICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ANTI_CLERICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL</Trait>
+				<Trait>TRAIT_SEAFARING</Trait>
+				<Trait>TRAIT_ANTI_CLERICAL</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL1</Trait>
+				<Trait>TRAIT_SEAFARING1</Trait>
+				<Trait>TRAIT_ANTI_CLERICAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -25278,30 +24624,12 @@
 			<FavoriteCivic>CIVIC_BUREAUCRACY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_TAOISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_ISOLATIONIST</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_ISOLATIONIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -25947,30 +25275,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_KEMETISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_ISOLATIONIST</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_ISOLATIONIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -26635,30 +25945,12 @@
 			<FavoriteCivic>CIVIC_FEUDAL</FavoriteCivic>
 			<FavoriteReligion>RELIGION_ASATRU</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_BARBARIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_BARBARIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SEAFARING</Trait>
+				<Trait>TRAIT_PROGRESSIST</Trait>
+				<Trait>TRAIT_BARBARIC</Trait>
+				<Trait>TRAIT_SEAFARING1</Trait>
+				<Trait>TRAIT_PROGRESSIST1</Trait>
+				<Trait>TRAIT_BARBARIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -27307,30 +26599,12 @@
 			<FavoriteCivic>CIVIC_MERCANTILISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_ORGANIZED</Trait>
+				<Trait>TRAIT_POPULIST</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_ORGANIZED1</Trait>
+				<Trait>TRAIT_POPULIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -27982,30 +27256,12 @@
 			<FavoriteCivic>CIVIC_STATE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_ISLAM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_FOREIGN</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_FOREIGN1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -28671,30 +27927,12 @@
 			<FavoriteCivic>CIVIC_DESPOTISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_YORUBA</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_BARBARIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_BARBARIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_DECEIVER</Trait>
+				<Trait>TRAIT_EXPANSIVE</Trait>
+				<Trait>TRAIT_BARBARIC</Trait>
+				<Trait>TRAIT_DECEIVER1</Trait>
+				<Trait>TRAIT_EXPANSIVE1</Trait>
+				<Trait>TRAIT_BARBARIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -29342,30 +28580,12 @@
 			<FavoriteCivic>CIVIC_GREEN</FavoriteCivic>
 			<FavoriteReligion>RELIGION_SHAMANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_NOMAD</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_NOMAD1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_NOMAD</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_EXCESSIVE</Trait>
+				<Trait>TRAIT_NOMAD1</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_EXCESSIVE1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -30019,30 +29239,12 @@
 			<iFreedomAppreciation>10</iFreedomAppreciation>
 			<FavoriteCivic>CIVIC_PLANNED</FavoriteCivic>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_DECEIVER</Trait>
+				<Trait>TRAIT_POLITICIAN</Trait>
+				<Trait>TRAIT_CRUEL</Trait>
+				<Trait>TRAIT_DECEIVER1</Trait>
+				<Trait>TRAIT_POLITICIAN1</Trait>
+				<Trait>TRAIT_CRUEL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -30722,30 +29924,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_ISLAM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ANTI_CLERICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ANTI_CLERICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_EXPANSIVE</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL</Trait>
+				<Trait>TRAIT_ANTI_CLERICAL</Trait>
+				<Trait>TRAIT_EXPANSIVE1</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL1</Trait>
+				<Trait>TRAIT_ANTI_CLERICAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -31429,30 +30613,12 @@
 			<FavoriteCivic>CIVIC_STATE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_HINDUISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_EXPANSIVE</Trait>
+				<Trait>TRAIT_SEAFARING</Trait>
+				<Trait>TRAIT_CRUEL</Trait>
+				<Trait>TRAIT_EXPANSIVE1</Trait>
+				<Trait>TRAIT_SEAFARING1</Trait>
+				<Trait>TRAIT_CRUEL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -32119,30 +31285,12 @@
 			<FavoriteCivic>CIVIC_MERCANTILISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_SHINTO</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_DECEIVER</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL</Trait>
+				<Trait>TRAIT_ISOLATIONIST</Trait>
+				<Trait>TRAIT_DECEIVER1</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL1</Trait>
+				<Trait>TRAIT_ISOLATIONIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -32807,30 +31955,12 @@
 			<FavoriteCivic>CIVIC_REPUBLIC</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_SEAFARING</Trait>
+				<Trait>TRAIT_MEGALOMANIAC</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_SEAFARING1</Trait>
+				<Trait>TRAIT_MEGALOMANIAC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -33502,30 +32632,12 @@
 			<FavoriteCivic>CIVIC_CASTE_SYSTEM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CONFUCIANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_DECEIVER</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL</Trait>
+				<Trait>TRAIT_DECEIVER1</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -34202,30 +33314,12 @@
 			<FavoriteCivic>CIVIC_DEMOCRACY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_REVOLUTIONARY</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_REVOLUTIONARY1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_CHARISMATIC</Trait>
+				<Trait>TRAIT_REVOLUTIONARY</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_CHARISMATIC1</Trait>
+				<Trait>TRAIT_REVOLUTIONARY1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -34918,30 +34012,12 @@
 			<FavoriteCivic>CIVIC_SECULARISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_REVOLUTIONARY</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_REVOLUTIONARY1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SEAFARING</Trait>
+				<Trait>TRAIT_FINANCIAL</Trait>
+				<Trait>TRAIT_REVOLUTIONARY</Trait>
+				<Trait>TRAIT_SEAFARING1</Trait>
+				<Trait>TRAIT_FINANCIAL1</Trait>
+				<Trait>TRAIT_REVOLUTIONARY1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -35621,30 +34697,12 @@
 			<FavoriteCivic>CIVIC_STATE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_CREATIVE</Trait>
+				<Trait>TRAIT_ORGANIZED</Trait>
+				<Trait>TRAIT_CRUEL</Trait>
+				<Trait>TRAIT_CREATIVE1</Trait>
+				<Trait>TRAIT_ORGANIZED1</Trait>
+				<Trait>TRAIT_CRUEL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -36310,30 +35368,12 @@
 			<FavoriteCivic>CIVIC_REPUBLIC</FavoriteCivic>
 			<FavoriteReligion>RELIGION_KEMETISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_EXPANSIVE</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_EXCESSIVE</Trait>
+				<Trait>TRAIT_EXPANSIVE1</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_EXCESSIVE1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -36994,30 +36034,12 @@
 			<FavoriteCivic>CIVIC_STATE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL</Trait>
+				<Trait>TRAIT_CHARISMATIC</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL1</Trait>
+				<Trait>TRAIT_CHARISMATIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -37680,30 +36702,12 @@
 			<FavoriteCivic>CIVIC_NATIONALIST</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL</Trait>
+				<Trait>TRAIT_PROGRESSIST</Trait>
+				<Trait>TRAIT_IDEALISTIC</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL1</Trait>
+				<Trait>TRAIT_PROGRESSIST1</Trait>
+				<Trait>TRAIT_IDEALISTIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -38382,30 +37386,12 @@
 			<FavoriteCivic>CIVIC_REPUBLIC</FavoriteCivic>
 			<FavoriteReligion>RELIGION_SHAMANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_ORGANIZED</Trait>
+				<Trait>TRAIT_CREATIVE</Trait>
+				<Trait>TRAIT_ISOLATIONIST</Trait>
+				<Trait>TRAIT_ORGANIZED1</Trait>
+				<Trait>TRAIT_CREATIVE1</Trait>
+				<Trait>TRAIT_ISOLATIONIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -39068,30 +38054,12 @@
 			<FavoriteCivic>CIVIC_FEUDAL</FavoriteCivic>
 			<FavoriteReligion>RELIGION_MESOPOTAMISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_BARBARIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_BARBARIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_EXPANSIVE</Trait>
+				<Trait>TRAIT_CREATIVE</Trait>
+				<Trait>TRAIT_BARBARIC</Trait>
+				<Trait>TRAIT_EXPANSIVE1</Trait>
+				<Trait>TRAIT_CREATIVE1</Trait>
+				<Trait>TRAIT_BARBARIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -39747,30 +38715,12 @@
 			<FavoriteCivic>CIVIC_CASTE_SYSTEM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_BUDDHISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_EXPANSIVE</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_FANATICAL</Trait>
+				<Trait>TRAIT_EXPANSIVE1</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_FANATICAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -40457,30 +39407,12 @@
 			<FavoriteCivic>CIVIC_NATIONALIST</FavoriteCivic>
 			<FavoriteReligion>RELIGION_BUDDHISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_CREATIVE</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL</Trait>
+				<Trait>TRAIT_FOREIGN</Trait>
+				<Trait>TRAIT_CREATIVE1</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL1</Trait>
+				<Trait>TRAIT_FOREIGN1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -41126,30 +40058,12 @@
 			<FavoriteCivic>CIVIC_EGALITARIAN</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_POLITICIAN</Trait>
+				<Trait>TRAIT_FINANCIAL</Trait>
+				<Trait>TRAIT_EXCESSIVE</Trait>
+				<Trait>TRAIT_POLITICIAN1</Trait>
+				<Trait>TRAIT_FINANCIAL1</Trait>
+				<Trait>TRAIT_EXCESSIVE1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -41812,30 +40726,12 @@
 			<FavoriteCivic>CIVIC_LEGISLATURE</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -42487,30 +41383,12 @@
 			<FavoriteCivic>CIVIC_GREEN</FavoriteCivic>
 			<FavoriteReligion>RELIGION_SHAMANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_NOMAD</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUNTER_GATHERER</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_NOMAD1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUNTER_GATHERER1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_NOMAD</Trait>
+				<Trait>TRAIT_HUMANITARIAN</Trait>
+				<Trait>TRAIT_HUNTER_GATHERER</Trait>
+				<Trait>TRAIT_NOMAD1</Trait>
+				<Trait>TRAIT_HUMANITARIAN1</Trait>
+				<Trait>TRAIT_HUNTER_GATHERER1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -43165,30 +42043,12 @@
 			<FavoriteCivic>CIVIC_VASSALAGE</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_CHARISMATIC</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_ISOLATIONIST</Trait>
+				<Trait>TRAIT_CHARISMATIC1</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_ISOLATIONIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -43839,30 +42699,12 @@
 			<FavoriteCivic>CIVIC_THEOCRACY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_AGGRESSIVE</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL</Trait>
+				<Trait>TRAIT_AGGRESSIVE1</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -44509,30 +43351,12 @@
 			<FavoriteCivic>CIVIC_THEOCRACY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ANTI_CLERICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ANTI_CLERICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_ORGANIZED</Trait>
+				<Trait>TRAIT_ANTI_CLERICAL</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_ORGANIZED1</Trait>
+				<Trait>TRAIT_ANTI_CLERICAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -45183,30 +44007,12 @@
 			<FavoriteCivic>CIVIC_VASSALAGE</FavoriteCivic>
 			<FavoriteReligion>RELIGION_SHAMANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ANTI_CLERICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ANTI_CLERICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SEAFARING</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_ANTI_CLERICAL</Trait>
+				<Trait>TRAIT_SEAFARING1</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_ANTI_CLERICAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -45871,30 +44677,12 @@
 			<FavoriteCivic>CIVIC_CHARITY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_SHAMANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_ORGANIZED</Trait>
+				<Trait>TRAIT_SCIENTIFIC</Trait>
+				<Trait>TRAIT_CRUEL</Trait>
+				<Trait>TRAIT_ORGANIZED1</Trait>
+				<Trait>TRAIT_SCIENTIFIC1</Trait>
+				<Trait>TRAIT_CRUEL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -46563,30 +45351,12 @@
 			<FavoriteCivic>CIVIC_STATE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_ISLAM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_ORGANIZED</Trait>
+				<Trait>TRAIT_FANATICAL</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_ORGANIZED1</Trait>
+				<Trait>TRAIT_FANATICAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -47246,30 +46016,12 @@
 			<FavoriteCivic>CIVIC_VASSALAGE</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_AGGRESSIVE</Trait>
+				<Trait>TRAIT_EXPANSIVE</Trait>
+				<Trait>TRAIT_POPULIST</Trait>
+				<Trait>TRAIT_AGGRESSIVE1</Trait>
+				<Trait>TRAIT_EXPANSIVE1</Trait>
+				<Trait>TRAIT_POPULIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -47934,30 +46686,12 @@
 			<FavoriteCivic>CIVIC_STATE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_NAGHUALISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PROGRESSIST</Trait>
+				<Trait>TRAIT_CHARISMATIC</Trait>
+				<Trait>TRAIT_ISOLATIONIST</Trait>
+				<Trait>TRAIT_PROGRESSIST1</Trait>
+				<Trait>TRAIT_CHARISMATIC1</Trait>
+				<Trait>TRAIT_ISOLATIONIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -48621,30 +47355,12 @@
 			<FavoriteCivic>CIVIC_REPUBLIC</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXPANSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_EXPANSIVE</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_POPULIST</Trait>
+				<Trait>TRAIT_EXPANSIVE1</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_POPULIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -49308,30 +48024,12 @@
 			<FavoriteCivic>CIVIC_DESPOTISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_HELLENISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_CRUEL</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_CRUEL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -49983,30 +48681,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>NONE</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_REVOLUTIONARY</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_REVOLUTIONARY1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_AGGRESSIVE</Trait>
+				<Trait>TRAIT_ORGANIZED</Trait>
+				<Trait>TRAIT_REVOLUTIONARY</Trait>
+				<Trait>TRAIT_AGGRESSIVE1</Trait>
+				<Trait>TRAIT_ORGANIZED1</Trait>
+				<Trait>TRAIT_REVOLUTIONARY1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -50670,30 +49350,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_ORGANIZED</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_FOREIGN</Trait>
+				<Trait>TRAIT_ORGANIZED1</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_FOREIGN1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -51357,30 +50019,12 @@
 			<FavoriteCivic>CIVIC_NATIONALIST</FavoriteCivic>
 			<FavoriteReligion>RELIGION_KEMETISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_CHARISMATIC</Trait>
+				<Trait>TRAIT_FOREIGN</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_CHARISMATIC1</Trait>
+				<Trait>TRAIT_FOREIGN1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -52044,30 +50688,12 @@
 			<FavoriteCivic>CIVIC_SOVEREIGNTY</FavoriteCivic>
 			<FavoriteReligion>NONE</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUNTER_GATHERER</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUNTER_GATHERER1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_POLITICIAN</Trait>
+				<Trait>TRAIT_PROGRESSIST</Trait>
+				<Trait>TRAIT_HUNTER_GATHERER</Trait>
+				<Trait>TRAIT_POLITICIAN1</Trait>
+				<Trait>TRAIT_PROGRESSIST1</Trait>
+				<Trait>TRAIT_HUNTER_GATHERER1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -52739,30 +51365,12 @@
 			<FavoriteCivic>CIVIC_NATIONALIST</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_HUMANITARIAN</Trait>
+				<Trait>TRAIT_POLITICIAN</Trait>
+				<Trait>TRAIT_IDEALISTIC</Trait>
+				<Trait>TRAIT_HUMANITARIAN1</Trait>
+				<Trait>TRAIT_POLITICIAN1</Trait>
+				<Trait>TRAIT_IDEALISTIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -53422,30 +52030,12 @@
 			<FavoriteCivic>CIVIC_REPUBLIC</FavoriteCivic>
 			<FavoriteReligion>RELIGION_MESOPOTAMISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_CHARISMATIC</Trait>
+				<Trait>TRAIT_AGRICULTURAL</Trait>
+				<Trait>TRAIT_FOREIGN</Trait>
+				<Trait>TRAIT_CHARISMATIC1</Trait>
+				<Trait>TRAIT_AGRICULTURAL1</Trait>
+				<Trait>TRAIT_FOREIGN1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -54119,30 +52709,12 @@
 			<FavoriteCivic>CIVIC_DESPOTISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_DECEIVER</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_CRUEL</Trait>
+				<Trait>TRAIT_DECEIVER1</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_CRUEL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -54806,30 +53378,12 @@
 			<FavoriteCivic>CIVIC_PACIFISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_HELLENISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_HUMANITARIAN</Trait>
+				<Trait>TRAIT_IDEALISTIC</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_HUMANITARIAN1</Trait>
+				<Trait>TRAIT_IDEALISTIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -55494,30 +54048,12 @@
 			<FavoriteCivic>CIVIC_STATE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_ISLAM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_CREATIVE</Trait>
+				<Trait>TRAIT_FINANCIAL</Trait>
+				<Trait>TRAIT_POPULIST</Trait>
+				<Trait>TRAIT_CREATIVE1</Trait>
+				<Trait>TRAIT_FINANCIAL1</Trait>
+				<Trait>TRAIT_POPULIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -56182,30 +54718,12 @@
 			<FavoriteCivic>NONE</FavoriteCivic>
 			<FavoriteReligion>NONE</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_POLITICIAN</Trait>
+				<Trait>TRAIT_PROGRESSIST</Trait>
+				<Trait>TRAIT_EXCESSIVE</Trait>
+				<Trait>TRAIT_POLITICIAN1</Trait>
+				<Trait>TRAIT_PROGRESSIST1</Trait>
+				<Trait>TRAIT_EXCESSIVE1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -56870,30 +55388,12 @@
 			<FavoriteCivic>CIVIC_NATIONALIST</FavoriteCivic>
 			<FavoriteReligion>NONE</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_FINANCIAL</Trait>
+				<Trait>TRAIT_SEAFARING</Trait>
+				<Trait>TRAIT_POPULIST</Trait>
+				<Trait>TRAIT_FINANCIAL1</Trait>
+				<Trait>TRAIT_SEAFARING1</Trait>
+				<Trait>TRAIT_POPULIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -57557,30 +56057,12 @@
 			<FavoriteCivic>CIVIC_STATE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_DECEIVER</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_CRUEL</Trait>
+				<Trait>TRAIT_DECEIVER1</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_CRUEL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -58245,30 +56727,12 @@
 			<FavoriteCivic>CIVIC_PACIFISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_SHAMANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUNTER_GATHERER</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUNTER_GATHERER1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_HUMANITARIAN</Trait>
+				<Trait>TRAIT_HUNTER_GATHERER</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_HUMANITARIAN1</Trait>
+				<Trait>TRAIT_HUNTER_GATHERER1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -58933,30 +57397,12 @@
 			<FavoriteCivic>CIVIC_VASSALAGE</FavoriteCivic>
 			<FavoriteReligion>RELIGION_SHINTO</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_CRUEL</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_CRUEL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -59610,30 +58056,12 @@
 			<FavoriteCivic>CIVIC_NATIONALIST</FavoriteCivic>
 			<FavoriteReligion>NONE</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_MEGALOMANIAC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_AGGRESSIVE</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_MEGALOMANIAC</Trait>
+				<Trait>TRAIT_AGGRESSIVE1</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_MEGALOMANIAC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -60290,30 +58718,12 @@
 			<FavoriteCivic>CIVIC_STATE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_JUDAISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_SCIENTIFIC</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_SCIENTIFIC1</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -60961,30 +59371,12 @@
 			<FavoriteCivic>CIVIC_DEMOCRACY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_JUDAISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PROGRESSIST</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_EXCESSIVE</Trait>
+				<Trait>TRAIT_PROGRESSIST1</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_EXCESSIVE1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -61649,30 +60041,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_JUDAISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_HUMANITARIAN</Trait>
+				<Trait>TRAIT_FANATICAL</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_HUMANITARIAN1</Trait>
+				<Trait>TRAIT_FANATICAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -62324,30 +60698,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_NAGHUALISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_POLITICIAN</Trait>
+				<Trait>TRAIT_FOREIGN</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_POLITICIAN1</Trait>
+				<Trait>TRAIT_FOREIGN1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -63012,30 +61368,12 @@
 			<FavoriteCivic>CIVIC_FEUDAL</FavoriteCivic>
 			<FavoriteReligion>NONE</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_AGGRESSIVE</Trait>
+				<Trait>TRAIT_AGRICULTURAL</Trait>
+				<Trait>TRAIT_CRUEL</Trait>
+				<Trait>TRAIT_AGGRESSIVE1</Trait>
+				<Trait>TRAIT_AGRICULTURAL1</Trait>
+				<Trait>TRAIT_CRUEL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -63701,30 +62039,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_BUDDHISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_POPULIST</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_POPULIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -64389,30 +62709,12 @@
 			<FavoriteCivic>NONE</FavoriteCivic>
 			<FavoriteReligion>RELIGION_VOODOO</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_BARBARIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROGRESSIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_BARBARIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_PROGRESSIST</Trait>
+				<Trait>TRAIT_BARBARIC</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_PROGRESSIST1</Trait>
+				<Trait>TRAIT_BARBARIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -65068,30 +63370,12 @@
 			<FavoriteCivic>CIVIC_STATE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_CHARISMATIC</Trait>
+				<Trait>TRAIT_FANATICAL</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_CHARISMATIC1</Trait>
+				<Trait>TRAIT_FANATICAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -65756,30 +64040,12 @@
 			<FavoriteCivic>CIVIC_MARXIST</FavoriteCivic>
 			<FavoriteReligion>NONE</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_ISOLATIONIST</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_ISOLATIONIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -66428,30 +64694,12 @@
 			<FavoriteCivic>CIVIC_PLANNED</FavoriteCivic>
 			<FavoriteReligion>NONE</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_REVOLUTIONARY</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_REVOLUTIONARY1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL</Trait>
+				<Trait>TRAIT_ORGANIZED</Trait>
+				<Trait>TRAIT_REVOLUTIONARY</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL1</Trait>
+				<Trait>TRAIT_ORGANIZED1</Trait>
+				<Trait>TRAIT_REVOLUTIONARY1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -67116,30 +65364,12 @@
 			<FavoriteCivic>CIVIC_CASTE_SYSTEM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_HELLENISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_AGRICULTURAL</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_CRUEL</Trait>
+				<Trait>TRAIT_AGRICULTURAL1</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_CRUEL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -67791,30 +66021,12 @@
 			<FavoriteCivic>CIVIC_PACIFISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_SHAMANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL</Trait>
+				<Trait>TRAIT_ORGANIZED</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL1</Trait>
+				<Trait>TRAIT_ORGANIZED1</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -68470,30 +66682,12 @@
 			<FavoriteCivic>CIVIC_NATIONALIST</FavoriteCivic>
 			<FavoriteReligion>RELIGION_SHINTO</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SEAFARING1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SEAFARING</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_FOREIGN</Trait>
+				<Trait>TRAIT_SEAFARING1</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_FOREIGN1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -69147,30 +67341,12 @@
 			<FavoriteCivic>CIVIC_ORAL_TRADITION</FavoriteCivic>
 			<FavoriteReligion>NONE</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_NOMAD</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_NOMAD1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUNTER_GATHERER</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUNTER_GATHERER1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_NOMAD</Trait>
+				<Trait>TRAIT_NOMAD1</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_HUNTER_GATHERER</Trait>
+				<Trait>TRAIT_HUNTER_GATHERER1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -69826,30 +68002,12 @@
 			<FavoriteCivic>CIVIC_GREEN</FavoriteCivic>
 			<FavoriteReligion>RELIGION_MESOPOTAMISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_REVOLUTIONARY</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_REVOLUTIONARY1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SCIENTIFIC</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_REVOLUTIONARY</Trait>
+				<Trait>TRAIT_SCIENTIFIC1</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_REVOLUTIONARY1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -70513,30 +68671,12 @@
 			<FavoriteCivic>CIVIC_DESPOTISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_KEMETISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_AGRICULTURAL</Trait>
+				<Trait>TRAIT_CHARISMATIC</Trait>
+				<Trait>TRAIT_ISOLATIONIST</Trait>
+				<Trait>TRAIT_AGRICULTURAL1</Trait>
+				<Trait>TRAIT_CHARISMATIC1</Trait>
+				<Trait>TRAIT_ISOLATIONIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -71213,30 +69353,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_ANDEANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_FINANCIAL</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_FINANCIAL1</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -71900,30 +70022,12 @@
 			<FavoriteCivic>NONE</FavoriteCivic>
 			<FavoriteReligion>NONE</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SCIENTIFIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_EXCESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SCIENTIFIC</Trait>
+				<Trait>TRAIT_CREATIVE</Trait>
+				<Trait>TRAIT_EXCESSIVE</Trait>
+				<Trait>TRAIT_SCIENTIFIC1</Trait>
+				<Trait>TRAIT_CREATIVE1</Trait>
+				<Trait>TRAIT_EXCESSIVE1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -72584,30 +70688,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FANATICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_FANATICAL</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_FANATICAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -73271,30 +71357,12 @@
 			<FavoriteCivic>CIVIC_STATE_CHURCH</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_DECEIVER1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FOREIGN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_DECEIVER</Trait>
+				<Trait>TRAIT_FOREIGN</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_DECEIVER1</Trait>
+				<Trait>TRAIT_FOREIGN1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -73958,30 +72026,12 @@
 			<FavoriteCivic>CIVIC_PACIFISM</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CONFUCIANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PHILOSOPHICAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL</Trait>
+				<Trait>TRAIT_CREATIVE</Trait>
+				<Trait>TRAIT_IDEALISTIC</Trait>
+				<Trait>TRAIT_PHILOSOPHICAL1</Trait>
+				<Trait>TRAIT_CREATIVE1</Trait>
+				<Trait>TRAIT_IDEALISTIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -74634,30 +72684,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>NONE</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_PROTECTIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ISOLATIONIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_PROTECTIVE</Trait>
+				<Trait>TRAIT_ISOLATIONIST</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
+				<Trait>TRAIT_PROTECTIVE1</Trait>
+				<Trait>TRAIT_ISOLATIONIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -75327,30 +73359,12 @@
 			<FavoriteCivic>CIVIC_BUREAUCRACY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_NAGHUALISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUNTER_GATHERER</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUNTER_GATHERER1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_INDUSTRIOUS1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_AGGRESSIVE</Trait>
+				<Trait>TRAIT_HUNTER_GATHERER</Trait>
+				<Trait>TRAIT_INDUSTRIOUS</Trait>
+				<Trait>TRAIT_AGGRESSIVE1</Trait>
+				<Trait>TRAIT_HUNTER_GATHERER1</Trait>
+				<Trait>TRAIT_INDUSTRIOUS1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -76014,30 +74028,12 @@
 			<FavoriteCivic>CIVIC_VASSALAGE</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CONFUCIANISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_FINANCIAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IMPERIALIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CRUEL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_FINANCIAL</Trait>
+				<Trait>TRAIT_IMPERIALIST</Trait>
+				<Trait>TRAIT_CRUEL</Trait>
+				<Trait>TRAIT_FINANCIAL1</Trait>
+				<Trait>TRAIT_IMPERIALIST1</Trait>
+				<Trait>TRAIT_CRUEL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -76705,30 +74701,12 @@
 			<FavoriteCivic>CIVIC_BOURGEOIS</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CREATIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_CREATIVE</Trait>
+				<Trait>TRAIT_IDEALISTIC</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_CREATIVE1</Trait>
+				<Trait>TRAIT_IDEALISTIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -77389,30 +75367,12 @@
 			<FavoriteCivic>CIVIC_MONARCHY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_CHRISTIANITY</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUMANITARIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POPULIST1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_HUMANITARIAN</Trait>
+				<Trait>TRAIT_CHARISMATIC</Trait>
+				<Trait>TRAIT_POPULIST</Trait>
+				<Trait>TRAIT_HUMANITARIAN1</Trait>
+				<Trait>TRAIT_CHARISMATIC1</Trait>
+				<Trait>TRAIT_POPULIST1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -78077,30 +76037,12 @@
 			<FavoriteCivic>CIVIC_BUREAUCRACY</FavoriteCivic>
 			<FavoriteReligion>RELIGION_BUDDHISM</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_ORGANIZED1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_CHARISMATIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_TEMPERAMENTAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_ORGANIZED</Trait>
+				<Trait>TRAIT_CHARISMATIC</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL</Trait>
+				<Trait>TRAIT_ORGANIZED1</Trait>
+				<Trait>TRAIT_CHARISMATIC1</Trait>
+				<Trait>TRAIT_TEMPERAMENTAL1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -78751,30 +76693,12 @@
 			<FavoriteCivic>CIVIC_VASSALAGE</FavoriteCivic>
 			<FavoriteReligion>NONE</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUNTER_GATHERER</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGGRESSIVE1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_SPIRITUAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_HUNTER_GATHERER1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_AGGRESSIVE</Trait>
+				<Trait>TRAIT_SPIRITUAL</Trait>
+				<Trait>TRAIT_HUNTER_GATHERER</Trait>
+				<Trait>TRAIT_AGGRESSIVE1</Trait>
+				<Trait>TRAIT_SPIRITUAL1</Trait>
+				<Trait>TRAIT_HUNTER_GATHERER1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>
@@ -79426,30 +77350,12 @@
 			<FavoriteCivic>NONE</FavoriteCivic>
 			<FavoriteReligion>NONE</FavoriteReligion>
 			<Traits>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_POLITICIAN1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_AGRICULTURAL1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
-				<Trait>
-					<TraitType>TRAIT_IDEALISTIC1</TraitType>
-					<bTrait>1</bTrait>
-				</Trait>
+				<Trait>TRAIT_POLITICIAN</Trait>
+				<Trait>TRAIT_AGRICULTURAL</Trait>
+				<Trait>TRAIT_IDEALISTIC</Trait>
+				<Trait>TRAIT_POLITICIAN1</Trait>
+				<Trait>TRAIT_AGRICULTURAL1</Trait>
+				<Trait>TRAIT_IDEALISTIC1</Trait>
 			</Traits>
 			<Flavors>
 				<Flavor>

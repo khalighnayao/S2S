@@ -29,10 +29,7 @@
 			<bFood>1</bFood>
 			<bFound>1</bFound>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_SETTLE</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<!--iCost>150</iCost-->
@@ -56,10 +53,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_SETTLER</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SENTRY</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_SENTRY</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 	</UnitInfos>

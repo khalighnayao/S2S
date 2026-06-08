@@ -107,9 +107,6 @@ m_piFeatureDefensePercent(NULL),
 m_piUnitCombatModifierPercent(NULL),
 m_piDomainModifierPercent(NULL),
 //m_piAIWeightbyUnitCombatTypes(NULL),
-m_pbTerrainDoubleMove(NULL),
-m_pbFeatureDoubleMove(NULL),
-m_pbUnitCombat(NULL),
 //ls612: Terrain Work modifiers
 m_piTerrainWorkPercent(NULL),
 m_piFeatureWorkPercent(NULL),
@@ -249,9 +246,6 @@ CvPromotionInfo::~CvPromotionInfo()
 	SAFE_DELETE_ARRAY(m_piFeatureDefensePercent);
 	SAFE_DELETE_ARRAY(m_piUnitCombatModifierPercent);
 	SAFE_DELETE_ARRAY(m_piDomainModifierPercent);
-	SAFE_DELETE_ARRAY(m_pbTerrainDoubleMove);
-	SAFE_DELETE_ARRAY(m_pbFeatureDoubleMove);
-	SAFE_DELETE_ARRAY(m_pbUnitCombat);
 	SAFE_DELETE_ARRAY(m_piTerrainWorkPercent);
 	SAFE_DELETE_ARRAY(m_piFeatureWorkPercent);
 
@@ -690,8 +684,8 @@ bool CvPromotionInfo::changesMoveThroughPlots() const
 	return (isAmphib() ||
 			isCanMovePeaks() ||
 			isCanLeadThroughPeaks() ||
-			m_pbTerrainDoubleMove != NULL ||
-			m_pbFeatureDoubleMove != NULL ||
+			!m_aeTerrainDoubleMove.empty() ||
+			!m_aeFeatureDoubleMove.empty() ||
 			m_bHillsDoubleMove);
 }
 
@@ -777,21 +771,21 @@ bool CvPromotionInfo::isAnyDomainModifierPercent() const
 bool CvPromotionInfo::getTerrainDoubleMove(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumTerrainInfos(), i);
-	return m_pbTerrainDoubleMove ? m_pbTerrainDoubleMove[i] : false;
+	return algo::any_of_equal(m_aeTerrainDoubleMove, static_cast<TerrainTypes>(i));
 }
 
 
 bool CvPromotionInfo::getFeatureDoubleMove(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumFeatureInfos(), i);
-	return m_pbFeatureDoubleMove ? m_pbFeatureDoubleMove[i] : false;
+	return algo::any_of_equal(m_aeFeatureDoubleMove, static_cast<FeatureTypes>(i));
 }
 
 
 bool CvPromotionInfo::getUnitCombat(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), i);
-	return m_pbUnitCombat ? m_pbUnitCombat[i] : false;
+	return algo::any_of_equal(m_aeUnitCombat, static_cast<UnitCombatTypes>(i));
 }
 
 //ls612: Terrain Work Modifiers
@@ -2370,6 +2364,9 @@ void CvPromotionInfo::getDataMembers(CvInfoUtil& util)
 		.addEnum(m_iPrereqPromotion, L"PromotionPrereq")
 		.addEnum(m_iPrereqOrPromotion1, L"PromotionPrereqOr1")
 		.addEnum(m_iPrereqOrPromotion2, L"PromotionPrereqOr2")
+		.add(m_aeTerrainDoubleMove, L"TerrainDoubleMoves")
+		.add(m_aeFeatureDoubleMove, L"FeatureDoubleMoves")
+		.add(m_aeUnitCombat, L"UnitCombats")
 	;
 }
 
@@ -2474,9 +2471,6 @@ bool CvPromotionInfo::read(CvXMLLoadUtility* pXML)
 	pXML->SetVariableListTagPair(&m_piFeatureDefensePercent, L"FeatureDefenses", GC.getNumFeatureInfos());
 	pXML->SetVariableListTagPair(&m_piUnitCombatModifierPercent, L"UnitCombatMods", GC.getNumUnitCombatInfos());
 	pXML->SetVariableListTagPair(&m_piDomainModifierPercent, L"DomainMods", NUM_DOMAIN_TYPES);
-	pXML->SetVariableListTagPair(&m_pbTerrainDoubleMove, L"TerrainDoubleMoves", GC.getNumTerrainInfos());
-	pXML->SetVariableListTagPair(&m_pbFeatureDoubleMove, L"FeatureDoubleMoves", GC.getNumFeatureInfos());
-	pXML->SetVariableListTagPair(&m_pbUnitCombat, L"UnitCombats", GC.getNumUnitCombatInfos());
 	//ls612: Terrain Work Modifiers
 	pXML->SetVariableListTagPair(&m_piTerrainWorkPercent, L"TerrainWorks", GC.getNumTerrainInfos());
 	pXML->SetVariableListTagPair(&m_piFeatureWorkPercent, L"FeatureWorks", GC.getNumFeatureInfos());
@@ -3014,16 +3008,6 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 			m_piTerrainDefensePercent[j] = pClassInfo->getTerrainDefensePercent(j);
 		}
 
-		if ((m_pbTerrainDoubleMove == NULL ||m_pbTerrainDoubleMove[j] == bDefault) &&
-			pClassInfo->getTerrainDoubleMove(j) != bDefault)
-		{
-			if ( m_pbTerrainDoubleMove == NULL )
-			{
-				CvXMLLoadUtility::InitList(&m_pbTerrainDoubleMove,GC.getNumTerrainInfos(),bDefault);
-			}
-			m_pbTerrainDoubleMove[j] = pClassInfo->getTerrainDoubleMove(j);
-		}
-
 		//ls612: Terrain Work Modifiers
 		if ((m_piTerrainWorkPercent == NULL || m_piTerrainWorkPercent[j] == iDefault) &&
 			pClassInfo->getTerrainWorkPercent(j) != iDefault)
@@ -3057,15 +3041,6 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 			m_piFeatureDefensePercent[j] = pClassInfo->getFeatureDefensePercent(j);
 		}
 
-		if ((m_pbFeatureDoubleMove == NULL ||m_pbFeatureDoubleMove[j] == bDefault) &&
-			pClassInfo->getFeatureDoubleMove(j) != bDefault)
-		{
-			if ( m_pbFeatureDoubleMove == NULL )
-			{
-				CvXMLLoadUtility::InitList(&m_pbFeatureDoubleMove,GC.getNumFeatureInfos(),bDefault);
-			}
-			m_pbFeatureDoubleMove[j] = pClassInfo->getFeatureDoubleMove(j);
-		}
 		//ls612: Terrain Work Modifiers
 		if ((m_piFeatureWorkPercent == NULL || m_piFeatureWorkPercent[j] == iDefault) &&
 			pClassInfo->getFeatureWorkPercent(j) != iDefault)
@@ -3089,15 +3064,6 @@ void CvPromotionInfo::copyNonDefaults(const CvPromotionInfo* pClassInfo)
 			m_piUnitCombatModifierPercent[j] = pClassInfo->getUnitCombatModifierPercent(j);
 		}
 
-		if ((m_pbUnitCombat == NULL || m_pbUnitCombat[j] == bDefault) &&
-			pClassInfo->getUnitCombat(j) != bDefault)
-		{
-			if ( m_pbUnitCombat == NULL )
-			{
-				CvXMLLoadUtility::InitList(&m_pbUnitCombat,GC.getNumUnitCombatInfos(),bDefault);
-			}
-			m_pbUnitCombat[j] = pClassInfo->getUnitCombat(j);
-		}
 
 		//if ((m_piAIWeightbyUnitCombatTypes == NULL || m_piAIWeightbyUnitCombatTypes[j] == iDefault) &&
 		//	pClassInfo->getAIWeightbyUnitCombatType(j) != iDefault)
@@ -3598,9 +3564,6 @@ void CvPromotionInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_piFeatureDefensePercent, GC.getNumFeatureInfos());
 	CheckSum(iSum, m_piUnitCombatModifierPercent, GC.getNumUnitCombatInfos());
 	CheckSum(iSum, m_piDomainModifierPercent, NUM_DOMAIN_TYPES);
-	CheckSum(iSum, m_pbTerrainDoubleMove, GC.getNumTerrainInfos());
-	CheckSum(iSum, m_pbFeatureDoubleMove, GC.getNumFeatureInfos());
-	CheckSum(iSum, m_pbUnitCombat, GC.getNumUnitCombatInfos());
 	CheckSum(iSum, m_piTerrainWorkPercent, GC.getNumTerrainInfos());
 	CheckSum(iSum, m_piFeatureWorkPercent, GC.getNumFeatureInfos());
 	CheckSum(iSum, m_bCanMovePeaks);

@@ -676,10 +676,7 @@
 	</ElementType>
 	<ElementType name="UnitCombatTargetType" content="textOnly"/>
 	<ElementType name="bUnitCombatTarget" content="textOnly" dt:type="boolean"/>
-	<ElementType name="UnitCombatTarget" content="eltOnly">
-		<element type="UnitCombatTargetType"/>
-		<element type="bUnitCombatTarget"/>
-	</ElementType>
+	<ElementType name="UnitCombatTarget" content="textOnly"/>
 	<ElementType name="UnitCombatTargets" content="eltOnly">
 		<element type="UnitCombatTarget" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -688,10 +685,7 @@
 	</ElementType>
 	<ElementType name="UnitCombatDefenderType" content="textOnly"/>
 	<ElementType name="bUnitCombatDefender" content="textOnly" dt:type="boolean"/>
-	<ElementType name="UnitCombatDefender" content="eltOnly">
-		<element type="UnitCombatDefenderType"/>
-		<element type="bUnitCombatDefender"/>
-	</ElementType>
+	<ElementType name="UnitCombatDefender" content="textOnly"/>
 	<ElementType name="UnitCombatDefenders" content="eltOnly">
 		<element type="UnitCombatDefender" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -705,10 +699,7 @@
 	</ElementType>
 	<ElementType name="UnitAIType" content="textOnly"/>
 	<ElementType name="bUnitAI" content="textOnly" dt:type="boolean"/>
-	<ElementType name="UnitAI" content="eltOnly">
-		<element type="UnitAIType"/>
-		<element type="bUnitAI"/>
-	</ElementType>
+	<ElementType name="UnitAI" content="textOnly"/>
 	<ElementType name="UnitAIs" content="eltOnly">
 		<element type="UnitAI" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -740,10 +731,7 @@
 	</ElementType>
 	<ElementType name="GreatPeopleType" content="textOnly"/>
 	<ElementType name="bGreatPeople" content="textOnly" dt:type="boolean"/>
-	<ElementType name="GreatPeople" content="eltOnly">
-		<element type="GreatPeopleType"/>
-		<element type="bGreatPeople"/>
-	</ElementType>
+	<ElementType name="GreatPeople" content="textOnly"/>
 	<ElementType name="GreatPeoples" content="eltOnly">
 		<element type="GreatPeople" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -762,10 +750,7 @@
 	<ElementType name="NotGameOption" content="textOnly"/>
 	<ElementType name="CivicOption" content="textOnly"/>
 	<ElementType name="bPrereqCivic" content="textOnly" dt:type="boolean"/>
-	<ElementType name="PrereqCivic" content="eltOnly">
-		<element type="CivicOption"/>
-		<element type="bPrereqCivic"/>
-	</ElementType>
+	<ElementType name="PrereqCivic" content="textOnly"/>
 	<ElementType name="PrereqOrCivics" content="eltOnly">
 		<element type="PrereqCivic" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -1042,10 +1027,7 @@
 	<ElementType name="LayerAnimationPath" content="textOnly"/>
 	<ElementType name="PromotionType" content="textOnly"/>
 	<ElementType name="bFreePromotion" content="textOnly" dt:type="boolean"/>
-	<ElementType name="FreePromotion" content="eltOnly">
-		<element type="PromotionType"/>
-		<element type="bFreePromotion"/>
-	</ElementType>
+	<ElementType name="FreePromotion" content="textOnly"/>
 	<ElementType name="FreePromotions" content="eltOnly">
 		<element type="FreePromotion" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -1589,26 +1571,15 @@
 	<ElementType name="iAdjacentTileHealChange" content="textOnly" dt:type="int"/>
 	<ElementType name="iCombatPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="bUnitCombat" content="textOnly" dt:type="boolean"/>
-	<ElementType name="UnitCombat" content="eltOnly">
-		<element type="UnitCombatType"/>
-		<element type="bUnitCombat"/>
-	</ElementType>
+	<ElementType name="UnitCombat" content="textOnly"/>
 	<ElementType name="UnitCombats" content="eltOnly">
 		<element type="UnitCombat" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
-	<ElementType name="bTerrainDoubleMove" content="textOnly" dt:type="boolean"/>
-	<ElementType name="TerrainDoubleMove" content="eltOnly">
-		<element type="TerrainType"/>
-		<element type="bTerrainDoubleMove"/>
-	</ElementType>
+	<ElementType name="TerrainDoubleMove" content="textOnly"/>
 	<ElementType name="TerrainDoubleMoves" content="eltOnly">
 		<element type="TerrainDoubleMove" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
-	<ElementType name="bFeatureDoubleMove" content="textOnly" dt:type="boolean"/>
-	<ElementType name="FeatureDoubleMove" content="eltOnly">
-		<element type="FeatureType"/>
-		<element type="bFeatureDoubleMove"/>
-	</ElementType>
+	<ElementType name="FeatureDoubleMove" content="textOnly"/>
 	<ElementType name="FeatureDoubleMoves" content="eltOnly">
 		<element type="FeatureDoubleMove" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -1887,13 +1858,6 @@
 	</ElementType>
 	<ElementType name="bValid" content="textOnly" dt:type="boolean"/>
 	<ElementType name="bCityLoad" content="textOnly" dt:type="boolean"/>
-	<ElementType name="CarrierUnitAI" content="eltOnly">
-		<element type="UnitAIType"/>
-		<element type="bUnitAI"/>
-	</ElementType>
-	<ElementType name="CarrierUnitAIs" content="eltOnly">
-		<element type="CarrierUnitAI" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
 	<ElementType name="SpecialUnitInfo" content="eltOnly">
 		<element type="Type"/>
 		<element type="bForceOverwrite" minOccurs="0"/>
@@ -1905,7 +1869,6 @@
 		<element type="bSMLoadSame" minOccurs="0"/>
 		<element type="iCombatPercent" minOccurs="0"/>
 		<element type="iWithdrawalChange" minOccurs="0"/>
-		<element type="CarrierUnitAIs" minOccurs="0"/>
 	</ElementType>
 	<ElementType name="SpecialUnitInfos" content="eltOnly">
 		<element type="SpecialUnitInfo" maxOccurs="*"/>

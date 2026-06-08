@@ -19,16 +19,9 @@ public:
 	int getNumDiplomacyText() const;
 
 	bool getCivilizationTypes(const int i) const;
-	bool* getCivilizationTypes() const;
-
 	bool getLeaderHeadTypes(const int i) const;
-	bool* getLeaderHeadTypes() const;
-
 	bool getAttitudeTypes(int i) const;
-	bool* getAttitudeTypes() const;
-
 	bool getDiplomacyPowerTypes(const int i) const;
-	bool* getDiplomacyPowerTypes() const;
 
 	const char* getDiplomacyText(int i) const;
 	const CvString* getDiplomacyText() const;
@@ -38,10 +31,10 @@ public:
 
 protected:
 	int m_iNumDiplomacyText;
-	bool* m_pbCivilizationTypes;
-	bool* m_pbLeaderHeadTypes;
-	bool* m_pbAttitudeTypes;
-	bool* m_pbDiplomacyPowerTypes;
+	std::vector<CivilizationTypes> m_aeCivilizationTypes;
+	std::vector<LeaderHeadTypes> m_aeLeaderHeadTypes;
+	std::vector<AttitudeTypes> m_aeAttitudeTypes;
+	std::vector<DiplomacyPowerTypes> m_aeDiplomacyPowerTypes;
 	CvString* m_paszDiplomacyText;
 };
 

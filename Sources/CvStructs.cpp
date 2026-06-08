@@ -22,6 +22,40 @@
 #include "CvUnit.h"
 #include "CvOutcomeMission.h"
 #include "CvInfos.h"
+#include "CvInfoUtil.h"
+
+void TerrainStructs::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.addEnum(eTerrain, L"TerrainType")
+		.addEnum(ePrereqTech, L"PrereqTech")
+		.add(iTime, L"iTime")
+	;
+}
+
+void PlaceBonusTypes::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.addEnum(eBonus, L"BonusType")
+		.add(iProbability, L"iProbability")
+		.add(bRequiresAccess, L"bRequiresAccess")
+		.addEnum(ePrereqTerrain, L"TerrainType")
+		.addEnum(ePrereqFeature, L"FeatureType")
+		.addEnum(ePrereqMapCategory, L"MapCategoryType")
+		.addEnum(ePrereqTech, L"TechType")
+	;
+}
+
+void FeatureStruct::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.addEnum(eFeature, L"FeatureType")
+		.addEnum(ePrereqTech, L"PrereqTech")
+		.add(iTime, L"iTime")
+		.add(iProduction, L"iProduction")
+		.add(bRemove, L"bRemove")
+	;
+}
 
 XYCoords::XYCoords(int x, int y)
 	: iX(x)

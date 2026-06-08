@@ -16,14 +16,8 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -38,10 +32,7 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -56,14 +47,8 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_ORION_ARM</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MILKY_WAY</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -79,14 +64,8 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_ORION_ARM</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MILKY_WAY</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -101,10 +80,7 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -119,10 +95,7 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -137,10 +110,7 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -155,10 +125,7 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -173,14 +140,8 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LOCAL_GROUP</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LOCAL_GROUP</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_VIRGO_SUPERCLUSTER</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -195,14 +156,8 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LOCAL_GROUP</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LOCAL_GROUP</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_VIRGO_SUPERCLUSTER</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -217,10 +172,7 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -235,10 +187,7 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -253,10 +202,7 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -272,10 +218,7 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_OBSERVABLE_UNIVERSE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -290,10 +233,7 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -308,10 +248,7 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -326,10 +263,7 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -344,18 +278,9 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_ORION_ARM</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MILKY_WAY</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -370,10 +295,7 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -389,10 +311,7 @@
 			<iSeeThrough>1</iSeeThrough>
 			<iDefense>50</iDefense>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_GALACTIC_CORE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_GALACTIC_CORE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -410,26 +329,11 @@
 			<bRequiresFlatlands>1</bRequiresFlatlands>
 			<bNoImprovement>1</bNoImprovement>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_REGOLITH</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_MARE</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_HIGHLAND</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_DOME</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_RILLE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_OASIS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -448,26 +352,11 @@
 			<bRequiresFlatlands>1</bRequiresFlatlands>
 			<bNoImprovement>1</bNoImprovement>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_REGOLITH</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_MARE</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_HIGHLAND</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_DOME</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_RILLE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_OASIS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -485,26 +374,11 @@
 			<bRequiresFlatlands>1</bRequiresFlatlands>
 			<bNoImprovement>1</bNoImprovement>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_REGOLITH</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_MARE</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_HIGHLAND</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_DOME</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_RILLE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_OASIS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -519,18 +393,9 @@
 			<iDefense>50</iDefense>
 			<iPopDestroys>-1</iPopDestroys>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_INNER_SOLAR_SYSTEM</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_INNER_SOLAR_SYSTEM</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_ASTEROIDS_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>
@@ -551,14 +416,8 @@
 			<bVisibleAlways>1</bVisibleAlways>
 			<bNukeImmune>1</bNukeImmune>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_ORION_ARM</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MILKY_WAY</TerrainBoolean>
 			</TerrainBooleans>
 			<WorldSoundscapeAudioScript>ASSS_BLACK_HOLE_SELECT_AMB</WorldSoundscapeAudioScript>
 		</FeatureInfo>

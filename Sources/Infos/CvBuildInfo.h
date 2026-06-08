@@ -70,19 +70,16 @@ private:
 	int m_iCost;
 	TechTypes m_iTechPrereq;
 	ImprovementTypes m_iImprovement;
-	int m_iRoute;
-	int m_iTerrainChange;
-	int m_iFeatureChange;
+	RouteTypes m_iRoute;
+	TerrainTypes m_iTerrainChange;
+	FeatureTypes m_iFeatureChange;
 	TechTypes m_iObsoleteTech;
-	int m_iEntityEvent;
+	EntityEventTypes m_iEntityEvent;
 	int m_iMissionType;
 
 	// Arrays
 
-	int* m_paiFeatureTech;
-	int* m_paiFeatureTime;
-	int* m_paiFeatureProduction;
-	bool* m_pabFeatureRemove;
+	std::vector<FeatureStruct> m_aFeatureStructs;
 
 	std::vector<int> m_aiCategories;
 	std::vector<BonusTypes> m_aiPrereqBonusTypes;

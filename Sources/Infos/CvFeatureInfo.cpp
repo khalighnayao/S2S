@@ -73,8 +73,7 @@ m_iEffectProbability(0),
 m_piYieldChange(NULL),
 m_piRiverYieldChange(NULL),
 m_pi3DAudioScriptFootstepIndex(NULL),
-m_pbTerrain(NULL)
-,m_iSpreadProbability(0)
+m_iSpreadProbability(0)
 ,m_iCultureDistance(0)
 ,m_iPopDestroys(-1)
 ,m_bIgnoreTerrainCulture(false)
@@ -97,7 +96,6 @@ CvFeatureInfo::~CvFeatureInfo()
 	SAFE_DELETE_ARRAY(m_piYieldChange);
 	SAFE_DELETE_ARRAY(m_piRiverYieldChange);
 	SAFE_DELETE_ARRAY(m_pi3DAudioScriptFootstepIndex);
-	SAFE_DELETE_ARRAY(m_pbTerrain);
 
 }
 
@@ -312,7 +310,7 @@ int CvFeatureInfo::get3DAudioScriptFootstepIndex(int i) const
 bool CvFeatureInfo::isTerrain(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumTerrainInfos(), i);
-	return m_pbTerrain ? m_pbTerrain[i] : false;
+	return algo::any_of_equal(m_aeTerrain, static_cast<TerrainTypes>(i));
 }
 
 
@@ -456,7 +454,7 @@ bool CvFeatureInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(m_szEffectType, L"EffectType");
 	pXML->GetOptionalChildXmlValByName(&m_iEffectProbability, L"iEffectProbability");
 
-	pXML->SetVariableListTagPair(&m_pbTerrain, L"TerrainBooleans", GC.getNumTerrainInfos());
+	pXML->SetOptionalVector(&m_aeTerrain, L"TerrainBooleans");
 
 	pXML->GetOptionalChildXmlValByName(&m_iSpreadProbability, L"iSpread");
 	pXML->GetOptionalChildXmlValByName(&m_iCultureDistance, L"iCultureDistance");
@@ -545,18 +543,7 @@ void CvFeatureInfo::copyNonDefaults(const CvFeatureInfo* pClassInfo)
 	if (getEffectType() == cDefault) m_szEffectType = pClassInfo->getEffectType();
 	if (getEffectProbability() == iDefault) m_iEffectProbability = pClassInfo->getEffectProbability();
 
-	for ( int i = 0; i < GC.getNumTerrainInfos(); i++ )
-	{
-		if ( isTerrain(i) == bDefault && pClassInfo->isTerrain(i) != bDefault )
-		{
-			if ( m_pbTerrain == NULL )
-			{
-				CvXMLLoadUtility::InitList(&m_pbTerrain, GC.getNumTerrainInfos());
-			}
-
-			m_pbTerrain[i] = pClassInfo->isTerrain(i);
-		}
-	}
+	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeTerrain, pClassInfo->m_aeTerrain);
 
 	if (getSpreadProbability() == iDefault) m_iSpreadProbability = pClassInfo->getSpreadProbability();
 	if (getCultureDistance() == iDefault) m_iCultureDistance = pClassInfo->getCultureDistance();
@@ -609,7 +596,7 @@ void CvFeatureInfo::getCheckSum(uint32_t &iSum) const
 	CheckSum(iSum, m_piYieldChange, NUM_YIELD_TYPES);
 	CheckSum(iSum, m_piRiverYieldChange, NUM_YIELD_TYPES);
 
-	CheckSum(iSum, m_pbTerrain, GC.getNumTerrainInfos());
+	CheckSumC(iSum, m_aeTerrain);
 	m_PropertyManipulators.getCheckSum(iSum);
 }
 
