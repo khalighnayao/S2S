@@ -1,5 +1,18 @@
 # Derived-data repository — architecture plan
 
+> **Part of a larger frame.** This is the **read-side** of the AI architecture north-star
+> ([`ai-architecture-north-star.md`](ai-architecture-north-star.md)) — the change-driven derived-data
+> modules. Placement is **on the base objects** (`CvGame`/`CvTeam`/`CvPlayer`/`CvCity`), not the AI
+> subclasses (so the data isn't trapped in the classes we're dissolving, and it can absorb the
+> UI-shared `canConstruct` caches). Read the north-star for the goal, the hard constraints
+> (VC2003/C++03, EXE base-class ABI, MP lockstep determinism), and how this fits the unit-AI and
+> backend work. Two corrections to the §6.1 below, established since: (a) constructibility depends on
+> more than tech/building/civic/bonus — also population, culture, and city *properties* (which move
+> often) — so the constructible set is a **bounded-staleness** datum, not event-exact; (b) there are
+> already **three** `canConstruct` caches to **absorb** (not add a fourth):
+> `CvPlayer::m_bCanConstruct[]`, `CvCity::m_bCanConstruct`,
+> `CvCityAI::BuildingValueCache::m_buildingsToCalculate`.
+
 **Four drivers, served by one pattern** (they reinforce each other, not compete):
 
 1. **Only (re)calculate what changed** — stop wiping whole caches every turn and rebuilding from
