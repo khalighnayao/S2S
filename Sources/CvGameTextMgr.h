@@ -200,6 +200,12 @@ public:
 	// improvement) from the unified prerequisite model, replacing the per-type hand-rolled
 	// loops in buildBuildingRequiresString.
 	void appendVicinityRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req);
+	// #195 Phase 2: status-aware renderer for a model requirement. Filters by what the city
+	// already has (via CvGameObject::hasGOM, the same oracle the construct-condition uses) and
+	// renders the unmet items as a "Requires: <links>" list (AND for REQUIRE_ALL, OR otherwise).
+	void appendRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req, const CvCity* pCity);
+	// #195 Phase 2: format one GOM (type,id) as a clickable <link>description</link>.
+	bool buildRequirementItemLink(GOMTypes eGOM, int iId, CvWString& szOut) const;
 	void buildMaintenanceModifiersString(CvWStringBuffer& szBuffer, TechTypes eTech, bool bList);
 
 	DllExport void buildCityBillboardIconString( CvWStringBuffer& szBuffer, CvCity* pCity);

@@ -18287,6 +18287,76 @@ void CvGameTextMgr::appendVicinityRequirementHelp(CvWStringBuffer& szBuffer, con
 	}
 }
 
+// #195 Phase 2: format one GOM (type, id) as a clickable <link>description</link>. Returns
+// false for GOM types this renderer does not display (caller skips them).
+bool CvGameTextMgr::buildRequirementItemLink(GOMTypes eGOM, int iId, CvWString& szOut) const
+{
+	switch (eGOM)
+	{
+	case GOM_BUILDING:    szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getBuildingInfo(static_cast<BuildingTypes>(iId)).getType()).GetCString(), GC.getBuildingInfo(static_cast<BuildingTypes>(iId)).getDescription()); return true;
+	case GOM_TECH:        szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getTechInfo(static_cast<TechTypes>(iId)).getType()).GetCString(), GC.getTechInfo(static_cast<TechTypes>(iId)).getDescription()); return true;
+	case GOM_BONUS:       szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getBonusInfo(static_cast<BonusTypes>(iId)).getType()).GetCString(), GC.getBonusInfo(static_cast<BonusTypes>(iId)).getDescription()); return true;
+	case GOM_RELIGION:    szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getReligionInfo(static_cast<ReligionTypes>(iId)).getType()).GetCString(), GC.getReligionInfo(static_cast<ReligionTypes>(iId)).getDescription()); return true;
+	case GOM_CORPORATION: szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getCorporationInfo(static_cast<CorporationTypes>(iId)).getType()).GetCString(), GC.getCorporationInfo(static_cast<CorporationTypes>(iId)).getDescription()); return true;
+	case GOM_CIVIC:       szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getCivicInfo(static_cast<CivicTypes>(iId)).getType()).GetCString(), GC.getCivicInfo(static_cast<CivicTypes>(iId)).getDescription()); return true;
+	case GOM_TERRAIN:     szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getTerrainInfo(static_cast<TerrainTypes>(iId)).getType()).GetCString(), GC.getTerrainInfo(static_cast<TerrainTypes>(iId)).getDescription()); return true;
+	case GOM_FEATURE:     szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getFeatureInfo(static_cast<FeatureTypes>(iId)).getType()).GetCString(), GC.getFeatureInfo(static_cast<FeatureTypes>(iId)).getDescription()); return true;
+	case GOM_IMPROVEMENT: szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getImprovementInfo(static_cast<ImprovementTypes>(iId)).getType()).GetCString(), GC.getImprovementInfo(static_cast<ImprovementTypes>(iId)).getDescription()); return true;
+	case GOM_HERITAGE:    szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getHeritageInfo(static_cast<HeritageTypes>(iId)).getType()).GetCString(), GC.getHeritageInfo(static_cast<HeritageTypes>(iId)).getDescription()); return true;
+	default:              return false;
+	}
+}
+
+// #195 Phase 2: status-aware renderer for a model requirement. Filters by what the city
+// already has via CvGameObject::hasGOM -- the same oracle the construct-condition evaluates
+// against -- so the displayed have/need status matches actual constructibility. Renders the
+// unmet items as a "Requires: <links>" list (AND for REQUIRE_ALL, OR otherwise). pCity NULL
+// (Civilopedia) treats nothing as satisfied, so the full requirement is shown.
+void CvGameTextMgr::appendRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req, const CvCity* pCity)
+{
+	// FORBID / COUNT carry bespoke wording ("not required", "N of"); not handled here.
+	if (req.eOp == REQOP_FORBID || req.eOp == REQOP_REQUIRE_COUNT)
+	{
+		return;
+	}
+	const CvGameObject* pObject = pCity ? pCity->getGameObject() : NULL;
+
+	// REQUIRE_ANY is met the moment the city has any one listed item -> show nothing.
+	if (req.eOp == REQOP_REQUIRE_ANY && pObject != NULL)
+	{
+		foreach_(const int iId, req.aiIds)
+		{
+			if (pObject->hasGOM(req.eGOM, iId))
+			{
+				return;
+			}
+		}
+	}
+
+	const CvWString szSep = (req.eOp == REQOP_REQUIRE_ALL) ? gDLL->getText("TXT_KEY_AND") : gDLL->getText("TXT_KEY_OR");
+	bool bFirst = true;
+	foreach_(const int iId, req.aiIds)
+	{
+		// For REQUIRE_ALL, drop the items the city already satisfies (the per-field blocks
+		// did this "skip if has" filtering individually).
+		if (req.eOp == REQOP_REQUIRE_ALL && pObject != NULL && pObject->hasGOM(req.eGOM, iId))
+		{
+			continue;
+		}
+		CvWString szItem;
+		if (!buildRequirementItemLink(req.eGOM, iId, szItem))
+		{
+			continue;
+		}
+		setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), szItem, szSep.c_str(), bFirst);
+		bFirst = false;
+	}
+	if (!bFirst)
+	{
+		szBuffer.append(ENDCOLR);
+	}
+}
+
 void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, BuildingTypes eBuilding, bool bCivilopediaText, bool bTechChooserText, const CvCity* pCity)
 {
 	PROFILE_EXTRA_FUNC();
@@ -18657,34 +18727,14 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 			szBuffer.append(gDLL->getText("TXT_KEY_BUILDINGHELP_REQUIRES_ANY_BUILDING", GC.getBuildingInfo(ePrereqBuilding).getDescription()));
 		}
 
-		bFirst = true;
-		bool bValid = false;
-		if (pCity)
+		// #195 Phase 2: "requires one of these buildings" via the model + the unified hasGOM
+		// status oracle (GOM_BUILDING -> isActiveBuilding). The old block additionally treated
+		// an all-obsolete OR-set as satisfied; that minor display nuance is not reproduced.
+		foreach_(const ConstructRequirement& req, kBuilding.getConstructRequirements())
 		{
-			bValid = true;
-			for (int iI = 0; iI < kBuilding.getNumPrereqOrBuilding(); ++iI)
+			if (req.eGOM == GOM_BUILDING && req.eOp == REQOP_REQUIRE_ANY)
 			{
-				if (!GET_TEAM(pCity->getTeam()).isObsoleteBuilding((BuildingTypes)kBuilding.getPrereqOrBuilding(iI)))
-				{
-					bValid = false;
-					if (pCity->isActiveBuilding((BuildingTypes)kBuilding.getPrereqOrBuilding(iI)))
-					{
-						bValid = true;
-						break;
-					}
-				}
-			}
-		}
-		if (!bValid)
-		{
-			for (int iI = 0; iI < kBuilding.getNumPrereqOrBuilding(); ++iI)
-			{
-				setListHelp(
-					szBuffer, gDLL->getText("TXT_KEY_REQUIRES"),
-					GC.getBuildingInfo((BuildingTypes)kBuilding.getPrereqOrBuilding(iI)).getDescription(),
-					gDLL->getText("TXT_KEY_OR").c_str(), bFirst
-				);
-				bFirst = false;
+				appendRequirementHelp(szBuffer, req, pCity);
 			}
 		}
 
@@ -18774,38 +18824,14 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 				szBuffer.append(ENDCOLR);
 			}
 
-			if (kBuilding.getPrereqAndBonus() != NO_BONUS
-			&& (!pCity || !pCity->hasBonus((BonusTypes)kBuilding.getPrereqAndBonus())))
+			// #195 Phase 2: prereq bonuses (the single AND bonus + the OR list) via the model
+			// + the unified hasGOM status oracle (GOM_BONUS -> hasBonus).
+			foreach_(const ConstructRequirement& req, kBuilding.getConstructRequirements())
 			{
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_UNITHELP_REQUIRES_STRING", GC.getBonusInfo((BonusTypes)kBuilding.getPrereqAndBonus()).getTextKeyWide()));
-			}
-			szBonusList.clear();
-
-			bFirst = true;
-
-			foreach_(const BonusTypes ePrereqBonus, kBuilding.getPrereqOrBonuses())
-			{
-				if (!pCity || !pCity->hasBonus(ePrereqBonus))
+				if (req.eGOM == GOM_BONUS)
 				{
-					setListHelp(
-						szBonusList, gDLL->getText("TXT_KEY_REQUIRES"),
-						GC.getBonusInfo(ePrereqBonus).getDescription(),
-						gDLL->getText("TXT_KEY_OR").c_str(), bFirst
-					);
-					bFirst = false;
+					appendRequirementHelp(szBuffer, req, pCity);
 				}
-				else if (pCity)
-				{
-					bFirst = true;
-					break;
-				}
-			}
-
-			if (!bFirst)
-			{
-				szBonusList.append(ENDCOLR);
-				szBuffer.append(szBonusList);
 			}
 
 			if (NO_CORPORATION != kBuilding.getFoundsCorporation())
