@@ -22,6 +22,7 @@
 class CounterSet;
 class CvCity;
 class CvDeal;
+struct ConstructRequirement;
 class CvPopupInfo;
 class CvPlayer;
 
@@ -195,6 +196,10 @@ public:
 	bool buildPromotionString(CvWStringBuffer& szBuffer, TechTypes eTech, int iPromotionType, bool bFirst, bool bList) const;
 	void buildHintsList(CvWStringBuffer& szBuffer);
 	void buildBuildingRequiresString(CvWStringBuffer& szBuffer, BuildingTypes eBuilding, bool bCivilopediaText, bool bTechChooserText, const CvCity* pCity);
+	// #195 Phase 2: render a single "in-city-vicinity" requirement (terrain / feature /
+	// improvement) from the unified prerequisite model, replacing the per-type hand-rolled
+	// loops in buildBuildingRequiresString.
+	void appendVicinityRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req);
 	void buildMaintenanceModifiersString(CvWStringBuffer& szBuffer, TechTypes eTech, bool bList);
 
 	DllExport void buildCityBillboardIconString( CvWStringBuffer& szBuffer, CvCity* pCity);

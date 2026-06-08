@@ -18259,6 +18259,34 @@ void CvGameTextMgr::setHeritageHelp(CvWStringBuffer &szBuffer, const HeritageTyp
 }
 
 
+// #195 Phase 2: render one terrain / feature / improvement "requires ... in city vicinity"
+// requirement straight from the unified prerequisite model, replacing four near-identical
+// hand-rolled loops. Same TXT keys, separator (AND for REQUIRE_ALL, OR otherwise) and the
+// IN_CITY_VICINITY suffix as the code it supersedes.
+void CvGameTextMgr::appendVicinityRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req)
+{
+	const CvWString szJoin = (req.eOp == REQOP_REQUIRE_ALL) ? gDLL->getText("TXT_KEY_AND") : gDLL->getText("TXT_KEY_OR");
+	bool bFirst = true;
+	foreach_(const int iId, req.aiIds)
+	{
+		CvWString szDesc;
+		switch (req.eGOM)
+		{
+		case GOM_TERRAIN:     szDesc = GC.getTerrainInfo(static_cast<TerrainTypes>(iId)).getDescription(); break;
+		case GOM_FEATURE:     szDesc = GC.getFeatureInfo(static_cast<FeatureTypes>(iId)).getDescription(); break;
+		case GOM_IMPROVEMENT: szDesc = GC.getImprovementInfo(static_cast<ImprovementTypes>(iId)).getDescription(); break;
+		default: return; // not an in-vicinity requirement type
+		}
+		setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), szDesc, szJoin.c_str(), bFirst);
+		bFirst = false;
+	}
+	if (!bFirst)
+	{
+		szBuffer.append(gDLL->getText("TXT_KEY_IN_CITY_VICINITY"));
+		szBuffer.append(ENDCOLR);
+	}
+}
+
 void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, BuildingTypes eBuilding, bool bCivilopediaText, bool bTechChooserText, const CvCity* pCity)
 {
 	PROFILE_EXTRA_FUNC();
@@ -18673,60 +18701,16 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 				bFirst = false;
 			}
 		}
-		bFirst = true;
-		for (int iI = 0; iI < GC.getNumTerrainInfos(); ++iI)
+		// #195 Phase 2: terrain (Or/And), improvement (Or) and feature (Or) "in city
+		// vicinity" requirements, rendered from the unified model instead of four
+		// near-identical hand-rolled loops. appendVicinityRequirementHelp reproduces the
+		// per-block TXT keys, AND/OR separator and IN_CITY_VICINITY suffix.
+		foreach_(const ConstructRequirement& req, kBuilding.getConstructRequirements())
 		{
-			if (kBuilding.isPrereqOrTerrain(iI))
+			if (req.eGOM == GOM_TERRAIN || req.eGOM == GOM_FEATURE || req.eGOM == GOM_IMPROVEMENT)
 			{
-				setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), GC.getTerrainInfo((TerrainTypes)iI).getDescription(), gDLL->getText("TXT_KEY_OR").c_str(), bFirst);
-				bFirst = false;
+				appendVicinityRequirementHelp(szBuffer, req);
 			}
-		}
-		if (!bFirst)
-		{
-			szBuffer.append(gDLL->getText("TXT_KEY_IN_CITY_VICINITY"));
-			szBuffer.append(ENDCOLR);
-		}
-
-		bFirst = true;
-		for (int iI = 0; iI < GC.getNumTerrainInfos(); ++iI)
-		{
-			if (kBuilding.isPrereqAndTerrain(iI))
-			{
-				setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), GC.getTerrainInfo((TerrainTypes)iI).getDescription(), gDLL->getText("TXT_KEY_AND").c_str(), bFirst);
-				bFirst = false;
-			}
-		}
-		if (!bFirst)
-		{
-			szBuffer.append(gDLL->getText("TXT_KEY_IN_CITY_VICINITY"));
-			szBuffer.append(ENDCOLR);
-		}
-
-		bFirst = true;
-		foreach_(const ImprovementTypes prereqOrImprovement, kBuilding.getPrereqOrImprovements())
-		{
-			setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), GC.getImprovementInfo(prereqOrImprovement).getDescription(), gDLL->getText("TXT_KEY_OR").c_str(), bFirst);
-			bFirst = false;
-		}
-		if (!bFirst)
-		{
-			szBuffer.append(gDLL->getText("TXT_KEY_IN_CITY_VICINITY"));
-			szBuffer.append(ENDCOLR);
-		}
-		bFirst = true;
-		for (int iI = 0; iI < GC.getNumFeatureInfos(); ++iI)
-		{
-			if (kBuilding.isPrereqOrFeature(iI))
-			{
-				setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), GC.getFeatureInfo((FeatureTypes)iI).getDescription(), gDLL->getText("TXT_KEY_OR").c_str(), bFirst);
-				bFirst = false;
-			}
-		}
-		if (!bFirst)
-		{
-			szBuffer.append(gDLL->getText("TXT_KEY_IN_CITY_VICINITY"));
-			szBuffer.append(ENDCOLR);
 		}
 
 		if (pCity && kBuilding.isAllowsNukes() && GC.getGame().isNoNukes())
