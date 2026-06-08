@@ -46,17 +46,34 @@ value (apply a delta rather than recompute) is a per-datum *bonus*; the requirem
   `CvPlayerAI`/`CvCityAI`) owns one (`m_dataRepository`), exposes `AI_dataRepository()`, and wires
   its back-pointer via `init(this)` in its constructor. Header-only; Assert build clean.
   **No data yet** — added case by case per §6.
-- **Related perf fix already shipped** (independent of the repository): the constructible-set
-  memoization on the per-city `BuildingValueCache` (§6 step 1's trivial first step) — CABV 3.6×. See
-  [`turn-time-optimization.md`](turn-time-optimization.md).
+- **Related perf fix already shipped** (independent of the repository): the *within-turn*
+  constructible-set memoization on the per-city `BuildingValueCache` (§6 step 1's trivial first
+  step) — CABV 3.6×. See [`turn-time-optimization.md`](turn-time-optimization.md).
+- **First real repository entry is identified and evidence-backed but NOT yet implemented:** the
+  *cross-turn* retention of that same constructible set (§6.1). Measurement now shows it is the
+  highest-value action in the whole turn (PreLoop ≈ 30% of turn-time) and the `[PERF/cabvset]`
+  data proves the set is flat turn-over-turn, so event-driven invalidation is safe. This is the
+  next step whenever the repository work is picked up.
 
 ---
 
 ## 1. Why now — the evidence
 
-- **Measured:** `CalculateAllBuildingValues` is the dominant late-game turn cost, and its `PreLoop`
-  (`CvCityAI.cpp:12583-12630`) is 94% of it — recomputing a *flag-independent* set on every call.
-  See [`turn-time-optimization.md`](turn-time-optimization.md).
+- **Measured (wall-clock `[PERF]`, steady-state late game):** `CalculateAllBuildingValues` is the
+  dominant late-game turn cost, and its `PreLoop` (`CvCityAI.cpp:12599`) is the single biggest leaf
+  in the whole turn — **~11.2 s of a ~37 s turn (~30%)**. It runs **~91×/turn** (≈ once per city
+  cache-build) at **~123 ms each**. The turn is ~80% one chain: `CvPlayer::doTurn` → `doTurn.cities`
+  → `city.doProduction` → `AI_chooseProduction` → `CalculateAllBuildingValues` → `PreLoop`. The
+  plot/unit-scaling paths everyone first suspected are negligible (visibility ~35 ms, property
+  ~180 ms, units ~1.2 s). See [`turn-time-optimization.md`](turn-time-optimization.md).
+- **Retention is provably safe & high-value:** the `[PERF/cabvset]` log shows the PreLoop's output
+  set is **flat turn-over-turn** (per city: 117–123 / 166–168 / 214–216). The rebuild is therefore
+  redundant — constructibility only moves on discrete events (tech, building completed, civic,
+  bonus). This is the direct evidence that **change-driven invalidation will keep the set correct
+  while eliminating ~91 rebuilds/turn.**
+- **The within-turn memoization is already banked** (the trivial first step): the set is computed
+  once per cache-build instead of once per CABV call (`preloop=0` on repeat calls). The remaining
+  work is *cross-turn* retention behind the repository (§6.1).
 - **The pattern is everywhere, done the brute-force way:** `CvPlayerAI::AI_doTurnPre` wipes
   `m_cachedTechValues`, `m_aiCivicValueCache`, `m_numBuildingsNeeded`, `m_missionTargetCache`,
   `plotDangerCache`, and re-runs `AI_updateBonusValue()` — **every turn, unconditionally**. That is a
@@ -185,12 +202,20 @@ These are non-negotiable given the production-cache hang we already hit:
 
 1. **Prove the pattern on the measured #1 cost — the constructible set (PreLoop).** Move the
    PreLoop body into `CvCityAI::computeConstructibleSet()` behind a `TLazy<std::set<BuildingTypes>>`
-   on the city. Invalidate from `onBuildingChanged`/`onTechAcquired`/`onBonusChanged`. Backstop:
-   invalidate when the existing per-turn `BuildingValueCache` is (re)built. Measure `preloop` drop.
+   on the city. Invalidate from `onBuildingChanged`/`onTechAcquired`/`onBonusChanged`/`onCivicChanged`.
+   Backstop: invalidate when the existing per-turn `BuildingValueCache` is (re)built (keep until the
+   event hooks are proven complete). Measure the `preloop` drop via `[PERF/cabv]`.
    - *Trivial first step — DONE (shipped, 3.6× CABV):* memoized the set on the existing per-city
-     `BuildingValueCache` so it's computed once per cache-lifetime instead of once per CABV call —
-     redundant within-turn reruns gone, zero new staleness. The cross-turn event-driven version
-     (this step proper, behind the repository) is the remaining work.
+     `BuildingValueCache` (`m_buildingsToCalculate` + `m_buildingsToCalculateValid`) so it's computed
+     once per cache-lifetime instead of once per CABV call — redundant within-turn reruns gone, zero
+     new staleness.
+   - *Go-signal for the cross-turn version (this step proper):* the `[PERF/cabvset]` instrument
+     (`CvCityAI.cpp`, logs `constructible/enablers/setSize` per cache-build) confirms the set is
+     **flat turn-over-turn** — so retaining it across turns and invalidating only on the four events
+     above is correctness-safe and removes ~91 PreLoop rebuilds/turn (~11.2 s/turn, ~30% of the
+     turn). The flag already exists; the work is (a) lift the set onto the City repository member,
+     (b) flip the per-turn flush to event-driven invalidation, (c) run debug-verify (§5.6) for a few
+     sessions to catch any missing hook before removing the backstop flush.
 2. **Absorb the `AI_doTurnPre` per-turn clears one at a time.** Convert each blanket `.clear()`
    (tech value, civic value, needed-building counts, bonus value) into event-driven invalidation.
    Acceptance: `AI_doTurnPre` no longer unconditionally wipes that datum.

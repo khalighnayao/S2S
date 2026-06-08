@@ -17,6 +17,18 @@ architecture rules that apply to DLL source.
 - `.claude/skills/` — project-exclusive Claude Code skills (see "Project Skills" below).
 
 ## Build And Test
+
+> **⛔ HARD RULE — the `.vcxproj` / `.sln` / `.vcxproj.filters` files are DEAD for build purposes. NEVER read them to learn ANY build fact.**
+> They are stale IDE-display artifacts that do **not** drive the build and are **not** kept in sync. Do **not** trust them for the
+> compiler, platform toolset, C++ standard/language version, preprocessor defines, include paths, optimization flags, or anything else.
+> Any build fact comes from **FastBuild only**: `Sources/fbuild.bff` (+ `Tools/_Build.ps1`). Treating the `.vcxproj` as truth has already
+> caused a wrong conclusion (its `PlatformToolset` says `v142`, which is FALSE — see the toolchain note below). When unsure, read `fbuild.bff`.
+>
+> **Actual toolchain (from `fbuild.bff`):** the vendored **Microsoft Visual C++ Toolkit 2003 = MSVC 7.1 (VC2003)** compiler/linker
+> (`Build/deps/...`), **Python 2.4**, **Boost 1.32 / 1.55**. So the DLL is genuinely **C++03, 32-bit/x86** — *no* `std::thread`, *no* OpenMP,
+> *no* C++11+. This is a hard compiler limit (the toolchain is locked to stay ABI/STL-compatible with the closed VC7.1 game `.exe`), **not**
+> a style convention. In-process threading means raw Win32 only. Do not modernize or replace the build chain/toolchain.
+
 The build is driven by **`Tools/_Build.ps1`** (a FastBuild wrapper). Invoke it
 **from the `Sources/` directory**:
 
