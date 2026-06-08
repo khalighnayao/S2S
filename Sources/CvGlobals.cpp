@@ -3238,16 +3238,44 @@ void cvInternalGlobals::buildConstructibilityEnablerIndex()
 		const CvBuildingInfo& kC = getBuildingInfo(eC);
 		std::set<BuildingTypes> aEnablers;
 
-		// Direct building prerequisites (mirrors the PreLoop's isPrereqInCityBuilding /
-		// isPrereqOrBuilding test exactly).
-		for (int i = 0, n = kC.getNumPrereqInCityBuildings(); i < n; i++)
+		// Direct building prerequisites, read through the #195 Phase 2 unified requirement
+		// model. The GOM_BUILDING REQUIRE_ALL/REQUIRE_ANY requirements are exactly the typed
+		// InCity / Or building lists this loop used before (FORBID/COUNT are not enablers,
+		// so they are correctly skipped) -- the PreLoop's isPrereqInCityBuilding /
+		// isPrereqOrBuilding contract is preserved.
+		foreach_(const ConstructRequirement& req, kC.getConstructRequirements())
 		{
-			aEnablers.insert(static_cast<BuildingTypes>(kC.getPrereqInCityBuilding(i)));
+			if (req.eGOM == GOM_BUILDING && (req.eOp == REQOP_REQUIRE_ALL || req.eOp == REQOP_REQUIRE_ANY))
+			{
+				foreach_(const int iId, req.aiIds)
+				{
+					aEnablers.insert(static_cast<BuildingTypes>(iId));
+				}
+			}
 		}
-		for (int i = 0, n = kC.getNumPrereqOrBuilding(); i < n; i++)
+#if FASSERT_ENABLE
+		// Fidelity: the model must reproduce the typed lists the legacy index relied on.
 		{
-			aEnablers.insert(static_cast<BuildingTypes>(kC.getPrereqOrBuilding(i)));
+			std::set<BuildingTypes> aTyped;
+			for (int i = 0, n = kC.getNumPrereqInCityBuildings(); i < n; i++)
+			{
+				aTyped.insert(static_cast<BuildingTypes>(kC.getPrereqInCityBuilding(i)));
+			}
+			for (int i = 0, n = kC.getNumPrereqOrBuilding(); i < n; i++)
+			{
+				aTyped.insert(static_cast<BuildingTypes>(kC.getPrereqOrBuilding(i)));
+			}
+			std::set<BuildingTypes> aModel;
+			foreach_(const ConstructRequirement& req, kC.getConstructRequirements())
+			{
+				if (req.eGOM == GOM_BUILDING && (req.eOp == REQOP_REQUIRE_ALL || req.eOp == REQOP_REQUIRE_ANY))
+				{
+					foreach_(const int iId, req.aiIds) aModel.insert(static_cast<BuildingTypes>(iId));
+				}
+			}
+			FAssertMsg(aTyped == aModel, CvString::format("ConstructRequirement model diverges from typed building prereqs for %s", kC.getType()).c_str());
 		}
+#endif
 
 		// Construct-condition: any building/bonus it references is a potential enabler.
 		const BoolExpr* pCondition = kC.getConstructCondition();

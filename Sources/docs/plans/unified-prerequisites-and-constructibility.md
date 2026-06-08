@@ -164,13 +164,39 @@ so the turn-time win does not block on the (gameplay-sensitive) unification.
 4. Then: drive set invalidation off the index on `setHasBuilding`/bonus/tech change
    instead of full rebuild (the cross-turn retention step).
 
-### Phase 2 — Prereq → BoolExpr unification  *(#195 simplification, gameplay-sensitive)*
-5. Migrate GOM-expressible typed prereqs into the construct/train condition,
-   incrementally, one prereq family at a time, load-verifying each.
-6. Shrink `canConstructInternal`/`canTrain` to: non-GOM typed checks + one condition
-   eval. Keep `buildDisplayString`/civic-validation/Python consumers whole.
-7. Retire `calculateEnablesOtherBuildings`'s bool in favour of "has any dependents
-   in the index".
+### Phase 2 — Unified prerequisite model  *(additive aggregation layer, low risk)*
+
+Chosen over a BoolExpr-fold / `canConstruct`-rewrite: that path is multi-surface (city +
+player levels), would lose the per-prereq `probabilityEverConstructable` hints, and the
+turn-time win is already banked — so the remaining payoff is *introspection coherence*,
+best served by a unifying interface, not by rewriting the evaluator. `canConstruct` /
+`canTrain` evaluation (and its hints / gate stratification) stays untouched.
+
+**Increment 1 — DONE (model + first consumer):**
+- `Sources/ConstructRequirement.h` — `ConstructRequirement { GOMTypes eGOM;
+  ConstructRequirementOp eOp (ALL/ANY/FORBID/COUNT); vector<int> aiIds; int iCount; }`:
+  one introspectable prereq over a GOM type. Read-only description, not an evaluator.
+- `CvBuildingInfo::getConstructRequirements()` — built at load
+  (`buildConstructRequirements` in `doPostLoadCaching`) from the GOM-expressible typed
+  fields: GOM_BUILDING (InCity=ALL, Or=ANY, NotInCity=FORBID, NumOf=COUNT), GOM_TECH,
+  GOM_BONUS (And=ALL, Or=ANY), GOM_RELIGION, GOM_CORPORATION, GOM_CIVIC (And/Or),
+  GOM_OPTION.
+- The constructibility enabler index now reads building prereqs **through the model**
+  (GOM_BUILDING ALL+ANY = the old InCity+Or; FORBID/COUNT correctly skipped — not
+  enablers), guarded by a `FASSERT_ENABLE` fidelity assert that fires
+  `ConstructRequirement model diverges …` into `Asserts.log` at load if the model ever
+  disagrees with the typed fields. Builds clean (Assert).
+
+**Increment 2+ (next):**
+- `CvUnitInfo::getTrainRequirements()` (same model, train side) + migrate the unit-enabler
+  index dimension onto it.
+- Extend coverage: terrain / feature / improvement / heritage, vicinity-bonus and
+  state-religion variants (bespoke semantics); non-GOM prereqs (population, culture,
+  properties, war/power) stay typed and noted.
+- Migrate help text / Civilopedia rendering onto the model (the real fragmentation win;
+  `CvGameTextMgr` currently hand-enumerates each typed field).
+- (Optional, later) re-express `canConstruct` / `canTrain` on the model, shadow-verified,
+  preserving probability hints + gate stratification.
 
 ## Invariants to preserve
 - The `bExposed`/`bTestVisible`/`bIgnoreBuildings` gate stratification.

@@ -13,6 +13,7 @@
 
 #include "CvInfos.h"
 #include "IDValuemap.h"
+#include "ConstructRequirement.h"
 
 class BoolExpr;
 class CvArtInfoBuilding;
@@ -68,6 +69,11 @@ public:
 	bool getNotShowInCity() const;
 	bool EnablesOtherBuildings() const;
 	bool EnablesUnits() const						{ return m_bEnablesUnits; }
+
+	// #195 Phase 2: this building's GOM-expressible prerequisites in one introspectable
+	// list, derived from the typed Prereq* fields at load. Read-only description for the
+	// Civilopedia / help text / enabler index; canConstruct still does the evaluation.
+	const std::vector<ConstructRequirement>& getConstructRequirements() const { return m_constructRequirements; }
 
 	int getMaxGlobalInstances() const				{ return m_iMaxGlobalInstances; }
 	int getMaxTeamInstances() const					{ return m_iMaxTeamInstances; }
@@ -470,6 +476,7 @@ public:
 
 private:
 	void setNotShowInCity();
+	void buildConstructRequirements();
 
 	bool m_bNoLimit;
 	bool m_bNotShowInCity;
@@ -511,6 +518,9 @@ private:
 	bool m_bQuarantine;
 	bool m_bEnablesOtherBuildings;
 	bool m_bEnablesUnits;
+
+	// #195 Phase 2: unified prerequisite description, derived at load from the typed fields.
+	std::vector<ConstructRequirement> m_constructRequirements;
 
 	int m_iPrereqVicinityBonus;
 	int m_iPrereqRawVicinityBonus;
