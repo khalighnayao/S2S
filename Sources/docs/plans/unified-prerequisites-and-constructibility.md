@@ -224,14 +224,20 @@ prereq field. Migrating it onto the model, one cluster at a time, each visually 
   same oracle the construct-condition uses, so displayed status == real constructibility);
   renders unmet items as a `Requires: <links>` list (AND/OR by op). Formatting normalised to
   clickable links (old blocks mixed link / description / textkey).
-- **Cluster 2 — DONE:** prereq **Or-buildings** (was a bespoke active/obsolete `bValid`
-  scan → GOM_BUILDING REQUIRE_ANY) and prereq **bonuses** (single AND + OR list, two
-  `hasBonus` loops → GOM_BONUS). One nuance dropped: all-obsolete OR-building set no longer
-  special-cased. Builds clean. **Awaiting visual verification.**
-- **Next clusters:** InCity-buildings (REQUIRE_ALL; separate-line → joined-list change),
-  religion (`getChar` symbol → link — a UX call), tech And (`bTechChooserText` gating),
-  civics And/Or (the elaborate **show-all have/need colour-toggle** — does NOT fit the
-  show-only-unmet renderer; needs a colour mode), NotInCity (FORBID inverse). Each verified.
+- **Cluster 2 — DONE + verified ("text is fine, links work"):** prereq **Or-buildings**
+  (was an active/obsolete `bValid` scan → GOM_BUILDING REQUIRE_ANY) and prereq **bonuses**
+  (single AND + OR list → GOM_BONUS). Nuance dropped: all-obsolete OR-building set no longer
+  special-cased.
+- **Cluster 3 — DONE (awaiting verification):** **InCity-buildings** (GOM_BUILDING
+  REQUIRE_ALL; all-infos scan + per-line `Requires <link>` → one joined unmet list) and
+  **civics** (AND + OR). Civics keep their show-all colour-coded UX via a dedicated
+  `appendCivicRequirementHelp()` (have = green, need = red) that returns met-status for the
+  `RequiresActiveCivics` note — replaced ~55 lines of two colour-toggle loops.
+- **Intentionally left as-is:** **tech** (`bTechChooserText` gating + the model combines
+  PrereqAndTech/AndTechs so the single-vs-list distinction the chooser needs is lost),
+  **religion** (a coherent group rendered as `getChar` symbols — symbol vs link is a UX call),
+  **NotInCity** (FORBID, "not required" inverse wording), and the non-GOM / vicinity-bonus /
+  state-religion / holy-city blocks. These are documented exceptions, not omissions.
 
 **Increment 5+ (optional, later):** re-express `canConstruct` / `canTrain` on the model,
 shadow-verified, preserving probability hints + gate stratification.
