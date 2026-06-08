@@ -1,26 +1,68 @@
 # Turn-Time Optimization — Investigation & Hot-Path Map
 
-**Status:** Investigation complete; no code changes yet. This is a problem map to drive a
-measured optimization pass.
+**Status:** Measured. `[PERF]` wall-clock instrumentation has located the cost. The static
+big-O suspect list (below) was the starting hypothesis; **measurement superseded it** —
+most suspects are negligible and one path nobody flagged dominates. Optimization target
+identified; first lever not yet implemented.
 
 **Question that started this:** late-game turns take *significantly* longer than early
-turns. How much of that is just "more cities," and what scales worse than linearly with
-game progress (tech count, unit count, revealed-plot count) regardless of city count?
-
-**Headline answer:** city count is only one driver. There are several per-turn passes that
-scale with **revealed plots** or **unit count** rather than cities, plus a handful of
-per-turn re-invocation ("spin") bugs whose cost grows with unit count. The single most
-suspicious item is an every-turn full-map visibility recompute that the source itself
-labels a "stickytape" hack.
-
-> **Measure before cutting.** Every claim below is a static read of the code. The repo
-> already ships a working sampling profiler — use it to confirm which of these actually
-> dominate *before* optimizing. See [Profiling](#profiling-how-to-measure). The big-O
-> labels are guides to *where to look*, not evidence that a path is hot.
+turns — what scales worse than "more cities"?
 
 ---
 
-## TL;DR ranked suspects
+## MEASURED CONCLUSION (authoritative — supersedes the static suspects below)
+
+The turn is **not** spread across the plot/unit-scaling passes we first suspected. It is
+~80% **one chain**, and within it a single loop dominates. Per-turn averages from a clean
+late-game run (`gPerfLogLevel=1`, Autolog off, ~9 turns, ~37 s/turn wall clock):
+
+```
+CvPlayer::doTurn               32.6 s   ← essentially the whole turn
+└─ doTurn.cities               26.4 s   (81% of the player turn)
+   └─ city.doProduction        22.8 s
+      └─ AI_chooseProduction    21.9 s
+         └─ CalculateAllBuildingValues 16.9 s
+            ├─ PreLoop (canConstruct sweep)  11.2 s  ◄── #1: ~30% of the ENTIRE turn
+            ├─ building valuation             3.8 s
+            └─ all other dimensions          ~1.9 s
+```
+
+Everything else is rounding error by comparison: `recalculateAllResourceConsumption` 1.9 s,
+`game.autoSave` 1.4 s (periodic), `doTurnUnits` 1.2 s, `AI_doDiplo` 0.6 s, visibility
+"stickytape" ~0.035 s, property solver ~0.18 s.
+
+**The hotspot is the CABV PreLoop** (`CvCityAI.cpp:12599`) — the `canConstruct()` sweep over
+all building types plus the enabler inner loop (`O(enablers × buildings)` of
+`BoolExpr::evaluateChange`). It runs **~91×/turn** (≈ once per city cache-build) at **~123 ms
+each = 11.2 s/turn**.
+
+**The #1 lever: cross-turn retention of the constructible set.** The PreLoop is flushed and
+fully rebuilt every turn, but its output barely changes — measured per-city `setSize` is
+**flat** turn-over-turn (city 24596: 117–123; city 8198: 166–168; city 24585: 214–216).
+That flatness is the proof the rebuild is redundant: constructibility only changes on
+discrete events (tech, building completed, civic, bonus). Retaining the set across turns with
+**event-driven invalidation** plausibly removes most of the 11.2 s/turn (~25–30% off the
+whole turn). **This is exactly step 1 of the derived-data repository** — see
+[`derived-data-repository.md`](derived-data-repository.md) §6.1. Second lever: a Game-level
+reverse-index ("which buildings' construct-conditions reference building X") to prune the
+quadratic enabler loop (repository §6.3).
+
+**On "slower and slower":** investigated and **closed — it is episodic/state-driven, not a
+monotonic leak.** One heavy stretch (a war/build spree) showed steep linear creep (R²=0.94),
+but a later equally-long stretch was flat (R²=0.03), and per-city `setSize` does not grow.
+Reload clears a transient component but there is no steady accumulator to chase. Tooling for
+re-checking shipped: `Tools/turn-perf-trend.awk` (least-squares creep verdict) and
+`[PERF/cabvset]` (set-size log). Do **not** prioritize the degradation; optimize the absolute
+hotspot (the PreLoop) instead.
+
+---
+
+## TL;DR ranked suspects (STATIC pre-measurement hypothesis — mostly DISPROVEN)
+
+> **Historical.** This big-O table was the *starting* map from a static code read. Keep it
+> for the plot/unit-scaling analysis, but the **measured** verdict above overrides it: #1
+> (visibility) measured ~35 ms, #8 (property) ~180 ms, #3 (units) ~1.2 s — none is the cost.
+> The real hotspot (CABV PreLoop) is an economic/per-city path that did **not** appear here.
 
 | # | Hot path | File:line | Scales with | Per-turn frequency |
 |---|----------|-----------|-------------|--------------------|
@@ -200,6 +242,15 @@ fallback for drilling deeper.
 
 ### Intra-session growth diagnostic (turn times climb the longer you play, reset on reload)
 
+> **CLOSED — episodic, not a leak.** Resolved with `[PERF/cabvset]` + `Tools/turn-perf-trend.awk`:
+> creep does **not** steadily reproduce (one stretch R²=0.94 steep, the next R²=0.03 flat), and
+> per-city constructible `setSize` is flat turn-over-turn. The growth was a heavy game-state stretch
+> (war/build spree), not an in-memory accumulator. **No leak to chase** — optimize the absolute
+> hotspot (CABV PreLoop) instead. The hypotheses below are kept as the investigation trail; all were
+> either disproven (contract broker EXONERATED, see next block) or rendered moot by the cabvset data.
+> Re-run the trend check if a future session feels like steady creep:
+> `awk -f Tools/turn-perf-trend.awk -v phase=total "$LOGS/Performance.log"`.
+
 Owner observation: turn time grows turn-over-turn within a session and **resets on game reload**.
 That is a sharp signal — reload reconstructs everything *from the save*, so unit/city **counts
 are preserved** across a reload. Therefore a phase that grows-and-resets is driven by
@@ -282,6 +333,21 @@ Instrumented top-to-bottom through the per-turn hot path (prune later if noisy).
   `city.AI_updateWorkersNeededHere`, `city.doCheckProduction`, `city.doCulture`,
   `city.doProduction`, `city.AI_chooseProduction`, `city.CalculateAllBuildingValues`,
   `city.AI_bestUnitAI`.
+- **`CvGame::doTurn` tail split (`game.*`, owner=-1):** every call in `doTurn` is now wrapped so
+  the parent total has ~no unaccounted gap — `game.doDeals`, `game.teamDoTurn`, `game.mapDoTurn`,
+  `game.barbarians`, `game.doSpawns`, `game.doGlobalWarming`, `game.doHeadquarters`,
+  `game.doDiploVote`, `game.writePlotSnapshot`, `game.doUpdateCacheOnTurn`, `game.updateScore`,
+  `game.difficulty`, `game.doFoundCorporations`, `game.testVictory`, `game.engineDoTurn`,
+  **`game.autoSave`** (the periodic spike — engine save inside the timer), and the three Python
+  event hooks `game.py.beginGameTurn` / `game.py.preEndGameTurn` / `game.py.endGameTurn` (confirmed
+  light: the Revolution stability hook + `onBeginGameTurn`; the Zizkov map-jam is one-shot on
+  build, NOT periodic).
+- **CABV internals (`[PERF/cabv]`, accumulating `PERF_ACCUM`):** 13 sub-dimensions per call —
+  `preloop` (the hotspot), `building`, `defense`, `happy`, `health`, `exp`, `notdev`, `sea`,
+  `maint`, `spec`, `commerceYields`, `commerceVal`, `food` — plus `flags` (focus) and `owner`.
+- **CABV set composition (`[PERF/cabvset]`):** `turn= owner= city= numBuildings= constructible=
+  enablers= setSize=` logged once per cache-build — the leak-vs-growth discriminator (setSize
+  flat ⇒ no set growth).
 
 Per-city scopes log once per city (and `AI_bestUnitAI` several times per production choice), so
 **aggregate by phase label**. Total ms per phase across the whole log:
@@ -297,6 +363,27 @@ Read it as a tree: `CvPlayer::doTurn` ≈ `doTurn.cities` + `doTurn.AI_doTurnPre
 (+ `AI_updateBestBuild`/`WorkersNeededHere`) + `city.doProduction` (→ `AI_chooseProduction` →
 `CalculateAllBuildingValues` + `AI_bestUnitAI`) + the rest. Whichever leaf carries the mass is
 the optimization target.
+
+### Creep check ("does it go slower and slower?")
+
+`Tools/turn-perf-trend.awk` sums a phase per game-turn, least-squares-fits `ms = a + b*turn`
+across the session, and prints the slope (ms added per turn), %/turn of the mean, R²
+(trustworthiness of the trend) and a `CREEP` / `weak` / `flat` verdict. It drops a partial
+trailing turn automatically and needs ≥3 complete turns.
+```
+LOGS="$USERPROFILE/Documents/My Games/Beyond The Sword/Logs"
+awk -f Tools/turn-perf-trend.awk                       "$LOGS/Performance.log"  # CvPlayer::doTurn
+awk -f Tools/turn-perf-trend.awk -v phase=total        "$LOGS/Performance.log"  # whole-turn wall clock
+awk -f Tools/turn-perf-trend.awk -v phase=doTurn.cities -v lo=1300 -v hi=1360 "$LOGS/Performance.log"
+```
+**Leak vs growth:** a positive slope alone doesn't prove a per-session leak — teching up grows
+the CABV constructible set, so `doTurn.cities` heavier late-game is *expected*. To separate them,
+play a window, save+reload mid-session, and re-run the script on a fresh-session log: if the
+fresh session starts lower and re-climbs → session leak; if it starts at the same mean → genuine
+model growth. (NOTE: `Performance.log` is rewritten per session — copy it off before reloading if
+you want to diff the same turn numbers before/after.) A 19-turn late-game sample measured slope
+≈ +447 ms/turn (+1.6%/turn, R²≈0.43) — creep is real but modest, and concentrated in
+`doTurn.cities` (CABV), consistent with constructible-set growth rather than a leak.
 
 ## FProfiler: how to measure (deeper, fallback)
 
@@ -321,16 +408,37 @@ The repo also ships a complete sampling profiler.
 
 ---
 
-## Suggested next steps (in order)
+## Suggested next steps (in order) — REVISED post-measurement
 
-1. **Measure** with a `ProfileExtra` DLL on a late-game save; rank by self-time. (No code risk.)
-2. **Visibility hack (#1):** investigate the underlying visibility-count drift the "stickytape"
-   works around; if fixable or gateable to load-only, this may be the largest single win.
-3. **Pathfinding/spins (#3):** add cascade-depth + per-unit path-count logging (extend existing
-   `[UNT]` taxonomy) to find units that hit the `iTempHack` cap; fix remaining spin sources.
-4. **Cheap O(n) wins (#6, #7):** make resource-consumption and can-construct caches
-   event-driven (invalidate on actual change) instead of full recompute/flush every turn.
-5. Re-measure after each change; keep the profiler DLL around as the regression check.
+Measurement is done; the ranking is no longer "go measure" — it's "go fix the PreLoop." In
+priority order by measured payoff:
+
+1. **CABV PreLoop cross-turn retention (the win).** Retain the constructible set across turns
+   with event-driven invalidation instead of rebuilding it ~91×/turn. This is **step 1 of the
+   derived-data repository** ([`derived-data-repository.md`](derived-data-repository.md) §6.1) —
+   the within-turn memoization (`m_buildingsToCalculate` + `m_buildingsToCalculateValid`) is
+   already in place; this extends it across the turn boundary, invalidating on
+   tech/building/civic/bonus events. Target: most of 11.2 s/turn (~25–30% of the whole turn).
+   Safety: the constructible *set* is an input, not a loop-driving value — does not risk the
+   `AI_chooseProduction` hang (repository §5.2). Backstop: keep the per-turn flush until the
+   event hooks are proven complete (debug-verify mode, §5.6).
+2. **Prune the quadratic enabler loop.** A Game-level reverse-index of construct-condition
+   dependencies (`EnablesOtherBuildings` graph) lets the PreLoop skip the `O(enablers ×
+   buildings)` `evaluateChange` scan — repository §6.3 (the global/static tier). Tackle if
+   step 1's retention isn't enough (it usually will be).
+3. **`recalculateAllResourceConsumption` (1.9 s/turn)** — full recompute every turn; convert to
+   event-driven (repository §6.2). Secondary; an order of magnitude below the PreLoop.
+4. **`game.autoSave` periodic spike** — the every-N-turns `CvGame::doTurn` spike is the engine
+   autosave (line 5995, inside the timer). Not AI cost; if the perf metric should exclude it,
+   end the `CvGame::doTurn` PERF_SCOPE before `AutoSave()` while keeping the `game.autoSave`
+   sub-scope. Cosmetic, not a speedup.
+5. Re-measure with `[PERF]` after each change; `Tools/turn-perf-trend.awk` is the regression check.
+
+Deprioritized by measurement (kept for completeness, NOT worth the risk now): the visibility
+"stickytape" (~35 ms), pathfinding/unit spins (`doTurnUnits` ~1.2 s and not the bottleneck),
+property solver (~180 ms). The original "measure with a ProfileExtra DLL" step is done — the
+`[PERF]` wall-clock path replaced it; FProfiler remains the fallback for drilling *inside* the
+PreLoop if step 1 needs it.
 
 ## City & Unit AI loop hot-paths (structural; confirm with `[PERF]`/FProfiler)
 

@@ -152,18 +152,27 @@ Implemented with a RAII scope timer (`PERF_SCOPE(phase, owner)` →
 scope exit. Cost when off is a single integer compare, so it ships in normal DLLs.
 
 - `[PERF/phase]` (1) — `turn=<n> owner=<playerId|-1> phase=<label> ms=<elapsed>`. `owner=-1`
-  marks game/map-scope phases. ~20 scopes across the per-turn path: `CvGame::doTurn`,
-  `doTurn.visibilityRebuild`, `CvPlayer::doTurn` (per player) split into
-  `doTurn.cities`/`AI_doTurnPre`/`AI_doTurnPost`, the `AI_doTurnPre` internals (`pre.*`), and the
-  per-city tree (`city.doTurn` → `cacheFlush`/`AI_doTurn`/`doProduction`/`AI_chooseProduction`/
-  `CalculateAllBuildingValues`/…, tagged by city owner). Aggregate by label.
+  marks game/map-scope phases. ~40 scopes across the per-turn path: `CvGame::doTurn` and its full
+  tail (`game.*` — `doDeals`/`teamDoTurn`/`mapDoTurn`/`doSpawns`/`writePlotSnapshot`/`autoSave`/… +
+  the 3 Python hooks `game.py.beginGameTurn`/`preEndGameTurn`/`endGameTurn`), `CvPlayer::doTurn` (per
+  player) split into `doTurn.cities`/`AI_doTurnPre`/`AI_doTurnPost`, the `AI_doTurnPre` internals
+  (`pre.*`), and the per-city tree (`city.doTurn` → `cacheFlush`/`AI_doTurn`/`doProduction`/
+  `AI_chooseProduction`/`CalculateAllBuildingValues`/…, tagged by city owner). Aggregate by label.
+  (Measured target: `CalculateAllBuildingValues.PreLoop` ≈ 30% of the whole turn; the periodic
+  `CvGame::doTurn` spike = `game.autoSave`.)
 - `[PERF/cabv]` (1) — one line per `CalculateAllBuildingValues` call decomposing it by dimension
   (`preloop`/`building`/`defense`/…/`food`), via `PERF_ACCUM(double&)` accumulating timers that sum
   each section across the building loop and log once. (Found the CABV hot spot = the `PreLoop`.)
+- `[PERF/cabvset]` (1) — `turn= owner= city= numBuildings= constructible= enablers= setSize=`,
+  one line per constructible-set (re)build. The leak-vs-growth discriminator: a flat `setSize`
+  turn-over-turn means the PreLoop rebuild is redundant (→ cross-turn retention is safe). Recipe:
+  `grep cabvset Performance.log | awk '{print $3,$8,$9}'`.
 
 Helpers in `BetterBTSAI.h`: `PERF_SCOPE(label, owner)` times the enclosing scope; `PERF_ACCUM(acc)`
-adds the enclosing scope's ms to an accumulator (for interleaved sub-sections). Full scope inventory
-+ awk recipes: [`../plans/turn-time-optimization.md`](../plans/turn-time-optimization.md).
+adds the enclosing scope's ms to an accumulator (for interleaved sub-sections). Creep check:
+`Tools/turn-perf-trend.awk` least-squares-fits a phase's ms/turn and prints a CREEP/flat verdict
+(`-v phase=total|CvPlayer::doTurn|doTurn.cities`). Full scope inventory + awk recipes:
+[`../plans/turn-time-optimization.md`](../plans/turn-time-optimization.md).
 
 ---
 

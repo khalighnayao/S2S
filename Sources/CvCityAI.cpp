@@ -12601,6 +12601,12 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 		PROFILE("CvCityAI::CalculateAllBuildingValues.PreLoop");
 		PERF_ACCUM(dPreLoop);
 		buildingsToCalculate.clear();
+		// [PERF/cabvset] diagnostics: count how many buildings pass canConstruct
+		// (iConstructible) and how many of those drive the O(buildings) enabler
+		// inner loop (iEnablers). If these grow turn-over-turn within a session
+		// (and reset on reload) the PreLoop cost is set-growth, not per-call cost.
+		int iConstructible = 0;
+		int iEnablers = 0;
 		for (int iBuilding = 0; iBuilding < iNumBuildings; iBuilding++)
 		{
 			const BuildingTypes eBuilding = static_cast<BuildingTypes>(iBuilding);
@@ -12609,10 +12615,12 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 				continue;
 			}
 			buildingsToCalculate.insert(eBuilding);
+			iConstructible++;
 			const CvBuildingInfo& building = GC.getBuildingInfo(eBuilding);
 
 			if (building.EnablesOtherBuildings())
 			{
+				iEnablers++;
 				const CvGameObjectCity* pObject = getGameObject();
 
 				// add the extra building and its bonuses to the override to see if they influence the construct condition of this building
@@ -12647,6 +12655,9 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 			}
 		}
 		cachedBuildingValues->m_buildingsToCalculateValid = true;
+		logPerf(1, "[PERF/cabvset] turn=%d owner=%d city=%d numBuildings=%d constructible=%d enablers=%d setSize=%d",
+			GC.getGame().getGameTurn(), getOwner(), getID(), iNumBuildings,
+			iConstructible, iEnablers, (int)buildingsToCalculate.size());
 	}
 	{
 		PROFILE("CvCityAI::CalculateAllBuildingValues.Loop");
