@@ -166,7 +166,16 @@ scope exit. Cost when off is a single integer compare, so it ships in normal DLL
 - `[PERF/cabvset]` (1) — `turn= owner= city= numBuildings= constructible= enablers= setSize=`,
   one line per constructible-set (re)build. The leak-vs-growth discriminator: a flat `setSize`
   turn-over-turn means the PreLoop rebuild is redundant (→ cross-turn retention is safe). Recipe:
-  `grep cabvset Performance.log | awk '{print $3,$8,$9}'`.
+  `grep cabvset Performance.log | awk '{print $3,$8,$9}'`. (Since #195 the PreLoop builds the set
+  from the static enabler reverse-index `GC.getBuildingsEnabledBy`, so `enablers=` counts
+  directly-constructible buildings that have a non-empty dependent list.)
+- `[PERF/reqmodel]` (1) — one-shot per session (fired from the CABV PreLoop) verifying the
+  #195 unified prerequisite model (`CvBuildingInfo::getConstructRequirements` /
+  `CvUnitInfo::getTrainRequirements`) reproduces the typed prereq fields the enabler index
+  relies on. A summary line `checked buildings= units= mismatches=` plus one
+  `[PERF/reqmodel] MISMATCH building=…|unit=…` per divergence. **`mismatches=0` is the pass
+  condition** — it is logged (not asserted) precisely so it surfaces in FinalRelease, where
+  `FASSERT` compiles out. See [`../plans/unified-prerequisites-and-constructibility.md`](../plans/unified-prerequisites-and-constructibility.md).
 
 Helpers in `BetterBTSAI.h`: `PERF_SCOPE(label, owner)` times the enclosing scope; `PERF_ACCUM(acc)`
 adds the enclosing scope's ms to an accumulator (for interleaved sub-sections). Creep check:

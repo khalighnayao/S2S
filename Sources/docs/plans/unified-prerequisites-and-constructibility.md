@@ -1,7 +1,11 @@
 # Unified Prerequisites & Constructibility (#195)
 
-**Status:** Phase 1 COMPLETE — index is authoritative, legacy O(buildings²) scan removed.
-Verified zero divergence across a real game (see below). Phase 2 not started.
+> This is the **plan / rollout / measurement history**. For how the shipped system works
+> today (the model, the enabler index, help-text rendering), see the reference note
+> [`../reference/constructibility-and-prerequisites.md`](../reference/constructibility-and-prerequisites.md).
+
+**Status:** Phase 1 COMPLETE & merged (PR #314). Phase 2 (unified model + index + help-text)
+on PR #315, user-verified. Index is authoritative; legacy O(buildings²) scan removed.
 
 ## Current state (what's built)
 - `BoolExpr::getInvolvedGOMs(vector<GOMQuery>&)` — one-pass gather visitor that

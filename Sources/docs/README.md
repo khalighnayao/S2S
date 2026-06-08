@@ -42,6 +42,7 @@ This folder is split by intent:
 | [UnitAI_Selection](reference/UnitAI_Selection.md) | How the AI picks a unit's `UNITAI` and concrete unit type |
 | [UnitSelection_Mechanics](reference/UnitSelection_Mechanics.md) | The selection step itself: role → chosen `UnitTypes` |
 | [doProduction](reference/doProduction.md) | `CvCity::doProduction` — the per-turn city production step |
+| [constructibility-and-prerequisites](reference/constructibility-and-prerequisites.md) | The unified `ConstructRequirement` model, the static enabler reverse-index (CABV turn-time), and help-text rendering |
 | [MapScript_Process](reference/MapScript_Process.md) | End-to-end lifecycle of a C2C mapscript (`C2C_World`) |
 
 ## Plans — work in flight
