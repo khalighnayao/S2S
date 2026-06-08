@@ -1578,6 +1578,54 @@ void CvBuildingInfo::buildConstructRequirements()
 	{
 		m_constructRequirements.push_back(ConstructRequirement(GOM_OPTION, REQOP_REQUIRE_ALL, getPrereqGameOption()));
 	}
+
+	// --- GOM_TERRAIN (per-terrain AND / OR membership) ---
+	{
+		ConstructRequirement reqAnd(GOM_TERRAIN, REQOP_REQUIRE_ALL);
+		ConstructRequirement reqOr(GOM_TERRAIN, REQOP_REQUIRE_ANY);
+		for (int i = 0, n = GC.getNumTerrainInfos(); i < n; i++)
+		{
+			if (isPrereqAndTerrain(i)) reqAnd.aiIds.push_back(i);
+			if (isPrereqOrTerrain(i)) reqOr.aiIds.push_back(i);
+		}
+		if (!reqAnd.aiIds.empty()) m_constructRequirements.push_back(reqAnd);
+		if (!reqOr.aiIds.empty()) m_constructRequirements.push_back(reqOr);
+	}
+
+	// --- GOM_FEATURE (per-feature OR membership) ---
+	{
+		ConstructRequirement reqOr(GOM_FEATURE, REQOP_REQUIRE_ANY);
+		for (int i = 0, n = GC.getNumFeatureInfos(); i < n; i++)
+		{
+			if (isPrereqOrFeature(i)) reqOr.aiIds.push_back(i);
+		}
+		if (!reqOr.aiIds.empty()) m_constructRequirements.push_back(reqOr);
+	}
+
+	// --- GOM_IMPROVEMENT (any listed improvement in the vicinity) ---
+	{
+		ConstructRequirement req(GOM_IMPROVEMENT, REQOP_REQUIRE_ANY);
+		foreach_(const ImprovementTypes eImp, getPrereqOrImprovements())
+		{
+			req.aiIds.push_back(eImp);
+		}
+		if (!req.aiIds.empty()) m_constructRequirements.push_back(req);
+	}
+
+	// --- GOM_HERITAGE (any listed heritage) ---
+	{
+		ConstructRequirement req(GOM_HERITAGE, REQOP_REQUIRE_ANY);
+		foreach_(const HeritageTypes eHeritage, getPrereqOrHeritage())
+		{
+			req.aiIds.push_back(eHeritage);
+		}
+		if (!req.aiIds.empty()) m_constructRequirements.push_back(req);
+	}
+
+	// Deliberately NOT modelled yet (bespoke semantics, no consumer needs them):
+	// vicinity / raw-vicinity bonus prereqs (in-vicinity, not in-city), state-religion
+	// (player-level), and the non-GOM prereqs (population, culture level, properties,
+	// war/power). These keep their existing typed handling in canConstruct.
 }
 
 void CvBuildingInfo::doPostLoadCaching(uint32_t iThis)

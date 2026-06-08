@@ -199,11 +199,15 @@ best served by a unifying interface, not by rewriting the evaluator. `canConstru
 
 So **both** enabler-index dimensions (building + unit) now read through the unified model.
 
-**Increment 3+ (next):**
-- Extend coverage: terrain / feature / improvement / heritage (clean GOM maps), then the
-  bespoke variants (vicinity-bonus = in-vicinity-not-in-city, state-religion = player-level);
-  non-GOM prereqs (population, culture, properties, war/power) stay typed and noted. This is
-  foundation for the Civilopedia/web export — no behavioural consumer yet.
+**Increment 3 — DONE (building coverage completed):**
+- Building model extended to GOM_TERRAIN (And/Or), GOM_FEATURE (Or), GOM_IMPROVEMENT (Or),
+  GOM_HERITAGE (Or). The building model now covers every clean GOM-mappable typed prereq.
+- Deliberately still NOT modelled (bespoke semantics, no consumer): vicinity / raw-vicinity
+  bonus (in-vicinity, not in-city), state-religion (player-level); and the non-GOM prereqs
+  (population, culture level, properties, war/power) keep their typed handling. Foundation
+  for the Civilopedia/web export — these GOM types have no behavioural consumer yet.
+
+**Increment 4+ (user-directed / later):**
 - Migrate help text / Civilopedia rendering onto the model (the real fragmentation win;
   `CvGameTextMgr` hand-enumerates each typed field). **Needs visual verification** of
   tooltips/pedia — UI testing is the user's job — so it is a user-directed step.
