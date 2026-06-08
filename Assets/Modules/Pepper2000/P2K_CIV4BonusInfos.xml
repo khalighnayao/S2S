@@ -27,42 +27,18 @@
 			<bFlatlands>1</bFlatlands>
 			<bNormalize>1</bNormalize>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_STAR_CLUSTER</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_ORION_ARM</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MILKY_WAY</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_STAR_CLUSTER</TerrainBoolean>
 			</TerrainBooleans>
 			<FeatureBooleans>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_MINI_NEPTUNE</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_SUPER_EARTH</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_DESERT_PLANET</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_OCEAN_PLANET</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
+				<FeatureBoolean>FEATURE_MINI_NEPTUNE</FeatureBoolean>
+				<FeatureBoolean>FEATURE_SUPER_EARTH</FeatureBoolean>
+				<FeatureBoolean>FEATURE_DESERT_PLANET</FeatureBoolean>
+				<FeatureBoolean>FEATURE_OCEAN_PLANET</FeatureBoolean>
 			</FeatureBooleans>
 			<FeatureTerrainBooleans>
-				<FeatureTerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bFeatureTerrain>1</bFeatureTerrain>
-				</FeatureTerrainBoolean>
+				<FeatureTerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</FeatureTerrainBoolean>
 			</FeatureTerrainBooleans>
 			<iPlacementOrder>9</iPlacementOrder>
 		</BonusInfo>
@@ -92,22 +68,10 @@
 			<bFlatlands>1</bFlatlands>
 			<bNormalize>1</bNormalize>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LOCAL_GROUP</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_DISTANT_COSMOS</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LOCAL_GROUP</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_VIRGO_SUPERCLUSTER</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_OBSERVABLE_UNIVERSE</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_DISTANT_COSMOS</TerrainBoolean>
 			</TerrainBooleans>
 			<iPlacementOrder>9</iPlacementOrder>
 		</BonusInfo>
@@ -137,18 +101,9 @@
 			<bFlatlands>1</bFlatlands>
 			<bNormalize>1</bNormalize>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_INTERGALACTIC_VOID</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_DISTANT_COSMOS</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_OBSERVABLE_UNIVERSE</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_INTERGALACTIC_VOID</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_DISTANT_COSMOS</TerrainBoolean>
 			</TerrainBooleans>
 			<iPlacementOrder>9</iPlacementOrder>
 		</BonusInfo>
@@ -178,46 +133,16 @@
 			<bFlatlands>1</bFlatlands>
 			<bNormalize>1</bNormalize>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_TITAN</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_EUROPA</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_ENCELADUS</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MARTIAN_ICE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MARTIAN_PERMAFROST</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MARTIAN_DESERT</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MARTIAN_DUNES</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MARTIAN_BARREN</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MARTIAN_PLAINS</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MARTIAN_ROCKY</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_TITAN</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_EUROPA</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_ENCELADUS</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MARTIAN_ICE</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MARTIAN_PERMAFROST</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MARTIAN_DESERT</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MARTIAN_DUNES</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MARTIAN_BARREN</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MARTIAN_PLAINS</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MARTIAN_ROCKY</TerrainBoolean>
 			</TerrainBooleans>
 			<iPlacementOrder>9</iPlacementOrder>
 		</BonusInfo>
@@ -247,34 +172,13 @@
 			<bFlatlands>1</bFlatlands>
 			<bNormalize>1</bNormalize>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MARTIAN_ICE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MARTIAN_PERMAFROST</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MARTIAN_DESERT</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MARTIAN_DUNES</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MARTIAN_BARREN</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MARTIAN_PLAINS</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MARTIAN_ROCKY</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MARTIAN_ICE</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MARTIAN_PERMAFROST</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MARTIAN_DESERT</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MARTIAN_DUNES</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MARTIAN_BARREN</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MARTIAN_PLAINS</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MARTIAN_ROCKY</TerrainBoolean>
 			</TerrainBooleans>
 			<iPlacementOrder>9</iPlacementOrder>
 		</BonusInfo>
@@ -305,42 +209,18 @@
 			<bFlatlands>1</bFlatlands>
 			<bNormalize>1</bNormalize>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_ASTEROID_SURFACE</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_KUIPER_BELT_OBJECT</TerrainBoolean>
 			</TerrainBooleans>
 			<FeatureBooleans>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_OORT_CLOUD</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_ASTEROIDS</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
+				<FeatureBoolean>FEATURE_OORT_CLOUD</FeatureBoolean>
+				<FeatureBoolean>FEATURE_ASTEROIDS</FeatureBoolean>
 			</FeatureBooleans>
 			<FeatureTerrainBooleans>
-				<FeatureTerrainBoolean>
-					<TerrainType>TERRAIN_INNER_SOLAR_SYSTEM</TerrainType>
-					<bFeatureTerrain>1</bFeatureTerrain>
-				</FeatureTerrainBoolean>
-				<FeatureTerrainBoolean>
-					<TerrainType>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainType>
-					<bFeatureTerrain>1</bFeatureTerrain>
-				</FeatureTerrainBoolean>
-				<FeatureTerrainBoolean>
-					<TerrainType>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainType>
-					<bFeatureTerrain>1</bFeatureTerrain>
-				</FeatureTerrainBoolean>
-				<FeatureTerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bFeatureTerrain>1</bFeatureTerrain>
-				</FeatureTerrainBoolean>
+				<FeatureTerrainBoolean>TERRAIN_INNER_SOLAR_SYSTEM</FeatureTerrainBoolean>
+				<FeatureTerrainBoolean>TERRAIN_OUTER_SOLAR_SYSTEM</FeatureTerrainBoolean>
+				<FeatureTerrainBoolean>TERRAIN_TRANSNEPTUNIAN_SPACE</FeatureTerrainBoolean>
+				<FeatureTerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</FeatureTerrainBoolean>
 			</FeatureTerrainBooleans>
 			<iPlacementOrder>9</iPlacementOrder>
 		</BonusInfo>
@@ -370,42 +250,18 @@
 			<bFlatlands>1</bFlatlands>
 			<bNormalize>1</bNormalize>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_ASTEROID_SURFACE</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_KUIPER_BELT_OBJECT</TerrainBoolean>
 			</TerrainBooleans>
 			<FeatureBooleans>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_OORT_CLOUD</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_ASTEROIDS</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
+				<FeatureBoolean>FEATURE_OORT_CLOUD</FeatureBoolean>
+				<FeatureBoolean>FEATURE_ASTEROIDS</FeatureBoolean>
 			</FeatureBooleans>
 			<FeatureTerrainBooleans>
-				<FeatureTerrainBoolean>
-					<TerrainType>TERRAIN_INNER_SOLAR_SYSTEM</TerrainType>
-					<bFeatureTerrain>1</bFeatureTerrain>
-				</FeatureTerrainBoolean>
-				<FeatureTerrainBoolean>
-					<TerrainType>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainType>
-					<bFeatureTerrain>1</bFeatureTerrain>
-				</FeatureTerrainBoolean>
-				<FeatureTerrainBoolean>
-					<TerrainType>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainType>
-					<bFeatureTerrain>1</bFeatureTerrain>
-				</FeatureTerrainBoolean>
-				<FeatureTerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bFeatureTerrain>1</bFeatureTerrain>
-				</FeatureTerrainBoolean>
+				<FeatureTerrainBoolean>TERRAIN_INNER_SOLAR_SYSTEM</FeatureTerrainBoolean>
+				<FeatureTerrainBoolean>TERRAIN_OUTER_SOLAR_SYSTEM</FeatureTerrainBoolean>
+				<FeatureTerrainBoolean>TERRAIN_TRANSNEPTUNIAN_SPACE</FeatureTerrainBoolean>
+				<FeatureTerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</FeatureTerrainBoolean>
 			</FeatureTerrainBooleans>
 			<iPlacementOrder>9</iPlacementOrder>
 		</BonusInfo>
@@ -435,42 +291,18 @@
 			<bFlatlands>1</bFlatlands>
 			<bNormalize>1</bNormalize>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_STAR_CLUSTER</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_ORION_ARM</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MILKY_WAY</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_STAR_CLUSTER</TerrainBoolean>
 			</TerrainBooleans>
 			<FeatureBooleans>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_MINI_NEPTUNE</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_SUPER_EARTH</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_DESERT_PLANET</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_OCEAN_PLANET</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
+				<FeatureBoolean>FEATURE_MINI_NEPTUNE</FeatureBoolean>
+				<FeatureBoolean>FEATURE_SUPER_EARTH</FeatureBoolean>
+				<FeatureBoolean>FEATURE_DESERT_PLANET</FeatureBoolean>
+				<FeatureBoolean>FEATURE_OCEAN_PLANET</FeatureBoolean>
 			</FeatureBooleans>
 			<FeatureTerrainBooleans>
-				<FeatureTerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bFeatureTerrain>1</bFeatureTerrain>
-				</FeatureTerrainBoolean>
+				<FeatureTerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</FeatureTerrainBoolean>
 			</FeatureTerrainBooleans>
 			<iPlacementOrder>9</iPlacementOrder>
 		</BonusInfo>
@@ -500,42 +332,18 @@
 			<bFlatlands>1</bFlatlands>
 			<bNormalize>1</bNormalize>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_STAR_CLUSTER</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_ORION_ARM</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_MILKY_WAY</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_STAR_CLUSTER</TerrainBoolean>
 			</TerrainBooleans>
 			<FeatureBooleans>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_MINI_NEPTUNE</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_SUPER_EARTH</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_DESERT_PLANET</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
-				<FeatureBoolean>
-					<FeatureType>FEATURE_OCEAN_PLANET</FeatureType>
-					<bFeature>1</bFeature>
-				</FeatureBoolean>
+				<FeatureBoolean>FEATURE_MINI_NEPTUNE</FeatureBoolean>
+				<FeatureBoolean>FEATURE_SUPER_EARTH</FeatureBoolean>
+				<FeatureBoolean>FEATURE_DESERT_PLANET</FeatureBoolean>
+				<FeatureBoolean>FEATURE_OCEAN_PLANET</FeatureBoolean>
 			</FeatureBooleans>
 			<FeatureTerrainBooleans>
-				<FeatureTerrainBoolean>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bFeatureTerrain>1</bFeatureTerrain>
-				</FeatureTerrainBoolean>
+				<FeatureTerrainBoolean>TERRAIN_TRANSTELLAR_SPACE</FeatureTerrainBoolean>
 			</FeatureTerrainBooleans>
 			<iPlacementOrder>9</iPlacementOrder>
 		</BonusInfo>
@@ -562,10 +370,7 @@
 			<bNoRiverSide>1</bNoRiverSide>
 			<bNormalize>1</bNormalize>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_HIGHLAND</TerrainBoolean>
 			</TerrainBooleans>
 			<iPlacementOrder>9</iPlacementOrder>
 		</BonusInfo>
@@ -594,18 +399,9 @@
 			<bNoRiverSide>1</bNoRiverSide>
 			<bNormalize>1</bNormalize>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_REGOLITH</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_MARE</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_RILLE</TerrainBoolean>
 			</TerrainBooleans>
 			<iPlacementOrder>9</iPlacementOrder>
 		</BonusInfo>
@@ -636,50 +432,29 @@
 			<bNoRiverSide>1</bNoRiverSide>
 			<bNormalize>1</bNormalize>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_HYPERSPACE</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_HYPERSPACE</TerrainBoolean>
 			</TerrainBooleans>
 			<iPlacementOrder>9</iPlacementOrder>
 		</BonusInfo>
 		<BonusInfo>
 			<Type>BONUS_IRON_ORE</Type>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_HIGHLAND</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_DOME</TerrainBoolean>
 			</TerrainBooleans>
 		</BonusInfo>
 		<BonusInfo>
 			<Type>BONUS_TITANIUM_ORE</Type>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_HIGHLAND</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_DOME</TerrainBoolean>
 			</TerrainBooleans>
 		</BonusInfo>
 		<BonusInfo>
 			<Type>BONUS_BAUXITE_ORE</Type>
 			<TerrainBooleans>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
-				<TerrainBoolean>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bTerrain>1</bTerrain>
-				</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_HIGHLAND</TerrainBoolean>
+				<TerrainBoolean>TERRAIN_LUNAR_DOME</TerrainBoolean>
 			</TerrainBooleans>
 		</BonusInfo>
 	</BonusInfos>

@@ -17,10 +17,6 @@
 //------------------------------------------------------------------------------------------------------
 CvDiplomacyResponse::CvDiplomacyResponse() :
 m_iNumDiplomacyText(0),
-m_pbCivilizationTypes(NULL),
-m_pbLeaderHeadTypes(NULL),
-m_pbAttitudeTypes(NULL),
-m_pbDiplomacyPowerTypes(NULL),
 m_paszDiplomacyText(NULL)
 {
 }
@@ -34,10 +30,6 @@ m_paszDiplomacyText(NULL)
 //------------------------------------------------------------------------------------------------------
 CvDiplomacyResponse::~CvDiplomacyResponse()
 {
-	SAFE_DELETE_ARRAY(m_pbCivilizationTypes);
-	SAFE_DELETE_ARRAY(m_pbLeaderHeadTypes);
-	SAFE_DELETE_ARRAY(m_pbAttitudeTypes);
-	SAFE_DELETE_ARRAY(m_pbDiplomacyPowerTypes);
 	SAFE_DELETE_ARRAY(m_paszDiplomacyText);
 }
 
@@ -49,45 +41,25 @@ int CvDiplomacyResponse::getNumDiplomacyText() const
 bool CvDiplomacyResponse::getCivilizationTypes(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumCivilizationInfos(), i);
-	return m_pbCivilizationTypes ? m_pbCivilizationTypes[i] : false;
-}
-
-bool* CvDiplomacyResponse::getCivilizationTypes() const
-{
-	return m_pbCivilizationTypes;
+	return algo::any_of_equal(m_aeCivilizationTypes, static_cast<CivilizationTypes>(i));
 }
 
 bool CvDiplomacyResponse::getLeaderHeadTypes(const int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumLeaderHeadInfos(), i);
-	return m_pbLeaderHeadTypes ? m_pbLeaderHeadTypes[i] : false;
-}
-
-bool* CvDiplomacyResponse::getLeaderHeadTypes() const
-{
-	return m_pbLeaderHeadTypes;
+	return algo::any_of_equal(m_aeLeaderHeadTypes, static_cast<LeaderHeadTypes>(i));
 }
 
 bool CvDiplomacyResponse::getAttitudeTypes(int i) const
 {
 	FASSERT_BOUNDS(0, NUM_ATTITUDE_TYPES, i);
-	return m_pbAttitudeTypes ? m_pbAttitudeTypes[i] : false;
-}
-
-bool* CvDiplomacyResponse::getAttitudeTypes() const
-{
-	return m_pbAttitudeTypes;
+	return algo::any_of_equal(m_aeAttitudeTypes, static_cast<AttitudeTypes>(i));
 }
 
 bool CvDiplomacyResponse::getDiplomacyPowerTypes(const int i) const
 {
 	FASSERT_BOUNDS(0, NUM_DIPLOMACYPOWER_TYPES, i);
-	return m_pbDiplomacyPowerTypes ? m_pbDiplomacyPowerTypes[i] : false;
-}
-
-bool* CvDiplomacyResponse::getDiplomacyPowerTypes() const
-{
-	return m_pbDiplomacyPowerTypes;
+	return algo::any_of_equal(m_aeDiplomacyPowerTypes, static_cast<DiplomacyPowerTypes>(i));
 }
 
 const char* CvDiplomacyResponse::getDiplomacyText(int i) const
@@ -102,13 +74,10 @@ const CvString* CvDiplomacyResponse::getDiplomacyText() const
 
 bool CvDiplomacyResponse::read(CvXMLLoadUtility* pXML)
 {
-	pXML->SetVariableListTagPair(&m_pbCivilizationTypes, L"Civilizations", GC.getNumCivilizationInfos());
-	// Leaders
-	pXML->SetVariableListTagPair(&m_pbLeaderHeadTypes, L"Leaders", GC.getNumLeaderHeadInfos());
-	// AttitudeTypes
-	pXML->SetVariableListTagPair(&m_pbAttitudeTypes, L"Attitudes", NUM_ATTITUDE_TYPES);
-	// PowerTypes
-	pXML->SetVariableListTagPair(&m_pbDiplomacyPowerTypes, L"DiplomacyPowers", NUM_DIPLOMACYPOWER_TYPES);
+	pXML->SetOptionalVector(&m_aeCivilizationTypes, L"Civilizations");
+	pXML->SetOptionalVector(&m_aeLeaderHeadTypes, L"Leaders");
+	pXML->SetOptionalVector(&m_aeAttitudeTypes, L"Attitudes");
+	pXML->SetOptionalVector(&m_aeDiplomacyPowerTypes, L"DiplomacyPowers");
 	// DiplomacyText
 	if (pXML->TryMoveToXmlFirstChild(L"DiplomacyText"))
 	{
@@ -121,7 +90,6 @@ bool CvDiplomacyResponse::read(CvXMLLoadUtility* pXML)
 void CvDiplomacyResponse::UpdateDiplomacies(CvDiplomacyInfo* pDiplomacyInfo, int iIndex)
 {
 	PROFILE_EXTRA_FUNC();
-	const bool bDefault = false;
 
 	// We use the String append mechanism from WOC default = assume the modder added his strings
 	// purposly, so those are on the first place, the strings previously are appended after them
@@ -134,38 +102,26 @@ void CvDiplomacyResponse::UpdateDiplomacies(CvDiplomacyInfo* pDiplomacyInfo, int
 	CvXMLLoadUtilityModTools::StringArrayExtend(&m_paszDiplomacyText, &m_iNumDiplomacyText, &m_paszNewNames, pDiplomacyInfo->getNumDiplomacyText(iIndex));
 	SAFE_DELETE_ARRAY(m_paszNewNames);
 
-	// if anything is true, we don't overwrite(assuming the modder did set it true purposly
+	// Additive union: keep anything already true, add any type the source response has.
 	for ( int i = 0; i < GC.getNumLeaderHeadInfos(); ++i)
 	{
-		if ((m_pbLeaderHeadTypes == NULL || m_pbLeaderHeadTypes[i] == bDefault) && pDiplomacyInfo->getLeaderHeadTypes(iIndex, i) != bDefault)
+		if (pDiplomacyInfo->getLeaderHeadTypes(iIndex, i) && !algo::any_of_equal(m_aeLeaderHeadTypes, static_cast<LeaderHeadTypes>(i)))
 		{
-			if ( NULL == m_pbLeaderHeadTypes )
-			{
-				CvXMLLoadUtility::InitList(&m_pbLeaderHeadTypes,GC.getNumLeaderHeadInfos(),bDefault);
-			}
-			m_pbLeaderHeadTypes[i] = pDiplomacyInfo->getLeaderHeadTypes(iIndex, i);
+			m_aeLeaderHeadTypes.push_back(static_cast<LeaderHeadTypes>(i));
 		}
 	}
 	for ( int i = 0; i < NUM_ATTITUDE_TYPES; ++i)
 	{
-		if ((m_pbAttitudeTypes == NULL || m_pbAttitudeTypes[i] == bDefault) && pDiplomacyInfo->getAttitudeTypes(iIndex, i) != bDefault)
+		if (pDiplomacyInfo->getAttitudeTypes(iIndex, i) && !algo::any_of_equal(m_aeAttitudeTypes, static_cast<AttitudeTypes>(i)))
 		{
-			if ( NULL == m_pbAttitudeTypes )
-			{
-				CvXMLLoadUtility::InitList(&m_pbAttitudeTypes,NUM_ATTITUDE_TYPES,bDefault);
-			}
-			m_pbAttitudeTypes[i] = pDiplomacyInfo->getAttitudeTypes(iIndex, i);
+			m_aeAttitudeTypes.push_back(static_cast<AttitudeTypes>(i));
 		}
 	}
 	for ( int i = 0; i < NUM_DIPLOMACYPOWER_TYPES; ++i)
 	{
-		if ((m_pbDiplomacyPowerTypes == NULL || m_pbDiplomacyPowerTypes[i] == bDefault) && pDiplomacyInfo->getDiplomacyPowerTypes(iIndex, i) != bDefault)
+		if (pDiplomacyInfo->getDiplomacyPowerTypes(iIndex, i) && !algo::any_of_equal(m_aeDiplomacyPowerTypes, static_cast<DiplomacyPowerTypes>(i)))
 		{
-			if ( NULL == m_pbDiplomacyPowerTypes )
-			{
-				CvXMLLoadUtility::InitList(&m_pbDiplomacyPowerTypes,NUM_DIPLOMACYPOWER_TYPES,bDefault);
-			}
-			m_pbDiplomacyPowerTypes[i] = pDiplomacyInfo->getDiplomacyPowerTypes(iIndex, i);
+			m_aeDiplomacyPowerTypes.push_back(static_cast<DiplomacyPowerTypes>(i));
 		}
 	}
 }

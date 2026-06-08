@@ -129,9 +129,9 @@ private:
 	int* m_piYieldChange;
 	int* m_piImprovementChange;
 
-	bool* m_pbTerrain;
-	bool* m_pbFeature;
-	bool* m_pbFeatureTerrain;
+	std::vector<TerrainTypes> m_aeTerrain;
+	std::vector<FeatureTypes> m_aeFeature;
+	std::vector<TerrainTypes> m_aeFeatureTerrain;
 
 	std::vector<int> m_aiCategories;
 

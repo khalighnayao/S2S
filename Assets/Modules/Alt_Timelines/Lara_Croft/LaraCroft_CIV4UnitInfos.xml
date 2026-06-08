@@ -37,18 +37,9 @@
 			<bIgnoreBuildingDefense>1</bIgnoreBuildingDefense>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_MUSEUM</BuildingType>
@@ -86,14 +77,8 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_BLITZ</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_MARCH</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_BLITZ</FreePromotion>
+				<FreePromotion>PROMOTION_MARCH</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 	</UnitInfos>

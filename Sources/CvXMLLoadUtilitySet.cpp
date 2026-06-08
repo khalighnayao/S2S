@@ -828,7 +828,7 @@ bool CvXMLLoadUtility::LoadPreMenuGlobals()
 	LoadGlobalClassInfo(GC.m_paBuildingInfo, "CIV4BuildingInfos", "Buildings", L"/Civ4BuildingInfos/BuildingInfos/BuildingInfo", false, &GC.m_BuildingInfoReplacements);
 	LoadGlobalClassInfo(GC.m_paCivicInfo, "CIV4CivicInfos", "Civilizations", L"/Civ4CivicInfos/CivicInfos/CivicInfo", false, &GC.m_CivicInfoReplacements);
 	LoadGlobalClassInfo(GC.m_paPlayerColorInfo, "CIV4PlayerColorInfos", "Interface", L"/Civ4PlayerColorInfos/PlayerColorInfos/PlayerColorInfo", false);
-	LoadGlobalClassInfo(GC.m_paBuildInfo, "CIV4BuildInfos", "Units", L"/Civ4BuildInfos/BuildInfos/BuildInfo", false, &GC.m_BuildInfoReplacements);
+	LoadGlobalClassInfo(GC.m_buildTable.rows(), "CIV4BuildInfos", "Units", L"/Civ4BuildInfos/BuildInfos/BuildInfo", false, &GC.m_BuildInfoReplacements);
 	LoadGlobalClassInfo(GC.m_paOutcomeInfo, "CIV4OutcomeInfos", "GameInfo", L"/Civ4OutcomeInfos/OutcomeInfos/OutcomeInfo", false);
 
 	//	AlbertS2: Register mission types
@@ -877,6 +877,11 @@ bool CvXMLLoadUtility::LoadPreMenuGlobals()
 	LoadGlobalClassInfo(GC.m_paEventInfo, "CIV4EventInfos", "Events", L"/Civ4EventInfos/EventInfos/EventInfo", false, &GC.m_EventInfoReplacements);
 	LoadGlobalClassInfo(GC.m_paEventTriggerInfo, "CIV4EventTriggerInfos", "Events", L"/Civ4EventTriggerInfos/EventTriggerInfos/EventTriggerInfo", false, &GC.m_EventTriggerInfoReplacements);
 	OutputDebugString("Base load complete\n");
+
+	// Parse-then-link: uniform pass that resolves every info's deferred FK columns now that the whole
+	// catalog is parsed. Currently only CvBuildInfo defers (forced, to prove order-independence);
+	// other classes still resolve immediately and the global pass below mops up their delayed refs.
+	GC.linkAllInfos();
 
 	// AIAndy: Resolve delayed resolutions of type strings
 	GC.resolveDelayedResolution();
@@ -1880,6 +1885,8 @@ void CvXMLLoadUtility::LoadGlobalClassInfo(std::vector<T*>& aInfos, const char* 
 			}
 		}
 	}
+
+	logging::logMsg("XmlLoad.log", "%s: %d entries loaded\n", szFileRoot, (int)aInfos.size());
 
 	m_pParser->resetDocumentPool();
 }

@@ -41,10 +41,7 @@
 				<UnitType>UNIT_GUNSHIP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_DIESELPUNK</PrereqTech>
 			<TechTypes>
@@ -134,14 +131,8 @@
 				<UnitType>UNIT_GUNSHIP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_DIESELPUNK</PrereqTech>
 			<TechTypes>
@@ -240,18 +231,9 @@
 				<UnitType>UNIT_MOBILE_ARTILLERY</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COLLATERAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
+				<UnitAI>UNITAI_COLLATERAL</UnitAI>
+				<UnitAI>UNITAI_CITY_COUNTER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_DIESELPUNK</PrereqTech>
 			<BonusType>BONUS_AMMUNITION</BonusType>
@@ -349,18 +331,9 @@
 				<UnitType>UNIT_MOBILE_ARTILLERY</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COLLATERAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
+				<UnitAI>UNITAI_COLLATERAL</UnitAI>
+				<UnitAI>UNITAI_CITY_COUNTER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_DIESELPUNK</PrereqTech>
 			<BonusType>BONUS_AMMUNITION</BonusType>
@@ -451,18 +424,9 @@
 				<UnitType>UNIT_MODERN_ARMOR</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_DIESELPUNK</PrereqTech>
 			<BonusType>BONUS_DIESELPUNK</BonusType>
@@ -558,10 +522,7 @@
 				<UnitType>UNIT_A10_BOMBER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_DEFENSE_AIR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_DEFENSE_AIR</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_DIESELPUNK</PrereqTech>
 			<BonusType>BONUS_DIESELPUNK</BonusType>
@@ -639,18 +600,9 @@
 				<UnitType>UNIT_MODERN_ARMOR</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_DIESELPUNK</PrereqTech>
 			<BonusType>BONUS_DIESELPUNK</BonusType>
@@ -714,10 +666,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_MACHINE</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_BLITZ</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_BLITZ</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<UnitInfo>
@@ -751,22 +700,10 @@
 			<bMilitaryProduction>1</bMilitaryProduction>
 			<bPillage>1</bPillage>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_DIESELPUNK</PrereqTech>
 			<TechTypes>

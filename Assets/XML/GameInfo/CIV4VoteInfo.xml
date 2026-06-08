@@ -22,10 +22,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -49,10 +46,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -76,10 +70,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -103,10 +94,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -130,10 +118,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -156,16 +141,10 @@
 			<bForceWar>0</bForceWar>
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics>
-				<ForceCivic>
-					<CivicType>CIVIC_DEMOCRACY</CivicType>
-					<bForce>1</bForce>
-				</ForceCivic>
+				<ForceCivic>CIVIC_DEMOCRACY</ForceCivic>
 			</ForceCivics>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -188,16 +167,10 @@
 			<bForceWar>0</bForceWar>
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics>
-				<ForceCivic>
-					<CivicType>CIVIC_LEGISLATURE</CivicType>
-					<bForce>1</bForce>
-				</ForceCivic>
+				<ForceCivic>CIVIC_LEGISLATURE</ForceCivic>
 			</ForceCivics>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -220,16 +193,10 @@
 			<bForceWar>0</bForceWar>
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics>
-				<ForceCivic>
-					<CivicType>CIVIC_EGALITARIAN</CivicType>
-					<bForce>1</bForce>
-				</ForceCivic>
+				<ForceCivic>CIVIC_EGALITARIAN</ForceCivic>
 			</ForceCivics>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -252,16 +219,10 @@
 			<bForceWar>0</bForceWar>
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics>
-				<ForceCivic>
-					<CivicType>CIVIC_GREEN</CivicType>
-					<bForce>1</bForce>
-				</ForceCivic>
+				<ForceCivic>CIVIC_GREEN</ForceCivic>
 			</ForceCivics>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -284,16 +245,10 @@
 			<bForceWar>0</bForceWar>
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics>
-				<ForceCivic>
-					<CivicType>CIVIC_SECULARISM</CivicType>
-					<bForce>1</bForce>
-				</ForceCivic>
+				<ForceCivic>CIVIC_SECULARISM</ForceCivic>
 			</ForceCivics>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -316,16 +271,10 @@
 			<bForceWar>0</bForceWar>
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics>
-				<ForceCivic>
-					<CivicType>CIVIC_SOCIALIZED</CivicType>
-					<bForce>1</bForce>
-				</ForceCivic>
+				<ForceCivic>CIVIC_SOCIALIZED</ForceCivic>
 			</ForceCivics>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -349,10 +298,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -376,10 +322,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -403,10 +346,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -430,10 +370,7 @@
 			<bAssignCity>1</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_UN</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_UN</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -457,10 +394,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_POPE</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_POPE</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -484,10 +418,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_POPE</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_POPE</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -511,10 +442,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_POPE</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_POPE</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -538,10 +466,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_POPE</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_POPE</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -565,10 +490,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_POPE</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_POPE</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -592,10 +514,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_POPE</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_POPE</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -619,10 +538,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_POPE</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_POPE</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -646,10 +562,7 @@
 			<bAssignCity>1</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_POPE</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_POPE</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -673,10 +586,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_CVIENNA</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_CVIENNA</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -700,10 +610,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_CVIENNA</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_CVIENNA</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -727,10 +634,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_CVIENNA</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_CVIENNA</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -754,10 +658,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_CVIENNA</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_CVIENNA</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -781,10 +682,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_CVIENNA</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_CVIENNA</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -808,10 +706,7 @@
 			<bAssignCity>0</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_CVIENNA</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_CVIENNA</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 		<VoteInfo>
@@ -835,10 +730,7 @@
 			<bAssignCity>1</bAssignCity>
 			<ForceCivics/>
 			<DiploVotes>
-				<DiploVote>
-					<DiploVoteType>DIPLOVOTE_CVIENNA</DiploVoteType>
-					<bValid>1</bValid>
-				</DiploVote>
+				<DiploVote>DIPLOVOTE_CVIENNA</DiploVote>
 			</DiploVotes>
 		</VoteInfo>
 	</VoteInfos>

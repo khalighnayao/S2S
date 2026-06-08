@@ -467,10 +467,7 @@
 	<ElementType name="DefaultComplexTraits" content="eltOnly">
 		<element type="TraitType" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
-	<ElementType name="Trait" content="eltOnly">
-		<element type="TraitType"/>
-		<element type="bTrait"/>
-	</ElementType>
+	<ElementType name="Trait" content="textOnly"/>
 	<ElementType name="Traits" content="eltOnly">
 		<element type="Trait" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -726,10 +723,7 @@
 	</ElementType>
 	<ElementType name="PromotionType" content="textOnly"/>
 	<ElementType name="bFreePromotion" content="textOnly" dt:type="boolean"/>
-	<ElementType name="FreePromotion" content="eltOnly">
-		<element type="PromotionType"/>
-		<element type="bFreePromotion"/>
-	</ElementType>
+	<ElementType name="FreePromotion" content="textOnly"/>
 	<ElementType name="FreePromotions" content="eltOnly">
 		<element type="FreePromotion" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -947,18 +941,12 @@
 	</ElementType>
 	<ElementType name="TechType" content="textOnly"/>
 	<ElementType name="bFreeTech" content="textOnly" dt:type="boolean"/>
-	<ElementType name="FreeTech" content="eltOnly">
-		<element type="TechType"/>
-		<element type="bFreeTech"/>
-	</ElementType>
+	<ElementType name="FreeTech" content="textOnly"/>
 	<ElementType name="FreeTechs" content="eltOnly">
 		<element type="FreeTech" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="bDisableTech" content="textOnly" dt:type="boolean"/>
-	<ElementType name="DisableTech" content="eltOnly">
-		<element type="TechType"/>
-		<element type="bDisableTech"/>
-	</ElementType>
+	<ElementType name="DisableTech" content="textOnly"/>
 	<ElementType name="DisableTechs" content="eltOnly">
 		<element type="DisableTech" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -973,10 +961,7 @@
 	<ElementType name="bAIPlayable" content="textOnly" dt:type="boolean"/>
 	<ElementType name="LeaderName" content="textOnly"/>
 	<ElementType name="bLeaderAvailability" content="textOnly" dt:type="boolean"/>
-	<ElementType name="Leader" content="eltOnly">
-		<element type="LeaderName"/>
-		<element type="bLeaderAvailability"/>
-	</ElementType>
+	<ElementType name="Leader" content="textOnly"/>
 	<ElementType name="Leaders" content="eltOnly">
 		<element type="Leader" maxOccurs="*"/>
 	</ElementType>

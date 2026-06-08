@@ -43,9 +43,6 @@ m_iDerivativeCiv(NO_CIVILIZATION),
 m_bPlayable(false),
 m_bAIPlayable(false),
 m_piCivilizationInitialCivics(NULL),
-m_pbLeaders(NULL),
-m_pbCivilizationFreeTechs(NULL),
-m_pbCivilizationDisableTechs(NULL),
 m_paszCityNames(NULL),
 m_iSpawnRateModifier(0),
 m_iSpawnRateNPCPeaceModifier(0),
@@ -64,9 +61,6 @@ m_bStronglyRestricted(false)
 CvCivilizationInfo::~CvCivilizationInfo()
 {
 	SAFE_DELETE_ARRAY(m_piCivilizationInitialCivics);
-	SAFE_DELETE_ARRAY(m_pbLeaders);
-	SAFE_DELETE_ARRAY(m_pbCivilizationFreeTechs);
-	SAFE_DELETE_ARRAY(m_pbCivilizationDisableTechs);
 	SAFE_DELETE_ARRAY(m_paszCityNames);
 	GC.removeDelayedResolution((int*)&m_iDerivativeCiv);
 }
@@ -208,7 +202,7 @@ void CvCivilizationInfo::setCivilizationInitialCivics(int iCivicOption, int iCiv
 bool CvCivilizationInfo::isLeaders(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumLeaderHeadInfos(), i);
-	return m_pbLeaders ? m_pbLeaders[i] : false;
+	return algo::any_of_equal(m_aeLeaders, static_cast<LeaderHeadTypes>(i));
 }
 
 
@@ -231,14 +225,14 @@ bool CvCivilizationInfo::isCivilizationBuilding(int i) const
 bool CvCivilizationInfo::isCivilizationFreeTechs(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumTechInfos(), i);
-	return m_pbCivilizationFreeTechs ? m_pbCivilizationFreeTechs[i] : false;
+	return algo::any_of_equal(m_aeCivilizationFreeTechs, static_cast<TechTypes>(i));
 }
 
 
 bool CvCivilizationInfo::isCivilizationDisableTechs(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumTechInfos(), i);
-	return m_pbCivilizationDisableTechs ? m_pbCivilizationDisableTechs[i] : false;
+	return algo::any_of_equal(m_aeCivilizationDisableTechs, static_cast<TechTypes>(i));
 }
 
 
@@ -291,9 +285,9 @@ void CvCivilizationInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_iSpawnRateNPCPeaceModifier);
 	CheckSum(iSum, m_bStronglyRestricted);
 	CheckSumI(iSum, GC.getNumCivicOptionInfos(), m_piCivilizationInitialCivics);
-	CheckSumI(iSum, GC.getNumLeaderHeadInfos(), m_pbLeaders);
-	CheckSumI(iSum, GC.getNumTechInfos(), m_pbCivilizationFreeTechs);
-	CheckSumI(iSum, GC.getNumTechInfos(), m_pbCivilizationDisableTechs);
+	CheckSumC(iSum, m_aeLeaders);
+	CheckSumC(iSum, m_aeCivilizationFreeTechs);
+	CheckSumC(iSum, m_aeCivilizationDisableTechs);
 	CheckSumC(iSum, m_aiCivilizationBuildings);
 }
 
@@ -331,8 +325,8 @@ bool CvCivilizationInfo::read(CvXMLLoadUtility* pXML)
 
 	pXML->SetOptionalVector(&m_aiCivilizationBuildings, L"FreeBuildings");
 
-	pXML->SetVariableListTagPair(&m_pbCivilizationFreeTechs, L"FreeTechs", GC.getNumTechInfos());
-	pXML->SetVariableListTagPair(&m_pbCivilizationDisableTechs, L"DisableTechs", GC.getNumTechInfos());
+	pXML->SetOptionalVector(&m_aeCivilizationFreeTechs, L"FreeTechs");
+	pXML->SetOptionalVector(&m_aeCivilizationDisableTechs, L"DisableTechs");
 
 	if (pXML->TryMoveToXmlFirstChild(L"InitialCivics"))
 	{
@@ -376,7 +370,7 @@ bool CvCivilizationInfo::read(CvXMLLoadUtility* pXML)
 		SAFE_DELETE_ARRAY(m_piCivilizationInitialCivics);
 	}
 
-	pXML->SetVariableListTagPair(&m_pbLeaders, L"Leaders", GC.getNumLeaderHeadInfos());
+	pXML->SetOptionalVector(&m_aeLeaders, L"Leaders");
 
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"CivilizationSelectionSound");
 
@@ -449,31 +443,14 @@ void CvCivilizationInfo::copyNonDefaults(const CvCivilizationInfo* pClassInfo)
 
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCivilizationBuildings, pClassInfo->m_aiCivilizationBuildings);
 
-	for ( int i = 0; i < GC.getNumTechInfos(); i++)
-	{
-		if ( isCivilizationFreeTechs(i) == bDefault && pClassInfo->isCivilizationFreeTechs(i) != bDefault)
-		{
-			if ( NULL == m_pbCivilizationFreeTechs )
-			{
-				CvXMLLoadUtility::InitList(&m_pbCivilizationFreeTechs,GC.getNumTechInfos(),bDefault);
-			}
-			m_pbCivilizationFreeTechs[i] = pClassInfo->isCivilizationFreeTechs(i);
-		}
-		if ( isCivilizationDisableTechs(i) == bDefault && pClassInfo->isCivilizationDisableTechs(i) != bDefault)
-		{
-			if ( NULL == m_pbCivilizationDisableTechs )
-			{
-				CvXMLLoadUtility::InitList(&m_pbCivilizationDisableTechs,GC.getNumTechInfos(),bDefault);
-			}
-			m_pbCivilizationDisableTechs[i] = pClassInfo->isCivilizationDisableTechs(i);
-		}
-	}
+	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeCivilizationFreeTechs, pClassInfo->m_aeCivilizationFreeTechs);
+	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeCivilizationDisableTechs, pClassInfo->m_aeCivilizationDisableTechs);
 
 	for ( int i = 0; i < GC.getNumCivicOptionInfos(); i++)
 	{
 		if ( getCivilizationInitialCivics(i) == -1 && pClassInfo->getCivilizationInitialCivics(i) != -1 )
 		{
-			if ( NULL == m_pbCivilizationDisableTechs )
+			if ( NULL == m_piCivilizationInitialCivics )
 			{
 				CvXMLLoadUtility::InitList(&m_piCivilizationInitialCivics,GC.getNumCivicOptionInfos(),-1);
 			}
@@ -481,17 +458,7 @@ void CvCivilizationInfo::copyNonDefaults(const CvCivilizationInfo* pClassInfo)
 		}
 	}
 
-	for ( int i = 0; i < GC.getNumLeaderHeadInfos(); i++)
-	{
-		if ( isLeaders(i) == bDefault && pClassInfo->isLeaders(i) != bDefault)
-		{
-			if ( NULL == m_pbLeaders )
-			{
-				CvXMLLoadUtility::InitList(&m_pbLeaders,GC.getNumLeaderHeadInfos(),bDefault);
-			}
-			m_pbLeaders[i] = pClassInfo->isLeaders(i);
-		}
-	}
+	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeLeaders, pClassInfo->m_aeLeaders);
 
 	//TB Tags
 	//int

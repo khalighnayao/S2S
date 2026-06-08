@@ -8,6 +8,7 @@
 #include "CvImprovementInfo.h"
 #include "CvBonusInfo.h"
 #include "CvInfos.h"
+#include "CvInfoUtil.h"
 #include "CvDiplomacyClasses.h"
 #include "CvUnitCombatInfo.h"
 #include "CvPlayerOptionInfo.h"
@@ -780,7 +781,7 @@ void cvInternalGlobals::updateReplacements()
 
 	m_ProjectInfoReplacements.updateReplacements(m_paProjectInfo);
 
-	m_BuildInfoReplacements.updateReplacements(m_paBuildInfo);
+	m_BuildInfoReplacements.updateReplacements(m_buildTable.rows());
 
 	m_SpawnInfoReplacements.updateReplacements(m_paSpawnInfo);
 	m_GameSpeedInfoReplacements.updateReplacements(m_paGameSpeedInfo);
@@ -1929,13 +1930,29 @@ CvGoodyInfo& cvInternalGlobals::getGoodyInfo(GoodyTypes eGoodyNum) const
 
 int cvInternalGlobals::getNumBuildInfos() const
 {
-	return (int)m_paBuildInfo.size();
+	return m_buildTable.getNum();
 }
 
 CvBuildInfo& cvInternalGlobals::getBuildInfo(BuildTypes eBuildNum) const
 {
 	FASSERT_BOUNDS(0, GC.getNumBuildInfos(), eBuildNum);
-	return *(m_paBuildInfo[eBuildNum]);
+	return m_buildTable.get(eBuildNum);
+}
+
+void cvInternalGlobals::linkAllInfos()
+{
+	PROFILE_EXTRA_FUNC();
+	// Uniform parse-then-link over every registered info vector. CvInfoUtil's virtual getDataMembers
+	// dispatches to each row's concrete declarative fields; rows with no declared FKs (or only
+	// already-resolved immediate ones) are a no-op. Coverage grows as classes are migrated.
+	for (uint32_t v = 0, nv = m_aInfoVectors.size(); v < nv; v++)
+	{
+		std::vector<CvInfoBase*>& vec = *m_aInfoVectors[v];
+		for (uint32_t i = 0, n = vec.size(); i < n; i++)
+		{
+			CvInfoUtil(vec[i]).link();
+		}
+	}
 }
 
 int cvInternalGlobals::getNumHandicapInfos() const
@@ -2840,6 +2857,12 @@ void cvInternalGlobals::reprocessSigns()
 
 bool cvInternalGlobals::isDelayedResolutionRequired(InfoClassTypes eLoadingClass, InfoClassTypes eRefClass) const
 {
+	// SPIKE (parse-then-link): force CvBuildInfo onto the deferred path regardless of load order, so
+	// its top-level FK columns resolve in InfoTable<CvBuildInfo>::link() instead of inline at read.
+	// This demonstrates that with a link phase the catalog no longer depends on XML load order.
+	// (Nested struct-element FKs still resolve immediately — see CvInfoUtil m_bForceImmediate.)
+	if (eLoadingClass == BUILD_INFO)
+		return true;
 	return m_infoClassXmlLoadOrder[eLoadingClass] <= m_infoClassXmlLoadOrder[eRefClass];
 }
 

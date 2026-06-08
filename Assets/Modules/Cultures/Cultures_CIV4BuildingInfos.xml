@@ -51,10 +51,7 @@
 			<PrereqTech>TECH_RITUALISM</PrereqTech>
 			<RawVicinityBonus>BONUS_KANGAROO</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_OCEANIAN</BuildingType>
@@ -194,10 +191,7 @@
 			</MapCategoryTypes>
 			<PrereqTech>TECH_TRACKING</PrereqTech>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>
@@ -448,10 +442,7 @@
 				<BuildingType>BUILDING_C_AC_EUROPEAN</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_DEMOCRACY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_DEMOCRACY</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<iCost>3480</iCost>
@@ -718,10 +709,7 @@
 			<PrereqTech>TECH_MASONRY</PrereqTech>
 			<RawVicinityBonus>BONUS_TURQUOISE</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -828,10 +816,7 @@
 			<PrereqTech>TECH_MATCHLOCK</PrereqTech>
 			<RawVicinityBonus>BONUS_PEYOTE</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -868,10 +853,7 @@
 			<PrereqTech>TECH_ARMORED_CAVALRY</PrereqTech>
 			<RawVicinityBonus>BONUS_CAMEL</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_MIDDLE_EASTERN</BuildingType>
@@ -1338,10 +1320,7 @@
 			<PrereqTech>TECH_COPPER_WORKING</PrereqTech>
 			<RawVicinityBonus>BONUS_SPICES</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PEAK</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PEAK</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_SOUTH_AMERICAN</BuildingType>
@@ -1413,10 +1392,7 @@
 			<PrereqTech>TECH_OBSIDIAN_WEAPONS</PrereqTech>
 			<RawVicinityBonus>BONUS_OBSIDIAN</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -1467,10 +1443,7 @@
 			<PrereqTech>TECH_ARCHERY</PrereqTech>
 			<RawVicinityBonus>BONUS_WHEAT</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FLOOD_PLAINS</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FLOOD_PLAINS</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_MIDDLE_EASTERN</BuildingType>
@@ -1939,10 +1912,7 @@
 			<PrereqTech>TECH_VASSALAGE</PrereqTech>
 			<RawVicinityBonus>BONUS_SULPHUR</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -1979,10 +1949,7 @@
 			<PrereqTech>TECH_FEUDALISM</PrereqTech>
 			<RawVicinityBonus>BONUS_WHEAT</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SAVANNA</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_SAVANNA</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>
@@ -2019,10 +1986,7 @@
 			<PrereqTech>TECH_MOUNTED_ARCHERY</PrereqTech>
 			<RawVicinityBonus>BONUS_SHEEP</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>
@@ -2128,10 +2092,7 @@
 			<PrereqTech>TECH_COLONIALISM</PrereqTech>
 			<RawVicinityBonus>BONUS_SUGAR</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_SOUTH_AMERICAN</BuildingType>
@@ -2314,10 +2275,7 @@
 			<PrereqTech>TECH_AESTHETICS</PrereqTech>
 			<RawVicinityBonus>BONUS_PRIME_TIMBER</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -2461,28 +2419,13 @@
 			<PrereqTech>TECH_SOCIAL_CONTRACT</PrereqTech>
 			<RawVicinityBonus>BONUS_BEAVERS</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TAIGA</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -2705,10 +2648,7 @@
 			<bWater>1</bWater>
 			<RawVicinityBonus>BONUS_MUREX</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>
@@ -2815,22 +2755,10 @@
 			<PrereqTech>TECH_IRON_WORKING</PrereqTech>
 			<RawVicinityBonus>BONUS_SHEEP</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_EUROPEAN</BuildingType>
@@ -2963,10 +2891,7 @@
 			<PrereqTech>TECH_SPICE_TRADE</PrereqTech>
 			<RawVicinityBonus>BONUS_SUGAR</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -3073,22 +2998,10 @@
 			<PrereqTech>TECH_ALPHABET</PrereqTech>
 			<RawVicinityBonus>BONUS_PUMPKIN</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -3125,14 +3038,8 @@
 			<PrereqTech>TECH_ANIMAL_RIDING</PrereqTech>
 			<RawVicinityBonus>BONUS_HORSE</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GRASSLAND</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PLAINS</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -3512,14 +3419,8 @@
 			<PrereqTech>TECH_MOUNTED_ARCHERY</PrereqTech>
 			<RawVicinityBonus>BONUS_HORSE</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GRASSLAND</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PLAINS</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -3561,10 +3462,7 @@
 				<BuildingType>BUILDING_C_AC_EUROPEAN</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_CONFEDERACY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_CONFEDERACY</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<iCost>3210</iCost>
@@ -3875,28 +3773,13 @@
 			<PrereqTech>TECH_CANINE_DOMESTICATION</PrereqTech>
 			<RawVicinityBonus>BONUS_SEA_LION_AND_SEAL</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TAIGA</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -3968,22 +3851,10 @@
 			<PrereqTech>TECH_NAVAL_CANNON</PrereqTech>
 			<RawVicinityBonus>BONUS_HEMP</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_EUROPEAN</BuildingType>
@@ -4026,14 +3897,8 @@
 			<PrereqTech>TECH_MOUNTED_ARCHERY</PrereqTech>
 			<RawVicinityBonus>BONUS_DONKEY</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GRASSLAND</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PLAINS</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -4105,16 +3970,10 @@
 			<PrereqTech>TECH_POLYTHEISM</PrereqTech>
 			<RawVicinityBonus>BONUS_STONE</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FLOOD_PLAINS</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FLOOD_PLAINS</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>
@@ -4178,22 +4037,10 @@
 			<bWater>1</bWater>
 			<RawVicinityBonus>BONUS_APPLE</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_EUROPEAN</BuildingType>
@@ -4357,16 +4204,10 @@
 			<PrereqTech>TECH_THEOLOGY</PrereqTech>
 			<RawVicinityBonus>BONUS_COFFEE</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PEAK</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PEAK</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>
@@ -4611,22 +4452,10 @@
 			<PrereqTech>TECH_ARISTOCRACY</PrereqTech>
 			<RawVicinityBonus>BONUS_GRAPES</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_EUROPEAN</BuildingType>
@@ -4760,10 +4589,7 @@
 			<PrereqTech>TECH_CASTE_SYSTEM</PrereqTech>
 			<RawVicinityBonus>BONUS_COTTON</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SAVANNA</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_SAVANNA</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>
@@ -4940,22 +4766,10 @@
 			<PrereqTech>TECH_PRINTING_PRESS</PrereqTech>
 			<RawVicinityBonus>BONUS_PIG</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_EUROPEAN</BuildingType>
@@ -5493,22 +5307,10 @@
 			<bWater>1</bWater>
 			<RawVicinityBonus>BONUS_WHALE</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -5721,10 +5523,7 @@
 			<PrereqTech>TECH_RIFLING</PrereqTech>
 			<RawVicinityBonus>BONUS_BISON</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>
@@ -5952,10 +5751,7 @@
 			<PrereqTech>TECH_POTTERY</PrereqTech>
 			<RawVicinityBonus>BONUS_CORN</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -6060,14 +5856,8 @@
 			<PrereqTech>TECH_ANIMAL_RIDING</PrereqTech>
 			<RawVicinityBonus>BONUS_HORSE</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GRASSLAND</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PLAINS</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_EUROPEAN</BuildingType>
@@ -6104,22 +5894,10 @@
 			<PrereqTech>TECH_TRAP_FISHING</PrereqTech>
 			<RawVicinityBonus>BONUS_DEER</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -6331,10 +6109,7 @@
 			<PrereqTech>TECH_COPPER_WORKING</PrereqTech>
 			<RawVicinityBonus>BONUS_POTATOES</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PEAK</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PEAK</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_SOUTH_AMERICAN</BuildingType>
@@ -6377,10 +6152,7 @@
 			<PrereqTech>TECH_POLYTHEISM</PrereqTech>
 			<RawVicinityBonus>BONUS_SPICES</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -6455,10 +6227,7 @@
 			<PrereqTech>TECH_SIEGE_WARFARE</PrereqTech>
 			<RawVicinityBonus>BONUS_PEARLS</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -6530,10 +6299,7 @@
 			<PrereqTech>TECH_HARPOON_MAKING</PrereqTech>
 			<RawVicinityBonus>BONUS_WALRUS</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ICE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -6675,22 +6441,10 @@
 			<PrereqTech>TECH_AXE_MAKING</PrereqTech>
 			<RawVicinityBonus>BONUS_PRIME_TIMBER</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -6727,10 +6481,7 @@
 			<PrereqTech>TECH_MONOTHEISM</PrereqTech>
 			<RawVicinityBonus>BONUS_SALT</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_MIDDLE_EASTERN</BuildingType>
@@ -6855,22 +6606,10 @@
 			<bWater>1</bWater>
 			<RawVicinityBonus>BONUS_FISH</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -6972,10 +6711,7 @@
 			<PrereqTech>TECH_HUNTING</PrereqTech>
 			<RawVicinityBonus>BONUS_HEMP</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_SOUTH_AMERICAN</BuildingType>
@@ -7047,10 +6783,7 @@
 			<PrereqTech>TECH_NATIONALISM</PrereqTech>
 			<RawVicinityBonus>BONUS_NATURAL_GAS</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_MIDDLE_EASTERN</BuildingType>
@@ -7330,10 +7063,7 @@
 			<PrereqTech>TECH_CANAL_SYSTEMS</PrereqTech>
 			<RawVicinityBonus>BONUS_BANANA</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -7553,10 +7283,7 @@
 			<PrereqTech>TECH_COMMUNISM</PrereqTech>
 			<RawVicinityBonus>BONUS_BANANA</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PEAK</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PEAK</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>
@@ -7593,22 +7320,10 @@
 			<PrereqTech>TECH_METAL_CASTING</PrereqTech>
 			<RawVicinityBonus>BONUS_PIG</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -8044,10 +7759,7 @@
 			<PrereqTech>TECH_TRADE</PrereqTech>
 			<RawVicinityBonus>BONUS_SAPPHIRES</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GRASSLAND</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>
@@ -8581,10 +8293,7 @@
 			<PrereqTech>TECH_FOLK_DANCE</PrereqTech>
 			<RawVicinityBonus>BONUS_COW</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SAVANNA</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_SAVANNA</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>
@@ -8655,10 +8364,7 @@
 			<PrereqTech>TECH_OBSIDIAN_WEAPONS</PrereqTech>
 			<RawVicinityBonus>BONUS_INDIGO</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -8780,10 +8486,7 @@
 			<bWater>1</bWater>
 			<RawVicinityBonus>BONUS_RICE</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_HILL</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_HILL</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>
@@ -9076,10 +8779,7 @@
 			<bWater>1</bWater>
 			<RawVicinityBonus>BONUS_TURQUOISE</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PEAK</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PEAK</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_SOUTH_AMERICAN</BuildingType>
@@ -9221,14 +8921,8 @@
 			<PrereqTech>TECH_ANIMAL_RIDING</PrereqTech>
 			<RawVicinityBonus>BONUS_HORSE</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GRASSLAND</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PLAINS</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -9299,10 +8993,7 @@
 			<PrereqTech>TECH_ARCHITECTURE</PrereqTech>
 			<RawVicinityBonus>BONUS_MARBLE</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -9415,10 +9106,7 @@
 			<PrereqTech>TECH_MASONRY</PrereqTech>
 			<RawVicinityBonus>BONUS_GOLD_ORE</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SAVANNA</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_SAVANNA</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>
@@ -9559,10 +9247,7 @@
 			<PrereqTech>TECH_PHILOSOPHY</PrereqTech>
 			<RawVicinityBonus>BONUS_SHEEP</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -9599,10 +9284,7 @@
 			<PrereqTech>TECH_OBSIDIAN_WEAPONS</PrereqTech>
 			<RawVicinityBonus>BONUS_COCA</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_BARREN</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_SOUTH_AMERICAN</BuildingType>
@@ -9639,10 +9321,7 @@
 			<PrereqTech>TECH_MASONRY</PrereqTech>
 			<RawVicinityBonus>BONUS_HEMP</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PEAK</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PEAK</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -9819,22 +9498,10 @@
 			<PrereqTech>TECH_WOODWORKING</PrereqTech>
 			<RawVicinityBonus>BONUS_FISH</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -10044,10 +9711,7 @@
 			<PrereqTech>TECH_BARTER</PrereqTech>
 			<RawVicinityBonus>BONUS_JADE</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -10380,10 +10044,7 @@
 			<PrereqTech>TECH_WARFARE</PrereqTech>
 			<RawVicinityBonus>BONUS_MANGO</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_OCEANIAN</BuildingType>
@@ -11256,10 +10917,7 @@
 			<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
 			<RawVicinityBonus>BONUS_LLAMA</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PEAK</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PEAK</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_SOUTH_AMERICAN</BuildingType>
@@ -11591,28 +11249,13 @@
 			<PrereqTech>TECH_GUILDS</PrereqTech>
 			<RawVicinityBonus>BONUS_BEAVERS</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TAIGA</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_EUROPEAN</BuildingType>
@@ -11819,32 +11462,14 @@
 			<PrereqTech>TECH_EQUINE_DOMESTICATION</PrereqTech>
 			<RawVicinityBonus>BONUS_DEER</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TAIGA</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TUNDRA</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_EUROPEAN</BuildingType>
@@ -11951,10 +11576,7 @@
 			<PrereqTech>TECH_TRADE</PrereqTech>
 			<RawVicinityBonus>BONUS_SILK</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_MIDDLE_EASTERN</BuildingType>
@@ -12060,10 +11682,7 @@
 			<PrereqTech>TECH_FOLK_MUSIC</PrereqTech>
 			<RawVicinityBonus>BONUS_SEA_LION_AND_SEAL</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_HILL</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_HILL</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_EUROPEAN</BuildingType>
@@ -12211,10 +11830,7 @@
 			<PrereqTech>TECH_ARCHERY</PrereqTech>
 			<RawVicinityBonus>BONUS_SHRIMP</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MARSH</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -12390,10 +12006,7 @@
 			<PrereqTech>TECH_LITERATURE</PrereqTech>
 			<RawVicinityBonus>BONUS_ELEPHANTS</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -12440,10 +12053,7 @@
 			<PrereqTech>TECH_FEUDALISM</PrereqTech>
 			<RawVicinityBonus>BONUS_MAMMOTH</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TAIGA</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -12587,14 +12197,8 @@
 			<PrereqTech>TECH_AXE_MAKING</PrereqTech>
 			<RawVicinityBonus>BONUS_BISON</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GRASSLAND</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PLAINS</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -12804,28 +12408,13 @@
 			<PrereqTech>TECH_COMMUNISM</PrereqTech>
 			<RawVicinityBonus>BONUS_NATURAL_GAS</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TAIGA</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_EUROPEAN</BuildingType>
@@ -12983,10 +12572,7 @@
 			<PrereqTech>TECH_POLYTHEISM</PrereqTech>
 			<RawVicinityBonus>BONUS_SHEEP</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FLOOD_PLAINS</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FLOOD_PLAINS</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_MIDDLE_EASTERN</BuildingType>
@@ -13196,10 +12782,7 @@
 			<PrereqTech>TECH_ARMOR_CRAFTING</PrereqTech>
 			<RawVicinityBonus>BONUS_SILVER_ORE</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PEAK</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PEAK</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_EUROPEAN</BuildingType>
@@ -13459,10 +13042,7 @@
 			<PrereqTech>TECH_CIVIL_SERVICE</PrereqTech>
 			<RawVicinityBonus>BONUS_STONE</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -13709,10 +13289,7 @@
 			<PrereqTech>TECH_EDUCATION</PrereqTech>
 			<RawVicinityBonus>BONUS_RICE</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -13819,10 +13396,7 @@
 			<PrereqTech>TECH_MEDITATION</PrereqTech>
 			<RawVicinityBonus>BONUS_COW</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PEAK</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PEAK</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -14209,10 +13783,7 @@
 			<PrereqTech>TECH_CAMELID_DOMESTICATION</PrereqTech>
 			<RawVicinityBonus>BONUS_CAMEL</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DUNES</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>
@@ -14354,10 +13925,7 @@
 			<PrereqTech>TECH_ARCHERY</PrereqTech>
 			<RawVicinityBonus>BONUS_PARROTS</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_SOUTH_AMERICAN</BuildingType>
@@ -14776,10 +14344,7 @@
 			<PrereqTech>TECH_STEEL</PrereqTech>
 			<RawVicinityBonus>BONUS_GRAPES</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -14816,28 +14381,13 @@
 			<PrereqTech>TECH_SAILING</PrereqTech>
 			<RawVicinityBonus>BONUS_PRIME_TIMBER</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TAIGA</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_EUROPEAN</BuildingType>
@@ -15162,14 +14712,8 @@
 			<PrereqTech>TECH_ANIMAL_RIDING</PrereqTech>
 			<RawVicinityBonus>BONUS_GOLD_ORE</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GRASSLAND</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PLAINS</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_ASIAN</BuildingType>
@@ -15449,28 +14993,13 @@
 			<PrereqTech>TECH_OBSIDIAN_WEAPONS</PrereqTech>
 			<RawVicinityBonus>BONUS_GOLD_ORE</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PEAK</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PEAK</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_NORTH_AMERICAN</BuildingType>
@@ -15577,10 +15106,7 @@
 			<PrereqTech>TECH_COPPER_WORKING</PrereqTech>
 			<RawVicinityBonus>BONUS_ELEPHANTS</RawVicinityBonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SAVANNA</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_SAVANNA</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_C_AC_AFRICAN</BuildingType>

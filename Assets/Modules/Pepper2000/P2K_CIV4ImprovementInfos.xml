@@ -17,10 +17,7 @@
 			<iPillageGold>200</iPillageGold>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ORBIT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ORBIT</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iUniqueRange>2</iUniqueRange>
 			<ImprovementUpgrade>IMPROVEMENT_SPACE_STATION_LV2</ImprovementUpgrade>
@@ -41,10 +38,7 @@
 			<iPillageGold>200</iPillageGold>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ORBIT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ORBIT</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iUniqueRange>2</iUniqueRange>
 			<ImprovementPillage>IMPROVEMENT_SPACE_STATION_LV1</ImprovementPillage>
@@ -65,10 +59,7 @@
 			<iPillageGold>200</iPillageGold>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ORBIT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ORBIT</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iUniqueRange>2</iUniqueRange>
 			<ImprovementPillage>IMPROVEMENT_SPACE_STATION_LV2</ImprovementPillage>
@@ -87,30 +78,12 @@
 			<PrereqTech>TECH_LUNAR_MEGASTRUCTURES</PrereqTech>
 			<iPillageGold>200</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MOON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MOON</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -137,18 +110,9 @@
 			<PrereqTech>TECH_ABYSS_COLONIZATION</PrereqTech>
 			<iPillageGold>200</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_VENUS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_VENUS_HIGHLANDS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_VENUS_LOWLANDS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_VENUS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_VENUS_HIGHLANDS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_VENUS_LOWLANDS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -183,18 +147,9 @@
 			<PrereqTech>TECH_BOTANICAL_ALCHEMY</PrereqTech>
 			<iPillageGold>200</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_VENUS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_VENUS_HIGHLANDS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_VENUS_LOWLANDS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_VENUS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_VENUS_HIGHLANDS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_VENUS_LOWLANDS</TerrainMakesValid>
 			</TerrainMakesValids>
 		</ImprovementInfo>
 		<ImprovementInfo>
@@ -211,30 +166,12 @@
 			<PrereqTech>TECH_PLANETARY_EXTRACTION</PrereqTech>
 			<iPillageGold>200</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MARS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MARS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -288,26 +225,11 @@
 			<PrereqTech>TECH_EXTRATERRESTRIAL_AGRICULTURE</PrereqTech>
 			<iPillageGold>200</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MARS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MARS</TerrainMakesValid>
 			</TerrainMakesValids>
 		</ImprovementInfo>
 		<ImprovementInfo>
@@ -321,26 +243,11 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -356,34 +263,13 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_ROCKY</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -399,16 +285,10 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_STAR_CLUSTER</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_STAR_CLUSTER</TerrainMakesValid>
 			</TerrainMakesValids>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_BLUE_SUPERGIANT</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_BLUE_SUPERGIANT</FeatureMakesValid>
 			</FeatureMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -424,18 +304,9 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_INTERGALACTIC_VOID</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_COSMOS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OBSERVABLE_UNIVERSE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_INTERGALACTIC_VOID</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_COSMOS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -451,18 +322,9 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_HYPERSPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_FUTURE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BRANESPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_HYPERSPACE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_FUTURE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BRANESPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -478,18 +340,9 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_HYPERSPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_PAST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BRANESPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_HYPERSPACE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_PAST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BRANESPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -505,18 +358,9 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_HYPERSPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_FUTURE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_PAST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_HYPERSPACE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_FUTURE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_PAST</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -537,22 +381,10 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_CISLUNAR_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_INNER_SOLAR_SYSTEM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_CISLUNAR_SPACE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_INNER_SOLAR_SYSTEM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bGraphicalOnly>1</bGraphicalOnly>
 		</ImprovementInfo>
@@ -572,14 +404,8 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LOCAL_GROUP</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LOCAL_GROUP</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_VIRGO_SUPERCLUSTER</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bGraphicalOnly>1</bGraphicalOnly>
 		</ImprovementInfo>
@@ -598,10 +424,7 @@
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<iPillageGold>50</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_CISLUNAR_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_CISLUNAR_SPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -646,18 +469,9 @@
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<iPillageGold>50</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_INNER_SOLAR_SYSTEM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_INNER_SOLAR_SYSTEM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -686,10 +500,7 @@
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<iPillageGold>50</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MERCURY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MERCURY</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bOutsideBorders>1</bOutsideBorders>
 		</ImprovementInfo>
@@ -708,10 +519,7 @@
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<iPillageGold>50</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MERCURY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MERCURY</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bOutsideBorders>1</bOutsideBorders>
 		</ImprovementInfo>
@@ -729,10 +537,7 @@
 			<PrereqTech>TECH_ASTEROID_MINING</PrereqTech>
 			<bOutsideBorders>1</bOutsideBorders>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ASTEROIDS</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ASTEROIDS</FeatureMakesValid>
 			</FeatureMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -804,10 +609,7 @@
 			<PrereqTech>TECH_APPLIED_RELATIVITY</PrereqTech>
 			<bOutsideBorders>1</bOutsideBorders>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_BLUE_SUPERGIANT</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_BLUE_SUPERGIANT</FeatureMakesValid>
 			</FeatureMakesValids>
 			<iPillageGold>200</iPillageGold>
 		</ImprovementInfo>
@@ -825,10 +627,7 @@
 			<PrereqTech>TECH_NEUTRONIUM</PrereqTech>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_NEUTRON_STAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_NEUTRON_STAR</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 		</ImprovementInfo>
@@ -846,10 +645,7 @@
 			<PrereqTech>TECH_GRAND_UNIFICATION_BIOLOGY</PrereqTech>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_NEUTRON_STAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_NEUTRON_STAR</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 		</ImprovementInfo>
@@ -866,18 +662,9 @@
 			</YieldChanges>
 			<PrereqTech>TECH_MAGNETIC_SAILS</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_INNER_SOLAR_SYSTEM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_INNER_SOLAR_SYSTEM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iUniqueRange>2</iUniqueRange>
 			<iPillageGold>200</iPillageGold>
@@ -905,10 +692,7 @@
 			</YieldChanges>
 			<PrereqTech>TECH_STAR_LIFTING</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SUN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SUN</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iUniqueRange>2</iUniqueRange>
 			<iPillageGold>200</iPillageGold>
@@ -926,22 +710,10 @@
 			</YieldChanges>
 			<PrereqTech>TECH_COLONY_ARCOLOGY</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JUPITER</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SATURN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_URANUS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_NEPTUNE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JUPITER</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SATURN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_URANUS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_NEPTUNE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iUniqueRange>2</iUniqueRange>
 			<iPillageGold>200</iPillageGold>
@@ -959,22 +731,10 @@
 			</YieldChanges>
 			<PrereqTech>TECH_COLONY_ARCOLOGY</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JUPITER</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SATURN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_URANUS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_NEPTUNE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JUPITER</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SATURN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_URANUS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_NEPTUNE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iUniqueRange>2</iUniqueRange>
 			<iPillageGold>200</iPillageGold>
@@ -993,44 +753,17 @@
 			<iUpgradeTime>40</iUpgradeTime>
 			<PrereqTech>TECH_KUIPER_BELT_EXPLORATION</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_IO</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GANYMEDE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_EUROPA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_CALLISTO</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TITAN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ENCELADUS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_UMBRIEL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRITON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_IO</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GANYMEDE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_EUROPA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_CALLISTO</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TITAN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ENCELADUS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_UMBRIEL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRITON</TerrainMakesValid>
 			</TerrainMakesValids>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_SMALL_MOON</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_SMALL_MOON</FeatureMakesValid>
 			</FeatureMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -1058,44 +791,17 @@
 			</YieldChanges>
 			<PrereqTech>TECH_LUNAR_MEGASTRUCTURES</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_IO</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GANYMEDE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_EUROPA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_CALLISTO</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TITAN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ENCELADUS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_UMBRIEL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRITON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_IO</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GANYMEDE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_EUROPA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_CALLISTO</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TITAN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ENCELADUS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_UMBRIEL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRITON</TerrainMakesValid>
 			</TerrainMakesValids>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_SMALL_MOON</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_SMALL_MOON</FeatureMakesValid>
 			</FeatureMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -1123,10 +829,7 @@
 			</YieldChanges>
 			<PrereqTech>TECH_TIME_REVERSAL</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_PAST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_PAST</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iUniqueRange>2</iUniqueRange>
 			<iPillageGold>200</iPillageGold>
@@ -1144,10 +847,7 @@
 			</YieldChanges>
 			<PrereqTech>TECH_TIME_REVERSAL</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_FUTURE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_FUTURE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iUniqueRange>2</iUniqueRange>
 			<iPillageGold>200</iPillageGold>
@@ -1165,32 +865,14 @@
 			</YieldChanges>
 			<PrereqTech>TECH_PARATERRAFORMING</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ASTEROID_SURFACE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_KUIPER_BELT_OBJECT</TerrainMakesValid>
 			</TerrainMakesValids>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_SEDNOID</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLANETARY_RING</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_OORT_CLOUD</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ASTEROIDS</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_SEDNOID</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLANETARY_RING</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_OORT_CLOUD</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ASTEROIDS</FeatureMakesValid>
 			</FeatureMakesValids>
 			<iUniqueRange>2</iUniqueRange>
 			<iPillageGold>200</iPillageGold>
@@ -1218,10 +900,7 @@
 			</YieldChanges>
 			<PrereqTech>TECH_BRANE_CONSTRUCTION</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BRANESPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BRANESPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iUniqueRange>2</iUniqueRange>
 			<iPillageGold>200</iPillageGold>
@@ -1239,10 +918,7 @@
 			</YieldChanges>
 			<PrereqTech>TECH_BRANE_CONSTRUCTION</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BRANESPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BRANESPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iUniqueRange>2</iUniqueRange>
 			<iPillageGold>200</iPillageGold>
@@ -1260,10 +936,7 @@
 			</YieldChanges>
 			<PrereqTech>TECH_SPIRITUAL_REALMS</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BRANESPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BRANESPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iUniqueRange>2</iUniqueRange>
 			<iPillageGold>200</iPillageGold>
@@ -1291,14 +964,8 @@
 			</YieldChanges>
 			<PrereqTech>TECH_INTERSTELLAR_TRADE</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRANSTELLAR_SPACE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ORION_ARM</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -1338,10 +1005,7 @@
 			</YieldChanges>
 			<PrereqTech>TECH_INDUCED_SUPERNOVA</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_NEUTRON_STAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_NEUTRON_STAR</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 			<TechYieldChanges>
@@ -1376,22 +1040,10 @@
 			</YieldChanges>
 			<PrereqTech>TECH_INTERGALACTIC_COLONIZATION</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LOCAL_GROUP</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_INTERGALACTIC_VOID</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LOCAL_GROUP</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_VIRGO_SUPERCLUSTER</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OBSERVABLE_UNIVERSE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_INTERGALACTIC_VOID</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -1448,10 +1100,7 @@
 			</YieldChanges>
 			<PrereqTech>TECH_DARK_ENERGY_HARVESTING</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_INTERGALACTIC_VOID</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_INTERGALACTIC_VOID</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 		</ImprovementInfo>
@@ -1468,10 +1117,7 @@
 			</YieldChanges>
 			<PrereqTech>TECH_CONTROLLED_VACUUM_COLLAPSE</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_INTERGALACTIC_VOID</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_INTERGALACTIC_VOID</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 		</ImprovementInfo>
@@ -1488,38 +1134,14 @@
 			</YieldChanges>
 			<PrereqTech>TECH_ASTROENGINEERING</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GALACTIC_CORE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_STAR_CLUSTER</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_NEBULA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_RED_GIANT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SUN_LIKE_STAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_RED_DWARF</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MILKY_WAY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GALACTIC_CORE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ORION_ARM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_STAR_CLUSTER</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_NEBULA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_RED_GIANT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SUN_LIKE_STAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_RED_DWARF</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 			<TechYieldChanges>
@@ -1554,42 +1176,15 @@
 			</YieldChanges>
 			<PrereqTech>TECH_PLANET_SCOUTING</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GALACTIC_CORE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_STAR_CLUSTER</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_NEBULA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_RED_GIANT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SUN_LIKE_STAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_RED_DWARF</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MILKY_WAY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GALACTIC_CORE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ORION_ARM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_STAR_CLUSTER</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_NEBULA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_RED_GIANT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SUN_LIKE_STAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_RED_DWARF</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRANSTELLAR_SPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -1644,38 +1239,14 @@
 			</YieldChanges>
 			<PrereqTech>TECH_ECOSYNTHESIS</PrereqTech>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_CARBON_PLANET</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_CHTHONIAN_PLANET</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_DESERT_PLANET</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ROGUE_PLANET</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_SUPER_EARTH</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_OCEAN_PLANET</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_HOT_JUPITER</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_MINI_NEPTUNE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_CARBON_PLANET</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_CHTHONIAN_PLANET</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_DESERT_PLANET</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ROGUE_PLANET</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_SUPER_EARTH</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_OCEAN_PLANET</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_HOT_JUPITER</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_MINI_NEPTUNE</FeatureMakesValid>
 			</FeatureMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -1728,22 +1299,10 @@
 			</YieldChanges>
 			<PrereqTech>TECH_ARTIFICIAL_PLANETS</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GALACTIC_CORE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MILKY_WAY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GALACTIC_CORE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ORION_ARM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRANSTELLAR_SPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 		</ImprovementInfo>
@@ -1760,30 +1319,12 @@
 			</YieldChanges>
 			<PrereqTech>TECH_STAR_LIFTING</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GALACTIC_CORE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_RED_GIANT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SUN_LIKE_STAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_RED_DWARF</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MILKY_WAY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GALACTIC_CORE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ORION_ARM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_RED_GIANT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SUN_LIKE_STAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_RED_DWARF</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 		</ImprovementInfo>
@@ -1800,22 +1341,10 @@
 			</YieldChanges>
 			<PrereqTech>TECH_GALACTIC_ECOLOGY</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LOCAL_GROUP</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_COSMOS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LOCAL_GROUP</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_VIRGO_SUPERCLUSTER</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OBSERVABLE_UNIVERSE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_COSMOS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 			<TechYieldChanges>
@@ -1874,10 +1403,7 @@
 			</YieldChanges>
 			<PrereqTech>TECH_ARTIFICIAL_STARS</PrereqTech>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_BROWN_DWARF</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_BROWN_DWARF</FeatureMakesValid>
 			</FeatureMakesValids>
 			<iPillageGold>200</iPillageGold>
 			<TechYieldChanges>
@@ -1912,10 +1438,7 @@
 			</YieldChanges>
 			<PrereqTech>TECH_ENDLESS_EXPLORATION</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_COSMOS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_COSMOS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -1954,10 +1477,7 @@
 			</YieldChanges>
 			<PrereqTech>TECH_ORBITAL_MEGASTRUCTURES</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_CISLUNAR_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_CISLUNAR_SPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 			<TechYieldChanges>
@@ -1984,18 +1504,9 @@
 			</YieldChanges>
 			<PrereqTech>TECH_COLONY_ARCOLOGY</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_INNER_SOLAR_SYSTEM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_INNER_SOLAR_SYSTEM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iUpgradeTime>10</iUpgradeTime>
 			<iPillageGold>200</iPillageGold>
@@ -2024,18 +1535,9 @@
 			</YieldChanges>
 			<PrereqTech>TECH_PLANET_ENGINEERING</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_INNER_SOLAR_SYSTEM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_INNER_SOLAR_SYSTEM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 			<ImprovementPillage>IMPROVEMENT_SATELLITE_STATION</ImprovementPillage>
@@ -2053,26 +1555,11 @@
 			</YieldChanges>
 			<PrereqTech>TECH_ADVANCED_SEEDSHIPS</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GALACTIC_CORE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_NEBULA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_STAR_CLUSTER</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ORION_ARM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MILKY_WAY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GALACTIC_CORE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_NEBULA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_STAR_CLUSTER</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 			<TechYieldChanges>
@@ -2099,20 +1586,11 @@
 			</YieldChanges>
 			<PrereqTech>TECH_INTERGALACTIC_COLONIZATION</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_VIRGO_SUPERCLUSTER</TerrainMakesValid>
 			</TerrainMakesValids>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_DWARF_GALAXY</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_GALAXY</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_DWARF_GALAXY</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_GALAXY</FeatureMakesValid>
 			</FeatureMakesValids>
 			<iPillageGold>200</iPillageGold>
 			<TechYieldChanges>
@@ -2139,10 +1617,7 @@
 			</YieldChanges>
 			<PrereqTech>TECH_COSMIC_ENGINEERING</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OBSERVABLE_UNIVERSE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 		</ImprovementInfo>
@@ -2159,10 +1634,7 @@
 			</YieldChanges>
 			<PrereqTech>TECH_CONTROLLED_INFLATION</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_COSMOS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_COSMOS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 		</ImprovementInfo>
@@ -2179,22 +1651,10 @@
 			</YieldChanges>
 			<PrereqTech>TECH_EXPERIMENTAL_COSMOLOGY</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_COSMOS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_INTERGALACTIC_VOID</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_HYPERSPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OBSERVABLE_UNIVERSE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_COSMOS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_INTERGALACTIC_VOID</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_HYPERSPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 			<TechYieldChanges>
@@ -2221,14 +1681,8 @@
 			</YieldChanges>
 			<PrereqTech>TECH_MULTIDIMENSIONAL_TIME</PrereqTech>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_PAST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_FUTURE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_PAST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_FUTURE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iPillageGold>200</iPillageGold>
 		</ImprovementInfo>
@@ -2246,10 +1700,7 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_CISLUNAR_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_CISLUNAR_SPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>10</iCulture>
 			<iCultureRange>1</iCultureRange>
@@ -2275,18 +1726,9 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_INNER_SOLAR_SYSTEM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_INNER_SOLAR_SYSTEM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>10</iCulture>
 			<iCultureRange>1</iCultureRange>
@@ -2312,22 +1754,10 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRANSTELLAR_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GALACTIC_CORE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ORION_ARM</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRANSTELLAR_SPACE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MILKY_WAY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GALACTIC_CORE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>10</iCulture>
 			<iCultureRange>1</iCultureRange>
@@ -2353,26 +1783,11 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LOCAL_GROUP</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_INTERGALACTIC_VOID</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_COSMOS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LOCAL_GROUP</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_VIRGO_SUPERCLUSTER</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_INTERGALACTIC_VOID</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OBSERVABLE_UNIVERSE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_COSMOS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>10</iCulture>
 			<iCultureRange>1</iCultureRange>
@@ -2398,22 +1813,10 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_HYPERSPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_PAST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DISTANT_FUTURE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BRANESPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_HYPERSPACE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_PAST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DISTANT_FUTURE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BRANESPACE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>10</iCulture>
 			<iCultureRange>1</iCultureRange>
@@ -2441,30 +1844,12 @@
 			<iPillageGold>200</iPillageGold>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MOON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MOON</TerrainMakesValid>
 			</TerrainMakesValids>
 			<ImprovementUpgrade>IMPROVEMENT_LUNAR_OUTPOST</ImprovementUpgrade>
 		</ImprovementInfo>
@@ -2484,30 +1869,12 @@
 			<iPillageGold>500</iPillageGold>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MOON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MOON</TerrainMakesValid>
 			</TerrainMakesValids>
 			<ImprovementPillage>IMPROVEMENT_LUNAR_BASE</ImprovementPillage>
 			<ImprovementUpgrade>IMPROVEMENT_LUNAR_HABITATION_COMPLEX</ImprovementUpgrade>
@@ -2528,30 +1895,12 @@
 			<iPillageGold>1000</iPillageGold>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MOON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MOON</TerrainMakesValid>
 			</TerrainMakesValids>
 		</ImprovementInfo>
 		<ImprovementInfo>
@@ -2569,30 +1918,12 @@
 			<iPillageGold>200</iPillageGold>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MOON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MOON</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -2662,30 +1993,12 @@
 			<iPillageGold>200</iPillageGold>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MOON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MOON</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -2742,58 +2055,19 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>10</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MOON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MARS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MOON</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MARS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<ImprovementUpgrade>IMPROVEMENT_COLONY_HABITAT_MEDIUM</ImprovementUpgrade>
 		</ImprovementInfo>
@@ -2815,58 +2089,19 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>15</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MOON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MARS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MOON</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MARS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<ImprovementPillage>IMPROVEMENT_COLONY_HABITAT_SMALL</ImprovementPillage>
 			<ImprovementUpgrade>IMPROVEMENT_COLONY_HABITAT_LARGE</ImprovementUpgrade>
@@ -2899,58 +2134,19 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>20</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MOON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MARS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MOON</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MARS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<ImprovementPillage>IMPROVEMENT_COLONY_HABITAT_MEDIUM</ImprovementPillage>
 			<ImprovementUpgrade>IMPROVEMENT_COLONY_HABITAT_HUGE</ImprovementUpgrade>
@@ -2982,58 +2178,19 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>25</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MOON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MARS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MOON</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MARS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<ImprovementPillage>IMPROVEMENT_COLONY_HABITAT_LARGE</ImprovementPillage>
 			<TechYieldChanges>
@@ -3099,58 +2256,19 @@
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<iPillageGold>250</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MOON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MARS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MOON</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MARS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -3222,58 +2340,19 @@
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<iPillageGold>250</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MOON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MARS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MOON</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MARS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -3329,30 +2408,12 @@
 			<iPillageGold>250</iPillageGold>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MOON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MOON</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -3441,70 +2502,22 @@
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<iPillageGold>50</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_DOME</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_MARE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_HIGHLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_REGOLITH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUNAR_RILLE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MOON</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARTIAN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GREEN_MARS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_VENUS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_VENUS_HIGHLANDS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_VENUS_LOWLANDS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_DOME</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_MARE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_HIGHLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_REGOLITH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUNAR_RILLE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MOON</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARTIAN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GREEN_MARS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_VENUS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_VENUS_HIGHLANDS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_VENUS_LOWLANDS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -3538,14 +2551,8 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_CISLUNAR_SPACE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ORBIT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_CISLUNAR_SPACE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ORBIT</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iVisibilityChange>5</iVisibilityChange>
 			<iSeeFrom>4</iSeeFrom>

@@ -264,7 +264,7 @@ protected:
 
 	// Arrays
 
-	bool* m_pbTraits;
+	std::vector<TraitTypes> m_aeTraits;
 
 	int* m_piFlavorValue;
 	int* m_piContactRand;

@@ -10,12 +10,6 @@
 			<Description>TXT_KEY_SPECIALUNIT_FIGHTER</Description>
 			<bValid>1</bValid>
 			<bCityLoad>0</bCityLoad>
-			<CarrierUnitAIs>
-				<CarrierUnitAI>
-					<UnitAIType>UNITAI_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</CarrierUnitAI>
-			</CarrierUnitAIs>
 		</SpecialUnitInfo>
 		<SpecialUnitInfo>
 			<Type>SPECIALUNIT_PEOPLE</Type>
@@ -23,63 +17,30 @@
 			<bValid>1</bValid>
 			<bCityLoad>0</bCityLoad>
 			<bSMLoadSame>1</bSMLoadSame>
-			<CarrierUnitAIs>
-				<CarrierUnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</CarrierUnitAI>
-				<CarrierUnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</CarrierUnitAI>
-				<CarrierUnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</CarrierUnitAI>
-			</CarrierUnitAIs>
 		</SpecialUnitInfo>
 		<SpecialUnitInfo>
 			<Type>SPECIALUNIT_MISSILE</Type>
 			<Description>TXT_KEY_SPECIALUNIT_MISSILE</Description>
 			<bValid>1</bValid>
 			<bCityLoad>1</bCityLoad>
-			<CarrierUnitAIs>
-				<CarrierUnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</CarrierUnitAI>
-			</CarrierUnitAIs>
 		</SpecialUnitInfo>
 		<SpecialUnitInfo>
 			<Type>SPECIALUNIT_TROOP</Type>
 			<Description>TXT_KEY_SPECIALUNIT_TROOP</Description>
 			<bValid>1</bValid>
 			<bCityLoad>0</bCityLoad>
-			<CarrierUnitAIs/>
 		</SpecialUnitInfo>
 		<SpecialUnitInfo>
 			<Type>SPECIALUNIT_SEAPLANE</Type>
 			<Description>TXT_KEY_SPECIALUNIT_SEAPLANE</Description>
 			<bValid>1</bValid>
 			<bCityLoad>0</bCityLoad>
-			<CarrierUnitAIs>
-				<CarrierUnitAI>
-					<UnitAIType>UNITAI_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</CarrierUnitAI>
-			</CarrierUnitAIs>
 		</SpecialUnitInfo>
 		<SpecialUnitInfo>
 			<Type>SPECIALUNIT_VTOL</Type>
 			<Description>TXT_KEY_SPECIALUNIT_VTOL</Description>
 			<bValid>1</bValid>
 			<bCityLoad>0</bCityLoad>
-			<CarrierUnitAIs>
-				<CarrierUnitAI>
-					<UnitAIType>UNITAI_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</CarrierUnitAI>
-			</CarrierUnitAIs>
 		</SpecialUnitInfo>
 		<SpecialUnitInfo>
 			<Type>SPECIALUNIT_CAPTIVE</Type>
@@ -88,7 +49,6 @@
 			<bCityLoad>0</bCityLoad>
 			<iCombatPercent>-5</iCombatPercent>
 			<iWithdrawalChange>-10</iWithdrawalChange>
-			<CarrierUnitAIs/>
 		</SpecialUnitInfo>
 	</SpecialUnitInfos>
 </Civ4SpecialUnitInfos>

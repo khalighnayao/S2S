@@ -1965,10 +1965,7 @@
 			<iGridX>10</iGridX>
 			<iGridY>5</iGridY>
 			<TerrainTrades>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
+				<TerrainTrade>TERRAIN_LAKE_SHORE</TerrainTrade>
 			</TerrainTrades>
 			<bRiverTrade>1</bRiverTrade>
 			<Flavors>
@@ -4104,34 +4101,13 @@
 			<iGridX>22</iGridX>
 			<iGridY>7</iGridY>
 			<TerrainTrades>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_COAST</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_COAST_POLAR</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_COAST_TROPICAL</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_COAST_DEEP</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_COAST_DEEP_POLAR</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_COAST_DEEP_TROPICAL</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_LAKE</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
+				<TerrainTrade>TERRAIN_COAST</TerrainTrade>
+				<TerrainTrade>TERRAIN_COAST_POLAR</TerrainTrade>
+				<TerrainTrade>TERRAIN_COAST_TROPICAL</TerrainTrade>
+				<TerrainTrade>TERRAIN_COAST_DEEP</TerrainTrade>
+				<TerrainTrade>TERRAIN_COAST_DEEP_POLAR</TerrainTrade>
+				<TerrainTrade>TERRAIN_COAST_DEEP_TROPICAL</TerrainTrade>
+				<TerrainTrade>TERRAIN_LAKE</TerrainTrade>
 			</TerrainTrades>
 			<Flavors>
 				<Flavor>
@@ -6687,30 +6663,12 @@
 				<PrereqTech>TECH_BRONZE_WORKING</PrereqTech>
 			</OrPreReqs>
 			<TerrainTrades>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_SEA</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_SEA_DEEP</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_SEA_DEEP_POLAR</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_SEA_DEEP_TROPICAL</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_SEA_TROPICAL</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
+				<TerrainTrade>TERRAIN_SEA</TerrainTrade>
+				<TerrainTrade>TERRAIN_SEA_DEEP</TerrainTrade>
+				<TerrainTrade>TERRAIN_SEA_DEEP_POLAR</TerrainTrade>
+				<TerrainTrade>TERRAIN_SEA_DEEP_TROPICAL</TerrainTrade>
+				<TerrainTrade>TERRAIN_SEA_POLAR</TerrainTrade>
+				<TerrainTrade>TERRAIN_SEA_TROPICAL</TerrainTrade>
 			</TerrainTrades>
 			<Quote>TXT_KEY_TECH_SEAFARING_QUOTE</Quote>
 			<Sound>AS2D_TECH_SEAFARING</Sound>
@@ -12573,30 +12531,12 @@
 				</DomainExtraMove>
 			</DomainExtraMoves>
 			<TerrainTrades>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_OCEAN</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_OCEAN_POLAR</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_OCEAN_TROPICAL</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_TRENCH</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_TRENCH_POLAR</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
-				<TerrainTrade>
-					<TerrainType>TERRAIN_TRENCH_TROPICAL</TerrainType>
-					<bTerrainTrade>1</bTerrainTrade>
-				</TerrainTrade>
+				<TerrainTrade>TERRAIN_OCEAN</TerrainTrade>
+				<TerrainTrade>TERRAIN_OCEAN_POLAR</TerrainTrade>
+				<TerrainTrade>TERRAIN_OCEAN_TROPICAL</TerrainTrade>
+				<TerrainTrade>TERRAIN_TRENCH</TerrainTrade>
+				<TerrainTrade>TERRAIN_TRENCH_POLAR</TerrainTrade>
+				<TerrainTrade>TERRAIN_TRENCH_TROPICAL</TerrainTrade>
 			</TerrainTrades>
 			<Flavors>
 				<Flavor>

@@ -3186,10 +3186,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GANYMEDE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GANYMEDE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>300</iCommerce>
@@ -3317,10 +3314,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_JUPITER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_JUPITER</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -3343,10 +3337,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -3481,10 +3472,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MERCURY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MERCURY</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -4345,10 +4333,7 @@
 				<MapCategoryType>MAPCATEGORY_CISLUNAR</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_ASTEROIDS</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_ASTEROIDS</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>400</iCommerce>
@@ -5477,22 +5462,10 @@
 				<BuildingType>BUILDING_CISLUNAR_ONEILL_CYLINDER</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_DESPOTISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MONARCHY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_TOTALITARIANISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_SUPERHUMAN</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_DESPOTISM</PrereqCivic>
+				<PrereqCivic>CIVIC_MONARCHY</PrereqCivic>
+				<PrereqCivic>CIVIC_TOTALITARIANISM</PrereqCivic>
+				<PrereqCivic>CIVIC_SUPERHUMAN</PrereqCivic>
 			</PrereqOrCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 		</BuildingInfo>
@@ -7270,18 +7243,9 @@
 				<Bonus>BONUS_CEMENT</Bonus>
 			</PrereqBonuses>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_CRATER_MEDIUM</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_CRATER_LARGE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_CRATER_SMALL</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_CRATER_MEDIUM</PrereqFeature>
+				<PrereqFeature>FEATURE_CRATER_LARGE</PrereqFeature>
+				<PrereqFeature>FEATURE_CRATER_SMALL</PrereqFeature>
 			</PrereqOrFeature>
 			<iCost>1300</iCost>
 			<iHurryCostModifier>10000</iHurryCostModifier>
@@ -8762,22 +8726,10 @@
 				<BuildingType>BUILDING_MARTIAN_CITY</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_DIVINE_CULT</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_STATE_CHURCH</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_COSMIC_ENLIGHTENING</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_INQUISITORIAL</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_DIVINE_CULT</PrereqCivic>
+				<PrereqCivic>CIVIC_STATE_CHURCH</PrereqCivic>
+				<PrereqCivic>CIVIC_COSMIC_ENLIGHTENING</PrereqCivic>
+				<PrereqCivic>CIVIC_INQUISITORIAL</PrereqCivic>
 			</PrereqOrCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<bPrereqPower>1</bPrereqPower>
@@ -11779,10 +11731,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_ASTEROIDS</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_ASTEROIDS</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>-10</iCommerce>
@@ -11817,10 +11766,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -11869,10 +11815,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>10</iYield>
@@ -11905,10 +11848,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>400</iCommerce>
@@ -11936,10 +11876,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>5</iYield>
@@ -11959,46 +11896,16 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MERCURY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_CALLISTO</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_EUROPA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GANYMEDE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_IO</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ENCELADUS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_UMBRIEL</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TRITON</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MERCURY</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_CALLISTO</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_EUROPA</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GANYMEDE</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_IO</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ENCELADUS</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_UMBRIEL</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TRITON</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>-10</iCommerce>
@@ -12096,10 +12003,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_CALLISTO</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_CALLISTO</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -12126,10 +12030,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_CALLISTO</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_CALLISTO</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>5</iYield>
@@ -12155,10 +12056,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_CALLISTO</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_CALLISTO</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>5</iYield>
@@ -12181,10 +12079,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_CALLISTO</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_CALLISTO</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -12210,10 +12105,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -12961,10 +12853,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ENCELADUS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ENCELADUS</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -12993,10 +12882,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>10</iYield>
@@ -13031,10 +12917,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_EUROPA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_EUROPA</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>400</iCommerce>
@@ -13063,10 +12946,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_EUROPA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_EUROPA</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>-10</iCommerce>
@@ -13096,10 +12976,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_EUROPA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_EUROPA</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -13161,22 +13038,10 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_JUPITER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_SATURN</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_URANUS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_NEPTUNE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_JUPITER</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_SATURN</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_URANUS</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_NEPTUNE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -13322,10 +13187,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>10</iYield>
@@ -13361,16 +13223,10 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TRANSNEPTUNIAN_SPACE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_OORT_CLOUD</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_OORT_CLOUD</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>100</iCommerce>
@@ -13486,10 +13342,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>500</iCommerce>
@@ -13518,10 +13371,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_IO</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_IO</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -13547,10 +13397,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_IO</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_IO</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -13582,22 +13429,10 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_JUPITER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_SATURN</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_URANUS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_NEPTUNE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_JUPITER</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_SATURN</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_URANUS</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_NEPTUNE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -13629,10 +13464,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_JUPITER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_JUPITER</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -13690,10 +13522,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_JUPITER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_JUPITER</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -13727,10 +13556,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>20</iCommerce>
@@ -13774,10 +13600,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -13802,10 +13625,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -13830,10 +13650,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -13866,10 +13683,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -13934,10 +13748,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_UMBRIEL</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_UMBRIEL</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -13964,10 +13775,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -14006,10 +13814,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<GlobalBuildingProductionModifiers>
 				<BuildingProductionModifier>
@@ -14102,10 +13907,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MERCURY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MERCURY</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>100</iCommerce>
@@ -14140,10 +13942,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MERCURY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MERCURY</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -14171,10 +13970,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MERCURY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MERCURY</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>100</iCommerce>
@@ -14203,10 +13999,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MERCURY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MERCURY</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>10</iYield>
@@ -14235,10 +14028,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MERCURY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MERCURY</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>5</iYield>
@@ -14298,10 +14088,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_NEPTUNE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_NEPTUNE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>50</iCommerce>
@@ -14340,10 +14127,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_NEPTUNE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_NEPTUNE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>100</iCommerce>
@@ -14371,10 +14155,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_NEPTUNE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_NEPTUNE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>50</iCommerce>
@@ -14408,10 +14189,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_NEPTUNE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_NEPTUNE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -14435,10 +14213,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_UMBRIEL</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_UMBRIEL</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -14464,10 +14239,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_UMBRIEL</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_UMBRIEL</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>5</iYield>
@@ -14491,46 +14263,16 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MERCURY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_CALLISTO</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_EUROPA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GANYMEDE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_IO</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ENCELADUS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_UMBRIEL</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TRITON</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MERCURY</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_CALLISTO</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_EUROPA</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GANYMEDE</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_IO</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ENCELADUS</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_UMBRIEL</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TRITON</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>-10</iCommerce>
@@ -14780,10 +14522,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SEDNOID</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_SEDNOID</PrereqFeature>
 			</PrereqOrFeature>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -14822,10 +14561,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>-10</iCommerce>
@@ -14899,16 +14635,10 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_SATURN</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_SATURN</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SMALL_MOON</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_SMALL_MOON</PrereqFeature>
 			</PrereqOrFeature>
 			<iMilitaryProductionModifier>50</iMilitaryProductionModifier>
 			<iRevIdxLocal>-5</iRevIdxLocal>
@@ -14927,10 +14657,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_PLANETARY_RING</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_PLANETARY_RING</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>1000</iCommerce>
@@ -14958,10 +14685,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_SATURN</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_SATURN</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>400</iCommerce>
@@ -14990,10 +14714,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_PLANETARY_RING</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_PLANETARY_RING</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -15020,10 +14741,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SEDNOID</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_SEDNOID</PrereqFeature>
 			</PrereqOrFeature>
 			<YieldChanges>
 				<iYield>10</iYield>
@@ -15067,14 +14785,8 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -15100,14 +14812,8 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -15134,14 +14840,8 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -15170,14 +14870,8 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>100</iCommerce>
@@ -15204,14 +14898,8 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>5</iYield>
@@ -15235,14 +14923,8 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -15295,10 +14977,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -15328,18 +15007,9 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_INNER_SOLAR_SYSTEM</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MERCURY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_INNER_SOLAR_SYSTEM</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MERCURY</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -15364,42 +15034,15 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_JUPITER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_SATURN</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_URANUS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_NEPTUNE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_EUROPA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_INNER_SOLAR_SYSTEM</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MERCURY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OUTER_SOLAR_SYSTEM</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_JUPITER</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_SATURN</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_URANUS</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_NEPTUNE</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_EUROPA</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_INNER_SOLAR_SYSTEM</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MERCURY</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -15424,50 +15067,17 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TRANSNEPTUNIAN_SPACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OUTER_SOLAR_SYSTEM</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_JUPITER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_SATURN</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_URANUS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_NEPTUNE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_EUROPA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_INNER_SOLAR_SYSTEM</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MERCURY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TRANSNEPTUNIAN_SPACE</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OUTER_SOLAR_SYSTEM</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_JUPITER</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_SATURN</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_URANUS</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_NEPTUNE</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_EUROPA</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_INNER_SOLAR_SYSTEM</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MERCURY</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -15495,10 +15105,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_SUN</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_SUN</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -15669,10 +15276,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_EUROPA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_EUROPA</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>10</iYield>
@@ -15695,10 +15299,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_SUN</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_SUN</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>100</iCommerce>
@@ -15727,10 +15328,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_SUN</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_SUN</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -15782,10 +15380,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_CALLISTO</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_CALLISTO</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>50</iYield>
@@ -15813,10 +15408,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ASTEROID_SURFACE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ASTEROID_SURFACE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>50</iCommerce>
@@ -15849,10 +15441,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_EUROPA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_EUROPA</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>50</iYield>
@@ -15889,10 +15478,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GANYMEDE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GANYMEDE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>25</iYield>
@@ -15920,10 +15506,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_JUPITER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_JUPITER</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>50</iYield>
@@ -15959,10 +15542,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MERCURY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MERCURY</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>50</iYield>
@@ -15990,10 +15570,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_NEPTUNE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_NEPTUNE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -16026,10 +15603,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_UMBRIEL</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_UMBRIEL</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>30</iYield>
@@ -16061,10 +15635,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_KUIPER_BELT_OBJECT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_KUIPER_BELT_OBJECT</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>50</iCommerce>
@@ -16097,10 +15668,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_SATURN</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_SATURN</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>20</iYield>
@@ -16129,10 +15697,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_UMBRIEL</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_UMBRIEL</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>30</iYield>
@@ -16164,10 +15729,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TRITON</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TRITON</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>50</iYield>
@@ -16195,10 +15757,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_URANUS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_URANUS</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>500</iCommerce>
@@ -16227,10 +15786,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TRITON</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TRITON</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -16259,10 +15815,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TRITON</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TRITON</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -16287,10 +15840,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TRITON</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TRITON</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>5</iYield>
@@ -16316,10 +15866,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TRITON</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TRITON</PrereqTerrain>
 			</PrereqOrTerrain>
 			<GlobalBuildingProductionModifiers>
 				<BuildingProductionModifier>
@@ -16358,10 +15905,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_UMBRIEL</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_UMBRIEL</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -16390,10 +15934,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_UMBRIEL</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_UMBRIEL</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>5</iYield>
@@ -16416,10 +15957,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_URANUS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_URANUS</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>100</iCommerce>
@@ -16453,10 +15991,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_URANUS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_URANUS</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -16490,10 +16025,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_EUROPA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_EUROPA</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -17105,14 +16637,8 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SUPERMASSIVE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_BLACK_HOLE</PrereqFeature>
+				<PrereqFeature>FEATURE_SUPERMASSIVE_BLACK_HOLE</PrereqFeature>
 			</PrereqOrFeature>
 			<YieldChanges>
 				<iYield>12</iYield>
@@ -17176,14 +16702,8 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SUPERMASSIVE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_BLACK_HOLE</PrereqFeature>
+				<PrereqFeature>FEATURE_SUPERMASSIVE_BLACK_HOLE</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>-30</iCommerce>
@@ -17211,14 +16731,8 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SUPERMASSIVE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_BLACK_HOLE</PrereqFeature>
+				<PrereqFeature>FEATURE_SUPERMASSIVE_BLACK_HOLE</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -17242,14 +16756,8 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SUPERMASSIVE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_BLACK_HOLE</PrereqFeature>
+				<PrereqFeature>FEATURE_SUPERMASSIVE_BLACK_HOLE</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>150</iCommerce>
@@ -17275,14 +16783,8 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SUPERMASSIVE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_BLACK_HOLE</PrereqFeature>
+				<PrereqFeature>FEATURE_SUPERMASSIVE_BLACK_HOLE</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -17410,10 +16912,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_NEUTRON_STAR</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_NEUTRON_STAR</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -17463,10 +16962,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_CARBON_PLANET</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_CARBON_PLANET</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>-5</iCommerce>
@@ -17497,10 +16993,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MILKY_WAY</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>50</iYield>
@@ -17608,10 +17101,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_CHTHONIAN_PLANET</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_CHTHONIAN_PLANET</PrereqFeature>
 			</PrereqOrFeature>
 			<YieldChanges>
 				<iYield>5</iYield>
@@ -18166,14 +17656,8 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SUPERMASSIVE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_BLACK_HOLE</PrereqFeature>
+				<PrereqFeature>FEATURE_SUPERMASSIVE_BLACK_HOLE</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -18336,10 +17820,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_DESERT_PLANET</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_DESERT_PLANET</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>-5</iCommerce>
@@ -18746,14 +18227,8 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SUPERMASSIVE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_BLACK_HOLE</PrereqFeature>
+				<PrereqFeature>FEATURE_SUPERMASSIVE_BLACK_HOLE</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -18793,14 +18268,8 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SUPERMASSIVE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_BLACK_HOLE</PrereqFeature>
+				<PrereqFeature>FEATURE_SUPERMASSIVE_BLACK_HOLE</PrereqFeature>
 			</PrereqOrFeature>
 			<YieldChanges>
 				<iYield>10</iYield>
@@ -18825,14 +18294,8 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SUPERMASSIVE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_BLACK_HOLE</PrereqFeature>
+				<PrereqFeature>FEATURE_SUPERMASSIVE_BLACK_HOLE</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -19107,10 +18570,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GALACTIC_CORE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GALACTIC_CORE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -19135,10 +18595,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GALACTIC_CORE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GALACTIC_CORE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>10</iYield>
@@ -19166,16 +18623,10 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GALACTIC_CORE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GALACTIC_CORE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SUPERMASSIVE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_SUPERMASSIVE_BLACK_HOLE</PrereqFeature>
 			</PrereqOrFeature>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -19366,10 +18817,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_RED_DWARF</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_RED_DWARF</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>50</iCommerce>
@@ -19412,10 +18860,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_RED_DWARF</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_RED_DWARF</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>15</iYield>
@@ -19450,10 +18895,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_RED_DWARF</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_RED_DWARF</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>5</iYield>
@@ -19552,10 +18994,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_SUN_LIKE_STAR</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_SUN_LIKE_STAR</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>25</iCommerce>
@@ -19667,14 +19106,8 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SUPERMASSIVE_BLACK_HOLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_BLACK_HOLE</PrereqFeature>
+				<PrereqFeature>FEATURE_SUPERMASSIVE_BLACK_HOLE</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -19707,10 +19140,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_STAR_CLUSTER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_STAR_CLUSTER</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>50</iCommerce>
@@ -20359,10 +19789,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_STAR_CLUSTER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_STAR_CLUSTER</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -20492,10 +19919,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ORION_ARM</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -20540,10 +19964,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ORION_ARM</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ORION_ARM</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>50</iCommerce>
@@ -20929,10 +20350,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_MINI_NEPTUNE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_MINI_NEPTUNE</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>-5</iCommerce>
@@ -20982,10 +20400,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_NEBULA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_NEBULA</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>300</iCommerce>
@@ -21087,10 +20502,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_NEUTRON_STAR</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_NEUTRON_STAR</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>50</iCommerce>
@@ -21118,10 +20530,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_NEUTRON_STAR</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_NEUTRON_STAR</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -21149,10 +20558,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_STAR_CLUSTER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_STAR_CLUSTER</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>50</iCommerce>
@@ -21220,10 +20626,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MILKY_WAY</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -21263,10 +20666,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_OCEAN_PLANET</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_OCEAN_PLANET</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>-5</iCommerce>
@@ -21318,10 +20718,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_OORT_CLOUD</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_OORT_CLOUD</PrereqFeature>
 			</PrereqOrFeature>
 			<YieldChanges>
 				<iYield>5</iYield>
@@ -21353,10 +20750,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_OORT_CLOUD</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_OORT_CLOUD</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>100</iCommerce>
@@ -21384,10 +20778,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_OORT_CLOUD</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_OORT_CLOUD</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -21413,10 +20804,7 @@
 				<MapCategoryType>MAPCATEGORY_SOLAR_SYSTEM</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_OORT_CLOUD</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_OORT_CLOUD</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>100</iCommerce>
@@ -21545,10 +20933,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MILKY_WAY</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>250</iCommerce>
@@ -21994,10 +21379,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_RED_DWARF</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_RED_DWARF</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -22213,10 +21595,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_ROGUE_PLANET</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_ROGUE_PLANET</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -22247,10 +21626,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_ROGUE_PLANET</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_ROGUE_PLANET</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -22285,10 +21661,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_ROGUE_PLANET</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_ROGUE_PLANET</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>150</iCommerce>
@@ -22342,10 +21715,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_ROGUE_PLANET</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_ROGUE_PLANET</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>250</iCommerce>
@@ -22377,10 +21747,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_MILKY_WAY</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_MILKY_WAY</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>150</iCommerce>
@@ -22602,10 +21969,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_STAR_CLUSTER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_STAR_CLUSTER</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>10</iYield>
@@ -22765,10 +22129,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_NEUTRON_STAR</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_NEUTRON_STAR</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>125</iCommerce>
@@ -22795,10 +22156,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SUPER_EARTH</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_SUPER_EARTH</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>-5</iCommerce>
@@ -22825,10 +22183,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_HOT_JUPITER</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_HOT_JUPITER</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>-5</iCommerce>
@@ -22856,10 +22211,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GALACTIC_CORE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GALACTIC_CORE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>100</iCommerce>
@@ -22955,10 +22307,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_ROGUE_PLANET</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_ROGUE_PLANET</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_ROGUE_PLANET_OUTPOST</BuildingType>
@@ -22985,10 +22334,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_RED_DWARF</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_RED_DWARF</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>-5</iCommerce>
@@ -23084,22 +22430,10 @@
 				</PropertySource>
 			</PropertyManipulators>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_GERONTOCRACY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_UNIVERSAL_EMPIRE</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_SOCIETAL_MOLDING</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_SUPERHUMAN</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_GERONTOCRACY</PrereqCivic>
+				<PrereqCivic>CIVIC_UNIVERSAL_EMPIRE</PrereqCivic>
+				<PrereqCivic>CIVIC_SOCIETAL_MOLDING</PrereqCivic>
+				<PrereqCivic>CIVIC_SUPERHUMAN</PrereqCivic>
 			</PrereqOrCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 		</BuildingInfo>
@@ -23621,10 +22955,7 @@
 				<MapCategoryType>MAPCATEGORY_MILKY_WAY</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_WHITE_DWARF</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_WHITE_DWARF</PrereqFeature>
 			</PrereqOrFeature>
 			<YieldChanges>
 				<iYield>4</iYield>
@@ -23691,10 +23022,7 @@
 				<MapCategoryType>MAPCATEGORY_PLASMA</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_RED_DWARF</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_RED_DWARF</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>50</iCommerce>
@@ -23977,16 +23305,10 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_LOCAL_GROUP</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_LOCAL_GROUP</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_GALAXY</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_GALAXY</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -24148,14 +23470,8 @@
 				<BuildingType>BUILDING_INTERGALACTIC_GALACTIC_GROUP_COLONY</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_VIRGO_SUPERCLUSTER</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 		</BuildingInfo>
 		<BuildingInfo>
@@ -24175,10 +23491,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -24217,10 +23530,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>700</iCommerce>
@@ -24304,10 +23614,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>150</iYield>
@@ -24402,10 +23709,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>1000</iCommerce>
@@ -24591,10 +23895,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>300</iCommerce>
@@ -24624,10 +23925,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_VIRGO_SUPERCLUSTER</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>500</iCommerce>
@@ -24755,10 +24053,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_VIRGO_SUPERCLUSTER</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>70</iYield>
@@ -24819,14 +24114,8 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_VIRGO_SUPERCLUSTER</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>6</iYield>
@@ -24900,10 +24189,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>9</iYield>
@@ -24929,10 +24215,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_INTERGALACTIC_VOID</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_INTERGALACTIC_VOID</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>5</iYield>
@@ -25129,10 +24412,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>100</iYield>
@@ -25182,10 +24462,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -25565,14 +24842,8 @@
 				<BuildingType>BUILDING_INTERGALACTIC_CITY</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_VIRGO_SUPERCLUSTER</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 		</BuildingInfo>
 		<BuildingInfo>
@@ -25836,14 +25107,8 @@
 				<BuildingType>BUILDING_INTERGALACTIC_LOGISTICS_CENTER</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_VIRGO_SUPERCLUSTER</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 		</BuildingInfo>
 		<BuildingInfo>
@@ -26027,16 +25292,10 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_LOCAL_GROUP</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_LOCAL_GROUP</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_DWARF_GALAXY</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_DWARF_GALAXY</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>100</iCommerce>
@@ -26083,10 +25342,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_VIRGO_SUPERCLUSTER</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -26300,10 +25556,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>800</iCommerce>
@@ -26408,10 +25661,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_QUASAR</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_QUASAR</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>50</iCommerce>
@@ -26437,10 +25687,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_QUASAR</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_QUASAR</PrereqFeature>
 			</PrereqOrFeature>
 			<YieldChanges>
 				<iYield>0</iYield>
@@ -26520,16 +25767,10 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_LOCAL_GROUP</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_LOCAL_GROUP</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_DWARF_GALAXY</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_DWARF_GALAXY</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>250</iCommerce>
@@ -26570,10 +25811,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_VIRGO_SUPERCLUSTER</PrereqTerrain>
 			</PrereqOrTerrain>
 			<YieldChanges>
 				<iYield>50</iYield>
@@ -26612,10 +25850,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>1500</iCommerce>
@@ -26646,16 +25881,10 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_LOCAL_GROUP</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_LOCAL_GROUP</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_DWARF_GALAXY</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_DWARF_GALAXY</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>250</iCommerce>
@@ -26697,10 +25926,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -26752,10 +25978,7 @@
 			<iLineOfSight>1</iLineOfSight>
 			<iLocalDynamicDefense>10</iLocalDynamicDefense>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_OBSERVABLE_UNIVERSE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_OBSERVABLE_UNIVERSE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqInCityBuildings>
 				<BuildingType>BUILDING_INTERGALACTIC_COMMAND_CENTER</BuildingType>
@@ -26915,16 +26138,10 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_LOCAL_GROUP</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_LOCAL_GROUP</PrereqTerrain>
 			</PrereqOrTerrain>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_GALAXY</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_GALAXY</PrereqFeature>
 			</PrereqOrFeature>
 			<CommerceChanges>
 				<iCommerce>150</iCommerce>
@@ -27024,10 +26241,7 @@
 				<MapCategoryType>MAPCATEGORY_UNIVERSAL</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_VIRGO_SUPERCLUSTER</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_VIRGO_SUPERCLUSTER</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>200</iCommerce>
@@ -27066,10 +26280,7 @@
 			</MapCategoryTypes>
 			<iDefense>50</iDefense>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_INTERGALACTIC_VOID</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_INTERGALACTIC_VOID</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>-20</iCommerce>
@@ -27300,10 +26511,7 @@
 				<MapCategoryType>MAPCATEGORY_DISTANT</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DISTANT_PAST</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DISTANT_PAST</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>100</iCommerce>
@@ -27331,10 +26539,7 @@
 				<MapCategoryType>MAPCATEGORY_DISTANT</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DISTANT_PAST</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DISTANT_PAST</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>
@@ -27735,10 +26940,7 @@
 				<MapCategoryType>MAPCATEGORY_DISTANT</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DISTANT_FUTURE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DISTANT_FUTURE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>75</iCommerce>
@@ -27767,10 +26969,7 @@
 				<MapCategoryType>MAPCATEGORY_DISTANT</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DISTANT_PAST</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DISTANT_PAST</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>75</iCommerce>
@@ -28112,10 +27311,7 @@
 				<MapCategoryType>MAPCATEGORY_DISTANT</MapCategoryType>
 			</MapCategoryTypes>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DISTANT_PAST</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DISTANT_PAST</PrereqTerrain>
 			</PrereqOrTerrain>
 			<CommerceChanges>
 				<iCommerce>0</iCommerce>

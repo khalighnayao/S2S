@@ -1127,10 +1127,7 @@
 		<element type="UnitCombatExtraStrength" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="bPrereqCivic" content="textOnly" dt:type="boolean"/>
-	<ElementType name="PrereqCivic" content="eltOnly">
-		<element type="CivicOption"/>
-		<element type="bPrereqCivic"/>
-	</ElementType>
+	<ElementType name="PrereqCivic" content="textOnly"/>
 	<ElementType name="PrereqOrCivics" content="eltOnly">
 		<element type="PrereqCivic" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -1140,10 +1137,7 @@
 	<ElementType name="bPrereqTerrain" content="textOnly" dt:type="boolean"/>
 	<ElementType name="TerrainType" content="textOnly"/>
 	<ElementType name="PlotType" content="textOnly"/>
-	<ElementType name="PrereqTerrain" content="eltOnly">
-		<element type="TerrainType"/>
-		<element type="bPrereqTerrain"/>
-	</ElementType>
+	<ElementType name="PrereqTerrain" content="textOnly"/>
 	<ElementType name="PrereqOrTerrain" content="eltOnly">
 		<element type="PrereqTerrain" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -1154,11 +1148,7 @@
 		<element type="ImprovementType"/>
 	</ElementType>
 	<ElementType name="FeatureType" content="textOnly"/>
-	<ElementType name="bPrereqFeature" content="textOnly" dt:type="boolean"/>
-	<ElementType name="PrereqFeature" content="eltOnly">
-		<element type="FeatureType"/>
-		<element type="bPrereqFeature"/>
-	</ElementType>
+	<ElementType name="PrereqFeature" content="textOnly"/>
 	<ElementType name="PrereqOrFeature" content="eltOnly">
 		<element type="PrereqFeature" minOccurs="0" maxOccurs="*"/>
 	</ElementType>

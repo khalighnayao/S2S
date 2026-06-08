@@ -105,9 +105,9 @@ protected:
 
 	int* m_piCivilizationInitialCivics;
 
-	bool* m_pbLeaders;
-	bool* m_pbCivilizationFreeTechs;
-	bool* m_pbCivilizationDisableTechs;
+	std::vector<LeaderHeadTypes> m_aeLeaders;
+	std::vector<TechTypes> m_aeCivilizationFreeTechs;
+	std::vector<TechTypes> m_aeCivilizationDisableTechs;
 
 	CvString* m_paszCityNames;
 

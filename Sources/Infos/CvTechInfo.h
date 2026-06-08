@@ -205,7 +205,7 @@ protected:
 	int* m_piFreeSpecialistCount;
 
 	bool* m_pbCommerceFlexible;
-	bool* m_pbTerrainTrade;
+	std::vector<TerrainTypes> m_aeTerrainTrade;
 
 	std::vector<int> m_aiCategories;
 

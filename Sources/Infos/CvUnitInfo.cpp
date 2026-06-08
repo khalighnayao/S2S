@@ -168,18 +168,10 @@ m_bNoNonOwnedEntry(false),
 m_iLeaderPromotion(NO_PROMOTION),
 m_fUnitMaxSpeed(0.0f),
 m_fUnitPadTime(0.0f),
-m_pbPrereqOrCivics(NULL),
-m_pbTargetUnitCombat(NULL),
-m_pbDefenderUnitCombat(NULL),
-m_pbUnitAIType(NULL),
-m_pbNotUnitAIType(NULL),
 m_piReligionSpreads(NULL),
 m_piCorporationSpreads(NULL),
 m_piTerrainPassableTech(NULL),
 m_piFeaturePassableTech(NULL),
-m_pbGreatPeoples(NULL),
-//m_pbTerrainImpassable(NULL),
-//m_pbFeatureImpassable(NULL),
 m_piFlavorValue(NULL),
 m_piTerrainAttackModifier(NULL),
 m_piTerrainDefenseModifier(NULL),
@@ -190,9 +182,6 @@ m_piUnitCombatCollateralImmune(NULL),
 m_piDomainModifier(NULL),
 m_piBonusProductionModifier(NULL),
 m_piUnitGroupRequired(NULL),
-m_pbTerrainNative(NULL),
-m_pbFeatureNative(NULL),
-m_pbFreePromotions(NULL),
 m_paszEarlyArtDefineTags(NULL),
 m_paszLateArtDefineTags(NULL),
 m_paszMiddleArtDefineTags(NULL),
@@ -208,7 +197,6 @@ m_bGreatGeneral(false),
 m_bSlave(false),
 m_bRequiresStateReligionInCity(false),
 m_abHasCombatType(NULL),
-m_pbPassableRouteNeeded(NULL),
 m_paszClassicalArtDefineTags(NULL),
 m_paszRennArtDefineTags(NULL),
 m_paszIndustrialArtDefineTags(NULL),
@@ -300,16 +288,10 @@ CvUnitInfo::~CvUnitInfo()
 	PROFILE_EXTRA_FUNC();
 	CvInfoUtil(this).uninitDataMembers();
 
-	SAFE_DELETE_ARRAY(m_pbPrereqOrCivics);
-	SAFE_DELETE_ARRAY(m_pbTargetUnitCombat);
-	SAFE_DELETE_ARRAY(m_pbDefenderUnitCombat);
-	SAFE_DELETE_ARRAY(m_pbUnitAIType);
-	SAFE_DELETE_ARRAY(m_pbNotUnitAIType);
 	SAFE_DELETE_ARRAY(m_piReligionSpreads);
 	SAFE_DELETE_ARRAY(m_piCorporationSpreads);
 	SAFE_DELETE_ARRAY(m_piTerrainPassableTech);
 	SAFE_DELETE_ARRAY(m_piFeaturePassableTech);
-	SAFE_DELETE_ARRAY(m_pbGreatPeoples);
 	//SAFE_DELETE_ARRAY(m_pbTerrainImpassable);
 	//SAFE_DELETE_ARRAY(m_pbFeatureImpassable);
 	SAFE_DELETE_ARRAY(m_piFlavorValue);
@@ -322,14 +304,10 @@ CvUnitInfo::~CvUnitInfo()
 	SAFE_DELETE_ARRAY(m_piDomainModifier);
 	SAFE_DELETE_ARRAY(m_piBonusProductionModifier);
 	SAFE_DELETE_ARRAY(m_piUnitGroupRequired);
-	SAFE_DELETE_ARRAY(m_pbTerrainNative);
-	SAFE_DELETE_ARRAY(m_pbFeatureNative);
-	SAFE_DELETE_ARRAY(m_pbFreePromotions);
 	SAFE_DELETE_ARRAY(m_paszEarlyArtDefineTags);
 	SAFE_DELETE_ARRAY(m_paszLateArtDefineTags);
 	SAFE_DELETE_ARRAY(m_paszMiddleArtDefineTags);
 	SAFE_DELETE_ARRAY(m_paszUnitNames);
-	SAFE_DELETE_ARRAY(m_pbPassableRouteNeeded);
 	SAFE_DELETE_ARRAY(m_paszClassicalArtDefineTags);
 	SAFE_DELETE_ARRAY(m_paszRennArtDefineTags);
 	SAFE_DELETE_ARRAY(m_paszIndustrialArtDefineTags);
@@ -1130,9 +1108,9 @@ bool CvUnitInfo::isPrereqOrCivics(int i) const
 
 	if (i == NO_CIVIC)
 	{
-		return m_pbPrereqOrCivics != NULL;
+		return !m_aePrereqOrCivics.empty();
 	}
-	return m_pbPrereqOrCivics ? m_pbPrereqOrCivics[i] : false;
+	return algo::any_of_equal(m_aePrereqOrCivics, static_cast<CivicTypes>(i));
 }
 
 
@@ -1310,25 +1288,25 @@ int CvUnitInfo::getUnitGroupRequired(int i) const
 bool CvUnitInfo::getTargetUnitCombat(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), i);
-	return m_pbTargetUnitCombat ? m_pbTargetUnitCombat[i] : false;
+	return algo::any_of_equal(m_aeTargetUnitCombat, static_cast<UnitCombatTypes>(i));
 }
 
 bool CvUnitInfo::getDefenderUnitCombat(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumUnitCombatInfos(), i);
-	return m_pbDefenderUnitCombat ? m_pbDefenderUnitCombat[i] : false;
+	return algo::any_of_equal(m_aeDefenderUnitCombat, static_cast<UnitCombatTypes>(i));
 }
 
 bool CvUnitInfo::getUnitAIType(int i) const
 {
 	FASSERT_BOUNDS(0, NUM_UNITAI_TYPES, i);
-	return m_pbUnitAIType ? m_pbUnitAIType[i] : false;
+	return algo::any_of_equal(m_aiUnitAIs, static_cast<UnitAITypes>(i));
 }
 
 bool CvUnitInfo::getNotUnitAIType(int i) const
 {
 	FASSERT_BOUNDS(0, NUM_UNITAI_TYPES, i);
-	return m_pbNotUnitAIType ? m_pbNotUnitAIType[i] : false;
+	return algo::any_of_equal(m_aiNotUnitAIs, static_cast<UnitAITypes>(i));
 }
 
 int CvUnitInfo::getReligionSpreads(int i) const
@@ -1358,7 +1336,7 @@ int CvUnitInfo::getFeaturePassableTech(int i) const
 bool CvUnitInfo::getGreatPeoples(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumSpecialistInfos(), i);
-	return m_pbGreatPeoples ? m_pbGreatPeoples[i] : false;
+	return algo::any_of_equal(m_aeGreatPeoples, static_cast<SpecialistTypes>(i));
 }
 
 int CvUnitInfo::getBuildings(int i) const
@@ -1411,19 +1389,19 @@ int CvUnitInfo::getNumHeritage() const
 bool CvUnitInfo::getTerrainNative(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumTerrainInfos(), i);
-	return m_pbTerrainNative ? m_pbTerrainNative[i] : false;
+	return algo::any_of_equal(m_aeTerrainNative, static_cast<TerrainTypes>(i));
 }
 
 bool CvUnitInfo::getFeatureNative(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumFeatureInfos(), i);
-	return m_pbFeatureNative ? m_pbFeatureNative[i] : false;
+	return algo::any_of_equal(m_aeFeatureNative, static_cast<FeatureTypes>(i));
 }
 
 bool CvUnitInfo::getFreePromotions(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumPromotionInfos(), i);
-	return m_pbFreePromotions ? m_pbFreePromotions[i] : false;
+	return algo::any_of_equal(m_aeFreePromotions, static_cast<PromotionTypes>(i));
 }
 
 int CvUnitInfo::getLeaderPromotion() const
@@ -1772,7 +1750,7 @@ bool CvUnitInfo::isRequiresStateReligionInCity() const
 bool CvUnitInfo::getPassableRouteNeeded(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumRouteInfos(), i);
-	return m_pbPassableRouteNeeded ? m_pbPassableRouteNeeded[i] : false;
+	return algo::any_of_equal(m_aePassableRouteNeeded, static_cast<RouteTypes>(i));
 }
 
 const std::vector<BonusTypes>& CvUnitInfo::getPrereqOrVicinityBonuses() const
@@ -2758,6 +2736,16 @@ void CvUnitInfo::getDataMembers(CvInfoUtil& util)
 		.add(m_piFlankingStrikeUnit, L"FlankingStrikes")
 		.add(m_piUnitAttackModifier, L"UnitAttackMods")
 		.add(m_piUnitDefenseModifier, L"UnitDefenseMods")
+		.add(m_aiUnitAIs, L"UnitAIs")
+		.add(m_aiNotUnitAIs, L"NotUnitAIs")
+		.add(m_aeTargetUnitCombat, L"UnitCombatTargets")
+		.add(m_aeDefenderUnitCombat, L"UnitCombatDefenders")
+		.add(m_aeGreatPeoples, L"GreatPeoples")
+		.add(m_aePrereqOrCivics, L"PrereqOrCivics")
+		.add(m_aeTerrainNative, L"TerrainNatives")
+		.add(m_aeFeatureNative, L"FeatureNatives")
+		.add(m_aeFreePromotions, L"FreePromotions")
+		.add(m_aePassableRouteNeeded, L"PassableRouteNeededs")
 	;
 }
 
@@ -2918,7 +2906,6 @@ void CvUnitInfo::getCheckSum(uint32_t& iSum) const
 	CheckSumI(iSum, NUM_DOMAIN_TYPES, m_piDomainModifier);
 	CheckSumI(iSum, GC.getNumBonusInfos(), m_piBonusProductionModifier);
 	//CheckSumI(iSum, m_iGroupDefinitions, m_piUnitGroupRequired);
-	CheckSumI(iSum, GC.getNumCivicInfos(), m_pbPrereqOrCivics);
 
 	CheckSumC(iSum, m_workerBuilds);
 	CheckSumC(iSum, m_prereqOrHeritage);
@@ -2932,24 +2919,16 @@ void CvUnitInfo::getCheckSum(uint32_t& iSum) const
 	CheckSumC(iSum, m_aiUnitUpgrades);
 	CheckSumC(iSum, m_aiUnitUpgradeChain);
 
-	CheckSumI(iSum, GC.getNumUnitCombatInfos(), m_pbTargetUnitCombat);
-	CheckSumI(iSum, GC.getNumUnitCombatInfos(), m_pbDefenderUnitCombat);
-	CheckSumI(iSum, NUM_UNITAI_TYPES, m_pbUnitAIType);
-	CheckSumI(iSum, NUM_UNITAI_TYPES, m_pbNotUnitAIType);
 	CheckSumI(iSum, GC.getNumReligionInfos(), m_piReligionSpreads);
 	CheckSumI(iSum, GC.getNumCorporationInfos(), m_piCorporationSpreads);
 	CheckSumI(iSum, GC.getNumTerrainInfos(), m_piTerrainPassableTech);
 	CheckSumI(iSum, GC.getNumFeatureInfos(), m_piFeaturePassableTech);
-	CheckSumI(iSum, GC.getNumSpecialistInfos(), m_pbGreatPeoples);
 
 	CheckSumC(iSum, m_pbBuildings);
 	CheckSumC(iSum, m_addHeritage);
 
-	CheckSumI(iSum, GC.getNumTerrainInfos(), m_pbTerrainNative);
-	CheckSumI(iSum, GC.getNumFeatureInfos(), m_pbFeatureNative);
 	//CheckSumI(iSum, GC.getNumTerrainInfos(), m_pbTerrainImpassable);
 	//CheckSumI(iSum, GC.getNumFeatureInfos(), m_pbFeatureImpassable);
-	CheckSumI(iSum, GC.getNumPromotionInfos(), m_pbFreePromotions);
 
 	CheckSum(iSum, m_iLeaderPromotion);
 	CheckSum(iSum, m_iLeaderExperience);
@@ -2967,7 +2946,6 @@ void CvUnitInfo::getCheckSum(uint32_t& iSum) const
 
 	CheckSumC(iSum, m_piPrereqOrVicinityBonuses);
 	CheckSumC(iSum, m_aiCategories);
-	CheckSumI(iSum, GC.getNumRouteInfos(), m_pbPassableRouteNeeded);
 
 	m_KillOutcomeList.getCheckSum(iSum);
 
@@ -3265,11 +3243,6 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	//ls612: Can't enter non-Owned cities
 	pXML->GetOptionalChildXmlValByName(&m_bNoNonOwnedEntry, L"bOnlyFriendlyEntry");
 
-	pXML->SetVariableListTagPair(&m_pbTargetUnitCombat, L"UnitCombatTargets", GC.getNumUnitCombatInfos());
-	pXML->SetVariableListTagPair(&m_pbDefenderUnitCombat, L"UnitCombatDefenders", GC.getNumUnitCombatInfos());
-	pXML->SetVariableListTagPair(&m_pbUnitAIType, L"UnitAIs", NUM_UNITAI_TYPES);
-	pXML->SetVariableListTagPair(&m_pbNotUnitAIType, L"NotUnitAIs", NUM_UNITAI_TYPES);
-
 	pXML->SetVariableListTagPair(&m_piReligionSpreads, L"ReligionSpreads", GC.getNumReligionInfos(),-1);
 	pXML->SetVariableListTagPair(&m_piCorporationSpreads, L"CorporationSpreads", GC.getNumCorporationInfos(), -1);
 
@@ -3304,7 +3277,6 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 		m_piFeaturePassableTech = NULL;
 	}
 
-	pXML->SetVariableListTagPair(&m_pbGreatPeoples, L"GreatPeoples", GC.getNumSpecialistInfos());
 
 	pXML->SetOptionalVector(&m_pbBuildings, L"Buildings");
 	pXML->SetOptionalVector(&m_addHeritage, L"Heritage");
@@ -3323,7 +3295,6 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"NotGameOption");
 	m_iNotGameOption = pXML->GetInfoClass(szTextVal);
 
-	pXML->SetVariableListTagPair(&m_pbPrereqOrCivics, L"PrereqOrCivics", GC.getNumCivicInfos());
 
 	pXML->SetOptionalVectorWithDelayedResolution(m_aiTargetUnit, L"UnitTargets");
 	pXML->SetOptionalVectorWithDelayedResolution(m_aiDefendAgainstUnit, L"DefendAgainstUnit");
@@ -3410,8 +3381,6 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_iHillsAttackModifier, L"iHillsAttack");
 	pXML->GetOptionalChildXmlValByName(&m_iHillsDefenseModifier, L"iHillsDefense");
 
-	pXML->SetVariableListTagPair(&m_pbTerrainNative, L"TerrainNatives", GC.getNumTerrainInfos());
-	pXML->SetVariableListTagPair(&m_pbFeatureNative, L"FeatureNatives", GC.getNumFeatureInfos());
 
 	pXML->SetVariableListTagPair(&m_piTerrainAttackModifier, L"TerrainAttacks", GC.getNumTerrainInfos());
 	pXML->SetVariableListTagPair(&m_piTerrainDefenseModifier, L"TerrainDefenses", GC.getNumTerrainInfos());
@@ -3506,7 +3475,6 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	pXML->SetVariableListTagPair(&m_pbFreePromotions, L"FreePromotions", GC.getNumPromotionInfos());
 
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"LeaderPromotion");
 	m_iLeaderPromotion = pXML->GetInfoClass(szTextVal);
@@ -3536,7 +3504,6 @@ bool CvUnitInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_bRequiresStateReligionInCity, L"bRequiresStateReligionInCity");
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"VicinityBonusType");
 	m_iPrereqVicinityBonus = pXML->GetInfoClass(szTextVal);
-	pXML->SetVariableListTagPair(&m_pbPassableRouteNeeded, L"PassableRouteNeededs", GC.getNumRouteInfos(), false);
 	pXML->GetOptionalChildXmlValByName(&m_iBaseFoodChange, L"iBaseFoodChange");
 	pXML->GetOptionalChildXmlValByName(&m_iControlPoints, L"iControlPoints");
 	pXML->GetOptionalChildXmlValByName(&m_iCommandRange, L"iCommandRange");
@@ -4064,22 +4031,6 @@ void CvUnitInfo::copyNonDefaults(CvUnitInfo* pClassInfo)
 
 	for ( int i = 0; i < GC.getNumUnitCombatInfos(); i++)
 	{
-		if ( getTargetUnitCombat(i) == bDefault && pClassInfo->getTargetUnitCombat(i) != bDefault)
-		{
-			if ( NULL == m_pbTargetUnitCombat )
-			{
-				CvXMLLoadUtility::InitList(&m_pbTargetUnitCombat,GC.getNumUnitCombatInfos(),bDefault);
-			}
-			m_pbTargetUnitCombat[i] = pClassInfo->getTargetUnitCombat(i);
-		}
-		if ( getDefenderUnitCombat(i) == bDefault && pClassInfo->getDefenderUnitCombat(i) != bDefault)
-		{
-			if ( NULL == m_pbDefenderUnitCombat )
-			{
-				CvXMLLoadUtility::InitList(&m_pbDefenderUnitCombat,GC.getNumUnitCombatInfos(),bDefault);
-			}
-			m_pbDefenderUnitCombat[i] = pClassInfo->getDefenderUnitCombat(i);
-		}
 		if ( getUnitCombatModifier(i) == iDefault && pClassInfo->getUnitCombatModifier(i) != iDefault )
 		{
 			if ( NULL == m_piUnitCombatModifier )
@@ -4095,26 +4046,6 @@ void CvUnitInfo::copyNonDefaults(CvUnitInfo* pClassInfo)
 				CvXMLLoadUtility::InitList(&m_piUnitCombatCollateralImmune,GC.getNumUnitCombatInfos(),iDefault);
 			}
 			m_piUnitCombatCollateralImmune[i] = pClassInfo->getUnitCombatCollateralImmune(i);
-		}
-	}
-
-	for ( int i = 0; i < NUM_UNITAI_TYPES; i++)
-	{
-		if ( getUnitAIType(i) == bDefault && pClassInfo->getUnitAIType(i) != bDefault)
-		{
-			if ( NULL == m_pbUnitAIType )
-			{
-				CvXMLLoadUtility::InitList(&m_pbUnitAIType,NUM_UNITAI_TYPES,bDefault);
-			}
-			m_pbUnitAIType[i] = pClassInfo->getUnitAIType(i);
-		}
-		if ( getNotUnitAIType(i) == bDefault && pClassInfo->getNotUnitAIType(i) != bDefault)
-		{
-			if ( NULL == m_pbNotUnitAIType )
-			{
-				CvXMLLoadUtility::InitList(&m_pbNotUnitAIType,NUM_UNITAI_TYPES,bDefault);
-			}
-			m_pbNotUnitAIType[i] = pClassInfo->getNotUnitAIType(i);
 		}
 	}
 
@@ -4157,17 +4088,6 @@ void CvUnitInfo::copyNonDefaults(CvUnitInfo* pClassInfo)
 		}
 	}
 
-	for ( int i = 0; i < GC.getNumSpecialistInfos(); i++)
-	{
-		if ( getGreatPeoples(i) == bDefault && pClassInfo->getGreatPeoples(i) != bDefault)
-		{
-			if ( NULL == m_pbGreatPeoples )
-			{
-				CvXMLLoadUtility::InitList(&m_pbGreatPeoples,GC.getNumSpecialistInfos(),bDefault);
-			}
-			m_pbGreatPeoples[i] = pClassInfo->getGreatPeoples(i);
-		}
-	}
 
 	for ( int i = 0; i < GC.getNumTerrainInfos(); i++)
 	{
@@ -4179,14 +4099,6 @@ void CvUnitInfo::copyNonDefaults(CvUnitInfo* pClassInfo)
 			}
 			m_pbTerrainImpassable[i] = pClassInfo->getTerrainImpassable(i);
 		}*/
-		if ( getTerrainNative(i) == bDefault && pClassInfo->getTerrainNative(i) != bDefault)
-		{
-			if ( NULL == m_pbTerrainNative )
-			{
-				CvXMLLoadUtility::InitList(&m_pbTerrainNative,GC.getNumTerrainInfos(),bDefault);
-			}
-			m_pbTerrainNative[i] = pClassInfo->getTerrainNative(i);
-		}
 		if ( getTerrainAttackModifier(i) == iDefault && pClassInfo->getTerrainAttackModifier(i) != iDefault)
 		{
 			if ( NULL == m_piTerrainAttackModifier )
@@ -4223,14 +4135,6 @@ void CvUnitInfo::copyNonDefaults(CvUnitInfo* pClassInfo)
 		//	}
 		//	m_pbFeatureImpassable[i] = pClassInfo->getFeatureImpassable(i);
 		//}
-		if ( getFeatureNative(i) == bDefault && pClassInfo->getFeatureNative(i) != bDefault)
-		{
-			if (m_pbFeatureNative == NULL)
-			{
-				CvXMLLoadUtility::InitList(&m_pbFeatureNative,GC.getNumFeatureInfos(),bDefault);
-			}
-			m_pbFeatureNative[i] = pClassInfo->getFeatureNative(i);
-		}
 		if ( getFeatureAttackModifier(i) == iDefault && pClassInfo->getFeatureAttackModifier(i) != iDefault)
 		{
 			if (m_piFeatureAttackModifier == NULL)
@@ -4281,29 +4185,6 @@ void CvUnitInfo::copyNonDefaults(CvUnitInfo* pClassInfo)
 		}
 	}
 
-	for ( int i = 0; i < GC.getNumPromotionInfos(); i++)
-	{
-		if ( getFreePromotions(i) == bDefault && pClassInfo->getFreePromotions(i) != bDefault)
-		{
-			if ( NULL == m_pbFreePromotions )
-			{
-				CvXMLLoadUtility::InitList(&m_pbFreePromotions,GC.getNumPromotionInfos(),bDefault);
-			}
-			m_pbFreePromotions[i] = pClassInfo->getFreePromotions(i);
-		}
-	}
-
-	for ( int i = 0; i < GC.getNumCivicInfos(); i++)
-	{
-		if ( isPrereqOrCivics(i) == bDefault && pClassInfo->isPrereqOrCivics(i) != bDefault)
-		{
-			if ( NULL == m_pbPrereqOrCivics )
-			{
-				CvXMLLoadUtility::InitList(&m_pbPrereqOrCivics,GC.getNumCivicInfos(),bDefault);
-			}
-			m_pbPrereqOrCivics[i] = pClassInfo->isPrereqOrCivics(i);
-		}
-	}
 
 	//Struct Vector
 	GC.copyNonDefaultDelayedResolutionVector(m_aiTargetUnit, pClassInfo->m_aiTargetUnit);
@@ -4420,18 +4301,6 @@ void CvUnitInfo::copyNonDefaults(CvUnitInfo* pClassInfo)
 
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_piPrereqOrVicinityBonuses, pClassInfo->m_piPrereqOrVicinityBonuses);
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
-
-	for (int i = 0; i < GC.getNumRouteInfos(); i++)
-	{
-		if (!getPassableRouteNeeded(i) && pClassInfo->getPassableRouteNeeded(i))
-		{
-			if ( NULL == m_pbPassableRouteNeeded )
-			{
-				CvXMLLoadUtility::InitList(&m_pbPassableRouteNeeded,GC.getNumRouteInfos(),false);
-			}
-			m_pbPassableRouteNeeded[i] = pClassInfo->getPassableRouteNeeded(i);
-		}
-	}
 
 	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
 

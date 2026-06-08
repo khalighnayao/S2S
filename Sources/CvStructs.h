@@ -9,6 +9,7 @@
 
 class BoolExpr;
 class CvPlot;
+struct CvInfoUtil;
 
 // XXX these should not be in the DLL per se (if the user changes them, we are screwed...)
 
@@ -235,6 +236,7 @@ struct TerrainStructs
 	int iTime;
 	operator int() const {return (int)eTerrain;}
 	bool operator< (const TerrainStructs& rhs) const {return (int)eTerrain < (int)rhs.eTerrain;}
+	void getDataMembers(CvInfoUtil& util);
 };
 struct PlaceBonusTypes
 {
@@ -247,6 +249,18 @@ struct PlaceBonusTypes
 	MapCategoryTypes ePrereqMapCategory;
 	operator int() const {return (int)eBonus;}
 	bool operator< (const PlaceBonusTypes& rhs) const {return (int)eBonus < (int)rhs.eBonus;}
+	void getDataMembers(CvInfoUtil& util);
+};
+struct FeatureStruct
+{
+	FeatureTypes eFeature;
+	TechTypes ePrereqTech;
+	int iTime;
+	int iProduction;
+	bool bRemove;
+	operator int() const {return (int)eFeature;}
+	bool operator< (const FeatureStruct& rhs) const {return (int)eFeature < (int)rhs.eFeature;}
+	void getDataMembers(CvInfoUtil& util);
 };
 //TB Combat Mod end
 

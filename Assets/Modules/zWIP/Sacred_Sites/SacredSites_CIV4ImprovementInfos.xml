@@ -23,22 +23,10 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>25</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -109,22 +97,10 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>25</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -195,26 +171,11 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>25</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -277,22 +238,10 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>10</iPillageGold>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_BAMBOO</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST_ANCIENT</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_BAMBOO</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_JUNGLE</FeatureMakesValid>
 			</FeatureMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -355,30 +304,12 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>25</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>

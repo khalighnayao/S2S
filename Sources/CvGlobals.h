@@ -7,6 +7,7 @@
 #define CIV4_GLOBALS_H
 
 #include "FProfiler.h"
+#include "CvInfoTable.h"
 
 //
 // 'global' vars for Civ IV.  singleton class.
@@ -561,7 +562,11 @@ public:
 
 	int getNumBuildInfos() const;
 	CvBuildInfo& getBuildInfo(BuildTypes eBuildNum) const;
-	const std::vector<CvBuildInfo*>& getBuildInfos() const { return m_paBuildInfo; }
+
+	// Parse-then-link phase, uniform over every loaded info: resolve all deferred FK columns after
+	// the whole catalog is parsed (so FK targets are present regardless of XML load order).
+	void linkAllInfos();
+	const std::vector<CvBuildInfo*>& getBuildInfos() const { return m_buildTable.rows(); }
 
 	int getNumHandicapInfos() const;
 	CvHandicapInfo& getHandicapInfo(HandicapTypes eHandicapNum) const;
@@ -947,7 +952,7 @@ protected:
 	std::vector<CvImprovementInfo*> m_paImprovementInfo;
 	CvInfoReplacements<CvImprovementInfo> m_ImprovementInfoReplacements;
 	std::vector<CvGoodyInfo*> m_paGoodyInfo;
-	std::vector<CvBuildInfo*> m_paBuildInfo;
+	InfoTable<CvBuildInfo> m_buildTable;   // catalog for BuildTypes (was: std::vector<CvBuildInfo*> m_paBuildInfo)
 	CvInfoReplacements<CvBuildInfo> m_BuildInfoReplacements;
 	std::vector<CvHandicapInfo*> m_paHandicapInfo;
 	CvInfoReplacements<CvHandicapInfo> m_HandicapInfoReplacements;

@@ -37,14 +37,8 @@
 			<iAdvancedStartCost>60</iAdvancedStartCost>
 			<bOutsideBorders>1</bOutsideBorders>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_INFECTED_WATER</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAGUED_WATER</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_INFECTED_WATER</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAGUED_WATER</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -2448,14 +2442,8 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<bOutsideBorders>1</bOutsideBorders>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_CITY_RUINS</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ARCOLOGY_RUINS</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_CITY_RUINS</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ARCOLOGY_RUINS</FeatureMakesValid>
 			</FeatureMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -2566,10 +2554,7 @@
 			<iAirBombDefense>10</iAirBombDefense>
 			<iPillageGold>75</iPillageGold>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_TAR_PIT</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_TAR_PIT</FeatureMakesValid>
 			</FeatureMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -2662,10 +2647,7 @@
 			<iUpgradeTime>30</iUpgradeTime>
 			<iPillageGold>15</iPillageGold>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_TAR_PIT</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_TAR_PIT</FeatureMakesValid>
 			</FeatureMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -2720,142 +2702,40 @@
 			<bRequiresFeature>1</bRequiresFeature>
 			<iAdvancedStartCost>48</iAdvancedStartCost>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_CRATER</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_TAR_PIT</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_POLAR_ROCK_ARCH</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_POLAR_ROCK_ARCH2</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_POLAR_ROCK_FORM1</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_POLAR_ROCK_FORM2</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_POLAR_ROCK_FORM3</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_POLAR_ROCK_FORM4</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_DARK_ROCK_ARCH</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_DARK_ROCK_ARCH2</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_DARK_ROCK_FORM1</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_DARK_ROCK_FORM2</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_DARK_ROCK_FORM3</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_DARK_ROCK_FORM4</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ROCK_ARCH</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ROCK_ARCH2</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ROCK_FORM1</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ROCK_FORM2</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ROCK_FORM3</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ROCK_FORM4</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_EVEREST</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_FUJI</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_BAIKAL</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_BARRINGER_CRATER</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_BASALT_ORGAN</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_DEVILS_TABLE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_SOPKA</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_NGORONGORO_CRATER</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_NUKUORO</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_PAMUKKALE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_PRAVCICKA_BRANA</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_SINAI</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_ULURU</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_VICTORIA_FALLS</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_CRATER</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_TAR_PIT</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_POLAR_ROCK_ARCH</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_POLAR_ROCK_ARCH2</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_POLAR_ROCK_FORM1</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_POLAR_ROCK_FORM2</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_POLAR_ROCK_FORM3</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_POLAR_ROCK_FORM4</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_DARK_ROCK_ARCH</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_DARK_ROCK_ARCH2</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_DARK_ROCK_FORM1</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_DARK_ROCK_FORM2</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_DARK_ROCK_FORM3</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_DARK_ROCK_FORM4</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ROCK_ARCH</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ROCK_ARCH2</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ROCK_FORM1</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ROCK_FORM2</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ROCK_FORM3</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ROCK_FORM4</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_EVEREST</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_FUJI</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_BAIKAL</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_BARRINGER_CRATER</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_BASALT_ORGAN</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_DEVILS_TABLE</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_SOPKA</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_NGORONGORO_CRATER</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_NUKUORO</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_PAMUKKALE</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_PRAVCICKA_BRANA</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_SINAI</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_ULURU</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_VICTORIA_FALLS</FeatureMakesValid>
 			</FeatureMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -2956,10 +2836,7 @@
 			</YieldChanges>
 			<iAdvancedStartCost>48</iAdvancedStartCost>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_TAR_PIT</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_TAR_PIT</FeatureMakesValid>
 			</FeatureMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -3075,10 +2952,7 @@
 			<iUpgradeTime>5</iUpgradeTime>
 			<iPillageGold>5</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -3129,34 +3003,13 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>50</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -3812,30 +3665,12 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>15</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -4090,30 +3925,12 @@
 			<iUpgradeTime>5</iUpgradeTime>
 			<iPillageGold>5</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -5140,18 +4957,9 @@
 			<iPillageGold>80</iPillageGold>
 			<iHealthPercent>-100</iHealthPercent>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -5457,18 +5265,9 @@
 			<iPillageGold>60</iPillageGold>
 			<iHealthPercent>-100</iHealthPercent>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -5809,18 +5608,9 @@
 			<iHealthPercent>-50</iHealthPercent>
 			<iPillageGold>40</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -6148,92 +5938,29 @@
 			<iAirBombDefense>10</iAirBombDefense>
 			<iPillageGold>30</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
 			</TerrainMakesValids>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_POLAR_ROCK_ARCH</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_POLAR_ROCK_ARCH2</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_POLAR_ROCK_FORM1</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_POLAR_ROCK_FORM2</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_POLAR_ROCK_FORM3</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_POLAR_ROCK_FORM4</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_DARK_ROCK_ARCH</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_DARK_ROCK_ARCH2</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_DARK_ROCK_FORM1</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_DARK_ROCK_FORM2</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_DARK_ROCK_FORM3</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_DARK_ROCK_FORM4</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ROCK_ARCH</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ROCK_ARCH2</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ROCK_FORM1</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ROCK_FORM2</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ROCK_FORM3</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_ROCK_FORM4</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_POLAR_ROCK_ARCH</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_POLAR_ROCK_ARCH2</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_POLAR_ROCK_FORM1</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_POLAR_ROCK_FORM2</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_POLAR_ROCK_FORM3</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_POLAR_ROCK_FORM4</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_DARK_ROCK_ARCH</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_DARK_ROCK_ARCH2</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_DARK_ROCK_FORM1</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_DARK_ROCK_FORM2</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_DARK_ROCK_FORM3</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_DARK_ROCK_FORM4</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ROCK_ARCH</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ROCK_ARCH2</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ROCK_FORM1</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ROCK_FORM2</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ROCK_FORM3</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_ROCK_FORM4</FeatureMakesValid>
 			</FeatureMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -6453,18 +6180,9 @@
 			<iUpgradeTime>10</iUpgradeTime>
 			<iPillageGold>25</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -6544,18 +6262,9 @@
 			<iUpgradeTime>10</iUpgradeTime>
 			<iPillageGold>20</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
 			</TerrainMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -6710,30 +6419,12 @@
 			<iHealthPercent>100</iHealthPercent>
 			<iPillageGold>25</iPillageGold>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_BAMBOO</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_SAVANNA</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_MANGROVE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST_ANCIENT</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_BAMBOO</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_SAVANNA</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_JUNGLE</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_MANGROVE</FeatureMakesValid>
 			</FeatureMakesValids>
 			<ImprovementPillage>IMPROVEMENT_TREEFARM</ImprovementPillage>
 			<BonusTypeStructs>
@@ -6896,26 +6587,11 @@
 			<iHealthPercent>50</iHealthPercent>
 			<iPillageGold>20</iPillageGold>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_BAMBOO</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_MANGROVE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST_ANCIENT</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_BAMBOO</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_JUNGLE</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_MANGROVE</FeatureMakesValid>
 			</FeatureMakesValids>
 			<ImprovementPillage>IMPROVEMENT_LUMBERMILL</ImprovementPillage>
 			<ImprovementUpgrade>IMPROVEMENT_HYBRID_FOREST</ImprovementUpgrade>
@@ -7079,26 +6755,11 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>15</iPillageGold>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_BAMBOO</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_MANGROVE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST_ANCIENT</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_BAMBOO</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_MANGROVE</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_JUNGLE</FeatureMakesValid>
 			</FeatureMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -7282,26 +6943,11 @@
 			<iUpgradeTime>10</iUpgradeTime>
 			<iPillageGold>10</iPillageGold>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_BAMBOO</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_MANGROVE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST_ANCIENT</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_BAMBOO</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_JUNGLE</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_MANGROVE</FeatureMakesValid>
 			</FeatureMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -7412,26 +7058,11 @@
 			<iUpgradeTime>5</iUpgradeTime>
 			<iPillageGold>5</iPillageGold>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_BAMBOO</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_MANGROVE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST_ANCIENT</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_BAMBOO</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_JUNGLE</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_MANGROVE</FeatureMakesValid>
 			</FeatureMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -7494,26 +7125,11 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>120</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>40</iCulture>
 			<iCultureRange>2</iCultureRange>
@@ -7661,26 +7277,11 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>100</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>20</iCulture>
 			<iCultureRange>1</iCultureRange>
@@ -7809,26 +7410,11 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>80</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>10</iCulture>
 			<iCultureRange>0</iCultureRange>
@@ -7947,26 +7533,11 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>60</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>5</iCulture>
 			<ImprovementPillage>IMPROVEMENT_COTTAGE</ImprovementPillage>
@@ -8003,26 +7574,11 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>40</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>2</iCulture>
 			<ImprovementUpgrade>IMPROVEMENT_HAMLET</ImprovementUpgrade>
@@ -8045,62 +7601,20 @@
 			<iHealthPercent>-200</iHealthPercent>
 			<iPillageGold>150</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<ImprovementPillage>IMPROVEMENT_FACTORY</ImprovementPillage>
 			<TechYieldChanges>
@@ -8223,62 +7737,20 @@
 			<iHealthPercent>-100</iHealthPercent>
 			<iPillageGold>100</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<ImprovementPillage>IMPROVEMENT_WORKSHOP</ImprovementPillage>
 			<ImprovementUpgrade>IMPROVEMENT_MANUFACTURING_COMPLEX</ImprovementUpgrade>
@@ -8386,46 +7858,16 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>30</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<ImprovementUpgrade>IMPROVEMENT_FACTORY</ImprovementUpgrade>
 			<TechYieldChanges>
@@ -8627,62 +8069,20 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>30</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -8792,26 +8192,11 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>10</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -8886,26 +8271,11 @@
 			<iAirBombDefense>20</iAirBombDefense>
 			<iHealthPercent>25</iHealthPercent>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_BAMBOO</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_SAVANNA</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST_ANCIENT</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_BAMBOO</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_SAVANNA</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_JUNGLE</FeatureMakesValid>
 			</FeatureMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -8982,30 +8352,12 @@
 			<iAirBombDefense>10</iAirBombDefense>
 			<iPillageGold>10</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
 			</TerrainMakesValids>
 		</ImprovementInfo>
 		<!-- Peat Cutter | Independent - Information Lifestyle -->
@@ -9023,10 +8375,7 @@
 			<bRequiresFeature>1</bRequiresFeature>
 			<iPillageGold>8</iPillageGold>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PEAT_BOG</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PEAT_BOG</FeatureMakesValid>
 			</FeatureMakesValids>
 		</ImprovementInfo>
 		<!-- Thatch Cutter | End - Information Lifestyle -->
@@ -9045,10 +8394,7 @@
 			<bRequiresFeature>1</bRequiresFeature>
 			<iPillageGold>8</iPillageGold>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_VERY_TALL_GRASS</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_VERY_TALL_GRASS</FeatureMakesValid>
 			</FeatureMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -9110,34 +8456,13 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>25</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -9208,10 +8533,7 @@
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<iAirBombDefense>-1</iAirBombDefense>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PEAK</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PEAK</TerrainMakesValid>
 			</TerrainMakesValids>
 		</ImprovementInfo>
 		<!-- PREHISTORIC CAMPS -->
@@ -9238,10 +8560,7 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>5</iPillageGold>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_JUNGLE</FeatureMakesValid>
 			</FeatureMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -9399,28 +8718,13 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>5</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
 			</TerrainMakesValids>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_CACTUS</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_OASIS</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_CACTUS</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_OASIS</FeatureMakesValid>
 			</FeatureMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -9535,24 +8839,12 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>5</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
 			</TerrainMakesValids>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_SWAMP</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FLOOD_PLAINS</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_SWAMP</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FLOOD_PLAINS</FeatureMakesValid>
 			</FeatureMakesValids>
 			<BonusTypeStructs>
 				<BonusTypeStruct>
@@ -9627,74 +8919,23 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>20</iCulture>
 			<iVisibilityChange>4</iVisibilityChange>
@@ -9717,74 +8958,23 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>10</iCulture>
 			<ImprovementPillage>IMPROVEMENT_STONE_WATCHTOWER</ImprovementPillage>
@@ -9809,74 +8999,23 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>4</iCulture>
 			<ImprovementPillage>IMPROVEMENT_WOODEN_WATCHTOWER</ImprovementPillage>
@@ -9902,74 +9041,23 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>2</iCulture>
 			<ImprovementUpgrade>IMPROVEMENT_STONE_WATCHTOWER</ImprovementUpgrade>
@@ -9993,74 +9081,23 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>20</iCulture>
 			<iCultureRange>2</iCultureRange>
@@ -10087,74 +9124,23 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<ImprovementPillage>IMPROVEMENT_FORT</ImprovementPillage>
 			<ImprovementUpgrade>IMPROVEMENT_COMMAND_CENTER</ImprovementUpgrade>
@@ -10183,74 +9169,23 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<ImprovementPillage>IMPROVEMENT_WOODEN_PALISADE</ImprovementPillage>
 			<!-- Other improvements also can upgrade to Fort: Fortified Cave with Cache -->
@@ -10279,10 +9214,7 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_CAVES</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_CAVES</FeatureMakesValid>
 			</FeatureMakesValids>
 			<ImprovementPillage>IMPROVEMENT_FORTIFIED_CAVE</ImprovementPillage>
 			<ImprovementUpgrade>IMPROVEMENT_FORT</ImprovementUpgrade>
@@ -10309,10 +9241,7 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_CAVES</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_CAVES</FeatureMakesValid>
 			</FeatureMakesValids>
 			<iCulture>5</iCulture>
 			<ImprovementUpgrade>IMPROVEMENT_FORTIFIED_CAVE_WITH_CACHE</ImprovementUpgrade>
@@ -10339,74 +9268,23 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<ImprovementPillage>IMPROVEMENT_ABATIS_THORN_HEDGE</ImprovementPillage>
 			<ImprovementUpgrade>IMPROVEMENT_FORT</ImprovementUpgrade>
@@ -10430,74 +9308,23 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>1</iCulture>
 			<ImprovementUpgrade>IMPROVEMENT_WOODEN_PALISADE</ImprovementUpgrade>
@@ -10520,74 +9347,23 @@
             <iDefenseModifier>-30</iDefenseModifier>
             <bOutsideBorders>1</bOutsideBorders>
             <TerrainMakesValids>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_BARREN</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_DESERT</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_DUNES</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_GRASSLAND</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_ICE</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_LUSH</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_MARSH</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_MUDDY</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_PERMAFROST</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_PLAINS</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_ROCKY</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_BADLAND</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_JAGGED</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_SCRUB</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_TAIGA</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_TUNDRA</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
             </TerrainMakesValids>
             <iCulture>10</iCulture>
             <ImprovementUpgrade>IMPROVEMENT_RESOURCE_OUTPOST</ImprovementUpgrade>
@@ -10608,74 +9384,23 @@
             <bOutsideBorders>1</bOutsideBorders>
             <bActsAsCity>1</bActsAsCity>
             <TerrainMakesValids>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_BARREN</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_DESERT</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_DUNES</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_GRASSLAND</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_ICE</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_LUSH</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_MARSH</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_MUDDY</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_PERMAFROST</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_PLAINS</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_ROCKY</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_BADLAND</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_JAGGED</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_SCRUB</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_TAIGA</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_TUNDRA</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
             </TerrainMakesValids>
             <iCulture>20</iCulture>
             <ImprovementUpgrade>IMPROVEMENT_RESOURCE_SETTLEMENT</ImprovementUpgrade>
@@ -10695,74 +9420,23 @@
             <bOutsideBorders>1</bOutsideBorders>
             <bActsAsCity>1</bActsAsCity>
             <TerrainMakesValids>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_BARREN</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_DESERT</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_DUNES</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_GRASSLAND</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_ICE</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_LUSH</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_MARSH</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_MUDDY</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_PERMAFROST</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_PLAINS</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_ROCKY</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_BADLAND</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_JAGGED</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_SCRUB</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_TAIGA</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_TUNDRA</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
             </TerrainMakesValids>
             <iCulture>30</iCulture>
             <ImprovementUpgrade>IMPROVEMENT_RESOURCE_TOWN</ImprovementUpgrade>
@@ -10783,74 +9457,23 @@
             <bOutsideBorders>1</bOutsideBorders>
             <bActsAsCity>1</bActsAsCity>
             <TerrainMakesValids>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_BARREN</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_DESERT</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_DUNES</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_GRASSLAND</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_ICE</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_LUSH</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_MARSH</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_MUDDY</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_PERMAFROST</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_PLAINS</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_ROCKY</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_BADLAND</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_JAGGED</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_SCRUB</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_TAIGA</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_TUNDRA</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
             </TerrainMakesValids>
             <iCulture>40</iCulture>
             <ImprovementUpgrade>IMPROVEMENT_RESOURCE_COMPLEX</ImprovementUpgrade>
@@ -10871,74 +9494,23 @@
             <bOutsideBorders>1</bOutsideBorders>
             <bActsAsCity>1</bActsAsCity>
             <TerrainMakesValids>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_BARREN</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_DESERT</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_DUNES</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_GRASSLAND</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_ICE</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_LUSH</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_MARSH</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_MUDDY</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_PERMAFROST</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_PLAINS</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_ROCKY</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_BADLAND</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_JAGGED</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_SCRUB</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_TAIGA</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
-                <TerrainMakesValid>
-                    <TerrainType>TERRAIN_TUNDRA</TerrainType>
-                    <bMakesValid>1</bMakesValid>
-                </TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+                <TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
             </TerrainMakesValids>
             <iCulture>50</iCulture>
             <bBombardable>1</bBombardable>
@@ -10956,38 +9528,14 @@
 			<PrereqTech>TECH_GUILDS</PrereqTech>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesFeature>1</bPlacesFeature>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11006,10 +9554,7 @@
 			</YieldChanges>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST_YOUNG</FeatureMakesValid>
 			</FeatureMakesValids>
 			<bPlacesFeature>1</bPlacesFeature>
 		</ImprovementInfo>
@@ -11022,34 +9567,13 @@
 			<PrereqTech>TECH_ECOLOGY</PrereqTech>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesFeature>1</bPlacesFeature>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11063,34 +9587,13 @@
 			<PrereqTech>TECH_ECOLOGY</PrereqTech>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesFeature>1</bPlacesFeature>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11105,30 +9608,12 @@
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<iAirBombDefense>-1</iAirBombDefense>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesFeature>1</bPlacesFeature>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11144,14 +9629,8 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<!--bOutsideBorders>1</bOutsideBorders-->
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11167,10 +9646,7 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<!-- <bOutsideBorders>1</bOutsideBorders> -->
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11186,26 +9662,11 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<!--bOutsideBorders>1</bOutsideBorders-->
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ROCKY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ROCKY</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11221,18 +9682,9 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<!--bOutsideBorders>1</bOutsideBorders-->
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BARREN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_JAGGED</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BARREN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_JAGGED</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11248,10 +9700,7 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<!--bOutsideBorders>1</bOutsideBorders-->
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11267,10 +9716,7 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<!--bOutsideBorders>1</bOutsideBorders-->
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TUNDRA</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11286,10 +9732,7 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<!--bOutsideBorders>1</bOutsideBorders-->
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PERMAFROST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PERMAFROST</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11305,10 +9748,7 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<!--bOutsideBorders>1</bOutsideBorders-->
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_ICE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11324,14 +9764,8 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<!--bOutsideBorders>1</bOutsideBorders-->
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_BADLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_BADLAND</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11347,10 +9781,7 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<!--bOutsideBorders>1</bOutsideBorders-->
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DUNES</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DUNES</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11366,10 +9797,7 @@
 			<iAirBombDefense>-1</iAirBombDefense>
 			<!--bOutsideBorders>1</bOutsideBorders-->
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SALT_FLATS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SALT_FLATS</TerrainMakesValid>
 			</TerrainMakesValids>
 			<bPlacesTerrain>1</bPlacesTerrain>
 			<bGraphicalOnly>1</bGraphicalOnly>
@@ -11632,14 +10060,8 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>5</iPillageGold>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_KELP</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_SEA_GRASS</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_KELP</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_SEA_GRASS</FeatureMakesValid>
 			</FeatureMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -11668,14 +10090,8 @@
 			<bWaterImprovement>1</bWaterImprovement>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_CORAL_REEF</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_CORAL_REEF_BEACON</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_CORAL_REEF</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_CORAL_REEF_BEACON</FeatureMakesValid>
 			</FeatureMakesValids>
 			<bOutsideBorders>1</bOutsideBorders>
 			<bPlacesFeature>1</bPlacesFeature>
@@ -11690,14 +10106,8 @@
 			<bWaterImprovement>1</bWaterImprovement>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_REEF</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_REEF_BEACON</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_REEF</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_REEF_BEACON</FeatureMakesValid>
 			</FeatureMakesValids>
 			<bOutsideBorders>1</bOutsideBorders>
 			<bPlacesFeature>1</bPlacesFeature>
@@ -11712,14 +10122,8 @@
 			<bWaterImprovement>1</bWaterImprovement>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_GREAT_BARRIER</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_GREAT_BARRIER_REEF_BEACON</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_GREAT_BARRIER</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_GREAT_BARRIER_REEF_BEACON</FeatureMakesValid>
 			</FeatureMakesValids>
 			<bOutsideBorders>1</bOutsideBorders>
 			<bPlacesFeature>1</bPlacesFeature>
@@ -11735,10 +10139,7 @@
 			<bWaterImprovement>1</bWaterImprovement>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_CORAL_REEF</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_CORAL_REEF</FeatureMakesValid>
 			</FeatureMakesValids>
 			<bOutsideBorders>1</bOutsideBorders>
 			<bPlacesFeature>1</bPlacesFeature>
@@ -11753,10 +10154,7 @@
 			<bWaterImprovement>1</bWaterImprovement>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_REEF</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_REEF</FeatureMakesValid>
 			</FeatureMakesValids>
 			<bOutsideBorders>1</bOutsideBorders>
 			<bPlacesFeature>1</bPlacesFeature>
@@ -11771,10 +10169,7 @@
 			<bWaterImprovement>1</bWaterImprovement>
 			<iAdvancedStartCost>-1</iAdvancedStartCost>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_GREAT_BARRIER</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_GREAT_BARRIER</FeatureMakesValid>
 			</FeatureMakesValids>
 			<bOutsideBorders>1</bOutsideBorders>
 			<bPlacesFeature>1</bPlacesFeature>
@@ -11796,30 +10191,12 @@
 			<bWaterImprovement>1</bWaterImprovement>
 			<iAdvancedStartCost>48</iAdvancedStartCost>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_CORAL_REEF_LIGHTHOUSE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_REEF_LIGHTHOUSE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_GREAT_BARRIER</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_NUKUORO</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_SHARK_BAY</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_PLATY_SUGARLOAF</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_CORAL_REEF_LIGHTHOUSE</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_REEF_LIGHTHOUSE</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_GREAT_BARRIER</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_NUKUORO</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_SHARK_BAY</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_PLATY_SUGARLOAF</FeatureMakesValid>
 			</FeatureMakesValids>
 		</ImprovementInfo>
 		<!-- Tidal Harness -->
@@ -11839,18 +10216,9 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>5</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_TROPICAL</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -11888,63 +10256,21 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>5</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_DEEP</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_DEEP_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_DEEP_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_DEEP</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_DEEP_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_DEEP_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LAKE_SHORE</TerrainMakesValid>
 				<!-- Following valid with Wireless Electricity -->
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_DEEP</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_DEEP_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_DEEP_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LAKE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_DEEP</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_DEEP_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_DEEP_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LAKE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -12169,86 +10495,26 @@
 			<iAirBombDefense>5</iAirBombDefense>
 			<iPillageGold>25</iPillageGold>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OCEAN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OCEAN_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OCEAN_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_DEEP</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_DEEP_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_DEEP_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_DEEP</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_DEEP_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_DEEP_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRENCH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRENCH_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRENCH_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LAKE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OCEAN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OCEAN_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OCEAN_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_DEEP</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_DEEP_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_DEEP_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_DEEP</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_DEEP_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_DEEP_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRENCH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRENCH_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRENCH_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LAKE_SHORE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LAKE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<TechYieldChanges>
 				<TechYieldChange>
@@ -12294,86 +10560,26 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OCEAN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OCEAN_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OCEAN_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_DEEP</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_DEEP_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_DEEP_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_DEEP</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_DEEP_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_DEEP_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRENCH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRENCH_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRENCH_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LAKE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OCEAN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OCEAN_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OCEAN_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_DEEP</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_DEEP_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_DEEP_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_DEEP</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_DEEP_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_DEEP_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRENCH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRENCH_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRENCH_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LAKE_SHORE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LAKE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>5</iCulture>
 			<bBombardable>1</bBombardable>
@@ -12393,86 +10599,26 @@
 			<bOutsideBorders>1</bOutsideBorders>
 			<bMilitaryStructure>1</bMilitaryStructure>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OCEAN</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OCEAN_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_OCEAN_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_DEEP</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_DEEP_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST_DEEP_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_DEEP</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_DEEP_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SEA_DEEP_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRENCH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRENCH_POLAR</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TRENCH_TROPICAL</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LAKE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OCEAN</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OCEAN_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_OCEAN_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_DEEP</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_DEEP_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST_DEEP_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_DEEP</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_DEEP_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SEA_DEEP_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRENCH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRENCH_POLAR</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TRENCH_TROPICAL</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LAKE_SHORE</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LAKE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<iCulture>10</iCulture>
 			<iCultureRange>1</iCultureRange>
@@ -12538,56 +10684,20 @@
 			<iGoodyRange>3</iGoodyRange>
 			<iAirBombDefense>-1</iAirBombDefense>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MARSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LUSH</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_MUDDY</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_GRASSLAND</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_PLAINS</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_DESERT</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_TAIGA</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MARSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LUSH</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_SCRUB</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_MUDDY</TerrainMakesValid>
 			</TerrainMakesValids>
 			<FeatureMakesValids>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
-				<FeatureMakesValid>
-					<FeatureType>FEATURE_SWAMP</FeatureType>
-					<bMakesValid>1</bMakesValid>
-				</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_JUNGLE</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_FOREST_ANCIENT</FeatureMakesValid>
+				<FeatureMakesValid>FEATURE_SWAMP</FeatureMakesValid>
 			</FeatureMakesValids>
 			<WorldSoundscapeAudioScript>ASSS_FOREST_SELECT_AMB</WorldSoundscapeAudioScript>
 		</ImprovementInfo>
@@ -12604,14 +10714,8 @@
 			<iGoodyRange>3</iGoodyRange>
 			<iAirBombDefense>-1</iAirBombDefense>
 			<TerrainMakesValids>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_COAST</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
-				<TerrainMakesValid>
-					<TerrainType>TERRAIN_LAKE_SHORE</TerrainType>
-					<bMakesValid>1</bMakesValid>
-				</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_COAST</TerrainMakesValid>
+				<TerrainMakesValid>TERRAIN_LAKE_SHORE</TerrainMakesValid>
 			</TerrainMakesValids>
 			<WorldSoundscapeAudioScript>ASSS_FOREST_SELECT_AMB</WorldSoundscapeAudioScript>
 		</ImprovementInfo>

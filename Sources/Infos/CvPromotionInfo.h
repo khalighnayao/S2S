@@ -529,9 +529,9 @@ protected:
 	int* m_piTerrainWorkPercent;
 	int* m_piFeatureWorkPercent;
 
-	bool* m_pbTerrainDoubleMove;
-	bool* m_pbFeatureDoubleMove;
-	bool* m_pbUnitCombat;
+	std::vector<TerrainTypes> m_aeTerrainDoubleMove;
+	std::vector<FeatureTypes> m_aeFeatureDoubleMove;
+	std::vector<UnitCombatTypes> m_aeUnitCombat;
 
 	//TB Combat Mods Begin TB SubCombat Mod begin
 	//Text Strings

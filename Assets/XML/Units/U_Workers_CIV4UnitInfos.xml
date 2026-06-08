@@ -29,10 +29,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<DefaultUnitAI>UNITAI_WORKER</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<bFood>1</bFood>
 			<bWorkerTrade>1</bWorkerTrade>
@@ -129,10 +126,7 @@
 				<UnitType>UNIT_WORKCAMEL</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -258,10 +252,7 @@
 				<UnitType>UNIT_WORKER_INDUSTRIAL</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -422,10 +413,7 @@
 				<UnitType>UNIT_WORKER_INDUSTRIAL</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -557,10 +545,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_FIELD_WORKER1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_FIELD_WORKER1</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<!-- Worker (Mule) -->
@@ -594,10 +579,7 @@
 				<UnitType>UNIT_WORKER_INDUSTRIAL</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -734,14 +716,8 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_FIELD_WORKER1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_MOUNTAINEER</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_FIELD_WORKER1</FreePromotion>
+				<FreePromotion>PROMOTION_MOUNTAINEER</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<!-- Worker (Elephant) -->
@@ -775,10 +751,7 @@
 				<UnitType>UNIT_WORKER_INDUSTRIAL</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -893,14 +866,8 @@
 			<iWorkRate>130</iWorkRate>
 			<iAsset>1</iAsset>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_FIELD_WORKER1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_FOREST_WORKER1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_FIELD_WORKER1</FreePromotion>
+				<FreePromotion>PROMOTION_FOREST_WORKER1</FreePromotion>
 			</FreePromotions>
 			<UnitMeshGroups>
 				<iGroupSize>2</iGroupSize>
@@ -951,10 +918,7 @@
 				<UnitType>UNIT_WORKER_INDUSTRIAL</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -1086,14 +1050,8 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_HILL_WORKER1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_MOUNTAINEER</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_HILL_WORKER1</FreePromotion>
+				<FreePromotion>PROMOTION_MOUNTAINEER</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<!-- Worker (Camel) -->
@@ -1127,10 +1085,7 @@
 				<UnitType>UNIT_WORKER_INDUSTRIAL</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -1262,14 +1217,8 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_DESERT_WORKER1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_DESERT_WORKER2</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_DESERT_WORKER1</FreePromotion>
+				<FreePromotion>PROMOTION_DESERT_WORKER2</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<!-- Industrial Worker -->
@@ -1304,10 +1253,7 @@
 				<UnitType>UNIT_WORKER_MODERN</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -1470,10 +1416,7 @@
 				<UnitType>UNIT_CLONES</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -1558,10 +1501,7 @@
 				<UnitType>UNIT_CLONES</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -1723,10 +1663,7 @@
 				<UnitType>UNIT_WORKER_ANDROID</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_ANCIENT -->
@@ -1849,10 +1786,7 @@
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<bWorkerTrade>1</bWorkerTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_ANCIENT -->
@@ -1999,28 +1933,13 @@
 				<UnitType>UNIT_NEANDERTHAL_WORKBOAT</UnitType>
 			</SupersedingUnits>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER_SEA</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</NotUnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -2103,28 +2022,13 @@
 				<UnitType>UNIT_WORKBOAT_MIDDLE</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER_SEA</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</NotUnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -2242,28 +2146,13 @@
 				<UnitType>UNIT_WORKBOAT_MODERN</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER_SEA</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</NotUnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -2384,28 +2273,13 @@
 				<UnitType>UNIT_CONSTRUCT_SHIP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER_SEA</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</NotUnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -2484,28 +2358,13 @@
 			<bMechanized>1</bMechanized>
 			<bRenderBelowWater>1</bRenderBelowWater>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER_SEA</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</NotUnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->
@@ -2589,10 +2448,7 @@
 			<bMechanized>1</bMechanized>
 			<bRenderBelowWater>1</bRenderBelowWater>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER_SEA</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_OFFSHORE_PLATFORM</BuildType>
@@ -2647,10 +2503,7 @@
 			<bMechanized>1</bMechanized>
 			<bRenderBelowWater>1</bRenderBelowWater>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER_SEA</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_EXTRACTION_FACILITY</BuildType>
@@ -2711,10 +2564,7 @@
 			<bMechanized>1</bMechanized>
 			<bRenderBelowWater>1</bRenderBelowWater>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER_SEA</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_SUBMERGED_TOWN</BuildType>
@@ -2773,10 +2623,7 @@
 				<UnitType>UNIT_WORKER_INDUSTRIAL</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<!-- BUILDS REQUIRING: C2C_ERA_PREHISTORIC -->

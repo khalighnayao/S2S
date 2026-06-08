@@ -47,9 +47,7 @@ m_bOpenBorders(false),
 m_bForcePeace(false),
 m_bForceNoTrade(false),
 m_bForceWar(false),
-m_bAssignCity(false),
-m_pbForceCivic(NULL),
-m_abVoteSourceTypes(NULL)
+m_bAssignCity(false)
 {
 }
 
@@ -63,8 +61,6 @@ m_abVoteSourceTypes(NULL)
 //------------------------------------------------------------------------------------------------------
 CvVoteInfo::~CvVoteInfo()
 {
-	SAFE_DELETE_ARRAY(m_pbForceCivic);
-	SAFE_DELETE_ARRAY(m_abVoteSourceTypes);
 }
 
 
@@ -167,14 +163,14 @@ bool CvVoteInfo::isAssignCity() const
 bool CvVoteInfo::isForceCivic(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumCivicInfos(), i);
-	return m_pbForceCivic ? m_pbForceCivic[i] : false;
+	return algo::any_of_equal(m_aeForceCivic, static_cast<CivicTypes>(i));
 }
 
 
 bool CvVoteInfo::isVoteSourceType(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumVoteSourceInfos(), i);
-	return m_abVoteSourceTypes ? m_abVoteSourceTypes[i] : false;
+	return algo::any_of_equal(m_aeVoteSourceTypes, static_cast<VoteSourceTypes>(i));
 }
 
 
@@ -204,8 +200,8 @@ bool CvVoteInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_bForceWar, L"bForceWar");
 	pXML->GetOptionalChildXmlValByName(&m_bAssignCity, L"bAssignCity");
 
-	pXML->SetVariableListTagPair(&m_pbForceCivic, L"ForceCivics",  GC.getNumCivicInfos());
-	pXML->SetVariableListTagPair(&m_abVoteSourceTypes, L"DiploVotes",  GC.getNumVoteSourceInfos());
+	pXML->SetOptionalVector(&m_aeForceCivic, L"ForceCivics");
+	pXML->SetOptionalVector(&m_aeVoteSourceTypes, L"DiploVotes");
 
 	return true;
 }
@@ -237,29 +233,8 @@ void CvVoteInfo::copyNonDefaults(const CvVoteInfo* pClassInfo)
 	if (isForceWar() == bDefault) m_bForceWar = pClassInfo->isForceWar();
 	if (isAssignCity() == bDefault) m_bAssignCity = pClassInfo->isAssignCity();
 
-	for ( int i = 0; i < GC.getNumCivicInfos(); i++ )
-	{
-		if ( isForceCivic(i) == bDefault && pClassInfo->isForceCivic(i) != bDefault)
-		{
-			if ( NULL == m_pbForceCivic )
-			{
-				CvXMLLoadUtility::InitList(&m_pbForceCivic,GC.getNumCivicInfos(),bDefault);
-			}
-			m_pbForceCivic[i] = pClassInfo->isForceCivic(i);
-		}
-	}
-
-	for ( int i = 0; i < GC.getNumVoteSourceInfos(); i++ )
-	{
-		if ( isVoteSourceType(i) == bDefault && pClassInfo->isVoteSourceType(i) != bDefault)
-		{
-			if ( NULL == m_abVoteSourceTypes )
-			{
-				CvXMLLoadUtility::InitList(&m_abVoteSourceTypes,GC.getNumVoteSourceInfos(),bDefault);
-			}
-			m_abVoteSourceTypes[i] = pClassInfo->isVoteSourceType(i);
-		}
-	}
+	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeForceCivic, pClassInfo->m_aeForceCivic);
+	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeVoteSourceTypes, pClassInfo->m_aeVoteSourceTypes);
 }
 
 
@@ -285,7 +260,7 @@ void CvVoteInfo::getCheckSum(uint32_t& iSum) const
 
 	// Arrays
 
-	CheckSum(iSum, m_pbForceCivic, GC.getNumCivicInfos());
-	CheckSum(iSum, m_abVoteSourceTypes, GC.getNumVoteSourceInfos());
+	CheckSumC(iSum, m_aeForceCivic);
+	CheckSumC(iSum, m_aeVoteSourceTypes);
 }
 

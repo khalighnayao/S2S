@@ -105,18 +105,9 @@
 				</BonusProductionModifier>
 			</BonusProductionModifiers>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_DESPOTISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MONARCHY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_SUPERHUMAN</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_DESPOTISM</PrereqCivic>
+				<PrereqCivic>CIVIC_MONARCHY</PrereqCivic>
+				<PrereqCivic>CIVIC_SUPERHUMAN</PrereqCivic>
 			</PrereqOrCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<Properties>

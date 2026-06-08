@@ -39,22 +39,10 @@
 				<UnitType>UNIT_NEANDERTHAL_RAFT</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<ObsoleteTech>TECH_OPTICS</ObsoleteTech>
 			<SupersedingUnits>
@@ -152,26 +140,11 @@
 				<UnitType>UNIT_NEANDERTHAL_CANOE</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<ObsoleteTech>TECH_OPTICS</ObsoleteTech>
 			<SupersedingUnits>
@@ -262,22 +235,10 @@
 				<UnitType>UNIT_COG</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -393,22 +354,10 @@
 				<UnitType>UNIT_FLUYT</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -516,26 +465,11 @@
 				<UnitType>UNIT_GALLEON</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -611,26 +545,11 @@
 				<UnitType>UNIT_PADDLE_STEAMER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -711,18 +630,9 @@
 				<UnitType>UNIT_TRANSPORT</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_STEAM_POWER</PrereqTech>
 			<PrereqBonuses>
@@ -790,22 +700,10 @@
 				<UnitType>UNIT_LANDING_SHIP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MOTORIZED_TRANSPORTATION</PrereqTech>
 			<PrereqBonuses>
@@ -874,22 +772,10 @@
 				<UnitType>UNIT_FUSION_TRANSPORT</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MANUFACTURING</PrereqTech>
 			<PrereqBonuses>
@@ -962,14 +848,8 @@
 				<UnitType>UNIT_FUSION_TRANSPORT</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_STEALTH</PrereqTech>
 			<BonusType>BONUS_ALUMINUM_WARES</BonusType>
@@ -1052,22 +932,10 @@
 			<bRenderBelowWater>1</bRenderBelowWater>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_INVISIBILITY</PrereqTech>
 			<TechTypes>
@@ -1149,18 +1017,9 @@
 				<UnitType>UNIT_NEANDERTHAL_WAR_CANOE</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
 			</UnitAIs>
 			<ObsoleteTech>TECH_OPTICS</ObsoleteTech>
 			<SupersedingUnits>
@@ -1256,30 +1115,12 @@
 				<UnitType>UNIT_TRIREME</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -1392,26 +1233,11 @@
 				<UnitType>UNIT_QUINQUEREME2</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -1496,26 +1322,11 @@
 				<UnitType>UNIT_DECAREME</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -1592,22 +1403,10 @@
 				<UnitType>UNIT_GALLEASS</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -1691,22 +1490,10 @@
 				<UnitType>UNIT_GALLEASS</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -1797,26 +1584,11 @@
 				<UnitType>UNIT_GALLEASS</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -1897,26 +1669,11 @@
 				<UnitType>UNIT_SLOOP_OF_WAR</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -2050,30 +1807,12 @@
 				<UnitType>UNIT_MANOWAR</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -2163,34 +1902,13 @@
 				<UnitType>UNIT_IRON_FRIGATE</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -2285,34 +2003,13 @@
 				<UnitType>UNIT_PRE_DREADNOUGHT</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -2406,26 +2103,11 @@
 				<UnitType>UNIT_STEAM_DESTROYER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_SCREW_PROPELLER</PrereqTech>
 			<TechTypes>
@@ -2513,26 +2195,11 @@
 				<UnitType>UNIT_DREADNOUGHT_SHIP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ARTILLERY</PrereqTech>
 			<TechTypes>
@@ -2613,26 +2280,11 @@
 				<UnitType>UNIT_WW2_BATTLESHIP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_INDUSTRIALISM</PrereqTech>
 			<TechTypes>
@@ -2713,22 +2365,10 @@
 				<UnitType>UNIT_HEAVY_CRUISER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_INDUSTRIALISM</PrereqTech>
 			<TechTypes>
@@ -2811,18 +2451,9 @@
 				<UnitType>UNIT_BATTLESHIP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MECHANIZED_WARFARE</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -2909,18 +2540,9 @@
 				<UnitType>UNIT_FUSION_BATTLESHIP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_SEMICONDUCTORS</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -3006,26 +2628,11 @@
 				<UnitType>UNIT_MISSILE_CRUISER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MECHANIZED_WARFARE</PrereqTech>
 			<BonusType>BONUS_PETROLEUM_PRODUCTS</BonusType>
@@ -3108,26 +2715,11 @@
 				<UnitType>UNIT_AEGIS_CRUISER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MECHANIZED_WARFARE</PrereqTech>
 			<BonusType>BONUS_PETROLEUM_PRODUCTS</BonusType>
@@ -3219,22 +2811,10 @@
 				<UnitType>UNIT_NUCLEAR_SUBMARINE</UnitType>
 			</DefendAgainstUnit>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_NEURAL_NETWORKS</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -3337,22 +2917,10 @@
 				<UnitType>UNIT_FUSION_CRUISER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_DISASTER_ROBOTS</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -3461,18 +3029,9 @@
 				<UnitType>UNIT_FUSION_CRUISER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_GUIDED_WEAPONS</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -3565,26 +3124,11 @@
 			<bRenderBelowWater>1</bRenderBelowWater>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_WARMACHINES</PrereqTech>
 			<TechTypes>
@@ -3695,14 +3239,8 @@
 			<bRenderBelowWater>1</bRenderBelowWater>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ADVANCED_WARMACHINES</PrereqTech>
 			<iCost>7700</iCost>
@@ -3787,18 +3325,9 @@
 				<UnitType>UNIT_NEANDERTHAL_KAYAK</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<ObsoleteTech>TECH_OPTICS</ObsoleteTech>
 			<SupersedingUnits>
@@ -3895,18 +3424,9 @@
 				<UnitType>UNIT_CARAVEL</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<ObsoleteTech>TECH_COMPASS</ObsoleteTech>
 			<PrereqAndBuildings>
@@ -4018,26 +3538,11 @@
 				<UnitType>UNIT_SLOOP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -4115,26 +3620,11 @@
 				<UnitType>UNIT_FRIGATE</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -4234,38 +3724,14 @@
 				<UnitType>UNIT_IRON_FRIGATE</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -4350,34 +3816,13 @@
 				<UnitType>UNIT_STEAM_DESTROYER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_STEEL</PrereqTech>
 			<TechTypes>
@@ -4465,26 +3910,11 @@
 				<UnitType>UNIT_WW1_DESTROYER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ARTILLERY</PrereqTech>
 			<BonusType>BONUS_COAL</BonusType>
@@ -4562,26 +3992,11 @@
 				<UnitType>UNIT_DESTROYER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ARMORED_VEHICLES</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -4669,26 +4084,11 @@
 				<UnitType>UNIT_ATTACK_SUBMARINE</UnitType>
 			</DefendAgainstUnit>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_SEMICONDUCTORS</PrereqTech>
 			<TechTypes>
@@ -4772,22 +4172,10 @@
 			<bMechanized>1</bMechanized>
 			<bRenderBelowWater>1</bRenderBelowWater>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ROBOTICS</PrereqTech>
 			<PrereqBonuses>
@@ -4882,18 +4270,9 @@
 				<UnitType>UNIT_STEALTH_SUBMARINE</UnitType>
 			</DefendAgainstUnit>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_STEALTH</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -4984,26 +4363,11 @@
 				<UnitType>UNIT_STEALTH_SUBMARINE</UnitType>
 			</DefendAgainstUnit>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_REMOTE_NAVAL_TRAINING_CENTER</BuildingType>
@@ -5120,22 +4484,10 @@
 				<UnitType>UNIT_FUSION_SUBMARINE</UnitType>
 			</DefendAgainstUnit>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_INVISIBILITY</PrereqTech>
 			<TechTypes>
@@ -5260,22 +4612,10 @@
 				</FlankingStrike>
 			</FlankingStrikes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_SUBMARINE_WARFARE</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -5386,22 +4726,10 @@
 				</FlankingStrike>
 			</FlankingStrikes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ADVANCED_ROCKETRY</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -5524,18 +4852,9 @@
 				</FlankingStrike>
 			</FlankingStrikes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_GUIDED_WEAPONS</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -5661,18 +4980,9 @@
 				</FlankingStrike>
 			</FlankingStrikes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_STEALTH</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -5797,22 +5107,10 @@
 				</FlankingStrike>
 			</FlankingStrikes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_REMOTE_NAVAL_TRAINING_CENTER</BuildingType>
@@ -5950,18 +5248,9 @@
 				</FlankingStrike>
 			</FlankingStrikes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_BIOMIMETICS</PrereqTech>
 			<TechTypes>
@@ -6066,10 +5355,7 @@
 				<UnitType>UNIT_CARRIER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_NAVAL_FLIGHT</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -6180,10 +5466,7 @@
 				<UnitType>UNIT_NUCLEAR_CARRIER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_JET_PROPULSION</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -6294,10 +5577,7 @@
 				<UnitType>UNIT_FUSION_CARRIER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MODERN_WARFARE</PrereqTech>
 			<BonusType>BONUS_URANIUM</BonusType>
@@ -6416,10 +5696,7 @@
 			<bRenderBelowWater>1</bRenderBelowWater>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MEGASTRUCTURE_ENGINEERING</PrereqTech>
 			<iCost>6818</iCost>
@@ -6532,18 +5809,9 @@
 				<UnitType>UNIT_MASTER_SAILOR_OUTRIGGER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<ObsoleteTech>TECH_OPTICS</ObsoleteTech>
 			<PrereqTech>TECH_BOAT_BUILDING</PrereqTech>
@@ -6553,14 +5821,8 @@
 				<BonusType>BONUS_WOOD</BonusType>
 			</PrereqBonuses>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SEA_HUNTER2</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_SEA_HUNTER2</FreePromotion>
 			</FreePromotions>
 			<iCost>-1</iCost>
 			<iMinAreaSize>5</iMinAreaSize>
@@ -6639,28 +5901,13 @@
 				<UnitType>UNIT_MASTER_SAILOR_CARAVEL</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SEA_HUNTER2</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_SEA_HUNTER2</FreePromotion>
 			</FreePromotions>
 			<ObsoleteTech>TECH_COMPASS</ObsoleteTech>
 			<PrereqTech>TECH_SAILING</PrereqTech>
@@ -6764,36 +6011,15 @@
 				<UnitType>UNIT_MASTER_SAILOR_SLOOP</UnitType>
 			</UnitUpgrades>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SEA_HUNTER2</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_SEA_HUNTER2</FreePromotion>
 			</FreePromotions>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_COMPASS</PrereqTech>
 			<ObsoleteTech>TECH_ASTROLABE</ObsoleteTech>
@@ -6860,36 +6086,15 @@
 				<UnitType>UNIT_MASTER_SAILOR_FRIGATE</UnitType>
 			</UnitUpgrades>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_METALLURGY</PrereqTech>
 			<TechTypes>
@@ -6974,51 +6179,21 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitUpgrades>
 				<UnitType>UNIT_MASTER_SAILOR_IRON_FRIGATE</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_NAVIGATION</PrereqTech>
 			<TechTypes>
@@ -7088,47 +6263,20 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitUpgrades>
 				<UnitType>UNIT_MASTER_SAILOR_STEAM_DESTROYER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_STEEL</PrereqTech>
 			<TechTypes>
@@ -7204,39 +6352,18 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitUpgrades>
 				<UnitType>UNIT_MASTER_SAILOR_WW1_DESTROYER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ARTILLERY</PrereqTech>
 			<BonusType>BONUS_COAL</BonusType>
@@ -7312,39 +6439,18 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitUpgrades>
 				<UnitType>UNIT_MASTER_SAILOR_DESTROYER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ARMORED_VEHICLES</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -7425,14 +6531,8 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitUpgrades>
 				<UnitType>UNIT_MASTER_SAILOR_STEALTH_DESTROYER</UnitType>
@@ -7442,26 +6542,11 @@
 				<UnitType>UNIT_ATTACK_SUBMARINE</UnitType>
 			</DefendAgainstUnit>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_SEMICONDUCTORS</PrereqTech>
 			<TechTypes>
@@ -7550,14 +6635,8 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitUpgrades>
 				<UnitType>UNIT_MASTER_SAILOR_FF_DESTROYER_I</UnitType>
@@ -7569,18 +6648,9 @@
 				<UnitType>UNIT_STEALTH_SUBMARINE</UnitType>
 			</DefendAgainstUnit>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_STEALTH</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -7670,14 +6740,8 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<DefendAgainstUnit>
 				<UnitType>UNIT_SUBMARINE</UnitType>
@@ -7687,22 +6751,10 @@
 				<UnitType>UNIT_FUSION_SUBMARINE</UnitType>
 			</DefendAgainstUnit>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_INVISIBILITY</PrereqTech>
 			<TechTypes>
@@ -7800,49 +6852,22 @@
 			<bAlwaysHostile>1</bAlwaysHostile>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitUpgrades>
 				<UnitType>UNIT_MASTER_SAILOR_ATTACK_SUBMARINE</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_PIRATE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_PIRATE_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
 			</NotUnitAIs>
 			<PrereqTech>TECH_SUBMARINE_WARFARE</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -7885,26 +6910,11 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_MACHINE</FormationType>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MERCANTILISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_NATIONALIST</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_FEUDAL</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MONARCHY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_DESPOTISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_MERCANTILISM</PrereqCivic>
+				<PrereqCivic>CIVIC_NATIONALIST</PrereqCivic>
+				<PrereqCivic>CIVIC_FEUDAL</PrereqCivic>
+				<PrereqCivic>CIVIC_MONARCHY</PrereqCivic>
+				<PrereqCivic>CIVIC_DESPOTISM</PrereqCivic>
 			</PrereqOrCivics>
 		</UnitInfo>
 		<UnitInfo>
@@ -7948,14 +6958,8 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitUpgrades>
 				<UnitType>UNIT_MASTER_SAILOR_NUCLEAR_SUBMARINE</UnitType>
@@ -7985,22 +6989,10 @@
 				</FlankingStrike>
 			</FlankingStrikes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ADVANCED_ROCKETRY</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -8096,14 +7088,8 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitUpgrades>
 				<UnitType>UNIT_MASTER_SAILOR_FUSION_SUBMARINE</UnitType>
@@ -8134,18 +7120,9 @@
 				</FlankingStrike>
 			</FlankingStrikes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_GUIDED_WEAPONS</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -8245,14 +7222,8 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitTargets>
 				<UnitType>UNIT_FLUYT</UnitType>
@@ -8280,18 +7251,9 @@
 				</FlankingStrike>
 			</FlankingStrikes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_BIOMIMETICS</PrereqTech>
 			<TechTypes>
@@ -8391,31 +7353,16 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SEA_HUNTER2</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_SEA_HUNTER2</FreePromotion>
 			</FreePromotions>
 			<UnitUpgrades>
 				<UnitType>UNIT_MASTER_SAILOR_WAR_GALLEY</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iBaseUpkeep>1</iBaseUpkeep>
@@ -8494,30 +7441,12 @@
 				<UnitType>UNIT_MASTER_SAILOR_TRIREME</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_NAVAL_WARFARE</PrereqTech>
 			<ObsoleteTech>TECH_SEAFARING</ObsoleteTech>
@@ -8526,14 +7455,8 @@
 			<iBaseUpkeep>1</iBaseUpkeep>
 			<iMoves>3</iMoves>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SEA_HUNTER2</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_SEA_HUNTER2</FreePromotion>
 			</FreePromotions>
 			<TerrainImpassableTypes>
 				<TerrainType>TERRAIN_SEA_TROPICAL</TerrainType>
@@ -8625,40 +7548,19 @@
 			<bRenderBelowWater>1</bRenderBelowWater>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SEA_HUNTER2</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_SEA_HUNTER2</FreePromotion>
 			</FreePromotions>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitUpgrades>
 				<UnitType>UNIT_MASTER_SAILOR_QUINQUEREME</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_SEAFARING</PrereqTech>
 			<ObsoleteTech>TECH_SHIP_BUILDING</ObsoleteTech>
@@ -8728,22 +7630,10 @@
 				<UnitType>UNIT_MASTER_SAILOR_DECAREME</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ANCIENT_BALLISTICS</PrereqTech>
 			<ObsoleteTech>TECH_ANCIENT_MACHINERY</ObsoleteTech>
@@ -8763,14 +7653,8 @@
 			<iXPValueAttack>3</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SEA_HUNTER2</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_SEA_HUNTER2</FreePromotion>
 			</FreePromotions>
 			<iBombardRate>4</iBombardRate>
 			<DomainCargo>DOMAIN_LAND</DomainCargo>
@@ -8826,26 +7710,11 @@
 				<UnitType>UNIT_MASTER_SAILOR_GALLEASS</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ANCIENT_MACHINERY</PrereqTech>
 			<TechTypes>
@@ -8868,14 +7737,8 @@
 			<iXPValueAttack>3</iXPValueAttack>
 			<iXPValueDefense>1</iXPValueDefense>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SEA_HUNTER2</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_SEA_HUNTER2</FreePromotion>
 			</FreePromotions>
 			<DomainCargo>DOMAIN_LAND</DomainCargo>
 			<iAsset>1</iAsset>
@@ -8928,36 +7791,15 @@
 				<UnitType>UNIT_MASTER_SAILOR_SLOOP_OF_WAR</UnitType>
 			</UnitUpgrades>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SEA_HUNTER2</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_SEA_HUNTER2</FreePromotion>
 			</FreePromotions>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_GUILDS</PrereqTech>
 			<TechTypes>
@@ -9083,14 +7925,8 @@
 				<UnitType>UNIT_MASTER_SAILOR_MANOWAR</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_COMPASS</PrereqTech>
 			<ObsoleteTech>TECH_GRAND_WAR</ObsoleteTech>
@@ -9114,14 +7950,8 @@
 				</UnitDefenseMod>
 			</UnitDefenseMods>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<iBombardRate>12</iBombardRate>
 			<iAsset>3</iAsset>
@@ -9179,44 +8009,17 @@
 				<UnitType>UNIT_MASTER_SAILOR_PRE_DREADNOUGHT</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
 			</UnitAIs>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<PrereqTech>TECH_GRAND_WAR</PrereqTech>
 			<ObsoleteTech>TECH_COMBUSTION</ObsoleteTech>
@@ -9294,26 +8097,11 @@
 				<UnitType>UNIT_MASTER_SAILOR_DREADNOUGHT_SHIP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ARTILLERY</PrereqTech>
 			<TechTypes>
@@ -9394,36 +8182,15 @@
 				<UnitType>UNIT_MASTER_SAILOR_WW2_BATTLESHIP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<PrereqTech>TECH_INDUSTRIALISM</PrereqTech>
 			<TechTypes>
@@ -9501,28 +8268,13 @@
 				<UnitType>UNIT_MASTER_SAILOR_BATTLESHIP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<PrereqTech>TECH_MECHANIZED_WARFARE</PrereqTech>
 			<ObsoleteTech>TECH_SEMICONDUCTORS</ObsoleteTech>
@@ -9611,18 +8363,9 @@
 				<UnitType>UNIT_MASTER_SAILOR_FUSION_BATTLESHIP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSILE_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSILE_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_SEMICONDUCTORS</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -9632,14 +8375,8 @@
 			</PrereqBonuses>
 			<ObsoleteTech>TECH_ADVANCED_WARMACHINES</ObsoleteTech>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<iCost>-1</iCost>
 			<iMinAreaSize>10</iMinAreaSize>
@@ -9722,24 +8459,12 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ADVANCED_WARMACHINES</PrereqTech>
 			<iCost>-1</iCost>
@@ -9824,23 +8549,14 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitUpgrades>
 				<UnitType>UNIT_MASTER_SAILOR_CARRIER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_NAVAL_FLIGHT</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -9949,23 +8665,14 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitUpgrades>
 				<UnitType>UNIT_MASTER_SAILOR_NUCLEAR_CARRIER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_JET_PROPULSION</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -10074,23 +8781,14 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitUpgrades>
 				<UnitType>UNIT_MASTER_SAILOR_FUSION_CARRIER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MODERN_WARFARE</PrereqTech>
 			<BonusType>BONUS_URANIUM</BonusType>
@@ -10210,20 +8908,11 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_NAVIGATION1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
-				<FreePromotion>
-					<PromotionType>PROMOTION_LEADERSHIP</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_NAVIGATION1</FreePromotion>
+				<FreePromotion>PROMOTION_LEADERSHIP</FreePromotion>
 			</FreePromotions>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CARRIER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CARRIER_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MEGASTRUCTURE_ENGINEERING</PrereqTech>
 			<iCost>-1</iCost>
@@ -10333,14 +9022,8 @@
 				<UnitType>UNIT_MANOWAR</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -10415,22 +9098,10 @@
 			<bMechanized>1</bMechanized>
 			<bRenderBelowWater>1</bRenderBelowWater>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_SUBMARINE_WARFARE</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -10505,22 +9176,10 @@
 			<bMechanized>1</bMechanized>
 			<bRenderBelowWater>1</bRenderBelowWater>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_COAST_GUARD</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -10602,36 +9261,15 @@
 				<UnitType>UNIT_BARBARY_CORSAIR</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_PIRATE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_PIRATE_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
 			</NotUnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SMUGGLERS_SHANTY</BuildingType>
@@ -10743,26 +9381,11 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_MACHINE</FormationType>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MERCANTILISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_NATIONALIST</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_FEUDAL</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MONARCHY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_DESPOTISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_MERCANTILISM</PrereqCivic>
+				<PrereqCivic>CIVIC_NATIONALIST</PrereqCivic>
+				<PrereqCivic>CIVIC_FEUDAL</PrereqCivic>
+				<PrereqCivic>CIVIC_MONARCHY</PrereqCivic>
+				<PrereqCivic>CIVIC_DESPOTISM</PrereqCivic>
 			</PrereqOrCivics>
 		</UnitInfo>
 		<UnitInfo>
@@ -10805,36 +9428,15 @@
 				<UnitType>UNIT_PRIVATEER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_PIRATE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_PIRATE_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
 			</NotUnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SMUGGLERS_SHANTY</BuildingType>
@@ -10882,26 +9484,11 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_MACHINE</FormationType>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MERCANTILISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_NATIONALIST</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_FEUDAL</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MONARCHY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_DESPOTISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_MERCANTILISM</PrereqCivic>
+				<PrereqCivic>CIVIC_NATIONALIST</PrereqCivic>
+				<PrereqCivic>CIVIC_FEUDAL</PrereqCivic>
+				<PrereqCivic>CIVIC_MONARCHY</PrereqCivic>
+				<PrereqCivic>CIVIC_DESPOTISM</PrereqCivic>
 			</PrereqOrCivics>
 		</UnitInfo>
 		<UnitInfo>
@@ -10942,36 +9529,15 @@
 				<UnitType>UNIT_ASSAULT_SHIP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_PIRATE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_PIRATE_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
 			</NotUnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SHIPWRIGHT</BuildingType>
@@ -11019,32 +9585,14 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_MACHINE</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SENTRY</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_SENTRY</FreePromotion>
 			</FreePromotions>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MERCANTILISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_NATIONALIST</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_FEUDAL</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MONARCHY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_DESPOTISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_MERCANTILISM</PrereqCivic>
+				<PrereqCivic>CIVIC_NATIONALIST</PrereqCivic>
+				<PrereqCivic>CIVIC_FEUDAL</PrereqCivic>
+				<PrereqCivic>CIVIC_MONARCHY</PrereqCivic>
+				<PrereqCivic>CIVIC_DESPOTISM</PrereqCivic>
 			</PrereqOrCivics>
 		</UnitInfo>
 		<UnitInfo>
@@ -11083,40 +9631,16 @@
 				<UnitType>UNIT_STEALTH_DESTROYER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PIRATE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_PIRATE_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
 			</NotUnitAIs>
 			<PrereqTech>TECH_ASSEMBLY_LINE</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -11175,26 +9699,11 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_MACHINE</FormationType>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MERCANTILISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_NATIONALIST</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_FEUDAL</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MONARCHY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_DESPOTISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_MERCANTILISM</PrereqCivic>
+				<PrereqCivic>CIVIC_NATIONALIST</PrereqCivic>
+				<PrereqCivic>CIVIC_FEUDAL</PrereqCivic>
+				<PrereqCivic>CIVIC_MONARCHY</PrereqCivic>
+				<PrereqCivic>CIVIC_DESPOTISM</PrereqCivic>
 			</PrereqOrCivics>
 		</UnitInfo>
 		<UnitInfo>
@@ -11237,36 +9746,15 @@
 				<UnitType>UNIT_ATTACK_SUBMARINE</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_PIRATE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_PIRATE_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
 			</NotUnitAIs>
 			<PrereqTech>TECH_SUBMARINE_WARFARE</PrereqTech>
 			<BonusType>BONUS_STEEL_WARES</BonusType>
@@ -11309,26 +9797,11 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_MACHINE</FormationType>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MERCANTILISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_NATIONALIST</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_FEUDAL</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MONARCHY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_DESPOTISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_MERCANTILISM</PrereqCivic>
+				<PrereqCivic>CIVIC_NATIONALIST</PrereqCivic>
+				<PrereqCivic>CIVIC_FEUDAL</PrereqCivic>
+				<PrereqCivic>CIVIC_MONARCHY</PrereqCivic>
+				<PrereqCivic>CIVIC_DESPOTISM</PrereqCivic>
 			</PrereqOrCivics>
 		</UnitInfo>
 		<UnitInfo>
@@ -11370,36 +9843,15 @@
 			<bHiddenNationality>1</bHiddenNationality>
 			<bAlwaysHostile>1</bAlwaysHostile>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_PIRATE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_PIRATE_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
 			</NotUnitAIs>
 			<PrereqTech>TECH_COAST_GUARD</PrereqTech>
 			<iCost>1050</iCost>
@@ -11438,26 +9890,11 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_MACHINE</FormationType>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MERCANTILISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_NATIONALIST</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_FEUDAL</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MONARCHY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_DESPOTISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_MERCANTILISM</PrereqCivic>
+				<PrereqCivic>CIVIC_NATIONALIST</PrereqCivic>
+				<PrereqCivic>CIVIC_FEUDAL</PrereqCivic>
+				<PrereqCivic>CIVIC_MONARCHY</PrereqCivic>
+				<PrereqCivic>CIVIC_DESPOTISM</PrereqCivic>
 			</PrereqOrCivics>
 		</UnitInfo>
 		<UnitInfo>
@@ -11497,32 +9934,14 @@
 			<bHiddenNationality>1</bHiddenNationality>
 			<bAlwaysHostile>1</bAlwaysHostile>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_PIRATE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_PIRATE_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
 			</NotUnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_REMOTE_NAVAL_TRAINING_CENTER</BuildingType>
@@ -11569,32 +9988,14 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_MACHINE</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SENTRY</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_SENTRY</FreePromotion>
 			</FreePromotions>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MERCANTILISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_NATIONALIST</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_FEUDAL</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MONARCHY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_DESPOTISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_MERCANTILISM</PrereqCivic>
+				<PrereqCivic>CIVIC_NATIONALIST</PrereqCivic>
+				<PrereqCivic>CIVIC_FEUDAL</PrereqCivic>
+				<PrereqCivic>CIVIC_MONARCHY</PrereqCivic>
+				<PrereqCivic>CIVIC_DESPOTISM</PrereqCivic>
 			</PrereqOrCivics>
 		</UnitInfo>
 		<UnitInfo>
@@ -11627,10 +10028,7 @@
 			<Advisor>ADVISOR_GROWTH</Advisor>
 			<bRivalTerritory>1</bRivalTerritory>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_MERCHANT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_MERCHANT</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iBaseUpkeep>1</iBaseUpkeep>
@@ -11763,18 +10161,9 @@
 				<UnitType>UNIT_CARRACK_MERCHANT</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MERCHANT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_MERCHANT</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<ObsoleteTech>TECH_ASTROLABE</ObsoleteTech>
 			<PrereqTech>TECH_WRITING</PrereqTech>
@@ -11890,14 +10279,8 @@
 				<UnitType>UNIT_CLIPPER_MERCHANT</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_MERCHANT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_MERCHANT</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<ObsoleteTech>TECH_CHEMISTRY</ObsoleteTech>
 			<PrereqAndBuildings>
@@ -11973,14 +10356,8 @@
 				<UnitType>UNIT_LIBERTY_MERCHANT</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_MERCHANT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_MERCHANT</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<ObsoleteTech>TECH_SUBMARINE_WARFARE</ObsoleteTech>
 			<PrereqAndBuildings>
@@ -12055,14 +10432,8 @@
 				<UnitType>UNIT_CARGO_SHIP</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_MERCHANT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_MERCHANT</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<ObsoleteTech>TECH_CONGLOMERATES</ObsoleteTech>
 			<PrereqTech>TECH_SUBMARINE_WARFARE</PrereqTech>
@@ -12136,14 +10507,8 @@
 			<bMechanized>1</bMechanized>
 			<bRenderBelowWater>1</bRenderBelowWater>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_MERCHANT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_MERCHANT</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_CONGLOMERATES</PrereqTech>
 			<TechTypes>
@@ -12235,18 +10600,9 @@
 				<UnitType>UNIT_HOSPITAL_SHIP_2</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_HEALER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_HEALER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PROPERTY_CONTROL_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_HEALER</UnitAI>
+				<UnitAI>UNITAI_HEALER_SEA</UnitAI>
+				<UnitAI>UNITAI_PROPERTY_CONTROL_SEA</UnitAI>
 			</UnitAIs>
 			<TrainCondition>
 				<Or>
@@ -12371,14 +10727,8 @@
 				</HealUnitCombatType>
 			</HealUnitCombatTypes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_HEALER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PROPERTY_CONTROL_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_HEALER_SEA</UnitAI>
+				<UnitAI>UNITAI_PROPERTY_CONTROL_SEA</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_NAVAL_YARD</BuildingType>

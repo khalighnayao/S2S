@@ -28,8 +28,6 @@ public:
 
 	// Arrays
 
-	bool isCarrierUnitAIType(int i) const;
-
 	int getCombatPercent() const;
 	int getWithdrawalChange() const;
 
@@ -49,9 +47,6 @@ protected:
 
 	int m_iCombatPercent;
 	int m_iWithdrawalChange;
-
-	// Arrays
-	bool* m_pbCarrierUnitAITypes;
 };
 
 #endif // CV_SPECIAL_UNIT_INFO_H

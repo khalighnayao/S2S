@@ -749,10 +749,7 @@
 			<Civilopedia>TXT_KEY_BUILDING_FOLKLORE_ANIMAL_PEDIA</Civilopedia>
 			<Advisor>ADVISOR_MILITARY</Advisor>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_CAVES</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_CAVES</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqOrHeritage>
 				<Type>HERITAGE_FOLKLORE_LION_CAVE</Type>
@@ -2419,10 +2416,7 @@
 			<Civilopedia>TXT_KEY_BUILDING_FOLKLORE_ANIMAL_PEDIA</Civilopedia>
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqOrHeritage>
 				<Type>HERITAGE_FOLKLORE_WOLF_DIRE</Type>
@@ -2757,14 +2751,8 @@
 			<Civilopedia>TXT_KEY_BUILDING_FOLKLORE_ANIMAL_PEDIA</Civilopedia>
 			<Advisor>ADVISOR_SCIENCE</Advisor>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_OASIS</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_VERY_TALL_GRASS</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_OASIS</PrereqFeature>
+				<PrereqFeature>FEATURE_VERY_TALL_GRASS</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqOrHeritage>
 				<Type>HERITAGE_FOLKLORE_PROCOPTODON</Type>
@@ -3209,14 +3197,8 @@
 			<Civilopedia>TXT_KEY_BUILDING_FOLKLORE_ANIMAL_PEDIA</Civilopedia>
 			<Advisor>ADVISOR_MILITARY</Advisor>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_CAVES</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_CAVES</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
 			</PrereqOrFeature>
 			<PrereqOrHeritage>
 				<Type>HERITAGE_FOLKLORE_THYLACINE</Type>
@@ -3588,30 +3570,12 @@
 				<BuildingType>BUILDING_FOLKLORE_REQUIREMENT</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_CORAL_REEF</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_CORAL_REEF_BEACON</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_CORAL_REEF_LIGHTHOUSE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_PLATY_GREAT_BARRIER</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_GREAT_BARRIER_REEF_BEACON</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_GREAT_BARRIER_REEF_LIGHTHOUSE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_CORAL_REEF</PrereqFeature>
+				<PrereqFeature>FEATURE_CORAL_REEF_BEACON</PrereqFeature>
+				<PrereqFeature>FEATURE_CORAL_REEF_LIGHTHOUSE</PrereqFeature>
+				<PrereqFeature>FEATURE_PLATY_GREAT_BARRIER</PrereqFeature>
+				<PrereqFeature>FEATURE_GREAT_BARRIER_REEF_BEACON</PrereqFeature>
+				<PrereqFeature>FEATURE_GREAT_BARRIER_REEF_LIGHTHOUSE</PrereqFeature>
 			</PrereqOrFeature>
 			<bAutoBuild>1</bAutoBuild>
 			<bNukeImmune>1</bNukeImmune>
@@ -3629,18 +3593,9 @@
 				<BuildingType>BUILDING_FOLKLORE_REQUIREMENT</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_CRATER</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_PLATY_BARRINGER_CRATER</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_PLATY_NGORONGORO_CRATER</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_CRATER</PrereqFeature>
+				<PrereqFeature>FEATURE_PLATY_BARRINGER_CRATER</PrereqFeature>
+				<PrereqFeature>FEATURE_PLATY_NGORONGORO_CRATER</PrereqFeature>
 			</PrereqOrFeature>
 			<bAutoBuild>1</bAutoBuild>
 			<bNukeImmune>1</bNukeImmune>
@@ -3683,10 +3638,7 @@
 				<BuildingType>BUILDING_FOLKLORE_REQUIREMENT</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_OASIS</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_OASIS</PrereqFeature>
 			</PrereqOrFeature>
 			<bAutoBuild>1</bAutoBuild>
 			<bNukeImmune>1</bNukeImmune>
@@ -3704,82 +3656,25 @@
 				<BuildingType>BUILDING_FOLKLORE_REQUIREMENT</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_POLAR_ROCK_ARCH</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_POLAR_ROCK_ARCH2</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_POLAR_ROCK_FORM1</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_POLAR_ROCK_FORM2</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_POLAR_ROCK_FORM3</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_POLAR_ROCK_FORM4</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_DARK_ROCK_ARCH</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_DARK_ROCK_ARCH2</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_DARK_ROCK_FORM1</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_DARK_ROCK_FORM2</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_DARK_ROCK_FORM3</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_DARK_ROCK_FORM4</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_ROCK_ARCH</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_ROCK_ARCH2</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_ROCK_FORM1</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_ROCK_FORM2</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_ROCK_FORM3</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_ROCK_FORM4</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_PLATY_DEVILS_TABLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_POLAR_ROCK_ARCH</PrereqFeature>
+				<PrereqFeature>FEATURE_POLAR_ROCK_ARCH2</PrereqFeature>
+				<PrereqFeature>FEATURE_POLAR_ROCK_FORM1</PrereqFeature>
+				<PrereqFeature>FEATURE_POLAR_ROCK_FORM2</PrereqFeature>
+				<PrereqFeature>FEATURE_POLAR_ROCK_FORM3</PrereqFeature>
+				<PrereqFeature>FEATURE_POLAR_ROCK_FORM4</PrereqFeature>
+				<PrereqFeature>FEATURE_DARK_ROCK_ARCH</PrereqFeature>
+				<PrereqFeature>FEATURE_DARK_ROCK_ARCH2</PrereqFeature>
+				<PrereqFeature>FEATURE_DARK_ROCK_FORM1</PrereqFeature>
+				<PrereqFeature>FEATURE_DARK_ROCK_FORM2</PrereqFeature>
+				<PrereqFeature>FEATURE_DARK_ROCK_FORM3</PrereqFeature>
+				<PrereqFeature>FEATURE_DARK_ROCK_FORM4</PrereqFeature>
+				<PrereqFeature>FEATURE_ROCK_ARCH</PrereqFeature>
+				<PrereqFeature>FEATURE_ROCK_ARCH2</PrereqFeature>
+				<PrereqFeature>FEATURE_ROCK_FORM1</PrereqFeature>
+				<PrereqFeature>FEATURE_ROCK_FORM2</PrereqFeature>
+				<PrereqFeature>FEATURE_ROCK_FORM3</PrereqFeature>
+				<PrereqFeature>FEATURE_ROCK_FORM4</PrereqFeature>
+				<PrereqFeature>FEATURE_PLATY_DEVILS_TABLE</PrereqFeature>
 			</PrereqOrFeature>
 			<bAutoBuild>1</bAutoBuild>
 			<bNukeImmune>1</bNukeImmune>
@@ -3797,18 +3692,9 @@
 				<BuildingType>BUILDING_FOLKLORE_REQUIREMENT</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_REEF</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_REEF_BEACON</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_REEF_LIGHTHOUSE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_REEF</PrereqFeature>
+				<PrereqFeature>FEATURE_REEF_BEACON</PrereqFeature>
+				<PrereqFeature>FEATURE_REEF_LIGHTHOUSE</PrereqFeature>
 			</PrereqOrFeature>
 			<bAutoBuild>1</bAutoBuild>
 			<bNukeImmune>1</bNukeImmune>
@@ -3826,30 +3712,12 @@
 				<BuildingType>BUILDING_FOLKLORE_REQUIREMENT</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_VOLCANO_ACTIVE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_VOLCANO_DORMANT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_PLATY_FUJI</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_PLATY_SOPKA</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_PLATY_KRAKATOA</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_PLATY_KILIMANJARO</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_VOLCANO_ACTIVE</PrereqFeature>
+				<PrereqFeature>FEATURE_VOLCANO_DORMANT</PrereqFeature>
+				<PrereqFeature>FEATURE_PLATY_FUJI</PrereqFeature>
+				<PrereqFeature>FEATURE_PLATY_SOPKA</PrereqFeature>
+				<PrereqFeature>FEATURE_PLATY_KRAKATOA</PrereqFeature>
+				<PrereqFeature>FEATURE_PLATY_KILIMANJARO</PrereqFeature>
 			</PrereqOrFeature>
 			<bAutoBuild>1</bAutoBuild>
 			<bNukeImmune>1</bNukeImmune>
@@ -3883,14 +3751,8 @@
 				<BuildingType>BUILDING_FOLKLORE_REQUIREMENT</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_HILL</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PEAK</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_HILL</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PEAK</PrereqTerrain>
 			</PrereqOrTerrain>
 			<bAutoBuild>1</bAutoBuild>
 			<bNukeImmune>1</bNukeImmune>

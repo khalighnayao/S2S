@@ -41,10 +41,7 @@
 			<Civilopedia>TXT_KEY_UNIT_CONSTRUCTION_SHIP_PEDIA</Civilopedia>
 			<Advisor>ADVISOR_GROWTH</Advisor>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_LUNAR_HABITATION_COMPLEX</BuildType>
@@ -115,14 +112,8 @@
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
 			<bMechanized>1</bMechanized>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_EXPLORE</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_EFFECT_LAUNCH_SITE</BuildingType>
@@ -268,10 +259,7 @@
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<bFood>1</bFood>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_SETTLE</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_CISLUNAR_FACTORY</BuildingType>
@@ -363,10 +351,7 @@
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<bFood>1</bFood>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_SETTLE</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_CISLUNAR_FACTORY</BuildingType>
@@ -465,10 +450,7 @@
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<bFood>1</bFood>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_SETTLE</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_CISLUNAR_FACTORY</BuildingType>
@@ -581,10 +563,7 @@
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<bFood>1</bFood>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_SETTLE</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_CISLUNAR_SPACEPORT</BuildingType>
@@ -673,10 +652,7 @@
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<bFood>1</bFood>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_SETTLE</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_DEEP_SPACE_SPACECRAFT_FACTORY</BuildingType>
@@ -779,10 +755,7 @@
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<bFood>1</bFood>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_SETTLE</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_INTERSTELLAR_STARPORT</BuildingType>
@@ -892,10 +865,7 @@
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<bFood>1</bFood>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_SETTLE</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_INTERSTELLAR_WORMHOLE_TRADING_POST</BuildingType>
@@ -987,10 +957,7 @@
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<bFood>1</bFood>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_SETTLE</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_INTERGALACTIC_MORRIS_THORNE_WORMHOLE</BuildingType>
@@ -1083,10 +1050,7 @@
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<bFood>1</bFood>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_SETTLE</UnitAI>
 			</UnitAIs>
 			<PrereqOrBuildings>
 				<BuildingType>BUILDING_INTERGALACTIC_TEMPORAL_RIFT</BuildingType>
@@ -1172,10 +1136,7 @@
 			<bCanMoveAllTerrain>1</bCanMoveAllTerrain>
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_DEEP_SPACE_SPACECRAFT_FACTORY</BuildingType>
@@ -1224,10 +1185,7 @@
 			<bCanMoveAllTerrain>1</bCanMoveAllTerrain>
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_CISLUNAR_DRYDOCK</BuildingType>
@@ -1276,10 +1234,7 @@
 			<bCanMoveAllTerrain>1</bCanMoveAllTerrain>
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SPACE_COLONY_INTERSTELLAR_MOTHERSHIP</BuildingType>
@@ -1328,10 +1283,7 @@
 			<bCanMoveAllTerrain>1</bCanMoveAllTerrain>
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_INTERSTELLAR_DEFENSIVE_PERIMETER</BuildingType>
@@ -1394,10 +1346,7 @@
 			<bCanMoveAllTerrain>1</bCanMoveAllTerrain>
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_INTERGALACTIC_ELECTROWEAK_STAR_BASE</BuildingType>
@@ -1470,10 +1419,7 @@
 			<bIgnoreBuildingDefense>1</bIgnoreBuildingDefense>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_CISLUNAR_FACTORY</BuildingType>
@@ -1547,10 +1493,7 @@
 			<bIgnoreBuildingDefense>1</bIgnoreBuildingDefense>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_DEEP_SPACE_MAGLEV</BuildingType>
@@ -1587,10 +1530,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_RANGED</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_BLITZ</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_BLITZ</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<UnitInfo>
@@ -1630,10 +1570,7 @@
 			<bIgnoreBuildingDefense>1</bIgnoreBuildingDefense>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SPACE_COLONY_INTERSTELLAR_MOTHERSHIP</BuildingType>
@@ -1670,10 +1607,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_RANGED</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_BLITZ</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_BLITZ</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<UnitInfo>
@@ -1712,10 +1646,7 @@
 			<bIgnoreBuildingDefense>1</bIgnoreBuildingDefense>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_LUNAR_MANUFACTURING_PLANT</BuildingType>
@@ -1752,10 +1683,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_RANGED</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_BLITZ</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_BLITZ</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<UnitInfo>
@@ -1794,10 +1722,7 @@
 			<bIgnoreBuildingDefense>1</bIgnoreBuildingDefense>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_MARTIAN_ELECTRONICS_FACTORY</BuildingType>
@@ -1834,10 +1759,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_RANGED</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_BLITZ</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_BLITZ</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<UnitInfo>
@@ -1876,10 +1798,7 @@
 			<bIgnoreBuildingDefense>1</bIgnoreBuildingDefense>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_SPACE_COLONY_VENUS</BuildingType>
@@ -1916,10 +1835,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_RANGED</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_BLITZ</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_BLITZ</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<UnitInfo>
@@ -1958,10 +1874,7 @@
 			<bIgnoreBuildingDefense>1</bIgnoreBuildingDefense>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_KUIPER_BELT_EXPLORATION</PrereqTech>
 			<iCost>4850</iCost>
@@ -1995,10 +1908,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_RANGED</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_BLITZ</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_BLITZ</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<UnitInfo>
@@ -2038,10 +1948,7 @@
 			<bIgnoreBuildingDefense>1</bIgnoreBuildingDefense>
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ENDOGENOUS_EUCLIDEAN_PROPULSION</PrereqTech>
 			<iCost>4850</iCost>
@@ -2075,10 +1982,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_RANGED</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_BLITZ</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_BLITZ</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<UnitInfo>
@@ -2106,10 +2010,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_PLANETARY_MAGLEV</BuildType>
@@ -2174,10 +2075,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_PLANETARY_MAGLEV</BuildType>
@@ -2236,10 +2134,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_ORBITAL_TRAJECTORY</BuildType>
@@ -2299,10 +2194,7 @@
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<bCanMoveImpassable>1</bCanMoveImpassable>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_SOLAR_TRAJECTORY</BuildType>
@@ -2358,10 +2250,7 @@
 			<bFood>1</bFood>
 			<bFound>1</bFound>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_SETTLE</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_MARTIAN_FACTORY</BuildingType>
@@ -2412,10 +2301,7 @@
 			<bFood>1</bFood>
 			<bFound>1</bFound>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_SETTLE</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_VENUS_CARBONWORKS</BuildingType>
@@ -2479,10 +2365,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_SPACE_SOLAR_ARRAY</BuildType>
@@ -2589,10 +2472,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_SPACE_SOLAR_ARRAY</BuildType>
@@ -2711,10 +2591,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_COMPACT_WORMHOLE</BuildType>
@@ -2835,10 +2712,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_MEGAWORMHOLE</BuildType>
@@ -2983,10 +2857,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_HYPERLANE</BuildType>
@@ -3083,10 +2954,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_COMMERCIAL_SPACEPORT</BuildingType>
@@ -3148,10 +3016,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_MAGLEV_LAUNCHER</BuildingType>
@@ -3215,10 +3080,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_STARPORT</BuildingType>
@@ -3284,10 +3146,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_STARPORT</BuildingType>
@@ -3355,10 +3214,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_GALACTIC_PORT</BuildingType>
@@ -3426,10 +3282,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_GALACTIC_PORT</BuildingType>
@@ -3500,10 +3353,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_MICRO_WORMHOLE</BuildingType>
@@ -3585,10 +3435,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_INTERSTELLAR_WORLDHOUSE</BuildingType>
@@ -3677,10 +3524,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_LIFE_CHIRAL_FLEXIBLE</BuildingType>
@@ -3734,10 +3578,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_HYPERFACTORY</BuildingType>
@@ -3807,10 +3648,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Actions>
 				<Action>
@@ -3942,10 +3780,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_EFFECT_LAUNCH_SITE</BuildingType>
@@ -4124,10 +3959,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Actions>
 				<Action>
@@ -4742,10 +4574,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Actions>
 				<Action>
@@ -4938,10 +4767,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Actions>
 				<Action>
@@ -5098,10 +4924,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Actions>
 				<Action>
@@ -5225,10 +5048,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Actions>
 				<Action>
@@ -5319,10 +5139,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Actions>
 				<Action>
@@ -5448,10 +5265,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_COMMERCIAL_SPACEPORT</BuildingType>
@@ -5617,10 +5431,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_PLACE_ASTEROID</BuildType>
@@ -5692,10 +5503,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_PLACE_ASTEROID</BuildType>
@@ -5778,10 +5586,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_WORMHOLE</BuildType>
@@ -5853,10 +5658,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_SATELLITES</PrereqTech>
 			<Buildings>
@@ -5930,10 +5732,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_SPACE_STATIONS</PrereqTech>
 			<Buildings>
@@ -6004,10 +5803,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_SPACE_TOURISM</PrereqTech>
 			<Buildings>
@@ -6080,10 +5876,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ASTEROID_MINING</PrereqTech>
 			<Buildings>
@@ -6158,10 +5951,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ION_PROPULSION</PrereqTech>
 			<Buildings>
@@ -6236,10 +6026,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_LUNAR_EXPLORATION</PrereqTech>
 			<Buildings>
@@ -6313,10 +6100,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_SOLAR_PROPULSION</PrereqTech>
 			<Buildings>
@@ -6392,10 +6176,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_JOVIAN_EXPLORATION</PrereqTech>
 			<Buildings>
@@ -6466,10 +6247,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MAGNETIC_SAILS</PrereqTech>
 			<Actions>
@@ -6543,10 +6321,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ASTROGATION_CONSTELLATION</PrereqTech>
 			<Buildings>
@@ -6624,10 +6399,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ACNP_PROPULSION</PrereqTech>
 			<Buildings>
@@ -6705,10 +6477,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_FOLDING_SPACE</PrereqTech>
 			<Buildings>
@@ -6779,10 +6548,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_PLANETARY_EXPLORATION</PrereqTech>
 			<Buildings>
@@ -6852,10 +6618,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_PLANETARY_EXPLORATION</PrereqTech>
 			<Buildings>
@@ -6925,10 +6688,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_PLANETARY_EXPLORATION</PrereqTech>
 			<Buildings>
@@ -6999,10 +6759,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ION_PROPULSION</PrereqTech>
 			<Buildings>
@@ -7072,10 +6829,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_PLANETARY_EXPLORATION</PrereqTech>
 			<Buildings>
@@ -7145,10 +6899,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_JOVIAN_EXPLORATION</PrereqTech>
 			<Buildings>
@@ -7219,10 +6970,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_PLANETARY_EXPLORATION</PrereqTech>
 			<Buildings>
@@ -7292,10 +7040,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_JOVIAN_EXPLORATION</PrereqTech>
 			<Buildings>
@@ -7365,10 +7110,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_PLANETARY_EXPLORATION</PrereqTech>
 			<Buildings>
@@ -7439,10 +7181,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_PLANETARY_EXPLORATION</PrereqTech>
 			<Buildings>
@@ -7513,10 +7252,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ION_PROPULSION</PrereqTech>
 			<Buildings>
@@ -7588,10 +7324,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MAGNETIC_SAILS</PrereqTech>
 			<Buildings>
@@ -7663,10 +7396,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MOLECULAR_SCANNING</PrereqTech>
 			<Actions>
@@ -7734,10 +7464,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ASTROGATION_CONSTELLATION</PrereqTech>
 			<Actions>
@@ -7805,10 +7532,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_QUANTUM_RAMJET</PrereqTech>
 			<Actions>
@@ -7876,10 +7600,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ENDLESS_EXPLORATION</PrereqTech>
 			<Actions>
@@ -7947,10 +7668,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_MULTIVERSE_TRAVERSAL</PrereqTech>
 			<Actions>
@@ -8018,10 +7736,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ASTROIMPERIALISM</PrereqTech>
 			<Actions>
@@ -8089,10 +7804,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_PROTOTYPED_PATHOGENS</PrereqTech>
 			<Actions>
@@ -8160,10 +7872,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_PLANET_SCOUTING</PrereqTech>
 			<Actions>
@@ -8238,10 +7947,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ANTIMATTER_ROCKETS</PrereqTech>
 			<Buildings>
@@ -8314,10 +8020,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_LUNAR_PATH</BuildType>
@@ -8371,10 +8074,7 @@
 			<Advisor>ADVISOR_ECONOMY</Advisor>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<Builds>
 				<BuildType>BUILD_LUNAR_PATH</BuildType>

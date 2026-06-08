@@ -44,9 +44,6 @@ CvBonusInfo::CvBonusInfo() :
 	, m_bNormalize(false)
 	, m_piYieldChange(NULL)
 	, m_piImprovementChange(NULL)
-	, m_pbTerrain(NULL)
-	, m_pbFeature(NULL)
-	, m_pbFeatureTerrain(NULL)
 	, m_bPeaks(false)
 	, m_PropertyManipulators()
 	, m_tradeProvidingImprovements(NULL)
@@ -63,9 +60,6 @@ CvBonusInfo::~CvBonusInfo()
 {
 	SAFE_DELETE_ARRAY(m_piYieldChange);
 	SAFE_DELETE_ARRAY(m_piImprovementChange);
-	SAFE_DELETE_ARRAY(m_pbTerrain);
-	SAFE_DELETE_ARRAY(m_pbFeature);
-	SAFE_DELETE_ARRAY(m_pbFeatureTerrain);	// free memory - MT
 }
 
 int CvBonusInfo::getBonusClassType() const
@@ -245,19 +239,19 @@ int CvBonusInfo::getImprovementChange(int i) const
 bool CvBonusInfo::isTerrain(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumTerrainInfos(), i);
-	return m_pbTerrain ? m_pbTerrain[i] : false;
+	return algo::any_of_equal(m_aeTerrain, static_cast<TerrainTypes>(i));
 }
 
 bool CvBonusInfo::isFeature(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumFeatureInfos(), i);
-	return m_pbFeature ? m_pbFeature[i] : false;
+	return algo::any_of_equal(m_aeFeature, static_cast<FeatureTypes>(i));
 }
 
 bool CvBonusInfo::isFeatureTerrain(int i) const
 {
 	FASSERT_BOUNDS(0, GC.getNumTerrainInfos(), i);
-	return m_pbFeatureTerrain ? m_pbFeatureTerrain[i] : false;
+	return algo::any_of_equal(m_aeFeatureTerrain, static_cast<TerrainTypes>(i));
 }
 
 int CvBonusInfo::getCategory(int i) const
@@ -344,9 +338,9 @@ void CvBonusInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_bNormalize);
 	CheckSumI(iSum, NUM_YIELD_TYPES, m_piYieldChange);
 	CheckSumI(iSum, GC.getNumImprovementInfos(), m_piImprovementChange);
-	CheckSumI(iSum, GC.getNumTerrainInfos(), m_pbTerrain);
-	CheckSumI(iSum, GC.getNumFeatureInfos(), m_pbFeature);
-	CheckSumI(iSum, GC.getNumTerrainInfos(), m_pbFeatureTerrain);
+	CheckSumC(iSum, m_aeTerrain);
+	CheckSumC(iSum, m_aeFeature);
+	CheckSumC(iSum, m_aeFeatureTerrain);
 	CheckSumC(iSum, m_aeMapCategoryTypes);
 	CheckSum(iSum, m_bPeaks);
 
@@ -425,9 +419,9 @@ bool CvBonusInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_bNormalize, L"bNormalize");
 	pXML->GetOptionalChildXmlValByName(&m_bPeaks, L"bPeaks");
 
-	pXML->SetVariableListTagPair(&m_pbTerrain, L"TerrainBooleans", GC.getNumTerrainInfos());
-	pXML->SetVariableListTagPair(&m_pbFeature, L"FeatureBooleans", GC.getNumFeatureInfos());
-	pXML->SetVariableListTagPair(&m_pbFeatureTerrain, L"FeatureTerrainBooleans", GC.getNumTerrainInfos());
+	pXML->SetOptionalVector(&m_aeTerrain, L"TerrainBooleans");
+	pXML->SetOptionalVector(&m_aeFeature, L"FeatureBooleans");
+	pXML->SetOptionalVector(&m_aeFeatureTerrain, L"FeatureTerrainBooleans");
 	pXML->SetOptionalVector(&m_aeMapCategoryTypes, L"MapCategoryTypes");
 	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
 
@@ -491,36 +485,9 @@ void CvBonusInfo::copyNonDefaults(const CvBonusInfo* pClassInfo)
 	if (isNoRiverSide() == bDefault) m_bNoRiverSide = pClassInfo->isNoRiverSide();
 	if (isNormalize() == bDefault) m_bNormalize = pClassInfo->isNormalize();
 
-	for (int i = 0; i < GC.getNumTerrainInfos(); i++)
-	{
-		if (isTerrain(i) == bDefault && pClassInfo->isTerrain(i) != bDefault)
-		{
-			if (NULL == m_pbTerrain)
-			{
-				CvXMLLoadUtility::InitList(&m_pbTerrain, GC.getNumTerrainInfos(), bDefault);
-			}
-			m_pbTerrain[i] = pClassInfo->isTerrain(i);
-		}
-		if (isFeatureTerrain(i) == bDefault && pClassInfo->isFeatureTerrain(i) != bDefault)
-		{
-			if (NULL == m_pbFeatureTerrain)
-			{
-				CvXMLLoadUtility::InitList(&m_pbFeatureTerrain, GC.getNumTerrainInfos(), bDefault);
-			}
-			m_pbFeatureTerrain[i] = pClassInfo->isFeatureTerrain(i);
-		}
-	}
-	for (int i = 0; i < GC.getNumFeatureInfos(); i++)
-	{
-		if (isFeature(i) == bDefault && pClassInfo->isFeature(i) != bDefault)
-		{
-			if (NULL == m_pbFeature)
-			{
-				CvXMLLoadUtility::InitList(&m_pbFeature, GC.getNumFeatureInfos(), bDefault);
-			}
-			m_pbFeature[i] = pClassInfo->isFeature(i);
-		}
-	}
+	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeTerrain, pClassInfo->m_aeTerrain);
+	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeFeatureTerrain, pClassInfo->m_aeFeatureTerrain);
+	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeFeature, pClassInfo->m_aeFeature);
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeMapCategoryTypes, pClassInfo->getMapCategories());
 	if (isPeaks() == bDefault) m_bPeaks = pClassInfo->isPeaks();
 

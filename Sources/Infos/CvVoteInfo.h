@@ -69,8 +69,8 @@ protected:
 
 	// Arrays
 
-	bool* m_pbForceCivic;
-	bool* m_abVoteSourceTypes;
+	std::vector<CivicTypes> m_aeForceCivic;
+	std::vector<VoteSourceTypes> m_aeVoteSourceTypes;
 
 };
 

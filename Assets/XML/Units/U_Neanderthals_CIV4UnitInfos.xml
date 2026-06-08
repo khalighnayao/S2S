@@ -29,14 +29,8 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
 			</UnitAIs>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -103,10 +97,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
 			</UnitAIs>
 			<bAlwaysHostile>1</bAlwaysHostile>
 			<bHiddenNationality>1</bHiddenNationality>
@@ -175,26 +166,11 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_COUNTER</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -269,26 +245,11 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_COUNTER</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
 			</UnitAIs>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -376,18 +337,9 @@
 			</SubCombatTypes>
 			<DefaultUnitAI>UNITAI_CITY_DEFENSE</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -475,18 +427,9 @@
 			</SubCombatTypes>
 			<DefaultUnitAI>UNITAI_PROPERTY_CONTROL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_PROPERTY_CONTROL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_INVESTIGATOR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SEE_INVISIBLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_PROPERTY_CONTROL</UnitAI>
+				<UnitAI>UNITAI_INVESTIGATOR</UnitAI>
+				<UnitAI>UNITAI_SEE_INVISIBLE</UnitAI>
 			</UnitAIs>
 			<bNoCapture>1</bNoCapture>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
@@ -495,16 +438,10 @@
 			<bMilitaryTrade>1</bMilitaryTrade>
 			<bPassage>1</bPassage>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_CRIMINAL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_CRIMINAL</UnitCombatTarget>
 			</UnitCombatTargets>
 			<UnitCombatDefenders>
-				<UnitCombatDefender>
-					<UnitCombatDefenderType>UNITCOMBAT_CRIMINAL</UnitCombatDefenderType>
-					<bUnitCombatDefender>1</bUnitCombatDefender>
-				</UnitCombatDefender>
+				<UnitCombatDefender>UNITCOMBAT_CRIMINAL</UnitCombatDefender>
 			</UnitCombatDefenders>
 			<VisibilityIntensityTypes>
 				<VisibilityIntensityType>
@@ -513,10 +450,7 @@
 				</VisibilityIntensityType>
 			</VisibilityIntensityTypes>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SENTRY</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_SENTRY</FreePromotion>
 			</FreePromotions>
 			<PrereqTech>TECH_DECEPTION</PrereqTech>
 			<PrereqAndBuildings>
@@ -609,18 +543,9 @@
 			</SubCombatTypes>
 			<DefaultUnitAI>UNITAI_PROPERTY_CONTROL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_PROPERTY_CONTROL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_INVESTIGATOR</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SEE_INVISIBLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_PROPERTY_CONTROL</UnitAI>
+				<UnitAI>UNITAI_INVESTIGATOR</UnitAI>
+				<UnitAI>UNITAI_SEE_INVISIBLE</UnitAI>
 			</UnitAIs>
 			<bNoCapture>1</bNoCapture>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
@@ -635,22 +560,13 @@
 				</VisibilityIntensityType>
 			</VisibilityIntensityTypes>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_CRIMINAL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_CRIMINAL</UnitCombatTarget>
 			</UnitCombatTargets>
 			<UnitCombatDefenders>
-				<UnitCombatDefender>
-					<UnitCombatDefenderType>UNITCOMBAT_CRIMINAL</UnitCombatDefenderType>
-					<bUnitCombatDefender>1</bUnitCombatDefender>
-				</UnitCombatDefender>
+				<UnitCombatDefender>UNITCOMBAT_CRIMINAL</UnitCombatDefender>
 			</UnitCombatDefenders>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_SENTRY</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_SENTRY</FreePromotion>
 			</FreePromotions>
 			<PrereqTech>TECH_CONDUCT</PrereqTech>
 			<PrereqAndBuildings>
@@ -744,22 +660,10 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_EXPLORE</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_HUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_HUNTER_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_EXPLORE</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
+				<UnitAI>UNITAI_HUNTER</UnitAI>
+				<UnitAI>UNITAI_HUNTER_ESCORT</UnitAI>
 			</UnitAIs>
 			<bBarbCoExist>1</bBarbCoExist>
 			<bBlendIntoCity>1</bBlendIntoCity>
@@ -827,10 +731,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_WORKER</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</UnitAIs>
 			<bFood>1</bFood>
 			<bWorkerTrade>1</bWorkerTrade>
@@ -916,14 +817,8 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_PROPERTY_CONTROL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_HEALER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PROPERTY_CONTROL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_HEALER</UnitAI>
+				<UnitAI>UNITAI_PROPERTY_CONTROL</UnitAI>
 			</UnitAIs>
 			<bMilitaryProduction>1</bMilitaryProduction>
 			<bMilitaryTrade>1</bMilitaryTrade>
@@ -1027,14 +922,8 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_PROPERTY_CONTROL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_HEALER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PROPERTY_CONTROL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_HEALER</UnitAI>
+				<UnitAI>UNITAI_PROPERTY_CONTROL</UnitAI>
 			</UnitAIs>
 			<bMilitaryProduction>1</bMilitaryProduction>
 			<bMilitaryTrade>1</bMilitaryTrade>
@@ -1137,14 +1026,8 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_HEALER</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_HEALER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PROPERTY_CONTROL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_HEALER</UnitAI>
+				<UnitAI>UNITAI_PROPERTY_CONTROL</UnitAI>
 			</UnitAIs>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -1262,22 +1145,10 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_PILLAGE_COUNTER</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_HUNTER_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SEE_INVISIBLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CITY_COUNTER</UnitAI>
+				<UnitAI>UNITAI_PILLAGE_COUNTER</UnitAI>
+				<UnitAI>UNITAI_HUNTER_ESCORT</UnitAI>
+				<UnitAI>UNITAI_SEE_INVISIBLE</UnitAI>
 			</UnitAIs>
 			<bIgnoreTerrainCost>1</bIgnoreTerrainCost>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -1356,10 +1227,7 @@
 			</SubCombatTypes>
 			<DefaultUnitAI>UNITAI_PROPERTY_CONTROL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_PROPERTY_CONTROL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_PROPERTY_CONTROL</UnitAI>
 			</UnitAIs>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
@@ -1426,22 +1294,10 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_EXPLORE_SEA</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SEE_INVISIBLE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_EXPLORE_SEA</UnitAI>
+				<UnitAI>UNITAI_SEE_INVISIBLE_SEA</UnitAI>
 			</UnitAIs>
 			<bNoBadGoodies>1</bNoBadGoodies>
 			<bRivalTerritory>1</bRivalTerritory>
@@ -1541,18 +1397,9 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ATTACK_SEA</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
 			</UnitAIs>
 			<bMilitarySupport>1</bMilitarySupport>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -1643,26 +1490,11 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ATTACK_SEA</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<bMilitarySupport>1</bMilitarySupport>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -1771,22 +1603,10 @@
 			</TerrainImpassableTypes>
 			<DefaultUnitAI>UNITAI_ASSAULT_SEA</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SETTLER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_MISSIONARY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SPY_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
+				<UnitAI>UNITAI_SETTLER_SEA</UnitAI>
+				<UnitAI>UNITAI_MISSIONARY_SEA</UnitAI>
+				<UnitAI>UNITAI_SPY_SEA</UnitAI>
 			</UnitAIs>
 			<bMilitarySupport>1</bMilitarySupport>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -1870,28 +1690,13 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_WORKER_SEA</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER_SEA</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ASSAULT_SEA</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ESCORT_SEA</UnitAI>
+				<UnitAI>UNITAI_RESERVE_SEA</UnitAI>
+				<UnitAI>UNITAI_ATTACK_SEA</UnitAI>
+				<UnitAI>UNITAI_ASSAULT_SEA</UnitAI>
 			</NotUnitAIs>
 			<bMilitarySupport>1</bMilitarySupport>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -1991,16 +1796,10 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
 			</NotUnitAIs>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
 			<bMilitarySupport>1</bMilitarySupport>
@@ -2098,24 +1897,12 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ATTACK</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_COUNTER</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_WORKER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_WORKER</UnitAI>
 			</NotUnitAIs>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
 			<bMilitarySupport>1</bMilitarySupport>
@@ -2178,10 +1965,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_COMMANDO</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_COMMANDO</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<UnitInfo>
@@ -2212,22 +1996,10 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_COUNTER</UnitAI>
+				<UnitAI>UNITAI_CITY_COUNTER</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -2311,22 +2083,10 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_COUNTER</UnitAI>
+				<UnitAI>UNITAI_CITY_COUNTER</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -2412,26 +2172,11 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_COUNTER</UnitAI>
+				<UnitAI>UNITAI_CITY_COUNTER</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -2509,26 +2254,11 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ATTACK_CITY</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -2605,26 +2335,11 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_COUNTER</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -2707,26 +2422,11 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_COUNTER</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -2812,22 +2512,10 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_COUNTER</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
 			</UnitAIs>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -2910,26 +2598,11 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_COUNTER</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_COUNTER</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<bMilitaryHappiness>1</bMilitaryHappiness>
 			<bMilitaryProduction>1</bMilitaryProduction>
@@ -3019,30 +2692,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_HUNTER</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_HUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_HUNTER</UnitAI>
+				<UnitAI>UNITAI_EXPLORE</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_HUNTER_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_HUNTER_ESCORT</UnitAI>
 			</NotUnitAIs>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_HUNTING_SIGHT1</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_HUNTING_SIGHT1</FreePromotion>
 			</FreePromotions>
 			<bAssassin>1</bAssassin>
 			<PrereqTech>TECH_HUNTING</PrereqTech>
@@ -3069,14 +2727,8 @@
 				</UnitCombatMod>
 			</UnitCombatMods>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_ANIMAL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_PROMOTED_ARMED_GUARD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_ANIMAL</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_PROMOTED_ARMED_GUARD</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iAsset>2</iAsset>
 			<iPower>2</iPower>
@@ -3125,24 +2777,12 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_HUNTER</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_HUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_HUNTER</UnitAI>
+				<UnitAI>UNITAI_EXPLORE</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_HUNTER_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_HUNTER_ESCORT</UnitAI>
 			</NotUnitAIs>
 			<bAssassin>1</bAssassin>
 			<PrereqTech>TECH_TRACKING</PrereqTech>
@@ -3177,14 +2817,8 @@
 				</UnitCombatMod>
 			</UnitCombatMods>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_ANIMAL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_PROMOTED_ARMED_GUARD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_ANIMAL</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_PROMOTED_ARMED_GUARD</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iAsset>2</iAsset>
 			<iPower>2</iPower>
@@ -3231,23 +2865,14 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_HUNTER</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_HUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_HUNTER</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_HUNTER_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_HUNTER_ESCORT</UnitAI>
 			</NotUnitAIs>
 			<bAssassin>1</bAssassin>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_BY_THE_HORNS</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_BY_THE_HORNS</FreePromotion>
 			</FreePromotions>
 			<PrereqTech>TECH_PERSISTENCE_HUNTING</PrereqTech>
 			<PrereqAndBuildings>
@@ -3289,14 +2914,8 @@
 				</UnitCombatMod>
 			</UnitCombatMods>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_ANIMAL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_PROMOTED_ARMED_GUARD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_ANIMAL</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_PROMOTED_ARMED_GUARD</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iAsset>1</iAsset>
 			<iPower>1</iPower>
@@ -3344,28 +2963,16 @@
             <Advisor>ADVISOR_GROWTH</Advisor>
             <DefaultUnitAI>UNITAI_HUNTER</DefaultUnitAI>
             <UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_HUNTER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_HUNTER</UnitAI>
             </UnitAIs>
             <NotUnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_HUNTER_ESCORT</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_HUNTER_ESCORT</UnitAI>
             </NotUnitAIs>
             <bAssassin>1</bAssassin>
             <bNoBadGoodies>1</bNoBadGoodies>
             <FreePromotions>
-                <FreePromotion>
-                    <PromotionType>PROMOTION_BY_THE_HORNS</PromotionType>
-                    <bFreePromotion>1</bFreePromotion>
-                </FreePromotion>
-                <FreePromotion>
-                    <PromotionType>PROMOTION_MASTER_HUNTER1</PromotionType>
-                    <bFreePromotion>1</bFreePromotion>
-                </FreePromotion>
+                <FreePromotion>PROMOTION_BY_THE_HORNS</FreePromotion>
+                <FreePromotion>PROMOTION_MASTER_HUNTER1</FreePromotion>
             </FreePromotions>
             <PrereqTech>TECH_PERSISTENCE_HUNTING</PrereqTech>
             <PrereqAndBuildings>
@@ -3407,14 +3014,8 @@
                 </UnitCombatMod>
             </UnitCombatMods>
             <UnitCombatTargets>
-                <UnitCombatTarget>
-                    <UnitCombatTargetType>UNITCOMBAT_ANIMAL</UnitCombatTargetType>
-                    <bUnitCombatTarget>1</bUnitCombatTarget>
-                </UnitCombatTarget>
-                <UnitCombatTarget>
-                    <UnitCombatTargetType>UNITCOMBAT_PROMOTED_ARMED_GUARD</UnitCombatTargetType>
-                    <bUnitCombatTarget>1</bUnitCombatTarget>
-                </UnitCombatTarget>
+                <UnitCombatTarget>UNITCOMBAT_ANIMAL</UnitCombatTarget>
+                <UnitCombatTarget>UNITCOMBAT_PROMOTED_ARMED_GUARD</UnitCombatTarget>
             </UnitCombatTargets>
             <iAsset>1</iAsset>
             <iPower>1</iPower>
@@ -3467,18 +3068,9 @@
             <DefaultUnitAI>UNITAI_HUNTER</DefaultUnitAI>
             <Advisor>ADVISOR_GROWTH</Advisor>
             <UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_HUNTER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_ATTACK</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_HUNTER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
+                <UnitAI>UNITAI_ATTACK</UnitAI>
             </UnitAIs>
             <bAssassin>1</bAssassin>
             <bNoBadGoodies>1</bNoBadGoodies>
@@ -3513,14 +3105,8 @@
                 </UnitCombatMod>
             </UnitCombatMods>
             <UnitCombatTargets>
-                <UnitCombatTarget>
-                    <UnitCombatTargetType>UNITCOMBAT_ANIMAL</UnitCombatTargetType>
-                    <bUnitCombatTarget>1</bUnitCombatTarget>
-                </UnitCombatTarget>
-                <UnitCombatTarget>
-                    <UnitCombatTargetType>UNITCOMBAT_PROMOTED_ARMED_GUARD</UnitCombatTargetType>
-                    <bUnitCombatTarget>1</bUnitCombatTarget>
-                </UnitCombatTarget>
+                <UnitCombatTarget>UNITCOMBAT_ANIMAL</UnitCombatTarget>
+                <UnitCombatTarget>UNITCOMBAT_PROMOTED_ARMED_GUARD</UnitCombatTarget>
             </UnitCombatTargets>
             <iAsset>2</iAsset>
             <iPower>2</iPower>
@@ -3541,10 +3127,7 @@
             </UnitMeshGroups>
             <FormationType>FORMATION_TYPE_DEFAULT</FormationType>
             <FreePromotions>
-                <FreePromotion>
-                    <PromotionType>PROMOTION_MASTER_HUNTER1</PromotionType>
-                    <bFreePromotion>1</bFreePromotion>
-                </FreePromotion>
+                <FreePromotion>PROMOTION_MASTER_HUNTER1</FreePromotion>
             </FreePromotions>
             <ObsoleteTech>TECH_HUNTING</ObsoleteTech>
         </UnitInfo>
@@ -3582,18 +3165,9 @@
             <bNoBadGoodies>1</bNoBadGoodies>
             <bAssassin>1</bAssassin>
             <UnitAIs>
-                <UnitAI>
-                    <UnitAIType>UNITAI_HUNTER</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_EXPLORE</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
-                <UnitAI>
-                    <UnitAIType>UNITAI_ATTACK</UnitAIType>
-                    <bUnitAI>1</bUnitAI>
-                </UnitAI>
+                <UnitAI>UNITAI_HUNTER</UnitAI>
+                <UnitAI>UNITAI_EXPLORE</UnitAI>
+                <UnitAI>UNITAI_ATTACK</UnitAI>
             </UnitAIs>
             <PrereqTech>TECH_HUNTING</PrereqTech>
             <PrereqAndBuildings>
@@ -3618,14 +3192,8 @@
                 </UnitCombatMod>
             </UnitCombatMods>
             <UnitCombatTargets>
-                <UnitCombatTarget>
-                    <UnitCombatTargetType>UNITCOMBAT_ANIMAL</UnitCombatTargetType>
-                    <bUnitCombatTarget>1</bUnitCombatTarget>
-                </UnitCombatTarget>
-                <UnitCombatTarget>
-                    <UnitCombatTargetType>UNITCOMBAT_PROMOTED_ARMED_GUARD</UnitCombatTargetType>
-                    <bUnitCombatTarget>1</bUnitCombatTarget>
-                </UnitCombatTarget>
+                <UnitCombatTarget>UNITCOMBAT_ANIMAL</UnitCombatTarget>
+                <UnitCombatTarget>UNITCOMBAT_PROMOTED_ARMED_GUARD</UnitCombatTarget>
             </UnitCombatTargets>
             <iAsset>3</iAsset>
             <iPower>5</iPower>
@@ -3646,14 +3214,8 @@
             </UnitMeshGroups>
             <FormationType>FORMATION_TYPE_DEFAULT</FormationType>
             <FreePromotions>
-                <FreePromotion>
-                    <PromotionType>PROMOTION_MASTER_HUNTER1</PromotionType>
-                    <bFreePromotion>1</bFreePromotion>
-                </FreePromotion>
-                <FreePromotion>
-                    <PromotionType>PROMOTION_HUNTING_SIGHT1</PromotionType>
-                    <bFreePromotion>1</bFreePromotion>
-                </FreePromotion>
+                <FreePromotion>PROMOTION_MASTER_HUNTER1</FreePromotion>
+                <FreePromotion>PROMOTION_HUNTING_SIGHT1</FreePromotion>
             </FreePromotions>
             <ObsoleteTech>TECH_BRONZE_WORKING</ObsoleteTech>
         </UnitInfo>
@@ -3689,28 +3251,13 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_EXPLORE</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_HUNTER_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_EXPLORE</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
+				<UnitAI>UNITAI_HUNTER_ESCORT</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_HUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_HUNTER</UnitAI>
 			</NotUnitAIs>
 			<SeeInvisible>INVISIBLE_CAMOUFLAGE</SeeInvisible>
 			<bBarbCoExist>1</bBarbCoExist>
@@ -3768,10 +3315,7 @@
 			</MapCategoryTypes>
 			<DefaultUnitAI>UNITAI_SUBDUED_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_SUBDUED_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_SUBDUED_ANIMAL</UnitAI>
 			</UnitAIs>
 			<Description>TXT_KEY_UNIT_CAPTIVE_NEANDERTHAL</Description>
 			<Civilopedia>TXT_KEY_UNIT_CAPTIVE_MILITARY_PEDIA</Civilopedia>

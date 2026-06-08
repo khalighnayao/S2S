@@ -78,7 +78,10 @@ public:
 	virtual void read(FDataStreamBase*) {}
 	virtual void write(FDataStreamBase*) {}
 
-	virtual void getDataMembers(CvInfoUtil&) { FErrorMsg("Override this"); }
+	// Empty default: a class that hasn't declared any fields contributes nothing to the declarative
+	// read/link/checksum passes (it still uses its hand-written read()). Overridden by migrated
+	// classes. The empty base is what lets the uniform link phase call this on every info.
+	virtual void getDataMembers(CvInfoUtil&) {}
 	virtual bool read(CvXMLLoadUtility* pXML);
 	virtual bool readPass2(CvXMLLoadUtility*) { FErrorMsg("Override this"); return false; }
 	virtual bool readPass3() { FErrorMsg("Override this"); return false; }

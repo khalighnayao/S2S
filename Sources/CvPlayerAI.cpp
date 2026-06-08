@@ -10611,16 +10611,13 @@ int CvPlayerAI::AI_unitValue(UnitTypes eUnit, UnitAITypes eUnitAI, const CvArea*
 		case UNITAI_CARRIER_SEA:
 		case UNITAI_MISSILE_CARRIER_SEA:
 		{
+			// A special-cargo transport is valid for these carrier roles (mirrors the general-cargo
+			// ASSAULT_SEA/SETTLER_SEA case above). This previously gated on CvSpecialUnitInfo's
+			// CarrierUnitAITypes, but that data never loaded (loader/XML tag mismatch) and the loop
+			// passed eUnitAI instead of its own counter — so it was always false (dead). See #194.
 			if (kUnitInfo.getCargoSpace() > 0 && kUnitInfo.getSpecialCargo() != NO_SPECIALUNIT)
 			{
-				for (int i = 0; i < NUM_UNITAI_TYPES; ++i)
-				{
-					if (GC.getSpecialUnitInfo((SpecialUnitTypes)kUnitInfo.getSpecialCargo()).isCarrierUnitAIType(eUnitAI))
-					{
-						bValid = true;
-						break;
-					}
-				}
+				bValid = true;
 			}
 			break;
 		}

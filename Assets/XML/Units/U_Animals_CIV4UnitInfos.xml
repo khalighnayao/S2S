@@ -40,10 +40,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -166,10 +163,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -304,10 +298,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -406,10 +397,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<GroupSpawnUnitCombatTypes>
 				<GroupSpawnUnitCombatType>
@@ -430,26 +418,11 @@
 			</GroupSpawnUnitCombatTypes>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_GROUP_SOLO</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_GROUP_PARTY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_TAPIR</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_GROUP_SOLO</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_GROUP_PARTY</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_TAPIR</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -561,10 +534,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -721,23 +691,14 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_SEABIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_SEABIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -864,10 +825,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -1025,10 +983,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -1170,10 +1125,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -1369,10 +1321,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -1470,10 +1419,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
@@ -1605,10 +1551,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -1717,10 +1660,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -1813,10 +1753,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
@@ -1868,10 +1805,7 @@
 			<iWithdrawalProb>55</iWithdrawalProb>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_PIGEON</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_PIGEON</UnitCombatTarget>
 			</UnitCombatTargets>
 			<UnitTargets>
 				<UnitType>UNIT_DUCK</UnitType>
@@ -1944,10 +1878,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<GroupSpawnUnitCombatTypes>
 				<GroupSpawnUnitCombatType>
@@ -1968,22 +1899,10 @@
 			</GroupSpawnUnitCombatTypes>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_BOVINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_GOAT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_BOVINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_GOAT</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -2099,10 +2018,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -2268,10 +2184,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bCanMoveImpassable>1</bCanMoveImpassable>
@@ -2279,14 +2192,8 @@
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_FISH_BONEY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_INVERTEBRATE_CRUSTACEAN</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_FISH_BONEY</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_INVERTEBRATE_CRUSTACEAN</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -2428,29 +2335,14 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_ANTELOPE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_BOVINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_ANTELOPE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_BOVINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -2585,10 +2477,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -2738,10 +2627,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -2880,10 +2766,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -3064,10 +2947,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -3218,10 +3098,7 @@
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -3341,10 +3218,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -3489,29 +3363,14 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_ANIMAL_BIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_TAPIR</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_ANIMAL_BIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_TAPIR</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -3657,10 +3516,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -3816,10 +3672,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>3</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -3927,10 +3780,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -4090,10 +3940,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
@@ -4242,10 +4089,7 @@
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -4380,10 +4224,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -4503,29 +4344,14 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_BOVINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_EQUINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_URSINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_BOVINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_EQUINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_URSINE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -4658,25 +4484,13 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_ANTELOPE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_RATITE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_ANTELOPE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_RATITE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -4810,29 +4624,14 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_MONKEY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_PROSIMIAN</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_MONKEY</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_PROSIMIAN</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -4933,21 +4732,12 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_TINY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_TINY</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -5065,10 +4855,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
@@ -5200,10 +4987,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -5355,10 +5139,7 @@
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -5486,10 +5267,7 @@
 			<iAnimalIgnoresBorders>3</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -5584,10 +5362,7 @@
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -5700,10 +5475,7 @@
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -5809,10 +5581,7 @@
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -5937,35 +5706,17 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_ANTELOPE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_BOVINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_EQUINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_ANTELOPE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_BOVINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_EQUINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -6078,19 +5829,13 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_MARSUPIAL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_MARSUPIAL</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -6207,10 +5952,7 @@
 				<MapCategoryType>MAPCATEGORY_EARTH</MapCategoryType>
 			</MapCategoryTypes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -6362,10 +6104,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
@@ -6498,10 +6237,7 @@
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -6643,10 +6379,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>3</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -6780,10 +6513,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -6911,27 +6641,15 @@
 				<MapCategoryType>MAPCATEGORY_EARTH</MapCategoryType>
 			</MapCategoryTypes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_SEABIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_SEABIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -7022,27 +6740,15 @@
 				<MapCategoryType>MAPCATEGORY_EARTH</MapCategoryType>
 			</MapCategoryTypes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_SEABIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_SEABIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -7154,10 +6860,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -7316,10 +7019,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -7469,10 +7169,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -7594,19 +7291,13 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -7724,10 +7415,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -7850,10 +7538,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -7977,10 +7662,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -8074,10 +7756,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -8175,30 +7854,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_TINY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_SMALL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_MEDIUM</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_TINY</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_SMALL</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_MEDIUM</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -8315,27 +7979,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_TINY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_SMALL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_TINY</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_SMALL</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -8461,10 +8113,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -8590,10 +8239,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -8723,10 +8369,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -8843,10 +8486,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -8974,27 +8614,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_FINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_TINY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_FINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_TINY</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -9108,24 +8736,15 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<bRenderBelowWater>1</bRenderBelowWater>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_SMALL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_MEDIUM</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_SMALL</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_MEDIUM</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -9258,10 +8877,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -9383,10 +8999,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -9511,10 +9124,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -9643,10 +9253,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
 			<iCost>-1</iCost>
@@ -9789,10 +9396,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -9902,10 +9506,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -10044,10 +9645,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -10207,10 +9805,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>3</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -10301,25 +9896,13 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_RATITE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_ANTELOPE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_RATITE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_ANTELOPE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -10417,28 +10000,16 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_ANIMAL_INVERTEBRATE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_FISH_BONEY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_FISH_RAY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_ANIMAL_INVERTEBRATE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_FISH_BONEY</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_FISH_RAY</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -10562,10 +10133,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -10578,22 +10146,10 @@
 				<UnitType>UNIT_TREESLOTH</UnitType>
 			</UnitTargets>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_PARROT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_MONKEY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_PROSIMIAN</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_REPTILE_SNAKE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_PARROT</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_MONKEY</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_PROSIMIAN</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_REPTILE_SNAKE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -10696,27 +10252,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_GAMEBIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_SONGBIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_REPTILE_SNAKE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_GAMEBIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_SONGBIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_REPTILE_SNAKE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -10834,10 +10378,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -10973,10 +10514,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -11094,10 +10632,7 @@
 				<MapCategoryType>MAPCATEGORY_EARTH</MapCategoryType>
 			</MapCategoryTypes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -11111,38 +10646,14 @@
 				<UnitType>UNIT_DESERT_TARANTULA</UnitType>
 			</UnitTargets>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_GAMEBIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_CORVID</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_RAPTOR</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_SEABIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_SONGBIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_REPTILE_SNAKE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_GAMEBIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_CORVID</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_RAPTOR</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_SEABIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_SONGBIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_REPTILE_SNAKE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -11251,10 +10762,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -11402,10 +10910,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
@@ -11562,10 +11067,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bAssassin>1</bAssassin>
 			<UnitTargets>
@@ -11685,10 +11187,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -11795,10 +11294,7 @@
 				<MapCategoryType>MAPCATEGORY_EARTH</MapCategoryType>
 			</MapCategoryTypes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -11915,10 +11411,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -12036,10 +11529,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -12185,10 +11675,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -12312,10 +11799,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -12440,47 +11924,20 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_ANIMAL_BIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_BOVINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_EQUINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_GOAT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_MONKEY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_REPTILE_LIZARD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_ANIMAL_BIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_BOVINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_EQUINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_GOAT</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_MONKEY</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_REPTILE_LIZARD</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -12597,27 +12054,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_ANIMAL_AMPHIBIAN</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_ANIMAL_INSECT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_REPTILE_SNAKE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_ANIMAL_AMPHIBIAN</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_ANIMAL_INSECT</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_REPTILE_SNAKE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -12729,10 +12174,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -12839,10 +12281,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bAssassin>1</bAssassin>
 			<UnitTargets>
@@ -12970,10 +12409,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>3</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -13070,16 +12506,10 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_PILLAGE</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
 			</NotUnitAIs>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bPillage>1</bPillage>
@@ -13143,16 +12573,10 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_PILLAGE</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
 			</NotUnitAIs>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bPillage>1</bPillage>
@@ -13216,16 +12640,10 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_PILLAGE</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
 			</NotUnitAIs>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bPillage>1</bPillage>
@@ -13289,16 +12707,10 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_PILLAGE</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
 			</UnitAIs>
 			<NotUnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
 			</NotUnitAIs>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bPillage>1</bPillage>
@@ -13372,10 +12784,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -13484,31 +12893,16 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_GAMEBIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_GAMEBIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -13614,10 +13008,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -13744,10 +13135,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
@@ -13846,10 +13234,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -13975,23 +13360,14 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_GAMEBIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_GAMEBIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -14123,10 +13499,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -14250,10 +13623,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
@@ -14386,20 +13756,14 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_FISH_BONEY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_FISH_BONEY</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>4</iMoves>
@@ -14572,10 +13936,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
@@ -14709,10 +14070,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -14833,27 +14191,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_FINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_TINY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_FINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_TINY</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -14964,10 +14310,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -15088,10 +14431,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -15235,10 +14575,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -15365,10 +14702,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bCanMoveImpassable>1</bCanMoveImpassable>
@@ -15504,30 +14838,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_TINY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_SMALL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_MEDIUM</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_TINY</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_SMALL</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_MEDIUM</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -15652,10 +14971,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -15744,10 +15060,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -15849,10 +15162,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -15935,10 +15245,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -16062,10 +15369,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -16202,10 +15506,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -16326,10 +15627,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -16427,10 +15725,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -16548,10 +15843,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -16649,10 +15941,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -16761,10 +16050,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -16924,10 +16210,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -17044,10 +16327,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -17159,10 +16439,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>3</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -17274,10 +16551,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -17410,10 +16684,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -17529,10 +16800,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -17702,10 +16970,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -17811,10 +17076,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -17942,27 +17204,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_TINY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_SMALL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_TINY</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_SMALL</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -18059,10 +17309,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -18157,10 +17404,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -18263,31 +17507,16 @@
 				<MapCategoryType>MAPCATEGORY_EARTH</MapCategoryType>
 			</MapCategoryTypes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_ANIMAL_AMPHIBIAN</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_REPTILE_TURTLE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_REPTILE_SNAKE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_ANIMAL_AMPHIBIAN</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_REPTILE_TURTLE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_REPTILE_SNAKE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<UnitTargets>
 				<UnitType>UNIT_IGUANA</UnitType>
@@ -18393,10 +17622,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>3</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -18485,10 +17711,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
@@ -18630,10 +17853,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -18746,27 +17966,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_FINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_TINY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_FINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_TINY</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -18865,10 +18073,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -18994,10 +18199,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -19120,10 +18322,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<iCost>-1</iCost>
@@ -19237,10 +18436,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -19356,10 +18552,7 @@
 			</MapCategoryTypes>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -19472,10 +18665,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -19594,10 +18784,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -19715,30 +18902,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_TINY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_SMALL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_MEDIUM</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_TINY</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_SMALL</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_MEDIUM</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -19880,27 +19052,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_TINY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_SMALL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_TINY</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_SMALL</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -20059,10 +19219,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -20181,25 +19338,13 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_MEDIUM</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_LARGE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_HUGE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_MEDIUM</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_LARGE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_HUGE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -20311,10 +19456,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -20429,10 +19571,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -20571,10 +19710,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -20698,27 +19834,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_SEABIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_FISH_BONEY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_SEABIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_FISH_BONEY</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -20848,10 +19972,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -21006,10 +20127,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -21164,10 +20282,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -21290,10 +20405,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
@@ -21427,27 +20539,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_FINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_TINY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_FINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_TINY</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -21559,28 +20659,16 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_ANIMAL_INVERTEBRATE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_FISH_BONEY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_FISH_RAY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_ANIMAL_INVERTEBRATE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_FISH_BONEY</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_FISH_RAY</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>3</iMoves>
@@ -21707,29 +20795,14 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_ANTELOPE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_URSINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_ANTELOPE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_URSINE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -21840,10 +20913,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -21941,10 +21011,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -22052,27 +21119,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_MONKEY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_MONKEY</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_SWINE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<UnitTargets>
 				<UnitType>UNIT_IBEX</UnitType>
@@ -22231,31 +21286,16 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_GAMEBIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_EQUINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_TAPIR</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_GAMEBIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_EQUINE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_TAPIR</UnitCombatTarget>
 			</UnitCombatTargets>
 			<UnitTargets>
 				<UnitType>UNIT_COW</UnitType>
@@ -22382,10 +21422,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -22510,10 +21547,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -22636,10 +21670,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -22762,10 +21793,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -22887,10 +21915,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -23010,10 +22035,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -23135,10 +22157,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -23229,10 +22248,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -23337,27 +22353,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_GAMEBIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_GAMEBIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTarget>
 			</UnitCombatTargets>
 			<UnitTargets>
 				<UnitType>UNIT_WOMBAT</UnitType>
@@ -23483,10 +22487,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -23595,27 +22596,15 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_GAMEBIRD</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_GAMEBIRD</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_BIRD_WATERFOWL</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_RODENT</UnitCombatTarget>
 			</UnitCombatTargets>
 			<UnitTargets>
 				<UnitType>UNIT_WOMBAT</UnitType>
@@ -23730,10 +22719,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -23824,10 +22810,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -23939,10 +22922,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bNoDefensiveBonus>1</bNoDefensiveBonus>
@@ -24061,10 +23041,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -24174,23 +23151,14 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_TINY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_TINY</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -24272,21 +23240,12 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_SIZE_TINY</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_DIMINUTIVE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_SIZE_TINY</UnitCombatTarget>
 			</UnitCombatTargets>
 			<iCost>-1</iCost>
 			<iMoves>1</iMoves>
@@ -24394,10 +23353,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -24508,10 +23464,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -24672,10 +23625,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -24804,10 +23754,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -24956,10 +23903,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -25100,10 +24044,7 @@
 			<Domain>DOMAIN_SEA</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -25253,10 +24194,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -25379,10 +24317,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iCost>-1</iCost>
 			<iMoves>2</iMoves>
@@ -25489,28 +24424,16 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
 			<bFlatMovementCost>1</bFlatMovementCost>
 			<bAssassin>1</bAssassin>
 			<UnitCombatTargets>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_MUSTELIDAE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
-				<UnitCombatTarget>
-					<UnitCombatTargetType>UNITCOMBAT_MAMMAL_URSINE</UnitCombatTargetType>
-					<bUnitCombatTarget>1</bUnitCombatTarget>
-				</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_CERVID</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_MUSTELIDAE</UnitCombatTarget>
+				<UnitCombatTarget>UNITCOMBAT_MAMMAL_URSINE</UnitCombatTarget>
 			</UnitCombatTargets>
 			<UnitTargets>
 				<UnitType>UNIT_ARCTICFOX</UnitType>
@@ -25629,10 +24552,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>2</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>
@@ -25751,10 +24671,7 @@
 			<Domain>DOMAIN_LAND</Domain>
 			<DefaultUnitAI>UNITAI_ANIMAL</DefaultUnitAI>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ANIMAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ANIMAL</UnitAI>
 			</UnitAIs>
 			<iAnimalIgnoresBorders>1</iAnimalIgnoresBorders>
 			<bOnlyDefensive>1</bOnlyDefensive>

@@ -34,10 +34,7 @@
 				<UnitType>UNIT_DIPLOMAT_EARLY</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_EXPLORE</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_WARFARE</PrereqTech>
 			<Flavors>
@@ -198,10 +195,7 @@
 				<UnitType>UNIT_DIPLOMAT_INDUST</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_EXPLORE</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_ORATORY</PrereqTech>
 			<Flavors>
@@ -236,10 +230,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_COMMANDO</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_COMMANDO</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<UnitInfo>
@@ -272,10 +263,7 @@
 				<UnitType>UNIT_DIPLOMAT_MODERN</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_EXPLORE</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_OPTICS</PrereqTech>
 			<Flavors>
@@ -310,10 +298,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_COMMANDO</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_COMMANDO</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 		<UnitInfo>
@@ -343,10 +328,7 @@
 			<bStealPlans>1</bStealPlans>
 			<bInvestigate>1</bInvestigate>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_EXPLORE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_EXPLORE</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_RADIO</PrereqTech>
 			<Flavors>
@@ -382,10 +364,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_COMMANDO</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_COMMANDO</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 	</UnitInfos>

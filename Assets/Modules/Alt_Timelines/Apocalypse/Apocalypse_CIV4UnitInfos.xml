@@ -40,26 +40,11 @@
 				<UnitType>UNIT_MUSKETMAN</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_COUNTER</UnitAI>
+				<UnitAI>UNITAI_CITY_COUNTER</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_GUERRILLA_WARFARE</PrereqTech>
 			<iCost>773</iCost>
@@ -122,26 +107,11 @@
 				<UnitType>UNIT_MUSKETMAN</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_GUERRILLA_WARFARE</PrereqTech>
 			<iCost>773</iCost>
@@ -197,30 +167,12 @@
 				<UnitType>UNIT_MUSKETMAN</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_COUNTER</UnitAI>
+				<UnitAI>UNITAI_CITY_COUNTER</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_GUERRILLA_WARFARE</PrereqTech>
 			<iCost>773</iCost>
@@ -295,30 +247,12 @@
 				<UnitType>UNIT_CITY_GUARD</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_SPECIAL</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_SEE_INVISIBLE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_COUNTER</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
+				<UnitAI>UNITAI_CITY_COUNTER</UnitAI>
+				<UnitAI>UNITAI_CITY_SPECIAL</UnitAI>
+				<UnitAI>UNITAI_SEE_INVISIBLE</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_GUERRILLA_WARFARE</PrereqTech>
 			<iCost>773</iCost>
@@ -373,34 +307,13 @@
 				<UnitType>UNIT_MUSKETMAN</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_DEFENSE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_COUNTER</UnitAI>
+				<UnitAI>UNITAI_CITY_DEFENSE</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_GUERRILLA_WARFARE</PrereqTech>
 			<iCost>773</iCost>
@@ -465,26 +378,11 @@
 				<UnitType>UNIT_ANCIENT_FLAMETHROWER</UnitType>
 			</UnitUpgrades>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK_CITY</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_RESERVE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_CITY_COUNTER</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_ESCORT</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_ATTACK_CITY</UnitAI>
+				<UnitAI>UNITAI_RESERVE</UnitAI>
+				<UnitAI>UNITAI_CITY_COUNTER</UnitAI>
+				<UnitAI>UNITAI_ESCORT</UnitAI>
 			</UnitAIs>
 			<PrereqTech>TECH_GUERRILLA_WARFARE</PrereqTech>
 			<PrereqBonuses>
@@ -580,14 +478,8 @@
 				</FlankingStrike>
 			</FlankingStrikes>
 			<UnitAIs>
-				<UnitAI>
-					<UnitAIType>UNITAI_ATTACK</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
-				<UnitAI>
-					<UnitAIType>UNITAI_PILLAGE</UnitAIType>
-					<bUnitAI>1</bUnitAI>
-				</UnitAI>
+				<UnitAI>UNITAI_ATTACK</UnitAI>
+				<UnitAI>UNITAI_PILLAGE</UnitAI>
 			</UnitAIs>
 			<PrereqAndBuildings>
 				<BuildingType>BUILDING_ANIMAL_TRAINER_HORSE</BuildingType>
@@ -653,10 +545,7 @@
 			</UnitMeshGroups>
 			<FormationType>FORMATION_TYPE_DEFAULT</FormationType>
 			<FreePromotions>
-				<FreePromotion>
-					<PromotionType>PROMOTION_COMMANDO</PromotionType>
-					<bFreePromotion>1</bFreePromotion>
-				</FreePromotion>
+				<FreePromotion>PROMOTION_COMMANDO</FreePromotion>
 			</FreePromotions>
 		</UnitInfo>
 	</UnitInfos>

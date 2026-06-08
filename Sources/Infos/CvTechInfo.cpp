@@ -82,7 +82,6 @@ m_bDCMAirBombTech2(0),
 m_piDomainExtraMoves(NULL),
 m_piFlavorValue(NULL),
 m_pbCommerceFlexible(NULL),
-m_pbTerrainTrade(NULL),
 //ls612: Tech Commerce Modifiers
 m_piCommerceModifier(NULL)
 ,m_bEmbassyTrading(false)
@@ -117,7 +116,6 @@ CvTechInfo::~CvTechInfo()
 	SAFE_DELETE_ARRAY(m_piDomainExtraMoves);
 	SAFE_DELETE_ARRAY(m_piFlavorValue);
 	SAFE_DELETE_ARRAY(m_pbCommerceFlexible);
-	SAFE_DELETE_ARRAY(m_pbTerrainTrade);
 	SAFE_DELETE_ARRAY(m_piCommerceModifier);
 	GC.removeDelayedResolutionVector(m_piPrereqOrTechs);
 	GC.removeDelayedResolutionVector(m_piPrereqAndTechs);
@@ -443,7 +441,7 @@ bool CvTechInfo::isCommerceFlexible(int i) const
 
 bool CvTechInfo::isTerrainTrade(int i) const
 {
-	return m_pbTerrainTrade ? m_pbTerrainTrade[i] : false;
+	return algo::any_of_equal(m_aeTerrainTrade, static_cast<TerrainTypes>(i));
 }
 
 
@@ -688,7 +686,7 @@ bool CvTechInfo::read(CvXMLLoadUtility* pXML)
 	}
 
 	pXML->SetVariableListTagPair(&m_piDomainExtraMoves, L"DomainExtraMoves", NUM_DOMAIN_TYPES);
-	pXML->SetVariableListTagPair(&m_pbTerrainTrade, L"TerrainTrades", GC.getNumTerrainInfos(), false);
+	pXML->SetOptionalVector(&m_aeTerrainTrade, L"TerrainTrades");
 	//ls612: Tech Commerce Modifiers
 	if (pXML->TryMoveToXmlFirstChild(L"CommerceModifiers"))
 	{
@@ -859,18 +857,7 @@ void CvTechInfo::copyNonDefaults(const CvTechInfo* pClassInfo)
 			m_piDomainExtraMoves[j] = pClassInfo->getDomainExtraMoves(j);
 		}
 	}
-	for ( int j = 0; j < GC.getNumTerrainInfos(); j++)
-	{
-		if ((m_pbTerrainTrade == NULL || m_pbTerrainTrade[j] == bDefault) &&
-			pClassInfo->isTerrainTrade(j) != bDefault)
-		{
-			if ( m_pbTerrainTrade == NULL )
-			{
-				CvXMLLoadUtility::InitList(&m_pbTerrainTrade,GC.getNumTerrainInfos(),bDefault);
-			}
-			m_pbTerrainTrade[j] = pClassInfo->isTerrainTrade(j);
-		}
-	}
+	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeTerrainTrade, pClassInfo->m_aeTerrainTrade);
 	//ls612: Tech Commerce Modifiers
 	for ( int j = 0; j < NUM_COMMERCE_TYPES; j++)
 	{
@@ -1011,7 +998,7 @@ void CvTechInfo::getCheckSum(uint32_t& iSum) const
 	CheckSumC(iSum, m_piPrereqOrTechs);
 	CheckSumC(iSum, m_piPrereqAndTechs);
 	CheckSum(iSum, m_pbCommerceFlexible, NUM_COMMERCE_TYPES);
-	CheckSum(iSum, m_pbTerrainTrade, GC.getNumTerrainInfos());
+	CheckSumC(iSum, m_aeTerrainTrade);
 	//ls612: Tech Commerce Modifiers
 	CheckSum(iSum, m_piCommerceModifier, NUM_COMMERCE_TYPES);
 

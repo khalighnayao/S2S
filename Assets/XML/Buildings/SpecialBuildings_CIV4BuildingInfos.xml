@@ -434,14 +434,8 @@
 				<BuildingType>BUILDING_CHARCOAL_BURNER</BuildingType>
 			</PrereqOrBuildings>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_ANARCHISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_CHIEFDOM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_ANARCHISM</PrereqCivic>
+				<PrereqCivic>CIVIC_CHIEFDOM</PrereqCivic>
 			</PrereqOrCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<TechHappinessChanges>
@@ -737,10 +731,7 @@
 				<BuildingType>BUILDING_LAUNCH_ARCOLOGY</BuildingType>
 			</ReplacementBuildings>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_CAVES</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_CAVES</PrereqFeature>
 			</PrereqOrFeature>
 			<YieldChanges>
 				<iYield>1</iYield>
@@ -805,10 +796,7 @@
 			<Description>TXT_KEY_BUILDING_CIVIC_BANDITRY</Description>
 			<Civilopedia>TXT_KEY_BUILDING_CIVIC_BANDITRY_PEDIA</Civilopedia>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_BANDITRY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_BANDITRY</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<FreePromoTypes>
@@ -829,10 +817,7 @@
 			<Description>TXT_KEY_BUILDING_CIVIC_BURN_TRASH</Description>
 			<Civilopedia>TXT_KEY_BUILDING_CIVIC_BURN_TRASH_PEDIA</Civilopedia>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_BURN_GARBAGE</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_BURN_GARBAGE</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<Properties>
@@ -857,10 +842,7 @@
 				<BuildingType>BUILDING_PALACE</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_CASTE_SYSTEM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_CASTE_SYSTEM</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<SpecialistYieldChanges>
@@ -889,10 +871,7 @@
 				<BuildingType>BUILDING_PALACE</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_DEMOCRACY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_DEMOCRACY</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<SpecialistYieldChanges>
@@ -921,10 +900,7 @@
 				<BuildingType>BUILDING_PALACE</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_EGALITARIAN</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_EGALITARIAN</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<SpecialistYieldChanges>
@@ -952,10 +928,7 @@
 				<BuildingType>BUILDING_PALACE</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_FEUDAL</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_FEUDAL</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<SpecialistYieldChanges>
@@ -982,10 +955,7 @@
 				<BuildingType>BUILDING_PALACE</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_FREE_MARKET</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_FREE_MARKET</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<SpecialistYieldChanges>
@@ -1014,10 +984,7 @@
 				<BuildingType>BUILDING_PALACE</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MARTIAL_LAW</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_MARTIAL_LAW</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<SpecialistYieldChanges>
@@ -1042,10 +1009,7 @@
 			<Description>TXT_KEY_BUILDING_CIVIC_MERCENARIES</Description>
 			<Civilopedia>TXT_KEY_BUILDING_CIVIC_MERCENARIES_PEDIA</Civilopedia>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MERCENARIES</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_MERCENARIES</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<FreePromoTypes>
@@ -1066,10 +1030,7 @@
 			<Description>TXT_KEY_BUILDING_CIVIC_MILITIA</Description>
 			<Civilopedia>TXT_KEY_BUILDING_CIVIC_MILITIA_PEDIA</Civilopedia>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MILITIA</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_MILITIA</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<bApplyFreePromotionOnMove>1</bApplyFreePromotionOnMove>
@@ -1094,10 +1055,7 @@
 				<BuildingType>BUILDING_PALACE</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MIND_CONTROL</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_MIND_CONTROL</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<SpecialistYieldChanges>
@@ -1125,10 +1083,7 @@
 				<BuildingType>BUILDING_PALACE</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_AUTOMATED</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_AUTOMATED</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<SpecialistYieldChanges>
@@ -1156,10 +1111,7 @@
 				<BuildingType>BUILDING_PALACE</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_REPUBLIC</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_REPUBLIC</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<SpecialistYieldChanges>
@@ -1285,10 +1237,7 @@
 				<Bonus>BONUS_WOOD</Bonus>
 			</PrereqBonuses>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PEAK</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PEAK</PrereqTerrain>
 			</PrereqOrTerrain>
 			<ReplacementBuildings>
 				<BuildingType>BUILDING_HOUSING_HIGHRISES</BuildingType>
@@ -3533,18 +3482,9 @@
 			<Civilopedia>TXT_KEY_BUILDING_CRIME_ILLEGAL_IMMIGRATION_PEDIA</Civilopedia>
 			<PrereqTech>TECH_ALPHABET</PrereqTech>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_CLOSED_BORDERS</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_SKILLED_WORKERS</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_SECURED_BORDERS</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_CLOSED_BORDERS</PrereqCivic>
+				<PrereqCivic>CIVIC_SKILLED_WORKERS</PrereqCivic>
+				<PrereqCivic>CIVIC_SECURED_BORDERS</PrereqCivic>
 			</PrereqOrCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<iInsidiousness>20</iInsidiousness>
@@ -4857,14 +4797,8 @@
 				<BuildingType>BUILDING_WELFARE_OFFICE</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_SOCIALIZED</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_ECO_FRIENDLY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_SOCIALIZED</PrereqCivic>
+				<PrereqCivic>CIVIC_ECO_FRIENDLY</PrereqCivic>
 			</PrereqOrCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<iInsidiousness>1</iInsidiousness>
@@ -8767,10 +8701,7 @@
 			<ObsoleteTech>TECH_MASONRY</ObsoleteTech>
 			<Bonus>BONUS_GRASS</Bonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_VERY_TALL_GRASS</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_VERY_TALL_GRASS</PrereqFeature>
 			</PrereqOrFeature>
 			<ReplacementBuildings>
 				<BuildingType>BUILDING_HOUSING_LONGHOUSE</BuildingType>
@@ -8804,30 +8735,12 @@
 				<BuildingType>BUILDING_COMPUTER_NETWORK</BuildingType>
 			</PrereqInCityBuildings>
 			<PrereqOrCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_INQUISITORIAL</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_TOTALITARIANISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MARXIST</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_PROPAGANDA</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_SINGLE_PARTY</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
-				<PrereqCivic>
-					<CivicOption>CIVIC_GRID</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_INQUISITORIAL</PrereqCivic>
+				<PrereqCivic>CIVIC_TOTALITARIANISM</PrereqCivic>
+				<PrereqCivic>CIVIC_MARXIST</PrereqCivic>
+				<PrereqCivic>CIVIC_PROPAGANDA</PrereqCivic>
+				<PrereqCivic>CIVIC_SINGLE_PARTY</PrereqCivic>
+				<PrereqCivic>CIVIC_GRID</PrereqCivic>
 			</PrereqOrCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
 			<CommerceChanges>
@@ -8980,14 +8893,8 @@
 				<Bonus>BONUS_FINE_CLAY</Bonus>
 			</PrereqBonuses>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_SCRUB</PrereqTerrain>
 			</PrereqOrTerrain>
 			<ReplacementBuildings>
 				<BuildingType>BUILDING_HOUSING_INSULAE</BuildingType>
@@ -10374,18 +10281,9 @@
 			</ReplacementBuildings>
 			<iMinLatitude>50</iMinLatitude>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TAIGA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_TUNDRA</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_ICE</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TAIGA</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_TUNDRA</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_ICE</PrereqTerrain>
 			</PrereqOrTerrain>
 			<iHealth>1</iHealth>
 			<YieldChanges>
@@ -11062,22 +10960,10 @@
 			<iPrereqPopulation>3</iPrereqPopulation>
 			<Bonus>BONUS_PRIME_TIMBER</Bonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<ReplacementBuildings>
 				<BuildingType>BUILDING_HOUSING_PUEBLOS</BuildingType>
@@ -11176,10 +11062,7 @@
 				<Bonus>BONUS_GOLD_ORE</Bonus>
 			</PrereqBonuses>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MERCANTILISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_MERCANTILISM</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
             <YieldModifiers>
@@ -11205,10 +11088,7 @@
 				<Bonus>BONUS_SILVER_ORE</Bonus>
 			</PrereqBonuses>
 			<PrereqAndCivics>
-				<PrereqCivic>
-					<CivicOption>CIVIC_MERCANTILISM</CivicOption>
-					<bPrereqCivic>1</bPrereqCivic>
-				</PrereqCivic>
+				<PrereqCivic>CIVIC_MERCANTILISM</PrereqCivic>
 			</PrereqAndCivics>
 			<bRequiresActiveCivics>1</bRequiresActiveCivics>
             <YieldModifiers>
@@ -11446,14 +11326,8 @@
 			<ObsoleteTech>TECH_SURVEYING</ObsoleteTech>
 			<Bonus>BONUS_CLAY</Bonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_SCRUB</PrereqTerrain>
 			</PrereqOrTerrain>
 			<ReplacementBuildings>
 				<BuildingType>BUILDING_HOUSING_DOMUS</BuildingType>
@@ -12096,22 +11970,10 @@
 			<iPrereqPopulation>3</iPrereqPopulation>
 			<PrereqTech>TECH_TRAP_FISHING</PrereqTech>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FLOOD_PLAINS</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_SWAMP</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_PEAT_BOG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FLOOD_PLAINS</PrereqFeature>
+				<PrereqFeature>FEATURE_SWAMP</PrereqFeature>
+				<PrereqFeature>FEATURE_PEAT_BOG</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<ObsoleteTech>TECH_ENVIRONMENTAL_ECONOMICS</ObsoleteTech>
 			<iHappiness>-1</iHappiness>
@@ -13214,14 +13076,8 @@
 				<Bonus>BONUS_WOOD</Bonus>
 			</PrereqBonuses>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_DESERT</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_SCRUB</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_DESERT</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_SCRUB</PrereqTerrain>
 			</PrereqOrTerrain>
 			<ReplacementBuildings>
 				<BuildingType>BUILDING_HOUSING_SLUMS</BuildingType>
@@ -14727,14 +14583,8 @@
 			</PrereqBonuses>
 			<VicinityBonus>BONUS_BISON</VicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GRASSLAND</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PLAINS</PrereqTerrain>
 			</PrereqOrTerrain>
 			<ReplacementBuildings>
 				<BuildingType>BUILDING_HOUSING_VILLAS</BuildingType>
@@ -15502,26 +15352,11 @@
 				<Bonus>BONUS_BAMBOO</Bonus>
 			</PrereqBonuses>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<ReplacementBuildings>
 				<BuildingType>BUILDING_HOUSING_STILT_HUTS</BuildingType>
@@ -15560,26 +15395,11 @@
 			<PrereqTech>TECH_CAVE_DWELLING</PrereqTech>
 			<ObsoleteTech>TECH_CARPENTRY</ObsoleteTech>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_JUNGLE</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
+				<PrereqFeature>FEATURE_JUNGLE</PrereqFeature>
 			</PrereqOrFeature>
 			<ReplacementBuildings>
 				<BuildingType>BUILDING_HOUSING_GRASS_HUTS</BuildingType>
@@ -16016,22 +15836,10 @@
 			<ObsoleteTech>TECH_SURVEYING</ObsoleteTech>
 			<Bonus>BONUS_BARK</Bonus>
 			<PrereqOrFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_YOUNG</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_ANCIENT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
-				<PrereqFeature>
-					<FeatureType>FEATURE_FOREST_BURNT</FeatureType>
-					<bPrereqFeature>1</bPrereqFeature>
-				</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_YOUNG</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_ANCIENT</PrereqFeature>
+				<PrereqFeature>FEATURE_FOREST_BURNT</PrereqFeature>
 			</PrereqOrFeature>
 			<ReplacementBuildings>
 				<BuildingType>BUILDING_HOUSING_HOVELS</BuildingType>
@@ -16287,14 +16095,8 @@
 			</PrereqBonuses>
 			<RawVicinityBonus>BONUS_HORSE</RawVicinityBonus>
 			<PrereqOrTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_GRASSLAND</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
-				<PrereqTerrain>
-					<TerrainType>TERRAIN_PLAINS</TerrainType>
-					<bPrereqTerrain>1</bPrereqTerrain>
-				</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_GRASSLAND</PrereqTerrain>
+				<PrereqTerrain>TERRAIN_PLAINS</PrereqTerrain>
 			</PrereqOrTerrain>
 			<ReplacementBuildings>
 				<BuildingType>BUILDING_HOUSING_PALACES</BuildingType>
