@@ -1477,6 +1477,157 @@ namespace
 	}
 }
 
+// #195 Phase 2: aggregate the scattered GOM-expressible typed Prereq* fields into one
+// introspectable requirement list. Read-only description; canConstruct still evaluates.
+// Non-GOM prereqs (population, culture level, properties, war/power) and the vicinity-
+// bonus / state-religion variants keep their bespoke handling and are intentionally not
+// modelled here yet -- see the plan doc for the staged coverage.
+void CvBuildingInfo::buildConstructRequirements()
+{
+	PROFILE_EXTRA_FUNC();
+	m_constructRequirements.clear();
+
+	// --- GOM_BUILDING ---
+	{
+		ConstructRequirement req(GOM_BUILDING, REQOP_REQUIRE_ALL);
+		for (int i = 0, n = getNumPrereqInCityBuildings(); i < n; i++)
+		{
+			req.aiIds.push_back(getPrereqInCityBuilding(i));
+		}
+		if (!req.aiIds.empty()) m_constructRequirements.push_back(req);
+	}
+	{
+		ConstructRequirement req(GOM_BUILDING, REQOP_REQUIRE_ANY);
+		for (int i = 0, n = getNumPrereqOrBuilding(); i < n; i++)
+		{
+			req.aiIds.push_back(getPrereqOrBuilding(i));
+		}
+		if (!req.aiIds.empty()) m_constructRequirements.push_back(req);
+	}
+	{
+		ConstructRequirement req(GOM_BUILDING, REQOP_FORBID);
+		for (int i = 0, n = getNumPrereqNotInCityBuildings(); i < n; i++)
+		{
+			req.aiIds.push_back(getPrereqNotInCityBuilding(i));
+		}
+		if (!req.aiIds.empty()) m_constructRequirements.push_back(req);
+	}
+	foreach_(const BuildingModifier2& kPair, getPrereqNumOfBuildings())
+	{
+		m_constructRequirements.push_back(ConstructRequirement(GOM_BUILDING, REQOP_REQUIRE_COUNT, kPair.first, kPair.second));
+	}
+
+	// --- GOM_TECH (single PrereqAndTech + any PrereqAndTechs, all required) ---
+	{
+		ConstructRequirement req(GOM_TECH, REQOP_REQUIRE_ALL);
+		if (getPrereqAndTech() != NO_TECH)
+		{
+			req.aiIds.push_back(getPrereqAndTech());
+		}
+		foreach_(const TechTypes eTech, getPrereqAndTechs())
+		{
+			if (eTech != NO_TECH && algo::none_of_equal(req.aiIds, (int)eTech))
+			{
+				req.aiIds.push_back(eTech);
+			}
+		}
+		if (!req.aiIds.empty()) m_constructRequirements.push_back(req);
+	}
+
+	// --- GOM_BONUS ---
+	if (getPrereqAndBonus() != NO_BONUS)
+	{
+		m_constructRequirements.push_back(ConstructRequirement(GOM_BONUS, REQOP_REQUIRE_ALL, getPrereqAndBonus()));
+	}
+	{
+		ConstructRequirement req(GOM_BONUS, REQOP_REQUIRE_ANY);
+		foreach_(const BonusTypes eBonus, getPrereqOrBonuses())
+		{
+			req.aiIds.push_back(eBonus);
+		}
+		if (!req.aiIds.empty()) m_constructRequirements.push_back(req);
+	}
+
+	// --- GOM_RELIGION (city must have this religion) ---
+	if (getPrereqReligion() != NO_RELIGION)
+	{
+		m_constructRequirements.push_back(ConstructRequirement(GOM_RELIGION, REQOP_REQUIRE_ALL, getPrereqReligion()));
+	}
+
+	// --- GOM_CORPORATION ---
+	if (getPrereqCorporation() != NO_CORPORATION)
+	{
+		m_constructRequirements.push_back(ConstructRequirement(GOM_CORPORATION, REQOP_REQUIRE_ALL, getPrereqCorporation()));
+	}
+
+	// --- GOM_CIVIC (per-civic AND / OR membership) ---
+	{
+		ConstructRequirement reqAnd(GOM_CIVIC, REQOP_REQUIRE_ALL);
+		ConstructRequirement reqOr(GOM_CIVIC, REQOP_REQUIRE_ANY);
+		for (int i = 0, n = GC.getNumCivicInfos(); i < n; i++)
+		{
+			if (isPrereqAndCivics(i)) reqAnd.aiIds.push_back(i);
+			if (isPrereqOrCivics(i)) reqOr.aiIds.push_back(i);
+		}
+		if (!reqAnd.aiIds.empty()) m_constructRequirements.push_back(reqAnd);
+		if (!reqOr.aiIds.empty()) m_constructRequirements.push_back(reqOr);
+	}
+
+	// --- GOM_OPTION (game option must be enabled) ---
+	if (getPrereqGameOption() != -1)
+	{
+		m_constructRequirements.push_back(ConstructRequirement(GOM_OPTION, REQOP_REQUIRE_ALL, getPrereqGameOption()));
+	}
+
+	// --- GOM_TERRAIN (per-terrain AND / OR membership) ---
+	{
+		ConstructRequirement reqAnd(GOM_TERRAIN, REQOP_REQUIRE_ALL);
+		ConstructRequirement reqOr(GOM_TERRAIN, REQOP_REQUIRE_ANY);
+		for (int i = 0, n = GC.getNumTerrainInfos(); i < n; i++)
+		{
+			if (isPrereqAndTerrain(i)) reqAnd.aiIds.push_back(i);
+			if (isPrereqOrTerrain(i)) reqOr.aiIds.push_back(i);
+		}
+		if (!reqAnd.aiIds.empty()) m_constructRequirements.push_back(reqAnd);
+		if (!reqOr.aiIds.empty()) m_constructRequirements.push_back(reqOr);
+	}
+
+	// --- GOM_FEATURE (per-feature OR membership) ---
+	{
+		ConstructRequirement reqOr(GOM_FEATURE, REQOP_REQUIRE_ANY);
+		for (int i = 0, n = GC.getNumFeatureInfos(); i < n; i++)
+		{
+			if (isPrereqOrFeature(i)) reqOr.aiIds.push_back(i);
+		}
+		if (!reqOr.aiIds.empty()) m_constructRequirements.push_back(reqOr);
+	}
+
+	// --- GOM_IMPROVEMENT (any listed improvement in the vicinity) ---
+	{
+		ConstructRequirement req(GOM_IMPROVEMENT, REQOP_REQUIRE_ANY);
+		foreach_(const ImprovementTypes eImp, getPrereqOrImprovements())
+		{
+			req.aiIds.push_back(eImp);
+		}
+		if (!req.aiIds.empty()) m_constructRequirements.push_back(req);
+	}
+
+	// --- GOM_HERITAGE (any listed heritage) ---
+	{
+		ConstructRequirement req(GOM_HERITAGE, REQOP_REQUIRE_ANY);
+		foreach_(const HeritageTypes eHeritage, getPrereqOrHeritage())
+		{
+			req.aiIds.push_back(eHeritage);
+		}
+		if (!req.aiIds.empty()) m_constructRequirements.push_back(req);
+	}
+
+	// Deliberately NOT modelled yet (bespoke semantics, no consumer needs them):
+	// vicinity / raw-vicinity bonus prereqs (in-vicinity, not in-city), state-religion
+	// (player-level), and the non-GOM prereqs (population, culture level, properties,
+	// war/power). These keep their existing typed handling in canConstruct.
+}
+
 void CvBuildingInfo::doPostLoadCaching(uint32_t iThis)
 {
 	PROFILE_EXTRA_FUNC();
@@ -1509,6 +1660,8 @@ void CvBuildingInfo::doPostLoadCaching(uint32_t iThis)
 	}
 	m_bEnablesOtherBuildings = CvBuildingInternal::calculateEnablesOtherBuildings(*this, (BuildingTypes)iThis);
 	m_bEnablesUnits = CvBuildingInternal::calculateEnablesUnits(*this, (BuildingTypes)iThis);
+
+	buildConstructRequirements();
 
 	if (getHolyCity() != NO_RELIGION)
 	{

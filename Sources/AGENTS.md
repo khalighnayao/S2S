@@ -25,6 +25,11 @@ root `AGENTS.md`.
   `powershell.exe -NoProfile -ExecutionPolicy Bypass -File "../Tools/_Build.ps1" <Config> <verb...>`.
   Configs: `Assert`/`Debug`/`Release`/`FinalRelease`/`Profile`/`ProfileExtra`; verbs: `clean`/`build`/`rebuild`/`deploy`.
 - Quick compile check after editing: `Assert build` (~30s incremental). `MakeDLL*.bat` always rebuild+deploy.
+- **`FASSERT`/`FAssertMsg` compile out of `Release` and `FinalRelease`** (only `Assert`/`Debug`/`Testing`
+  define `FASSERT_ENABLE`, per `fbuild.bff` — *not* the `.vcxproj`). FinalRelease is the build players
+  run, so to verify anything in a FinalRelease run use the gated logging system (`[PERF]` via
+  `gPerfLogLevel`/`Autolog__LogLevelPerf`, or a `log<Domain>AI` helper), which ships in every DLL —
+  see `docs/reference/ai-logging-reference.md`.
 - `fbuild.bff` is the source-of-truth for compiled directories (the `.vcxproj` is IDE-only).
   New `Sources/<Dir>/` must be added to `fbuild.bff`'s `.UnityInputPath` (~line 201) **and** the `.vcxproj`(+`.filters`),
   or FastBuild fails at link with `LNK2001` while the IDE compiles fine.

@@ -600,6 +600,10 @@ public:
 	// condition / typed prereqs B (or a free bonus B grants) can satisfy. Lets the
 	// CABV unit-enabler value loop narrow its scan from all units to B's candidates.
 	const std::vector<UnitTypes>& getUnitsEnabledBy(BuildingTypes eEnabler) const;
+	// #195 Phase 2: one-shot [PERF/reqmodel] log verifying the unified requirement model
+	// reproduces the typed prereq fields the enabler index relies on (FinalRelease-visible
+	// via Autolog__LogLevelPerf). Called once from the CABV PreLoop.
+	void logConstructRequirementFidelity() const;
 
 	int getNumSpecialBuildingInfos() const;
 	CvSpecialBuildingInfo& getSpecialBuildingInfo(SpecialBuildingTypes eSpecialBuildingNum) const;

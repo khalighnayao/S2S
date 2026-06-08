@@ -22,6 +22,7 @@
 class CounterSet;
 class CvCity;
 class CvDeal;
+struct ConstructRequirement;
 class CvPopupInfo;
 class CvPlayer;
 
@@ -195,6 +196,20 @@ public:
 	bool buildPromotionString(CvWStringBuffer& szBuffer, TechTypes eTech, int iPromotionType, bool bFirst, bool bList) const;
 	void buildHintsList(CvWStringBuffer& szBuffer);
 	void buildBuildingRequiresString(CvWStringBuffer& szBuffer, BuildingTypes eBuilding, bool bCivilopediaText, bool bTechChooserText, const CvCity* pCity);
+	// #195 Phase 2: render a single "in-city-vicinity" requirement (terrain / feature /
+	// improvement) from the unified prerequisite model, replacing the per-type hand-rolled
+	// loops in buildBuildingRequiresString.
+	void appendVicinityRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req);
+	// #195 Phase 2: status-aware renderer for a model requirement. Filters by what the city
+	// already has (via CvGameObject::hasGOM, the same oracle the construct-condition uses) and
+	// renders the unmet items as a "Requires: <links>" list (AND for REQUIRE_ALL, OR otherwise).
+	void appendRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req, const CvCity* pCity);
+	// #195 Phase 2: format one GOM (type,id) as a clickable <link>description</link>.
+	bool buildRequirementItemLink(GOMTypes eGOM, int iId, CvWString& szOut) const;
+	// #195 Phase 2: civic requirements use a different UX -- show ALL prereq civics coloured
+	// by have (green) / need (red), not just the unmet ones. Returns whether this requirement
+	// is satisfied (all for REQUIRE_ALL; any-or-empty for REQUIRE_ANY) for the active-civics note.
+	bool appendCivicRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req);
 	void buildMaintenanceModifiersString(CvWStringBuffer& szBuffer, TechTypes eTech, bool bList);
 
 	DllExport void buildCityBillboardIconString( CvWStringBuffer& szBuffer, CvCity* pCity);

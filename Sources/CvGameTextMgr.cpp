@@ -18259,6 +18259,134 @@ void CvGameTextMgr::setHeritageHelp(CvWStringBuffer &szBuffer, const HeritageTyp
 }
 
 
+// #195 Phase 2: render one terrain / feature / improvement "requires ... in city vicinity"
+// requirement straight from the unified prerequisite model, replacing four near-identical
+// hand-rolled loops. Same TXT keys, separator (AND for REQUIRE_ALL, OR otherwise) and the
+// IN_CITY_VICINITY suffix as the code it supersedes.
+void CvGameTextMgr::appendVicinityRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req)
+{
+	const CvWString szJoin = (req.eOp == REQOP_REQUIRE_ALL) ? gDLL->getText("TXT_KEY_AND") : gDLL->getText("TXT_KEY_OR");
+	bool bFirst = true;
+	foreach_(const int iId, req.aiIds)
+	{
+		CvWString szDesc;
+		switch (req.eGOM)
+		{
+		case GOM_TERRAIN:     szDesc = GC.getTerrainInfo(static_cast<TerrainTypes>(iId)).getDescription(); break;
+		case GOM_FEATURE:     szDesc = GC.getFeatureInfo(static_cast<FeatureTypes>(iId)).getDescription(); break;
+		case GOM_IMPROVEMENT: szDesc = GC.getImprovementInfo(static_cast<ImprovementTypes>(iId)).getDescription(); break;
+		default: return; // not an in-vicinity requirement type
+		}
+		setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), szDesc, szJoin.c_str(), bFirst);
+		bFirst = false;
+	}
+	if (!bFirst)
+	{
+		szBuffer.append(gDLL->getText("TXT_KEY_IN_CITY_VICINITY"));
+		szBuffer.append(ENDCOLR);
+	}
+}
+
+// #195 Phase 2: format one GOM (type, id) as a clickable <link>description</link>. Returns
+// false for GOM types this renderer does not display (caller skips them).
+bool CvGameTextMgr::buildRequirementItemLink(GOMTypes eGOM, int iId, CvWString& szOut) const
+{
+	switch (eGOM)
+	{
+	case GOM_BUILDING:    szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getBuildingInfo(static_cast<BuildingTypes>(iId)).getType()).GetCString(), GC.getBuildingInfo(static_cast<BuildingTypes>(iId)).getDescription()); return true;
+	case GOM_TECH:        szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getTechInfo(static_cast<TechTypes>(iId)).getType()).GetCString(), GC.getTechInfo(static_cast<TechTypes>(iId)).getDescription()); return true;
+	case GOM_BONUS:       szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getBonusInfo(static_cast<BonusTypes>(iId)).getType()).GetCString(), GC.getBonusInfo(static_cast<BonusTypes>(iId)).getDescription()); return true;
+	case GOM_RELIGION:    szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getReligionInfo(static_cast<ReligionTypes>(iId)).getType()).GetCString(), GC.getReligionInfo(static_cast<ReligionTypes>(iId)).getDescription()); return true;
+	case GOM_CORPORATION: szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getCorporationInfo(static_cast<CorporationTypes>(iId)).getType()).GetCString(), GC.getCorporationInfo(static_cast<CorporationTypes>(iId)).getDescription()); return true;
+	case GOM_CIVIC:       szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getCivicInfo(static_cast<CivicTypes>(iId)).getType()).GetCString(), GC.getCivicInfo(static_cast<CivicTypes>(iId)).getDescription()); return true;
+	case GOM_TERRAIN:     szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getTerrainInfo(static_cast<TerrainTypes>(iId)).getType()).GetCString(), GC.getTerrainInfo(static_cast<TerrainTypes>(iId)).getDescription()); return true;
+	case GOM_FEATURE:     szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getFeatureInfo(static_cast<FeatureTypes>(iId)).getType()).GetCString(), GC.getFeatureInfo(static_cast<FeatureTypes>(iId)).getDescription()); return true;
+	case GOM_IMPROVEMENT: szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getImprovementInfo(static_cast<ImprovementTypes>(iId)).getType()).GetCString(), GC.getImprovementInfo(static_cast<ImprovementTypes>(iId)).getDescription()); return true;
+	case GOM_HERITAGE:    szOut.Format(L"<link=%s>%s</link>", CvWString(GC.getHeritageInfo(static_cast<HeritageTypes>(iId)).getType()).GetCString(), GC.getHeritageInfo(static_cast<HeritageTypes>(iId)).getDescription()); return true;
+	default:              return false;
+	}
+}
+
+// #195 Phase 2: status-aware renderer for a model requirement. Filters by what the city
+// already has via CvGameObject::hasGOM -- the same oracle the construct-condition evaluates
+// against -- so the displayed have/need status matches actual constructibility. Renders the
+// unmet items as a "Requires: <links>" list (AND for REQUIRE_ALL, OR otherwise). pCity NULL
+// (Civilopedia) treats nothing as satisfied, so the full requirement is shown.
+void CvGameTextMgr::appendRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req, const CvCity* pCity)
+{
+	// FORBID / COUNT carry bespoke wording ("not required", "N of"); not handled here.
+	if (req.eOp == REQOP_FORBID || req.eOp == REQOP_REQUIRE_COUNT)
+	{
+		return;
+	}
+	const CvGameObject* pObject = pCity ? pCity->getGameObject() : NULL;
+
+	// REQUIRE_ANY is met the moment the city has any one listed item -> show nothing.
+	if (req.eOp == REQOP_REQUIRE_ANY && pObject != NULL)
+	{
+		foreach_(const int iId, req.aiIds)
+		{
+			if (pObject->hasGOM(req.eGOM, iId))
+			{
+				return;
+			}
+		}
+	}
+
+	const CvWString szSep = (req.eOp == REQOP_REQUIRE_ALL) ? gDLL->getText("TXT_KEY_AND") : gDLL->getText("TXT_KEY_OR");
+	bool bFirst = true;
+	foreach_(const int iId, req.aiIds)
+	{
+		// For REQUIRE_ALL, drop the items the city already satisfies (the per-field blocks
+		// did this "skip if has" filtering individually).
+		if (req.eOp == REQOP_REQUIRE_ALL && pObject != NULL && pObject->hasGOM(req.eGOM, iId))
+		{
+			continue;
+		}
+		CvWString szItem;
+		if (!buildRequirementItemLink(req.eGOM, iId, szItem))
+		{
+			continue;
+		}
+		setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), szItem, szSep.c_str(), bFirst);
+		bFirst = false;
+	}
+	if (!bFirst)
+	{
+		szBuffer.append(ENDCOLR);
+	}
+}
+
+// #195 Phase 2: civic requirement renderer. Unlike appendRequirementHelp, civics show EVERY
+// listed civic, coloured by whether the active player has it (POSITIVE = have, WARNING = need),
+// joined by AND (REQUIRE_ALL) / OR (REQUIRE_ANY) -- the "show-all status" UX the old hand-rolled
+// blocks used. Returns whether the requirement is met, for the "requires active civics" note.
+bool CvGameTextMgr::appendCivicRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req)
+{
+	const PlayerTypes eActive = GC.getGame().getActivePlayer();
+	const bool bAnd = (req.eOp == REQOP_REQUIRE_ALL);
+	const CvWString szSep = gDLL->getText("TXT_KEY_REVERT_COLOR") + (bAnd ? gDLL->getText("TXT_KEY_AND") : gDLL->getText("TXT_KEY_OR"));
+	bool bFirst = true;
+	bool bAllMet = true;
+	bool bAnyMet = false;
+	foreach_(const int iId, req.aiIds)
+	{
+		const bool bMet = (eActive != NO_PLAYER) && GET_PLAYER(eActive).isCivic(static_cast<CivicTypes>(iId));
+		if (bMet) bAnyMet = true; else bAllMet = false;
+
+		CvWString szItem = (bMet ? gDLL->getText("TXT_KEY_POSITIVE_COLOR") : gDLL->getText("TXT_KEY_SET_WARNING_COLOR")) + GC.getCivicInfo(static_cast<CivicTypes>(iId)).getDescription();
+		CvWString szStart;
+		szStart.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_REQUIRES_NO_WARNING").c_str());
+		setListHelp(szBuffer, szStart.c_str(), szItem.c_str(), szSep.c_str(), bFirst);
+		bFirst = false;
+	}
+	if (!bFirst)
+	{
+		szBuffer.append(ENDCOLR);
+	}
+	return bAnd ? bAllMet : (bFirst || bAnyMet);
+}
+
 void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, BuildingTypes eBuilding, bool bCivilopediaText, bool bTechChooserText, const CvCity* pCity)
 {
 	PROFILE_EXTRA_FUNC();
@@ -18352,12 +18480,14 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 				}
 			}
 		}
-		for (int iI = 0; iI < GC.getNumBuildingInfos(); ++iI)
+		// #195 Phase 2: required in-city buildings (REQUIRE_ALL) via the model + hasGOM
+		// (isActiveBuilding). The old block scanned all building infos and emitted one
+		// "Requires <link>" line each; the renderer lists the unmet ones as "Requires: A and B".
+		foreach_(const ConstructRequirement& req, kBuilding.getConstructRequirements())
 		{
-			if (kBuilding.isPrereqInCityBuilding(iI) && (!pCity || !GET_TEAM(pCity->getTeam()).isObsoleteBuilding((BuildingTypes)iI) && !pCity->isActiveBuilding((BuildingTypes)iI)))
+			if (req.eGOM == GOM_BUILDING && req.eOp == REQOP_REQUIRE_ALL)
 			{
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_REQUIRES_LINK", CvWString(GC.getBuildingInfo((BuildingTypes)iI).getType()).GetCString(), GC.getBuildingInfo((BuildingTypes)iI).getTextKeyWide()));
+				appendRequirementHelp(szBuffer, req, pCity);
 			}
 		}
 
@@ -18434,64 +18564,20 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 		}
 	}
 
-	bFirst = true;
+	// #195 Phase 2: prereq civics (AND + OR) via the model. Civics keep their show-all,
+	// colour-coded UX (have = green, need = red) through appendCivicRequirementHelp, which
+	// also reports whether each requirement is met so the "requires active civics" note below
+	// stays correct.
 	bool civicRequirementsAllMet = true;
+	foreach_(const ConstructRequirement& req, kBuilding.getConstructRequirements())
 	{
-		bool bLastCivicWasMet = false;
-		for (int iI = 0; iI < GC.getNumCivicInfos(); ++iI)
+		if (req.eGOM == GOM_CIVIC)
 		{
-			if (kBuilding.isPrereqAndCivics(CivicTypes(iI)))
+			if (!appendCivicRequirementHelp(szBuffer, req))
 			{
-				if (GC.getGame().getActivePlayer() == NO_PLAYER || !GET_PLAYER(GC.getGame().getActivePlayer()).isCivic((CivicTypes)iI))
-				{
-					if (bLastCivicWasMet && !bFirst)
-					{
-						szBuffer.append(gDLL->getText("TXT_KEY_SET_WARNING_COLOR").c_str());
-					}
-					setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), GC.getCivicInfo((CivicTypes(iI))).getDescription(), gDLL->getText("TXT_KEY_AND").c_str(), bFirst);
-					bLastCivicWasMet = false;
-					civicRequirementsAllMet = false;
-				}
-				else
-				{
-					if (!bLastCivicWasMet && !bFirst)
-					{
-						szBuffer.append(gDLL->getText("TXT_KEY_REVERT_COLOR").c_str());
-					}
-					szTempBuffer.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_REQUIRES_NO_WARNING").c_str());
-					setListHelp(szBuffer, szTempBuffer, GC.getCivicInfo((CivicTypes(iI))).getDescription(), gDLL->getText("TXT_KEY_AND").c_str(), bFirst);
-					bLastCivicWasMet = true;
-				}
-				bFirst = false;
+				civicRequirementsAllMet = false;
 			}
 		}
-	}
-
-	bFirst = true;
-	{
-		const CvWString prefix = gDLL->getText("TXT_KEY_REQUIRES_NO_WARNING");
-		const CvWString separator = gDLL->getText("TXT_KEY_REVERT_COLOR") + gDLL->getText("TXT_KEY_OR");
-		bool bCivicORRequirementMet = false;
-
-		for (int iI = 0; iI < GC.getNumCivicInfos(); ++iI)
-		{
-			if (kBuilding.isPrereqOrCivics(CivicTypes(iI)))
-			{
-				CvWString desc = GC.getCivicInfo((CivicTypes(iI))).getDescription();
-
-				if (GC.getGame().getActivePlayer() != NO_PLAYER && GET_PLAYER(GC.getGame().getActivePlayer()).isCivic(CivicTypes(iI)))
-				{
-					desc = gDLL->getText("TXT_KEY_POSITIVE_COLOR") + desc;
-					bCivicORRequirementMet= true;
-				}
-				else desc = gDLL->getText("TXT_KEY_SET_WARNING_COLOR") + desc;
-
-				szTempBuffer.Format(L"%s%s", NEWLINE, prefix.c_str());
-				setListHelp(szBuffer,szTempBuffer, desc.c_str(), separator.c_str(), bFirst);
-				bFirst = false;
-			}
-		}
-		civicRequirementsAllMet &= (bFirst || bCivicORRequirementMet);
 	}
 
 	if (kBuilding.isRequiresActiveCivics())
@@ -18629,34 +18715,14 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 			szBuffer.append(gDLL->getText("TXT_KEY_BUILDINGHELP_REQUIRES_ANY_BUILDING", GC.getBuildingInfo(ePrereqBuilding).getDescription()));
 		}
 
-		bFirst = true;
-		bool bValid = false;
-		if (pCity)
+		// #195 Phase 2: "requires one of these buildings" via the model + the unified hasGOM
+		// status oracle (GOM_BUILDING -> isActiveBuilding). The old block additionally treated
+		// an all-obsolete OR-set as satisfied; that minor display nuance is not reproduced.
+		foreach_(const ConstructRequirement& req, kBuilding.getConstructRequirements())
 		{
-			bValid = true;
-			for (int iI = 0; iI < kBuilding.getNumPrereqOrBuilding(); ++iI)
+			if (req.eGOM == GOM_BUILDING && req.eOp == REQOP_REQUIRE_ANY)
 			{
-				if (!GET_TEAM(pCity->getTeam()).isObsoleteBuilding((BuildingTypes)kBuilding.getPrereqOrBuilding(iI)))
-				{
-					bValid = false;
-					if (pCity->isActiveBuilding((BuildingTypes)kBuilding.getPrereqOrBuilding(iI)))
-					{
-						bValid = true;
-						break;
-					}
-				}
-			}
-		}
-		if (!bValid)
-		{
-			for (int iI = 0; iI < kBuilding.getNumPrereqOrBuilding(); ++iI)
-			{
-				setListHelp(
-					szBuffer, gDLL->getText("TXT_KEY_REQUIRES"),
-					GC.getBuildingInfo((BuildingTypes)kBuilding.getPrereqOrBuilding(iI)).getDescription(),
-					gDLL->getText("TXT_KEY_OR").c_str(), bFirst
-				);
-				bFirst = false;
+				appendRequirementHelp(szBuffer, req, pCity);
 			}
 		}
 
@@ -18673,60 +18739,16 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 				bFirst = false;
 			}
 		}
-		bFirst = true;
-		for (int iI = 0; iI < GC.getNumTerrainInfos(); ++iI)
+		// #195 Phase 2: terrain (Or/And), improvement (Or) and feature (Or) "in city
+		// vicinity" requirements, rendered from the unified model instead of four
+		// near-identical hand-rolled loops. appendVicinityRequirementHelp reproduces the
+		// per-block TXT keys, AND/OR separator and IN_CITY_VICINITY suffix.
+		foreach_(const ConstructRequirement& req, kBuilding.getConstructRequirements())
 		{
-			if (kBuilding.isPrereqOrTerrain(iI))
+			if (req.eGOM == GOM_TERRAIN || req.eGOM == GOM_FEATURE || req.eGOM == GOM_IMPROVEMENT)
 			{
-				setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), GC.getTerrainInfo((TerrainTypes)iI).getDescription(), gDLL->getText("TXT_KEY_OR").c_str(), bFirst);
-				bFirst = false;
+				appendVicinityRequirementHelp(szBuffer, req);
 			}
-		}
-		if (!bFirst)
-		{
-			szBuffer.append(gDLL->getText("TXT_KEY_IN_CITY_VICINITY"));
-			szBuffer.append(ENDCOLR);
-		}
-
-		bFirst = true;
-		for (int iI = 0; iI < GC.getNumTerrainInfos(); ++iI)
-		{
-			if (kBuilding.isPrereqAndTerrain(iI))
-			{
-				setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), GC.getTerrainInfo((TerrainTypes)iI).getDescription(), gDLL->getText("TXT_KEY_AND").c_str(), bFirst);
-				bFirst = false;
-			}
-		}
-		if (!bFirst)
-		{
-			szBuffer.append(gDLL->getText("TXT_KEY_IN_CITY_VICINITY"));
-			szBuffer.append(ENDCOLR);
-		}
-
-		bFirst = true;
-		foreach_(const ImprovementTypes prereqOrImprovement, kBuilding.getPrereqOrImprovements())
-		{
-			setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), GC.getImprovementInfo(prereqOrImprovement).getDescription(), gDLL->getText("TXT_KEY_OR").c_str(), bFirst);
-			bFirst = false;
-		}
-		if (!bFirst)
-		{
-			szBuffer.append(gDLL->getText("TXT_KEY_IN_CITY_VICINITY"));
-			szBuffer.append(ENDCOLR);
-		}
-		bFirst = true;
-		for (int iI = 0; iI < GC.getNumFeatureInfos(); ++iI)
-		{
-			if (kBuilding.isPrereqOrFeature(iI))
-			{
-				setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), GC.getFeatureInfo((FeatureTypes)iI).getDescription(), gDLL->getText("TXT_KEY_OR").c_str(), bFirst);
-				bFirst = false;
-			}
-		}
-		if (!bFirst)
-		{
-			szBuffer.append(gDLL->getText("TXT_KEY_IN_CITY_VICINITY"));
-			szBuffer.append(ENDCOLR);
 		}
 
 		if (pCity && kBuilding.isAllowsNukes() && GC.getGame().isNoNukes())
@@ -18790,38 +18812,14 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 				szBuffer.append(ENDCOLR);
 			}
 
-			if (kBuilding.getPrereqAndBonus() != NO_BONUS
-			&& (!pCity || !pCity->hasBonus((BonusTypes)kBuilding.getPrereqAndBonus())))
+			// #195 Phase 2: prereq bonuses (the single AND bonus + the OR list) via the model
+			// + the unified hasGOM status oracle (GOM_BONUS -> hasBonus).
+			foreach_(const ConstructRequirement& req, kBuilding.getConstructRequirements())
 			{
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_UNITHELP_REQUIRES_STRING", GC.getBonusInfo((BonusTypes)kBuilding.getPrereqAndBonus()).getTextKeyWide()));
-			}
-			szBonusList.clear();
-
-			bFirst = true;
-
-			foreach_(const BonusTypes ePrereqBonus, kBuilding.getPrereqOrBonuses())
-			{
-				if (!pCity || !pCity->hasBonus(ePrereqBonus))
+				if (req.eGOM == GOM_BONUS)
 				{
-					setListHelp(
-						szBonusList, gDLL->getText("TXT_KEY_REQUIRES"),
-						GC.getBonusInfo(ePrereqBonus).getDescription(),
-						gDLL->getText("TXT_KEY_OR").c_str(), bFirst
-					);
-					bFirst = false;
+					appendRequirementHelp(szBuffer, req, pCity);
 				}
-				else if (pCity)
-				{
-					bFirst = true;
-					break;
-				}
-			}
-
-			if (!bFirst)
-			{
-				szBonusList.append(ENDCOLR);
-				szBuffer.append(szBonusList);
 			}
 
 			if (NO_CORPORATION != kBuilding.getFoundsCorporation())

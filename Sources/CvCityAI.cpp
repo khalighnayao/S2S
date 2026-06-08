@@ -12644,6 +12644,16 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 		logPerf(1, "[PERF/cabvset] turn=%d owner=%d city=%d numBuildings=%d constructible=%d enablers=%d setSize=%d",
 			GC.getGame().getGameTurn(), getOwner(), getID(), iNumBuildings,
 			iConstructible, iEnablers, (int)buildingsToCalculate.size());
+
+		// #195 Phase 2: one-shot model-fidelity sweep, logged so it is visible in FinalRelease.
+		// Runs here (not at the load-time index build) because gPerfLogLevel is only set at
+		// game init; once per session is enough since the model is static info data.
+		static bool s_bReqModelChecked = false;
+		if (gPerfLogLevel >= 1 && !s_bReqModelChecked)
+		{
+			s_bReqModelChecked = true;
+			GC.logConstructRequirementFidelity();
+		}
 	}
 	{
 		PROFILE("CvCityAI::CalculateAllBuildingValues.Loop");

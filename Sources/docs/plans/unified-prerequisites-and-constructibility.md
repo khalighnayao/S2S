@@ -1,7 +1,11 @@
 # Unified Prerequisites & Constructibility (#195)
 
-**Status:** Phase 1 COMPLETE — index is authoritative, legacy O(buildings²) scan removed.
-Verified zero divergence across a real game (see below). Phase 2 not started.
+> This is the **plan / rollout / measurement history**. For how the shipped system works
+> today (the model, the enabler index, help-text rendering), see the reference note
+> [`../reference/constructibility-and-prerequisites.md`](../reference/constructibility-and-prerequisites.md).
+
+**Status:** Phase 1 COMPLETE & merged (PR #314). Phase 2 (unified model + index + help-text)
+on PR #315, user-verified. Index is authoritative; legacy O(buildings²) scan removed.
 
 ## Current state (what's built)
 - `BoolExpr::getInvolvedGOMs(vector<GOMQuery>&)` — one-pass gather visitor that
@@ -164,13 +168,83 @@ so the turn-time win does not block on the (gameplay-sensitive) unification.
 4. Then: drive set invalidation off the index on `setHasBuilding`/bonus/tech change
    instead of full rebuild (the cross-turn retention step).
 
-### Phase 2 — Prereq → BoolExpr unification  *(#195 simplification, gameplay-sensitive)*
-5. Migrate GOM-expressible typed prereqs into the construct/train condition,
-   incrementally, one prereq family at a time, load-verifying each.
-6. Shrink `canConstructInternal`/`canTrain` to: non-GOM typed checks + one condition
-   eval. Keep `buildDisplayString`/civic-validation/Python consumers whole.
-7. Retire `calculateEnablesOtherBuildings`'s bool in favour of "has any dependents
-   in the index".
+### Phase 2 — Unified prerequisite model  *(additive aggregation layer, low risk)*
+
+Chosen over a BoolExpr-fold / `canConstruct`-rewrite: that path is multi-surface (city +
+player levels), would lose the per-prereq `probabilityEverConstructable` hints, and the
+turn-time win is already banked — so the remaining payoff is *introspection coherence*,
+best served by a unifying interface, not by rewriting the evaluator. `canConstruct` /
+`canTrain` evaluation (and its hints / gate stratification) stays untouched.
+
+**Increment 1 — DONE (model + first consumer):**
+- `Sources/ConstructRequirement.h` — `ConstructRequirement { GOMTypes eGOM;
+  ConstructRequirementOp eOp (ALL/ANY/FORBID/COUNT); vector<int> aiIds; int iCount; }`:
+  one introspectable prereq over a GOM type. Read-only description, not an evaluator.
+- `CvBuildingInfo::getConstructRequirements()` — built at load
+  (`buildConstructRequirements` in `doPostLoadCaching`) from the GOM-expressible typed
+  fields: GOM_BUILDING (InCity=ALL, Or=ANY, NotInCity=FORBID, NumOf=COUNT), GOM_TECH,
+  GOM_BONUS (And=ALL, Or=ANY), GOM_RELIGION, GOM_CORPORATION, GOM_CIVIC (And/Or),
+  GOM_OPTION.
+- The constructibility enabler index now reads building prereqs **through the model**
+  (GOM_BUILDING ALL+ANY = the old InCity+Or; FORBID/COUNT correctly skipped — not
+  enablers). Builds clean (Assert).
+
+**Increment 2 — DONE (unit/train side):**
+- `CvUnitInfo::getTrainRequirements()` — same model, built at load
+  (`buildTrainRequirements` in `doPostLoadCaching`): GOM_BUILDING (And=ALL, Or=ANY),
+  GOM_TECH, GOM_BONUS (And=ALL, Or=ANY), GOM_RELIGION, GOM_CORPORATION, GOM_CIVIC (Or).
+- The unit-enabler index dimension now reads through the model — building enablers from
+  GOM_BUILDING **REQUIRE_ALL only** (the CABV unit-enabler loop checks `isPrereqAndBuilding`
+  only, so OR-buildings are intentionally not enablers — preserves the Phase 1 verified
+  behaviour); bonus needs from GOM_BONUS (any op). Builds clean.
+
+So **both** enabler-index dimensions (building + unit) now read through the unified model.
+
+**Model-fidelity verification — via logging, NOT asserts.** FASSERT compiles out of
+FinalRelease (only Assert/Debug/Testing define `FASSERT_ENABLE`), so a one-shot sweep
+`cvInternalGlobals::logConstructRequirementFidelity()` emits `[PERF/reqmodel]` lines
+(building + unit model vs typed-field comparison) through the gated `[PERF]` logging
+channel, which ships in every DLL. It is fired once per session from the CABV PreLoop
+(where `gPerfLogLevel` is set — it is read at game init, after the load-time index build).
+**Verify:** play with `Autolog__LogLevelPerf >= 1`, confirm `Performance.log` has a
+`[PERF/reqmodel] … mismatches=0` line and no `[PERF/reqmodel] MISMATCH …` lines.
+
+**Increment 3 — DONE (building coverage completed):**
+- Building model extended to GOM_TERRAIN (And/Or), GOM_FEATURE (Or), GOM_IMPROVEMENT (Or),
+  GOM_HERITAGE (Or). The building model now covers every clean GOM-mappable typed prereq.
+- Deliberately still NOT modelled (bespoke semantics, no consumer): vicinity / raw-vicinity
+  bonus (in-vicinity, not in-city), state-religion (player-level); and the non-GOM prereqs
+  (population, culture level, properties, war/power) keep their typed handling. Foundation
+  for the Civilopedia/web export — these GOM types have no behavioural consumer yet.
+
+**Increment 4 — IN PROGRESS (help-text migration, cluster by cluster):**
+`CvGameTextMgr::buildBuildingRequiresString` (~570 lines) hand-enumerates every typed
+prereq field. Migrating it onto the model, one cluster at a time, each visually verified.
+- **Cluster 1 — DONE:** terrain (Or/And) / improvement (Or) / feature (Or) "in city
+  vicinity" requirements — four near-identical hand-rolled loops → one model loop +
+  `appendVicinityRequirementHelp()` (no status filtering; `IN_CITY_VICINITY` suffix kept).
+- **Status-aware renderer — DONE:** `appendRequirementHelp(req, pCity)` +
+  `buildRequirementItemLink(GOM,id)`. Filters unmet items via `CvGameObject::hasGOM` (the
+  same oracle the construct-condition uses, so displayed status == real constructibility);
+  renders unmet items as a `Requires: <links>` list (AND/OR by op). Formatting normalised to
+  clickable links (old blocks mixed link / description / textkey).
+- **Cluster 2 — DONE + verified ("text is fine, links work"):** prereq **Or-buildings**
+  (was an active/obsolete `bValid` scan → GOM_BUILDING REQUIRE_ANY) and prereq **bonuses**
+  (single AND + OR list → GOM_BONUS). Nuance dropped: all-obsolete OR-building set no longer
+  special-cased.
+- **Cluster 3 — DONE (awaiting verification):** **InCity-buildings** (GOM_BUILDING
+  REQUIRE_ALL; all-infos scan + per-line `Requires <link>` → one joined unmet list) and
+  **civics** (AND + OR). Civics keep their show-all colour-coded UX via a dedicated
+  `appendCivicRequirementHelp()` (have = green, need = red) that returns met-status for the
+  `RequiresActiveCivics` note — replaced ~55 lines of two colour-toggle loops.
+- **Intentionally left as-is:** **tech** (`bTechChooserText` gating + the model combines
+  PrereqAndTech/AndTechs so the single-vs-list distinction the chooser needs is lost),
+  **religion** (a coherent group rendered as `getChar` symbols — symbol vs link is a UX call),
+  **NotInCity** (FORBID, "not required" inverse wording), and the non-GOM / vicinity-bonus /
+  state-religion / holy-city blocks. These are documented exceptions, not omissions.
+
+**Increment 5+ (optional, later):** re-express `canConstruct` / `canTrain` on the model,
+shadow-verified, preserving probability hints + gate stratification.
 
 ## Invariants to preserve
 - The `bExposed`/`bTestVisible`/`bIgnoreBuildings` gate stratification.
