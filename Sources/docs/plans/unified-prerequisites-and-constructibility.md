@@ -187,14 +187,26 @@ best served by a unifying interface, not by rewriting the evaluator. `canConstru
   `ConstructRequirement model diverges …` into `Asserts.log` at load if the model ever
   disagrees with the typed fields. Builds clean (Assert).
 
-**Increment 2+ (next):**
-- `CvUnitInfo::getTrainRequirements()` (same model, train side) + migrate the unit-enabler
-  index dimension onto it.
-- Extend coverage: terrain / feature / improvement / heritage, vicinity-bonus and
-  state-religion variants (bespoke semantics); non-GOM prereqs (population, culture,
-  properties, war/power) stay typed and noted.
+**Increment 2 — DONE (unit/train side):**
+- `CvUnitInfo::getTrainRequirements()` — same model, built at load
+  (`buildTrainRequirements` in `doPostLoadCaching`): GOM_BUILDING (And=ALL, Or=ANY),
+  GOM_TECH, GOM_BONUS (And=ALL, Or=ANY), GOM_RELIGION, GOM_CORPORATION, GOM_CIVIC (Or).
+- The unit-enabler index dimension now reads through the model — building enablers from
+  GOM_BUILDING **REQUIRE_ALL only** (the CABV unit-enabler loop checks `isPrereqAndBuilding`
+  only, so OR-buildings are intentionally not enablers — preserves the Phase 1 verified
+  behaviour); bonus needs from GOM_BONUS (any op). Guarded by a `FASSERT_ENABLE`
+  `TrainRequirement model diverges …` assert. Builds clean.
+
+So **both** enabler-index dimensions (building + unit) now read through the unified model.
+
+**Increment 3+ (next):**
+- Extend coverage: terrain / feature / improvement / heritage (clean GOM maps), then the
+  bespoke variants (vicinity-bonus = in-vicinity-not-in-city, state-religion = player-level);
+  non-GOM prereqs (population, culture, properties, war/power) stay typed and noted. This is
+  foundation for the Civilopedia/web export — no behavioural consumer yet.
 - Migrate help text / Civilopedia rendering onto the model (the real fragmentation win;
-  `CvGameTextMgr` currently hand-enumerates each typed field).
+  `CvGameTextMgr` hand-enumerates each typed field). **Needs visual verification** of
+  tooltips/pedia — UI testing is the user's job — so it is a user-directed step.
 - (Optional, later) re-express `canConstruct` / `canTrain` on the model, shadow-verified,
   preserving probability hints + gate stratification.
 

@@ -4,6 +4,7 @@
 #define CV_UNIT_INFO_H
 
 #include "CvInfoBase.h"
+#include "ConstructRequirement.h"
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
@@ -393,6 +394,11 @@ public:
 
 	const BoolExpr* getTrainCondition() const;
 
+	// #195 Phase 2: this unit's GOM-expressible training prerequisites in one introspectable
+	// list, derived from the typed Prereq* fields at load. Read-only description for the
+	// Civilopedia / help text / enabler index; canTrain still does the evaluation.
+	const std::vector<ConstructRequirement>& getTrainRequirements() const { return m_trainRequirements; }
+
 protected:
 	int m_iMaxGlobalInstances;
 	int m_iMaxPlayerInstances;
@@ -537,7 +543,12 @@ public:
 	void doPostLoadCaching(uint32_t iThis);
 
 private:
+	void buildTrainRequirements();
+
 	CvPropertyManipulators m_PropertyManipulators;
+
+	// #195 Phase 2: unified prerequisite description, derived at load from the typed fields.
+	std::vector<ConstructRequirement> m_trainRequirements;
 
 	int m_iDCMBombRange;
 	int m_iDCMBombAccuracy;

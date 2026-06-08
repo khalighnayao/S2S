@@ -3333,22 +3333,64 @@ void cvInternalGlobals::buildConstructibilityEnablerIndex()
 		const CvUnitInfo& kU = getUnitInfo(eU);
 		std::set<BuildingTypes> aEnablers;
 
-		for (int i = 0, n = kU.getNumPrereqAndBuildings(); i < n; i++)
-		{
-			aEnablers.insert(static_cast<BuildingTypes>(kU.getPrereqAndBuilding(i)));
-		}
-
-		// Bonuses that gate this unit; any building granting one as a free bonus is a
-		// potential enabler.
+		// Direct building prereqs, read through the #195 Phase 2 requirement model. Only
+		// GOM_BUILDING REQUIRE_ALL (the typed PrereqAndBuildings) count as enablers -- the
+		// CABV unit-enabler loop checks isPrereqAndBuilding only, so OR-buildings are
+		// intentionally not treated as enablers (preserves the Phase 1 verified behaviour).
 		std::set<BonusTypes> aBonusNeeds;
-		if (kU.getPrereqAndBonus() != NO_BONUS)
+		foreach_(const ConstructRequirement& req, kU.getTrainRequirements())
 		{
-			aBonusNeeds.insert(static_cast<BonusTypes>(kU.getPrereqAndBonus()));
+			if (req.eGOM == GOM_BUILDING && req.eOp == REQOP_REQUIRE_ALL)
+			{
+				foreach_(const int iId, req.aiIds)
+				{
+					aEnablers.insert(static_cast<BuildingTypes>(iId));
+				}
+			}
+			// Bonuses that gate this unit (And + Or); a building granting one as a free
+			// bonus is a potential enabler.
+			else if (req.eGOM == GOM_BONUS)
+			{
+				foreach_(const int iId, req.aiIds)
+				{
+					aBonusNeeds.insert(static_cast<BonusTypes>(iId));
+				}
+			}
 		}
-		foreach_(const BonusTypes eOr, kU.getPrereqOrBonuses())
+#if FASSERT_ENABLE
+		// Fidelity: the model must reproduce the typed unit prereqs the legacy index used.
 		{
-			aBonusNeeds.insert(eOr);
+			std::set<BuildingTypes> aTypedBld;
+			for (int i = 0, n = kU.getNumPrereqAndBuildings(); i < n; i++)
+			{
+				aTypedBld.insert(static_cast<BuildingTypes>(kU.getPrereqAndBuilding(i)));
+			}
+			std::set<BonusTypes> aTypedBonus;
+			if (kU.getPrereqAndBonus() != NO_BONUS)
+			{
+				aTypedBonus.insert(static_cast<BonusTypes>(kU.getPrereqAndBonus()));
+			}
+			foreach_(const BonusTypes eOr, kU.getPrereqOrBonuses())
+			{
+				aTypedBonus.insert(eOr);
+			}
+			std::set<BuildingTypes> aModelBld;
+			std::set<BonusTypes> aModelBonus;
+			foreach_(const ConstructRequirement& req, kU.getTrainRequirements())
+			{
+				if (req.eGOM == GOM_BUILDING && req.eOp == REQOP_REQUIRE_ALL)
+				{
+					foreach_(const int iId, req.aiIds) aModelBld.insert(static_cast<BuildingTypes>(iId));
+				}
+				else if (req.eGOM == GOM_BONUS)
+				{
+					foreach_(const int iId, req.aiIds) aModelBonus.insert(static_cast<BonusTypes>(iId));
+				}
+			}
+			FAssertMsg(aTypedBld == aModelBld && aTypedBonus == aModelBonus,
+				CvString::format("TrainRequirement model diverges from typed unit prereqs for %s", kU.getType()).c_str());
 		}
+#endif
 
 		const BoolExpr* pCondition = kU.getTrainCondition();
 		if (pCondition != NULL)
