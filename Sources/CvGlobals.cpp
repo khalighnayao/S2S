@@ -2,6 +2,7 @@
 // globals.cpp
 //
 #include "CvGameCoreDLL.h"
+#include "BoolExpr.h"
 #include "CvBuildingInfo.h"
 #include "CvGameAI.h"
 #include "CvGlobals.h"
@@ -3184,6 +3185,186 @@ void cvInternalGlobals::doPostLoadCaching()
 	}
 
 	CityOutputHistory::setCityOutputHistorySize((uint16_t)GC.getCITY_OUTPUT_HISTORY_SIZE());
+
+	// Derive the static constructibility enabler reverse-index now that every building's
+	// prereqs, free bonuses and construct-condition are loaded and resolved (#195).
+	buildConstructibilityEnablerIndex();
+}
+
+const std::vector<BuildingTypes>& cvInternalGlobals::getBuildingsEnabledBy(BuildingTypes eEnabler) const
+{
+	FASSERT_BOUNDS(0, (int)m_buildingEnablerIndex.size(), eEnabler);
+	return m_buildingEnablerIndex[eEnabler];
+}
+
+const std::vector<UnitTypes>& cvInternalGlobals::getUnitsEnabledBy(BuildingTypes eEnabler) const
+{
+	FASSERT_BOUNDS(0, (int)m_buildingToUnitsEnabledIndex.size(), eEnabler);
+	return m_buildingToUnitsEnabledIndex[eEnabler];
+}
+
+// Build, once at load, the map "enabler building B -> buildings whose constructibility
+// B (or a free bonus B grants) can flip true". This is a pure function of info data, so
+// it is identical on every client (lockstep/OOS safe) and never needs rebuilding during
+// play. It is a *superset* of the true become-constructible set: getInvolvedGOMs returns
+// every building/bonus a construct-condition references, which is a superset of those
+// that flip it true. The CABV PreLoop confirms each candidate with canConstructInternal,
+// so the resulting constructible set is identical to the old O(buildings^2) inner scan.
+void cvInternalGlobals::buildConstructibilityEnablerIndex()
+{
+	PROFILE_EXTRA_FUNC();
+	const int iNumBuildings = getNumBuildingInfos();
+	const int iNumBonuses = getNumBonusInfos();
+	m_buildingEnablerIndex.assign(iNumBuildings, std::vector<BuildingTypes>());
+
+	// bonus -> buildings that grant it as a free bonus. Completing such a building makes
+	// the bonus present in the city, which can flip a condition that tests for the bonus.
+	std::vector< std::vector<BuildingTypes> > aBonusFreeGivers(iNumBonuses);
+	for (int iB = 0; iB < iNumBuildings; iB++)
+	{
+		const CvBuildingInfo& kB = getBuildingInfo(static_cast<BuildingTypes>(iB));
+		foreach_(const BonusModifier& kFree, kB.getFreeBonuses())
+		{
+			if (kFree.first >= 0 && kFree.first < iNumBonuses)
+			{
+				aBonusFreeGivers[kFree.first].push_back(static_cast<BuildingTypes>(iB));
+			}
+		}
+	}
+
+	for (int iC = 0; iC < iNumBuildings; iC++)
+	{
+		const BuildingTypes eC = static_cast<BuildingTypes>(iC);
+		const CvBuildingInfo& kC = getBuildingInfo(eC);
+		std::set<BuildingTypes> aEnablers;
+
+		// Direct building prerequisites (mirrors the PreLoop's isPrereqInCityBuilding /
+		// isPrereqOrBuilding test exactly).
+		for (int i = 0, n = kC.getNumPrereqInCityBuildings(); i < n; i++)
+		{
+			aEnablers.insert(static_cast<BuildingTypes>(kC.getPrereqInCityBuilding(i)));
+		}
+		for (int i = 0, n = kC.getNumPrereqOrBuilding(); i < n; i++)
+		{
+			aEnablers.insert(static_cast<BuildingTypes>(kC.getPrereqOrBuilding(i)));
+		}
+
+		// Construct-condition: any building/bonus it references is a potential enabler.
+		const BoolExpr* pCondition = kC.getConstructCondition();
+		if (pCondition != NULL)
+		{
+			std::vector<GOMQuery> aInvolved;
+			pCondition->getInvolvedGOMs(aInvolved);
+			foreach_(const GOMQuery& kGOM, aInvolved)
+			{
+				if (kGOM.GOM == GOM_BUILDING)
+				{
+					if (kGOM.id >= 0 && kGOM.id < iNumBuildings)
+					{
+						aEnablers.insert(static_cast<BuildingTypes>(kGOM.id));
+					}
+				}
+				else if (kGOM.GOM == GOM_BONUS)
+				{
+					if (kGOM.id >= 0 && kGOM.id < iNumBonuses)
+					{
+						foreach_(const BuildingTypes eGiver, aBonusFreeGivers[kGOM.id])
+						{
+							aEnablers.insert(eGiver);
+						}
+					}
+				}
+			}
+		}
+
+		// A building is never its own enabler in the PreLoop (it is already in the set
+		// by the time its dependents are expanded); drop the self-edge.
+		aEnablers.erase(eC);
+
+		foreach_(const BuildingTypes eEnabler, aEnablers)
+		{
+			if (eEnabler >= 0 && eEnabler < iNumBuildings)
+			{
+				m_buildingEnablerIndex[eEnabler].push_back(eC);
+			}
+		}
+	}
+
+	// Unit analogue: enabler building B -> units B can help train. Mirrors the CABV
+	// unit-enabler value loop's static triggers (CvCityAI ~13148): a unit's typed
+	// PrereqAndBuildings, its train condition referencing B or a bonus B grants free,
+	// and B's free bonuses satisfying the unit's PrereqAnd/PrereqOr bonus needs. The
+	// runtime gates (tech, hasBonus, isActiveBuilding) still run in the loop; the index
+	// only narrows the per-building scan from all units to a static superset of B's
+	// candidates, so the value result is unchanged.
+	const int iNumUnits = getNumUnitInfos();
+	m_buildingToUnitsEnabledIndex.assign(iNumBuildings, std::vector<UnitTypes>());
+	for (int iU = 0; iU < iNumUnits; iU++)
+	{
+		const UnitTypes eU = static_cast<UnitTypes>(iU);
+		const CvUnitInfo& kU = getUnitInfo(eU);
+		std::set<BuildingTypes> aEnablers;
+
+		for (int i = 0, n = kU.getNumPrereqAndBuildings(); i < n; i++)
+		{
+			aEnablers.insert(static_cast<BuildingTypes>(kU.getPrereqAndBuilding(i)));
+		}
+
+		// Bonuses that gate this unit; any building granting one as a free bonus is a
+		// potential enabler.
+		std::set<BonusTypes> aBonusNeeds;
+		if (kU.getPrereqAndBonus() != NO_BONUS)
+		{
+			aBonusNeeds.insert(static_cast<BonusTypes>(kU.getPrereqAndBonus()));
+		}
+		foreach_(const BonusTypes eOr, kU.getPrereqOrBonuses())
+		{
+			aBonusNeeds.insert(eOr);
+		}
+
+		const BoolExpr* pCondition = kU.getTrainCondition();
+		if (pCondition != NULL)
+		{
+			std::vector<GOMQuery> aInvolved;
+			pCondition->getInvolvedGOMs(aInvolved);
+			foreach_(const GOMQuery& kGOM, aInvolved)
+			{
+				if (kGOM.GOM == GOM_BUILDING)
+				{
+					if (kGOM.id >= 0 && kGOM.id < iNumBuildings)
+					{
+						aEnablers.insert(static_cast<BuildingTypes>(kGOM.id));
+					}
+				}
+				else if (kGOM.GOM == GOM_BONUS)
+				{
+					if (kGOM.id >= 0 && kGOM.id < iNumBonuses)
+					{
+						aBonusNeeds.insert(static_cast<BonusTypes>(kGOM.id));
+					}
+				}
+			}
+		}
+
+		foreach_(const BonusTypes eNeed, aBonusNeeds)
+		{
+			if (eNeed >= 0 && eNeed < iNumBonuses)
+			{
+				foreach_(const BuildingTypes eGiver, aBonusFreeGivers[eNeed])
+				{
+					aEnablers.insert(eGiver);
+				}
+			}
+		}
+
+		foreach_(const BuildingTypes eEnabler, aEnablers)
+		{
+			if (eEnabler >= 0 && eEnabler < iNumBuildings)
+			{
+				m_buildingToUnitsEnabledIndex[eEnabler].push_back(eU);
+			}
+		}
+	}
 }
 
 void cvInternalGlobals::checkInitialCivics()
