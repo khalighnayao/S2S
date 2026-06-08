@@ -474,6 +474,12 @@ bool BoolExprHas::getInvolvesGOM(const std::vector<GOMQuery>& queries) const
 	return false;
 }
 
+void BoolExprHas::getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const
+{
+	GOMQuery query = { m_eGOM, m_iID };
+	aGOMs.push_back(query);
+}
+
 void BoolExprHas::readContent(CvXMLLoadUtility* pXML)
 {
 	CvString szTextVal;
@@ -661,6 +667,11 @@ bool BoolExprNot::getInvolvesGOM(const std::vector<GOMQuery>& queries) const
 	return m_pExpr->getInvolvesGOM(queries);
 }
 
+void BoolExprNot::getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const
+{
+	m_pExpr->getInvolvedGOMs(aGOMs);
+}
+
 void BoolExprNot::buildDisplayString(CvWStringBuffer &szBuffer) const
 {
 	szBuffer.append(gDLL->getText("TXT_KEY_EXPR_NOT_"));
@@ -720,6 +731,12 @@ BoolExprChange BoolExprAnd::evaluateChange(const CvGameObject* pObject, const st
 bool BoolExprAnd::getInvolvesGOM(const std::vector<GOMQuery>& queries) const
 {
 	return m_pExpr1->getInvolvesGOM(queries) || m_pExpr2->getInvolvesGOM(queries);
+}
+
+void BoolExprAnd::getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const
+{
+	m_pExpr1->getInvolvedGOMs(aGOMs);
+	m_pExpr2->getInvolvedGOMs(aGOMs);
 }
 
 void BoolExprAnd::buildDisplayString(CvWStringBuffer &szBuffer) const
@@ -794,6 +811,12 @@ bool BoolExprOr::getInvolvesGOM(const std::vector<GOMQuery>& queries) const
 	return m_pExpr1->getInvolvesGOM(queries) || m_pExpr2->getInvolvesGOM(queries);
 }
 
+void BoolExprOr::getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const
+{
+	m_pExpr1->getInvolvedGOMs(aGOMs);
+	m_pExpr2->getInvolvedGOMs(aGOMs);
+}
+
 void BoolExprOr::buildDisplayString(CvWStringBuffer &szBuffer) const
 {
 	const bool bBrackets1 = getBindingStrength() > m_pExpr1->getBindingStrength();
@@ -865,6 +888,12 @@ bool BoolExprBEqual::getInvolvesGOM(const std::vector<GOMQuery>& queries) const
 	return m_pExpr1->getInvolvesGOM(queries) || m_pExpr2->getInvolvesGOM(queries);
 }
 
+void BoolExprBEqual::getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const
+{
+	m_pExpr1->getInvolvedGOMs(aGOMs);
+	m_pExpr2->getInvolvedGOMs(aGOMs);
+}
+
 void BoolExprBEqual::buildDisplayString(CvWStringBuffer &szBuffer) const
 {
 	const bool bBrackets1 = getBindingStrength() > m_pExpr1->getBindingStrength();
@@ -919,6 +948,13 @@ BoolExprChange BoolExprIf::evaluateChange(const CvGameObject* pObject, const std
 bool BoolExprIf::getInvolvesGOM(const std::vector<GOMQuery>& queries) const
 {
 	return m_pExprIf->getInvolvesGOM(queries) || m_pExprThen->getInvolvesGOM(queries) || m_pExprElse->getInvolvesGOM(queries);
+}
+
+void BoolExprIf::getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const
+{
+	m_pExprIf->getInvolvedGOMs(aGOMs);
+	m_pExprThen->getInvolvedGOMs(aGOMs);
+	m_pExprElse->getInvolvedGOMs(aGOMs);
 }
 
 void BoolExprIf::buildDisplayString(CvWStringBuffer &szBuffer) const
@@ -1011,6 +1047,11 @@ BoolExprChange BoolExprIntegrateOr::evaluateChange(const CvGameObject* pObject, 
 bool BoolExprIntegrateOr::getInvolvesGOM(const std::vector<GOMQuery>& queries) const
 {
 	return m_pExpr->getInvolvesGOM(queries);
+}
+
+void BoolExprIntegrateOr::getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const
+{
+	m_pExpr->getInvolvedGOMs(aGOMs);
 }
 
 void BoolExprIntegrateOr::buildDisplayString(CvWStringBuffer &szBuffer) const

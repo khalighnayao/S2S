@@ -61,6 +61,11 @@ public:
 	virtual bool evaluate(const CvGameObject*) const = 0;
 	virtual BoolExprChange evaluateChange(const CvGameObject*, const std::vector<GOMOverride>&) const = 0;
 	virtual bool getInvolvesGOM(const std::vector<GOMQuery>&) const = 0;
+	// Append every (GOM,id) leaf this expression references, walking the whole tree
+	// once. Mirrors getInvolvesGOM's recursion. Default (a non-GOM leaf) appends
+	// nothing; only BoolExprHas contributes, composites forward to their children.
+	// Used to build the static constructibility enabler reverse-index (#195).
+	virtual void getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const {}
 	static const BoolExpr* read(CvXMLLoadUtility* pXML);
 	virtual void getCheckSum(uint32_t&) const = 0;
 	virtual void buildDisplayString(CvWStringBuffer&) const = 0;
@@ -91,6 +96,7 @@ public:
 	virtual bool evaluate(const CvGameObject* pObject) const;
 	virtual BoolExprChange evaluateChange(const CvGameObject* pObject, const std::vector<GOMOverride>& overrides) const;
 	virtual bool getInvolvesGOM(const std::vector<GOMQuery>& queries) const;
+	virtual void getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const;
 	void readContent(CvXMLLoadUtility* pXML);
 	virtual void getCheckSum(uint32_t& iSum) const;
 	virtual void buildDisplayString(CvWStringBuffer& szBuffer) const;
@@ -126,6 +132,7 @@ public:
 	virtual bool evaluate(const CvGameObject* pObject) const;
 	virtual BoolExprChange evaluateChange(const CvGameObject* pObject, const std::vector<GOMOverride>& overrides) const;
 	virtual bool getInvolvesGOM(const std::vector<GOMQuery>& queries) const;
+	virtual void getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const;
 	virtual void getCheckSum(uint32_t& iSum) const;
 	virtual void buildDisplayString(CvWStringBuffer& szBuffer) const;
 	virtual int getBindingStrength() const;
@@ -141,6 +148,7 @@ public:
 	virtual bool evaluate(const CvGameObject* pObject) const;
 	virtual BoolExprChange evaluateChange(const CvGameObject* pObject, const std::vector<GOMOverride>& overrides) const;
 	virtual bool getInvolvesGOM(const std::vector<GOMQuery>& queries) const;
+	virtual void getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const;
 	virtual void getCheckSum(uint32_t& iSum) const;
 	virtual void buildDisplayString(CvWStringBuffer& szBuffer) const;
 	virtual int getBindingStrength() const;
@@ -161,6 +169,7 @@ public:
 	virtual bool evaluate(const CvGameObject* pObject) const;
 	virtual BoolExprChange evaluateChange(const CvGameObject* pObject, const std::vector<GOMOverride>& overrides) const;
 	virtual bool getInvolvesGOM(const std::vector<GOMQuery>& queries) const;
+	virtual void getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const;
 	virtual void getCheckSum(uint32_t& iSum) const;
 	virtual void buildDisplayString(CvWStringBuffer& szBuffer) const;
 	virtual int getBindingStrength() const;
@@ -181,6 +190,7 @@ public:
 	virtual bool evaluate(const CvGameObject* pObject) const;
 	virtual BoolExprChange evaluateChange(const CvGameObject* pObject, const std::vector<GOMOverride>& overrides) const;
 	virtual bool getInvolvesGOM(const std::vector<GOMQuery>& queries) const;
+	virtual void getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const;
 	virtual void getCheckSum(uint32_t& iSum) const;
 	virtual void buildDisplayString(CvWStringBuffer& szBuffer) const;
 	virtual int getBindingStrength() const;
@@ -197,6 +207,7 @@ public:
 	virtual bool evaluate(const CvGameObject* pObject) const;
 	virtual BoolExprChange evaluateChange(const CvGameObject* pObject, const std::vector<GOMOverride>& overrides) const;
 	virtual bool getInvolvesGOM(const std::vector<GOMQuery>& queries) const;
+	virtual void getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const;
 	virtual void getCheckSum(uint32_t& iSum) const;
 	virtual void buildDisplayString(CvWStringBuffer& szBuffer) const;
 	virtual int getBindingStrength() const;
@@ -214,6 +225,7 @@ public:
 	virtual bool evaluate(const CvGameObject* pObject) const;
 	virtual BoolExprChange evaluateChange(const CvGameObject* pObject, const std::vector<GOMOverride>& overrides) const;
 	virtual bool getInvolvesGOM(const std::vector<GOMQuery>& queries) const;
+	virtual void getInvolvedGOMs(std::vector<GOMQuery>& aGOMs) const;
 	virtual void getCheckSum(uint32_t& iSum) const;
 	virtual void buildDisplayString(CvWStringBuffer& szBuffer) const;
 	virtual int getBindingStrength() const;

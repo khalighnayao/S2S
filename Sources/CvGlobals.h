@@ -590,6 +590,17 @@ public:
 	CvBuildingInfo& getBuildingInfo(BuildingTypes eBuildingNum) const;
 	const std::vector<CvBuildingInfo*>& getBuildingInfos() const { return m_paBuildingInfo; }
 
+	// Static constructibility enabler reverse-index (#195): for enabler building B,
+	// the list of buildings whose constructibility B (or a free bonus B grants) can
+	// flip from false to true. Load-derived from info data only -> identical on every
+	// client. Lets the CABV PreLoop replace its O(buildings^2) enabler re-scan with an
+	// O(dependents) lookup. See Sources/docs/plans/unified-prerequisites-and-constructibility.md
+	const std::vector<BuildingTypes>& getBuildingsEnabledBy(BuildingTypes eEnabler) const;
+	// Analogue for unit training: for enabler building B, the units whose train
+	// condition / typed prereqs B (or a free bonus B grants) can satisfy. Lets the
+	// CABV unit-enabler value loop narrow its scan from all units to B's candidates.
+	const std::vector<UnitTypes>& getUnitsEnabledBy(BuildingTypes eEnabler) const;
+
 	int getNumSpecialBuildingInfos() const;
 	CvSpecialBuildingInfo& getSpecialBuildingInfo(SpecialBuildingTypes eSpecialBuildingNum) const;
 
@@ -796,6 +807,7 @@ public:
 
 protected:
 	void doPostLoadCaching();
+	void buildConstructibilityEnablerIndex();
 
 	bool m_bGraphicsInitialized;
 	bool m_bDLLProfiler;
@@ -982,6 +994,9 @@ protected:
 	CvInfoReplacements<CvProjectInfo> m_ProjectInfoReplacements;
 	std::vector<CvBuildingInfo*> m_paBuildingInfo;
 	CvInfoReplacements<CvBuildingInfo> m_BuildingInfoReplacements;
+	// #195 constructibility enabler reverse-indices, indexed by enabler BuildingTypes.
+	std::vector< std::vector<BuildingTypes> > m_buildingEnablerIndex;
+	std::vector< std::vector<UnitTypes> > m_buildingToUnitsEnabledIndex;
 	std::vector<CvSpecialBuildingInfo*> m_paSpecialBuildingInfo;
 	CvInfoReplacements<CvSpecialBuildingInfo> m_SpecialBuildingInfoReplacements;
 	std::vector<CvUnitInfo*> m_paUnitInfo;

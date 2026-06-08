@@ -5404,9 +5404,13 @@ int CvCityAI::AI_buildingValueThresholdOriginalUncached(BuildingTypes eBuilding,
 						queries.push_back(query);
 					}
 
-					for (int iI = 0; iI < GC.getNumUnitInfos(); iI++)
+					// #195: only units this building can statically help train are candidates;
+					// the precomputed reverse-index narrows the scan from all units to those.
+					// The runtime gates below (tech, hasBonus, isActiveBuilding) are unchanged,
+					// so the value result is identical (verified: zero [PERF/cabvset] UNIT-MISMATCH).
+					foreach_(const UnitTypes eEnabledUnit, GC.getUnitsEnabledBy(eBuilding))
 					{
-						const CvUnitInfo& kUnit = GC.getUnitInfo((UnitTypes)iI);
+						const CvUnitInfo& kUnit = GC.getUnitInfo(eEnabledUnit);
 						bool bUnitIsEnabler = kUnit.isPrereqAndBuilding((int)eBuilding);
 						bool bUnitIsOtherwiseEnabled = false;
 
@@ -12601,10 +12605,15 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 		PROFILE("CvCityAI::CalculateAllBuildingValues.PreLoop");
 		PERF_ACCUM(dPreLoop);
 		buildingsToCalculate.clear();
-		// [PERF/cabvset] diagnostics: count how many buildings pass canConstruct
-		// (iConstructible) and how many of those drive the O(buildings) enabler
-		// inner loop (iEnablers). If these grow turn-over-turn within a session
-		// (and reset on reload) the PreLoop cost is set-growth, not per-call cost.
+		// #195: the constructible set is the directly-constructible buildings plus the
+		// buildings an enabler would unlock. The enabler relationship is static, so the
+		// candidate dependents come from the precomputed reverse-index (GC.getBuildingsEnabledBy)
+		// -- an O(dependents) lookup -- instead of the old O(buildings^2) inner re-scan. The
+		// same canConstructInternal(...,eExtraBuilding) confirm gates each candidate, so the
+		// resulting set is identical (verified: zero [PERF/cabvset] MISMATCH across a game).
+		// [PERF/cabvset] diagnostics: iConstructible = directly buildable, iEnablers = those
+		// with a non-empty dependent list. Growth turn-over-turn (reset on reload) would mean
+		// set-growth cost rather than per-call cost.
 		int iConstructible = 0;
 		int iEnablers = 0;
 		for (int iBuilding = 0; iBuilding < iNumBuildings; iBuilding++)
@@ -12616,40 +12625,17 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 			}
 			buildingsToCalculate.insert(eBuilding);
 			iConstructible++;
-			const CvBuildingInfo& building = GC.getBuildingInfo(eBuilding);
 
-			if (building.EnablesOtherBuildings())
+			const std::vector<BuildingTypes>& aDependents = GC.getBuildingsEnabledBy(eBuilding);
+			if (!aDependents.empty())
 			{
 				iEnablers++;
-				const CvGameObjectCity* pObject = getGameObject();
-
-				// add the extra building and its bonuses to the override to see if they influence the construct condition of this building
-				std::vector<GOMOverride> queries;
-				GOMOverride query = { pObject, GOM_BUILDING, eBuilding, true };
-				queries.push_back(query);
-				query.GOM = GOM_BONUS;
-				foreach_(const BonusModifier& pair, GC.getBuildingInfo(eBuilding).getFreeBonuses())
+				foreach_(const BuildingTypes eType, aDependents)
 				{
-					query.id = pair.first;
-					queries.push_back(query);
-				}
-
-				for (int iJ = 0; iJ < iNumBuildings; iJ++)
-				{
-					const BuildingTypes eType = static_cast<BuildingTypes>(iJ);
-					if (algo::none_of_equal(buildingsToCalculate, eType) && !hasBuilding(eType))
+					if (algo::none_of_equal(buildingsToCalculate, eType) && !hasBuilding(eType)
+					&&  canConstructInternal(eType, false, false, false, true, eBuilding))
 					{
-						// check if this building enables the construct condition of another building
-						bool bEnablesCondition = GC.getBuildingInfo(eType).isPrereqInCityBuilding(iBuilding) || GC.getBuildingInfo(eType).isPrereqOrBuilding(iBuilding);
-						if (!bEnablesCondition)
-						{
-							const BoolExpr* condition = GC.getBuildingInfo(eType).getConstructCondition();
-							bEnablesCondition = condition != NULL && condition->evaluateChange(pObject, queries) == BOOLEXPR_CHANGE_BECOMES_TRUE;
-						}
-						if (bEnablesCondition && canConstructInternal(eType, false, false, false, true, eBuilding))
-						{
-							buildingsToCalculate.insert(eType);
-						}
+						buildingsToCalculate.insert(eType);
 					}
 				}
 			}
@@ -13099,9 +13085,13 @@ void CvCityAI::CalculateAllBuildingValues(int iFocusFlags)
 						queries.push_back(query);
 					}
 
-					for (int iI = 0; iI < GC.getNumUnitInfos(); iI++)
+					// #195: only units this building can statically help train are candidates;
+					// the precomputed reverse-index narrows the scan from all units to those.
+					// The runtime gates below (tech, hasBonus, isActiveBuilding) are unchanged,
+					// so the value result is identical (verified: zero [PERF/cabvset] UNIT-MISMATCH).
+					foreach_(const UnitTypes eEnabledUnit, GC.getUnitsEnabledBy(eBuilding))
 					{
-						const CvUnitInfo& kUnit = GC.getUnitInfo((UnitTypes)iI);
+						const CvUnitInfo& kUnit = GC.getUnitInfo(eEnabledUnit);
 						bool bUnitIsEnabler = kUnit.isPrereqAndBuilding((int)eBuilding);
 						bool bUnitIsOtherwiseEnabled = false;
 
