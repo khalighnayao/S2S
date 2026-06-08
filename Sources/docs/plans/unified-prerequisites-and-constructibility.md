@@ -207,12 +207,21 @@ So **both** enabler-index dimensions (building + unit) now read through the unif
   (population, culture level, properties, war/power) keep their typed handling. Foundation
   for the Civilopedia/web export — these GOM types have no behavioural consumer yet.
 
-**Increment 4+ (user-directed / later):**
-- Migrate help text / Civilopedia rendering onto the model (the real fragmentation win;
-  `CvGameTextMgr` hand-enumerates each typed field). **Needs visual verification** of
-  tooltips/pedia — UI testing is the user's job — so it is a user-directed step.
-- (Optional, later) re-express `canConstruct` / `canTrain` on the model, shadow-verified,
-  preserving probability hints + gate stratification.
+**Increment 4 — IN PROGRESS (help-text migration, cluster by cluster):**
+`CvGameTextMgr::buildBuildingRequiresString` (~570 lines) hand-enumerates every typed
+prereq field. Migrating it onto the model, one cluster at a time, each visually verified.
+- **Cluster 1 — DONE:** terrain (Or/And) / improvement (Or) / feature (Or) "in city
+  vicinity" requirements — four near-identical hand-rolled loops replaced by one
+  model-driven loop + reusable `appendVicinityRequirementHelp()` (same TXT keys / AND-OR
+  separator / `IN_CITY_VICINITY` suffix; only change is block order). Builds clean. Awaiting
+  visual verification of the affected tooltips/pedia.
+- **Next clusters:** Or-/InCity-/NotInCity-buildings (active/obsolete status), tech And
+  (hasTech status + pedia/tech-chooser branches), bonus And/Or (hasBonus status), heritage
+  (REQUIRES_2 link list), civics And/Or (the elaborate have/need colour-toggle), religion
+  (`getChar`). Each migrated + verified separately.
+
+**Increment 5+ (optional, later):** re-express `canConstruct` / `canTrain` on the model,
+shadow-verified, preserving probability hints + gate stratification.
 
 ## Invariants to preserve
 - The `bExposed`/`bTestVisible`/`bIgnoreBuildings` gate stratification.
