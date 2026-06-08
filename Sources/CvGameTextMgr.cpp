@@ -18357,6 +18357,36 @@ void CvGameTextMgr::appendRequirementHelp(CvWStringBuffer& szBuffer, const Const
 	}
 }
 
+// #195 Phase 2: civic requirement renderer. Unlike appendRequirementHelp, civics show EVERY
+// listed civic, coloured by whether the active player has it (POSITIVE = have, WARNING = need),
+// joined by AND (REQUIRE_ALL) / OR (REQUIRE_ANY) -- the "show-all status" UX the old hand-rolled
+// blocks used. Returns whether the requirement is met, for the "requires active civics" note.
+bool CvGameTextMgr::appendCivicRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req)
+{
+	const PlayerTypes eActive = GC.getGame().getActivePlayer();
+	const bool bAnd = (req.eOp == REQOP_REQUIRE_ALL);
+	const CvWString szSep = gDLL->getText("TXT_KEY_REVERT_COLOR") + (bAnd ? gDLL->getText("TXT_KEY_AND") : gDLL->getText("TXT_KEY_OR"));
+	bool bFirst = true;
+	bool bAllMet = true;
+	bool bAnyMet = false;
+	foreach_(const int iId, req.aiIds)
+	{
+		const bool bMet = (eActive != NO_PLAYER) && GET_PLAYER(eActive).isCivic(static_cast<CivicTypes>(iId));
+		if (bMet) bAnyMet = true; else bAllMet = false;
+
+		CvWString szItem = (bMet ? gDLL->getText("TXT_KEY_POSITIVE_COLOR") : gDLL->getText("TXT_KEY_SET_WARNING_COLOR")) + GC.getCivicInfo(static_cast<CivicTypes>(iId)).getDescription();
+		CvWString szStart;
+		szStart.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_REQUIRES_NO_WARNING").c_str());
+		setListHelp(szBuffer, szStart.c_str(), szItem.c_str(), szSep.c_str(), bFirst);
+		bFirst = false;
+	}
+	if (!bFirst)
+	{
+		szBuffer.append(ENDCOLR);
+	}
+	return bAnd ? bAllMet : (bFirst || bAnyMet);
+}
+
 void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, BuildingTypes eBuilding, bool bCivilopediaText, bool bTechChooserText, const CvCity* pCity)
 {
 	PROFILE_EXTRA_FUNC();
@@ -18450,12 +18480,14 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 				}
 			}
 		}
-		for (int iI = 0; iI < GC.getNumBuildingInfos(); ++iI)
+		// #195 Phase 2: required in-city buildings (REQUIRE_ALL) via the model + hasGOM
+		// (isActiveBuilding). The old block scanned all building infos and emitted one
+		// "Requires <link>" line each; the renderer lists the unmet ones as "Requires: A and B".
+		foreach_(const ConstructRequirement& req, kBuilding.getConstructRequirements())
 		{
-			if (kBuilding.isPrereqInCityBuilding(iI) && (!pCity || !GET_TEAM(pCity->getTeam()).isObsoleteBuilding((BuildingTypes)iI) && !pCity->isActiveBuilding((BuildingTypes)iI)))
+			if (req.eGOM == GOM_BUILDING && req.eOp == REQOP_REQUIRE_ALL)
 			{
-				szBuffer.append(NEWLINE);
-				szBuffer.append(gDLL->getText("TXT_KEY_REQUIRES_LINK", CvWString(GC.getBuildingInfo((BuildingTypes)iI).getType()).GetCString(), GC.getBuildingInfo((BuildingTypes)iI).getTextKeyWide()));
+				appendRequirementHelp(szBuffer, req, pCity);
 			}
 		}
 
@@ -18532,64 +18564,20 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 		}
 	}
 
-	bFirst = true;
+	// #195 Phase 2: prereq civics (AND + OR) via the model. Civics keep their show-all,
+	// colour-coded UX (have = green, need = red) through appendCivicRequirementHelp, which
+	// also reports whether each requirement is met so the "requires active civics" note below
+	// stays correct.
 	bool civicRequirementsAllMet = true;
+	foreach_(const ConstructRequirement& req, kBuilding.getConstructRequirements())
 	{
-		bool bLastCivicWasMet = false;
-		for (int iI = 0; iI < GC.getNumCivicInfos(); ++iI)
+		if (req.eGOM == GOM_CIVIC)
 		{
-			if (kBuilding.isPrereqAndCivics(CivicTypes(iI)))
+			if (!appendCivicRequirementHelp(szBuffer, req))
 			{
-				if (GC.getGame().getActivePlayer() == NO_PLAYER || !GET_PLAYER(GC.getGame().getActivePlayer()).isCivic((CivicTypes)iI))
-				{
-					if (bLastCivicWasMet && !bFirst)
-					{
-						szBuffer.append(gDLL->getText("TXT_KEY_SET_WARNING_COLOR").c_str());
-					}
-					setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), GC.getCivicInfo((CivicTypes(iI))).getDescription(), gDLL->getText("TXT_KEY_AND").c_str(), bFirst);
-					bLastCivicWasMet = false;
-					civicRequirementsAllMet = false;
-				}
-				else
-				{
-					if (!bLastCivicWasMet && !bFirst)
-					{
-						szBuffer.append(gDLL->getText("TXT_KEY_REVERT_COLOR").c_str());
-					}
-					szTempBuffer.Format(L"%s%s", NEWLINE, gDLL->getText("TXT_KEY_REQUIRES_NO_WARNING").c_str());
-					setListHelp(szBuffer, szTempBuffer, GC.getCivicInfo((CivicTypes(iI))).getDescription(), gDLL->getText("TXT_KEY_AND").c_str(), bFirst);
-					bLastCivicWasMet = true;
-				}
-				bFirst = false;
+				civicRequirementsAllMet = false;
 			}
 		}
-	}
-
-	bFirst = true;
-	{
-		const CvWString prefix = gDLL->getText("TXT_KEY_REQUIRES_NO_WARNING");
-		const CvWString separator = gDLL->getText("TXT_KEY_REVERT_COLOR") + gDLL->getText("TXT_KEY_OR");
-		bool bCivicORRequirementMet = false;
-
-		for (int iI = 0; iI < GC.getNumCivicInfos(); ++iI)
-		{
-			if (kBuilding.isPrereqOrCivics(CivicTypes(iI)))
-			{
-				CvWString desc = GC.getCivicInfo((CivicTypes(iI))).getDescription();
-
-				if (GC.getGame().getActivePlayer() != NO_PLAYER && GET_PLAYER(GC.getGame().getActivePlayer()).isCivic(CivicTypes(iI)))
-				{
-					desc = gDLL->getText("TXT_KEY_POSITIVE_COLOR") + desc;
-					bCivicORRequirementMet= true;
-				}
-				else desc = gDLL->getText("TXT_KEY_SET_WARNING_COLOR") + desc;
-
-				szTempBuffer.Format(L"%s%s", NEWLINE, prefix.c_str());
-				setListHelp(szBuffer,szTempBuffer, desc.c_str(), separator.c_str(), bFirst);
-				bFirst = false;
-			}
-		}
-		civicRequirementsAllMet &= (bFirst || bCivicORRequirementMet);
 	}
 
 	if (kBuilding.isRequiresActiveCivics())

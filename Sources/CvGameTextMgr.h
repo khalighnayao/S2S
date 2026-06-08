@@ -206,6 +206,10 @@ public:
 	void appendRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req, const CvCity* pCity);
 	// #195 Phase 2: format one GOM (type,id) as a clickable <link>description</link>.
 	bool buildRequirementItemLink(GOMTypes eGOM, int iId, CvWString& szOut) const;
+	// #195 Phase 2: civic requirements use a different UX -- show ALL prereq civics coloured
+	// by have (green) / need (red), not just the unmet ones. Returns whether this requirement
+	// is satisfied (all for REQUIRE_ALL; any-or-empty for REQUIRE_ANY) for the active-civics note.
+	bool appendCivicRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req);
 	void buildMaintenanceModifiersString(CvWStringBuffer& szBuffer, TechTypes eTech, bool bList);
 
 	DllExport void buildCityBillboardIconString( CvWStringBuffer& szBuffer, CvCity* pCity);
