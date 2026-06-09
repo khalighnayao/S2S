@@ -30,6 +30,7 @@ public:
 	float getIceLatitude() const;
 	float getRandIceLatitude() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvClimateInfo* pClassInfo);
 

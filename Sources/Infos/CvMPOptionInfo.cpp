@@ -26,9 +26,9 @@
 //	Multiplayer options and their default values
 //
 //
-CvMPOptionInfo::CvMPOptionInfo() :
-m_bDefault(false)
+CvMPOptionInfo::CvMPOptionInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -43,6 +43,14 @@ bool CvMPOptionInfo::getDefault() const
 }
 
 
+void CvMPOptionInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_bDefault, L"bDefault")
+	;
+}
+
+
 bool CvMPOptionInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
@@ -50,7 +58,7 @@ bool CvMPOptionInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(&m_bDefault, L"bDefault");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -58,16 +66,14 @@ bool CvMPOptionInfo::read(CvXMLLoadUtility* pXML)
 
 void CvMPOptionInfo::copyNonDefaults(const CvMPOptionInfo* pClassInfo)
 {
-	const bool bDefault = false;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getDefault() == bDefault) m_bDefault = pClassInfo->getDefault();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvMPOptionInfo::getCheckSum(uint32_t& iSum) const
 {
-	CheckSum(iSum, m_bDefault);
+	CvInfoUtil(this).checkSum(iSum);
 }
 

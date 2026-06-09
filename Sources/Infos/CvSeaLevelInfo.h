@@ -19,6 +19,7 @@ public:
 
 	int getSeaLevelChange() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvSeaLevelInfo* pClassInfo);
 

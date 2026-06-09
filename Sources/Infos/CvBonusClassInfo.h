@@ -24,6 +24,7 @@ public:
 
 	int getUniqueRange() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvBonusClassInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

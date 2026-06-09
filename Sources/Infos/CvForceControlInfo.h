@@ -21,6 +21,7 @@ public:
 
 	bool getDefault() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvForceControlInfo* pClassInfo);

@@ -23,9 +23,9 @@
 //======================================================================================================
 //					CvSeaLevelInfo
 //======================================================================================================
-CvSeaLevelInfo::CvSeaLevelInfo() :
-m_iSeaLevelChange(0)
+CvSeaLevelInfo::CvSeaLevelInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -40,15 +40,22 @@ int CvSeaLevelInfo::getSeaLevelChange() const
 }
 
 
+void CvSeaLevelInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_iSeaLevelChange, L"iSeaLevelChange")
+	;
+}
+
+
 bool CvSeaLevelInfo::read(CvXMLLoadUtility* pXML)
 {
-
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(&m_iSeaLevelChange, L"iSeaLevelChange");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -56,10 +63,8 @@ bool CvSeaLevelInfo::read(CvXMLLoadUtility* pXML)
 
 void CvSeaLevelInfo::copyNonDefaults(const CvSeaLevelInfo* pClassInfo)
 {
-	const int iDefault = 0;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getSeaLevelChange() == iDefault) m_iSeaLevelChange = pClassInfo->getSeaLevelChange();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

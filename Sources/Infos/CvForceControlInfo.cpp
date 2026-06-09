@@ -26,9 +26,9 @@
 //	Forced Controls and their default values
 //
 //
-CvForceControlInfo::CvForceControlInfo() :
-m_bDefault(false)
+CvForceControlInfo::CvForceControlInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -43,6 +43,14 @@ bool CvForceControlInfo::getDefault() const
 }
 
 
+void CvForceControlInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_bDefault, L"bDefault")
+	;
+}
+
+
 bool CvForceControlInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
@@ -50,7 +58,7 @@ bool CvForceControlInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(&m_bDefault, L"bDefault");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -58,16 +66,14 @@ bool CvForceControlInfo::read(CvXMLLoadUtility* pXML)
 
 void CvForceControlInfo::copyNonDefaults(const CvForceControlInfo* pClassInfo)
 {
-	const bool bDefault = false;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getDefault() == bDefault) m_bDefault = pClassInfo->getDefault();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvForceControlInfo::getCheckSum(uint32_t& iSum) const
 {
-	CheckSum(iSum, m_bDefault);
+	CvInfoUtil(this).checkSum(iSum);
 }
 

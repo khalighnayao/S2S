@@ -31,9 +31,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvBonusClassInfo::CvBonusClassInfo() :
-m_iUniqueRange(0)
+CvBonusClassInfo::CvBonusClassInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -55,6 +55,14 @@ int CvBonusClassInfo::getUniqueRange() const
 }
 
 
+void CvBonusClassInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_iUniqueRange, L"iUniqueRange")
+	;
+}
+
+
 bool CvBonusClassInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
@@ -62,7 +70,7 @@ bool CvBonusClassInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(&m_iUniqueRange, L"iUniqueRange");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -70,16 +78,14 @@ bool CvBonusClassInfo::read(CvXMLLoadUtility* pXML)
 
 void CvBonusClassInfo::copyNonDefaults(const CvBonusClassInfo* pClassInfo)
 {
-	const int iDefault = 0;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getUniqueRange() == iDefault) m_iUniqueRange = pClassInfo->getUniqueRange();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvBonusClassInfo::getCheckSum(uint32_t& iSum) const
 {
-	CheckSum(iSum, m_iUniqueRange);
+	CvInfoUtil(this).checkSum(iSum);
 }
 
