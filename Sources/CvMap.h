@@ -144,6 +144,12 @@ public:
 	inline int getGridWidth() const { return m_iGridWidth; }
 	inline int getGridHeight() const { return m_iGridHeight; }
 
+	// Effective grid height used for latitude. On "space maps" (a band of empty
+	// TERRAIN_NONE plots above the playable Earth) this is the height of the
+	// Earth band alone, so latitude is not squashed across the unused space rows.
+	// Equal to getGridHeight() on ordinary maps. See updateLatitudeGridHeight().
+	inline int getLatitudeGridHeight() const { return m_iLatitudeGridHeight; }
+
 	int getLandPlots() const;
 	void changeLandPlots(int iChange);
 
@@ -246,11 +252,13 @@ public:
 
 private:
 	void calculateAreas();
+	void updateLatitudeGridHeight();
 
 	const MapTypes m_eType;
 
 	int m_iGridWidth;
 	int m_iGridHeight;
+	int m_iLatitudeGridHeight;
 	int m_iLandPlots;
 	int m_iOwnedPlots;
 	int m_iTopLatitude;
