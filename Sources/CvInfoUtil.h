@@ -278,6 +278,49 @@ struct CvInfoUtil
 		return *this;
 	}
 
+	///==========================
+	/// Enum-as-int FK wrapper
+	///==========================
+	/// For legacy members typed plain `int` that actually hold a foreign-key type index resolved at read
+	/// time via GetInfoClass (e.g. a ColorTypes index stored in an int). Reads the <tag> type string and
+	/// resolves it immediately (no delayed resolution); default -1. Use addEnum instead whenever the
+	/// member is a real enum type — this exists only for the int-typed legacy fields.
+
+	struct IntInfoClassWrapper : WrappedVar
+	{
+		friend struct CvInfoUtil;
+
+	protected:
+		IntInfoClassWrapper(int& var, const wchar_t* tag)
+			: WrappedVar(static_cast<void*>(&var), tag)
+		{}
+
+		int& ref() const { return *static_cast<int*>(m_ptr); }
+
+		void initVar() { ref() = -1; }
+
+		void checkSum(uint32_t& iSum) const { CheckSum(iSum, ref()); }
+
+		void readXml(CvXMLLoadUtility* pXML)
+		{
+			CvString szTextVal;
+			if (pXML->GetOptionalChildXmlValByName(szTextVal, m_tag.c_str()))
+				ref() = pXML->GetInfoClass(szTextVal);
+		}
+
+		void copyNonDefaults(const WrappedVar* source)
+		{
+			if (ref() == -1)
+				ref() = static_cast<const IntInfoClassWrapper*>(source)->ref();
+		}
+	};
+
+	CvInfoUtil& addEnumAsInt(int& var, const wchar_t* tag)
+	{
+		m_wrappedVars.push_back(new IntInfoClassWrapper(var, tag));
+		return *this;
+	}
+
 	///================
 	/// String wrapper
 	///================
@@ -312,6 +355,61 @@ struct CvInfoUtil
 	CvInfoUtil& add(CvString& var, const wchar_t* tag)
 	{
 		m_wrappedVars.push_back(new StringWrapper(var, tag));
+		return *this;
+	}
+
+	///==========================
+	/// Fixed char-array wrapper
+	///==========================
+	/// A `char[N]` buffer filled by GetOptionalChildXmlValByName from <tag> (e.g. the small fixed model
+	/// strings on the *ModelInfo classes). The member stays char[N] (getters unchanged); absent tag =>
+	/// left at its default (empty string). The array size N is captured from the member's type.
+
+	struct FixedCharArrayWrapper : WrappedVar
+	{
+		friend struct CvInfoUtil;
+
+	protected:
+		FixedCharArrayWrapper(char* var, const wchar_t* tag, int size)
+			: WrappedVar(static_cast<void*>(var), tag)
+			, m_size(size)
+		{}
+
+		char* ref() const { return static_cast<char*>(m_ptr); }
+
+		void initVar() { ref()[0] = '\0'; }
+
+		void checkSum(uint32_t& iSum) const
+		{
+			for (int i = 0; i < m_size && ref()[i] != '\0'; i++)
+				CheckSum(iSum, ref()[i]);
+		}
+
+		void readXml(CvXMLLoadUtility* pXML)
+		{
+			pXML->GetOptionalChildXmlValByName(ref(), m_tag.c_str());
+		}
+
+		void copyNonDefaults(const WrappedVar* source)
+		{
+			if (ref()[0] == '\0')
+			{
+				const char* src = static_cast<const FixedCharArrayWrapper*>(source)->ref();
+				int i = 0;
+				for (; i < m_size - 1 && src[i] != '\0'; i++)
+					ref()[i] = src[i];
+				ref()[i] = '\0';
+			}
+		}
+
+	private:
+		const int m_size;
+	};
+
+	template <int N>
+	CvInfoUtil& add(char (&var)[N], const wchar_t* tag)
+	{
+		m_wrappedVars.push_back(new FixedCharArrayWrapper(var, tag, N));
 		return *this;
 	}
 
