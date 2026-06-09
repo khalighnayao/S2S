@@ -18311,7 +18311,7 @@ bool CvGameTextMgr::buildRequirementItemLink(GOMTypes eGOM, int iId, CvWString& 
 // against -- so the displayed have/need status matches actual constructibility. Renders the
 // unmet items as a "Requires: <links>" list (AND for REQUIRE_ALL, OR otherwise). pCity NULL
 // (Civilopedia) treats nothing as satisfied, so the full requirement is shown.
-void CvGameTextMgr::appendRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req, const CvCity* pCity)
+void CvGameTextMgr::appendRequirementHelp(CvWStringBuffer& szBuffer, const ConstructRequirement& req, const CvCity* pCity, const char* szRequiresKey)
 {
 	// FORBID / COUNT carry bespoke wording ("not required", "N of"); not handled here.
 	if (req.eOp == REQOP_FORBID || req.eOp == REQOP_REQUIRE_COUNT)
@@ -18347,7 +18347,7 @@ void CvGameTextMgr::appendRequirementHelp(CvWStringBuffer& szBuffer, const Const
 		{
 			continue;
 		}
-		setListHelp(szBuffer, gDLL->getText("TXT_KEY_REQUIRES"), szItem, szSep.c_str(), bFirst);
+		setListHelp(szBuffer, gDLL->getText(szRequiresKey), szItem, szSep.c_str(), bFirst);
 		bFirst = false;
 	}
 	if (!bFirst)
@@ -18756,12 +18756,29 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 			szBuffer.append(gDLL->getText("TXT_KEY_PROJECTHELP_NO_NUKES"));
 		}
 
+		// #325: the ConstructCondition is a pure build-time gate -- canConstruct checks it but
+		// checkBuildings never re-evaluates it -- so label it "Requires to build" to distinguish
+		// it from the operating gates below (e.g. Lye Maker: build with bricks+barrels, operate
+		// with wood + grass/straw). Build comes first: you raise it before you run it.
 		const BoolExpr* pExpr = kBuilding.getConstructCondition();
 		if (pExpr && (!pCity || !pExpr->evaluate(pCity->getGameObject())))
 		{
-			szBuffer.append(gDLL->getText("TXT_KEY_REQUIRES"));
+			szBuffer.append(gDLL->getText("TXT_KEY_REQUIRES_TO_BUILD"));
 			pExpr->buildDisplayString(szBuffer);
 			szBuffer.append(ENDCOLR);
+		}
+
+		// #195 Phase 2 / #325: prereq bonuses (the single AND bonus + the OR list) via the model
+		// + the unified hasGOM status oracle (GOM_BONUS -> hasBonus). Rendered here, alongside
+		// the other model-requirement clusters, so they appear in the Civilopedia too -- not just
+		// the build tooltip. These are *operating* gates: CvCity::checkBuildings disables a built
+		// building when its prereq bonus is lost, so they are labelled "Requires to operate".
+		foreach_(const ConstructRequirement& req, kBuilding.getConstructRequirements())
+		{
+			if (req.eGOM == GOM_BONUS)
+			{
+				appendRequirementHelp(szBuffer, req, pCity, "TXT_KEY_REQUIRES_TO_OPERATE");
+			}
 		}
 
 		if (bCivilopediaText)
@@ -18809,16 +18826,6 @@ void CvGameTextMgr::buildBuildingRequiresString(CvWStringBuffer& szBuffer, Build
 			if (!bFirst)
 			{
 				szBuffer.append(ENDCOLR);
-			}
-
-			// #195 Phase 2: prereq bonuses (the single AND bonus + the OR list) via the model
-			// + the unified hasGOM status oracle (GOM_BONUS -> hasBonus).
-			foreach_(const ConstructRequirement& req, kBuilding.getConstructRequirements())
-			{
-				if (req.eGOM == GOM_BONUS)
-				{
-					appendRequirementHelp(szBuffer, req, pCity);
-				}
 			}
 
 			if (NO_CORPORATION != kBuilding.getFoundsCorporation())

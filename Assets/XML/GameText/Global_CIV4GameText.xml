@@ -22878,6 +22878,14 @@
 		<Russian>[NEWLINE][COLOR_WARNING_TEXT]Òðåáóåòñÿ:[SPACE][COLOR_REVERT]</Russian>
 	</TEXT>
 	<TEXT>
+		<Tag>TXT_KEY_REQUIRES_TO_BUILD</Tag>
+		<English>[NEWLINE][COLOR_WARNING_TEXT]Requires to build[SPACE][COLOR_REVERT]</English>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_REQUIRES_TO_OPERATE</Tag>
+		<English>[NEWLINE][COLOR_WARNING_TEXT]Requires to operate[SPACE][COLOR_REVERT]</English>
+	</TEXT>
+	<TEXT>
 		<Tag>TXT_KEY_REQUIRES_LINK</Tag>
 		<English>[ICON_BULLET][COLOR_WARNING_TEXT]Requires [COLOR_REVERT][LINK=%s1]%s2[\LINK]</English>
 		<French>[ICON_BULLET][COLOR_WARNING_TEXT]Requiert [COLOR_REVERT][LINK=%s1]%s2[\LINK]</French>
