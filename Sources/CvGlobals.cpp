@@ -221,7 +221,9 @@ void CreateMiniDump(EXCEPTION_POINTERS *pep)
 	time (&rawtime);
 	timeinfo = localtime (&rawtime);
 
-	_stprintf(filename, _T("MiniDump-%s-%d%02d%02d-%02d%02d%02d.dmp"), C2C_VERSION, 1900 + timeinfo->tm_year, timeinfo->tm_mon, timeinfo->tm_mday, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+	// tm_mon is 0-based (January == 0), so add 1 to print the calendar month. tm_year is
+	// already adjusted via +1900. (Fixes #324 — dumps were stamped one month early.)
+	_stprintf(filename, _T("MiniDump-%s-%d%02d%02d-%02d%02d%02d.dmp"), C2C_VERSION, 1900 + timeinfo->tm_year, timeinfo->tm_mon + 1, timeinfo->tm_mday, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 
 	/* Open a file to store the minidump. */
 	HANDLE hFile = CreateFile(filename,
