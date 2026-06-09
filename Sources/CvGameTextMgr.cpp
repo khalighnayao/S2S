@@ -3258,12 +3258,8 @@ bool CvGameTextMgr::setCombatPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot, 
 		bool bStealthDefense = false;
 		bool bIsSamePlot = false;
 
-		int iView = gDLL->shiftKey() ? 2 : 1;
-
-		if (getBugOptionBOOL("ACO__SwapViews", false, "ACO_SWAP_VIEWS"))
-		{
-			iView = 3 - iView; //swaps 1 and 2.
-		}
+		// Shift reveals the extra "needed rounds" detail line (iView == 2).
+		const int iView = gDLL->shiftKey() ? 2 : 1;
 
 		CvUnit* pDefender = pPlot->getBestDefender(NO_PLAYER, pAttacker->getOwner(), pAttacker, !gDLL->altKey(), NO_TEAM == pAttacker->getDeclareWarMove(pPlot), false, bAssassinate);
 
