@@ -130,6 +130,10 @@ Pipeline side (`CvCity::pushOrder`/`popOrder`/`doProduction`):
 - `[COM/threshold]` (3) — the go/no-go odds bar required to attack.
 - `[COM/decision]` (2) — the attack target a unit commits to (`AI_cityAttack` / `AI_anyAttack`
   / `AI_leaveAttack`), closing the odds → outcome loop.
+- `[COM/calib]` (3) — Phase 3b calibration: the strength-ratio heuristic (`heurBase`) vs the
+  binomial engine (`binom`, what the AI now decides on) win%, pre-bias, per non-air attack
+  eval, with the matchup. The harness for re-tuning the `AI_finalOddsThreshold *23/20`
+  recenter and the future per-player aggression bar. See [`../plans/combat-phase3b-plan.md`](../plans/combat-phase3b-plan.md).
 
 ### `[WAR]` — team war (`WarAI.log`, **team** scope)
 

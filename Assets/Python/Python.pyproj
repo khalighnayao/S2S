@@ -54,7 +54,6 @@
     <Compile Include="BUG\Scoreboard.py" />
     <Compile Include="BUG\Tabs\ANDAutomationsTab.py" />
     <Compile Include="BUG\Tabs\ANDDiplomacyTab.py" />
-    <Compile Include="BUG\Tabs\BugACOOptionsTab.py" />
     <Compile Include="BUG\Tabs\BugAdvisorOptionsTab.py" />
     <Compile Include="BUG\Tabs\BugAlertsOptionsTab.py" />
     <Compile Include="BUG\Tabs\BugAutologOptionsTab.py" />

@@ -51,13 +51,20 @@ Quick wins; verify zero references personally, then remove (code + header decls)
 
 ## Tier 2 — audit required (medium risk)
 
-- **ACO leftovers — `Art/ACO/*.dds` bar art is NOT dead; do not remove.** Only the
-  ~2.2k-line ACO *histogram* was deleted. The current `computeCombatPreview`
-  renderer still draws the `Art/ACO/{green,yellow,red}_bar_*.dds` bars
-  (`CvGameTextMgr.cpp:3158` comment + ~3170+ `<img=Art/ACO/…>`), so the art ships in
-  the FPK and stays. The only ACO candidates are genuinely-orphaned `TXT_ACO_*`
-  text keys and the `ACO__SwapViews` BUG option *if* unreferenced — verify each is
-  truly unused by the new renderer before touching; treat as low priority.
+- **ACO BUG-options surface — REMOVED (2026-06-09).** The old Advanced Combat Odds
+  options screen was fully dead once the preview became a pure `computeCombatPreview`
+  renderer (only `ACO__SwapViews` was still read, and it merely inverted the Shift-gated
+  "needed rounds" line). Removed: `BugACOOptionsTab.py` (+ its `Python.pyproj` entry),
+  `Assets/Config/Advanced Combat Odds.xml`, the two `init.xml` registration lines, ~21
+  `TXT_KEY_BUG_OPT_ACO__*`/`TXT_KEY_BUG_OPTTAB_ACO` GameText keys, the whole `ACO_*`
+  GlobalDefine block in `GlobalDefinesAlt.xml`, the `CONCEPT_ADVANCED_COMBAT_ODDS`
+  Civilopedia concept (NewConceptInfo + 2 GameText keys), and a stray ACO sentence
+  mis-glued onto `TXT_KEY_CONCEPT_ACTIVE_DEFENSE_PEDIA`. The `SwapViews` C++ read was
+  dropped (`iView` now comes straight from `shiftKey()`).
+  **KEEP (live, not ACO cruft):** the `Art/ACO/{green,yellow,red}_bar_*.dds` bars (the
+  `computeCombatPreview` renderer draws them, `CvGameTextMgr.cpp` ~3158) and the
+  `TXT_ACO_*` renderer text keys (e.g. `TXT_ACO_VICTORY`). These are the new lean
+  preview's assets — the `ACO` here is just retained naming.
 - **Dead-branch zombies (handle via the bug backlog, not bulk deletion):**
   - `#105` `m_bGameStart` / `checkGameStart()` — the flag is never set true so the
     branch is dead. Already `needs-signoff` (semantics decision: needs `>` not `>=`

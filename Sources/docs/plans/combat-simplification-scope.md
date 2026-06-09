@@ -184,5 +184,10 @@ Removals done → now unifying the lean core onto `CvCombatModel`:
   resolution, the odds functions, the preview, and the AI's damage inputs all consume it
   (prediction == resolution; barb free-wins + the round-1 hit-chance bug reconciled).
   See `combat-model-sketch.md`.
-- **Phase 3b — planned** (route the AI's win-% through the binomial engine). Its own
-  branch when stable. Full plan in `combat-phase3b-plan.md`.
+- **Phase 3b — IMPLEMENTED** (PR #318; FinalRelease-playtested as a foundation, long-term
+  balance/calibration tracked as separate followups). Non-air AI attacks
+  now decide on `getCombatOdds()/10` (the UI/resolver number) instead of the strength-ratio
+  heuristic; `AI_finalOddsThreshold *23/20` recentres the bar (air-exempt); heuristic kept
+  for predicted-HP; personality bias preserved; `[COM/calib]` log added. NB: first done on
+  branch `combat-ai-binomial-odds` (PR #23) which never merged — re-applied to `main`. Full
+  detail + GlobalDefine follow-up in `combat-phase3b-plan.md`.

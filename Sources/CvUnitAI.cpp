@@ -1122,6 +1122,20 @@ int CvUnitAI::AI_attackOddsAtPlotInternal(const CvPlot* pPlot, CvUnit* pDefender
 	}
 	int iOurFirepower = ((getDomainType() == DOMAIN_AIR) ? iOurStrength : currFirepower(NULL, NULL));
 
+	// Phase 3b: the AI now decides on the engine's binomial win% (getCombatOdds) for
+	// non-air attacks -- the same number the UI preview shows and the resolver rolls --
+	// instead of the strength-ratio approximation computed further down. Captured here on
+	// the entry state (the predicted-HP context the caller set, matching the heuristic).
+	// Air has no engine path yet (getCombatOdds ignores air strength/interception), so it
+	// keeps the heuristic; the recenter in AI_finalOddsThreshold is air-exempt to match.
+	// The heuristic below still runs -- it drives the predicted-HP writes (load-bearing for
+	// the stack sim in CvSelectionGroupAI::AI_attackOdds) and the [COM/calib] log.
+	int iBinomialOdds = -1;
+	if (getDomainType() != DOMAIN_AIR)
+	{
+		iBinomialOdds = getCombatOdds(this, pDefender) / 10; // permille -> percent
+	}
+
 	const bool bSamePlot = pDefender->plot() == plot();
 
 	int iDamageToUs;
@@ -1272,6 +1286,17 @@ int CvUnitAI::AI_attackOddsAtPlotInternal(const CvPlot* pPlot, CvUnit* pDefender
 
 	int iOdds = iOurStrength * 100 / (iOurStrength + iTheirStrength);
 
+	const int iHeuristicBase = iOdds; // pre-bias strength-ratio odds, for [COM/calib]
+
+	// Phase 3b swap: for non-air, decide on the binomial win% rather than the strength
+	// ratio above. The round-count predicted-HP machinery and the strength boosts that
+	// fed iHeuristicBase are left intact -- those boosts are now dead for the returned
+	// odds but still drive the predicted-HP writes and the logged heuristic.
+	if (iBinomialOdds >= 0)
+	{
+		iOdds = iBinomialOdds;
+	}
+
 	//	Koshling - modify the calculated odds to account for
 	//	the AI player's rose-tinted-spectacles value - this used to simply add
 	//	to the odds, but that made it look like fights with hugely different strengths
@@ -1297,6 +1322,21 @@ int CvUnitAI::AI_attackOddsAtPlotInternal(const CvPlot* pPlot, CvUnit* pDefender
 			iNeededRoundsUs, iNeededRoundsThem, combatLimit(pDefender), iHitLimitThem,
 			iBaseOdds, iOdds);
 	}
+
+	// Phase 3b calibration: heuristic vs binomial win% for every non-air AI attack
+	// evaluation. iHeuristicBase / iBinomialOdds are the pre-bias numbers (the per-leader
+	// personality bias is applied identically to whichever source is returned, so the
+	// distribution shift is fully captured pre-bias). Kept (gated, level 3) as the harness
+	// for re-tuning the AI_finalOddsThreshold recenter and the future per-player bar.
+	if (gUnitLogLevel >= 3 && iBinomialOdds >= 0)
+	{
+		logCombatAI(3, "[COM/calib] atk=%S(%d) ourStr=%d def=%S theirStr=%d climit=%d nrUs=%d nrThem=%d roundsDiff=%d | heurBase=%d binom=%d finalBiased=%d mod=%d",
+			getDescription(0).GetCString(), getID(), iOurStrength,
+			pDefender->getDescription(0).GetCString(), iTheirStrength,
+			combatLimit(pDefender), iNeededRoundsUs, iNeededRoundsThem, iRoundsDiff,
+			iHeuristicBase, iBinomialOdds, range(iOdds, 1, 99), modifyPredictedResults ? 1 : 0);
+	}
+
 	return range(iOdds, 1, 99);
 }
 
@@ -24806,6 +24846,20 @@ int CvUnitAI::AI_finalOddsThreshold(const CvPlot* pPlot, int iOddsThreshold) con
 		iDivisor += ((AI_getUnitAIType() == UNITAI_ATTACK_CITY || AI_getUnitAIType() == UNITAI_ATTACK) ? 2 : 0);
 		iFinalOddsThreshold /= iDivisor;
 	}
+
+	// Phase 3b recenter: non-air attack odds are now the engine's binomial win%
+	// (AI_attackOddsAtPlotInternal), a steeper sigmoid than the strength-ratio heuristic
+	// these ~40 thresholds were tuned against. At a fixed bar the binomial greenlights more
+	// "good but not certain" fights (measured on autoplay: heur 60% == binom 80%, heur 70%
+	// == binom 96%), so raise the bar to roughly preserve aggregate aggression. Air still
+	// uses the heuristic and is exempt. TUNING KNOB (dial via the [COM/calib] log; see
+	// combat-phase3b-plan.md): 23/20 ~= +15% (current); 20/20 = none. Follow-up: move this
+	// literal into a GlobalDefine + per-leader aggression modifier (plan "Follow-up").
+	if (getDomainType() != DOMAIN_AIR)
+	{
+		iFinalOddsThreshold = iFinalOddsThreshold * 23 / 20;
+	}
+
 	// [COM/threshold] -- the go/no-go odds bar the AI requires to attack this plot.
 	logCombatAI(3, "[COM/threshold] owner=%d unit=%d target=(%d,%d) base=%d final=%d",
 		(int)getOwner(), getID(), pPlot ? pPlot->getX() : -1, pPlot ? pPlot->getY() : -1,

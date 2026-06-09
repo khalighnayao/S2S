@@ -73,7 +73,6 @@
 	<load mod="BULL City Bar"/>
 	<load mod="BULL Misc Hovers"/>
 	<load mod="AutoSave"/>
-	<load mod="Advanced Combat Odds"/>
 	<load mod="RoMSettings"/>
 	<load mod="DiplomacySettings"/>
 	<load mod="AutomatedSettings"/>
@@ -94,7 +93,6 @@
 		<tab module="BugAlertsOptionsTab"/>
 		<tab module="BugScoreOptionsTab"/>
 		<tab module="BugNJAGCOptionsTab"/>
-		<tab module="BugACOOptionsTab"/>
 		<tab module="BugUnitNameOptionsTab"/>
 		<tab module="BugAutologOptionsTab"/>
 		<tab module="BugSystemOptionsTab"/>
