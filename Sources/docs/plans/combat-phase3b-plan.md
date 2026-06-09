@@ -169,10 +169,15 @@ harness for re-tuning `23/20` and the per-player follow-up — folded into the e
 
 ### Scope boundary — followups, NOT blockers for this foundation
 The foundation is in and FinalRelease-playtested: it plays soundly and the calibration log
-shows no anomalies. It still needs **long-term play to settle balance** — that, and the
-items below, are deliberately their own followup issues, not gates on this PR:
-- **Long-term balance + threshold calibration:** the `23/20` recenter is a first cut; any
-  per-threshold / per-archetype re-tuning over extended play is its own task (use `[COM/calib]`).
+shows no anomalies. It still needs **long-term play to settle balance**. That balance work
+is deliberately out of scope here:
+- **Calibration is an ongoing, report-driven process — NOT a tracked issue.** The `23/20`
+  recenter is a first cut; it gets re-tuned over time from playtest suggestions and bug
+  reports (use the `[COM/calib]` log). Do not file a single "calibrate combat" issue.
+- **Tracked followups:** stack `AI_attackOdds` "goodness" behaviour after the binomial swap
+  (#319); re-add the itemised strength-modifier breakdown to the tooltip via
+  `CombatPreview.detailLines` (#320).
+- Other deferred items below are not gates on this PR:
 - **Profile (§6):** check autoplay turn time — `getCombatOdds` is heavier than a strength
   ratio. The `AI_attackOddsAtPlot` cache absorbs repeats, but `modifyPredictedResults`
   calls bypass it. Memoise only if it regresses.
