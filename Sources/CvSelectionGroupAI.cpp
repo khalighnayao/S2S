@@ -286,14 +286,19 @@ bool CvSelectionGroupAI::AI_update()
 
 
 // Returns attack odds out of 100 (the higher, the better...)
-int CvSelectionGroupAI::AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce, bool* bWin, int iThreshold) const
+int CvSelectionGroupAI::AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce, bool* bWin, int iThreshold, int* piLeadAttackerWinOdds) const
 {
 #define	ODDS_CACHE_VALUE_MASK	1023
 #define	ODDS_CACHE_WIN_BIT		1024
+#define	ODDS_CACHE_LEADODDS_SHIFT	11		// lead-attacker win% (0-100) packed above the win bit
+#define	ODDS_CACHE_LEADODDS_MASK	127
 	static std::map<const CvPlot*, int>*	g_attackOddsCache = NULL;
 	static const CvSelectionGroupAI*		g_attackOddsCacheGroup = NULL;
 	int iResult;
 	bool bIsWin = false;
+	// Lead attacker's binomial win% (the engine/UI number) -- the go/no-go gate, as opposed
+	// to iResult which is the stack outcome "goodness" loss-ratio used only for ranking.
+	int iLeadAttackerWinOdds = 0;
 
 	PROFILE_FUNC();
 
@@ -320,6 +325,10 @@ int CvSelectionGroupAI::AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy,
 			{
 				*bWin = ((itr->second & ODDS_CACHE_WIN_BIT) != 0);
 			}
+			if ( piLeadAttackerWinOdds != NULL )
+			{
+				*piLeadAttackerWinOdds = ((itr->second >> ODDS_CACHE_LEADODDS_SHIFT) & ODDS_CACHE_LEADODDS_MASK);
+			}
 
 			return iResult;
 		}
@@ -334,6 +343,10 @@ int CvSelectionGroupAI::AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy,
 
 		if (!pPlot->hasDefender(false, NO_PLAYER, getOwner(), getHeadUnit(), !bPotentialEnemy, bPotentialEnemy))
 		{
+			if ( piLeadAttackerWinOdds != NULL )
+			{
+				*piLeadAttackerWinOdds = 100; // uncontested move-in
+			}
 			return 100; // Disagrees with earlier count
 		}
 
@@ -424,6 +437,13 @@ int CvSelectionGroupAI::AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy,
 
 			if ( pDefender != NULL && pAttacker != NULL )
 			{
+				//	The first contested round is our best attacker vs their best defender;
+				//	its win% is the engine number we expose for the go/no-go gate (issue #319).
+				if ( pLastAttacker == NULL )
+				{
+					iLeadAttackerWinOdds = iOdds;
+				}
+
 				pLastDefender = pDefender;
 				pLastAttacker = pAttacker;
 				iLastOdds = iOdds;
@@ -550,15 +570,22 @@ int CvSelectionGroupAI::AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy,
 		if ( bPotentialEnemy && !bForce )
 		{
 
-			(*g_attackOddsCache)[pPlot] = (iResult & ODDS_CACHE_VALUE_MASK) + (bIsWin ? ODDS_CACHE_WIN_BIT : 0);
+			(*g_attackOddsCache)[pPlot] = (iResult & ODDS_CACHE_VALUE_MASK) + (bIsWin ? ODDS_CACHE_WIN_BIT : 0)
+				+ ((iLeadAttackerWinOdds & ODDS_CACHE_LEADODDS_MASK) << ODDS_CACHE_LEADODDS_SHIFT);
 		}
 	}
 
-	// [COM/odds] -- attack odds the AI computed for a target plot (the core combat
-	// decision input; compare against the [COM/threshold] bar for the go/no-go).
-	logCombatAI(3, "[COM/odds] owner=%d unit=%d target=(%d,%d) odds=%d win=%d",
+	if ( piLeadAttackerWinOdds != NULL )
+	{
+		*piLeadAttackerWinOdds = iLeadAttackerWinOdds;
+	}
+
+	// [COM/odds] -- attack odds the AI computed for a target plot. goodness=stack loss-ratio
+	// (ranking only); leadWin=lead attacker's binomial win% (the go/no-go gate compared against
+	// the [COM/threshold] bar post-#319). Logging both surfaces the goodness-vs-win% spread.
+	logCombatAI(3, "[COM/odds] owner=%d unit=%d target=(%d,%d) goodness=%d leadWin=%d win=%d",
 		(int)getOwner(), getHeadUnit() ? getHeadUnit()->getID() : -1,
-		pPlot ? pPlot->getX() : -1, pPlot ? pPlot->getY() : -1, iResult, bIsWin ? 1 : 0);
+		pPlot ? pPlot->getX() : -1, pPlot ? pPlot->getY() : -1, iResult, iLeadAttackerWinOdds, bIsWin ? 1 : 0);
 
 	return iResult;
 }

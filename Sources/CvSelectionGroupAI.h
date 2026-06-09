@@ -27,7 +27,11 @@ public:
 
 	bool AI_update();
 
-	int AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce = false, bool* bWin = NULL, int iTheshold = -1) const;
+	// Returns the stack "goodness" loss-ratio (NOT a win%). piLeadAttackerWinOdds, when
+	// non-NULL, is filled with the lead attacker's binomial win% (the engine number the UI
+	// shows) so callers can gate go/no-go on a real win probability and use the goodness
+	// return only for ranking. See issue #319 / combat-phase3b-plan.md §5.
+	int AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce = false, bool* bWin = NULL, int iTheshold = -1, int* piLeadAttackerWinOdds = NULL) const;
 
 	CvUnit* AI_getBestGroupAttacker
 	(

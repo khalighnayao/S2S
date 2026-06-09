@@ -299,7 +299,7 @@ public:
 	virtual void AI_reset() = 0;
 	virtual void AI_separate() = 0;
 	virtual bool AI_update() = 0;
-	virtual int AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce = false, bool* bWin = NULL, int iTheshold = -1) const = 0;
+	virtual int AI_attackOdds(const CvPlot* pPlot, bool bPotentialEnemy, bool bForce = false, bool* bWin = NULL, int iTheshold = -1, int* piLeadAttackerWinOdds = NULL) const = 0;
 
 	virtual CvUnit* AI_getBestGroupAttacker
 	(

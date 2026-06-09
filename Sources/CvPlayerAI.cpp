@@ -3308,10 +3308,22 @@ bool CvPlayerAI::AI_getVisiblePlotDanger(const CvPlot* pPlot, int iRange, bool b
 				)
 			&& pLoopUnit->canAttack()
 			&& !pLoopUnit->isInvisible(getTeam(), false)
-			&& pLoopUnit->canEnterOrAttackPlot(pPlot)
-			&& (group == NULL || pLoopUnit->getGroup()->AI_attackOdds(pPlot, true, true) > 100 - acceptableOdds))
+			&& pLoopUnit->canEnterOrAttackPlot(pPlot))
 			{
-				return true;
+				if (group == NULL)
+				{
+					return true;
+				}
+				// #319: gate danger on the enemy's lead-attacker binomial win% (the engine
+				// number), not the stack "goodness" loss-ratio. goodness compresses an
+				// overwhelming attacker vs a weak target to a tiny value, so it under-reported
+				// the danger from strong enemies; the win% captures "this enemy will likely beat us".
+				int iEnemyWinOdds = 0;
+				pLoopUnit->getGroup()->AI_attackOdds(pPlot, true, true, NULL, -1, &iEnemyWinOdds);
+				if (iEnemyWinOdds > 100 - acceptableOdds)
+				{
+					return true;
+				}
 			}
 		}
 	}
