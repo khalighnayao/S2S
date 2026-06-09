@@ -102,10 +102,47 @@ will silently change how aggressive the AI is at every threshold.
   separately; the binomial fixed the very-weak-defender underflow that originally
   motivated the raw-odds path, so it may simplify.
 
-### 5. Stack goodness inherits the change
-`CvSelectionGroupAI::AI_attackOdds` (the loss-ratio "goodness" score, NOT a win%)
-consumes per-unit odds + predicted HP. It needs no structural change, but its
-output shifts because its inputs shift. Include it in the autoplay comparison.
+### 5. Stack goodness inherits the change — RESOLVED structurally (#319)
+`CvSelectionGroupAI::AI_attackOdds` returns a loss-ratio "goodness" score, NOT a win%.
+Post-3b its inputs shifted (the last-round give-back now uses the binomial `iLastOdds`)
+while its bulk (predicted-HP survivorship) stayed heuristic. The deeper, pre-existing
+problem the audit surfaced: **goodness was threshold-compared against the win-% bar**
+(`AI_finalOddsThreshold`, now recentred ×23/20) at ~7 attack-decision sites — the same
+goodness-vs-win% conflation that caused the historic weak-defender hunter bug, just less
+extreme. Only the hunter path had been fixed (it gates on per-unit win% via
+`AI_getBestGroupAttacker`).
+
+**Fix (#319, landed):** `AI_attackOdds` now also yields the **lead attacker's binomial
+win%** via a new `int* piLeadAttackerWinOdds` out-param (the first contested round's odds
+= best attacker vs best defender = the engine number the UI shows). The go/no-go gates
+were switched to compare *that* against `AI_finalOddsThreshold`, while **goodness is kept
+only for ranking** (`> iBestValue`) and exchange-quality uses. Converted: `AI_anyAttack`
+(both the active CvReachablePlotSet loop and `AI_ambush`), the city-attack scan
+(`CvUnitAI.cpp:17629`), `AI_leaveAttack`, the area-attack scan (`:15455`), the
+minimal-targets scan (`:27413`), the river-crossing guard `shouldAvoidLowOddsRiverAttack`
+(fed win% so a 95%-win attack on a weak defender across a river is no longer wrongly
+skipped), and `CvPlayerAI::AI_getVisiblePlotDanger` (enemy win% now drives the threat
+test, fixing the symmetric under-reporting of danger from strong enemies vs weak targets).
+
+**Deliberately left on goodness** (it is the correct semantics there — exchange quality,
+not a win bar): the bombard formulas (`AI_bombardCity` weight + the `>95` skip-if-crushing),
+the blockade `<50` bottleneck renormalize (`:17207`), the `>75` pre-filter before
+`AI_cityAttack` (`:3366`), and the disabled `#ifdef VALIDITY_CHECK_NEW_ATTACK_SEARCH` block.
+
+**Behavioural deltas the aggression tuning should account for** — like all combat
+calibration here, this is an *ongoing, report-driven process, NOT a tracked issue*; it
+folds into the per-leader/per-trait aggression work below ("Follow-up") rather than a
+one-off "calibrate #319" task:
+- The win% includes the per-leader personality bias, so personality now influences these
+  gates (it previously only touched goodness indirectly).
+- `AI_ambush` dropped its goodness-inflation hacks (`+iOddsThreshold` when win-likely, `*2`
+  on home territory) that existed only to drag compressed goodness over a non-win% bar;
+  home-soil ambush is now purely win%-gated. If home aggression should return, express it
+  as a *lower bar* in `AI_finalOddsThreshold`, not as value inflation.
+- The `×23/20` recenter still applies to these gates, but it now sits on a real win% (what
+  it was calibrated for) rather than on goodness — re-tune it over time against the enriched
+  `[COM/odds]` log (now emits `goodness=` and `leadWin=` side by side) + `[COM/calib]`, and
+  ultimately subsume it into the per-leader bar.
 
 ### 6. Performance
 `getCombatOdds` (nested binomial + `pow`) is heavier than a strength ratio, and the
@@ -175,8 +212,11 @@ is deliberately out of scope here:
   recenter is a first cut; it gets re-tuned over time from playtest suggestions and bug
   reports (use the `[COM/calib]` log). Do not file a single "calibrate combat" issue.
 - **Tracked followups:** stack `AI_attackOdds` "goodness" behaviour after the binomial swap
-  (#319); re-add the itemised strength-modifier breakdown to the tooltip via
-  `CombatPreview.detailLines` (#320).
+  (#319 — **structural fix landed**: go/no-go now gates on the lead attacker's win% via the
+  new `piLeadAttackerWinOdds` out-param, goodness kept for ranking; see §5. The resulting
+  aggression is tuned by the ongoing report-driven calibration, folded into the per-leader
+  aggression work — not a separate tracked issue); re-add the itemised
+  strength-modifier breakdown to the tooltip via `CombatPreview.detailLines` (#320).
 - Other deferred items below are not gates on this PR:
 - **Profile (§6):** check autoplay turn time — `getCombatOdds` is heavier than a strength
   ratio. The `AI_attackOddsAtPlot` cache absorbs repeats, but `modifyPredictedResults`

@@ -15450,9 +15450,11 @@ bool CvUnitAI::AI_protect(int iOddsThreshold, int iMaxPathTurns)
 						{
 							// BBAI efficiency: Most of the time, path will exist and odds will be checked anyway.  When path doesn't exist, checking path
 							// takes longer.  Therefore, check odds first.
-							iValue = getGroup()->AI_attackOdds(pLoopPlot, true);
+							int iWinOdds = 0;
+							iValue = getGroup()->AI_attackOdds(pLoopPlot, true, false, NULL, -1, &iWinOdds);
 
-							if ((iValue >= AI_finalOddsThreshold(pLoopPlot, iOddsThreshold)) && (iValue * 50 > iBestValue))
+							// #319: gate go/no-go on the lead attacker's win%, rank on goodness.
+							if ((iWinOdds >= AI_finalOddsThreshold(pLoopPlot, iOddsThreshold)) && (iValue * 50 > iBestValue))
 							{
 								int iPathTurns;
 								if (generatePath(pLoopPlot, 0, true, &iPathTurns, iMaxPathTurns))
@@ -17619,14 +17621,16 @@ bool CvUnitAI::AI_cityAttack(int iRange, int iOddsThreshold, bool bFollow)
 			if (bFollow && canEnterOrAttackPlot(plotX, true)
 			|| !bFollow && generatePath(plotX, 0, true, &iPathTurns, iRange) && iPathTurns <= iRange)
 			{
-				const int iValue = getGroup()->AI_attackOdds(plotX, true);
+				int iWinOdds = 0;
+				const int iValue = getGroup()->AI_attackOdds(plotX, true, false, NULL, -1, &iWinOdds);
 
-				if (shouldAvoidLowOddsRiverAttack(*this, plotX, iValue))
+				if (shouldAvoidLowOddsRiverAttack(*this, plotX, iWinOdds))
 				{
 					continue;
 				}
 
-				if (iValue >= AI_finalOddsThreshold(plotX, iOddsThreshold) && iValue > iBestValue)
+				// #319: gate on the lead attacker's win%, rank on goodness.
+				if (iWinOdds >= AI_finalOddsThreshold(plotX, iOddsThreshold) && iValue > iBestValue)
 				{
 					const CvPlot* endTurnPlot = getPathEndTurnPlot();
 
@@ -17726,6 +17730,7 @@ bool CvUnitAI::AI_anyAttack(int iRange, int iOddsThreshold, int iMinStack, bool 
 			continue;
 		}
 		int iValue = 0;
+		int iWinOdds = 0;
 		bool bWinLikely = false;
 		int iAdjustedOddsThreshold = 0;
 
@@ -17733,10 +17738,10 @@ bool CvUnitAI::AI_anyAttack(int iRange, int iOddsThreshold, int iMinStack, bool 
 
 		if (plotX->getNumVisiblePotentialEnemyDefenders(this) > 0)
 		{
-			iValue += getGroup()->AI_attackOdds(plotX, true, false, &bWinLikely, iOddsThreshold);
+			iValue += getGroup()->AI_attackOdds(plotX, true, false, &bWinLikely, iOddsThreshold, &iWinOdds);
 			iAdjustedOddsThreshold = AI_finalOddsThreshold(plotX, iOddsThreshold);
 
-			if (shouldAvoidLowOddsRiverAttack(*this, plotX, iValue))
+			if (shouldAvoidLowOddsRiverAttack(*this, plotX, iWinOdds))
 			{
 				continue;
 			}
@@ -17749,6 +17754,7 @@ bool CvUnitAI::AI_anyAttack(int iRange, int iOddsThreshold, int iMinStack, bool 
 		else
 		{
 			iValue += 100 * plotX->getNumVisiblePotentialEnemyDefenderless(this);
+			iWinOdds = 100; // defenderless target -- uncontested
 			iAdjustedOddsThreshold = 1;
 			bWinLikely = true;
 		}
@@ -17765,7 +17771,8 @@ bool CvUnitAI::AI_anyAttack(int iRange, int iOddsThreshold, int iMinStack, bool 
 			itr.setOpaqueInfo(ACTIVITY_ID_ANY_ATTACK, 1 + 100 * iValue * iOddsThreshold / iAdjustedOddsThreshold);
 		}
 
-		if (iValue > iBestValue && iValue >= iAdjustedOddsThreshold)
+		// #319: gate on the lead attacker's win%, rank on goodness (+ territory/city bonuses).
+		if (iValue > iBestValue && iWinOdds >= iAdjustedOddsThreshold)
 		{
 			PROFILE("CvUnitAI::AI_anyAttack.SearchPath");
 
@@ -17927,9 +17934,11 @@ bool CvUnitAI::AI_leaveAttack(int iRange, int iOddsThreshold, int iStrengthThres
 			int iPathTurns;
 			if (generatePath(plotX, 0, true, &iPathTurns, iRange))
 			{
-				const int iValue = getGroup()->AI_attackOdds(plotX, true);
+				int iWinOdds = 0;
+				const int iValue = getGroup()->AI_attackOdds(plotX, true, false, NULL, -1, &iWinOdds);
 
-				if (iValue >= AI_finalOddsThreshold(plotX, iOddsThreshold))
+				// #319: gate on the lead attacker's win%, rank on goodness.
+				if (iWinOdds >= AI_finalOddsThreshold(plotX, iOddsThreshold))
 				{
 					if (iValue > iBestValue)
 					{
@@ -24901,8 +24910,9 @@ bool CvUnitAI::AI_stackAttackCity(int iRange, int iPowerThreshold, bool bFollow)
 		{
 			if (bFollow)
 			{
-				const int iAttackOdds = getGroup()->AI_attackOdds(pLoopPlot, true);
-				if (shouldAvoidLowOddsRiverAttack(*this, pLoopPlot, iAttackOdds))
+				int iWinOdds = 0; // #319: river check wants a real win%, not the goodness ratio
+				getGroup()->AI_attackOdds(pLoopPlot, true, false, NULL, -1, &iWinOdds);
+				if (shouldAvoidLowOddsRiverAttack(*this, pLoopPlot, iWinOdds))
 				{
 					continue;
 				}
@@ -27399,9 +27409,9 @@ bool CvUnitAI::AI_protectTarget(const CvUnit* pTarget)
 						{
 							if (pLoopPlot->getNumVisibleAdjacentEnemyDefenders(this) <= ((getGroup()->getNumUnits() * 3) / 2))
 							{
-								const int iValue = getGroup()->AI_attackOdds(pLoopPlot, true);
+								int iWinOdds = 0; const int iValue = getGroup()->AI_attackOdds(pLoopPlot, true, false, NULL, -1, &iWinOdds); // #319
 
-								if (iValue >= AI_finalOddsThreshold(pLoopPlot, 65))
+								if (iWinOdds >= AI_finalOddsThreshold(pLoopPlot, 65)) // #319: gate on win%, rank on goodness
 								{
 									if (iValue > iBestValue)
 									{
@@ -28701,32 +28711,27 @@ bool CvUnitAI::AI_ambush(int iOddsThreshold, bool bAssassinationOnly)
 	}
 	bool bWinLikely = false;
 	int iAdjustedOddsThreshold;
-	int iValue;
+	// #319: gate the ambush on the lead attacker's binomial win% (the engine number), not the
+	// stack "goodness" loss-ratio. The old goodness-inflation hacks (+iOddsThreshold when win
+	// likely, *2 on home territory) existed only to drag the compressed goodness over a bar it
+	// wasn't a win% for; with a true win% they are dropped. (Home-soil aggression, if wanted
+	// back, belongs in AI_finalOddsThreshold as a lower bar, not as value inflation.)
+	int iWinOdds = 0;
 
 	PROFILE("CvUnitAI::AI_anyAttack.FoundTargetforAmbush");
 	if (iVisDef > 0)
 	{
-		iValue = getGroup()->AI_attackOdds(pPlot, true, true, &bWinLikely, iOddsThreshold);
+		getGroup()->AI_attackOdds(pPlot, true, true, &bWinLikely, iOddsThreshold, &iWinOdds);
 		iAdjustedOddsThreshold = AI_finalOddsThreshold(pPlot, iOddsThreshold);
-		if (bWinLikely)
-		{
-			iValue += iOddsThreshold;
-		}
 	}
 	else
 	{
-		iValue = 100 * iVisDefless;
+		iWinOdds = 100; // defenderless target -- uncontested
 		iAdjustedOddsThreshold = 1;
 		bWinLikely = true;
 	}
 
-	// Increase value on our territory since we really want to get rid of enemies there even if it costs us a few losses
-	if (pPlot->getOwner() == getOwner() && bWinLikely)
-	{
-		iValue *= 2;
-	}
-
-	if (iValue > 0 && iValue >= iAdjustedOddsThreshold)
+	if (iWinOdds > 0 && iWinOdds >= iAdjustedOddsThreshold)
 	{
 		if (bCanAssassinate)
 		{
