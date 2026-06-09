@@ -19,7 +19,12 @@ CvDLLEntity::~CvDLLEntity()
 
 void CvDLLEntity::removeEntity()
 {
-	gDLL->getEntityIFace()->removeEntity(getEntity());
+	// Guard against a null/dummy entity: with viewports enabled, off-screen units
+	// have no engine entity, and the engine derefs the pointer unconditionally.
+	if (CvUnit::isRealEntity(getEntity()))
+	{
+		gDLL->getEntityIFace()->removeEntity(getEntity());
+	}
 }
 
 void CvDLLEntity::setup()
@@ -55,7 +60,10 @@ void CvDLLEntity::destroyEntity()
 	g_numEntitiesDestroyed++;
 
 	//OutputDebugString(CvString::format("destroyEntity for %08lx\n", this).c_str());
-	gDLL->getEntityIFace()->destroyEntity(m_pEntity);
+	if (CvUnit::isRealEntity(m_pEntity))
+	{
+		gDLL->getEntityIFace()->destroyEntity(m_pEntity);
+	}
 }
 
 bool CvDLLEntity::IsSelected() const
