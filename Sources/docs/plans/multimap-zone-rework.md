@@ -1,6 +1,6 @@
 # Multi-map → Zone rework
 
-Status: **in progress** (Phase A-soft started). Owner-driven design; this doc is the execution reference.
+Status: **PAUSED after Phase A-soft** (shipped — PR #327, game-load verified). Field study; parked while other priorities take precedence. **Resume at Phase A-hard** (the single-map collapse + save-salvage shim + win measurement), or jump to Phase B (zone paging). Owner-driven design; this doc is the execution reference.
 
 ## Goal & scope
 
