@@ -1,7 +1,9 @@
 # Phase 3b — Route the AI's win-% through the binomial engine
 
-Status: **IMPLEMENTED on `main` (working tree), pending in-game playtest.** Non-air AI
-attacks now decide on the engine's binomial `getCombatOdds()/10` — the same number the
+Status: **IMPLEMENTED (PR #318), FinalRelease-playtested as a working foundation.** This
+delivers the *foundation* — one combat number end-to-end — NOT finished balance. Long-term
+balance and threshold calibration are deliberately out of scope and tracked as separate
+followup issues. Non-air AI attacks now decide on the engine's binomial `getCombatOdds()/10` — the same number the
 UI preview shows and the resolver rolls — instead of the strength-ratio heuristic. The
 heuristic still runs (drives the predicted-HP contract + the `[COM/calib]` log); the
 per-leader personality bias is preserved; air keeps the heuristic. `AI_finalOddsThreshold`
@@ -165,9 +167,12 @@ Calibration log: `[COM/calib]` (level 3, `CombatAI.log`, via `logCombatAI`) emit
 harness for re-tuning `23/20` and the per-player follow-up — folded into the existing
 `[COM]` domain rather than a separate `CombatOddsCalibration.log`.
 
-### Remaining before "done"
-- **Playtest (FinalRelease):** confirm AI aggression / unit-loss feel acceptable. The
-  Assert build compiles clean; behaviour is unverified until played.
+### Scope boundary — followups, NOT blockers for this foundation
+The foundation is in and FinalRelease-playtested: it plays soundly and the calibration log
+shows no anomalies. It still needs **long-term play to settle balance** — that, and the
+items below, are deliberately their own followup issues, not gates on this PR:
+- **Long-term balance + threshold calibration:** the `23/20` recenter is a first cut; any
+  per-threshold / per-archetype re-tuning over extended play is its own task (use `[COM/calib]`).
 - **Profile (§6):** check autoplay turn time — `getCombatOdds` is heavier than a strength
   ratio. The `AI_attackOddsAtPlot` cache absorbs repeats, but `modifyPredictedResults`
   calls bypass it. Memoise only if it regresses.

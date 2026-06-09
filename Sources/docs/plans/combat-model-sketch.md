@@ -11,7 +11,8 @@ divergences were reconciled to one behaviour (prediction == resolution): barb
 free-wins now apply uniformly (incl. `getCombatOdds`, dropping the old
 `isHominid`/`ACO_IgnoreBarbFreeWins` split), and the `resolveCombat` round-1
 attacker hit-chance bug (~0.5% via a one-round lag) is fixed.
-Phase 3b LANDED (working tree on `main`, pending playtest): the AI's *win-%* now comes
+Phase 3b LANDED (PR #318; FinalRelease-playtested foundation, balance/calibration are
+separate followups): the AI's *win-%* now comes
 from the binomial engine (`getCombatOdds()/10`) for non-air attacks, replacing the
 strength-ratio heuristic. The heuristic still runs for the predicted-HP contract the
 stack sim depends on; the personality bias is preserved; air keeps the heuristic. The
