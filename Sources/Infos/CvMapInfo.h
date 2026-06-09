@@ -28,6 +28,7 @@ public:
 	const CvString getInitialWBMap() const	{ return m_szInitialWBMap; }
 	const CvString getMapScript() const		{ return m_szMapScript; }
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 
 private:

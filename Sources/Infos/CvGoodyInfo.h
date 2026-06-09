@@ -47,6 +47,7 @@ public:
 
 	const char* getSound() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvGoodyInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

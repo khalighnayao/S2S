@@ -25,14 +25,8 @@
 //======================================================================================================
 
 CvMapInfo::CvMapInfo()
-	: m_iGridWidth(0)
-	, m_iGridHeight(0)
-	, m_iWrapX(-1)
-	, m_iWrapY(-1)
-	, m_bStartRevealed(false)
-	, m_szInitialWBMap(NULL)
-	, m_szMapScript(NULL)
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -41,17 +35,25 @@ CvMapInfo::~CvMapInfo()
 }
 
 
+void CvMapInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_iGridWidth, L"iGridWidth")
+		.add(m_iGridHeight, L"iGridHeight")
+		.add(m_iWrapX, L"bWrapX", -1)
+		.add(m_iWrapY, L"bWrapY", -1)
+		.add(m_bStartRevealed, L"bStartRevealed")
+		.add(m_szInitialWBMap, L"InitialWBMap")
+		.add(m_szMapScript, L"MapScript")
+	;
+}
+
+
 bool CvMapInfo::read(CvXMLLoadUtility* pXML)
 {
 	CvHotkeyInfo::read(pXML);
 
-	pXML->GetOptionalChildXmlValByName(&m_iGridWidth, L"iGridWidth");
-	pXML->GetOptionalChildXmlValByName(&m_iGridHeight, L"iGridHeight");
-	pXML->GetOptionalChildXmlValByName(&m_iWrapX, L"bWrapX");
-	pXML->GetOptionalChildXmlValByName(&m_iWrapY, L"bWrapY");
-	pXML->GetOptionalChildXmlValByName(&m_bStartRevealed, L"bStartRevealed");
-	pXML->GetOptionalChildXmlValByName(m_szInitialWBMap, L"InitialWBMap");
-	pXML->GetOptionalChildXmlValByName(m_szMapScript, L"MapScript");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
