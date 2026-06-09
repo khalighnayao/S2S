@@ -33,6 +33,7 @@ public:
 
 	const char* getWaypoint() const;		// effect type, Exposed to Python
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvMissionInfo* pClassInfo);

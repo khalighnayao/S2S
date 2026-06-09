@@ -25,10 +25,9 @@
 //  CvUpkeepInfo
 //
 
-CvUpkeepInfo::CvUpkeepInfo() :
-m_iPopulationPercent(0),
-m_iCityPercent(0)
+CvUpkeepInfo::CvUpkeepInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -49,6 +48,15 @@ int CvUpkeepInfo::getCityPercent() const
 }
 
 
+void CvUpkeepInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_iPopulationPercent, L"iPopulationPercent")
+		.add(m_iCityPercent, L"iCityPercent")
+	;
+}
+
+
 bool CvUpkeepInfo::read(CvXMLLoadUtility* pXml)
 {
 	if (!CvInfoBase::read(pXml))
@@ -56,8 +64,7 @@ bool CvUpkeepInfo::read(CvXMLLoadUtility* pXml)
 		return false;
 	}
 
-	pXml->GetChildXmlValByName(&m_iPopulationPercent, L"iPopulationPercent");
-	pXml->GetChildXmlValByName(&m_iCityPercent, L"iCityPercent");
+	CvInfoUtil(this).readXml(pXml);
 
 	return true;
 }
@@ -65,18 +72,14 @@ bool CvUpkeepInfo::read(CvXMLLoadUtility* pXml)
 
 void CvUpkeepInfo::copyNonDefaults(const CvUpkeepInfo* pClassInfo)
 {
-	const int iDefault = 0;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getPopulationPercent() == iDefault) m_iPopulationPercent = pClassInfo->getPopulationPercent();
-	if (getCityPercent() == iDefault) m_iCityPercent = pClassInfo->getCityPercent();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvUpkeepInfo::getCheckSum(uint32_t& iSum) const
 {
-	CheckSum(iSum, m_iPopulationPercent);
-	CheckSum(iSum, m_iCityPercent);
+	CvInfoUtil(this).checkSum(iSum);
 }
 

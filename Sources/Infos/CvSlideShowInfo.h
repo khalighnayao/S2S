@@ -26,6 +26,7 @@ public:
 	DllExport const char* getTransitionType()	{ return m_szTransitionType; }
 	DllExport float getStartTime()				{ return m_fStartTime; }
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvSlideShowInfo* pClassInfo);
 

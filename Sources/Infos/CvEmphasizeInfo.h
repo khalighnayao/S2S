@@ -34,6 +34,7 @@ public:
 	int getYieldChange(int i) const;
 	int getCommerceChange(int i) const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvEmphasizeInfo* pClassInfo);
 

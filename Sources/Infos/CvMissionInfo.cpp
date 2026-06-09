@@ -31,25 +31,15 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvMissionInfo::CvMissionInfo() :
-m_iTime(0),
-m_bSound(false),
-m_bTarget(false),
-m_bBuild(false),
-m_bVisible(false),
-m_eEntityEvent(ENTITY_EVENT_NONE)
+CvMissionInfo::CvMissionInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
-CvMissionInfo::CvMissionInfo(const char * szType) : CvHotkeyInfo(),
-m_iTime(0),
-m_bSound(false),
-m_bTarget(false),
-m_bBuild(false),
-m_bVisible(false),
-m_eEntityEvent(ENTITY_EVENT_NONE)
+CvMissionInfo::CvMissionInfo(const char * szType) : CvHotkeyInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 	m_szType = szType;
 }
 
@@ -108,23 +98,28 @@ EntityEventTypes CvMissionInfo::getEntityEvent() const
 }
 
 
+void CvMissionInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szWaypoint, L"Waypoint")
+		.add(m_iTime, L"iTime")
+		.add(m_bSound, L"bSound")
+		.add(m_bTarget, L"bTarget")
+		.add(m_bBuild, L"bBuild")
+		.add(m_bVisible, L"bVisible")
+		.addEnum(m_eEntityEvent, L"EntityEventType")
+	;
+}
+
+
 bool CvMissionInfo::read(CvXMLLoadUtility* pXML)
 {
-	CvString szTmp;
 	if (!CvHotkeyInfo::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(m_szWaypoint, L"Waypoint");
-	pXML->GetOptionalChildXmlValByName(&m_iTime, L"iTime");
-	pXML->GetOptionalChildXmlValByName(&m_bSound, L"bSound");
-	pXML->GetOptionalChildXmlValByName(&m_bTarget, L"bTarget");
-	pXML->GetOptionalChildXmlValByName(&m_bBuild, L"bBuild");
-	pXML->GetOptionalChildXmlValByName(&m_bVisible, L"bVisible");
-
-	if ( pXML->GetOptionalChildXmlValByName(szTmp, L"EntityEventType"))
-		m_eEntityEvent = (EntityEventTypes)pXML->GetInfoClass(szTmp);
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -132,20 +127,8 @@ bool CvMissionInfo::read(CvXMLLoadUtility* pXML)
 
 void CvMissionInfo::copyNonDefaults(const CvMissionInfo* pClassInfo)
 {
-	const bool bDefault = false;
-	const int iDefault = 0;
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvHotkeyInfo::copyNonDefaults(pClassInfo);
 
-	if (getWaypoint() == cDefault) m_szWaypoint = pClassInfo->getWaypoint();
-	if (getTime() == iDefault) m_iTime = pClassInfo->getTime();
-
-	if (isSound() == bDefault) m_bSound = pClassInfo->isSound();
-	if (isTarget() == bDefault) m_bTarget = pClassInfo->isTarget();
-	if (isBuild() == bDefault) m_bBuild = pClassInfo->isBuild();
-	if (getVisible() == bDefault) m_bVisible = pClassInfo->getVisible();
-
-	if ( getEntityEvent() == ENTITY_EVENT_NONE ) m_eEntityEvent = pClassInfo->getEntityEvent();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

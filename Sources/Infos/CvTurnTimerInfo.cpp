@@ -32,12 +32,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvTurnTimerInfo::CvTurnTimerInfo() :
-m_iBaseTime(0),
-m_iCityBonus(0),
-m_iUnitBonus(0),
-m_iFirstTurnMultiplier(0)
+CvTurnTimerInfo::CvTurnTimerInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -77,18 +74,25 @@ int CvTurnTimerInfo::getFirstTurnMultiplier() const
 }
 
 
+void CvTurnTimerInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_iBaseTime, L"iBaseTime")
+		.add(m_iCityBonus, L"iCityBonus")
+		.add(m_iUnitBonus, L"iUnitBonus")
+		.add(m_iFirstTurnMultiplier, L"iFirstTurnMultiplier")
+	;
+}
+
+
 bool CvTurnTimerInfo::read(CvXMLLoadUtility* pXML)
 {
-
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(&m_iBaseTime, L"iBaseTime");
-	pXML->GetOptionalChildXmlValByName(&m_iCityBonus, L"iCityBonus");
-	pXML->GetOptionalChildXmlValByName(&m_iUnitBonus, L"iUnitBonus");
-	pXML->GetOptionalChildXmlValByName(&m_iFirstTurnMultiplier, L"iFirstTurnMultiplier");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -96,22 +100,14 @@ bool CvTurnTimerInfo::read(CvXMLLoadUtility* pXML)
 
 void CvTurnTimerInfo::copyNonDefaults(const CvTurnTimerInfo* pClassInfo)
 {
-	const int iDefault = 0;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getBaseTime() == iDefault) m_iBaseTime = pClassInfo->getBaseTime();
-	if (getCityBonus() == iDefault) m_iCityBonus = pClassInfo->getCityBonus();
-	if (getUnitBonus() == iDefault) m_iUnitBonus = pClassInfo->getUnitBonus();
-	if (getFirstTurnMultiplier() == iDefault) m_iFirstTurnMultiplier = pClassInfo->getFirstTurnMultiplier();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvTurnTimerInfo::getCheckSum(uint32_t &iSum) const
 {
-	CheckSum(iSum, m_iBaseTime);
-	CheckSum(iSum, m_iCityBonus);
-	CheckSum(iSum, m_iUnitBonus);
-	CheckSum(iSum, m_iFirstTurnMultiplier);
+	CvInfoUtil(this).checkSum(iSum);
 }
 

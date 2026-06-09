@@ -21,6 +21,7 @@ public:
 	CvIdeaInfo();
 	virtual ~CvIdeaInfo();
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvIdeaInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

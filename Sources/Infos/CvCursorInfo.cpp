@@ -55,16 +55,22 @@ const char* CvCursorInfo::getPath()
 }
 
 
+void CvCursorInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szPath, L"CursorPath")
+	;
+}
+
+
 bool CvCursorInfo::read(CvXMLLoadUtility* pXML)
 {
-	CvString szTextVal;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(szTextVal, L"CursorPath");
-	m_szPath = szTextVal;
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -72,10 +78,8 @@ bool CvCursorInfo::read(CvXMLLoadUtility* pXML)
 
 void CvCursorInfo::copyNonDefaults(const CvCursorInfo* pClassInfo)
 {
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getPath() == cDefault) m_szPath = pClassInfo->m_szPath;
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

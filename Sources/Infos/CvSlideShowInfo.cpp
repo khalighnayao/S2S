@@ -31,9 +31,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvSlideShowInfo::CvSlideShowInfo() :
-m_fStartTime(0.0f)
+CvSlideShowInfo::CvSlideShowInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -49,28 +49,32 @@ CvSlideShowInfo::~CvSlideShowInfo()
 }
 
 
+void CvSlideShowInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szPath, L"Path")
+		.add(m_szTransitionType, L"TransitionType")
+		.add(m_fStartTime, L"fStartTime")
+	;
+}
+
+
 bool CvSlideShowInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
-	pXML->GetChildXmlValByName(m_szPath, L"Path");
-	pXML->GetChildXmlValByName(m_szTransitionType, L"TransitionType");
-	pXML->GetChildXmlValByName(&m_fStartTime, L"fStartTime");
+
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
 
 void CvSlideShowInfo::copyNonDefaults(const CvSlideShowInfo* pClassInfo)
 {
-	const float fDefault = 0.0f;
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getPath() == cDefault) m_szPath = pClassInfo->m_szPath;
-	if (getTransitionType() == cDefault) m_szTransitionType = pClassInfo->m_szTransitionType;
-	if (getStartTime() == fDefault) m_fStartTime = pClassInfo->m_fStartTime;
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

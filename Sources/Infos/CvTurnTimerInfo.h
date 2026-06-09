@@ -27,6 +27,7 @@ public:
 	int getUnitBonus() const;
 	int getFirstTurnMultiplier() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvTurnTimerInfo* pClassInfo);

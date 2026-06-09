@@ -54,13 +54,22 @@ const char* CvSlideShowRandomInfo::getPath()
 }
 
 
+void CvSlideShowRandomInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szPath, L"Path")
+	;
+}
+
+
 bool CvSlideShowRandomInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
-	pXML->GetChildXmlValByName(m_szPath, L"Path");
+
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -68,10 +77,8 @@ bool CvSlideShowRandomInfo::read(CvXMLLoadUtility* pXML)
 
 void CvSlideShowRandomInfo::copyNonDefaults(const CvSlideShowRandomInfo* pClassInfo)
 {
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getPath() == cDefault) m_szPath = pClassInfo->m_szPath;
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
