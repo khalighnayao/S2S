@@ -31,15 +31,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvInterfaceModeInfo::CvInterfaceModeInfo() :
-m_iCursorIndex(NO_CURSOR),
-m_iMissionType(NO_MISSION),
-m_bVisible(false),
-m_bGotoPlot(false),
-m_bHighlightPlot(false),
-m_bSelectType(false),
-m_bSelectAll(false)
+CvInterfaceModeInfo::CvInterfaceModeInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -99,43 +93,35 @@ bool CvInterfaceModeInfo::getSelectAll() const
 
 bool CvInterfaceModeInfo::read(CvXMLLoadUtility* pXML)
 {
-
-	CvString szTextVal;
 	if (!CvHotkeyInfo::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"CursorType");
-	m_iCursorIndex = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"Mission");
-	m_iMissionType = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(&m_bVisible, L"bVisible");
-	pXML->GetOptionalChildXmlValByName(&m_bGotoPlot, L"bGotoPlot");
-	pXML->GetOptionalChildXmlValByName(&m_bHighlightPlot, L"bHighlightPlot");
-	pXML->GetOptionalChildXmlValByName(&m_bSelectType, L"bSelectType");
-	pXML->GetOptionalChildXmlValByName(&m_bSelectAll, L"bSelectAll");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
 
 
+void CvInterfaceModeInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.addEnumAsInt(m_iCursorIndex, L"CursorType")
+		.addEnumAsInt(m_iMissionType, L"Mission")
+		.add(m_bVisible, L"bVisible")
+		.add(m_bGotoPlot, L"bGotoPlot")
+		.add(m_bHighlightPlot, L"bHighlightPlot")
+		.add(m_bSelectType, L"bSelectType")
+		.add(m_bSelectAll, L"bSelectAll")
+	;
+}
+
+
 void CvInterfaceModeInfo::copyNonDefaults(const CvInterfaceModeInfo* pClassInfo)
 {
-	const bool bDefault = false;
-	const int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-
 	CvHotkeyInfo::copyNonDefaults(pClassInfo);
 
-	if (getCursorIndex() == iTextDefault) m_iCursorIndex = pClassInfo->getCursorIndex();
-	if (getMissionType() == iTextDefault) m_iMissionType = pClassInfo->getMissionType();
-
-	if (getVisible() == bDefault) m_bVisible = pClassInfo->getVisible();
-	if (getGotoPlot() == bDefault) m_bGotoPlot = pClassInfo->getGotoPlot();
-	if (getHighlightPlot() == bDefault) m_bHighlightPlot = pClassInfo->getHighlightPlot();
-	if (getSelectType() == bDefault) m_bSelectType = pClassInfo->getSelectType();
-	if (getSelectAll() == bDefault) m_bSelectAll = pClassInfo->getSelectAll();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

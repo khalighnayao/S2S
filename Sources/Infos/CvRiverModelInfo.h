@@ -30,6 +30,7 @@ public:
 	DllExport const char* getConnectString() const;
 	DllExport const char* getRotateString() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvRiverModelInfo* pClassInfo);
 

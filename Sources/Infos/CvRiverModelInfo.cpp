@@ -31,12 +31,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvRiverModelInfo::CvRiverModelInfo() :
-m_iTextureIndex(0)
+CvRiverModelInfo::CvRiverModelInfo()
 {
-	m_szDeltaString[0] = '\0';
-	m_szConnectString[0] = '\0';
-	m_szRotateString[0] = '\0';
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -88,6 +85,19 @@ const char* CvRiverModelInfo::getRotateString() const
 }
 
 
+void CvRiverModelInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szModelFile, L"ModelFile")
+		.add(m_szBorderFile, L"BorderFile")
+		.add(m_iTextureIndex, L"TextureIndex")
+		.add(m_szDeltaString, L"DeltaType")
+		.add(m_szConnectString, L"Connections")
+		.add(m_szRotateString, L"Rotations")
+	;
+}
+
+
 bool CvRiverModelInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
@@ -95,30 +105,15 @@ bool CvRiverModelInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(m_szModelFile, L"ModelFile");
-	pXML->GetOptionalChildXmlValByName(m_szBorderFile, L"BorderFile");
-	pXML->GetOptionalChildXmlValByName(&m_iTextureIndex, L"TextureIndex");
-	pXML->GetOptionalChildXmlValByName(m_szDeltaString, L"DeltaType");
-	pXML->GetOptionalChildXmlValByName(m_szConnectString, L"Connections");
-	pXML->GetOptionalChildXmlValByName(m_szRotateString, L"Rotations");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
 
 void CvRiverModelInfo::copyNonDefaults(const CvRiverModelInfo* pClassInfo)
 {
-	const int iDefault = 0;
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getModelFile() == cDefault) m_szModelFile = pClassInfo->getModelFile();
-	if (getBorderFile() == cDefault) m_szBorderFile = pClassInfo->getBorderFile();
-
-	if (getTextureIndex() == iDefault) m_iTextureIndex = pClassInfo->getTextureIndex();
-
-	if (getDeltaString() == cDefault) strcpy(m_szDeltaString, (const char*) CvString::format("%s", pClassInfo->getDeltaString()));
-	if (getConnectString() == cDefault) strcpy(m_szConnectString, (const char*) CvString::format("%s", pClassInfo->getConnectString()));
-	if (getRotateString() == cDefault) strcpy(m_szRotateString, (const char*) CvString::format("%s", pClassInfo->getRotateString()));
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

@@ -31,22 +31,10 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvVictoryInfo::CvVictoryInfo() :
- m_iPopulationPercentLead(0)
-,m_iLandPercent(0)
-,m_iMinLandPercent(0)
-,m_iReligionPercent(0)
-,m_iCityCulture(NO_CULTURELEVEL)
-,m_iNumCultureCities(0)
-,m_iTotalCultureRatio(0)
-,m_iVictoryDelayTurns(0)
-,m_bTargetScore(false)
-,m_bEndScore(false)
-,m_bConquest(false)
-,m_bDiploVote(false)
-,m_bPermanent(false)
-,m_bTotalVictory(false)
-{ }
+CvVictoryInfo::CvVictoryInfo()
+{
+	CvInfoUtil(this).initDataMembers();
+}
 
 
 //------------------------------------------------------------------------------------------------------
@@ -150,37 +138,39 @@ bool CvVictoryInfo::isTotalVictory() const
 
 
 
+void CvVictoryInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_bTargetScore, L"bTargetScore")
+		.add(m_bEndScore, L"bEndScore")
+		.add(m_bConquest, L"bConquest")
+		.add(m_bDiploVote, L"bDiploVote")
+		.add(m_bPermanent, L"bPermanent")
+		.add(m_bTotalVictory, L"bTotalVictory")
+		.add(m_iPopulationPercentLead, L"iPopulationPercentLead")
+		.add(m_iLandPercent, L"iLandPercent")
+		.add(m_iMinLandPercent, L"iMinLandPercent")
+		.add(m_iReligionPercent, L"iReligionPercent")
+		.add(m_iNumCultureCities, L"iNumCultureCities")
+		.add(m_iTotalCultureRatio, L"iTotalCultureRatio")
+		.add(m_iVictoryDelayTurns, L"iVictoryDelayTurns")
+		.addEnumAsInt(m_iCityCulture, L"CityCulture")
+		.add(m_szMovie, L"VictoryMovie")
+	;
+}
+
+
 //
 // read from xml
 //
 bool CvVictoryInfo::read(CvXMLLoadUtility* pXML)
 {
-
-	CvString szTextVal;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(&m_bTargetScore, L"bTargetScore");
-	pXML->GetOptionalChildXmlValByName(&m_bEndScore, L"bEndScore");
-	pXML->GetOptionalChildXmlValByName(&m_bConquest, L"bConquest");
-	pXML->GetOptionalChildXmlValByName(&m_bDiploVote, L"bDiploVote");
-	pXML->GetOptionalChildXmlValByName(&m_bPermanent, L"bPermanent");
-	pXML->GetOptionalChildXmlValByName(&m_bTotalVictory, L"bTotalVictory");
-
-	pXML->GetOptionalChildXmlValByName(&m_iPopulationPercentLead, L"iPopulationPercentLead");
-	pXML->GetOptionalChildXmlValByName(&m_iLandPercent, L"iLandPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iMinLandPercent, L"iMinLandPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iReligionPercent, L"iReligionPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iNumCultureCities, L"iNumCultureCities");
-	pXML->GetOptionalChildXmlValByName(&m_iTotalCultureRatio, L"iTotalCultureRatio");
-	pXML->GetOptionalChildXmlValByName(&m_iVictoryDelayTurns, L"iVictoryDelayTurns");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"CityCulture");
-	m_iCityCulture = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(m_szMovie, L"VictoryMovie");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -188,39 +178,16 @@ bool CvVictoryInfo::read(CvXMLLoadUtility* pXML)
 
 void CvVictoryInfo::copyNonDefaults(const CvVictoryInfo* pClassInfo)
 {
-	bool bDefault = false;
-	int iDefault = 0;
-	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	CvString cDefault = CvString::format("").GetCString();
-	CvWString wDefault = CvWString::format(L"").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (isTargetScore() == bDefault) m_bTargetScore = pClassInfo->isTargetScore();
-	if (isEndScore() == bDefault) m_bEndScore = pClassInfo->isEndScore();
-	if (isConquest() == bDefault) m_bConquest = pClassInfo->isConquest();
-	if (isDiploVote() == bDefault) m_bDiploVote = pClassInfo->isDiploVote();
-	if (isPermanent() == bDefault) m_bPermanent = pClassInfo->isPermanent();
-
-	if (getPopulationPercentLead() == iDefault) m_iPopulationPercentLead = pClassInfo->getPopulationPercentLead();
-	if (getLandPercent() == iDefault) m_iLandPercent = pClassInfo->getLandPercent();
-	if (getMinLandPercent() == iDefault) m_iMinLandPercent = pClassInfo->getMinLandPercent();
-	if (getReligionPercent() == iDefault) m_iReligionPercent = pClassInfo->getReligionPercent();
-
-	if (getCityCulture() == iTextDefault) m_iCityCulture = pClassInfo->getCityCulture();
-
-	if (getNumCultureCities() == iDefault) m_iNumCultureCities = pClassInfo->getNumCultureCities();
-	if (getTotalCultureRatio() == iDefault) m_iTotalCultureRatio = pClassInfo->getTotalCultureRatio();
-	if (getVictoryDelayTurns() == iDefault) m_iVictoryDelayTurns = pClassInfo->getVictoryDelayTurns();
-
-	if (getMovie() == cDefault) m_szMovie = pClassInfo->getMovie();
-
-	if (isTotalVictory() == bDefault) m_bTotalVictory = pClassInfo->isTotalVictory();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvVictoryInfo::getCheckSum(uint32_t& iSum) const
 {
+	// NOTE: kept explicit (not delegated to CvInfoUtil) to preserve the exact legacy checksum, which
+	// historically omits m_bTotalVictory and m_szMovie. Folding those in would change the value.
 	CheckSum(iSum, m_iPopulationPercentLead);
 	CheckSum(iSum, m_iLandPercent);
 	CheckSum(iSum, m_iMinLandPercent);

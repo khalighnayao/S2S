@@ -31,6 +31,7 @@ public:
 	bool getSelectType() const;
 	bool getSelectAll() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvInterfaceModeInfo* pClassInfo);
 

@@ -27,11 +27,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvPlayerColorInfo::CvPlayerColorInfo() :
-m_iColorTypePrimary(NO_COLOR),
-m_iColorTypeSecondary(NO_COLOR),
-m_iTextColorType(NO_COLOR)
+CvPlayerColorInfo::CvPlayerColorInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -65,22 +63,24 @@ int CvPlayerColorInfo::getTextColorType() const
 }
 
 
+void CvPlayerColorInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.addEnumAsInt(m_iColorTypePrimary, L"ColorTypePrimary")
+		.addEnumAsInt(m_iColorTypeSecondary, L"ColorTypeSecondary")
+		.addEnumAsInt(m_iTextColorType, L"TextColorType")
+	;
+}
+
+
 bool CvPlayerColorInfo::read(CvXMLLoadUtility* pXML)
 {
-	CvString szTextVal;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(szTextVal, L"ColorTypePrimary");
-	m_iColorTypePrimary = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetChildXmlValByName(szTextVal, L"ColorTypeSecondary");
-	m_iColorTypeSecondary = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetChildXmlValByName(szTextVal, L"TextColorType");
-	m_iTextColorType = pXML->GetInfoClass( szTextVal);
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -88,12 +88,8 @@ bool CvPlayerColorInfo::read(CvXMLLoadUtility* pXML)
 
 void CvPlayerColorInfo::copyNonDefaults(const CvPlayerColorInfo* pClassInfo)
 {
-	const int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getColorTypePrimary() == iTextDefault) m_iColorTypePrimary = pClassInfo->getColorTypePrimary();
-	if (getColorTypeSecondary() == iTextDefault) m_iColorTypeSecondary = pClassInfo->getColorTypeSecondary();
-	if (getTextColorType() == iTextDefault) m_iTextColorType = pClassInfo->getTextColorType();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
