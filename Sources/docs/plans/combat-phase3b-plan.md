@@ -1,14 +1,22 @@
 # Phase 3b — Route the AI's win-% through the binomial engine
 
-Status: **planned / not started.** Phase 3a (the shared `buildRoundModel` Layer 1)
-is done — resolution, the odds functions, the preview, and the AI's *damage inputs*
-already share one formula. 3b is the deliberate, behaviour-changing follow-up:
-replace the AI's *win-probability* heuristic with the engine's binomial
-`getCombatOdds`, so the number the AI decides on is the same number the UI shows
-and the resolver actually rolls.
+Status: **IMPLEMENTED on `main` (working tree), pending in-game playtest.** Non-air AI
+attacks now decide on the engine's binomial `getCombatOdds()/10` — the same number the
+UI preview shows and the resolver rolls — instead of the strength-ratio heuristic. The
+heuristic still runs (drives the predicted-HP contract + the `[COM/calib]` log); the
+per-leader personality bias is preserved; air keeps the heuristic. `AI_finalOddsThreshold`
+recentres the bar `*23/20` (+15%, air-exempt). See "Implemented" at the bottom.
 
-This is deferred on purpose. It is not a refactor — it shifts AI aggression, and
-the safety is in the rollout (flag + instrument + calibrate), not in the diff.
+> History note: this work was first done on branch `combat-ai-binomial-odds` (PR #23,
+> June 2026) but that branch never merged to `main`/`release` — the merge commit is not
+> an ancestor of either. It was re-applied directly onto `main`'s working tree. The
+> stale "planned / not started" status above was the symptom that surfaced the gap.
+
+This was deferred on purpose. It is not a refactor — it shifts AI aggression, and the
+safety is in the rollout (instrument + calibrate + playtest), not in the diff.
+
+Phase 3a (the shared `buildRoundModel` Layer 1) is done — resolution, the odds
+functions, the preview, and the AI's *damage inputs* already share one formula.
 
 ## What changes, precisely
 
@@ -126,8 +134,53 @@ strength ratio already puts >95% or <5%).
 - The number the AI decided on == `getCombatOdds` == the UI preview == what the
   resolver rolls (the whole point: one combat number, end to end).
 
-## Open questions to settle before starting
-- Calibration target: preserve current aggression exactly (remap), or accept the
-  more-accurate binomial and re-tune by feel? (Affects §4b choice.)
-- Is a permanent A/B option worth keeping, or flag-then-remove?
-- Air: keep on the heuristic indefinitely, or schedule the air-odds engine path?
+## Open questions — as resolved
+- Calibration target: **re-tuned by feel** with a single global recenter (§4b option ii),
+  not a per-threshold remap. Validated on ~5.7k autoplay evals: heur 60% == binom 80%,
+  heur 70% == binom 96%; post-swap odds are healthily bimodal (~56% clear loss, ~31%
+  clear win, ~7% judgment calls — the recenter only bites on that 7%).
+- A/B option: **not kept.** No temporary `MODDERGAMEOPTION` flag — the swap went straight
+  in. The gated `[COM/calib]` log is the calibration harness instead.
+- Air: **keeps the heuristic** (and is exempt from the recenter). `getCombatOdds` has no
+  air path yet (no `airCurrCombatStr`/interception). Air-odds engine path is a separate
+  task (combat-model-sketch GAP #1).
+
+## Implemented (what actually shipped to the working tree)
+Two edits in `Sources/CvUnitAI.cpp`, plus this doc + `combat-model-sketch.md` +
+`ai-logging-reference.md`:
+
+1. **`AI_attackOddsAtPlotInternal`** — for non-air, capture `iBinomialOdds =
+   getCombatOdds(this, pDefender) / 10` on entry, and after the strength-ratio `iOdds`
+   is computed (saved as `iHeuristicBase`), swap: `if (iBinomialOdds >= 0) iOdds =
+   iBinomialOdds;`. The personality bias line is applied to the result unchanged. The
+   round-count / strength-boost / predicted-HP machinery is **left intact** — the boosts
+   are now dead for the returned odds but still drive `AI_setPredictedHitPoints` (the
+   stack sim in `CvSelectionGroupAI::AI_attackOdds` chains on it) and the `[COM/calib]` log.
+2. **`AI_finalOddsThreshold`** — non-air only, `iFinalOddsThreshold = iFinalOddsThreshold
+   * 23 / 20` at the tail (after the existing ×6/divisor block, before the `[COM/threshold]`
+   log). The recenter knob.
+
+Calibration log: `[COM/calib]` (level 3, `CombatAI.log`, via `logCombatAI`) emits
+`heurBase` vs `binom` pre-bias odds + matchup per non-air eval. Kept (gated) as the
+harness for re-tuning `23/20` and the per-player follow-up — folded into the existing
+`[COM]` domain rather than a separate `CombatOddsCalibration.log`.
+
+### Remaining before "done"
+- **Playtest (FinalRelease):** confirm AI aggression / unit-loss feel acceptable. The
+  Assert build compiles clean; behaviour is unverified until played.
+- **Profile (§6):** check autoplay turn time — `getCombatOdds` is heavier than a strength
+  ratio. The `AI_attackOddsAtPlot` cache absorbs repeats, but `modifyPredictedResults`
+  calls bypass it. Memoise only if it regresses.
+- **Hunter raw-odds path (§4c):** recheck `AI_huntRange` `bRawOdds` thresholds — it bypasses
+  `AI_finalOddsThreshold`, so the recenter does not reach it.
+
+## Follow-up: per-player / per-trait configurable aggression (FUTURE)
+Replace the hardcoded `23/20` with a data-driven, per-leader knob so aggression varies by
+civ/leader (barbarians reckless → lower bar; pacifists cautious → higher bar). The single
+chokepoint is `AI_finalOddsThreshold`'s recenter line. Smallest-first:
+1. Move `23/20` into a GlobalDefine (e.g. `AI_BINOMIAL_ODDS_THRESHOLD_PERCENT = 115`), read
+   via `GC.getDefineINT(...)`; cache it if `AI_finalOddsThreshold` (PROFILE_FUNC) shows hot.
+2. Add a per-leader/trait aggression term combined multiplicatively; barbarians via
+   `GET_PLAYER(getOwner()).isNPC()`. Prior art: `AI_getAttackOddsChange()` (the *odds* bias,
+   distinct from this *threshold* bar).
+3. Keep air exempt and the hunter raw-odds path bypassing this until they get engine odds.
