@@ -5790,12 +5790,19 @@ int CvPlot::getLatitudeMinutes() const
 	if (kMap.isWrapX())
 	{
 		// normal and toroidal
-		return calculateMinutes(getY(), kMap.getGridHeight(), kMap.isWrapY(), kMap.getBottomLatitude(), kMap.getTopLatitude());
+		// On space maps the playable Earth is shorter than the grid; derive
+		// latitude from the Earth band and clamp empty space rows above it to
+		// the pole (see CvMap::updateLatitudeGridHeight).
+		const int iEarthHeight = kMap.getLatitudeGridHeight();
+		const int iY = std::min(getY(), iEarthHeight - 1);
+		return calculateMinutes(iY, iEarthHeight, kMap.isWrapY(), kMap.getBottomLatitude(), kMap.getTopLatitude());
 	}
 	else if (!kMap.isWrapY())
 	{
 		// flat
-		return calculateMinutes(getY(), kMap.getGridHeight(), false, kMap.getBottomLatitude(), kMap.getTopLatitude());
+		const int iEarthHeight = kMap.getLatitudeGridHeight();
+		const int iY = std::min(getY(), iEarthHeight - 1);
+		return calculateMinutes(iY, iEarthHeight, false, kMap.getBottomLatitude(), kMap.getTopLatitude());
 	}
 	else
 	{

@@ -42,6 +42,7 @@ bool CvMap::m_bSwitchInProgress = false;
 CvMap::CvMap(MapTypes eType)
 	: m_iGridWidth(0)
 	, m_iGridHeight(0)
+	, m_iLatitudeGridHeight(0)
 	, m_iLandPlots(0)
 	, m_iOwnedPlots(0)
 	, m_iTopLatitude(0)
@@ -190,6 +191,10 @@ void CvMap::reset(CvMapInitData* pInitInfo)
 			m_iGridHeight *= GC.getLandscapeInfo(GC.getActiveLandscapeID()).getPlotsPerCellY();
 		}
 	}
+
+	// Default to the full grid; updateLatitudeGridHeight() shrinks this to the
+	// Earth band once plots carry real terrain (after generation / load).
+	m_iLatitudeGridHeight = m_iGridHeight;
 
 	m_iLandPlots = 0;
 	m_iOwnedPlots = 0;
@@ -1344,6 +1349,9 @@ void CvMap::read(FDataStreamBase* pStream)
 	}
 	setup();
 
+	// Derived, not serialized: recompute the Earth band now that plot terrain is loaded.
+	updateLatitudeGridHeight();
+
 	WRAPPER_READ_OBJECT_END(wrapper);
 
 	OutputDebugString("Reading Map: End\n");
@@ -1661,6 +1669,41 @@ void CvMap::calculateAreas()
 			gDLL->getFAStarIFace()->GeneratePath(&GC.getAreaFinder(), pLoopPlot->getX(), pLoopPlot->getY(), -1, -1, pLoopPlot->isWater(), iArea);
 		}
 	}
+
+	updateLatitudeGridHeight();
+}
+
+
+// Detect the playable "Earth" band on space maps so latitude is derived from it
+// alone. Space maps (e.g. Snofru's / KaTiON's solar-system maps) place the Earth
+// at the bottom of the grid and fill the rows above it with empty TERRAIN_NONE
+// "space" plots. Latitude is a linear map of the row index across the whole grid
+// height, so without this the Earth's ~56 rows are squashed into a sliver of the
+// true -90..90 range, breaking every latitude-gated bonus, feature and spawn.
+//
+// The Earth's top edge is the highest row holding any real (non-space) terrain;
+// everything above it is space. On an ordinary map every row carries terrain, so
+// this resolves to the full grid height and latitude is unchanged. This replaces
+// the need for the external "rescaled latitude" map modmods.
+void CvMap::updateLatitudeGridHeight()
+{
+	int iEarthTop = -1;
+
+	for (int iY = getGridHeight() - 1; iY >= 0 && iEarthTop == -1; iY--)
+	{
+		for (int iX = 0; iX < getGridWidth(); iX++)
+		{
+			if (plotSorenINLINE(iX, iY)->getTerrainType() != NO_TERRAIN)
+			{
+				iEarthTop = iY;
+				break;
+			}
+		}
+	}
+
+	// Never let the band collapse below 2 rows: calculateMinutes() divides by
+	// (height - 1) on non-Y-wrapping maps, so a 1-row band would divide by zero.
+	m_iLatitudeGridHeight = std::min(getGridHeight(), std::max(2, (iEarthTop >= 0) ? (iEarthTop + 1) : getGridHeight()));
 }
 
 
