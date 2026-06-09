@@ -129,7 +129,10 @@ not a win bar): the bombard formulas (`AI_bombardCity` weight + the `>95` skip-i
 the blockade `<50` bottleneck renormalize (`:17207`), the `>75` pre-filter before
 `AI_cityAttack` (`:3366`), and the disabled `#ifdef VALIDITY_CHECK_NEW_ATTACK_SEARCH` block.
 
-**Behavioural deltas to validate via autoplay (the calibration is the user's boundary):**
+**Behavioural deltas the aggression tuning should account for** — like all combat
+calibration here, this is an *ongoing, report-driven process, NOT a tracked issue*; it
+folds into the per-leader/per-trait aggression work below ("Follow-up") rather than a
+one-off "calibrate #319" task:
 - The win% includes the per-leader personality bias, so personality now influences these
   gates (it previously only touched goodness indirectly).
 - `AI_ambush` dropped its goodness-inflation hacks (`+iOddsThreshold` when win-likely, `*2`
@@ -137,8 +140,9 @@ the blockade `<50` bottleneck renormalize (`:17207`), the `>75` pre-filter befor
   home-soil ambush is now purely win%-gated. If home aggression should return, express it
   as a *lower bar* in `AI_finalOddsThreshold`, not as value inflation.
 - The `×23/20` recenter still applies to these gates, but it now sits on a real win% (what
-  it was calibrated for) rather than on goodness — so re-tune it against the enriched
-  `[COM/odds]` log (now emits `goodness=` and `leadWin=` side by side) + `[COM/calib]`.
+  it was calibrated for) rather than on goodness — re-tune it over time against the enriched
+  `[COM/odds]` log (now emits `goodness=` and `leadWin=` side by side) + `[COM/calib]`, and
+  ultimately subsume it into the per-leader bar.
 
 ### 6. Performance
 `getCombatOdds` (nested binomial + `pow`) is heavier than a strength ratio, and the
@@ -209,8 +213,9 @@ is deliberately out of scope here:
   reports (use the `[COM/calib]` log). Do not file a single "calibrate combat" issue.
 - **Tracked followups:** stack `AI_attackOdds` "goodness" behaviour after the binomial swap
   (#319 — **structural fix landed**: go/no-go now gates on the lead attacker's win% via the
-  new `piLeadAttackerWinOdds` out-param, goodness kept for ranking; see §5. Remaining work is
-  autoplay calibration of the resulting aggression, the user's boundary); re-add the itemised
+  new `piLeadAttackerWinOdds` out-param, goodness kept for ranking; see §5. The resulting
+  aggression is tuned by the ongoing report-driven calibration, folded into the per-leader
+  aggression work — not a separate tracked issue); re-add the itemised
   strength-modifier breakdown to the tooltip via `CombatPreview.detailLines` (#320).
 - Other deferred items below are not gates on this PR:
 - **Profile (§6):** check autoplay turn time — `getCombatOdds` is heavier than a strength
