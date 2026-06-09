@@ -244,12 +244,21 @@ void CvPlotPaging::UpdatePaging()
 		win32::Stopwatch pageTimer;
 		pageTimer.Start();
 
-		// Evict graphics first, allowing at least 1/2 our time budget for it (we definitely want to make sure we don't run out of memory!)
-		while (NeedToFreeMemory() && pageTimer.ElapsedMilliseconds() < pagingFrameTime * 0.5)
+		// Proactively shed graphics that are no longer required so the resident set stays
+		// bounded to a configurable cache size, rather than hoarding until NeedToFreeMemory()
+		// finally trips near the ~1.9GB hard limit (which then thrashes evict-vs-page-in for
+		// the frame budget and starves tree/feature page-in). EvictGraphics() only ever frees
+		// graphics already marked not-required, so in-radius graphics are never touched and it
+		// returns false once nothing is evictable. PAGING_RESIDENT_SOFT_CAP is the dial: lower
+		// = leaner memory, higher = bigger cache (fewer re-pages when panning back).
+		// NeedToFreeMemory() is retained as a hard safety net.
+		static const unsigned int iResidentSoftCap = GC.getDefineINT("PAGING_RESIDENT_SOFT_CAP", 6000);
+		while ((g_iNumPagedInPlots > iResidentSoftCap || NeedToFreeMemory())
+			&& pageTimer.ElapsedMilliseconds() < pagingFrameTime * 0.5)
 		{
 			if (!EvictGraphics())
 			{
-				break; // we in trouble now!
+				break;
 			}
 		}
 

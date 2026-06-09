@@ -30,6 +30,13 @@
 		<DefineName>MAX_DESIRED_MEMORY_USED</DefineName>
 		<iDefineIntVal>2000000</iDefineIntVal>
 	</Define>
+	<!-- Proactively page graphics out once this many plots are resident, instead of waiting
+		for MAX_DESIRED_MEMORY_USED. Lower = leaner memory, higher = bigger cache. Only ever
+		evicts not-required (out-of-radius) graphics, so it is safe at any value. -->
+	<Define>
+		<DefineName>PAGING_RESIDENT_SOFT_CAP</DefineName>
+		<iDefineIntVal>2500</iDefineIntVal>
+	</Define>
 	<!-- If specified, instead of MAX_DESIRED_MEMORY_USED, a set of test
 		allocations will be performed to test for low memory conditions -->
 	<!-- Size of each test allocation -->

@@ -1635,8 +1635,6 @@ class CvMainInterface:
 					screen.hide("FoVSliderText")
 					screen.hide("FoVSlider")
 				screen.show("BuildListBtn0")
-				if GC.getNumMapsInitialized() > 1:
-					screen.show("ParallelMapsBtn")
 
 		elif IFT == InterfaceVisibility.INTERFACE_HIDE:
 			screen.moveItem("EndTurnText", 0, self.yRes - 128, 0)
