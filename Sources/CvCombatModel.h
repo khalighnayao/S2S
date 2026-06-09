@@ -81,9 +81,11 @@ float getCombatOddsSpecific(const CvUnit* pAttacker, const CvUnit* pDefender, in
 // (win odds with vs. without first strikes). CvGameTextMgr is then a pure
 // renderer of this struct -- it does no combat math of its own.
 //
-// detailLines is the extension seam: when a combat-mod rule (e.g. a future
-// FightOrFlight plugin) is active it appends its own labelled rows here, and
-// the renderer prints them generically. No per-rule UI edits required.
+// detailLines is the extension seam: each row is a complete, ready-to-render
+// labelled string the renderer prints generically (coloured by category), so no
+// per-rule UI edits are required. Two producers use it: the optional itemised
+// strength-modifier breakdown (bIncludeModifierBreakdown, gated behind Shift in
+// the UI), and any future combat-mod rule (e.g. a FightOrFlight plugin).
 // ---------------------------------------------------------------------------
 
 enum CombatPreviewCategory
@@ -95,8 +97,8 @@ enum CombatPreviewCategory
 
 struct CombatPreviewLine
 {
-	std::wstring szLabel;
-	float fValue;                       // percentage (0..100) or HP, per category
+	std::wstring szLabel;               // complete, ready-to-render text (producer formats any value in)
+	float fValue;                       // signed numeric metadata (e.g. the modifier %); renderer colours by eCategory, not fValue
 	CombatPreviewCategory eCategory;
 
 	CombatPreviewLine(const std::wstring& label, float value, CombatPreviewCategory cat)
@@ -143,6 +145,10 @@ struct CombatPreview
 	std::vector<CombatPreviewLine> detailLines;
 };
 
-CombatPreview computeCombatPreview(const CvUnit* pAttacker, const CvUnit* pDefender);
+// bIncludeModifierBreakdown: when true, the returned preview's detailLines carry
+// an itemised per-modifier breakdown of the defender's effective strength (terrain,
+// fortification, city/hills/feature, unit-combat, domain, river/amphib, animal/barb,
+// ...). Off by default so the lean base hover pays no cost; the UI sets it under Shift.
+CombatPreview computeCombatPreview(const CvUnit* pAttacker, const CvUnit* pDefender, bool bIncludeModifierBreakdown = false);
 
 #endif // CV_COMBAT_MODEL_H

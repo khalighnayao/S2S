@@ -424,7 +424,62 @@ float getCombatOddsSpecific(const CvUnit* pAttacker, const CvUnit* pDefender, in
 // Runs the full ACO distribution once and packages every figure the combat
 // tooltip needs. All math here is lifted verbatim from the old inline body of
 // CvGameTextMgr::setCombatPlotHelp -- the renderer is now a pure consumer.
-CombatPreview computeCombatPreview(const CvUnit* pAttacker, const CvUnit* pDefender)
+// Append one breakdown row for a non-zero modifier. The TXT_KEY_COMBAT_MESSAGE_*
+// keys (shared with the combat log in CvUtil.py) already embed the signed value,
+// so szLabel is the complete display string. Category colours by effect on the
+// attacker: a positive value raises the defender's effective strength (bad for the
+// attacker -> red); a negative value lowers it (good -> green).
+static void addModifierLine(std::vector<CombatPreviewLine>& lines, const char* szTextKey, int iValue)
+{
+	if (iValue == 0)
+	{
+		return;
+	}
+	const CombatPreviewCategory eCategory = (iValue > 0) ? COMBAT_PREVIEW_NEGATIVE : COMBAT_PREVIEW_POSITIVE;
+	lines.push_back(CombatPreviewLine(gDLL->getText(szTextKey, iValue), (float)iValue, eCategory));
+}
+
+// Itemise the defender's effective-strength modifiers (the matchup breakdown) from
+// the CombatDetails the engine already filled while computing currCombatStr. Mirrors
+// the field/key mapping in CvUtil.combatDetailMessageBuilder so the tooltip and the
+// combat log read identically. Modifiers folded into iExtraCombatPercent (generic
+// combat, stealth, religious, size/volume) surface as one lumped "Extra Combat" line.
+static void appendModifierBreakdown(std::vector<CombatPreviewLine>& lines, const CombatDetails& cd)
+{
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_EXTRA_COMBAT_PERCENT", cd.iExtraCombatPercent);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_ANIMAL_COMBAT", cd.iAnimalCombatModifierTA);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_AI_ANIMAL_COMBAT", cd.iAIAnimalCombatModifierTA);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_ANIMAL_COMBAT", cd.iAnimalCombatModifierAA);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_AI_ANIMAL_COMBAT", cd.iAIAnimalCombatModifierAA);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_BARBARIAN_COMBAT", cd.iBarbarianCombatModifierTB);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_BARBARIAN_AI_COMBAT", cd.iAIBarbarianCombatModifierTB);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_BARBARIAN_COMBAT", cd.iBarbarianCombatModifierAB);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_BARBARIAN_AI_COMBAT", cd.iAIBarbarianCombatModifierAB);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_PLOT_DEFENSE", cd.iPlotDefenseModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_FORTIFY", cd.iFortifyModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_CITY_DEFENSE", cd.iCityDefenseModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_HILLS_ATTACK", cd.iHillsAttackModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_HILLS", cd.iHillsDefenseModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_FEATURE_ATTACK", cd.iFeatureAttackModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_FEATURE", cd.iFeatureDefenseModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_TERRAIN_ATTACK", cd.iTerrainAttackModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_TERRAIN", cd.iTerrainDefenseModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_CITY_ATTACK", cd.iCityAttackModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_DOMAIN_DEFENSE", cd.iDomainDefenseModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_CITY_BARBARIAN_DEFENSE", cd.iCityBarbarianDefenseModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_CLASS_DEFENSE", cd.iDefenseModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_CLASS_ATTACK", cd.iAttackModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_CLASS_COMBAT", cd.iCombatModifierT);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_CLASS_COMBAT", cd.iCombatModifierA);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_CLASS_DOMAIN", cd.iDomainModifierA);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_CLASS_DOMAIN", cd.iDomainModifierT);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_CLASS_ANIMAL_COMBAT", cd.iAnimalCombatModifierA);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_CLASS_ANIMAL_COMBAT", cd.iAnimalCombatModifierT);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_CLASS_RIVER_ATTACK", cd.iRiverAttackModifier);
+	addModifierLine(lines, "TXT_KEY_COMBAT_MESSAGE_CLASS_AMPHIB_ATTACK", cd.iAmphibAttackModifier);
+}
+
+CombatPreview computeCombatPreview(const CvUnit* pAttacker, const CvUnit* pDefender, bool bIncludeModifierBreakdown)
 {
 	PROFILE_EXTRA_FUNC();
 
@@ -458,7 +513,11 @@ CombatPreview computeCombatPreview(const CvUnit* pAttacker, const CvUnit* pDefen
 	}
 
 	// --- per-round damage and needed rounds (shared Layer-1 RoundModel) ---
-	const RoundModel m = buildRoundModel(pAttacker, iAttackerStrength, iAttackerFirepower, pDefender, pPlot);
+	// When the breakdown is requested, capture the defender's itemised modifiers from
+	// the same currCombatStr call buildRoundModel already makes (no extra strength work).
+	CombatDetails kDefenderDetails;
+	const RoundModel m = buildRoundModel(pAttacker, iAttackerStrength, iAttackerFirepower, pDefender, pPlot,
+		bIncludeModifierBreakdown ? &kDefenderDetails : NULL);
 	const int iDefenderStrength = m.iDefenderStrength;
 	const int iDamageToAttacker = m.iDamageToAttacker;
 	const int iDamageToDefender = m.iDamageToDefender;
@@ -580,6 +639,12 @@ CombatPreview computeCombatPreview(const CvUnit* pAttacker, const CvUnit* pDefen
 
 	kP.iWinOddsWithFS = getCombatOddsImpl(pAttacker, pDefender, false);
 	kP.iWinOddsNoFS = getCombatOddsImpl(pAttacker, pDefender, true);
+
+	// --- itemised strength-modifier breakdown (Shift-detail; empty otherwise) ---
+	if (bIncludeModifierBreakdown)
+	{
+		appendModifierBreakdown(kP.detailLines, kDefenderDetails);
+	}
 
 	kP.bValid = true;
 	return kP;

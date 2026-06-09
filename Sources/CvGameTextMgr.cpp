@@ -3303,8 +3303,9 @@ bool CvGameTextMgr::setCombatPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot, 
 				// Lean combat preview. All combat math comes from CvCombatModel
 				// (computeCombatPreview); this block only formats the result.
 				// A future combat-mod rule adds its own rows via kP.detailLines,
-				// so the renderer never needs per-rule edits.
-				const CombatPreview kP = computeCombatPreview(pAttacker, pDefender);
+				// so the renderer never needs per-rule edits. Holding Shift
+				// (iView == 2) also requests the itemised modifier breakdown.
+				const CombatPreview kP = computeCombatPreview(pAttacker, pDefender, iView == 2);
 				if (kP.bValid)
 				{
 					const bool bCanKill = (kP.iDefenderHitLimitHP == 0);
@@ -3413,12 +3414,14 @@ bool CvGameTextMgr::setCombatPlotHelp(CvWStringBuffer& szString, CvPlot* pPlot, 
 						szString.append(gDLL->getText("TXT_ACO_ROUNDS", kP.iNeededRoundsAttacker, kP.iNeededRoundsDefender));
 					}
 
-					// --- Plugin-contributed rows (empty in the vanilla engine) ---
+					// --- Detail rows: the Shift modifier breakdown and any plugin
+					// rows. Each szLabel is already complete (the producer formats
+					// its value in), so the renderer only colours and prints it. ---
 					for (std::vector<CombatPreviewLine>::const_iterator it = kP.detailLines.begin(); it != kP.detailLines.end(); ++it)
 					{
 						const char* szLineColor = (it->eCategory == COMBAT_PREVIEW_POSITIVE) ? "COLOR_POSITIVE_TEXT"
 							: (it->eCategory == COMBAT_PREVIEW_NEGATIVE) ? "COLOR_NEGATIVE_TEXT" : "COLOR_UNIT_TEXT";
-						szTempBuffer.Format(L"%s: " SETCOLR L"%.1f" ENDCOLR, it->szLabel.c_str(), TEXT_COLOR(szLineColor), it->fValue);
+						szTempBuffer.Format(SETCOLR L"%s" ENDCOLR, TEXT_COLOR(szLineColor), it->szLabel.c_str());
 						szString.append(NEWLINE);
 						szString.append(szTempBuffer.GetCString());
 					}
