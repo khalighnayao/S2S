@@ -93,6 +93,16 @@ not findings to re-discover.
   `shouldHaveGraphics`; `CvMap::setupGraphical`.
 
 ## Conventions
+- **Nothing here is ever "just a one-liner" — expect hidden consequences.** This is a
+  large, tightly-coupled Civ4/C2C codebase with non-obvious cross-cutting wiring (combat
+  math shared across UI/AI/resolution, name-tagged save serialization, dual Python-enum
+  registration, FastBuild unity grouping that exposes latent missing includes, graphics
+  paths that run pre-init, the dead `.vcxproj`, etc. — see "Key Subsystem Knowledge"). Before
+  any change, **read the relevant core docs first** (this file, the nearest `AGENTS.md`, and
+  the subsystem's `Sources/docs/` notes), trace every caller/consumer of what you touch, and
+  assume a small edit has ripples until you've checked. Do not skip this because a change
+  "looks trivial" — that assumption has repeatedly produced regressions and contradicted
+  documented design.
 - **Only automatically branch / commit / PR when the work is tied to an active GitHub
   issue.** For anything else (experiments, behaviour tuning, undocumented fixes we are
   still iterating on), **edit the working tree only** — do not commit, create or switch
