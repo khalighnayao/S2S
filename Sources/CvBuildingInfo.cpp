@@ -1628,6 +1628,41 @@ void CvBuildingInfo::buildConstructRequirements()
 	// war/power). These keep their existing typed handling in canConstruct.
 }
 
+//	Derive the list of bonuses this building's effect tables reference, by probing every
+//	bonus type against the same getters the consumption math reads (happiness/health/
+//	defense changes, per-yield changes+modifiers, per-commerce modifiers). Brute force is
+//	fine here: it runs once at load; afterwards per-city consumption visits only these few
+//	bonuses instead of scanning all bonus types per built building every turn.
+void CvBuildingInfo::buildConsumptionRelevantBonuses()
+{
+	PROFILE_EXTRA_FUNC();
+	m_consumptionRelevantBonuses.clear();
+
+	for (int iBonus = 0; iBonus < GC.getNumBonusInfos(); iBonus++)
+	{
+		const BonusTypes eBonus = static_cast<BonusTypes>(iBonus);
+
+		bool bTouches =
+			   getBonusHappinessChanges().getValue(eBonus) != 0
+			|| getBonusHealthChanges().getValue(eBonus) != 0
+			|| getBonusDefenseChanges(eBonus) != 0;
+
+		for (int iJ = 0; !bTouches && iJ < NUM_YIELD_TYPES; iJ++)
+		{
+			bTouches = getBonusYieldChanges(eBonus, iJ) != 0 || getBonusYieldModifier(eBonus, iJ) != 0;
+		}
+		for (int iJ = 0; !bTouches && iJ < NUM_COMMERCE_TYPES; iJ++)
+		{
+			bTouches = getBonusCommerceModifier(eBonus, iJ) != 0;
+		}
+
+		if (bTouches)
+		{
+			m_consumptionRelevantBonuses.push_back(eBonus);
+		}
+	}
+}
+
 void CvBuildingInfo::doPostLoadCaching(uint32_t iThis)
 {
 	PROFILE_EXTRA_FUNC();
@@ -1662,6 +1697,7 @@ void CvBuildingInfo::doPostLoadCaching(uint32_t iThis)
 	m_bEnablesUnits = CvBuildingInternal::calculateEnablesUnits(*this, (BuildingTypes)iThis);
 
 	buildConstructRequirements();
+	buildConsumptionRelevantBonuses();
 
 	if (getHolyCity() != NO_RELIGION)
 	{

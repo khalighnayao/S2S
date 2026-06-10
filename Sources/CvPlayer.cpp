@@ -3814,8 +3814,13 @@ void CvPlayer::doTurn()
 //	AI_doCentralizedProduction();
 //#endif
 
-	//Clear the cache each turn.
-	recalculateAllResourceConsumption();
+	//	Resource consumption's only consumer is the bonus-depletion odds scaling
+	//	(CvPlot::doBonusDepletion), which is gated on this modder option -- skip maintaining
+	//	the statistic entirely when nothing can read it.
+	if (GC.getGame().isModderGameOption(MODDERGAMEOPTION_RESOURCE_DEPLETION))
+	{
+		recalculateAllResourceConsumption();
+	}
 
 	if (GC.getGame().isOption(GAMEOPTION_ADVANCED_REALISTIC_CORPORATIONS))
 	{
@@ -27070,13 +27075,217 @@ void CvPlayer::recalculateResourceConsumption(BonusTypes eBonus)
 	m_paiResourceConsumption[eBonus] = iConsumption;
 }
 
+namespace {
+	void addUniqueBonus(std::vector<BonusTypes>& aBonuses, int iBonus)
+	{
+		if (iBonus != NO_BONUS && !algo::any_of_equal(aBonuses, (BonusTypes)iBonus))
+		{
+			aBonuses.push_back((BonusTypes)iBonus);
+		}
+	}
+}
+
+//	Inverted iteration of recalculateResourceConsumption over ALL bonuses: one pass over
+//	each city visiting only the bonuses its current production item and built buildings
+//	actually touch (load-derived CvBuildingInfo::getConsumptionRelevantBonuses), instead of
+//	rescanning every city's every building once per bonus type. Every individual term keeps
+//	the legacy integer arithmetic and int addition commutes, so the results are
+//	byte-identical -- REQUIRED, because this is synced game state (it feeds bonus-depletion
+//	odds and is serialized), not advisory AI data. Verify with gPerfLogLevel >= 2: the
+//	legacy per-bonus recompute runs as a shadow and [PERF/rescons] reports mismatches.
 void CvPlayer::recalculateAllResourceConsumption()
 {
 	PROFILE_EXTRA_FUNC();
 	PERF_SCOPE("CvPlayer::recalculateAllResourceConsumption", getID());
-	for (int iI = 0; iI < GC.getNumBonusInfos(); iI++)
+
+	const int iNumBonuses = GC.getNumBonusInfos();
+	std::vector<int> aiConsumption(iNumBonuses, 0);
+
+	for (city_iterator cityIt = beginCities(); cityIt != endCities(); ++cityIt)
 	{
-		recalculateResourceConsumption((BonusTypes)iI);
+		const CvCity* cityX = *cityIt;
+
+		const int baseProd = cityX->getBaseYieldRate(YIELD_PRODUCTION);
+		const int prodYieldRate = cityX->getYieldRate(YIELD_PRODUCTION);
+
+		// --- Construction consumption: the current production item's prereq bonuses get
+		//     the city's production rate added once each (legacy OR-semantics across the
+		//     four prereq forms); its bonus production modifiers apply to base production.
+		const BuildingTypes prodBuilding = cityX->getProductionBuilding();
+		const UnitTypes prodUnit = cityX->getProductionUnit();
+		const ProjectTypes prodProject = cityX->getProductionProject();
+
+		std::vector<BonusTypes> prereqBonuses;
+
+		if (prodBuilding != NO_BUILDING)
+		{
+			const CvBuildingInfo& kBuilding = GC.getBuildingInfo(prodBuilding);
+
+			addUniqueBonus(prereqBonuses, kBuilding.getPrereqAndBonus());
+			addUniqueBonus(prereqBonuses, kBuilding.getPrereqVicinityBonus());
+			foreach_(const BonusTypes eBonus, kBuilding.getPrereqOrBonuses())
+			{
+				addUniqueBonus(prereqBonuses, eBonus);
+			}
+			foreach_(const BonusTypes eBonus, kBuilding.getPrereqOrVicinityBonuses())
+			{
+				addUniqueBonus(prereqBonuses, eBonus);
+			}
+			for (int iI = 0; iI < iNumBonuses; iI++)
+			{
+				const int iMod = kBuilding.getBonusProductionModifier((BonusTypes)iI);
+				if (iMod != 0)
+				{
+					aiConsumption[iI] += baseProd * iMod / 100;
+				}
+			}
+		}
+		else if (prodUnit != NO_UNIT)
+		{
+			const CvUnitInfo& kUnit = GC.getUnitInfo(prodUnit);
+
+			addUniqueBonus(prereqBonuses, kUnit.getPrereqAndBonus());
+			addUniqueBonus(prereqBonuses, kUnit.getPrereqVicinityBonus());
+			foreach_(const BonusTypes eBonus, kUnit.getPrereqOrBonuses())
+			{
+				addUniqueBonus(prereqBonuses, eBonus);
+			}
+			foreach_(const BonusTypes eBonus, kUnit.getPrereqOrVicinityBonuses())
+			{
+				addUniqueBonus(prereqBonuses, eBonus);
+			}
+			for (int iI = 0; iI < iNumBonuses; iI++)
+			{
+				const int iMod = kUnit.getBonusProductionModifier((BonusTypes)iI);
+				if (iMod != 0)
+				{
+					aiConsumption[iI] += baseProd * iMod / 100;
+				}
+			}
+		}
+		else if (prodProject != NO_PROJECT)
+		{
+			const CvProjectInfo& kProject = GC.getProjectInfo(prodProject);
+			for (int iI = 0; iI < iNumBonuses; iI++)
+			{
+				const int iMod = kProject.getBonusProductionModifier((BonusTypes)iI);
+				if (iMod != 0)
+				{
+					aiConsumption[iI] += baseProd * iMod / 100;
+				}
+			}
+		}
+
+		foreach_(const BonusTypes eBonus, prereqBonuses)
+		{
+			aiConsumption[eBonus] += prodYieldRate;
+		}
+
+		// --- Base rates once per city (the legacy per-bonus pass re-derived the same
+		//     values once per bonus). ---
+		int aiBaseYieldRate[NUM_YIELD_TYPES];
+		for (int iJ = 0; iJ < NUM_YIELD_TYPES; iJ++)
+		{
+			aiBaseYieldRate[iJ] = cityX->getBaseYieldRate((YieldTypes)iJ);
+		}
+		int aiBaseCommerceRate[NUM_COMMERCE_TYPES];
+		for (int iJ = 0; iJ < NUM_COMMERCE_TYPES; iJ++)
+		{
+			aiBaseCommerceRate[iJ] = cityX->getBaseCommerceRate((CommerceTypes)iJ);
+		}
+
+		// --- Building effects: each built building contributes only to the bonuses its
+		//     effect tables reference. Term math is the legacy code verbatim. ---
+		const std::vector<BuildingTypes>& hasBuildings = cityX->getHasBuildings();
+		for (std::vector<BuildingTypes>::const_iterator bldIt = hasBuildings.begin(); bldIt != hasBuildings.end(); ++bldIt)
+		{
+			const BuildingTypes eTypeX = *bldIt;
+			if (cityX->isDisabledBuilding(eTypeX))
+				continue;
+
+			const CvBuildingInfo& buildingX = GC.getBuildingInfo(eTypeX);
+
+			foreach_(const BonusTypes eBonus, buildingX.getConsumptionRelevantBonuses())
+			{
+				int iValue = (
+						buildingX.getBonusHappinessChanges().getValue(eBonus) * 12
+					+	buildingX.getBonusHealthChanges().getValue(eBonus) * 8
+					+	buildingX.getBonusDefenseChanges(eBonus)
+				);
+				for (int iJ = 0; iJ < NUM_YIELD_TYPES; iJ++)
+				{
+					iValue += (
+							buildingX.getBonusYieldChanges(eBonus, iJ) * 3
+						+ buildingX.getBonusYieldModifier(eBonus, iJ) * aiBaseYieldRate[iJ] / 33
+					);
+				}
+				for (int iJ = 0; iJ < NUM_COMMERCE_TYPES; iJ++)
+				{
+					iValue += aiBaseCommerceRate[iJ] * buildingX.getBonusCommerceModifier(eBonus, iJ) / 33;
+				}
+				aiConsumption[eBonus] += iValue;
+			}
+		}
+	}
+
+	// --- Per-bonus tail: the hasBonus gate and the trading-partner export term (legacy
+	//     semantics: a bonus we do not hold has zero consumption and no export term). ---
+	for (int iI = 0; iI < iNumBonuses; iI++)
+	{
+		const BonusTypes eBonus = (BonusTypes)iI;
+		if (!hasBonus(eBonus))
+		{
+			aiConsumption[iI] = 0;
+			continue;
+		}
+		const int iBonusExport = getBonusExport(eBonus);
+		if (iBonusExport > 0)
+		{
+			int iTempValue = 0;
+			int iTradingPartnerCount = 0;
+			for (int iJ = 0; iJ < MAX_PC_PLAYERS; iJ++)
+			{
+				const CvPlayer& kOther = GET_PLAYER((PlayerTypes)iJ);
+				if (kOther.isAlive()
+				&& GET_TEAM(getTeam()).isHasMet(kOther.getTeam())
+				&& kOther.getBonusImport(eBonus) > 0)
+				{
+					iTempValue += kOther.getResourceConsumption(eBonus);
+					++iTradingPartnerCount;
+				}
+			}
+			if (iTradingPartnerCount > 0)
+			{
+				aiConsumption[iI] += (iTempValue / iTradingPartnerCount) * iBonusExport;
+			}
+		}
+	}
+
+	if (gPerfLogLevel >= 2)
+	{
+		// Shadow verify: legacy recompute stays authoritative; report any divergence.
+		int iMismatches = 0;
+		for (int iI = 0; iI < iNumBonuses; iI++)
+		{
+			recalculateResourceConsumption((BonusTypes)iI);
+			if (m_paiResourceConsumption[iI] != aiConsumption[iI])
+			{
+				if (iMismatches < 5)
+				{
+					logPerf(2, "[PERF/rescons] MISMATCH owner=%d bonus=%d legacy=%d fast=%d",
+						(int)getID(), iI, m_paiResourceConsumption[iI], aiConsumption[iI]);
+				}
+				iMismatches++;
+			}
+		}
+		logPerf(2, "[PERF/rescons] turn=%d owner=%d verified bonuses=%d mismatches=%d",
+			GC.getGame().getGameTurn(), (int)getID(), iNumBonuses, iMismatches);
+		return;
+	}
+
+	for (int iI = 0; iI < iNumBonuses; iI++)
+	{
+		m_paiResourceConsumption[iI] = aiConsumption[iI];
 	}
 }
 

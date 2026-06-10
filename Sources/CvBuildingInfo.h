@@ -75,6 +75,11 @@ public:
 	// Civilopedia / help text / enabler index; canConstruct still does the evaluation.
 	const std::vector<ConstructRequirement>& getConstructRequirements() const { return m_constructRequirements; }
 
+	//	The bonuses this building's effect tables reference (happiness/health/defense/yield/
+	//	commerce changes or modifiers), derived once at load. Lets per-city consumption math
+	//	visit only the few touched bonuses instead of scanning every bonus type per building.
+	const std::vector<BonusTypes>& getConsumptionRelevantBonuses() const { return m_consumptionRelevantBonuses; }
+
 	int getMaxGlobalInstances() const				{ return m_iMaxGlobalInstances; }
 	int getMaxTeamInstances() const					{ return m_iMaxTeamInstances; }
 	int getMaxPlayerInstances() const				{ return m_iMaxPlayerInstances; }
@@ -477,6 +482,7 @@ public:
 private:
 	void setNotShowInCity();
 	void buildConstructRequirements();
+	void buildConsumptionRelevantBonuses();
 
 	bool m_bNoLimit;
 	bool m_bNotShowInCity;
@@ -521,6 +527,9 @@ private:
 
 	// #195 Phase 2: unified prerequisite description, derived at load from the typed fields.
 	std::vector<ConstructRequirement> m_constructRequirements;
+
+	// Load-derived: bonuses referenced by this building's effect tables (see getter).
+	std::vector<BonusTypes> m_consumptionRelevantBonuses;
 
 	int m_iPrereqVicinityBonus;
 	int m_iPrereqRawVicinityBonus;
