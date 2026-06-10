@@ -28,6 +28,7 @@ public:
 	DllExport int getToState();
 	DllExport int getAnimation();
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(CvThroneRoomInfo* pClassInfo);
 

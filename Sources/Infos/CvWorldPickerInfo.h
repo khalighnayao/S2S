@@ -33,6 +33,7 @@ public:
 	DllExport int getNumWaterLevelGloss();
 	DllExport const char* getWaterLevelGlossPath(int index);
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(CvWorldPickerInfo* pClassInfo);
 

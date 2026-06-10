@@ -98,6 +98,7 @@ public:
 	DllExport FogTypes getFogType() const;
 	DllExport const char* getBaseTexture() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility*);
 	void copyNonDefaults(const CvTerrainPlaneInfo* pClassInfo);
 
@@ -139,6 +140,7 @@ public:
 	DllExport CameraOverlayTypes getCameraOverlayType() const;
 	DllExport const char* getBaseTexture() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility*);
 	void copyNonDefaults(const CvCameraOverlayInfo* pClassInfo);
 

@@ -23,6 +23,7 @@ public:
 
 	DllExport const NiColorA& getColor() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvColorInfo* pClassInfo);

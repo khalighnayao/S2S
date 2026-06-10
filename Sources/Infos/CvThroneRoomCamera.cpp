@@ -33,6 +33,7 @@
 //------------------------------------------------------------------------------------------------------
 CvThroneRoomCamera::CvThroneRoomCamera()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -54,6 +55,15 @@ const char* CvThroneRoomCamera::getFileName()
 }
 
 
+// No legacy getCheckSum, so declaration order follows the legacy read() order.
+void CvThroneRoomCamera::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szFileName, L"FileName")
+	;
+}
+
+
 bool CvThroneRoomCamera::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
@@ -61,7 +71,7 @@ bool CvThroneRoomCamera::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(m_szFileName, L"FileName");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -69,10 +79,8 @@ bool CvThroneRoomCamera::read(CvXMLLoadUtility* pXML)
 
 void CvThroneRoomCamera::copyNonDefaults(const CvThroneRoomCamera* pClassInfo)
 {
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getFileName() == cDefault) m_szFileName = pClassInfo->m_szFileName;
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

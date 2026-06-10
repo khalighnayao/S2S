@@ -26,25 +26,40 @@
 //
 //
 CvLandscapeInfo::CvLandscapeInfo() :
-m_iFogR(0),
-m_iFogG(0),
-m_iFogB(0),
-m_iHorizontalGameCell(0),
-m_iVerticalGameCell(0),
-m_iPlotsPerCellX(0),
-m_iPlotsPerCellY(0),
+// Derived fields, computed from the cell/plot counts after read/copy - not XML-backed.
 m_iHorizontalVertCnt(0),
-m_iVerticalVertCnt(0),
-m_iWaterHeight(0),
-m_fTextureScaleX(0.0f),
-m_fTextureScaleY(0.0f),
-m_fZScale(0.0f),
-m_fPeakScale(0.0f),
-m_fHillScale(0.0f),
-m_bUseTerrainShader(false),
-m_bUseLightmap(false),
-m_bRandomMap(false)
+m_iVerticalVertCnt(0)
 {
+	CvInfoUtil(this).initDataMembers();
+}
+
+
+// Declared in legacy read() order (this class has no getCheckSum).
+void CvLandscapeInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_iWaterHeight, L"iWaterHeight")
+		.add(m_bRandomMap, L"bRandomMap")
+		.add(m_szHeightMap, L"HeightMap")
+		.add(m_szTerrainMap, L"TerrainMap")
+		.add(m_szNormalMap, L"NormalMap")
+		.add(m_szBlendMap, L"BlendMap")
+		.add(m_szSkyArt, L"SkyArt")
+		.add(m_iFogR, L"iFogR")
+		.add(m_iFogG, L"iFogG")
+		.add(m_iFogB, L"iFogB")
+		.add(m_fTextureScaleX, L"fTextureScaleX")
+		.add(m_fTextureScaleY, L"fTextureScaleY")
+		.add(m_iHorizontalGameCell, L"iGameCellSizeX")
+		.add(m_iVerticalGameCell, L"iGameCellSizeY")
+		.add(m_iPlotsPerCellX, L"iPlotsPerCellX")
+		.add(m_iPlotsPerCellY, L"iPlotsPerCellY")
+		.add(m_fZScale, L"fZScale")
+		.add(m_bUseTerrainShader, L"bTerrainShader")
+		.add(m_bUseLightmap, L"bUseLightmap")
+		.add(m_fPeakScale, L"fPeakScale")
+		.add(m_fHillScale, L"fHillScale")
+	;
 }
 
 
@@ -160,43 +175,15 @@ bool CvLandscapeInfo::isRandomMap() const
 //
 bool CvLandscapeInfo::read(CvXMLLoadUtility* pXML)
 {
-	CvString szTextVal;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(&m_iWaterHeight, L"iWaterHeight");
-	pXML->GetChildXmlValByName(&m_bRandomMap, L"bRandomMap");
-
-	pXML->GetOptionalChildXmlValByName(m_szHeightMap, L"HeightMap");
-	pXML->GetOptionalChildXmlValByName(m_szTerrainMap, L"TerrainMap");
-	pXML->GetOptionalChildXmlValByName(m_szNormalMap, L"NormalMap");
-	pXML->GetOptionalChildXmlValByName(m_szBlendMap, L"BlendMap");
-	pXML->GetOptionalChildXmlValByName(m_szSkyArt, L"SkyArt");
-
-	pXML->GetChildXmlValByName(&m_iFogR, L"iFogR");
-	pXML->GetChildXmlValByName(&m_iFogG, L"iFogG");
-	pXML->GetChildXmlValByName(&m_iFogB, L"iFogB");
-
-	pXML->GetChildXmlValByName(&m_fTextureScaleX, L"fTextureScaleX");
-	pXML->GetChildXmlValByName(&m_fTextureScaleY, L"fTextureScaleY");
-
-	pXML->GetChildXmlValByName(&m_iHorizontalGameCell, L"iGameCellSizeX");
-	pXML->GetChildXmlValByName(&m_iVerticalGameCell, L"iGameCellSizeY");
-
-	pXML->GetChildXmlValByName(&m_iPlotsPerCellX, L"iPlotsPerCellX");
-	pXML->GetChildXmlValByName(&m_iPlotsPerCellY, L"iPlotsPerCellY");
+	CvInfoUtil(this).readXml(pXML);
 
 	m_iHorizontalVertCnt = m_iPlotsPerCellX * m_iHorizontalGameCell - (m_iPlotsPerCellX - 1);
 	m_iVerticalVertCnt   = m_iPlotsPerCellY * m_iVerticalGameCell - (m_iPlotsPerCellY - 1);
-
-	pXML->GetChildXmlValByName(&m_fZScale, L"fZScale");
-	pXML->GetChildXmlValByName(&m_bUseTerrainShader, L"bTerrainShader");
-	pXML->GetChildXmlValByName(&m_bUseLightmap, L"bUseLightmap");
-	pXML->GetChildXmlValByName(&m_fPeakScale, L"fPeakScale");
-	pXML->GetChildXmlValByName(&m_fHillScale, L"fHillScale");
-
 
 	return true;
 }
@@ -204,37 +191,11 @@ bool CvLandscapeInfo::read(CvXMLLoadUtility* pXML)
 
 void CvLandscapeInfo::copyNonDefaults(const CvLandscapeInfo* pClassInfo)
 {
-	bool bDefault = false;
-	int iDefault = 0;
-	float fDefault = 0.0f;
-	CvString cDefault = CvString::format("").GetCString();
-	CvWString wDefault = CvWString::format(L"").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getWaterHeight() == iDefault) m_iWaterHeight = pClassInfo->getWaterHeight();
-	if (isRandomMap() == bDefault) m_bRandomMap = pClassInfo->isRandomMap();
-	if (getHeightMap() == cDefault) m_szHeightMap = pClassInfo->getHeightMap();
-	if (getTerrainMap() == cDefault) m_szTerrainMap = pClassInfo->getTerrainMap();
-	if (getNormalMap() == cDefault) m_szNormalMap = pClassInfo->getNormalMap();
-	if (getBlendMap() == cDefault) m_szBlendMap = pClassInfo->getBlendMap();
-	if (getSkyArt() == cDefault) m_szSkyArt = pClassInfo->getSkyArt();
-	if (getFogR() == iDefault) m_iFogR = pClassInfo->getFogR();
-	if (getFogG() == iDefault) m_iFogG = pClassInfo->getFogG();
-	if (getFogB() == iDefault) m_iFogB = pClassInfo->getFogB();
-	if (getTextureScaleX() == fDefault) m_fTextureScaleX = pClassInfo->getTextureScaleX();
-	if (getTextureScaleY() == fDefault) m_fTextureScaleY = pClassInfo->getTextureScaleY();
-	if (getHorizontalGameCell() == iDefault) m_iHorizontalGameCell = pClassInfo->getHorizontalGameCell();
-	if (getVerticalGameCell() == iDefault) m_iVerticalGameCell = pClassInfo->getVerticalGameCell();
-	if (getPlotsPerCellX() == iDefault) m_iPlotsPerCellX = pClassInfo->getPlotsPerCellX();
-	if (getPlotsPerCellY() == iDefault) m_iPlotsPerCellY = pClassInfo->getPlotsPerCellY();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
+
 	m_iHorizontalVertCnt = m_iPlotsPerCellX * m_iHorizontalGameCell - (m_iPlotsPerCellX - 1);
 	m_iVerticalVertCnt   = m_iPlotsPerCellY * m_iVerticalGameCell - (m_iPlotsPerCellY - 1);
-
-	if (getZScale() == fDefault) m_fZScale = pClassInfo->getZScale();
-	if (isUseTerrainShader() == bDefault) m_bUseTerrainShader = pClassInfo->isUseTerrainShader();
-	if (isUseLightmap() == bDefault) m_bUseLightmap = pClassInfo->isUseLightmap();
-	if (getPeakScale() == fDefault) m_fPeakScale = pClassInfo->getPeakScale();
-	if (getHillScale() == fDefault) m_fHillScale = pClassInfo->getHillScale();
 }
 
