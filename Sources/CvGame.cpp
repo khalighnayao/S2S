@@ -242,31 +242,14 @@ void CvGame::init(HandicapTypes eHandicap)
 
 	if (getGameTurn() == 0)
 	{
-		int iStartTurn = 0;
-
-		for (int iI = 0; iI < GC.getGameSpeedInfo(getGameSpeedType()).getNumTurnIncrements(); iI++)
-		{
-			iStartTurn += GC.getGameSpeedInfo(getGameSpeedType()).getGameTurnInfo(iI).iNumGameTurnsPerIncrement;
-		}
-
-		iStartTurn *= GC.getEraInfo(getStartEra()).getStartPercent();
-		iStartTurn /= 100;
-
-		setGameTurn(iStartTurn);
+		setGameTurn(GC.getGameSpeedInfo(getGameSpeedType()).getEraStartTurn(getStartEra()));
 	}
 
 	setStartTurn(getGameTurn());
 
 	if (getMaxTurns() == 0)
 	{
-		int iEstimateEndTurn = 0;
-
-		for (int iI = 0; iI < GC.getGameSpeedInfo(getGameSpeedType()).getNumTurnIncrements(); iI++)
-		{
-			iEstimateEndTurn += GC.getGameSpeedInfo(getGameSpeedType()).getGameTurnInfo(iI).iNumGameTurnsPerIncrement;
-		}
-
-		setEstimateEndTurn(iEstimateEndTurn);
+		setEstimateEndTurn(GC.getGameSpeedInfo(getGameSpeedType()).getTotalTurns());
 
 	// This looks like a reasonable place for me to place my own interrupts for the victory conditions
 	// I need to ensure that the AI understands it has to go after everything, so ALL the victory options
@@ -5853,7 +5836,7 @@ void CvGame::doTurn()
 
 	{
 		PERF_SCOPE("game.doSpawns", -1);
-		if (getElapsedGameTurns() > GC.getGameSpeedInfo(getGameSpeedType()).getGameTurnInfo(getStartEra()).iNumGameTurnsPerIncrement/80)
+		if (getElapsedGameTurns() > GC.getGameSpeedInfo(getGameSpeedType()).getTurnsInEra(getStartEra())/80)
 		{
 			for (int iI = MAX_PC_PLAYERS; iI < MAX_PLAYERS; iI++)
 			{
@@ -9975,9 +9958,10 @@ void CvGame::doCalculateCurrentTick()
 			}
 			uint32_t currentTick = calculateCurrentTick();
 
-			uint32_t endTechTick = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_FUTURE_START");
-			endTechTick = (200000 + endTechTick) * 360;
-			if (currentTick > endTechTick) //more than 6000 AD
+			// tick where the last era ("the future") begins; tech influence cannot date past it
+			const CvEraInfo& kLastEra = GC.getEraInfo((EraTypes)(GC.getNumEraInfos() - 1));
+			const uint32_t endTechTick = (kLastEra.getHistoricalStartYear() - GC.getEraInfo((EraTypes)0).getHistoricalStartYear()) * 360;
+			if (currentTick > endTechTick)
 			{
 				m_currentDate.increment();
 			}

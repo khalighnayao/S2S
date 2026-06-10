@@ -1,8 +1,22 @@
 # CvGameSpeedInfo simplification (Percents → named fields, GameTurnInfos collapse)
 
-Part of the #196 declarative-loading migration. Follows the `CvWorldInfo` precedent (#310):
-restructure odd data into descriptive named fields instead of special-casing the loader.
-Status: **plan, not yet implemented**.
+Part of the #196 declarative-loading migration (sub-issue #248). Follows the `CvWorldInfo`
+precedent (#310): restructure odd data into descriptive named fields instead of
+special-casing the loader.
+
+Status: **IMPLEMENTED 2026-06** (awaiting in-game playtest). The resulting model is
+documented in `../reference/calendar-and-gamespeed.md`; this doc remains as the findings
+record and decision log. Deviations from the plan below, per owner direction:
+- Phases 2+3 were merged — the intermediate "GameTurnInfos as declarative struct-vector"
+  state was skipped (no doing the work twice); the table went straight to derivation.
+- The `<Adapt>` grammar became tag-dispatched (`<Adapt>`/`<AdaptHammerCost>`/`<AdaptUnitYield>`,
+  fixed `AdaptTypes` enum) instead of pattern-matching an `<ID>` child string.
+- `CvEraInfo.iStartPercent` was also deleted (start turns now derive exactly from per-era
+  turn counts). Bonus finding: the old `iStartPercent` data proved the GameTurnInfo rows were
+  **off by one vs eras** (prehistoric had two rows, Future none), so `CvGame.cpp`'s
+  `getGameTurnInfo(getStartEra())` doSpawns site was reading the previous era's pacing.
+- Per-era Normal-speed turn counts were taken from the `iStartPercent` deltas (round
+  designed numbers summing to 2000), not the generated row turn counts.
 
 ## Findings (verified 2026-06)
 

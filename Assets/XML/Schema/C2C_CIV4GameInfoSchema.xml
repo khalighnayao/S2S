@@ -532,17 +532,6 @@
 	<ElementType name="HintInfos" content="eltOnly">
 		<element type="HintInfo" maxOccurs="*"/>
 	</ElementType>
-	<ElementType name="iMonthIncrement" content="textOnly" dt:type="int"/>
-	<ElementType name="iDayIncrement" content="textOnly" dt:type="int"/>
-	<ElementType name="iTurnsPerIncrement" content="textOnly" dt:type="int"/>
-	<ElementType name="GameTurnInfo" content="eltOnly">
-		<element type="iMonthIncrement" minOccurs="0"/>
-		<element type="iDayIncrement" minOccurs="0"/>
-		<element type="iTurnsPerIncrement"/>
-	</ElementType>
-	<ElementType name="GameTurnInfos" content="eltOnly">
-		<element type="GameTurnInfo" maxOccurs="*"/>
-	</ElementType>
 	<ElementType name="iGold" content="textOnly" dt:type="int"/>
 	<ElementType name="iGoldRand1" content="textOnly" dt:type="int"/>
 	<ElementType name="iGoldRand2" content="textOnly" dt:type="int"/>
@@ -1366,7 +1355,6 @@
 		<element type="Help" minOccurs="0"/>
 		<element type="iSpeedPercent" minOccurs="0"/>
 		<element type="iUnitYieldScalePercent" minOccurs="0"/>
-		<element type="GameTurnInfos" minOccurs="0"/>
 	</ElementType>
 	<ElementType name="GameSpeedInfos" content="eltOnly">
 		<element type="GameSpeedInfo" maxOccurs="*"/>
@@ -1607,7 +1595,9 @@
 	<ElementType name="iStartingUnitMultiplier" content="textOnly" dt:type="int"/>
 	<ElementType name="iStartingGold" content="textOnly" dt:type="int"/>
 	<ElementType name="iFreePopulation" content="textOnly" dt:type="int"/>
-	<ElementType name="iStartPercent" content="textOnly" dt:type="int"/>
+	<ElementType name="iHistoricalStartYear" content="textOnly" dt:type="int"/>
+	<ElementType name="iHistoricalEndYear" content="textOnly" dt:type="int"/>
+	<ElementType name="iNormalSpeedTurns" content="textOnly" dt:type="int"/>
 	<ElementType name="iSoundtrackSpace" content="textOnly" dt:type="int"/>
 	<ElementType name="bFirstSoundtrackFirst" content="textOnly" dt:type="boolean"/>
 	<ElementType name="EraInfoSoundtrack" content="textOnly"/>
@@ -1654,7 +1644,9 @@
 		<element type="iStartingExploreUnits" minOccurs="0"/>
 		<element type="iStartingGold" minOccurs="0"/>
 		<element type="iFreePopulation" minOccurs="0"/>
-		<element type="iStartPercent" minOccurs="0"/>
+		<element type="iHistoricalStartYear" minOccurs="0"/>
+		<element type="iHistoricalEndYear" minOccurs="0"/>
+		<element type="iNormalSpeedTurns" minOccurs="0"/>
 		<element type="iGrowthPercent" minOccurs="0"/>
 		<element type="iTrainPercent" minOccurs="0"/>
 		<element type="iConstructPercent" minOccurs="0"/>
@@ -2015,9 +2007,6 @@
 	<ElementType name="Civ4Hints" content="eltOnly">
 		<element type="HintInfos" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
-	<ElementType name="Civ4GameTurnInfo" content="eltOnly">
-		<element type="GameTurnInfos" minOccurs="0" maxOccurs="*"/>
-	</ElementType>
 	<ElementType name="Civ4GoodyInfo" content="eltOnly">
 		<element type="GoodyInfos" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
@@ -2091,7 +2080,6 @@
 		<element type="ProcessInfos"/>
 		<element type="ReligionInfos"/>
 		<element type="HintInfos" minOccurs="0" maxOccurs="*"/>
-		<element type="GameTurnInfos" minOccurs="0" maxOccurs="*"/>
 		<element type="GoodyInfos" minOccurs="0" maxOccurs="*"/>
 		<element type="HandicapInfos" minOccurs="0" maxOccurs="*"/>
 		<element type="HurryInfos" minOccurs="0" maxOccurs="*"/>

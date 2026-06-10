@@ -3093,56 +3093,6 @@ void shuffle(int* piShuffle, int iNum, CvRandom& rand)
 
 #define NUM_ERAS 14
 
-struct EraYearRange
-{
-    int startYear;
-    int endYear;
-};
-
-void initEraYearRanges(EraYearRange eraYearRanges[NUM_ERAS])
-{
-	eraYearRanges[0].startYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_PREHISTORIC_START");
-	eraYearRanges[0].endYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_PREHISTORIC_END");
-
-	eraYearRanges[1].startYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_ANCIENT_START");
-	eraYearRanges[1].endYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_ANCIENT_END");
-
-	eraYearRanges[2].startYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_CLASSIC_START");
-	eraYearRanges[2].endYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_CLASSIC_END");
-
-	eraYearRanges[3].startYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_MEDIEVAL_START");
-	eraYearRanges[3].endYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_MEDIEVAL_END");
-
-	eraYearRanges[4].startYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_RENAISSANCE_START");
-	eraYearRanges[4].endYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_RENAISSANCE_END");
-
-	eraYearRanges[5].startYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_INDUSTRIAL_START");
-	eraYearRanges[5].endYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_INDUSTRIAL_END");
-
-	eraYearRanges[6].startYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_ATOMIC_START");
-	eraYearRanges[6].endYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_ATOMIC_END");
-
-	eraYearRanges[7].startYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_INFORMATION_START");
-	eraYearRanges[7].endYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_INFORMATION_END");
-
-	eraYearRanges[8].startYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_NANOTECH_START");
-	eraYearRanges[8].endYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_NANOTECH_END");
-
-	eraYearRanges[9].startYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_TRANSHUMAN_START");
-	eraYearRanges[9].endYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_TRANSHUMAN_END");
-
-	eraYearRanges[10].startYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_GALACTIC_START");
-	eraYearRanges[10].endYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_GALACTIC_END");
-
-	eraYearRanges[11].startYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_COSMIC_START");
-	eraYearRanges[11].endYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_COSMIC_END");
-
-	eraYearRanges[12].startYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_TRANSCENDENT_START");
-	eraYearRanges[12].endYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_TRANSCENDENT_END");
-
-	eraYearRanges[13].startYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_FUTURE_START");
-	eraYearRanges[13].endYear = GC.getDefineINT("HISTORICAL_ACCURATE_ERA_RANGE_FUTURE_END");
-}
 double customDatePolynomial(double x) {
 	return tanh(30.0 * x) * pow(x, 0.5);
 }
@@ -3234,17 +3184,15 @@ int calculateYearFromInfluence(int eraStart, int eraEnd, double influence)
 
 int calculateTickFromInfluence(int eraStart, int eraEnd, double influence)
 {
-	return (abs(200000 + eraStart) * 360) + static_cast<int>((eraEnd - eraStart) * influence * 360);
+	const int epochYear = GC.getEraInfo((EraTypes)0).getHistoricalStartYear();
+	return ((eraStart - epochYear) * 360) + static_cast<int>((eraEnd - eraStart) * influence * 360);
 }
 
 int calculateCurrentTick()
 {
-	int totalTechsInEra[NUM_ERAS] = { 0 };
 	double totalInfluences[NUM_ERAS] = { 0.0 };
 	double weight[NUM_ERAS] = { 0.0 };
-	EraYearRange eraYearRanges[NUM_ERAS];
 
-	initEraYearRanges(eraYearRanges); //initialize era ranges from XML global defines
 	calculateTotalInfluence(totalInfluences, weight); //calculate influence from players techs
 
 	double weightedTicks = 0.0;
@@ -3252,7 +3200,8 @@ int calculateCurrentTick()
 
 	for (int iEra = 0; iEra < NUM_ERAS; ++iEra)
 	{
-		int tick = calculateTickFromInfluence(eraYearRanges[iEra].startYear, eraYearRanges[iEra].endYear, totalInfluences[iEra]);
+		const CvEraInfo& kEra = GC.getEraInfo((EraTypes)iEra);
+		int tick = calculateTickFromInfluence(kEra.getHistoricalStartYear(), kEra.getHistoricalEndYear(), totalInfluences[iEra]);
 		weightedTicks += tick * weight[iEra];
 		totalWeight += weight[iEra];
 		logging::logMsg("C2C.log", "[CALENDAR] Era %d: Year = %d", iEra, tick);
@@ -3263,7 +3212,7 @@ int calculateCurrentTick()
 		totalWeight = 1.0;
 	}
 	int currentTick = static_cast<int>(weightedTicks / totalWeight);
-	int target_year = -200000 + (currentTick / 360);
+	int target_year = GC.getEraInfo((EraTypes)0).getHistoricalStartYear() + (currentTick / 360);
 	logging::logMsg("C2C.log", "[CALENDAR] Weighted Ticks = %f, Total Weight = %f, Current Ticks = %d", weightedTicks, totalWeight, currentTick);
 	logging::logMsg("C2C.log", "[CALENDAR] TARGET_YEAR = %d", target_year);
 	return currentTick;
@@ -3288,8 +3237,6 @@ int getTurnYearForGame(int iGameTurn, int iStartYear, CalendarTypes eCalendar, G
 
 int getTurnMonthForGame(int iGameTurn, int iStartYear, CalendarTypes eCalendar, GameSpeedTypes eSpeed)
 {
-	//int iTurnCount;
-	//int iI;
 	CvDate date;
 
 	int iTurnMonth = iStartYear * GC.getNumMonthInfos();
@@ -3298,27 +3245,6 @@ int getTurnMonthForGame(int iGameTurn, int iStartYear, CalendarTypes eCalendar, 
 	{
 	case CALENDAR_DEFAULT:
 	case CALENDAR_NO_SEASONS:
-		/*iTurnCount = 0;
-
-		for (iI = 0; iI < GC.getGameSpeedInfo(eSpeed).getNumTurnIncrements(); iI++)
-		{
-			if (iGameTurn > (iTurnCount + GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(iI).iNumGameTurnsPerIncrement))
-			{
-				iTurnMonth += (GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(iI).iMonthIncrement * GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(iI).iNumGameTurnsPerIncrement);
-				iTurnCount += GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(iI).iNumGameTurnsPerIncrement;
-			}
-			else
-			{
-				iTurnMonth += (GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(iI).iMonthIncrement * (iGameTurn - iTurnCount));
-				iTurnCount += (iGameTurn - iTurnCount);
-				break;
-			}
-		}
-
-		if (iGameTurn > iTurnCount)
-		{
-			iTurnMonth += (GC.getGameSpeedInfo(eSpeed).getGameTurnInfo(GC.getGameSpeedInfo(eSpeed).getNumTurnIncrements() - 1).iMonthIncrement * (iGameTurn - iTurnCount));
-		}*/
 		if (iGameTurn == GC.getGame().getGameTurn())
 		{
 			date = GC.getGame().getCurrentDate();

@@ -44,6 +44,7 @@ This folder is split by intent:
 | [doProduction](reference/doProduction.md) | `CvCity::doProduction` — the per-turn city production step |
 | [constructibility-and-prerequisites](reference/constructibility-and-prerequisites.md) | The unified `ConstructRequirement` model, the static enabler reverse-index (CABV turn-time), and help-text rendering |
 | [declarative-info-loading](reference/declarative-info-loading.md) | `CvInfoUtil` / `getDataMembers` — how `Cv*Info` classes load from XML, the wrapper catalog, and the byte-identical migration recipe (#196) |
+| [calendar-and-gamespeed](reference/calendar-and-gamespeed.md) | Era-driven turn counts & calendar (`CvEraInfo` pacing fields, `CvGameSpeedInfo` derived accessors, `CvDate` interpolation, Adapt channels) |
 | [MapScript_Process](reference/MapScript_Process.md) | End-to-end lifecycle of a C2C mapscript (`C2C_World`) |
 
 ## Plans — work in flight

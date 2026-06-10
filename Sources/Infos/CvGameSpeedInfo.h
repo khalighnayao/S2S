@@ -9,7 +9,11 @@
 //
 //  class : CvGameSpeedInfo
 //
-//  DESC:
+//  DESC:   A game speed scales costs/durations by iSpeedPercent and stretches the
+//          game over proportionally more turns. Turn counts and calendar pacing
+//          are derived per era from CvEraInfo's historical year span and
+//          Normal-speed turn count (see CvDate) — nothing calendar-related is
+//          stored here.
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 class CvGameSpeedInfo
@@ -20,21 +24,18 @@ class CvGameSpeedInfo
 public:
 
 	CvGameSpeedInfo();
-	virtual ~CvGameSpeedInfo();
 
 	int getSpeedPercent() const;
 	int getHammerCostPercent() const;
 	int getUnitYieldScalePercent() const;
-	int getNumTurnIncrements() const;
 
-	const GameTurnInfo& getGameTurnInfo(int iIndex) const;
-	const CvDateIncrement& getDateIncrement(int iIndex) const;
-	std::vector<CvDateIncrement>& getIncrements();
-	bool getEndDatesCalculated() const;
-	void setEndDatesCalculated(bool bCalculated);
+	// Era pacing at this speed, derived from CvEraInfo (not XML-backed).
+	int getTurnsInEra(int iEra) const;
+	int getEraStartTurn(int iEra) const;
+	int getTotalTurns() const;
+	int getTicksPerTurnInEra(int iEra) const;
 
-	void allocateGameTurnInfos(int iSize);
-
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvGameSpeedInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;
@@ -44,14 +45,9 @@ protected:
 
 	int m_iSpeedPercent;
 	// Scale for unit-produced yields (e.g. subdued-animal food/production), the
-	// ADAPT_UNIT_YIELD channel of <AdaptUnitYield> expressions. Grows slower than
-	// iSpeedPercent (~sqrt) so yields don't outpace the longer research/build times.
+	// <AdaptUnitYield> expression channel. Grows slower than iSpeedPercent
+	// (~sqrt) so yields don't outpace the longer research/build times.
 	int m_iUnitYieldScalePercent;
-	int m_iNumTurnIncrements;
-
-	GameTurnInfo* m_pGameTurnInfo;
-	std::vector<CvDateIncrement> m_aIncrements;
-	bool m_bEndDatesCalculated;
 };
 
 #endif // CV_GAME_SPEED_INFO_H

@@ -6,16 +6,13 @@
 							when you choose your game speed when starting a new game.
 			Type		= Defines what Civ IV calls the game speed, e.g. GAMESPEED_EPIC.
 * Integer Tags:
-				iSpeedPercent			= Speed scale
+				iSpeedPercent			= Speed scale. Scales costs/durations, and stretches the game over
+											proportionally more turns: each era lasts its CIV4EraInfos.xml
+											iNormalSpeedTurns * iSpeedPercent / 100 turns, and the calendar
+											interpolates the era's historical year span over those turns.
 				iUnitYieldScalePercent	= Multiplier on unit-produced yields (e.g. subdued-animal food/production),
 											the <AdaptUnitYield> expression channel. Approximately:
 											sqrt(iSpeedPercent / 100) * TECH_COST_MODIFIER
-				iMonthIncrement			= Number Months that pass each turn
-				iDayIncrement			= Number Days that pass each turn
-				iTurnsPerIncrement		= Number of turns that this year increment level lasts
-* Multi-Line Tags
-				GameTurnInfos	= Contains all of the year increment levels (GameTurnInfo's)
-				GameTurnInfo	= Contains a iMonthIncrement or an iDayIncrement, and an iTurnsPerIncrement, see above.
 *GameSpeed*	-	*Total turns*	-	*Scale factor*
 Ultrafast	-		500			-	Normal*0.25 - THIS SPEED IS FOR TESTING PURPOSES ONLY
 Blitz		-		1000		-	Normal*0.5
@@ -36,64 +33,6 @@ Also you will need to change the STANDARD_GAMESPEED in GlobalDefines.xml if you 
 			<Help>TXT_KEY_GAMESPEED_ETERNITY_HELP</Help>
 			<iSpeedPercent>1000</iSpeedPercent>
 			<iUnitYieldScalePercent>1575</iUnitYieldScalePercent>
-			<GameTurnInfos>
-				<GameTurnInfo>
-					<iMonthIncrement>1842</iMonthIncrement>
-					<iTurnsPerIncrement>977</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>467</iMonthIncrement>
-					<iTurnsPerIncrement>977</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>2243</iDayIncrement>
-					<iTurnsPerIncrement>1735</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>467</iDayIncrement>
-					<iTurnsPerIncrement>1272</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>288</iDayIncrement>
-					<iTurnsPerIncrement>1186</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>103</iDayIncrement>
-					<iTurnsPerIncrement>1223</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>41</iDayIncrement>
-					<iTurnsPerIncrement>1318</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>15</iDayIncrement>
-					<iTurnsPerIncrement>2160</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>12</iDayIncrement>
-					<iTurnsPerIncrement>1800</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>19</iDayIncrement>
-					<iTurnsPerIncrement>1895</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>30</iDayIncrement>
-					<iTurnsPerIncrement>1800</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>183</iDayIncrement>
-					<iTurnsPerIncrement>1377</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>350</iDayIncrement>
-					<iTurnsPerIncrement>1028</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>575</iDayIncrement>
-					<iTurnsPerIncrement>1252</iTurnsPerIncrement>
-				</GameTurnInfo>
-			</GameTurnInfos>
 		</GameSpeedInfo>
 		<GameSpeedInfo>
 			<Type>GAMESPEED_EONS</Type>
@@ -101,64 +40,6 @@ Also you will need to change the STANDARD_GAMESPEED in GlobalDefines.xml if you 
 			<Help>TXT_KEY_GAMESPEED_EONS_HELP</Help>
 			<iSpeedPercent>800</iSpeedPercent>
 			<iUnitYieldScalePercent>1400</iUnitYieldScalePercent>
-			<GameTurnInfos>
-				<GameTurnInfo>
-					<iMonthIncrement>2302</iMonthIncrement>
-					<iTurnsPerIncrement>782</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>583</iMonthIncrement>
-					<iTurnsPerIncrement>782</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>2800</iDayIncrement>
-					<iTurnsPerIncrement>1388</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>583</iDayIncrement>
-					<iTurnsPerIncrement>1018</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>360</iDayIncrement>
-					<iTurnsPerIncrement>950</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>128</iDayIncrement>
-					<iTurnsPerIncrement>984</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>51</iDayIncrement>
-					<iTurnsPerIncrement>1060</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>19</iDayIncrement>
-					<iTurnsPerIncrement>1705</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>15</iDayIncrement>
-					<iTurnsPerIncrement>1440</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>24</iDayIncrement>
-					<iTurnsPerIncrement>1500</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>37</iDayIncrement>
-					<iTurnsPerIncrement>1459</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>228</iDayIncrement>
-					<iTurnsPerIncrement>1105</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>437</iDayIncrement>
-					<iTurnsPerIncrement>824</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>718</iDayIncrement>
-					<iTurnsPerIncrement>1003</iTurnsPerIncrement>
-				</GameTurnInfo>
-			</GameTurnInfos>
 		</GameSpeedInfo>
 		<GameSpeedInfo>
 			<Type>GAMESPEED_SNAIL</Type>
@@ -166,64 +47,6 @@ Also you will need to change the STANDARD_GAMESPEED in GlobalDefines.xml if you 
 			<Help>TXT_KEY_GAMESPEED_SNAIL_HELP</Help>
 			<iSpeedPercent>600</iSpeedPercent>
 			<iUnitYieldScalePercent>1225</iUnitYieldScalePercent>
-			<GameTurnInfos>
-				<GameTurnInfo>
-					<iMonthIncrement>3072</iMonthIncrement>
-					<iTurnsPerIncrement>586</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>778</iMonthIncrement>
-					<iTurnsPerIncrement>586</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>3732</iDayIncrement>
-					<iTurnsPerIncrement>1041</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>778</iDayIncrement>
-					<iTurnsPerIncrement>763</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>481</iDayIncrement>
-					<iTurnsPerIncrement>712</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>171</iDayIncrement>
-					<iTurnsPerIncrement>737</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>68</iDayIncrement>
-					<iTurnsPerIncrement>793</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>26</iDayIncrement>
-					<iTurnsPerIncrement>1244</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>20</iDayIncrement>
-					<iTurnsPerIncrement>1080</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>31</iDayIncrement>
-					<iTurnsPerIncrement>1162</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>50</iDayIncrement>
-					<iTurnsPerIncrement>1080</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>303</iDayIncrement>
-					<iTurnsPerIncrement>832</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>579</iDayIncrement>
-					<iTurnsPerIncrement>622</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>945</iDayIncrement>
-					<iTurnsPerIncrement>762</iTurnsPerIncrement>
-				</GameTurnInfo>
-			</GameTurnInfos>
 		</GameSpeedInfo>
 		<GameSpeedInfo>
 			<Type>GAMESPEED_MARATHON</Type>
@@ -231,64 +54,6 @@ Also you will need to change the STANDARD_GAMESPEED in GlobalDefines.xml if you 
 			<Help>TXT_KEY_GAMESPEED_MARATHON_HELP</Help>
 			<iSpeedPercent>400</iSpeedPercent>
 			<iUnitYieldScalePercent>1000</iUnitYieldScalePercent>
-			<GameTurnInfos>
-				<GameTurnInfo>
-					<iMonthIncrement>4604</iMonthIncrement>
-					<iTurnsPerIncrement>391</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>1166</iMonthIncrement>
-					<iTurnsPerIncrement>391</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>187</iMonthIncrement>
-					<iTurnsPerIncrement>693</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>1163</iDayIncrement>
-					<iTurnsPerIncrement>509</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>722</iDayIncrement>
-					<iTurnsPerIncrement>474</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>257</iDayIncrement>
-					<iTurnsPerIncrement>491</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>101</iDayIncrement>
-					<iTurnsPerIncrement>532</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>39</iDayIncrement>
-					<iTurnsPerIncrement>832</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>30</iDayIncrement>
-					<iTurnsPerIncrement>720</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>46</iDayIncrement>
-					<iTurnsPerIncrement>782</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>75</iDayIncrement>
-					<iTurnsPerIncrement>720</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>457</iDayIncrement>
-					<iTurnsPerIncrement>552</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>873</iDayIncrement>
-					<iTurnsPerIncrement>412</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>1437</iDayIncrement>
-					<iTurnsPerIncrement>501</iTurnsPerIncrement>
-				</GameTurnInfo>
-			</GameTurnInfos>
 		</GameSpeedInfo>
 		<GameSpeedInfo>
 			<Type>GAMESPEED_EPIC</Type>
@@ -296,64 +61,6 @@ Also you will need to change the STANDARD_GAMESPEED in GlobalDefines.xml if you 
 			<Help>TXT_KEY_GAMESPEED_EPIC_HELP</Help>
 			<iSpeedPercent>300</iSpeedPercent>
 			<iUnitYieldScalePercent>850</iUnitYieldScalePercent>
-			<GameTurnInfos>
-				<GameTurnInfo>
-					<iMonthIncrement>6143</iMonthIncrement>
-					<iTurnsPerIncrement>293</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>1557</iMonthIncrement>
-					<iTurnsPerIncrement>293</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>249</iMonthIncrement>
-					<iTurnsPerIncrement>520</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>1556</iDayIncrement>
-					<iTurnsPerIncrement>382</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>961</iDayIncrement>
-					<iTurnsPerIncrement>356</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>341</iDayIncrement>
-					<iTurnsPerIncrement>369</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>137</iDayIncrement>
-					<iTurnsPerIncrement>397</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>51</iDayIncrement>
-					<iTurnsPerIncrement>632</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>41</iDayIncrement>
-					<iTurnsPerIncrement>528</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>61</iDayIncrement>
-					<iTurnsPerIncrement>590</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>100</iDayIncrement>
-					<iTurnsPerIncrement>540</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>612</iDayIncrement>
-					<iTurnsPerIncrement>412</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>1165</iDayIncrement>
-					<iTurnsPerIncrement>309</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>1899</iDayIncrement>
-					<iTurnsPerIncrement>379</iTurnsPerIncrement>
-				</GameTurnInfo>
-			</GameTurnInfos>
 		</GameSpeedInfo>
 		<GameSpeedInfo>
 			<Type>GAMESPEED_LONG</Type>
@@ -361,64 +68,6 @@ Also you will need to change the STANDARD_GAMESPEED in GlobalDefines.xml if you 
 			<Help>TXT_KEY_GAMESPEED_LONG_HELP</Help>
 			<iSpeedPercent>200</iSpeedPercent>
 			<iUnitYieldScalePercent>700</iUnitYieldScalePercent>
-			<GameTurnInfos>
-				<GameTurnInfo>
-					<iMonthIncrement>9231</iMonthIncrement>
-					<iTurnsPerIncrement>195</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>2338</iMonthIncrement>
-					<iTurnsPerIncrement>195</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>374</iMonthIncrement>
-					<iTurnsPerIncrement>347</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>77</iMonthIncrement>
-					<iTurnsPerIncrement>255</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>1447</iDayIncrement>
-					<iTurnsPerIncrement>237</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>512</iDayIncrement>
-					<iTurnsPerIncrement>246</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>204</iDayIncrement>
-					<iTurnsPerIncrement>265</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>77</iDayIncrement>
-					<iTurnsPerIncrement>421</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>61</iDayIncrement>
-					<iTurnsPerIncrement>354</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>92</iDayIncrement>
-					<iTurnsPerIncrement>391</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>150</iDayIncrement>
-					<iTurnsPerIncrement>360</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>913</iDayIncrement>
-					<iTurnsPerIncrement>276</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>1748</iDayIncrement>
-					<iTurnsPerIncrement>206</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>95</iMonthIncrement>
-					<iTurnsPerIncrement>252</iTurnsPerIncrement>
-				</GameTurnInfo>
-			</GameTurnInfos>
 		</GameSpeedInfo>
 		<GameSpeedInfo>
 			<Type>GAMESPEED_NORMAL</Type>
@@ -426,64 +75,6 @@ Also you will need to change the STANDARD_GAMESPEED in GlobalDefines.xml if you 
 			<Help>TXT_KEY_GAMESPEED_NORMAL_HELP</Help>
 			<iSpeedPercent>100</iSpeedPercent>
 			<iUnitYieldScalePercent>500</iUnitYieldScalePercent>
-			<GameTurnInfos>
-				<GameTurnInfo>
-					<iMonthIncrement>18367</iMonthIncrement>
-					<iTurnsPerIncrement>98</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>4653</iMonthIncrement>
-					<iTurnsPerIncrement>98</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>749</iMonthIncrement>
-					<iTurnsPerIncrement>173</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>156</iMonthIncrement>
-					<iTurnsPerIncrement>127</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>96</iMonthIncrement>
-					<iTurnsPerIncrement>119</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>1031</iDayIncrement>
-					<iTurnsPerIncrement>123</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>409</iDayIncrement>
-					<iTurnsPerIncrement>132</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>154</iDayIncrement>
-					<iTurnsPerIncrement>211</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>122</iDayIncrement>
-					<iTurnsPerIncrement>177</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>184</iDayIncrement>
-					<iTurnsPerIncrement>195</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>10</iMonthIncrement>
-					<iTurnsPerIncrement>180</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>61</iMonthIncrement>
-					<iTurnsPerIncrement>138</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>116</iMonthIncrement>
-					<iTurnsPerIncrement>103</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>191</iMonthIncrement>
-					<iTurnsPerIncrement>126</iTurnsPerIncrement>
-				</GameTurnInfo>
-			</GameTurnInfos>
 		</GameSpeedInfo>
 		<GameSpeedInfo>
 			<Type>GAMESPEED_BLITZ</Type>
@@ -491,64 +82,6 @@ Also you will need to change the STANDARD_GAMESPEED in GlobalDefines.xml if you 
 			<Help>TXT_KEY_GAMESPEED_BLITZ_HELP</Help>
 			<iSpeedPercent>50</iSpeedPercent>
 			<iUnitYieldScalePercent>350</iUnitYieldScalePercent>
-			<GameTurnInfos>
-				<GameTurnInfo>
-					<iMonthIncrement>36734</iMonthIncrement>
-					<iTurnsPerIncrement>49</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>9307</iMonthIncrement>
-					<iTurnsPerIncrement>49</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>1490</iMonthIncrement>
-					<iTurnsPerIncrement>87</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>309</iMonthIncrement>
-					<iTurnsPerIncrement>64</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>193</iMonthIncrement>
-					<iTurnsPerIncrement>59</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>2064</iDayIncrement>
-					<iTurnsPerIncrement>61</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>819</iDayIncrement>
-					<iTurnsPerIncrement>66</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>308</iDayIncrement>
-					<iTurnsPerIncrement>105</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>243</iDayIncrement>
-					<iTurnsPerIncrement>89</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>367</iDayIncrement>
-					<iTurnsPerIncrement>98</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>20</iMonthIncrement>
-					<iTurnsPerIncrement>90</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>122</iMonthIncrement>
-					<iTurnsPerIncrement>69</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>235</iMonthIncrement>
-					<iTurnsPerIncrement>51</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>381</iMonthIncrement>
-					<iTurnsPerIncrement>63</iTurnsPerIncrement>
-				</GameTurnInfo>
-			</GameTurnInfos>
 		</GameSpeedInfo>
 		<GameSpeedInfo>
 			<Type>GAMESPEED_ULTRAFAST</Type>
@@ -556,64 +89,6 @@ Also you will need to change the STANDARD_GAMESPEED in GlobalDefines.xml if you 
 			<Help>TXT_KEY_GAMESPEED_ULTRAFAST_HELP</Help>
 			<iSpeedPercent>25</iSpeedPercent>
 			<iUnitYieldScalePercent>250</iUnitYieldScalePercent>
-			<GameTurnInfos>
-				<GameTurnInfo>
-					<iMonthIncrement>75000</iMonthIncrement>
-					<iTurnsPerIncrement>24</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>19000</iMonthIncrement>
-					<iTurnsPerIncrement>24</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>3014</iMonthIncrement>
-					<iTurnsPerIncrement>43</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>619</iMonthIncrement>
-					<iTurnsPerIncrement>32</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>380</iMonthIncrement>
-					<iTurnsPerIncrement>30</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>135</iMonthIncrement>
-					<iTurnsPerIncrement>31</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>1641</iDayIncrement>
-					<iTurnsPerIncrement>33</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>611</iDayIncrement>
-					<iTurnsPerIncrement>53</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>492</iDayIncrement>
-					<iTurnsPerIncrement>44</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iDayIncrement>734</iDayIncrement>
-					<iTurnsPerIncrement>49</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>40</iMonthIncrement>
-					<iTurnsPerIncrement>45</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>240</iMonthIncrement>
-					<iTurnsPerIncrement>35</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>462</iMonthIncrement>
-					<iTurnsPerIncrement>26</iTurnsPerIncrement>
-				</GameTurnInfo>
-				<GameTurnInfo>
-					<iMonthIncrement>774</iMonthIncrement>
-					<iTurnsPerIncrement>31</iTurnsPerIncrement>
-				</GameTurnInfo>
-			</GameTurnInfos>
 		</GameSpeedInfo>
 	</GameSpeedInfos>
 </Civ4GameSpeedInfo>

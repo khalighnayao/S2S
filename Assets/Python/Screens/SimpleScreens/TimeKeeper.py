@@ -14,7 +14,7 @@ def TimeKeeper():
 	iEra = 0
 	while iEra < iEras:
 		CvInfo = GC.getEraInfo(iEra)
-		aListEra.append((CvInfo.getStartPercent(), szColorEra + CvInfo.getDescription()))
+		aListEra.append(szColorEra + CvInfo.getDescription())
 		iEra += 1
 	# Create table
 	screen = CyGInterfaceScreen("TimeKeeperScreen", CvScreenEnums.TIMEKEEPER)
@@ -25,18 +25,10 @@ def TimeKeeper():
 	TABLE = "TimeKeeperTable"
 	screen.addTableControlGFC(TABLE, iNumColumns + 1, 0, 0, xRes, yRes, True, False, 24, 24, TableStyles.TABLE_STYLE_STANDARD )
 	screen.setTableColumnHeader(TABLE, 0, "", 120)
-	iMaxIncrements = 0
-	aListGS = []
 	for i in xrange(iNumColumns):
-		CvInfo = GC.getGameSpeedInfo(i)
-		iTurnIncrements = CvInfo.getNumTurnIncrements()
-		if iTurnIncrements > iMaxIncrements:
-			iMaxIncrements = iTurnIncrements
-		aListGS.append((CvInfo, iTurnIncrements))
+		screen.setTableColumnHeader(TABLE, i + 1, GC.getGameSpeedInfo(i).getDescription(), (xRes - 120)/iNumColumns)
 
-		screen.setTableColumnHeader(TABLE, i + 1, CvInfo.getDescription(), (xRes - 120)/iNumColumns)
-
-	for _ in xrange(5 * iMaxIncrements + iEras + 3):
+	for _ in xrange(5 * iEras + 3):
 		screen.appendTableRow(TABLE)
 
 	# Cache misc content
@@ -51,17 +43,19 @@ def TimeKeeper():
 	eCalNoSeasons = CalendarTypes.CALENDAR_NO_SEASONS
 	eWidGen = WidgetTypes.WIDGET_GENERAL
 	iStartYear = GC.getGame().getStartYear()
-	# Fill table
+	# Fill table: one block of rows per era, one column per game speed
 	iCol = 0
 	while iCol < iNumColumns:
-		CvGameSpeedInfo, iTurnIncrements = aListGS.pop(0)
-		iTotalTurns = 0
+		CvGameSpeedInfo = GC.getGameSpeedInfo(iCol)
 		iRow = 0
-		for j in xrange(iTurnIncrements):
-			iTurns = CvGameSpeedInfo.getGameTurnInfo(j).iNumGameTurnsPerIncrement
-			iIncrement = CvGameSpeedInfo.getDateIncrement(j).iIncrementDay + 30*CvGameSpeedInfo.getDateIncrement(j).iIncrementMonth
+		for iEra in xrange(iEras):
+			iStartTurn = CvGameSpeedInfo.getEraStartTurn(iEra)
+			iTurns = CvGameSpeedInfo.getTurnsInEra(iEra)
+			iIncrement = CvGameSpeedInfo.getTicksPerTurnInEra(iEra)
+			screen.setTableText(TABLE, 0, iRow, aListEra[iEra], "", eWidGen, 1, 2, 1<<0)
+			iRow += 1
 			screen.setTableText(TABLE, 0, iRow, szStartYear, "", eWidGen, 1, 2, 1<<0)
-			screen.setTableText(TABLE, iCol+1, iRow, "<font=3>" + CyGameTextMgr().getDateStr(iTotalTurns, False, eCalNoSeasons, iStartYear, iCol), "", eWidGen, 1, 2, 1<<0)
+			screen.setTableText(TABLE, iCol+1, iRow, "<font=3>" + CyGameTextMgr().getDateStr(iStartTurn, False, eCalNoSeasons, iStartYear, iCol), "", eWidGen, 1, 2, 1<<0)
 			iRow += 1
 			screen.setTableText(TABLE, 0, iRow, szTurns, "", eWidGen, 1, 2, 1<<0)
 			screen.setTableText(TABLE, iCol+1, iRow, "<font=3>" + str(iTurns), "", eWidGen, 1, 2, 1<<0)
@@ -71,22 +65,15 @@ def TimeKeeper():
 			iRow += 1
 			screen.setTableText(TABLE, 0, iRow, szDuration, "", eWidGen, 1, 2, 1<<0)
 			screen.setTableText(TABLE, iCol+1, iRow, "<font=3>" + separateYearMonthDay(iTurns * iIncrement), "", eWidGen, 1, 2, 1<<0)
-			iRow += 2
-			iTotalTurns += iTurns
+			iRow += 1
 
-		iRow = 5*iMaxIncrements
+		iTotalTurns = CvGameSpeedInfo.getTotalTurns()
+		iRow += 1
 		screen.setTableText(TABLE, 0, iRow, szEndYear, "", eWidGen, 1, 2, 1<<0)
 		screen.setTableText(TABLE, iCol+1, iRow, szColorSel + CyGameTextMgr().getDateStr(iTotalTurns, False, eCalNoSeasons, iStartYear, iCol), "", eWidGen, 1, 2, 1<<0)
 		iRow += 1
 		screen.setTableText(TABLE, 0, iRow, szTurnsCol, "", eWidGen, 1, 2, 1<<0)
 		screen.setTableText(TABLE, iCol+1, iRow, szColorSel + str(iTotalTurns), "", eWidGen, 1, 2, 1<<0)
-		iRow += 2
-
-		for iStartPercent, szName in aListEra:
-			iStartTurn = iStartPercent * iTotalTurns / 100
-			screen.setTableText(TABLE, 0, iRow, szName, "", eWidGen, 1, 2, 1<<0)
-			screen.setTableText(TABLE, iCol+1, iRow, szColorEra + CyGameTextMgr().getDateStr(iStartTurn, False, eCalNoSeasons, iStartYear, iCol), "", eWidGen, 1, 2, 1<<0)
-			iRow += 1
 		iCol += 1
 
 def separateYearMonthDay(iValue):

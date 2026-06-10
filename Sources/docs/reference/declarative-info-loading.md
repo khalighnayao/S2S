@@ -57,16 +57,16 @@ un-migrated classes are a harmless no-op. `CvBuildInfo` is the fully-migrated re
 
 ### Not yet supported (each blocks a cluster of classes)
 1. **2D `m_ppi` arrays** (`int**`) — blocks Civic, Improvement, Property, Trait.
-2. **Non-FK `IDValueMap`** keyed by plain `int` (e.g. `IDValueMapPercent = IDValueMap<int,int,100>`)
-   — `.add(IDValueMap)` instantiates `InfoClassTraits<int>`, which doesn't exist → won't compile.
-3. **Delayed-resolution enum-as-int** — `addEnumAsInt` is immediate-only, so an `int` FK that
+2. **Delayed-resolution enum-as-int** — `addEnumAsInt` is immediate-only, so an `int` FK that
    used `addDelayedResolution` (e.g. `CvVoteSourceInfo::m_iCivic`) can't use it yet.
 
 **Before writing a new wrapper, check whether the data structure should exist at all.**
-`CvWorldInfo` was "blocked" by (2) until inspection showed its `Percents` map held exactly one
-ID (`ADAPT_SCALE_CITY_LIMITS`) across all data — so the map was replaced by a named scalar
-field `iCityLimitsScalePercent` (read directly by `CvCivicInfo::getCityLimit`; the WorldInfo
-leg of `adaptValueToGame` was removed) and the class migrated with plain `.add()` calls.
+The former blocker "non-FK `IDValueMap` keyed by plain `int`" (`IDValueMapPercent`) was
+resolved this way twice and is now extinct: `CvWorldInfo`'s `Percents` map held exactly one
+ID across all data → replaced by the named scalar `iCityLimitsScalePercent` (#310), and the
+`CvGameSpeedInfo`/`CvHandicapInfo` maps (#248) became `iUnitYieldScalePercent` + the
+tag-dispatched `<Adapt>` grammar (handicap's map was dead data and was deleted outright) —
+see `calendar-and-gamespeed.md`.
 Owner ruling: **restructuring data into something descriptive and uniform beats preserving an
 odd structure and special-casing the loader for it.**
 
@@ -123,7 +123,9 @@ data model — which is what the pitfalls below are for.
 ## Status (2026-06)
 
 `CvBuildInfo` fully migrated (reference). Incremental per-class migration in flight under #196;
-28 classes migrated (incl. `CvWorldInfo` via the Percents→named-field restructure, #310)
+29 classes migrated (incl. `CvWorldInfo` via the Percents→named-field restructure #310, and
+`CvGameSpeedInfo` #248 via the calendar restructure — see `calendar-and-gamespeed.md`;
+`CvEraInfo` is a partial adopter: its three calendar-pacing fields are declarative)
 + ~15 empty-stub sub-issues closed as no-work so far. Authoritative class
 list = `EXPAND_FOR_EACH_INFO_CLASS` in `CvInfoClassTraits.h`. Related: prerequisite unification
 is #195; the broader load-coherence background is in the bool-list flattening work.
