@@ -31,11 +31,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvHurryInfo::CvHurryInfo() :
-m_iGoldPerProduction(0),
-m_iProductionPerPopulation(0),
-m_bAnger(false)
+CvHurryInfo::CvHurryInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -69,18 +67,24 @@ bool CvHurryInfo::isAnger() const
 }
 
 
+void CvHurryInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_iGoldPerProduction, L"iGoldPerProduction")
+		.add(m_iProductionPerPopulation, L"iProductionPerPopulation")
+		.add(m_bAnger, L"bAnger")
+	;
+}
+
+
 bool CvHurryInfo::read(CvXMLLoadUtility* pXML)
 {
-
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(&m_iGoldPerProduction, L"iGoldPerProduction");
-	pXML->GetOptionalChildXmlValByName(&m_iProductionPerPopulation, L"iProductionPerPopulation");
-
-	pXML->GetOptionalChildXmlValByName(&m_bAnger, L"bAnger");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -88,23 +92,14 @@ bool CvHurryInfo::read(CvXMLLoadUtility* pXML)
 
 void CvHurryInfo::copyNonDefaults(const CvHurryInfo* pClassInfo)
 {
-	const bool bDefault = false;
-	const int iDefault = 0;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getGoldPerProduction() == iDefault) m_iGoldPerProduction = pClassInfo->getGoldPerProduction();
-	if (getProductionPerPopulation() == iDefault) m_iProductionPerPopulation = pClassInfo->getProductionPerPopulation();
-
-	if (isAnger() == bDefault) m_bAnger = pClassInfo->isAnger();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvHurryInfo::getCheckSum(uint32_t& iSum) const
 {
-	CheckSum(iSum, m_iGoldPerProduction);
-	CheckSum(iSum, m_iProductionPerPopulation);
-
-	CheckSum(iSum, m_bAnger);
+	CvInfoUtil(this).checkSum(iSum);
 }
 

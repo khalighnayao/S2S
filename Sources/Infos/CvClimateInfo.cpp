@@ -23,19 +23,9 @@
 //======================================================================================================
 //					CvClimateInfo
 //======================================================================================================
-CvClimateInfo::CvClimateInfo() :
-m_iDesertPercentChange(0),
-m_iJungleLatitude(0),
-m_iHillRange(0),
-m_iPeakPercent(0),
-m_fSnowLatitudeChange(0.0f),
-m_fTundraLatitudeChange(0.0f),
-m_fGrassLatitudeChange(0.0f),
-m_fDesertBottomLatitudeChange(0.0f),
-m_fDesertTopLatitudeChange(0.0f),
-m_fIceLatitude(0.0f),
-m_fRandIceLatitude(0.0f)
+CvClimateInfo::CvClimateInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -110,26 +100,32 @@ float CvClimateInfo::getRandIceLatitude() const
 }
 
 
+void CvClimateInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_iDesertPercentChange, L"iDesertPercentChange")
+		.add(m_iJungleLatitude, L"iJungleLatitude")
+		.add(m_iHillRange, L"iHillRange")
+		.add(m_iPeakPercent, L"iPeakPercent")
+		.add(m_fSnowLatitudeChange, L"fSnowLatitudeChange")
+		.add(m_fTundraLatitudeChange, L"fTundraLatitudeChange")
+		.add(m_fGrassLatitudeChange, L"fGrassLatitudeChange")
+		.add(m_fDesertBottomLatitudeChange, L"fDesertBottomLatitudeChange")
+		.add(m_fDesertTopLatitudeChange, L"fDesertTopLatitudeChange")
+		.add(m_fIceLatitude, L"fIceLatitude")
+		.add(m_fRandIceLatitude, L"fRandIceLatitude")
+	;
+}
+
+
 bool CvClimateInfo::read(CvXMLLoadUtility* pXML)
 {
-
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(&m_iDesertPercentChange, L"iDesertPercentChange");
-	pXML->GetOptionalChildXmlValByName(&m_iJungleLatitude, L"iJungleLatitude");
-	pXML->GetOptionalChildXmlValByName(&m_iHillRange, L"iHillRange");
-	pXML->GetOptionalChildXmlValByName(&m_iPeakPercent, L"iPeakPercent");
-
-	pXML->GetOptionalChildXmlValByName(&m_fSnowLatitudeChange, L"fSnowLatitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_fTundraLatitudeChange, L"fTundraLatitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_fGrassLatitudeChange, L"fGrassLatitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_fDesertBottomLatitudeChange, L"fDesertBottomLatitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_fDesertTopLatitudeChange, L"fDesertTopLatitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_fIceLatitude, L"fIceLatitude");
-	pXML->GetOptionalChildXmlValByName(&m_fRandIceLatitude, L"fRandIceLatitude");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -137,22 +133,8 @@ bool CvClimateInfo::read(CvXMLLoadUtility* pXML)
 
 void CvClimateInfo::copyNonDefaults(const CvClimateInfo* pClassInfo)
 {
-	int iDefault = 0;
-	float fDefault = 0.0f;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getDesertPercentChange() == iDefault) m_iDesertPercentChange = pClassInfo->getDesertPercentChange();
-	if (getJungleLatitude() == iDefault) m_iJungleLatitude = pClassInfo->getJungleLatitude();
-	if (getHillRange() == iDefault) m_iHillRange = pClassInfo->getHillRange();
-	if (getPeakPercent() == iDefault) m_iPeakPercent = pClassInfo->getPeakPercent();
-
-	if (getSnowLatitudeChange() == fDefault) m_fSnowLatitudeChange = pClassInfo->getSnowLatitudeChange();
-	if (getTundraLatitudeChange() == fDefault) m_fTundraLatitudeChange = pClassInfo->getTundraLatitudeChange();
-	if (getGrassLatitudeChange() == fDefault) m_fGrassLatitudeChange = pClassInfo->getGrassLatitudeChange();
-	if (getDesertBottomLatitudeChange() == fDefault) m_fDesertBottomLatitudeChange = pClassInfo->getDesertBottomLatitudeChange();
-	if (getDesertTopLatitudeChange() == fDefault) m_fDesertTopLatitudeChange = pClassInfo->getDesertTopLatitudeChange();
-	if (getIceLatitude() == fDefault) m_fIceLatitude = pClassInfo->getIceLatitude();
-	if (getRandIceLatitude() == fDefault) m_fRandIceLatitude = pClassInfo->getRandIceLatitude();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

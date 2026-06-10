@@ -24,6 +24,7 @@ public:
 
 	DllExport const char* getPath();
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvCursorInfo* pClassInfo);
 

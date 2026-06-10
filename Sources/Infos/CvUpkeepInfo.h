@@ -25,6 +25,7 @@ public:
 	int getPopulationPercent() const;
 	int getCityPercent() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvUpkeepInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

@@ -33,9 +33,9 @@
 //	Graphic options and their default values
 //
 //
-CvGraphicOptionInfo::CvGraphicOptionInfo() :
-m_bDefault(false)
+CvGraphicOptionInfo::CvGraphicOptionInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -50,6 +50,14 @@ bool CvGraphicOptionInfo::getDefault() const
 }
 
 
+void CvGraphicOptionInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_bDefault, L"bDefault")
+	;
+}
+
+
 bool CvGraphicOptionInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
@@ -57,7 +65,7 @@ bool CvGraphicOptionInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(&m_bDefault, L"bDefault");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -65,16 +73,14 @@ bool CvGraphicOptionInfo::read(CvXMLLoadUtility* pXML)
 
 void CvGraphicOptionInfo::copyNonDefaults(const CvGraphicOptionInfo* pClassInfo)
 {
-	const bool bDefault = false;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getDefault() == bDefault) m_bDefault = pClassInfo->getDefault();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvGraphicOptionInfo::getCheckSum(uint32_t& iSum) const
 {
-	CheckSum(iSum, m_bDefault);
+	CvInfoUtil(this).checkSum(iSum);
 }
 

@@ -27,9 +27,9 @@
 //  DESC:   Contains info about Ideas
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-CvIdeaInfo::CvIdeaInfo() :
-m_eIdeaClass(NO_IDEACLASS)
+CvIdeaInfo::CvIdeaInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -44,6 +44,14 @@ IdeaClassTypes CvIdeaInfo::getIdeaClass() const
 }
 
 
+void CvIdeaInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.addEnum(m_eIdeaClass, L"IdeaClassType")
+	;
+}
+
+
 bool CvIdeaInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
@@ -51,12 +59,7 @@ bool CvIdeaInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	CvString szTextVal;
-
-	if ( pXML->GetOptionalChildXmlValByName(szTextVal, L"IdeaClassType") )
-		m_eIdeaClass = (IdeaClassTypes)pXML->GetInfoClass(szTextVal);
-	else
-		m_eIdeaClass = NO_IDEACLASS;
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -66,12 +69,12 @@ void CvIdeaInfo::copyNonDefaults(const CvIdeaInfo* pClassInfo)
 {
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getIdeaClass() == NO_IDEACLASS) m_eIdeaClass = pClassInfo->getIdeaClass();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvIdeaInfo::getCheckSum(uint32_t& iSum) const
 {
-	CheckSum(iSum, m_eIdeaClass);
+	CvInfoUtil(this).checkSum(iSum);
 }
 

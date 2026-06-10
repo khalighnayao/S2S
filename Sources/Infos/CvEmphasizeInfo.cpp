@@ -27,14 +27,10 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvEmphasizeInfo::CvEmphasizeInfo() :
- m_bAvoidGrowth(false)
-,m_bGreatPeople(false)
-,m_piYieldModifiers(NULL)
-,m_piCommerceModifiers(NULL)
-,m_bAvoidAngryCitizens(false)
-,m_bAvoidUnhealthyCitizens(false)
-{ }
+CvEmphasizeInfo::CvEmphasizeInfo()
+{
+	CvInfoUtil(this).initDataMembers();
+}
 
 
 //------------------------------------------------------------------------------------------------------
@@ -46,8 +42,8 @@ CvEmphasizeInfo::CvEmphasizeInfo() :
 //------------------------------------------------------------------------------------------------------
 CvEmphasizeInfo::~CvEmphasizeInfo()
 {
-	SAFE_DELETE_ARRAY(m_piYieldModifiers);
-	SAFE_DELETE_ARRAY(m_piCommerceModifiers);
+	// The yield/commerce arrays are owned by the declarative layer (addYields/addCommerce); it frees them.
+	CvInfoUtil(this).uninitDataMembers();
 }
 
 
@@ -95,6 +91,21 @@ int CvEmphasizeInfo::getCommerceChange(int i) const
 //
 // read from XML
 //
+void CvEmphasizeInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_bAvoidGrowth, L"bAvoidGrowth")
+		.add(m_bGreatPeople, L"bGreatPeople")
+		.addYields(m_piYieldModifiers, L"YieldModifiers")
+		.addCommerce(m_piCommerceModifiers, L"CommerceModifiers")
+		.add(m_bAvoidAngryCitizens, L"bAvoidAngryCitizens")
+		.add(m_bAvoidUnhealthyCitizens, L"bAvoidUnhealthyCitizens")
+	;
+}
+
+//
+// read from XML
+//
 bool CvEmphasizeInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
@@ -102,30 +113,7 @@ bool CvEmphasizeInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(&m_bAvoidGrowth, L"bAvoidGrowth");
-	pXML->GetChildXmlValByName(&m_bGreatPeople, L"bGreatPeople");
-
-	if (pXML->TryMoveToXmlFirstChild(L"YieldModifiers"))
-	{
-		pXML->SetYields(&m_piYieldModifiers);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piYieldModifiers);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CommerceModifiers"))
-	{
-		pXML->SetCommerce(&m_piCommerceModifiers);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCommerceModifiers);
-	}
-	pXML->GetChildXmlValByName(&m_bAvoidAngryCitizens, L"bAvoidAngryCitizens");
-	pXML->GetChildXmlValByName(&m_bAvoidUnhealthyCitizens, L"bAvoidUnhealthyCitizens");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -133,34 +121,8 @@ bool CvEmphasizeInfo::read(CvXMLLoadUtility* pXML)
 void CvEmphasizeInfo::copyNonDefaults(const CvEmphasizeInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	bool bDefault = false;
-	int iDefault = 0;
-	CvString cDefault = CvString::format("").GetCString();
-	CvWString wDefault = CvWString::format(L"").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (isAvoidGrowth() == bDefault) m_bAvoidGrowth = pClassInfo->isAvoidGrowth();
-	if (isGreatPeople() == bDefault) m_bGreatPeople = pClassInfo->isGreatPeople();
-
-	if (!m_piYieldModifiers) CvXMLLoadUtility::InitList(&m_piYieldModifiers, NUM_YIELD_TYPES);
-	for ( int i = 0; i < NUM_YIELD_TYPES; i++ )
-	{
-		if ( m_piYieldModifiers[i] == iDefault )
-		{
-			m_piYieldModifiers[i] = pClassInfo->getYieldChange(i);
-		}
-	}
-
-	if (!m_piCommerceModifiers) CvXMLLoadUtility::InitList(&m_piCommerceModifiers, NUM_COMMERCE_TYPES);
-	for ( int i = 0; i < NUM_COMMERCE_TYPES; i++ )
-	{
-		if ( m_piCommerceModifiers[i] == iDefault )
-		{
-			m_piCommerceModifiers[i] = pClassInfo->getCommerceChange(i);
-		}
-	}
-	if (isAvoidAngryCitizens() == false) m_bAvoidAngryCitizens = pClassInfo->isAvoidAngryCitizens();
-	if (isAvoidUnhealthyCitizens() == false) m_bAvoidUnhealthyCitizens = pClassInfo->isAvoidUnhealthyCitizens();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

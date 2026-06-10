@@ -25,6 +25,7 @@ public:
 //	bool getTraitNoUpkeep(int i) const;
 	bool isPolicy() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvCivicOptionInfo* pClassInfo);
 

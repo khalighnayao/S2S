@@ -27,6 +27,7 @@ public:
 
 	bool isAnger() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvHurryInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

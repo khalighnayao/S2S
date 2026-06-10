@@ -31,10 +31,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvProcessInfo::CvProcessInfo() :
-m_iTechPrereq(NO_TECH),
-m_paiProductionToCommerceModifier(NULL)
+CvProcessInfo::CvProcessInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -47,7 +46,8 @@ m_paiProductionToCommerceModifier(NULL)
 //------------------------------------------------------------------------------------------------------
 CvProcessInfo::~CvProcessInfo()
 {
-	SAFE_DELETE_ARRAY(m_paiProductionToCommerceModifier);
+	// The commerce-modifier array is owned by the declarative layer (addCommerce); it frees it.
+	CvInfoUtil(this).uninitDataMembers();
 }
 
 
@@ -58,25 +58,23 @@ int CvProcessInfo::getProductionToCommerceModifier(int i) const
 }
 
 
+void CvProcessInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.addEnum(m_iTechPrereq, L"TechPrereq")
+		.addCommerce(m_paiProductionToCommerceModifier, L"ProductionToCommerceModifiers")
+	;
+}
+
+
 bool CvProcessInfo::read(CvXMLLoadUtility* pXML)
 {
-	CvString szTextVal;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalTypeEnum(m_iTechPrereq, L"TechPrereq");
-
-	if (pXML->TryMoveToXmlFirstChild(L"ProductionToCommerceModifiers"))
-	{
-		pXML->SetCommerce(&m_paiProductionToCommerceModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_paiProductionToCommerceModifier);
-	}
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -85,30 +83,14 @@ bool CvProcessInfo::read(CvXMLLoadUtility* pXML)
 void CvProcessInfo::copyNonDefaults(const CvProcessInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	int iDefault = 0;
-	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getTechPrereq() == iTextDefault) m_iTechPrereq = pClassInfo->getTechPrereq();
-
-	if (!m_paiProductionToCommerceModifier) CvXMLLoadUtility::InitList(&m_paiProductionToCommerceModifier, NUM_COMMERCE_TYPES);
-	for ( int i = 0; i < NUM_COMMERCE_TYPES; i++ )
-	{
-		if ( m_paiProductionToCommerceModifier[i] == iDefault )
-		{
-			m_paiProductionToCommerceModifier[i] = pClassInfo->getProductionToCommerceModifier(i);
-		}
-	}
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvProcessInfo::getCheckSum(uint32_t& iSum) const
 {
-	CheckSum(iSum, m_iTechPrereq);
-
-	// Arrays
-
-	CheckSum(iSum, m_paiProductionToCommerceModifier, NUM_COMMERCE_TYPES);
+	CvInfoUtil(this).checkSum(iSum);
 }
 

@@ -32,12 +32,11 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvCommerceInfo::CvCommerceInfo() :
-m_iChar(0),
-m_iInitialPercent(0),
-m_iInitialHappiness(0),
-m_iAIWeightPercent(0),
-m_bFlexiblePercent(false)
+// m_iChar is a non-XML, runtime-assigned symbol index (see setChar); every XML-backed field is
+// declared in getDataMembers() and defaulted by initDataMembers() below.
+m_iChar(0)
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -89,6 +88,17 @@ bool CvCommerceInfo::isFlexiblePercent() const
 }
 
 
+void CvCommerceInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_iInitialPercent, L"iInitialPercent")
+		.add(m_iInitialHappiness, L"iInitialHappiness")
+		.add(m_iAIWeightPercent, L"iAIWeightPercent")
+		.add(m_bFlexiblePercent, L"bFlexiblePercent")
+	;
+}
+
+
 bool CvCommerceInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
@@ -96,10 +106,7 @@ bool CvCommerceInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(&m_iInitialPercent, L"iInitialPercent");
-	pXML->GetChildXmlValByName(&m_iInitialHappiness, L"iInitialHappiness");
-	pXML->GetChildXmlValByName(&m_iAIWeightPercent, L"iAIWeightPercent");
-	pXML->GetChildXmlValByName(&m_bFlexiblePercent, L"bFlexiblePercent");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -107,25 +114,14 @@ bool CvCommerceInfo::read(CvXMLLoadUtility* pXML)
 
 void CvCommerceInfo::copyNonDefaults(const CvCommerceInfo* pClassInfo)
 {
-	const bool bDefault = false;
-	const int iDefault = 0;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getInitialPercent() == iDefault) m_iInitialPercent = pClassInfo->getInitialPercent();
-	if (getInitialHappiness() == iDefault) m_iInitialHappiness = pClassInfo->getInitialHappiness();
-	if (getAIWeightPercent() == iDefault) m_iAIWeightPercent = pClassInfo->getAIWeightPercent();
-	if (isFlexiblePercent() == bDefault) m_bFlexiblePercent = pClassInfo->isFlexiblePercent();
-
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvCommerceInfo::getCheckSum(uint32_t& iSum) const
 {
-	CheckSum(iSum, m_iInitialPercent);
-	CheckSum(iSum, m_iInitialHappiness);
-	CheckSum(iSum, m_iAIWeightPercent);
-
-	CheckSum(iSum, m_bFlexiblePercent);
+	CvInfoUtil(this).checkSum(iSum);
 }
 

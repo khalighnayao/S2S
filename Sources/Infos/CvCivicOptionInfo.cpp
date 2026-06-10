@@ -32,9 +32,11 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvCivicOptionInfo::CvCivicOptionInfo() :
-	m_bPolicy(false),
+	// m_pabTraitNoUpkeep is a deprecated, non-XML array (its read is commented out); every XML-backed
+	// field is declared in getDataMembers() and defaulted by initDataMembers() below.
 	m_pabTraitNoUpkeep(NULL)
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -62,16 +64,22 @@ bool CvCivicOptionInfo::isPolicy() const
 //	return m_pabTraitNoUpkeep ? m_pabTraitNoUpkeep[i] : false;
 //}
 
+void CvCivicOptionInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_bPolicy, L"bPolicy")
+	;
+}
+
+
 bool CvCivicOptionInfo::read(CvXMLLoadUtility* pXML)
 {
-
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(&m_bPolicy, L"bPolicy");
-	//pXML->SetVariableListTagPair(&m_pabTraitNoUpkeep, L"TraitNoUpkeeps", GC.getNumTraitInfos());
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -81,6 +89,6 @@ void CvCivicOptionInfo::copyNonDefaults(const CvCivicOptionInfo* pClassInfo)
 {
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (!isPolicy()) m_bPolicy = pClassInfo->isPolicy();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
