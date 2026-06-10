@@ -24,44 +24,12 @@
 //======================================================================================================
 //					CvWorldInfo
 //======================================================================================================
-
-//------------------------------------------------------------------------------------------------------
-//
-//  FUNCTION:   CvWorldInfo()
-//
-//  PURPOSE :   Default constructor
-//
-//------------------------------------------------------------------------------------------------------
-CvWorldInfo::CvWorldInfo() :
- m_iDefaultPlayers(0)
-,m_iUnitNameModifier(0)
-,m_iTargetNumCities(0)
-,m_iBuildingPrereqModifier(0)
-,m_iMaxConscriptModifier(0)
-,m_iWarWearinessModifier(0)
-,m_iGridWidth(0)
-,m_iGridHeight(0)
-,m_iTerrainGrainChange(0)
-,m_iFeatureGrainChange(0)
-,m_iTradeProfitPercent(0)
-,m_iDistanceMaintenancePercent(0)
-,m_iNumCitiesMaintenancePercent(0)
-,m_iColonyMaintenancePercent(0)
-,m_iCorporationMaintenancePercent(0)
-,m_iNumCitiesAnarchyPercent(0)
-,m_iAdvancedStartPointsMod(0)
-,m_iCommandersLevelThresholdsPercent(0)
-,m_iOceanMinAreaSize(0)
-{ }
+CvWorldInfo::CvWorldInfo()
+{
+	CvInfoUtil(this).initDataMembers();
+}
 
 
-//------------------------------------------------------------------------------------------------------
-//
-//  FUNCTION:   ~CvWorldInfo()
-//
-//  PURPOSE :   Default destructor
-//
-//------------------------------------------------------------------------------------------------------
 CvWorldInfo::~CvWorldInfo()
 {
 }
@@ -181,9 +149,36 @@ int CvWorldInfo::getOceanMinAreaSize() const
 }
 
 
-int CvWorldInfo::getPercent(int iID) const
+int CvWorldInfo::getCityLimitsScalePercent() const
 {
-	return m_Percent.getValue(iID);
+	return m_iCityLimitsScalePercent;
+}
+
+
+void CvWorldInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_iDefaultPlayers, L"iDefaultPlayers")
+		.add(m_iUnitNameModifier, L"iUnitNameModifier")
+		.add(m_iTargetNumCities, L"iTargetNumCities")
+		.add(m_iBuildingPrereqModifier, L"iBuildingPrereqModifier")
+		.add(m_iMaxConscriptModifier, L"iMaxConscriptModifier")
+		.add(m_iWarWearinessModifier, L"iWarWearinessModifier")
+		.add(m_iGridWidth, L"iGridWidth")
+		.add(m_iGridHeight, L"iGridHeight")
+		.add(m_iTerrainGrainChange, L"iTerrainGrainChange")
+		.add(m_iFeatureGrainChange, L"iFeatureGrainChange")
+		.add(m_iTradeProfitPercent, L"iTradeProfitPercent")
+		.add(m_iDistanceMaintenancePercent, L"iDistanceMaintenancePercent")
+		.add(m_iNumCitiesMaintenancePercent, L"iNumCitiesMaintenancePercent")
+		.add(m_iColonyMaintenancePercent, L"iColonyMaintenancePercent")
+		.add(m_iCorporationMaintenancePercent, L"iCorporationMaintenancePercent")
+		.add(m_iNumCitiesAnarchyPercent, L"iNumCitiesAnarchyPercent")
+		.add(m_iAdvancedStartPointsMod, L"iAdvancedStartPointsMod")
+		.add(m_iCommandersLevelThresholdsPercent, L"iCommandersLevelThresholdsPercent")
+		.add(m_iOceanMinAreaSize, L"iOceanMinAreaSize")
+		.add(m_iCityLimitsScalePercent, L"iCityLimitsScalePercent", 100)
+	;
 }
 
 
@@ -194,27 +189,7 @@ bool CvWorldInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(&m_iDefaultPlayers, L"iDefaultPlayers");
-	pXML->GetOptionalChildXmlValByName(&m_iUnitNameModifier, L"iUnitNameModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iTargetNumCities, L"iTargetNumCities");
-	pXML->GetOptionalChildXmlValByName(&m_iBuildingPrereqModifier, L"iBuildingPrereqModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxConscriptModifier, L"iMaxConscriptModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iWarWearinessModifier, L"iWarWearinessModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGridWidth, L"iGridWidth");
-	pXML->GetOptionalChildXmlValByName(&m_iGridHeight, L"iGridHeight");
-	pXML->GetOptionalChildXmlValByName(&m_iTerrainGrainChange, L"iTerrainGrainChange");
-	pXML->GetOptionalChildXmlValByName(&m_iFeatureGrainChange, L"iFeatureGrainChange");
-	pXML->GetOptionalChildXmlValByName(&m_iTradeProfitPercent, L"iTradeProfitPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iDistanceMaintenancePercent, L"iDistanceMaintenancePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iNumCitiesMaintenancePercent, L"iNumCitiesMaintenancePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iColonyMaintenancePercent, L"iColonyMaintenancePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iCorporationMaintenancePercent, L"iCorporationMaintenancePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iNumCitiesAnarchyPercent, L"iNumCitiesAnarchyPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAdvancedStartPointsMod, L"iAdvancedStartPointsMod");
-	pXML->GetOptionalChildXmlValByName(&m_iCommandersLevelThresholdsPercent, L"iCommandersLevelThresholdsPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iOceanMinAreaSize, L"iOceanMinAreaSize");
-
-	m_Percent.read(pXML, L"Percents");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -222,55 +197,13 @@ bool CvWorldInfo::read(CvXMLLoadUtility* pXML)
 
 void CvWorldInfo::copyNonDefaults(const CvWorldInfo* pClassInfo)
 {
-	int iDefault = 0;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getDefaultPlayers() == iDefault) m_iDefaultPlayers = pClassInfo->getDefaultPlayers();
-	if (getUnitNameModifier() == iDefault) m_iUnitNameModifier = pClassInfo->getUnitNameModifier();
-	if (getTargetNumCities() == iDefault) m_iTargetNumCities = pClassInfo->getTargetNumCities();
-	if (getBuildingPrereqModifier() == iDefault) m_iBuildingPrereqModifier = pClassInfo->getBuildingPrereqModifier();
-	if (getMaxConscriptModifier() == iDefault) m_iMaxConscriptModifier = pClassInfo->getMaxConscriptModifier();
-	if (getWarWearinessModifier() == iDefault) m_iWarWearinessModifier = pClassInfo->getWarWearinessModifier();
-	if (getGridWidth() == iDefault) m_iGridWidth = pClassInfo->getGridWidth();
-	if (getGridHeight() == iDefault) m_iGridHeight = pClassInfo->getGridHeight();
-	if (getTerrainGrainChange() == iDefault) m_iTerrainGrainChange = pClassInfo->getTerrainGrainChange();
-	if (getFeatureGrainChange() == iDefault) m_iFeatureGrainChange = pClassInfo->getFeatureGrainChange();
-	if (getTradeProfitPercent() == iDefault) m_iTradeProfitPercent = pClassInfo->getTradeProfitPercent();
-	if (getDistanceMaintenancePercent() == iDefault) m_iDistanceMaintenancePercent = pClassInfo->getDistanceMaintenancePercent();
-	if (getNumCitiesMaintenancePercent() == iDefault) m_iNumCitiesMaintenancePercent = pClassInfo->getNumCitiesMaintenancePercent();
-	if (getColonyMaintenancePercent() == iDefault) m_iColonyMaintenancePercent = pClassInfo->getColonyMaintenancePercent();
-	if (getCorporationMaintenancePercent() == iDefault) m_iCorporationMaintenancePercent = pClassInfo->getCorporationMaintenancePercent();
-	if (getNumCitiesAnarchyPercent() == iDefault) m_iNumCitiesAnarchyPercent = pClassInfo->getNumCitiesAnarchyPercent();
-	if (getAdvancedStartPointsMod() == iDefault) m_iAdvancedStartPointsMod = pClassInfo->getAdvancedStartPointsMod();
-	if (getCommandersLevelThresholdsPercent() == iDefault) m_iCommandersLevelThresholdsPercent = pClassInfo->getCommandersLevelThresholdsPercent();
-	if (m_iOceanMinAreaSize == iDefault) m_iOceanMinAreaSize = pClassInfo->getOceanMinAreaSize();
-
-	m_Percent.copyNonDefaults(pClassInfo->m_Percent);
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvWorldInfo::getCheckSum(uint32_t& iSum) const
 {
-	CheckSum(iSum, m_iDefaultPlayers);
-	CheckSum(iSum, m_iUnitNameModifier);
-	CheckSum(iSum, m_iTargetNumCities);
-	CheckSum(iSum, m_iBuildingPrereqModifier);
-	CheckSum(iSum, m_iMaxConscriptModifier);
-	CheckSum(iSum, m_iWarWearinessModifier);
-	CheckSum(iSum, m_iGridWidth);
-	CheckSum(iSum, m_iGridHeight);
-	CheckSum(iSum, m_iTerrainGrainChange);
-	CheckSum(iSum, m_iFeatureGrainChange);
-	CheckSum(iSum, m_iTradeProfitPercent);
-	CheckSum(iSum, m_iDistanceMaintenancePercent);
-	CheckSum(iSum, m_iNumCitiesMaintenancePercent);
-	CheckSum(iSum, m_iColonyMaintenancePercent);
-	CheckSum(iSum, m_iCorporationMaintenancePercent);
-	CheckSum(iSum, m_iNumCitiesAnarchyPercent);
-	CheckSum(iSum, m_iAdvancedStartPointsMod);
-	CheckSum(iSum, m_iCommandersLevelThresholdsPercent);
-	CheckSum(iSum, m_iOceanMinAreaSize);
-	CheckSumC(iSum, m_Percent);
+	CvInfoUtil(this).checkSum(iSum);
 }
-

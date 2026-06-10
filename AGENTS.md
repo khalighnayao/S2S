@@ -123,6 +123,13 @@ not findings to re-discover.
   in-game playtest (the user runs `FinalRelease` + `rebuild deploy`), not just a green
   Assert build. A merged or committed change does nothing in a running game until the DLL
   is rebuilt and deployed.
+- **Runtime-verification division of labor:** the agent builds + deploys the DLL and reads
+  the logs; **the owner launches the game**, ensures logging is enabled, and confirms the
+  game is loading — agents must not start/kill the game themselves (a headless launch
+  spawns a console window the agent cannot manage). Verify via
+  `Documents/My Games/Beyond The Sword/Logs/`: `XmlLoad.log` per-category counts, no
+  `Xml_MissingTypes.log`, no new `Asserts.log` entries (the `CvPlot::disableGraphicsPaging`
+  main-menu spam is a known pre-existing assert — filter it out).
 - Prefer minimal, local changes in large core files.
 - Preserve save compatibility by default; for intentional breaks, coordinate and
   mark with `@SAVEBREAK`. See `Notes for the next breaking of save game compatability cycle.txt`.
@@ -149,6 +156,16 @@ Any per-developer assistant memory store is a personal *index/cache* only — it
 **not** a substitute for the in-repo copy, and the in-repo copy is authoritative.
 If you record something locally, mirror the shareable part into the repo in the same
 change, and keep these docs current as the code moves. See `Sources/docs/README.md`.
+
+**⛔ HARD RULE — every owner ruling goes into the repo docs IMMEDIATELY, unprompted.**
+When the owner makes a ruling in conversation — a design decision, a workflow rule, a
+relaxed or tightened constraint, a "from now on do X" — writing it to assistant memory is
+NOT enough and never the end state. In the SAME work item (same commit/PR, without being
+asked) write it into the right repo home: workflow/convention rulings → this file's
+Conventions; subsystem/design rulings → the relevant `Sources/docs/` page. A ruling that
+exists only in one developer's local memory is invisible to every other contributor and
+agent, and has repeatedly had to be re-requested — treat "saved to memory only" as an
+unfinished task.
 
 ## Project Skills
 Project-exclusive Claude Code skills live in **`.claude/skills/<skill-name>/SKILL.md`**.

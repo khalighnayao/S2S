@@ -47,12 +47,7 @@
 			<iCorporationMaintenancePercent>500</iCorporationMaintenancePercent>
 			<iNumCitiesAnarchyPercent>50</iNumCitiesAnarchyPercent> <!-- 1 more anarchy turn per 2 cities -->
 			<iAdvancedStartPointsMod>75</iAdvancedStartPointsMod>
-			<Percents>
-				<Percent>
-					<ID>ADAPT_SCALE_CITY_LIMITS</ID>
-					<iValue>50</iValue>
-				</Percent>
-			</Percents>
+			<iCityLimitsScalePercent>50</iCityLimitsScalePercent>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_TINY</Type>
@@ -75,12 +70,7 @@
 			<iCorporationMaintenancePercent>300</iCorporationMaintenancePercent>
 			<iNumCitiesAnarchyPercent>33</iNumCitiesAnarchyPercent> <!-- 1 more anarchy turn per 3 cities -->
 			<iAdvancedStartPointsMod>80</iAdvancedStartPointsMod>
-			<Percents>
-				<Percent>
-					<ID>ADAPT_SCALE_CITY_LIMITS</ID>
-					<iValue>75</iValue>
-				</Percent>
-			</Percents>
+			<iCityLimitsScalePercent>75</iCityLimitsScalePercent>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_SMALL</Type>
@@ -101,12 +91,7 @@
 			<iCorporationMaintenancePercent>150</iCorporationMaintenancePercent>
 			<iNumCitiesAnarchyPercent>25</iNumCitiesAnarchyPercent> <!-- 1 more anarchy turn per 4 cities -->
 			<iAdvancedStartPointsMod>90</iAdvancedStartPointsMod>
-			<Percents>
-				<Percent>
-					<ID>ADAPT_SCALE_CITY_LIMITS</ID>
-					<iValue>90</iValue>
-				</Percent>
-			</Percents>
+			<iCityLimitsScalePercent>90</iCityLimitsScalePercent>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_STANDARD</Type>
@@ -124,12 +109,7 @@
 			<iCorporationMaintenancePercent>100</iCorporationMaintenancePercent>
 			<iNumCitiesAnarchyPercent>18</iNumCitiesAnarchyPercent> <!-- 1 more anarchy turn per 5.55 cities -->
 			<iAdvancedStartPointsMod>100</iAdvancedStartPointsMod>
-			<Percents>
-				<Percent>
-					<ID>ADAPT_SCALE_CITY_LIMITS</ID>
-					<iValue>100</iValue>
-				</Percent>
-			</Percents>
+			<iCityLimitsScalePercent>100</iCityLimitsScalePercent>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_LARGE</Type>
@@ -152,12 +132,7 @@
 			<iCorporationMaintenancePercent>50</iCorporationMaintenancePercent>
 			<iNumCitiesAnarchyPercent>13</iNumCitiesAnarchyPercent> <!-- 1 more anarchy turn per 7.7 cities -->
 			<iAdvancedStartPointsMod>125</iAdvancedStartPointsMod>
-			<Percents>
-				<Percent>
-					<ID>ADAPT_SCALE_CITY_LIMITS</ID>
-					<iValue>110</iValue>
-				</Percent>
-			</Percents>
+			<iCityLimitsScalePercent>110</iCityLimitsScalePercent>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_HUGE</Type>
@@ -180,12 +155,7 @@
 			<iCorporationMaintenancePercent>35</iCorporationMaintenancePercent>
 			<iNumCitiesAnarchyPercent>9</iNumCitiesAnarchyPercent> <!-- 1 more anarchy turn per 11.1 cities -->
 			<iAdvancedStartPointsMod>150</iAdvancedStartPointsMod>
-			<Percents>
-				<Percent>
-					<ID>ADAPT_SCALE_CITY_LIMITS</ID>
-					<iValue>125</iValue>
-				</Percent>
-			</Percents>
+			<iCityLimitsScalePercent>125</iCityLimitsScalePercent>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_GIANT</Type>
@@ -208,12 +178,7 @@
 			<iCorporationMaintenancePercent>25</iCorporationMaintenancePercent>
 			<iNumCitiesAnarchyPercent>7</iNumCitiesAnarchyPercent> <!-- 1 more anarchy turn per 14.3 cities -->
 			<iAdvancedStartPointsMod>200</iAdvancedStartPointsMod>
-			<Percents>
-				<Percent>
-					<ID>ADAPT_SCALE_CITY_LIMITS</ID>
-					<iValue>150</iValue>
-				</Percent>
-			</Percents>
+			<iCityLimitsScalePercent>150</iCityLimitsScalePercent>
 		</WorldInfo>
 		<WorldInfo>
 			<Type>WORLDSIZE_GIGANTIC</Type>
@@ -236,12 +201,7 @@
 			<iCorporationMaintenancePercent>20</iCorporationMaintenancePercent>
 			<iNumCitiesAnarchyPercent>5</iNumCitiesAnarchyPercent> <!-- 1 more anarchy turn per 20 cities -->
 			<iAdvancedStartPointsMod>250</iAdvancedStartPointsMod>
-			<Percents>
-				<Percent>
-					<ID>ADAPT_SCALE_CITY_LIMITS</ID>
-					<iValue>200</iValue>
-				</Percent>
-			</Percents>
+			<iCityLimitsScalePercent>200</iCityLimitsScalePercent>
 		</WorldInfo>
 	</WorldInfos>
 </Civ4WorldInfo>

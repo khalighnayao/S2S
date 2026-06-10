@@ -154,7 +154,9 @@ struct CvInfoUtil
 
 		void readXml(CvXMLLoadUtility* pXML)
 		{
-			pXML->GetOptionalChildXmlValByName(&ref(), m_tag.c_str());
+			// Pass the wrapper's default - the loader assigns its default param when the tag
+			// is absent, so omitting it would stomp a non-zero default with 0.
+			pXML->GetOptionalChildXmlValByName(&ref(), m_tag.c_str(), m_default);
 		}
 
 		void copyNonDefaults(const WrappedVar* source)

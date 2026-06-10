@@ -40,9 +40,9 @@ public:
 	int getAdvancedStartPointsMod() const;
 	int getCommandersLevelThresholdsPercent() const;
 	int getOceanMinAreaSize() const;
+	int getCityLimitsScalePercent() const;
 
-	int getPercent(int iID) const;
-
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvWorldInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;
@@ -68,8 +68,10 @@ private:
 	int m_iAdvancedStartPointsMod;
 	int m_iCommandersLevelThresholdsPercent;
 	int m_iOceanMinAreaSize;
-
-	IDValueMapPercent m_Percent;
+	// Scales civic city limits by map size (100 = no change); larger worlds allow
+	// more cities before overexpansion penalties. Replaced the ADAPT_SCALE_CITY_LIMITS
+	// entry of the generic Percents map.
+	int m_iCityLimitsScalePercent;
 };
 
 #endif // CV_WORLD_INFO_H
