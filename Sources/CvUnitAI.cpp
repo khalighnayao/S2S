@@ -11678,7 +11678,12 @@ bool CvUnitAI::AI_guardCityBestDefender()
 		{
 			if (pPlot->getBestDefender(getOwner()) == this)
 			{
-				getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_GUARD_CITY, NULL);
+				//	Park PERSISTENTLY (fortify -> ACTIVITY_SLEEP) rather than via MISSION_SKIP:
+				//	skip only holds for one turn, so every garrison re-ran its full decision
+				//	cascade every turn forever (measured ~16 s/turn for CITY_DEFENSE alone).
+				//	A fortified garrison stays parked until the staggered re-plan, danger, or
+				//	an event wakes it -- and actually accrues its fortify defense bonus.
+				getGroup()->pushMission(canFortify() ? MISSION_FORTIFY : (canSleep() ? MISSION_SLEEP : MISSION_SKIP), -1, -1, 0, false, false, MISSIONAI_GUARD_CITY, NULL);
 				getGroup()->AI_setAsGarrison(pCity);
 				return true;
 			}
@@ -11701,7 +11706,9 @@ bool CvUnitAI::AI_guardCityMinDefender(bool bSearch)
 			//TB: Lets try it without this ankle cutting check for a bit and see if they can put up a fight when invaded
 			/*if ((iCityDefenderCount <= 2) || (GC.getGame().getSorenRandNum(5, "AI shuffle defender") != 0))*/
 			{
-				getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_GUARD_CITY, NULL);
+				//	Persistent park (see AI_guardCityBestDefender): fortify-sleep instead of
+				//	one-turn skip, so the garrison stops re-planning every turn.
+				getGroup()->pushMission(canFortify() ? MISSION_FORTIFY : (canSleep() ? MISSION_SLEEP : MISSION_SKIP), -1, -1, 0, false, false, MISSIONAI_GUARD_CITY, NULL);
 				getGroup()->AI_setAsGarrison(pPlotCity);
 				return true;
 			}
@@ -12008,7 +12015,8 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 								pEjectedUnit->getGroup()->AI_setAsGarrison(pCity);
 								pEjectedUnit->AI_setUnitAIType(UNITAI_CITY_DEFENSE);
 								AI_logAct("guardCity", "garrisonHere", pCity->plot());
-								pEjectedUnit->getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_GUARD_CITY, NULL);
+								//	Persistent park (see AI_guardCityBestDefender): fortify-sleep, not one-turn skip.
+								pEjectedUnit->getGroup()->pushMission(pEjectedUnit->canFortify() ? MISSION_FORTIFY : (pEjectedUnit->canSleep() ? MISSION_SLEEP : MISSION_SKIP), -1, -1, 0, false, false, MISSIONAI_GUARD_CITY, NULL);
 								return (pEjectedUnit->getGroup() == pOldGroup || pEjectedUnit == this);
 							}
 							else if (pEjectedUnit->generatePath(missionPlot, 0, true))
@@ -21351,11 +21359,19 @@ bool CvUnitAI::processContracts(int iMinPriority)
 	if (bContractAlreadyEstablished)
 	{
 		m_contractualState = CONTRACTUAL_STATE_NO_WORK_FOUND;
-		
+
 		//	No work available
 		return false;
 	}
-	return true;
+	//	Advertised, but no work is immediately available: CONTINUE the decision cascade
+	//	rather than ending it with the unit still awake. Returning true here left the group
+	//	ready-to-move, so the slice driver re-visited it and re-ran the ENTIRE cascade a
+	//	second time each turn (the [PERF/unitai] exitReady spin -- ~3k duplicate cascades +
+	//	broker scans per turn for CITY_DEFENSE alone, plus HEALER / SEE_INVISIBLE /
+	//	INVESTIGATOR / INFILTRATOR). Work that arrives later in the turn still reaches this
+	//	unit: the broker's postProcessUnitsLookingForWork() calls processContracts() on
+	//	advertising units directly each slice and enacts the contract from there.
+	return false;
 }
 
 void CvUnitAI::contractFulfilled()

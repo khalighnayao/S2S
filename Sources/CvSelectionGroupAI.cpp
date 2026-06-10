@@ -123,10 +123,72 @@ bool CvSelectionGroupAI::AI_update()
 		return false;
 	}
 
-	if (!isHuman() && !getHeadUnit()->isCargo() && getActivityType() == ACTIVITY_SLEEP)
+	//	Attribute this group's decision time to its head unit's AI type (the [PERF/unitai]
+	//	per-turn table -- names which unit-AI modules carry the frame-span cost).
+	const UnitAITypes ePerfUnitAI = getHeadUnit()->AI_getUnitAIType();
+	const int iPerfBucket = (ePerfUnitAI >= 0 && ePerfUnitAI < NUM_UNITAI_TYPES) ? (int)ePerfUnitAI : 0;
+	PERF_ACCUM(gPerfUnitAITypeAccumMs[iPerfBucket]); ++gPerfUnitAITypeAccumN[iPerfBucket];
+
+	//	Churn discriminators: arrival state now, exit-still-ready recorded by ExitReadyProbe
+	//	on every return path (a high exitReady share = a decision cascade that fails to
+	//	terminate the group's turn, so the slice driver re-visits it -- the spin signature).
+	if (isForceUpdate())
 	{
-		setForceUpdate(true);
+		++gPerfUnitAITypeForceN[iPerfBucket];
 	}
+	else if (getActivityType() == ACTIVITY_AWAKE)
+	{
+		++gPerfUnitAITypeAwakeN[iPerfBucket];
+	}
+	struct ExitReadyProbe
+	{
+		ExitReadyProbe(CvSelectionGroupAI* pGroup, int iBucket) : m_pGroup(pGroup), m_iBucket(iBucket) {}
+		~ExitReadyProbe()
+		{
+			if (gPerfLogLevel >= 1 && m_pGroup->getNumUnits() > 0 && m_pGroup->readyToMove())
+			{
+				++gPerfUnitAITypeExitReadyN[m_iBucket];
+
+				//	Sample the exit state of spinning groups (capped per turn): activity +
+				//	mission queue + busy + moves-left distinguishes "cascade returned without
+				//	acting" from "pushed a mission that evaporates next slice", and names the
+				//	unit. [PERF/spin] at level 2.
+				if (gPerfLogLevel >= 2)
+				{
+					static int s_iSampleTurn = -1;
+					static int s_iSamples = 0;
+					const int iTurn = GC.getGame().getGameTurn();
+					if (iTurn != s_iSampleTurn)
+					{
+						s_iSampleTurn = iTurn;
+						s_iSamples = 0;
+					}
+					if (s_iSamples < 25)
+					{
+						++s_iSamples;
+						const CvUnit* pHead = m_pGroup->getHeadUnit();
+						logPerf(2, "[PERF/spin] turn=%d owner=%d type=%s unit=%S id=%d at=(%d,%d) act=%d missionQ=%d missionAI=%d busy=%d moves=%d",
+							iTurn, (int)m_pGroup->getOwner(),
+							GC.getUnitAIInfo((UnitAITypes)m_iBucket).getType(),
+							pHead->getName().GetCString(), pHead->getID(),
+							pHead->getX(), pHead->getY(),
+							(int)m_pGroup->getActivityType(),
+							m_pGroup->getLengthMissionQueue(),
+							(int)m_pGroup->AI_getMissionAIType(),
+							m_pGroup->isBusy() ? 1 : 0,
+							pHead->movesLeft());
+					}
+				}
+			}
+		}
+		CvSelectionGroupAI* m_pGroup;
+		int m_iBucket;
+	} perfExitProbe(this, iPerfBucket);
+
+	//	NOTE: the old "auto-wake any sleeping AI group here" hack is gone. Waking parked
+	//	groups to reconsider their orders is the job of the per-turn re-armer in
+	//	CvSelectionGroup::doTurn (staggered for garrison roles, immediate on danger);
+	//	duplicating it here woke every fortified unit on every frame slice.
 
 	if (isForceUpdate())
 	{

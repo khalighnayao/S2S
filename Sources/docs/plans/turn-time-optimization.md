@@ -60,7 +60,18 @@ Ranked levers (the repository migration steps — authoritative sequence in
    known sub-scopes (`AI_doTurn`, `AI_updateBestBuild`, `AI_updateWorkersNeededHere`,
    `doCheckProduction`, `doCulture`, …) measured small; ~3 s/turn is inline/un-scoped city-turn
    work. Next instrumentation pass goes here.
-4. **`recalculateAllResourceConsumption` → event-driven** (~2.05 s/turn) — repository tenant.
+4. **`recalculateAllResourceConsumption` — DOUBLE-FIXED (2026-06-10).** (a) Its ONLY consumer
+   is the bonus-depletion odds scaling (`CvPlot::doBonusDepletion`), which is gated on
+   `MODDERGAMEOPTION_RESOURCE_DEPLETION` — the recompute now carries the same gate, so games
+   without depletion (the owner's) skip it entirely (~2 s/turn for a value nobody read).
+   (b) For depletion games, the recompute is loop-inverted (per-city pass over each building's
+   load-derived `getConsumptionRelevantBonuses()` list instead of an all-bonuses × all-cities
+   × all-buildings sweep) — byte-identical term math since this is SYNCED state (serialized,
+   feeds synced RNG odds), with a permanent `[PERF/rescons]` shadow-verify armed at
+   `gPerfLogLevel >= 2`. **Audit pattern worth hunting:** per-turn statistics maintained
+   unconditionally for consumers that are optional or rare — the repository's lazy getters are
+   the structural answer (an unread datum costs nothing). Sweep `CvPlayer::doTurn`'s other
+   unconditional recomputes next.
 5. **CABV residual (~2.6 s/turn) — invalidation granularity** (phase (c) of the pilot): on
    completion rebuild only the candidate SET via the index; let VALUES age out on the period.
 6. *(behaviour call, owner's)* Deepen build queues so completions don't trigger ~190 full
@@ -70,6 +81,96 @@ Ranked levers (the repository migration steps — authoritative sequence in
 
 **Scoreboard (same turn-1336 save, CvPlayer::doTurn per turn):** pre-#314 ~32.6 s → enabler
 index ~20.6 → value retention ~18.6 → scoring-sweep fix **~14.6 s** (2026-06-10).
+
+> **⚠ MEASUREMENT BLIND SPOT FOUND (2026-06-10, owner stopwatch):** the scoreboard above covers
+> the **doTurn tree only**. A stopwatch on the full end-turn → responsive span measured
+> **~88 s wall-clock** against ~18 s of scoped phases — ~70 s happens in the **frame-driven
+> span**: AI unit movement runs from `CvGame::update` → `updateMoves` → `autoMission` /
+> `AI_unitUpdate` (selection-group cascades + pathfinding) per rendered frame BETWEEN turn
+> boundaries, outside every doTurn scope. (The old "doTurnUnits ~1.2 s ⇒ units are not the
+> bottleneck" conclusion only ever covered upkeep — movement was never in the tree.) New
+> instrumentation: `turn.wall` (true wall between turn boundaries), `game.update.accum`
+> (DLL compute in the frame span), `game.updateMoves.accum` + `moves.autoMission/`
+> `AI_unitUpdate/brokerPP.accum` sub-splits, all logged once per turn at `CvGame::doTurn`.
+> `wall − update.accum` ≈ engine/render residual — distinguishes "unit AI compute" from
+> "engine frame pacing" as the owner of the missing ~70 s. **Next session decides the next
+> target.**
+
+**FRAME SPAN MEASURED (2026-06-10, tier-2 instrumentation, steady-state per prompt-ended
+~98 s turn):** it IS compute, not pacing (`update.accum` ~80 s; engine/render residual ~18 s).
+Ranking: `pathGen` ~30 s avg / **130–145k calls/turn**; `AI_unitUpdate` ~37–44 s (fully
+explained by the `[PERF/unitai]` per-group table); **`UNITAI_CITY_DEFENSE` 15.2 s / 14,556
+re-decides/turn**; sea cluster ~9 s (`RESERVE/ATTACK/EXPLORE/SETTLER/WORKER_SEA` — matches
+`sea-ai-rework`); `reachable` 7.4 s / 61k ctors; broker post-process 3–8 s. Exonerated:
+per-slice Python `gameUpdate` (~5 ms), `updateScore`, `testAlive`; `plotPaging` load-only.
+
+**CITY_DEFENSE churn — investigation log (hypothesis 1 FALSIFIED):**
+- *Attempt 1 (2026-06-10):* capped the `ACTIVITY_SLEEP → setForceUpdate` auto-wake in
+  `CvSelectionGroupAI::AI_update` to once per turn (`m_iLastSleepWakeTurn`, transient).
+  **Measured: NO effect** — CITY_DEFENSE still 13–19 s / 14–25k calls per turn. The parked
+  groups evidently are not arriving via the sleep path. The cap stays (correct and free for
+  genuinely sleeping groups), but it is not the churn mechanism.
+- *Known per-turn re-armer:* `CvSelectionGroup::doTurn` (~`CvSelectionGroup.cpp:290`) sets
+  `setForceUpdate(true)` for EVERY AI group not on `ACTIVITY_MISSION`, every turn — explains
+  one full cascade per parked group per turn, but not the ~10× slice multiplier.
+- *Discriminators measured (force/awake/exitReady on [PERF/unitai]):* CITY_DEFENSE stable at
+  `force≈4,000` (the doTurn re-armer: one forced cascade per parked group per turn),
+  `exitReady≈3,000`, `awake≈3,400` — a **2× cascade multiplier**, with the rest of n being
+  cheap drive-by visits. Same signature on HEALER/SEE_INVISIBLE/INVESTIGATOR/INFILTRATOR.
+- *ROOT CAUSE (hypothesis 2, CONFIRMED by the numbers): `CvUnitAI::processContracts` tail
+  (`CvUnitAI.cpp:~21358`).* On a unit's FIRST call of the turn it advertises for work, finds
+  none, and returned **true** — terminating the cascade with the unit awake, no mission,
+  moves intact → `readyToMove()` stays true → the slice driver re-visits → the whole cascade
+  re-runs (second pass returns false and reaches a real terminal). Every advertising unit
+  paid two full cascades + two broker scans per turn; the per-slice
+  `postProcessUnitsLookingForWork` re-scans of ~6k advertising units are also the brokerPP
+  3–8 s/turn.
+- *FIX 1 (processContracts advertise-path, VERIFIED):* the advertise-no-work path returns
+  **false** (cascade continues to its real terminal in one pass; broker post-process remains
+  the within-turn work-delivery channel). Measured: brokerPP 3–8 → **0.8–1.5 s**, exitReady
+  −75%, awake re-visits −70%, reachable ctors −20%. **But CITY_DEFENSE ms unchanged** — the
+  surviving cascades run deeper (the path-heavy low-priority terminals now execute every
+  pass), so the cost moved, not vanished. Residual ~600/turn exitReady with
+  `missionAI=GUARD_CITY`, no mission — same bug class, smaller, logged for later.
+- *THE ISOLATED STRUCTURAL COST:* `force≈3,950` — one full re-plan-from-scratch per parked
+  defender group per turn (the `CvSelectionGroup::doTurn` re-armer) at ~3.5 ms + ~30 path
+  calls each; spin samples show 25-unit garrison stacks where each unit individually
+  re-derives "keep guarding" with pathfinding, every turn.
+- *FIX 2 (targeted re-plan stagger) — shipped, measured INSUFFICIENT alone.* force fell only
+  ~4k → ~2–2.7k and awake re-visits ROSE to ~2.4–3.5k: net cascades unchanged. Reason
+  (the keystone finding): **garrisons park via `MISSION_SKIP`, which only holds for ONE
+  turn** (`ACTIVITY_HOLD`, re-awakened by the next `doTurn`) — so parked defenders re-enter
+  the decision cascade every turn regardless of any force/wake gating. The stagger only
+  governs groups in PERSISTENT states.
+- *FIX 3 (the convergent root fix — shipped, awaiting verification): garrison terminals
+  park persistently.* `AI_guardCityBestDefender`, `AI_guardCityMinDefender` (in-place) and
+  `AI_guardCity` (garrisonHere) now push **`MISSION_FORTIFY`** (`canFortify()` fallback to
+  SKIP) — vanilla BTS semantics. Fortify → `ACTIVITY_SLEEP`, persistent; re-planning is now
+  governed by the staggered doTurn re-armer + danger + events (fixes 0–2 line up behind
+  this). Side bugfix: AI garrisons actually accrue their fortification defense bonus, which
+  the SKIP idiom had silently denied them. The redundant sleep-auto-wake in
+  `CvSelectionGroupAI::AI_update` is removed (the doTurn re-armer is the single auto-waker).
+  Expected: CITY_DEFENSE cascades → ~1k/turn (stagger share + danger), ms → ~4 s, pathGen
+  count finally drops. Playtest watch: garrison redistribution lag ≤4 turns absent danger;
+  city defense strength slightly UP (fortify bonuses).
+- *FIX 3 measured — PLATEAU at ~15–18 s, two causes now precisely understood:*
+  (1) **the danger override pins most garrisons to every-turn re-plans** —
+  `AI_getAnyPlotDanger(plot, 2)` reads potential-enemy danger, and late-game border cities
+  are perpetually "in danger" (where danger doesn't pin, the stagger works:
+  PROPERTY_CONTROL force halved, HEALER −50%); (2) **the expensive cascades belong to
+  SURPLUS defenders** — in an over-stacked garrison only one unit takes the cheap
+  best-defender terminal and a few cover minDefenders; the rest fail every cheap terminal
+  and fall through to all-cities path scans + vicinity `generatePath` loops on every
+  re-plan. The perf cost and the defender over-stacking behaviour bug are the same thing.
+  Also shipped: garrison park fallback is FORTIFY → SLEEP → SKIP (non-fortifying conscripts
+  park persistently too).
+- **NEXT CAMPAIGN (design work, not patches): the defender economy.** Garrison demand
+  accounting + assignment via the repository's **city-declared needs** (cities publish
+  defense needs once per change; units consume the published number; no per-unit map
+  searches). Demand side already improved by the fortify-bonus fix (garrisons now read at
+  full strength, easing the over-stacking attractor and the conscription of non-fortifying
+  units). Tied plans: `derived-data-repository.md` §8, `unit-ai-valuation.md` (defender
+  production glut), `ai-architecture-north-star.md` (per-UNITAI modules).
 
 Deprioritized (measured negligible): visibility stickytape, property solver, trade routes,
 the unit-choose family.

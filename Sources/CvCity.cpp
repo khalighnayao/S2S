@@ -1298,19 +1298,19 @@ void CvCity::doTurn()
 	setAirliftTargeted(false);
 	setBuiltFoodProducedUnit(false);
 	//Promotes Units if there is a building that allows it
-	doPromotion();
+	{ PERF_SCOPE("city.doPromotion", getOwner()); doPromotion(); }
 	//Does vicinity bonus checks
-	doVicinityBonus();
+	{ PERF_SCOPE("city.doVicinityBonus", getOwner()); doVicinityBonus(); }
 	//Checks conditions of buildings, may disable or enable some
-	checkBuildings();
-	checkFreeBuildings();
+	{ PERF_SCOPE("city.checkBuildings", getOwner()); checkBuildings(); }
+	{ PERF_SCOPE("city.checkFreeBuildings", getOwner()); checkFreeBuildings(); }
 
 	//Damages enemy units around the city, if applicable
-	doAttack();
+	{ PERF_SCOPE("city.doAttack", getOwner()); doAttack(); }
 	//Heals friendly units in the city extra, if applicable
-	doHeal();
+	{ PERF_SCOPE("city.doHeal", getOwner()); doHeal(); }
 	//Spreads corporations
-	doCorporation();
+	{ PERF_SCOPE("city.doCorporation", getOwner()); doCorporation(); }
 	//Counts down the disable power timer
 	doDisabledPower();
 
@@ -1329,23 +1329,23 @@ void CvCity::doTurn()
 
 	// updating after plot culture ensures player always sees correct ownership on plot,
 	// but plot could technically wiggle back and forth during AI turns.
-	doPlotCulture(getOwner(), getCommerceRate(COMMERCE_CULTURE));
+	{ PERF_SCOPE("city.doPlotCulture", getOwner()); doPlotCulture(getOwner(), getCommerceRate(COMMERCE_CULTURE)); }
 
 	//	Force deferred plot group recalculation to happen now before we assess production
-	CvPlot::setDeferredPlotGroupRecalculationMode(false);
+	{ PERF_SCOPE("city.plotGroupRecalc", getOwner()); CvPlot::setDeferredPlotGroupRecalculationMode(false); }
 
 	//	Auto-build any auto-build buildings we can
-	doAutobuild();
+	{ PERF_SCOPE("city.doAutobuild", getOwner()); doAutobuild(); }
 
 	{ PERF_SCOPE("city.doProduction", getOwner()); doProduction(bAllowNoProduction); }
 
-	GET_PLAYER(getOwner()).getContractBroker().advertiseTender(this, AI_getBuildPriority());
+	{ PERF_SCOPE("city.advertiseTender", getOwner()); GET_PLAYER(getOwner()).getContractBroker().advertiseTender(this, AI_getBuildPriority()); }
 
-	doDecay();
+	{ PERF_SCOPE("city.doDecay", getOwner()); doDecay(); }
 
-	doReligion();
+	{ PERF_SCOPE("city.doReligion", getOwner()); doReligion(); }
 
-	doGreatPeople();
+	{ PERF_SCOPE("city.doGreatPeople", getOwner()); doGreatPeople(); }
 
 	doMeltdown();
 
@@ -1426,10 +1426,13 @@ void CvCity::doTurn()
 		setWeLoveTheKingDay(false);
 	}
 
-	for (int iI = 0; iI < GC.getNumBonusInfos(); iI++)
 	{
-		m_pabHadVicinityBonus[iI] = hasVicinityBonus((BonusTypes)iI);
-		m_pabHadRawVicinityBonus[iI] = hasRawVicinityBonus((BonusTypes)iI);
+		PERF_SCOPE("city.vicinitySnapshot", getOwner());
+		for (int iI = 0; iI < GC.getNumBonusInfos(); iI++)
+		{
+			m_pabHadVicinityBonus[iI] = hasVicinityBonus((BonusTypes)iI);
+			m_pabHadRawVicinityBonus[iI] = hasRawVicinityBonus((BonusTypes)iI);
+		}
 	}
 
 #ifdef CAN_TRAIN_CACHING
@@ -1439,7 +1442,7 @@ void CvCity::doTurn()
 #endif
 
 	// ONEVENT - Do turn
-	CvEventReporter::getInstance().cityDoTurn(this, getOwner());
+	{ PERF_SCOPE("city.py.cityDoTurn", getOwner()); CvEventReporter::getInstance().cityDoTurn(this, getOwner()); }
 }
 
 void CvCity::doAutobuild()

@@ -14,6 +14,28 @@ int gCityLogLevel = 0;
 int gUnitLogLevel = 0;
 int gPerfLogLevel = 0;
 
+// Whole-turn frame-span accumulators (see BetterBTSAI.h) -- logged + reset at CvGame::doTurn.
+double gPerfGameUpdateAccumMs = 0;
+double gPerfUpdateMovesAccumMs = 0;
+double gPerfAutoMissionAccumMs = 0;
+double gPerfUnitUpdateAccumMs = 0;
+double gPerfBrokerPPAccumMs = 0;
+double gPerfPathGenAccumMs = 0;
+int    gPerfPathGenN = 0;
+double gPerfReachableAccumMs = 0;
+int    gPerfReachableN = 0;
+double gPerfPlotPagingAccumMs = 0;
+double gPerfPyGameUpdateAccumMs = 0;
+double gPerfUpdateScoreAccumMs = 0;
+double gPerfUpdateTimersAccumMs = 0;
+double gPerfAssignWorkAccumMs = 0;
+double gPerfTestAliveAccumMs = 0;
+double gPerfUnitAITypeAccumMs[NUM_UNITAI_TYPES] = {0};
+int    gPerfUnitAITypeAccumN[NUM_UNITAI_TYPES] = {0};
+int    gPerfUnitAITypeForceN[NUM_UNITAI_TYPES] = {0};
+int    gPerfUnitAITypeAwakeN[NUM_UNITAI_TYPES] = {0};
+int    gPerfUnitAITypeExitReadyN[NUM_UNITAI_TYPES] = {0};
+
 // Wall-clock turn-phase timing. Mirrors the other log<Domain> helpers but is gated by its
 // own gPerfLogLevel so timing can be enabled independently of the verbose AI logs.
 void logPerf(int level, const char* format, ...)

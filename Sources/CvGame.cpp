@@ -2254,6 +2254,10 @@ int CvGame::getTeamClosenessScore(int** aaiDistances, int* aiStartingLocs)
 
 void CvGame::update()
 {
+	//	Per-frame DLL work accumulated across the whole turn (logged at CvGame::doTurn) --
+	//	this span, not the doTurn tree, is where AI unit movement runs.
+	PERF_ACCUM(gPerfGameUpdateAccumMs);
+
 	startProfilingDLL(false);
 
 	//OutputDebugString(CvString::format("Start profiling(false) for CvGame::update()\n").c_str());
@@ -2280,7 +2284,10 @@ void CvGame::update()
 			gDLL->getInterfaceIFace()->setDirty(GlobeLayer_DIRTY_BIT, true);
 		}
 	}
-	CvPlotPaging::UpdatePaging();
+	{
+		PERF_ACCUM(gPerfPlotPagingAccumMs);
+		CvPlotPaging::UpdatePaging();
+	}
 
 	const CvPlayerAI& playerAct = GET_PLAYER(getActivePlayer());
 
@@ -2325,20 +2332,35 @@ again:
 
 		sendPlayerOptions();
 		// sample generic event
-		CyArgsList pyArgs;
-		CvEventReporter::getInstance().genericEvent("gameUpdate", pyArgs.makeFunctionArgs());
+		{
+			PERF_ACCUM(gPerfPyGameUpdateAccumMs);
+			CyArgsList pyArgs;
+			CvEventReporter::getInstance().genericEvent("gameUpdate", pyArgs.makeFunctionArgs());
+		}
 
 		if (getNumGameTurnActive() == 0 && (!isPbem() || !getPbemTurnSent()))
 		{
 			doTurn();
 		}
-		updateScore();
+		{
+			PERF_ACCUM(gPerfUpdateScoreAccumMs);
+			updateScore();
+		}
 		updateMoves();
-		updateTimers();
-		updateTurnTimer();
+		{
+			PERF_ACCUM(gPerfUpdateTimersAccumMs);
+			updateTimers();
+			updateTurnTimer();
+		}
 
-		AI_updateAssignWork();
-		testAlive();
+		{
+			PERF_ACCUM(gPerfAssignWorkAccumMs);
+			AI_updateAssignWork();
+		}
+		{
+			PERF_ACCUM(gPerfTestAliveAccumMs);
+			testAlive();
+		}
 
 		if (getAIAutoPlay(getActivePlayer()) <= 0 && !gDLL->GetAutorun() && GAMESTATE_EXTENDED != getGameState() && countHumanPlayersAlive() == 0)
 		{
@@ -5773,6 +5795,74 @@ void CvGame::addGreatPersonBornName(const CvWString& szName)
 void CvGame::doTurn()
 {
 	PROFILE_BEGIN("CvGame::doTurn()",DOTURN1);
+
+	//	Turn-boundary accounting for the frame-driven span the doTurn tree does not cover:
+	//	turn.wall is the true wall-clock between consecutive turn boundaries (what a player's
+	//	stopwatch measures, minus their own think time on the human turn);
+	//	game.update.accum is the DLL compute inside that span; updateMoves + its sub-parts
+	//	attribute the AI unit-movement share. wall - update.accum ~= engine/render residual.
+	if (gPerfLogLevel >= 1)
+	{
+		static win32::Stopwatch s_turnWall;
+		static bool s_bTurnWallRunning = false;
+		if (s_bTurnWallRunning)
+		{
+			s_turnWall.Stop();
+			logPerf(1, "[PERF/phase] turn=%d owner=-1 phase=turn.wall ms=%.3f", getGameTurn(), s_turnWall.ElapsedMilliseconds());
+		}
+		logPerf(1, "[PERF/phase] turn=%d owner=-1 phase=game.update.accum ms=%.3f", getGameTurn(), gPerfGameUpdateAccumMs);
+		logPerf(1, "[PERF/phase] turn=%d owner=-1 phase=game.updateMoves.accum ms=%.3f", getGameTurn(), gPerfUpdateMovesAccumMs);
+		logPerf(1, "[PERF/phase] turn=%d owner=-1 phase=moves.autoMission.accum ms=%.3f", getGameTurn(), gPerfAutoMissionAccumMs);
+		logPerf(1, "[PERF/phase] turn=%d owner=-1 phase=moves.AI_unitUpdate.accum ms=%.3f", getGameTurn(), gPerfUnitUpdateAccumMs);
+		logPerf(1, "[PERF/phase] turn=%d owner=-1 phase=moves.brokerPP.accum ms=%.3f", getGameTurn(), gPerfBrokerPPAccumMs);
+		logPerf(1, "[PERF/phase] turn=%d owner=-1 phase=moves.pathGen.accum ms=%.3f n=%d", getGameTurn(), gPerfPathGenAccumMs, gPerfPathGenN);
+		logPerf(1, "[PERF/phase] turn=%d owner=-1 phase=moves.reachable.accum ms=%.3f n=%d", getGameTurn(), gPerfReachableAccumMs, gPerfReachableN);
+		logPerf(1, "[PERF/phase] turn=%d owner=-1 phase=update.plotPaging.accum ms=%.3f", getGameTurn(), gPerfPlotPagingAccumMs);
+		logPerf(1, "[PERF/phase] turn=%d owner=-1 phase=update.pyGameUpdate.accum ms=%.3f", getGameTurn(), gPerfPyGameUpdateAccumMs);
+		logPerf(1, "[PERF/phase] turn=%d owner=-1 phase=update.score.accum ms=%.3f", getGameTurn(), gPerfUpdateScoreAccumMs);
+		logPerf(1, "[PERF/phase] turn=%d owner=-1 phase=update.timers.accum ms=%.3f", getGameTurn(), gPerfUpdateTimersAccumMs);
+		logPerf(1, "[PERF/phase] turn=%d owner=-1 phase=update.assignWork.accum ms=%.3f", getGameTurn(), gPerfAssignWorkAccumMs);
+		logPerf(1, "[PERF/phase] turn=%d owner=-1 phase=update.testAlive.accum ms=%.3f", getGameTurn(), gPerfTestAliveAccumMs);
+		//	Per-UNITAI decision-time table: which unit-AI modules carry the frame-span cost,
+		//	and the churn discriminators (force-armed / awake-ready arrivals, exit-still-ready).
+		for (int iI = 0; iI < NUM_UNITAI_TYPES; iI++)
+		{
+			if (gPerfUnitAITypeAccumMs[iI] >= 50)
+			{
+				logPerf(1, "[PERF/unitai] turn=%d type=%s ms=%.1f n=%d force=%d awake=%d exitReady=%d",
+					getGameTurn(), GC.getUnitAIInfo((UnitAITypes)iI).getType(),
+					gPerfUnitAITypeAccumMs[iI], gPerfUnitAITypeAccumN[iI],
+					gPerfUnitAITypeForceN[iI], gPerfUnitAITypeAwakeN[iI], gPerfUnitAITypeExitReadyN[iI]);
+			}
+		}
+		s_turnWall.Reset();
+		s_turnWall.Start();
+		s_bTurnWallRunning = true;
+	}
+	gPerfGameUpdateAccumMs = 0;
+	gPerfUpdateMovesAccumMs = 0;
+	gPerfAutoMissionAccumMs = 0;
+	gPerfUnitUpdateAccumMs = 0;
+	gPerfBrokerPPAccumMs = 0;
+	gPerfPathGenAccumMs = 0;
+	gPerfPathGenN = 0;
+	gPerfReachableAccumMs = 0;
+	gPerfReachableN = 0;
+	gPerfPlotPagingAccumMs = 0;
+	gPerfPyGameUpdateAccumMs = 0;
+	gPerfUpdateScoreAccumMs = 0;
+	gPerfUpdateTimersAccumMs = 0;
+	gPerfAssignWorkAccumMs = 0;
+	gPerfTestAliveAccumMs = 0;
+	for (int iI = 0; iI < NUM_UNITAI_TYPES; iI++)
+	{
+		gPerfUnitAITypeAccumMs[iI] = 0;
+		gPerfUnitAITypeAccumN[iI] = 0;
+		gPerfUnitAITypeForceN[iI] = 0;
+		gPerfUnitAITypeAwakeN[iI] = 0;
+		gPerfUnitAITypeExitReadyN[iI] = 0;
+	}
+
 	PERF_SCOPE("CvGame::doTurn", -1);
 
 	// Capture a snapshot of every plot's state at the start of the turn so the
@@ -7190,6 +7280,7 @@ void CvGame::createBarbarianUnits()
 void CvGame::updateMoves()
 {
 	PROFILE_FUNC();
+	PERF_ACCUM(gPerfUpdateMovesAccumMs);
 
 	int aiShuffle[MAX_PLAYERS];
 
@@ -7226,9 +7317,13 @@ void CvGame::updateMoves()
 			{
 				if (player.hasReadyUnautomatedUnit(false))
 				{
+					PERF_ACCUM(gPerfUnitUpdateAccumMs);
 					player.AI_unitUpdate();
 				}
-				algo::for_each(player.groups(), CvSelectionGroup::fn::autoMission());
+				{
+					PERF_ACCUM(gPerfAutoMissionAccumMs);
+					algo::for_each(player.groups(), CvSelectionGroup::fn::autoMission());
+				}
 
 				if (!player.hasBusyUnit())
 				{
@@ -7239,6 +7334,7 @@ void CvGame::updateMoves()
 			{
 				if (!player.hasReadyUnautomatedUnit(false))
 				{
+					PERF_ACCUM(gPerfUnitUpdateAccumMs);
 					player.AI_unitUpdate();
 				}
 				// Uncomment if UI interaction tracking is needed
@@ -7252,12 +7348,21 @@ void CvGame::updateMoves()
 		{
 			PROFILE("CvGame::updateMoves.AI");
 
-			algo::for_each(player.groups(), CvSelectionGroup::fn::autoMission());
+			{
+				PERF_ACCUM(gPerfAutoMissionAccumMs);
+				algo::for_each(player.groups(), CvSelectionGroup::fn::autoMission());
+			}
 
 			if (!isAutoMoves)
 			{
-				player.AI_unitUpdate();
-				player.getContractBroker().postProcessUnitsLookingForWork();
+				{
+					PERF_ACCUM(gPerfUnitUpdateAccumMs);
+					player.AI_unitUpdate();
+				}
+				{
+					PERF_ACCUM(gPerfBrokerPPAccumMs);
+					player.getContractBroker().postProcessUnitsLookingForWork();
+				}
 
 				if (!player.hasBusyUnit() && !player.hasReadyUnit(true))
 				{
