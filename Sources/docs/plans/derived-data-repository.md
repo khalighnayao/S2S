@@ -2,285 +2,251 @@
 
 > **Part of a larger frame.** This is the **read-side** of the AI architecture north-star
 > ([`ai-architecture-north-star.md`](ai-architecture-north-star.md)) — the change-driven derived-data
-> modules. Placement is **on the base objects** (`CvGame`/`CvTeam`/`CvPlayer`/`CvCity`), not the AI
-> subclasses (so the data isn't trapped in the classes we're dissolving, and it can absorb the
-> UI-shared `canConstruct` caches). Read the north-star for the goal, the hard constraints
-> (VC2003/C++03, EXE base-class ABI, MP lockstep determinism), and how this fits the unit-AI and
-> backend work. Two corrections to the §6.1 below, established since: (a) constructibility depends on
-> more than tech/building/civic/bonus — also population, culture, and city *properties* (which move
-> often) — so the constructible set is a **bounded-staleness** datum, not event-exact; (b) there are
-> already **three** `canConstruct` caches to **absorb** (not add a fourth):
-> `CvPlayer::m_bCanConstruct[]`, `CvCity::m_bCanConstruct`,
-> `CvCityAI::BuildingValueCache::m_buildingsToCalculate`.
+> modules. Read the north-star for the goal, the hard constraints (VC2003/C++03, EXE base-class ABI,
+> MP lockstep determinism), and how this fits the unit-AI and backend work.
 
 **Four drivers, served by one pattern** (they reinforce each other, not compete):
 
 1. **Only (re)calculate what changed** — stop wiping whole caches every turn and rebuilding from
-   scratch. (The worst example, the building-value `PreLoop`, was 94% of
-   `CalculateAllBuildingValues` — it rebuilt a *flag-independent* set on every call though its result
-   never changed. Memoizing it already cut CABV 3.6×.)
+   scratch. (The worst case, the building-value `PreLoop`, is already fixed by memoization + the
+   static enabler index — see §1. The next worst, the building-*value* recompute itself, is the
+   flagship tenant.)
 2. **One API surface (reusability)** — developers ask a getter (`getBuildingValue`,
-   `getConstructibleSet`, `getUnitsEnabledBy`, …) instead of re-deriving; new code reuses tested
-   logic instead of reinventing it (and its bugs).
-3. **De-duplicate** — the same "scan all building/unit types to re-derive a prereq/constructible
-   relationship" idiom is hand-rolled in many places (CABV `PreLoop`, `.NotDeveloping`, the religious
-   loop, the O(B²) "needed for other buildings" loop, and across `CvCityAI`/`CvCity`/`CvPlayer`). A
-   repository getter computed once replaces them all; the duplicated loops get deleted.
+   `getConstructibleSet`, …) instead of re-deriving; new code reuses tested logic instead of
+   reinventing it (and its bugs).
+3. **De-duplicate** — the same "scan all building/unit types to re-derive a relationship" idiom is
+   hand-rolled across `CvCityAI`/`CvCity`/`CvPlayer`. A repository getter computed once replaces
+   them all; the duplicated loops get deleted.
 4. **Shrink the monster files** — moving these derivations out of the ~14k-line `CvCityAI.cpp` (and
-   the equally huge `CvUnitAI.cpp`/`CvPlayerAI.cpp`) into focused repository classes is a direct
-   file-size win.
+   `CvUnitAI.cpp`/`CvPlayerAI.cpp`) into focused repository code is a direct file-size win.
 
-The same Game-level reverse-index that makes the PreLoop fast (#1) is the shared API (#2), lets us
-delete the duplicated scans (#3), and pulls logic out of the giant files (#4).
-
-**Scope of the idea:** a *uniform, simple-to-use* pattern that ALL these derived data sources adopt
-— building values, the constructible-building set, the prereq/enabler indices, tech/civic/
-promotion/bonus values, needed counts, area unit-AI counts, etc. Incremental "live update" of a
-value (apply a delta rather than recompute) is a per-datum *bonus*; the requirement is
-**change-driven recompute behind a shared getter**.
-
-> **Sequencing caveat (file-size vs risk).** There are two kinds of file-size work and they carry
-> very different risk: **(a) pure mechanical splitting** — moving functions out of the monster .cpp
-> into more translation units with *zero behaviour change* (safe, fast, no repository needed); and
-> **(b) repository extraction** — the de-dup/reusability program here, which *touches AI behaviour*
-> and is correctness-sensitive. Given the recent stale-cache hang, **attack file size first with (a)
-> the mechanical split**, and land the repository extraction (b) deliberately afterward with the
-> debug-verify backstop (§5). The constructible-set memoization already banked the big safe perf
-> win, so there is no urgency to rush the behaviour-sensitive parts.
+> **Sequencing caveat (file-size vs risk).** Pure mechanical file-splitting (zero behaviour change)
+> is safe and independent of this plan; repository extraction *touches AI behaviour* and is
+> correctness-sensitive. The stale-value hang (§5) is the proof. Land behaviour-sensitive steps
+> deliberately, with the gated-logging debug-verify (§5.6).
 
 ---
 
-## 0. Status
+## 0. Status (2026-06-10)
 
-- **Skeleton IMPLEMENTED** (`Sources/CvDerivedData.h`): the `TLazy<T>` holder, the templated
-  `CvDataRepository<TOwner>` base (typed owner back-pointer + `reset()`/`invalidateAll()` hooks),
-  and the four empty level repositories — `CvGameDataRepository`, `CvTeamDataRepository`,
-  `CvPlayerDataRepository`, `CvCityDataRepository`. Each AI level (`CvGameAI`/`CvTeamAI`/
-  `CvPlayerAI`/`CvCityAI`) owns one (`m_dataRepository`), exposes `AI_dataRepository()`, and wires
-  its back-pointer via `init(this)` in its constructor. Header-only; Assert build clean.
-  **No data yet** — added case by case per §6.
-- **Related perf fix already shipped** (independent of the repository): the *within-turn*
-  constructible-set memoization on the per-city `BuildingValueCache` (§6 step 1's trivial first
-  step) — CABV 3.6×. See [`turn-time-optimization.md`](turn-time-optimization.md).
-- **First real repository entry is identified and evidence-backed but NOT yet implemented:** the
-  *cross-turn* retention of that same constructible set (§6.1). Measurement now shows it is the
-  highest-value action in the whole turn (PreLoop ≈ 30% of turn-time) and the `[PERF/cabvset]`
-  data proves the set is flat turn-over-turn, so event-driven invalidation is safe. This is the
-  next step whenever the repository work is picked up.
+- **Skeleton v2 IMPLEMENTED** (`Sources/CvDerivedData.h` + `.cpp`). Repositories live on the
+  **base game objects** — `CvGame`/`CvTeam`/`CvPlayer`/`CvCity`, accessor `dataRepository()` — per
+  the north-star placement ruling (v1 had them on the AI subclasses; corrected before any tenants
+  existed, since the AI classes are being dissolved and the flagship tenants are UI-shared).
+  Mechanics (see the header for the full doc comment and getter idioms):
+  - `TLazyBase` — per-datum dirty flag, **change version counter** (bumped only when a recompute
+    actually changed the value), computed-turn stamp, optional **bounded-staleness max age**.
+  - `TLazy<T>` — typed value holder; `value()` is invariant-guarded; `set()` detects no-change
+    recomputes so downstream version checks skip work (the common case — e.g. the constructible
+    set is flat turn-over-turn).
+  - `TDependency` — records the upstream `version()` a datum computed against: cross-**level**
+    staleness is **pulled** via version compare, needing no invalidation fan-out wiring.
+  - **Automatic registration** — every datum registers with its repository on construction, so
+    `invalidateAll()`/`reset()` can never drift out of sync with the member list.
+  - `reset()` wired into each owner's `reset()` (game init **and** load): derived data is never
+    trusted from a save.
+  - **Read-only phase** (`TLazyBase::setReadOnlyPhase`) — recompute/invalidate assert inside it;
+    the precondition for the future parallel read pass (north-star §4).
+  No data members yet — tenants land per §6.
+- **The PreLoop hotspot is FIXED** (it was ~30% of the whole late-game turn): within-turn
+  memoization (3.6× CABV) + the **static enabler reverse-index** (#195 Phase 1, PR #314 — PreLoop
+  ~390×, ~11.7 s/turn → ~0.05 s, shadow-verified set-identical). The index lives on
+  `cvInternalGlobals` (`getBuildingsEnabledBy`/`getUnitsEnabledBy`, built once in
+  `doPostLoadCaching`) — that **is** this plan's Game-static tier, delivered (§3).
+- **The flagship perf tenant is now BUILDING VALUES**, not the constructible set. The remaining
+  doProduction chain re-computes per-building values for every city every turn (the flush at
+  `CvCity.cpp:1261`). Cross-turn retention was tried and **REVERTED**: stale values hung the turn
+  via `CvCity::doProduction`'s completion loop. That consumer is now **hardened** (bounded, gated
+  `[CIT/spin]` diagnostics — §6 step 1, done 2026-06-10), unblocking the pilot.
 
 ---
 
-## 1. Why now — the evidence
+## 1. Why — the evidence (updated post-#314)
 
-- **Measured (wall-clock `[PERF]`, steady-state late game):** `CalculateAllBuildingValues` is the
-  dominant late-game turn cost, and its `PreLoop` (`CvCityAI.cpp:12599`) is the single biggest leaf
-  in the whole turn — **~11.2 s of a ~37 s turn (~30%)**. It runs **~91×/turn** (≈ once per city
-  cache-build) at **~123 ms each**. The turn is ~80% one chain: `CvPlayer::doTurn` → `doTurn.cities`
-  → `city.doProduction` → `AI_chooseProduction` → `CalculateAllBuildingValues` → `PreLoop`. The
-  plot/unit-scaling paths everyone first suspected are negligible (visibility ~35 ms, property
-  ~180 ms, units ~1.2 s). See [`turn-time-optimization.md`](turn-time-optimization.md).
-- **Retention is provably safe & high-value:** the `[PERF/cabvset]` log shows the PreLoop's output
-  set is **flat turn-over-turn** (per city: 117–123 / 166–168 / 214–216). The rebuild is therefore
-  redundant — constructibility only moves on discrete events (tech, building completed, civic,
-  bonus). This is the direct evidence that **change-driven invalidation will keep the set correct
-  while eliminating ~91 rebuilds/turn.**
-- **The within-turn memoization is already banked** (the trivial first step): the set is computed
-  once per cache-build instead of once per CABV call (`preloop=0` on repeat calls). The remaining
-  work is *cross-turn* retention behind the repository (§6.1).
+- Pre-#314 measurement (`[PERF]`, late game, ~37 s turns): the turn was ~80% one chain —
+  `CvPlayer::doTurn` → `doTurn.cities` → `city.doProduction` → `AI_chooseProduction` →
+  `CalculateAllBuildingValues`. The PreLoop half of that is now fixed; the **rest of the chain
+  remains**: per-building value math + the other CABV dimensions (~5.7 s/turn) and the non-CABV
+  decision cost (~5 s/turn), recomputed per city per turn. (All numbers predate #314 —
+  **re-measure before optimizing**, see [`turn-time-optimization.md`](turn-time-optimization.md).)
 - **The pattern is everywhere, done the brute-force way:** `CvPlayerAI::AI_doTurnPre` wipes
   `m_cachedTechValues`, `m_aiCivicValueCache`, `m_numBuildingsNeeded`, `m_missionTargetCache`,
-  `plotDangerCache`, and re-runs `AI_updateBonusValue()` — **every turn, unconditionally**. That is a
+  `plotDangerCache`, and re-runs `AI_updateBonusValue()` — every turn, unconditionally. That is a
   degenerate repository with the dumbest possible invalidation ("invalidate all, always").
-- So this isn't a new system — it's **formalizing the existing per-player caches into one pattern
-  and replacing "clear everything every turn" with "invalidate only what an event touched."**
+- There are already **three** `canConstruct` caches to **absorb** (not add a fourth):
+  `CvPlayer::m_bCanConstruct[]`, `CvCity::m_bCanConstruct`,
+  `CvCityAI::BuildingValueCache::m_buildingsToCalculate`.
+- So this isn't a new system — it formalizes the existing caches into one pattern and replaces
+  "clear everything every turn" with "recompute only what changed."
 
 ---
 
-## 2. Core abstraction (C++03, fits the codebase)
+## 2. Core abstraction (implemented — see `CvDerivedData.h`)
 
-A derived datum = **value + dirty flag + a recompute method + the events that dirty it.** Keep it
-lightweight: a member on its owner, accessed through a getter that lazily recomputes.
+A derived datum = **value + dirty flag + version + a recompute getter + the events that dirty it.**
+The header's doc comment carries the authoritative getter idioms; in short:
 
-```cpp
-// Lightweight lazy/dirty holder. No registry required to start.
-template <typename T>
-class TLazy
-{
-public:
-    TLazy() : m_bDirty(true) {}
-    bool  dirty()  const { return m_bDirty; }
-    void  invalidate()   { m_bDirty = true; }
-    const T& value() const { return m_value; }          // assumes !dirty()
-    void  set(const T& v) { m_value = v; m_bDirty = false; }
-private:
-    T    m_value;
-    bool m_bDirty;
-};
-```
+- **Same level:** `if (m_foo.dirty()) m_foo.set(computeFoo()); return m_foo.value();`
+- **Cross level:** freshen the upstream *through its getter*, then compare `version()` via a
+  `TDependency`; recompute if it moved. Versions bump only on real value change, so an upstream
+  rebuild that produced the same answer costs downstream nothing.
+- **Bounded staleness:** a datum whose inputs move too often for event-exact invalidation declares
+  a max age in turns; `dirty()` then also expires it by age. This is the systematic form of the
+  "recompute every N turns" backstop.
 
-Owner exposes a typed getter that hides the dirty-check + recompute. This is the **simple-to-use**
-surface — replicating it for a new datum is three lines:
-
-```cpp
-// in CvCityAI
-const std::set<BuildingTypes>& AI_constructibleSet() const
-{
-    if (m_constructibleSet.dirty())
-        m_constructibleSet.set(computeConstructibleSet());   // the old PreLoop body
-    return m_constructibleSet.value();
-}
-```
-
-For data that benefits from *incremental* update (counts/sums), the same holder can be updated in
-place by an event endpoint instead of marked dirty — the **bonus** path:
-
-```cpp
-void CvPlayerAI::onBuildingBuilt(BuildingTypes b) { m_buildingCount[b] += 1; /* no recompute */ }
-```
-
-> No virtual-registry/function-pointer machinery is required to start. A central registry
-> (`enum DatumId` + subscription map) is a later convenience once many data sources exist; the
-> `TLazy<T>` member + getter + event-method idiom already delivers "only recompute what changed."
+No central registry/event bus — the per-member idiom plus automatic registration covers it;
+revisit only if the event wiring becomes repetitive (north-star "fluid" decision).
 
 ---
 
-## 3. Scopes & ownership — four levels: Game, Team, Player, City
+## 3. Scopes & ownership — four levels + the GC static tier
 
-The repository exists at **four levels**, each datum living at the **highest level where its inputs
-are invariant**, so shared work is done once for everything below it. A lower level's getter reads
-the level above (City → Player → Team → Game).
+Each datum lives at the **highest level where its inputs are invariant**; lower levels read upward
+(City → Player → Team → Game) via the cross-level idiom.
 
-| Level | Owner | Holds | Invalidated by |
+| Tier | Owner | Holds | Invalidated by |
 |---|---|---|---|
-| **Game** | `CvGame` / `CvGlobals` | Static XML-derived data: prereq reverse-indices (building→units/buildings), the `EnablesOtherBuildings` graph, unit/building classifications. Built **once at load** and never invalidated. | never |
-| **Team** | `CvTeamAI` | Team-shared facts: known/obsolete tech sets, tech-derived unit/building availability, war state, shared vision-derived data | tech acquired/obsoleted, war/peace |
-| **Player** | `CvPlayerAI` | tech value, civic value, promotion value, bonus value, building counts, area unit-AI counts, needed-building counts | civic/trait/strategy change, unit/building count change |
-| **City** | `CvCityAI` | **constructible-building set (PreLoop output)**, building values, best-build, **the city's declared needs (plots/yields it wants)**, workers-needed | building built/lost, tech, bonus, pop/plot change |
+| **Static** | `cvInternalGlobals` (NOT the repository) | XML-derived indices: prereq/enabler reverse-indices (`getBuildingsEnabledBy`/`getUnitsEnabledBy`), unit/building classifications | never — built once in `doPostLoadCaching` |
+| **Game** | `CvGame::dataRepository()` | game-**state**-derived, game-scoped data | per datum |
+| **Team** | `CvTeam::dataRepository()` | known/obsolete tech sets, tech-derived availability, war state | tech acquired/obsoleted, war/peace |
+| **Player** | `CvPlayer::dataRepository()` | tech/civic/promotion/bonus values, building counts, area unit-AI counts, needed-building counts | civic/trait/strategy change, unit/building count change |
+| **City** | `CvCity::dataRepository()` | constructible set, building values, best-build, declared needs, workers-needed | building built/lost, tech, bonus, pop/plot change (+ bounded age) |
 
-Each datum is placed at the level matching what actually moves it: a tech fact at Team (one
-recompute serves every city on the team), a civic value at Player, the constructible set at City.
+The static-vs-Game split is deliberate: truly static XML-derived data has a working home (`GC`,
+never invalidated) and should **not** migrate into the repository; the Game repository is reserved
+for game-state-derived data. Don't create a second home.
 
 ---
 
-## 4. Invalidation model — "only what changed"
+## 4. Staleness model — push dirty, pull versions, bounded age
 
-Two pieces: **event endpoints** (what happened) and **subscriptions** (which data each event dirties).
+Three pieces, used together:
 
-### Event endpoints (called from the existing mutation sites)
-A small, explicit set — the "live-update endpoints":
+1. **Push (dirty flag):** a mutation endpoint (`setHasBuilding`, tech-acquired, civic change,
+   bonus change, …) calls `invalidate()` on the data it touches **at the level that owns the
+   mutated input** only. No cross-level fan-out.
+2. **Pull (version compare):** data derived from another level's datum self-detects staleness by
+   comparing the upstream `version()` it last computed against (`TDependency`). This removes the
+   "missed invalidation hook → silently stale forever" failure class that killed the value-cache
+   experiment.
+3. **Bounded age:** for data whose inputs move continuously (population, culture, properties —
+   e.g. the constructible set), a max-age makes event-exactness unnecessary; events make it
+   *prompt*, age makes it *correct*.
 
-| Endpoint | Called from (mutation site) | Dirties (examples) |
-|---|---|---|
-| `onTechAcquired(team, tech)` | `CvTeam::setHasTech` | team tech sets; player tech/unit/building values; every city's constructible set |
-| `onBuildingChanged(city, b, added)` | `CvCity::setHasBuilding` | that city's constructible set + building values; player building counts |
-| `onCivicChanged(player)` | `CvPlayer::setCivics` | player civic value; building values (modifiers) |
-| `onBonusChanged(city, bonus)` | bonus accrual/loss | that city's constructible set + building/yield values |
-| `onUnitChanged(player, unit)` | unit create/kill/promote/AI-reassign | area unit-AI counts; unit/promotion values |
-| `onCityFoundedRazed / onPopulationChanged` | found/raze/grow | counts; city-scoped values |
-
-Each endpoint calls `invalidate()` on the specific `TLazy<>` members it affects (explicit and
-readable), or applies an incremental delta for the bonus path.
-
-### Strategy per datum
-- **Default = dirty + lazy full recompute.** Simplest, covers everything, "only recompute what
-  changed" at whole-datum granularity. Use unless profiling says otherwise.
-- **Incremental delta = opt-in.** Only for cheap aggregates (counts/sums) where the delta is
-  obviously correct. Higher bug risk; reserve for proven-hot aggregates.
+Incremental delta updates (apply the change instead of recomputing) remain an opt-in bonus for
+cheap aggregates; default is dirty + lazy full recompute.
 
 ---
 
 ## 5. Safety & correctness (the hard-won rules)
 
-These are non-negotiable given the production-cache hang we already hit:
-
-1. **Advisory data only.** The repository holds *derived AI heuristics*, never synced game state. A
+1. **Advisory data only.** The repository holds derived AI heuristics, never synced game state. A
    stale advisory number → a slightly worse decision, never a desync.
-2. **Never feed a repository value into control flow that can loop.** The building-*value* cache
-   hung the game because stale values looped `AI_chooseProduction`. The first target here (the
-   constructible *set*) is an input set, not a loop-driving value — safe. Vet each datum for this.
-3. **Determinism / MP-OOS.** Derived-only, rebuilt identically on every machine. Must never become
-   an input to synced state.
-4. **Save/load.** Don't serialize as truth — mark everything dirty on load and rebuild lazily.
-5. **Bounded-staleness backstop.** Keep a coarse safety net (e.g. a once-per-N-turns full
-   invalidate, or invalidate-on-load) so a *missed* hook can only cause bounded staleness, never
-   permanent wrong data. Because the data is advisory (rule #1), a bounded backstop is acceptable —
-   unlike the value-cache, this can never loop.
-6. **Optional debug-verify mode.** Behind a define, recompute a datum and assert it equals the
-   cached value, to catch missing invalidation hooks early (mirrors the visibility debug-count
-   technique). Cheap insurance during migration.
+2. **Consumers must be stale-tolerant.** The building-value retention experiment hung the game:
+   stale values looped `AI_chooseProduction`. The datum was blamed, but the consumer is the
+   landmine — *any* future missed hook reproduces the hang. Harden the consumer (validate the
+   choice against live `canConstruct` before pushing; bound re-decisions) **before** retaining the
+   data it reads. A repository value must never feed control flow that can spin.
+3. **Determinism / MP-OOS.** Derived-only, rebuilt identically on every machine; never an input to
+   synced state.
+4. **Save/load.** Never serialized as truth — every owner `reset()` marks all data dirty; rebuild
+   lazily.
+5. **Bounded-staleness backstop.** `invalidateAll()` is the coarse safety net; per-datum max-age is
+   the systematic one. Because data is advisory (rule 1), bounded staleness is acceptable.
+6. **Debug-verify via gated logging, NOT asserts.** During a tenant's migration, recompute-and-
+   compare emits through the gated `[PERF]` channel (ships in FinalRelease; `FAssert` does not, and
+   asserts are reserved for invariant violations, not diagnostics). Mirrors the #195 Phase 1
+   shadow-verify that proved the enabler index byte-identical before making it authoritative.
 
 ---
 
-## 6. Migration plan (incremental, measured)
+## 6. Migration plan (sequence agreed 2026-06-10; each step measurable + revertible)
 
-1. **Prove the pattern on the measured #1 cost — the constructible set (PreLoop).** Move the
-   PreLoop body into `CvCityAI::computeConstructibleSet()` behind a `TLazy<std::set<BuildingTypes>>`
-   on the city. Invalidate from `onBuildingChanged`/`onTechAcquired`/`onBonusChanged`/`onCivicChanged`.
-   Backstop: invalidate when the existing per-turn `BuildingValueCache` is (re)built (keep until the
-   event hooks are proven complete). Measure the `preloop` drop via `[PERF/cabv]`.
-   - *Trivial first step — DONE (shipped, 3.6× CABV):* memoized the set on the existing per-city
-     `BuildingValueCache` (`m_buildingsToCalculate` + `m_buildingsToCalculateValid`) so it's computed
-     once per cache-lifetime instead of once per CABV call — redundant within-turn reruns gone, zero
-     new staleness.
-   - *Go-signal for the cross-turn version (this step proper):* the `[PERF/cabvset]` instrument
-     (`CvCityAI.cpp`, logs `constructible/enablers/setSize` per cache-build) confirms the set is
-     **flat turn-over-turn** — so retaining it across turns and invalidating only on the four events
-     above is correctness-safe and removes ~91 PreLoop rebuilds/turn (~11.2 s/turn, ~30% of the
-     turn). The flag already exists; the work is (a) lift the set onto the City repository member,
-     (b) flip the per-turn flush to event-driven invalidation, (c) run debug-verify (§5.6) for a few
-     sessions to catch any missing hook before removing the backstop flush.
-2. **Absorb the `AI_doTurnPre` per-turn clears one at a time.** Convert each blanket `.clear()`
-   (tech value, civic value, needed-building counts, bonus value) into event-driven invalidation.
-   Acceptance: `AI_doTurnPre` no longer unconditionally wipes that datum.
-3. **Add the global/static tier** (prereq indices, `EnablesOtherBuildings` graph) computed once at
-   load — these never change and several hot loops re-derive them.
-4. **Introduce the central registry** (`enum DatumId` + event→ids map) only once enough data sources
-   exist that the per-member idiom is repetitive — a convenience layer, not a prerequisite.
-
-Each step is independently measurable and revertible; nothing is migrated until profiling shows it
-matters (and is recompute-bound rather than wasteful work better *removed* than cached).
+0. **Re-measure the post-#314 `[PERF]` tree** (owner plays a late-game session, `gPerfLogLevel=1`,
+   Autolog 0) — every whole-turn number predates the index; re-rank before optimizing.
+1. **Harden `AI_chooseProduction` against stale inputs — DONE (2026-06-10).** Root cause of the
+   retention hang: `CvCity::doProduction`'s completion loop (`while (productionLeft() <= 0)`).
+   Stale value/`canConstruct` data lets the AI re-choose a building it just completed; the turn's
+   overflow re-completes it instantly and `popOrder(bChoose)` re-picks it — the loop cycles
+   forever within one city-turn. ("Chose nothing" can NOT hang it: an empty queue makes
+   `getProductionNeeded()` return `MAX_INT`, which exits the loop.) Fix: cap completions per
+   city-turn (50) + a defensive break/re-decide flag when no production gets established, both
+   logging gated `[CIT/spin]` lines (FinalRelease-visible). A stale advisory value now degrades
+   to one logged idle city-turn instead of a hang. Note: `pushOrder` already live-validates via
+   `canConstruct`/`canTrain` — but those read the same caches, so correct invalidation (step 2)
+   is the real fix and the cap is the backstop.
+2. **Pilot tenants: building values + the three `canConstruct` caches** (~4.4 s/turn measured —
+   the CABV half of the choose cost). Sequenced deliberately in three sub-steps, one measured
+   cycle each:
+   - **(a) Retention policy — SHIPPED + VERIFIED 2026-06-10:** the per-turn
+     `AI_FlushBuildingValueCache()` in `CvCity::doTurn` is a staggered periodic refresh
+     (`BUILDING_VALUE_REFRESH_PERIOD = 4`, offset by city id); the cache stays **complete**
+     between refreshes. `setHasBuilding` still flushes immediately. Measured over 6 turns:
+     **0 `[CIT/spin]`**, doTurn ~20.6 → ~18.6 s/turn, CABV −40% (4.4 → 2.7 s/turn). The
+     residual CABV is event-driven (~190 completions/turn each retain-flush their city), so
+     the refinement for phase (c) is invalidation granularity: completions rebuild the
+     candidate SET only (cheap via the enabler index) while VALUES age out on the period.
+   - **(b) was re-aimed by measurement:** the scoring half turned out to be a **second
+     un-migrated legacy O(buildings²) enabler sweep** in `AI_scoreBuildingsFromListThreshold`
+     (same pattern the PreLoop shed in PR #314). Migrated to `getBuildingsEnabledBy` with the
+     legacy trigger-triple kept verbatim → scored values unchanged. The score-once memo as a
+     repository datum is deferred until this is measured — removing work beats caching it.
+   - **(c) Absorb the legacy caches** (`CvPlayer::m_bCanConstruct[]`, `CvCity::m_bCanConstruct`,
+     `BuildingValueCache`) into the repositories, replacing the flush cascade — after (a)+(b)
+     are proven in play; includes the granularity refinement from (a).
+3. **Score-once memoization** (~4.6 s/turn measured — same size as step 2!): the
+   `[PERF/choose]` data shows `AI_scoreBuildingsFromListThreshold` runs ~8.5× per choose (once
+   per focus-flag cascade rule), re-gathering candidates and re-running focus-independent
+   per-building production math every time. Memoize the candidate list + production-turns per
+   value-cache lifetime as a City-repository datum; per-focus scoring then reads cached values.
+   The enabler index (`getBuildingsEnabledBy`) gives targeted invalidation on completion.
+   (The previously planned "gate process-running cities" lever is DEAD: measured 5/980 chooses —
+   S2S cities always have buildings available; 77% of chooses are legitimate empty-queue
+   decisions after a completion.)
+4. **Absorb the `AI_doTurnPre` blanket clears** (tech value, civic value, bonus value, needed
+   counts) one at a time → event-driven behind the same pattern.
+5. **`recalculateAllResourceConsumption` → event-driven** (consumption moves only on building/
+   bonus/city changes).
+6. **Parallel read pass** (north-star §4): precompute, enter the read-only phase, fan the value
+   calc across Win32 threads with a deterministic reduction.
 
 ---
 
 ## 7. Data-source inventory (candidates to absorb)
 
-Per-city: constructible set (PreLoop), building values, best-build, workers-needed, yield/commerce
-base rates. Per-player: tech value (`m_cachedTechValues`), civic value (`m_aiCivicValueCache`),
-needed buildings (`m_numBuildingsNeeded`), bonus value (`AI_updateBonusValue`), promotion value
-(`AI_promotionValue`), area unit-AI counts, mission targets (`m_missionTargetCache`), plot danger
-(`plotDangerCache`). Per-team: tech/obsolete sets. Global: prereq reverse-indices, enabler graph.
+Per-city: constructible set, building values, best-build, workers-needed, yield/commerce base
+rates. Per-player: tech value (`m_cachedTechValues`), civic value (`m_aiCivicValueCache`), needed
+buildings (`m_numBuildingsNeeded`), bonus value (`AI_updateBonusValue`), promotion value, area
+unit-AI counts, mission targets, plot danger. Per-team: tech/obsolete sets. Static (already in
+GC): prereq reverse-indices, enabler graph.
 
 ---
 
 ## 8. What this unlocks beyond perf — city-declared needs (worker AI)
 
-The City-level repository is the natural home for **a city's declared needs** — the plots/yields it
-wants (food when starving, production, a specific bonus, etc.). That is itself a derived datum:
-computed from the city's state, change-driven (re-derive when pop/plots/buildings change), and read
-by others rather than recomputed by each consumer.
+The City-level repository is the natural home for **a city's declared needs** — the plots/yields
+it wants (food when starving, production, a specific bonus). Cities publish needs into the
+repository; the per-player worker AI (`CvWorkerAI`) reads across all cities' published needs to
+decide what to improve and where (memory/plan: `city-driven-worker-valuation`). One mechanism, two
+payoffs: speed + better AI coordination. Aligns with lifting unit decisions to per-player
+orchestration (`ai-unit-movement-to-player-level`).
 
-This moves us toward the existing **city-driven worker valuation** strategy (memory
-`city-driven-worker-valuation`): instead of a worker being *linked to* a city and pulling its
-to-do list from that one city, **cities publish their needs into the City-level repository, and the
-per-player worker AI (`CvWorkerAI`) reads across all cities' published needs** to decide what to
-improve and where. The repository decouples "what a city wants" (city level, computed once, cached)
-from "which worker does it" (player level, the existing claim ledger), and removes the per-worker,
-per-city recomputation of need.
+## 9. Decisions — resolved & open
 
-So the same pattern that fixes the building-value `PreLoop` cost also provides the substrate for
-city-needs-driven worker/improvement valuation — one mechanism, two payoffs (speed + better AI
-coordination). It also aligns with the north-star of lifting unit decisions from per-`CvUnit` to
-per-`CvPlayer` orchestration (`ai-unit-movement-to-player-level`).
+Resolved:
+- **Placement:** base objects (`dataRepository()`), not the AI subclasses. Done.
+- **Mechanics:** per-member `TLazy` idiom + automatic registration; no central registry for now.
+- **Cross-level staleness:** version pull (`TDependency`), not invalidation fan-out.
+- **Constructible-set style:** bounded staleness (max age) + prompt events, not event-exact.
+- **Verification channel:** gated `[PERF]` logging, not asserts.
 
-## 9. Open decisions
-
-- Per-member `TLazy<T>` idiom vs a central registry from day one — recommend idiom first, registry
-  later.
-- How precise to make subscriptions (per-datum events vs coarse scope invalidation) — start
-  per-datum where cheap, coarse where the dependency is broad.
-- Whether to keep the per-turn `BuildingValueCache` delete as the backstop or move fully
-  event-driven (the delete is what makes it safe today; keep until event hooks are proven complete).
+Open:
+- Per-datum event endpoints vs coarse scope invalidation where a dependency is broad — decide per
+  tenant.
+- When (if ever) the per-member idiom gets repetitive enough to justify a central event registry.
 
 ## Cross-references
-- [`turn-time-optimization.md`](turn-time-optimization.md) — the measurements that motivate this.
+- [`turn-time-optimization.md`](turn-time-optimization.md) — the measurements; current lever ranking.
+- [`unified-prerequisites-and-constructibility.md`](unified-prerequisites-and-constructibility.md) —
+  the static enabler index (#195) that killed the PreLoop.
 - Memory: `turn-time-optimization`, `city-driven-worker-valuation`, `ai-unit-movement-to-player-level`.
