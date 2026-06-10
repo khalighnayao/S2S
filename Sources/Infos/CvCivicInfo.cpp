@@ -10,6 +10,7 @@
 #include "CvGlobals.h"
 #include "CvInfos.h"
 #include "CvInfoUtil.h"
+#include "CvMap.h"
 #include "CvPlayerAI.h"
 #include "CvPython.h"
 #include "CvXMLLoadUtility.h"
@@ -1123,8 +1124,8 @@ int CvCivicInfo::getCityLimit(PlayerTypes ePlayer) const
 {
 	if (ePlayer > NO_PLAYER && GC.getGame().isOption(GAMEOPTION_EXP_OVEREXPANSION_PENALTIES))
 	{
-		const int iAdaptID = GC.getInfoTypeForString("ADAPT_SCALE_CITY_LIMITS");
-		return GET_PLAYER(ePlayer).getGameObject()->adaptValueToGame(iAdaptID , m_iCityLimit);
+		// Larger maps allow more cities before overexpansion penalties kick in.
+		return m_iCityLimit * GC.getWorldInfo(GC.getMap().getWorldSize()).getCityLimitsScalePercent() / 100;
 	}
 	return 0;
 }

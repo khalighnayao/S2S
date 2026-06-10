@@ -59,9 +59,16 @@ un-migrated classes are a harmless no-op. `CvBuildInfo` is the fully-migrated re
 1. **2D `m_ppi` arrays** (`int**`) — blocks Civic, Improvement, Property, Trait.
 2. **Non-FK `IDValueMap`** keyed by plain `int` (e.g. `IDValueMapPercent = IDValueMap<int,int,100>`)
    — `.add(IDValueMap)` instantiates `InfoClassTraits<int>`, which doesn't exist → won't compile.
-   Blocks e.g. `CvWorldInfo`.
 3. **Delayed-resolution enum-as-int** — `addEnumAsInt` is immediate-only, so an `int` FK that
    used `addDelayedResolution` (e.g. `CvVoteSourceInfo::m_iCivic`) can't use it yet.
+
+**Before writing a new wrapper, check whether the data structure should exist at all.**
+`CvWorldInfo` was "blocked" by (2) until inspection showed its `Percents` map held exactly one
+ID (`ADAPT_SCALE_CITY_LIMITS`) across all data — so the map was replaced by a named scalar
+field `iCityLimitsScalePercent` (read directly by `CvCivicInfo::getCityLimit`; the WorldInfo
+leg of `adaptValueToGame` was removed) and the class migrated with plain `.add()` calls.
+Owner ruling: **restructuring data into something descriptive and uniform beats preserving an
+odd structure and special-casing the loader for it.**
 
 ## Migration recipe (per class)
 
@@ -74,9 +81,27 @@ un-migrated classes are a harmless no-op. `CvBuildInfo` is the fully-migrated re
 6. Build (`Tools/_Build.ps1 Assert build`), then load-verify: `Logs/XmlLoad.log` per-category
    count unchanged, **no** `Logs/Xml_MissingTypes.log`, no asserts.
 
-## Keeping it byte-identical (the pitfalls)
+## Checksum parity: what it buys and when to drop it
 
-The checksum feeds OOS/sync and save-vs-XML detection, so a migration must reproduce it exactly.
+**What the info checksums are actually for** (traced 2026-06): every info's `getCheckSum`
+folds into one asset checksum (`cvInternalGlobals::getAssetCheckSum`, logged per-info to
+`Logs/Checksum.log`), which is stored in every savegame and compared on load
+(`CvInitCore::checkVersions`). On mismatch the game offers the **modifier-recalculation
+popup** — that is the checksum's *only* consumer. It does **not** feed multiplayer OOS
+detection, and it never blocks loading.
+
+**Owner ruling (2026-06-10): full parity between old and new structure is NOT required.**
+The bar is that the game gets correct data; a uniform, descriptive structure beats
+preserving a legacy quirk. The cost of a checksum change is exactly one spurious recalc
+prompt per existing save — acceptable. So: restructure freely when the structure is the
+problem, and don't contort `getDataMembers` to reproduce a legacy checksum.
+
+Parity is still *useful* when it's free: an unchanged `Checksum.log` before/after a pure
+migration proves the declarative path read identical data, and the first diverging info in
+the log localizes a regression. Keep parity when you're only changing the loader, not the
+data model — which is what the pitfalls below are for.
+
+## Keeping it byte-identical (the pitfalls, for pure-loader migrations)
 
 - **Declare in `getCheckSum` ORDER, not read order.** `checkSum()` iterates wrappers in
   declaration order; `readXml` order is irrelevant to values. CvString fields contribute nothing
@@ -98,6 +123,7 @@ The checksum feeds OOS/sync and save-vs-XML detection, so a migration must repro
 ## Status (2026-06)
 
 `CvBuildInfo` fully migrated (reference). Incremental per-class migration in flight under #196;
-27 classes migrated + ~15 empty-stub sub-issues closed as no-work so far. Authoritative class
+28 classes migrated (incl. `CvWorldInfo` via the Percents→named-field restructure, #310)
++ ~15 empty-stub sub-issues closed as no-work so far. Authoritative class
 list = `EXPAND_FOR_EACH_INFO_CLASS` in `CvInfoClassTraits.h`. Related: prerequisite unification
 is #195; the broader load-coherence background is in the bool-list flattening work.

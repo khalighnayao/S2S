@@ -203,6 +203,7 @@
 	<ElementType name="iTerrainGrainChange" content="textOnly" dt:type="int"/>
 	<ElementType name="iFeatureGrainChange" content="textOnly" dt:type="int"/>
 	<ElementType name="iOceanMinAreaSize" content="textOnly" dt:type="int"/>
+	<ElementType name="iCityLimitsScalePercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iResearchPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iTradeProfitPercent" content="textOnly" dt:type="int"/>
 	<ElementType name="iDistanceMaintenancePercent" content="textOnly" dt:type="int"/>
@@ -283,6 +284,7 @@
 		<element type="iAdvancedStartPointsMod" minOccurs="0"/>
 		<element type="iCommandersLevelThresholdsPercent" minOccurs="0"/>
 		<element type="iOceanMinAreaSize" minOccurs="0"/>
+		<element type="iCityLimitsScalePercent" minOccurs="0"/>
 	</ElementType>
 	<ElementType name="WorldInfos" content="eltOnly">
 		<element type="WorldInfo" maxOccurs="*"/>
