@@ -130,6 +130,8 @@ public:
 	int getNumOnGameOptions() const;
 	bool isOnGameOption(int i) const;
 
+	void getDataMembers(CvInfoUtil& util);
+
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvEventTriggerInfo* pClassInfo);

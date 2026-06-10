@@ -28,61 +28,6 @@
 //
 //
 CvEventInfo::CvEventInfo() :
-	m_bQuest(false),
-	m_bGlobal(false),
-	m_bTeam(false),
-	m_bCityEffect(false),
-	m_bOtherPlayerCityEffect(false),
-	m_bGoldToPlayer(false),
-	m_bGoldenAge(false),
-	m_bDeclareWar(false),
-	m_bDisbandUnit(false),
-	m_bGameSpeedScale(false),
-	m_iGold(0),
-	m_iRandomGold(0),
-	m_iCulture(0),
-	m_iEspionagePoints(0),
-	m_iTech(NO_TECH),
-	m_iTechPercent(0),
-	m_iTechCostPercent(0),
-	m_iTechMinTurnsLeft(0),
-	m_iPrereqTech(NO_TECH),
-	m_iFreeUnit(NO_UNIT),
-	m_iNumUnits(0),
-	m_iUnitExperience(0),
-	m_iUnitImmobileTurns(0),
-	m_iBuilding(NO_BUILDING),
-	m_iBuildingChange(0),
-	m_iHappy(0),
-	m_iHealth(0),
-	m_iHurryAnger(0),
-	m_iHappyTurns(0),
-	m_iFood(0),
-	m_iFoodPercent(0),
-	m_iFeature(NO_FEATURE),
-	m_iFeatureChange(0),
-	m_iImprovement(NO_IMPROVEMENT),
-	m_iImprovementChange(0),
-	m_iBonus(NO_BONUS),
-	m_iBonusChange(0),
-	m_iRoute(NO_ROUTE),
-	m_iRouteChange(0),
-	m_iBonusRevealed(NO_BONUS),
-	m_iBonusGift(NO_BONUS),
-	m_iConvertOwnCities(0),
-	m_iConvertOtherCities(0),
-	m_iMaxNumReligions(-1),
-	m_iOurAttitudeModifier(0),
-	m_iAttitudeModifier(0),
-	m_iTheirEnemyAttitudeModifier(0),
-	m_iPopulationChange(0),
-	m_iRevoltTurns(0),
-	m_iMinPillage(0),
-	m_iMaxPillage(0),
-	m_iFreeUnitSupport(0),
-	m_iInflationModifier(0),
-	m_iSpaceProductionModifier(0),
-	m_iAIValue(0),
 	m_piTechFlavorValue(NULL),
 	m_piPlotExtraYields(NULL),
 	m_piFreeSpecialistCount(NULL),
@@ -90,12 +35,10 @@ CvEventInfo::CvEventInfo() :
 	m_piAdditionalEventTime(NULL),
 	m_piClearEventChance(NULL),
 	m_piUnitCombatPromotions(NULL),
-	m_piUnitPromotions(NULL),
-	m_piCommerceModifier(NULL),
-	m_piYieldModifier(NULL),
-	m_iPrereqGameOption(NO_GAMEOPTION),
-	m_iRevolutionIndexChange(0)
-{ }
+	m_piUnitPromotions(NULL)
+{
+	CvInfoUtil(this).initDataMembers();
+}
 
 
 CvEventInfo::~CvEventInfo()
@@ -108,8 +51,8 @@ CvEventInfo::~CvEventInfo()
 	SAFE_DELETE_ARRAY(m_piClearEventChance);
 	SAFE_DELETE_ARRAY(m_piUnitCombatPromotions);
 	SAFE_DELETE_ARRAY(m_piUnitPromotions);
-	SAFE_DELETE_ARRAY(m_piCommerceModifier);
-	SAFE_DELETE_ARRAY(m_piYieldModifier);
+	// m_piCommerceModifier / m_piYieldModifier are owned by their addCommerce/addYields wrappers
+	CvInfoUtil(this).uninitDataMembers();
 }
 
 
@@ -733,6 +676,87 @@ int CvEventInfo::getClearEventChanceValuesVectorElement(int i) const		{ return m
 
 
 
+void CvEventInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order for readability; the checksum itself stays
+	// hand-written (see getCheckSum below), so declaration order carries no checksum weight here.
+	util
+		.add(m_bQuest, L"bQuest")
+		.add(m_bGlobal, L"bGlobal")
+		.add(m_bTeam, L"bTeam")
+		.add(m_bCityEffect, L"bPickCity")
+		.add(m_bOtherPlayerCityEffect, L"bPickOtherPlayerCity")
+		.add(m_bGoldToPlayer, L"bGoldToPlayer")
+		.add(m_bGoldenAge, L"bGoldenAge")
+		.add(m_bDeclareWar, L"bDeclareWar")
+		.add(m_bDisbandUnit, L"bDisbandUnit")
+		.add(m_bGameSpeedScale, L"bGameSpeedScale")
+		.add(m_iGold, L"iGold")
+		.add(m_iRandomGold, L"iRandomGold")
+		.add(m_iCulture, L"iCulture")
+		.add(m_iEspionagePoints, L"iEspionagePoints")
+		.addEnumAsInt(m_iTech, L"Tech")
+		.add(m_iTechPercent, L"iTechPercent")
+		.add(m_iTechCostPercent, L"iTechCostPercent")
+		.add(m_iTechMinTurnsLeft, L"iTechMinTurnsLeft")
+		.addEnum(m_iPrereqTech, L"PrereqTech")
+		.addEnumAsInt(m_iFreeUnit, L"FreeUnit")
+		.add(m_iNumUnits, L"iNumFreeUnits")
+		.add(m_iUnitExperience, L"iUnitExperience")
+		.add(m_iUnitImmobileTurns, L"iUnitImmobileTurns")
+		.addEnumAsInt(m_iBuilding, L"Building")
+		.add(m_iBuildingChange, L"iBuildingChange")
+		.add(m_iHappy, L"iHappy")
+		.add(m_iHealth, L"iHealth")
+		.add(m_iHurryAnger, L"iHurryAnger")
+		.add(m_iHappyTurns, L"iHappyTurns")
+		.add(m_iFood, L"iFood")
+		.add(m_iFoodPercent, L"iFoodPercent")
+		.addEnumAsInt(m_iFeature, L"FeatureType")
+		.add(m_iFeatureChange, L"iFeatureChange")
+		.addEnum(m_iImprovement, L"ImprovementType")
+		.add(m_iImprovementChange, L"iImprovementChange")
+		.addEnumAsInt(m_iBonus, L"BonusType")
+		.add(m_iBonusChange, L"iBonusChange")
+		.addEnumAsInt(m_iRoute, L"RouteType")
+		.add(m_iRouteChange, L"iRouteChange")
+		.addEnumAsInt(m_iBonusRevealed, L"BonusRevealed")
+		.addEnumAsInt(m_iBonusGift, L"BonusGift")
+		.add(m_iConvertOwnCities, L"iConvertOwnCities")
+		.add(m_iConvertOtherCities, L"iConvertOtherCities")
+		.add(m_iMaxNumReligions, L"iMaxNumReligions", -1)
+		.add(m_iOurAttitudeModifier, L"iOurAttitudeModifier")
+		.add(m_iAttitudeModifier, L"iAttitudeModifier")
+		.add(m_iTheirEnemyAttitudeModifier, L"iTheirEnemyAttitudeModifier")
+		.add(m_iPopulationChange, L"iPopulationChange")
+		.add(m_iRevoltTurns, L"iRevoltTurns")
+		.add(m_iMinPillage, L"iMinPillage")
+		.add(m_iMaxPillage, L"iMaxPillage")
+		.add(m_iFreeUnitSupport, L"iFreeUnitSupport")
+		.add(m_iInflationModifier, L"iInflationMod")
+		.add(m_iSpaceProductionModifier, L"iSpaceProductionMod")
+		.add(m_iAIValue, L"iAIValue")
+		.addEnumAsInt(m_iPrereqGameOption, L"PrereqGameOption")
+		.add(m_iRevolutionIndexChange, L"iRevolutionIndexChange")
+		// Read but deliberately absent from the legacy checksum — keeping the hand-written
+		// getCheckSum below preserves that omission.
+		.addCommerce(m_piCommerceModifier, L"CommerceModifiers")
+		.addYields(m_piYieldModifier, L"YieldModifiers")
+		.add(m_szPythonCallback, L"PythonCallback")
+		.add(m_szPythonExpireCheck, L"PythonExpireCheck")
+		.add(m_szPythonCanDo, L"PythonCanDo")
+		.add(m_szPythonHelp, L"PythonHelp")
+	;
+}
+
+
+// Kept fully hand-written (NOT delegated to CvInfoUtil) to preserve the legacy asset checksum
+// byte-for-byte:
+//  - hand-written fields (SetVariableListTagPair arrays, building change vectors, CvProperties)
+//    sit mid-order between declarative fields;
+//  - the python callback CvStrings ARE folded in here via CheckSumC, which the declarative
+//    StringWrapper cannot reproduce (its checkSum is a no-op);
+//  - m_piCommerceModifier / m_piYieldModifier are read but deliberately omitted here.
 void CvEventInfo::getCheckSum(uint32_t& iSum) const
 {
 	PROFILE_EXTRA_FUNC();
@@ -852,101 +876,11 @@ bool CvEventInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(&m_bQuest, L"bQuest");
-	pXML->GetOptionalChildXmlValByName(&m_bGlobal, L"bGlobal");
-	pXML->GetOptionalChildXmlValByName(&m_bTeam, L"bTeam");
-	pXML->GetOptionalChildXmlValByName(&m_bCityEffect, L"bPickCity");
-	pXML->GetOptionalChildXmlValByName(&m_bOtherPlayerCityEffect, L"bPickOtherPlayerCity");
-	pXML->GetOptionalChildXmlValByName(&m_bGoldToPlayer, L"bGoldToPlayer");
-	pXML->GetOptionalChildXmlValByName(&m_bGoldenAge, L"bGoldenAge");
-	pXML->GetOptionalChildXmlValByName(&m_bDeclareWar, L"bDeclareWar");
-	pXML->GetOptionalChildXmlValByName(&m_iGold, L"iGold");
-	pXML->GetOptionalChildXmlValByName(&m_iRandomGold, L"iRandomGold");
-	pXML->GetOptionalChildXmlValByName(&m_iCulture, L"iCulture");
-	pXML->GetOptionalChildXmlValByName(&m_iEspionagePoints, L"iEspionagePoints");
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"Tech");
-	m_iTech = pXML->GetInfoClass(szTextVal);
-	pXML->GetOptionalChildXmlValByName(&m_iTechPercent, L"iTechPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iTechCostPercent, L"iTechCostPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iTechMinTurnsLeft, L"iTechMinTurnsLeft");
-	pXML->GetOptionalTypeEnum(m_iPrereqTech, L"PrereqTech");
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"FreeUnit");
-	m_iFreeUnit = pXML->GetInfoClass(szTextVal);
-	pXML->GetOptionalChildXmlValByName(&m_iNumUnits, L"iNumFreeUnits");
-	pXML->GetOptionalChildXmlValByName(&m_bDisbandUnit, L"bDisbandUnit");
-	pXML->GetOptionalChildXmlValByName(&m_bGameSpeedScale, L"bGameSpeedScale");
-	pXML->GetOptionalChildXmlValByName(&m_iUnitExperience, L"iUnitExperience");
-	pXML->GetOptionalChildXmlValByName(&m_iUnitImmobileTurns, L"iUnitImmobileTurns");
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"Building");
-	m_iBuilding = pXML->GetInfoClass(szTextVal);
-	pXML->GetOptionalChildXmlValByName(&m_iBuildingChange, L"iBuildingChange");
-
-	pXML->GetOptionalChildXmlValByName(&m_iHappy, L"iHappy");
-	pXML->GetOptionalChildXmlValByName(&m_iHealth, L"iHealth");
-	pXML->GetOptionalChildXmlValByName(&m_iHurryAnger, L"iHurryAnger");
-	pXML->GetOptionalChildXmlValByName(&m_iHappyTurns, L"iHappyTurns");
-	pXML->GetOptionalChildXmlValByName(&m_iFood, L"iFood");
-	pXML->GetOptionalChildXmlValByName(&m_iFoodPercent, L"iFoodPercent");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"FeatureType");
-	m_iFeature = pXML->GetInfoClass(szTextVal);
-	pXML->GetOptionalChildXmlValByName(&m_iFeatureChange, L"iFeatureChange");
-
-	pXML->GetOptionalTypeEnum(m_iImprovement, L"ImprovementType");
-	pXML->GetOptionalChildXmlValByName(&m_iImprovementChange, L"iImprovementChange");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"BonusType");
-	m_iBonus = pXML->GetInfoClass(szTextVal);
-	pXML->GetOptionalChildXmlValByName(&m_iBonusChange, L"iBonusChange");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"RouteType");
-	m_iRoute = pXML->GetInfoClass(szTextVal);
-	pXML->GetOptionalChildXmlValByName(&m_iRouteChange, L"iRouteChange");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"BonusRevealed");
-	m_iBonusRevealed = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"BonusGift");
-	m_iBonusGift = pXML->GetInfoClass(szTextVal);
+	CvInfoUtil(this).readXml(pXML);
 
 	pXML->SetVariableListTagPair(&m_piTechFlavorValue, L"TechFlavors", GC.getNumFlavorTypes());
 	pXML->SetVariableListTagPair(&m_piPlotExtraYields, L"PlotExtraYields", NUM_YIELD_TYPES, 0);
 	pXML->SetVariableListTagPair(&m_piFreeSpecialistCount, L"FreeSpecialistCounts", GC.getNumSpecialistInfos());
-
-	pXML->GetOptionalChildXmlValByName(&m_iConvertOwnCities, L"iConvertOwnCities");
-	pXML->GetOptionalChildXmlValByName(&m_iConvertOtherCities, L"iConvertOtherCities");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxNumReligions, L"iMaxNumReligions", -1);
-	pXML->GetOptionalChildXmlValByName(&m_iOurAttitudeModifier, L"iOurAttitudeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iAttitudeModifier, L"iAttitudeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iTheirEnemyAttitudeModifier, L"iTheirEnemyAttitudeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iPopulationChange, L"iPopulationChange");
-	pXML->GetOptionalChildXmlValByName(&m_iRevoltTurns, L"iRevoltTurns");
-	pXML->GetOptionalChildXmlValByName(&m_iMinPillage, L"iMinPillage");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxPillage, L"iMaxPillage");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeUnitSupport, L"iFreeUnitSupport");
-	pXML->GetOptionalChildXmlValByName(&m_iInflationModifier, L"iInflationMod");
-	pXML->GetOptionalChildXmlValByName(&m_iSpaceProductionModifier, L"iSpaceProductionMod");
-	pXML->GetOptionalChildXmlValByName(&m_iAIValue, L"iAIValue");
-
-	if (pXML->TryMoveToXmlFirstChild(L"CommerceModifiers"))
-	{
-		pXML->SetCommerce(&m_piCommerceModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCommerceModifier);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"YieldModifiers"))
-	{
-		pXML->SetYields(&m_piYieldModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piYieldModifier);
-	}
 
 	CvString* pszPromotions = NULL;
 	FAssertMsg(NULL == m_piUnitCombatPromotions, "Memory leak");
@@ -980,11 +914,6 @@ bool CvEventInfo::read(CvXMLLoadUtility* pXML)
 
 	m_Properties.read(pXML);
 	m_PropertiesAllCities.read(pXML, L"PropertiesAllCities");
-
-	pXML->GetOptionalChildXmlValByName(m_szPythonCallback, L"PythonCallback");
-	pXML->GetOptionalChildXmlValByName(m_szPythonExpireCheck, L"PythonExpireCheck");
-	pXML->GetOptionalChildXmlValByName(m_szPythonCanDo, L"PythonCanDo");
-	pXML->GetOptionalChildXmlValByName(m_szPythonHelp, L"PythonHelp");
 
 	m_aszWorldNews.clear();
 	if (pXML->TryMoveToXmlFirstChild(L"WorldNewsTexts"))
@@ -1191,10 +1120,6 @@ bool CvEventInfo::read(CvXMLLoadUtility* pXML)
 
 		pXML->MoveToXmlParent();
 	}
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PrereqGameOption");
-	m_iPrereqGameOption = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(&m_iRevolutionIndexChange, L"iRevolutionIndexChange");
 
 	if (pXML->TryMoveToXmlFirstChild(L"AdditionalEvents"))
 	{
@@ -1291,58 +1216,13 @@ bool CvEventInfo::read(CvXMLLoadUtility* pXML)
 void CvEventInfo::copyNonDefaults(const CvEventInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	CvString szTextVal;
-
-	bool bDefault = false;
-	int iDefault = 0;
-	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	CvString cDefault = CvString::format("").GetCString();
-	CvWString wDefault = CvWString::format(L"").GetCString();
+	const int iDefault = 0;
+	const int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
+	const CvWString wDefault = CvWString::format(L"").GetCString();
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (isQuest() == bDefault) m_bQuest = pClassInfo->isQuest();
-	if (isGlobal() == bDefault) m_bGlobal = pClassInfo->isGlobal();
-	if (isTeam() == bDefault) m_bTeam = pClassInfo->isTeam();
-	if (isCityEffect() == bDefault) m_bCityEffect = pClassInfo->isCityEffect();
-	if (isOtherPlayerCityEffect() == bDefault) m_bOtherPlayerCityEffect = pClassInfo->isOtherPlayerCityEffect();
-	if (isGoldToPlayer() == bDefault) m_bGoldToPlayer = pClassInfo->isGoldToPlayer();
-	if (isGoldenAge() == bDefault) m_bGoldenAge = pClassInfo->isGoldenAge();
-	if (isDeclareWar() == bDefault) m_bDeclareWar = pClassInfo->isDeclareWar();
-
-	if (getGold() == iDefault) m_iGold = pClassInfo->getGold();
-	if (getRandomGold() == iDefault) m_iRandomGold = pClassInfo->getRandomGold();
-	if (getCulture() == iDefault) m_iCulture = pClassInfo->getCulture();
-	if (getEspionagePoints() == iDefault) m_iEspionagePoints = pClassInfo->getEspionagePoints();
-	if (getTech() == iTextDefault) m_iTech = pClassInfo->getTech();
-	if (getTechPercent() == iDefault) m_iTechPercent = pClassInfo->getTechPercent();
-	if (getTechCostPercent() == iDefault) m_iTechCostPercent = pClassInfo->getTechCostPercent();
-	if (getTechMinTurnsLeft() == iDefault) m_iTechMinTurnsLeft = pClassInfo->getTechMinTurnsLeft();
-	if (getPrereqTech() == iTextDefault) m_iPrereqTech = pClassInfo->getPrereqTech();
-	if (getFreeUnit() == iTextDefault) m_iFreeUnit = pClassInfo->getFreeUnit();
-	if (getNumUnits() == iDefault) m_iNumUnits = pClassInfo->getNumUnits();
-	if (m_bDisbandUnit == bDefault) m_bDisbandUnit = pClassInfo->isDisbandUnit();
-	if (m_bGameSpeedScale == bDefault) m_bGameSpeedScale = pClassInfo->isGameSpeedScale();
-	if (getUnitExperience() == iDefault) m_iUnitExperience = pClassInfo->getUnitExperience();
-	if (getUnitImmobileTurns() == iDefault) m_iUnitImmobileTurns = pClassInfo->getUnitImmobileTurns();
-	if (getBuilding() == iTextDefault) m_iBuilding = pClassInfo->getBuilding();
-	if (getBuildingChange() == iDefault) m_iBuildingChange = pClassInfo->getBuildingChange();
-	if (getHappy() == iDefault) m_iHappy = pClassInfo->getHappy();
-	if (getHealth() == iDefault) m_iHealth = pClassInfo->getHealth();
-	if (getHurryAnger() == iDefault) m_iHurryAnger = pClassInfo->getHurryAnger();
-	if (getHappyTurns() == iDefault) m_iHappyTurns = pClassInfo->getHappyTurns();
-	if (getFood() == iDefault) m_iFood = pClassInfo->getFood();
-	if (getFoodPercent() == iDefault) m_iFoodPercent = pClassInfo->getFoodPercent();
-	if (getFeature() == iTextDefault) m_iFeature = pClassInfo->getFeature();
-	if (getFeatureChange() == iDefault) m_iFeatureChange = pClassInfo->getFeatureChange();
-	if (getImprovement() == iTextDefault) m_iImprovement = pClassInfo->getImprovement();
-	if (getImprovementChange() == iDefault) m_iImprovementChange = pClassInfo->getImprovementChange();
-	if (getBonus() == iTextDefault) m_iBonus = pClassInfo->getBonus();
-	if (getBonusChange() == iDefault) m_iBonusChange = pClassInfo->getBonusChange();
-	if (getRouteChange() == iDefault) m_iRouteChange = pClassInfo->getRouteChange();
-	if (getRoute() == iTextDefault) m_iRoute = pClassInfo->getRoute();
-	if (getBonusRevealed() == iTextDefault) m_iBonusRevealed = pClassInfo->getBonusRevealed();
-	if (getBonusGift() == iTextDefault) m_iBonusGift = pClassInfo->getBonusGift();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	for ( int i = 0; i < GC.getNumFlavorTypes(); i++)
 	{
@@ -1355,27 +1235,8 @@ void CvEventInfo::copyNonDefaults(const CvEventInfo* pClassInfo)
 			m_piTechFlavorValue[i] = pClassInfo->getTechFlavorValue(i);
 		}
 	}
-	for ( int j = 0; j < NUM_COMMERCE_TYPES; j++)
-	{
-		if ( getCommerceModifier(j) == iDefault && pClassInfo->getCommerceModifier(j) != iDefault)
-		{
-			if ( NULL == m_piCommerceModifier )
-			{
-				CvXMLLoadUtility::InitList(&m_piCommerceModifier,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_piCommerceModifier[j] = pClassInfo->getCommerceModifier(j);
-		}
-	}
 	for ( int i = 0; i < NUM_YIELD_TYPES; i++)
 	{
-		if ( getYieldModifier(i) == iDefault && pClassInfo->getYieldModifier(i) != iDefault)
-		{
-			if ( NULL == m_piYieldModifier )
-			{
-				CvXMLLoadUtility::InitList(&m_piYieldModifier,NUM_YIELD_TYPES,iDefault);
-			}
-			m_piYieldModifier[i] = pClassInfo->getYieldModifier(i);
-		}
 		if (getPlotExtraYield(i) == iDefault && pClassInfo->getPlotExtraYield(i) != iDefault)
 		{
 			if ( NULL == m_piPlotExtraYields )
@@ -1396,21 +1257,6 @@ void CvEventInfo::copyNonDefaults(const CvEventInfo* pClassInfo)
 			m_piFreeSpecialistCount[i] = pClassInfo->getFreeSpecialistCount(i);
 		}
 	}
-
-	if (getConvertOwnCities() == iDefault) m_iConvertOwnCities = pClassInfo->getConvertOwnCities();
-	if (getConvertOtherCities() == iDefault) m_iConvertOtherCities = pClassInfo->getConvertOtherCities();
-	if (getMaxNumReligions() == -1) m_iMaxNumReligions = pClassInfo->getMaxNumReligions();
-	if (getOurAttitudeModifier() == iDefault) m_iOurAttitudeModifier = pClassInfo->getOurAttitudeModifier();
-	if (getAttitudeModifier() == iDefault) m_iAttitudeModifier = pClassInfo->getAttitudeModifier();
-	if (getTheirEnemyAttitudeModifier() == iDefault) m_iTheirEnemyAttitudeModifier = pClassInfo->getTheirEnemyAttitudeModifier();
-	if (getPopulationChange() == iDefault) m_iPopulationChange = pClassInfo->getPopulationChange();
-	if (getRevoltTurns() == iDefault) m_iRevoltTurns = pClassInfo->getRevoltTurns();
-	if (getMinPillage() == iDefault) m_iMinPillage = pClassInfo->getMinPillage();
-	if (getMaxPillage() == iDefault) m_iMaxPillage = pClassInfo->getMaxPillage();
-	if (getFreeUnitSupport() == iDefault) m_iFreeUnitSupport = pClassInfo->getFreeUnitSupport();
-	if (getInflationModifier() == iDefault) m_iInflationModifier = pClassInfo->getInflationModifier();
-	if (getSpaceProductionModifier() == iDefault) m_iSpaceProductionModifier = pClassInfo->getSpaceProductionModifier();
-	if (getAIValue() == iDefault) m_iAIValue = pClassInfo->getAIValue();
 
 	for (int i = 0; i < GC.getNumUnitCombatInfos(); ++i)
 	{
@@ -1435,11 +1281,6 @@ void CvEventInfo::copyNonDefaults(const CvEventInfo* pClassInfo)
 
 	m_Properties.copyNonDefaults(pClassInfo->getProperties());
 	m_PropertiesAllCities.copyNonDefaults(pClassInfo->getPropertiesAllCities());
-
-	if (getPythonCallback() == cDefault) m_szPythonCallback = pClassInfo->getPythonCallback();
-	if (getPythonExpireCheck() == cDefault) m_szPythonExpireCheck = pClassInfo->getPythonExpireCheck();
-	if (getPythonCanDo() == cDefault) m_szPythonCanDo = pClassInfo->getPythonCanDo();
-	if (getPythonHelp() == cDefault) m_szPythonHelp = pClassInfo->getPythonHelp();
 
 	CvWString szwTextVal;
 	for ( int i = 0; i < pClassInfo->getNumWorldNews(); i++)
@@ -1567,9 +1408,6 @@ void CvEventInfo::copyNonDefaults(const CvEventInfo* pClassInfo)
 			}
 		}
 	}
-
-	if (getPrereqGameOption() == iTextDefault) m_iPrereqGameOption = pClassInfo->getPrereqGameOption();
-	if (getRevolutionIndexChange() == iDefault) m_iRevolutionIndexChange = pClassInfo->getRevolutionIndexChange();
 
 	for ( int i = 0; i < pClassInfo->getAdditionalEventChanceVectorSize(); i++ )
 	{
