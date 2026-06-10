@@ -33,252 +33,37 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvBuildingInfo::CvBuildingInfo() :
-m_iMaxGlobalInstances(-1),
-m_iMaxTeamInstances(-1),
-m_iMaxPlayerInstances(-1),
-m_iExtraPlayerInstances(0),
-m_piVictoryThreshold(NULL),
-m_iDCMAirbombMission(0),
-m_bNoLimit(false),
-m_iVictoryPrereq(NO_VICTORY),
-m_iFreeStartEra(NO_ERA),
-m_iMaxStartEra(NO_ERA),
-m_iObsoleteTech(NO_TECH),
-m_iPrereqAndTech(NO_TECH),
-m_iPowerBonus(NO_BONUS),
-m_iFreeBuilding(NO_BUILDING),
-m_iFreeAreaBuilding(NO_BUILDING),
-m_iCivicOption(NO_CIVICOPTION),
-m_iAIWeight(0),
-m_iProductionCost(-1),
-m_iProductionCostSize(-1),
-m_iProductionCostCount(-1),
-m_iProductionCostMaterials(-1),
-m_iProductionCostComplexity(-1),
-m_iHurryCostModifier(0),
-m_iHurryAngerModifier(0),
-m_iMinAreaSize(0),
-m_iNumCitiesPrereq(0),
-m_iNumTeamsPrereq(0),
-m_iUnitLevelPrereq(0),
-m_iMinLatitude(0),
-m_iMaxLatitude(90),
-m_iGreatPeopleRateModifier(0),
-m_iGreatGeneralRateModifier(0),
-m_iDomesticGreatGeneralRateModifier(0),
-m_iGlobalGreatPeopleRateModifier(0),
-m_iAnarchyModifier(0),
-m_iGoldenAgeModifier(0),
-m_iGlobalHurryModifier(0),
-m_iFreeExperience(0),
-m_iGlobalFreeExperience(0),
-m_iFoodKept(0),
-m_iAirlift(0),
-m_iAirModifier(0),
-m_iAirUnitCapacity(0),
-m_iNukeModifier(0),
-m_iNukeExplosionRand(0),
-m_iFreeSpecialist(0),
-m_iAreaFreeSpecialist(0),
-m_iGlobalFreeSpecialist(0),
-m_iHappiness(0),
-m_iAreaHappiness(0),
-m_iGlobalHappiness(0),
-m_iStateReligionHappiness(0),
-m_iWorkerSpeedModifier(0),
-m_iMilitaryProductionModifier(0),
-m_iSpaceProductionModifier(0),
-m_iGlobalSpaceProductionModifier(0),
-m_iTradeRoutes(0),
-m_iCoastalTradeRoutes(0),
-m_iGlobalTradeRoutes(0),
-m_iTradeRouteModifier(0),
-m_iForeignTradeRouteModifier(0),
-m_iAssetValue(0),
-m_iPowerValue(0),
-m_eSpecialBuilding(NO_SPECIALBUILDING),
-m_iAdvisorType(NO_ADVISOR),
-
-m_iPrereqGameOption(NO_GAMEOPTION),
-m_iNotGameOption(NO_GAMEOPTION),
-
-m_iHolyCity(NO_RELIGION),
-m_iReligionType(NO_RELIGION),
-m_iStateReligion(NO_RELIGION),
-m_iPrereqReligion(NO_RELIGION),
-m_iPrereqCorporation(NO_CORPORATION),
-m_iFoundsCorporation(NO_CORPORATION),
-m_iGlobalReligionCommerce(NO_RELIGION),
-m_iGlobalCorporationCommerce(NO_CORPORATION),
-m_iPrereqAndBonus(NO_BONUS),
-m_iGreatPeopleUnitType(NO_UNIT),
-m_iGreatPeopleRateChange(0),
-m_iConquestProbability(50),
-m_iMaintenanceModifier(0),
-//DPII < Maintenance Modifier >
-m_iGlobalMaintenanceModifier(0),
-m_iAreaMaintenanceModifier(0),
-m_iOtherAreaMaintenanceModifier(0),
-m_iDistanceMaintenanceModifier(0),
-m_iNumCitiesMaintenanceModifier(0),
-m_iCoastalDistanceMaintenanceModifier(0),
-m_iConnectedCityMaintenanceModifier(0),
-//DPII < Maintenance Modifier >
-m_iWarWearinessModifier(0),
-m_iGlobalWarWearinessModifier(0),
-m_iEnemyWarWearinessModifier(0),
-m_iHealRateChange(0),
-m_iHealth(0),
-m_iAreaHealth(0),
-m_iGlobalHealth(0),
-m_iGlobalPopulationChange(0),
-m_iFreeTechs(0),
-m_eFreeSpecialTech(NO_TECH),
-m_iDefenseModifier(0),
-m_iBombardDefenseModifier(0),
-m_iAllCityDefenseModifier(0),
-m_iEspionageDefenseModifier(0),
-
-m_iUnitUpgradePriceModifier(0),
-m_iRevIdxLocal(0),
-m_iRevIdxNational(0),
-m_iRevIdxDistanceModifier(0),
-
+// Every XML-backed field declared in getDataMembers is initialized by initDataMembers()
+// below; this list holds only the runtime/derived fields, the readPass3 targets and the
+// hand-written loader remainder (see the comment in getDataMembers).
 m_iMissionType(NO_MISSION),
-m_iVoteSourceType(NO_VOTESOURCE),
-m_fVisibilityPriority(0.0f),
-m_bTeamShare(false),
-m_bWater(false),
-m_bRiver(false),
-m_bFreshWater(false),
-m_bPower(false),
-m_bOrbital(false),
-m_bOrbitalInfrastructure(false),
-m_bNoHolyCity(false),
-m_bAreaBorderObstacle(false),
-m_bForceTeamVoteEligible(false),
-m_bCapital(false),
-m_bGovernmentCenter(false),
-m_bGoldenAge(false),
-m_bMapCentering(false),
-m_bNoUnhappiness(false),
-m_bNoUnhealthyPopulation(false),
-m_bBuildingOnlyHealthy(false),
-m_bNeverCapture(false),
-m_bNukeImmune(false),
-m_bCenterInCity(false),
-m_bStateReligionInCity(false),
-m_bAllowsNukes(false),
-m_piRiverPlotYieldChange(NULL),
-m_piGlobalSeaPlotYieldChange(NULL),
-m_piYieldChange(NULL),
-m_piYieldPerPopChange(NULL),
-m_piYieldModifier(NULL),
-m_piPowerYieldModifier(NULL),
-m_piAreaYieldModifier(NULL),
-m_piGlobalYieldModifier(NULL),
-m_piCommerceChange(NULL),
-m_piCommercePerPopChange(NULL),
-m_piCommerceChangeDoubleTime(NULL),
-m_piCommerceModifier(NULL),
-m_piGlobalCommerceModifier(NULL),
-m_piSpecialistExtraCommerce(NULL),
-m_piStateReligionCommerce(NULL),
-m_piCommerceHappiness(NULL),
+m_iGreatPeopleUnitType(NO_UNIT),
+m_ePropertySpawnUnit(NO_UNIT),
+m_bNotShowInCity(false),
+m_bEnablesOtherBuildings(false),
+m_bEnablesUnits(false),
+m_bDamageAttackerCapable(false),
+m_pbCommerceFlexible(NULL),
+m_pabHurry(NULL),
 m_piSpecialistCount(NULL),
 m_piFreeSpecialistCount(NULL),
 m_piBonusProductionModifier(NULL),
 m_piDomainFreeExperience(NULL),
 m_piDomainProductionModifier(NULL),
 m_piFlavorValue(NULL),
-m_pbCommerceFlexible(NULL),
+m_piVictoryThreshold(NULL),
+m_piBonusDefenseChanges(NULL),
 m_ppaiSpecialistYieldChange(NULL),
 m_ppaiSpecialistCommerceChange(NULL),
-m_ppaiBonusYieldModifier(NULL)
-
-//New Integers
-,m_iGlobalPopulationgrowthratepercentage(0)
-,m_iPopulationgrowthratepercentage(0)
-,m_iPrereqVicinityBonus(NO_BONUS)
-,m_iPrereqRawVicinityBonus(NO_BONUS)
-,m_iPillageGoldModifier(0)
-,m_iWorldTradeRoutes(0)
-,m_iLineOfSight(0)
-,m_iInflationModifier(0)
-,m_iAdjacentDamagePercent(0)
-,m_iProductionContinueBuilding(NO_BUILDING)
-,m_iPrereqPopulation(0)
-,m_iPrereqCultureLevel(NO_CULTURELEVEL)
-,m_iWorkableRadius(0)
-,m_iPrereqAnyoneBuilding(NO_BUILDING)
-,m_iOccupationTimeModifier(0)
-,m_iNoEntryDefenseLevel(0)
-,m_iNumUnitFullHeal(0)
-,m_iExtendsBuilding(NO_BUILDING)
-,m_iObsoletesToBuilding(NO_BUILDING)
-,m_iNumPopulationEmployed(0)
-,m_iHealthPercentPerPopulation(0)
-,m_iHappinessPercentPerPopulation(0)
-//New Booleans
-,m_bApplyFreePromotionOnMove(false)
-,m_bPrereqPower(false)
-,m_bNoEnemyPillagingIncome(false)
-,m_bProvidesFreshWater(false)
-,m_bForceAllTradeRoutes(false)
-,m_bForceNoPrereqScaling(false)
-,m_bPrereqWar(false)
-,m_bRequiresActiveCivics(false)
-,m_bZoneOfControl(false)
-,m_bProtectedCulture(false)
-//New Integer Arrays
-,m_piBonusDefenseChanges(NULL)
-//New Multidimensional Integer Arrays
-,m_ppaiTechSpecialistChange(NULL)
-,m_ppaiBonusCommerceModifier(NULL)
-,m_ppaiBonusYieldChanges(NULL)
-,m_ppaiVicinityBonusYieldChanges(NULL)
-,m_ppaiBonusCommercePercentChanges(NULL)
-,m_ppiImprovementYieldChanges(NULL)
-,m_PropertyManipulators()
-,m_pExprNewCityFree(NULL)
-,m_pExprConstructCondition(NULL)
-//TB Combat Mods (Buildings) begin
-,m_iLinePriority(0)
-//TB Combat Mods (Buildings) end
-,m_bAutoBuild(false)
-,m_bEnablesOtherBuildings(false)
-,m_bEnablesUnits(false)
-//Team Project (3)
-//TB Building Tags
-,m_iNationalCaptureProbabilityModifier(0)
-,m_iNationalCaptureResistanceModifier(0)
-,m_iLocalCaptureProbabilityModifier(0)
-,m_iLocalCaptureResistanceModifier(0)
-,m_iLocalDynamicDefense(0)
-,m_iRiverDefensePenalty(0)
-,m_iMinDefense(0)
-,m_iBuildingDefenseRecoverySpeedModifier(0)
-,m_iCityDefenseRecoverySpeedModifier(0)
-,m_iDamageAttackerChance(0)
-,m_iDamageToAttacker(0)
-,m_iMaxPopulationAllowed(-1)
-,m_iMaxPopulationChange(0)
-,m_iInsidiousness(0)
-,m_iInvestigation(0)
-,m_iPopulationChange(0)
-// booleans
-,m_bDamageAllAttackers(false)
-,m_bDamageAttackerCapable(false)
-,m_bQuarantine(false)
-,m_ppaiLocalSpecialistYieldChange(NULL)
-,m_ppaiLocalSpecialistCommerceChange(NULL)
-,m_pabHurry(NULL)
-, m_iMaxPopAllowed(0)
-//,m_pExprFreePromotionCondition(NULL)
-,m_bNotShowInCity(false)
-,m_ePropertySpawnUnit(NO_UNIT)
-,m_ePropertySpawnProperty(NO_PROPERTY)
-,m_ePromotionLineType(NO_PROMOTIONLINE)
+m_ppaiLocalSpecialistYieldChange(NULL),
+m_ppaiLocalSpecialistCommerceChange(NULL),
+m_ppaiBonusYieldModifier(NULL),
+m_ppaiTechSpecialistChange(NULL),
+m_ppaiBonusCommerceModifier(NULL),
+m_ppaiBonusYieldChanges(NULL),
+m_ppaiBonusCommercePercentChanges(NULL),
+m_ppaiVicinityBonusYieldChanges(NULL),
+m_ppiImprovementYieldChanges(NULL)
 {
 	CvInfoUtil(this).initDataMembers();
 }
@@ -292,24 +77,11 @@ m_ppaiBonusYieldModifier(NULL)
 //------------------------------------------------------------------------------------------------------
 CvBuildingInfo::~CvBuildingInfo()
 {
+	// Frees the wrapper-owned arrays/exprs and removes delayed resolution for the declared
+	// FK fields (the six building FK enums and the building/unit-keyed IDValueMaps).
 	CvInfoUtil(this).uninitDataMembers();
 
 	SAFE_DELETE_ARRAY(m_piVictoryThreshold);
-	SAFE_DELETE_ARRAY(m_piRiverPlotYieldChange);
-	SAFE_DELETE_ARRAY(m_piGlobalSeaPlotYieldChange);
-	SAFE_DELETE_ARRAY(m_piYieldPerPopChange);
-	SAFE_DELETE_ARRAY(m_piYieldModifier);
-	SAFE_DELETE_ARRAY(m_piPowerYieldModifier);
-	SAFE_DELETE_ARRAY(m_piAreaYieldModifier);
-	SAFE_DELETE_ARRAY(m_piGlobalYieldModifier);
-	SAFE_DELETE_ARRAY(m_piCommerceChange);
-	SAFE_DELETE_ARRAY(m_piCommercePerPopChange);
-	SAFE_DELETE_ARRAY(m_piCommerceChangeDoubleTime);
-	SAFE_DELETE_ARRAY(m_piCommerceModifier);
-	SAFE_DELETE_ARRAY(m_piGlobalCommerceModifier);
-	SAFE_DELETE_ARRAY(m_piSpecialistExtraCommerce);
-	SAFE_DELETE_ARRAY(m_piStateReligionCommerce);
-	SAFE_DELETE_ARRAY(m_piCommerceHappiness);
 	SAFE_DELETE_ARRAY(m_piSpecialistCount);
 	SAFE_DELETE_ARRAY(m_piFreeSpecialistCount);
 	SAFE_DELETE_ARRAY(m_piBonusProductionModifier);
@@ -336,13 +108,6 @@ CvBuildingInfo::~CvBuildingInfo()
 	SAFE_DELETE_ARRAY(m_pabHurry);
 	//SAFE_DELETE(m_pExprFreePromotionCondition);
 
-	GC.removeDelayedResolution((int*)&m_iFreeBuilding);
-	GC.removeDelayedResolution((int*)&m_iFreeAreaBuilding);
-	GC.removeDelayedResolution((int*)&m_iProductionContinueBuilding);
-	GC.removeDelayedResolution((int*)&m_iPrereqAnyoneBuilding);
-	GC.removeDelayedResolution((int*)&m_iExtendsBuilding);
-	GC.removeDelayedResolution((int*)&m_iObsoletesToBuilding);
-
 	GC.removeDelayedResolutionVector(m_aEnabledCivilizationTypes);
 	GC.removeDelayedResolutionVector(m_aiFreeTraitTypes);
 	GC.removeDelayedResolutionVector(m_aiPrereqInCityBuildings);
@@ -351,12 +116,7 @@ CvBuildingInfo::~CvBuildingInfo()
 	GC.removeDelayedResolutionVector(m_vReplacementBuilding);
 	GC.removeDelayedResolutionVector(m_aiCategories);
 
-	m_aBuildingHappinessChanges.removeDelayedResolution();
 	m_aUnitProductionModifier.removeDelayedResolution();
-	m_aBuildingProductionModifier.removeDelayedResolution();
-	m_aGlobalBuildingProductionModifier.removeDelayedResolution();
-	m_aPrereqNumOfBuilding.removeDelayedResolution();
-	m_aGlobalBuildingCostModifier.removeDelayedResolution();
 }
 
 int CvBuildingInfo::getVictoryThreshold(int i) const
@@ -1708,160 +1468,20 @@ void CvBuildingInfo::doPostLoadCaching(uint32_t iThis)
 void CvBuildingInfo::getCheckSum(uint32_t& iSum) const
 {
 	PROFILE_EXTRA_FUNC();
+	// Declared fields fold in here, in getDataMembers declaration order. The explicit
+	// remainder below covers the hand-written loader fields plus the runtime/derived
+	// fields the legacy checksum always included (m_iMissionType, m_bDamageAttackerCapable,
+	// m_vReplacedBuilding, the readPass3 targets). Same field set as before the
+	// declarative migration; fold order changed (one-time recalc prompt on old saves).
 	CvInfoUtil(this).checkSum(iSum);
 
-	CheckSum(iSum, m_bNoLimit);
-	CheckSum(iSum, m_iVictoryPrereq);
-	CheckSum(iSum, m_iFreeStartEra);
-	CheckSum(iSum, m_iMaxStartEra);
-	CheckSum(iSum, m_iPrereqAndTech);
-	CheckSum(iSum, m_iPowerBonus);
-	CheckSum(iSum, m_iFreeBuilding);
-	CheckSum(iSum, m_iFreeAreaBuilding);
-	CheckSum(iSum, m_iCivicOption);
-	CheckSum(iSum, m_iAIWeight);
-	CheckSum(iSum, m_iProductionCost);
-	CheckSum(iSum, m_iProductionCostSize);
-	CheckSum(iSum, m_iProductionCostCount);
-	CheckSum(iSum, m_iProductionCostMaterials);
-	CheckSum(iSum, m_iProductionCostComplexity);
-	CheckSum(iSum, m_iHurryCostModifier);
-	CheckSum(iSum, m_iHurryAngerModifier);
-	CheckSum(iSum, m_iMinAreaSize);
-	CheckSum(iSum, m_iNumCitiesPrereq);
-	CheckSum(iSum, m_iNumTeamsPrereq);
-	CheckSum(iSum, m_iUnitLevelPrereq);
-	CheckSum(iSum, m_iMinLatitude);
-	CheckSum(iSum, m_iMaxLatitude);
-	CheckSum(iSum, m_iGreatPeopleRateModifier);
-	CheckSum(iSum, m_iGreatGeneralRateModifier);
-	CheckSum(iSum, m_iDomesticGreatGeneralRateModifier);
-	CheckSum(iSum, m_iGlobalGreatPeopleRateModifier);
-	CheckSum(iSum, m_iAnarchyModifier);
-	CheckSum(iSum, m_iGoldenAgeModifier);
-	CheckSum(iSum, m_iGlobalHurryModifier);
-	CheckSum(iSum, m_iFreeExperience);
-	CheckSum(iSum, m_iGlobalFreeExperience);
-	CheckSum(iSum, m_iFoodKept);
-	CheckSum(iSum, m_iAirlift);
-	CheckSum(iSum, m_iAirModifier);
-	CheckSum(iSum, m_iAirUnitCapacity);
-	CheckSum(iSum, m_iNukeModifier);
-	CheckSum(iSum, m_iNukeExplosionRand);
-	CheckSum(iSum, m_iFreeSpecialist);
-	CheckSum(iSum, m_iAreaFreeSpecialist);
-	CheckSum(iSum, m_iGlobalFreeSpecialist);
-	CheckSum(iSum, m_iHappiness);
-	CheckSum(iSum, m_iAreaHappiness);
-	CheckSum(iSum, m_iGlobalHappiness);
-	CheckSum(iSum, m_iStateReligionHappiness);
-	CheckSum(iSum, m_iWorkerSpeedModifier);
-	CheckSum(iSum, m_iMilitaryProductionModifier);
-	CheckSum(iSum, m_iSpaceProductionModifier);
-	CheckSum(iSum, m_iGlobalSpaceProductionModifier);
-	CheckSum(iSum, m_iTradeRoutes);
-	CheckSum(iSum, m_iCoastalTradeRoutes);
-	CheckSum(iSum, m_iGlobalTradeRoutes);
-	CheckSum(iSum, m_iTradeRouteModifier);
-	CheckSum(iSum, m_iForeignTradeRouteModifier);
-	CheckSum(iSum, m_iAssetValue);
-	CheckSum(iSum, m_iPowerValue);
-	CheckSum(iSum, m_eSpecialBuilding);
-	CheckSum(iSum, m_iAdvisorType);
-	CheckSum(iSum, m_iPrereqGameOption);
-	CheckSum(iSum, m_iNotGameOption);
-	CheckSum(iSum, m_iHolyCity);
-	CheckSum(iSum, m_iReligionType);
-	CheckSum(iSum, m_iStateReligion);
-	CheckSum(iSum, m_iPrereqReligion);
-	CheckSum(iSum, m_iPrereqCorporation);
-	CheckSum(iSum, m_iFoundsCorporation);
-	CheckSum(iSum, m_iGlobalReligionCommerce);
-	CheckSum(iSum, m_iGlobalCorporationCommerce);
-	CheckSum(iSum, m_iPrereqAndBonus);
-	CheckSum(iSum, m_iGreatPeopleUnitType);
-	CheckSum(iSum, m_iGreatPeopleRateChange);
-	CheckSum(iSum, m_iConquestProbability);
-	CheckSum(iSum, m_iMaintenanceModifier);
-	CheckSum(iSum, m_iGlobalMaintenanceModifier);
-	CheckSum(iSum, m_iAreaMaintenanceModifier);
-	CheckSum(iSum, m_iOtherAreaMaintenanceModifier);
-	CheckSum(iSum, m_iDistanceMaintenanceModifier);
-	CheckSum(iSum, m_iNumCitiesMaintenanceModifier);
-	CheckSum(iSum, m_iCoastalDistanceMaintenanceModifier);
-	CheckSum(iSum, m_iConnectedCityMaintenanceModifier);
-	CheckSum(iSum, m_iWarWearinessModifier);
-	CheckSum(iSum, m_iGlobalWarWearinessModifier);
-	CheckSum(iSum, m_iEnemyWarWearinessModifier);
-	CheckSum(iSum, m_iHealRateChange);
-	CheckSum(iSum, m_iHealth);
-	CheckSum(iSum, m_iAreaHealth);
-	CheckSum(iSum, m_iGlobalHealth);
-	CheckSum(iSum, m_iGlobalPopulationChange);
-	CheckSum(iSum, m_iFreeTechs);
-	CheckSum(iSum, m_eFreeSpecialTech);
-	CheckSum(iSum, m_iDefenseModifier);
-	CheckSum(iSum, m_iBombardDefenseModifier);
-	CheckSum(iSum, m_iAllCityDefenseModifier);
-	CheckSum(iSum, m_iEspionageDefenseModifier);
-	CheckSum(iSum, m_iUnitUpgradePriceModifier);
-	CheckSum(iSum, m_iRevIdxLocal);
-	CheckSum(iSum, m_iRevIdxNational);
-	CheckSum(iSum, m_iRevIdxDistanceModifier);
-	CheckSum(iSum, m_iMissionType);
-	CheckSum(iSum, m_iVoteSourceType);
-	//CheckSum(iSum, m_fVisibilityPriority);
-	CheckSum(iSum, m_bTeamShare);
-	CheckSum(iSum, m_bAutoBuild);
-	CheckSum(iSum, m_bWater);
-	CheckSum(iSum, m_bRiver);
-	CheckSum(iSum, m_bFreshWater);
-	CheckSum(iSum, m_bPower);
-	CheckSum(iSum, m_bOrbital);
-	CheckSum(iSum, m_bOrbitalInfrastructure);
-	CheckSum(iSum, m_bNoHolyCity);
-	CheckSum(iSum, m_bAreaBorderObstacle);
-	CheckSum(iSum, m_bForceTeamVoteEligible);
-	CheckSum(iSum, m_bCapital);
-	CheckSum(iSum, m_iDCMAirbombMission);
-	CheckSum(iSum, m_bGovernmentCenter);
-	CheckSum(iSum, m_bGoldenAge);
-	CheckSum(iSum, m_bMapCentering);
-	CheckSum(iSum, m_bNoUnhappiness);
-	CheckSum(iSum, m_bNoUnhealthyPopulation);
-	CheckSum(iSum, m_bBuildingOnlyHealthy);
-	CheckSum(iSum, m_bNeverCapture);
-	CheckSum(iSum, m_bNukeImmune);
-	CheckSum(iSum, m_bCenterInCity);
-	CheckSum(iSum, m_bStateReligionInCity);
-	CheckSum(iSum, m_bAllowsNukes);
+	CheckSum(iSum, m_iMissionType); // runtime, set via setMissionType
 
-	CheckSumC(iSum, m_piPrereqAndTechs);
-	CheckSumI(iSum, NUM_YIELD_TYPES, m_piRiverPlotYieldChange);
-	CheckSumI(iSum, NUM_YIELD_TYPES, m_piGlobalSeaPlotYieldChange);
-	CheckSumI(iSum, NUM_YIELD_TYPES, m_piYieldPerPopChange);
-	CheckSumI(iSum, NUM_YIELD_TYPES, m_piYieldModifier);
-	CheckSumI(iSum, NUM_YIELD_TYPES, m_piPowerYieldModifier);
-	CheckSumI(iSum, NUM_YIELD_TYPES, m_piAreaYieldModifier);
-	CheckSumI(iSum, NUM_YIELD_TYPES, m_piGlobalYieldModifier);
-	CheckSumI(iSum, NUM_COMMERCE_TYPES, m_piCommerceChange);
-	CheckSumI(iSum, NUM_COMMERCE_TYPES, m_piCommercePerPopChange);
-	CheckSumI(iSum, NUM_COMMERCE_TYPES, m_piCommerceChangeDoubleTime);
-	CheckSumI(iSum, NUM_COMMERCE_TYPES, m_piCommerceModifier);
-	CheckSumI(iSum, NUM_COMMERCE_TYPES, m_piGlobalCommerceModifier);
-	CheckSumI(iSum, NUM_COMMERCE_TYPES, m_piSpecialistExtraCommerce);
-	CheckSumI(iSum, NUM_COMMERCE_TYPES, m_piStateReligionCommerce);
-	CheckSumI(iSum, NUM_COMMERCE_TYPES, m_piCommerceHappiness);
 	CheckSumI(iSum, GC.getNumSpecialistInfos(), m_piSpecialistCount);
 	CheckSumI(iSum, GC.getNumSpecialistInfos(), m_piFreeSpecialistCount);
-	//CheckSumC(iSum, m_piBonusHealthChanges);
-	CheckSumC(iSum, m_piBonusHappinessChanges);
 	CheckSumI(iSum, GC.getNumBonusInfos(), m_piBonusProductionModifier);
-	CheckSumC(iSum, m_aUnitCombatFreeExperience);
 	CheckSumI(iSum, NUM_DOMAIN_TYPES, m_piDomainFreeExperience);
 	CheckSumI(iSum, NUM_DOMAIN_TYPES, m_piDomainProductionModifier);
-	CheckSumC(iSum, m_aBuildingHappinessChanges);
-	CheckSumC(iSum, m_aPrereqNumOfBuilding);
 	CheckSumI(iSum, GC.getNumFlavorTypes(), m_piFlavorValue);
 
 	CheckSumI(iSum, NUM_COMMERCE_TYPES, m_pbCommerceFlexible);
@@ -1905,50 +1525,11 @@ void CvBuildingInfo::getCheckSum(uint32_t& iSum) const
 		}
 	}
 
-	CheckSum(iSum, m_iGlobalPopulationgrowthratepercentage);
-	CheckSum(iSum, m_iPopulationgrowthratepercentage);
-	CheckSum(iSum, m_iPrereqVicinityBonus);
-	CheckSum(iSum, m_iPrereqRawVicinityBonus);
-	CheckSum(iSum, m_iPillageGoldModifier);
-	CheckSum(iSum, m_iWorldTradeRoutes);
-	CheckSum(iSum, m_iLineOfSight);
-	CheckSum(iSum, m_iInflationModifier);
-	CheckSum(iSum, m_iAdjacentDamagePercent);
-	CheckSum(iSum, m_iProductionContinueBuilding);
-	CheckSum(iSum, m_iPrereqPopulation);
-	CheckSum(iSum, m_iPrereqCultureLevel);
-	CheckSum(iSum, m_iWorkableRadius);
-	CheckSum(iSum, m_iPrereqAnyoneBuilding);
-	CheckSum(iSum, m_iExtendsBuilding);
-	CheckSum(iSum, m_iObsoletesToBuilding);
-	CheckSum(iSum, m_iOccupationTimeModifier);
-	CheckSum(iSum, m_iNoEntryDefenseLevel);
-	CheckSum(iSum, m_iNumUnitFullHeal);
-	CheckSum(iSum, m_iNumPopulationEmployed);
-	CheckSum(iSum, m_iHealthPercentPerPopulation);
-	CheckSum(iSum, m_iHappinessPercentPerPopulation);
-
-	CheckSum(iSum, m_bApplyFreePromotionOnMove);
-	CheckSum(iSum, m_bProtectedCulture);
-	CheckSum(iSum, m_bPrereqPower);
-	CheckSum(iSum, m_bNoEnemyPillagingIncome);
-	CheckSum(iSum, m_bProvidesFreshWater);
-	CheckSum(iSum, m_bForceAllTradeRoutes);
-	CheckSum(iSum, m_bForceNoPrereqScaling);
-	CheckSum(iSum, m_bPrereqWar);
-	CheckSum(iSum, m_bRequiresActiveCivics);
-	CheckSum(iSum, m_bZoneOfControl);
-
 	CheckSumC(iSum, m_aePrereqOrCivics);
 	CheckSumC(iSum, m_aePrereqAndCivics);
-	CheckSumC(iSum, m_aBuildingProductionModifier);
-	CheckSumC(iSum, m_aGlobalBuildingProductionModifier);
-	CheckSumC(iSum, m_aGlobalBuildingCostModifier);
 
 	CheckSumC(iSum, m_aUnitProductionModifier);
-	CheckSumC(iSum, m_piPrereqOrVicinityBonuses);
 	CheckSumI(iSum, GC.getNumBonusInfos(), m_piBonusDefenseChanges);
-	CheckSumC(iSum, m_aUnitCombatExtraStrength);
 
 	for(int i = 0; i < GC.getNumTechInfos(); i++)
 	{
@@ -1984,31 +1565,8 @@ void CvBuildingInfo::getCheckSum(uint32_t& iSum) const
 	m_PrereqPlayerMaxProperties.getCheckSum(iSum);
 
 	//TB Combat Mods (Buildings) begin
-	CheckSum(iSum, m_ePropertySpawnUnit);
-	CheckSum(iSum, m_ePropertySpawnProperty);
-	CheckSum(iSum, (int)m_ePromotionLineType);
-	//integers
-	CheckSum(iSum, m_iLinePriority);
-	CheckSum(iSum, m_iNationalCaptureProbabilityModifier);
-	CheckSum(iSum, m_iNationalCaptureResistanceModifier);
-	CheckSum(iSum, m_iLocalCaptureProbabilityModifier);
-	CheckSum(iSum, m_iLocalCaptureResistanceModifier);
-	CheckSum(iSum, m_iLocalDynamicDefense);
-	CheckSum(iSum, m_iRiverDefensePenalty);
-	CheckSum(iSum, m_iMinDefense);
-	CheckSum(iSum, m_iBuildingDefenseRecoverySpeedModifier);
-	CheckSum(iSum, m_iCityDefenseRecoverySpeedModifier);
-	CheckSum(iSum, m_iDamageAttackerChance);
-	CheckSum(iSum, m_iDamageToAttacker);
-	CheckSum(iSum, m_iMaxPopulationAllowed);
-	CheckSum(iSum, m_iMaxPopulationChange);
-	CheckSum(iSum, m_iInsidiousness);
-	CheckSum(iSum, m_iInvestigation);
-	CheckSum(iSum, m_iPopulationChange);
-	CheckSum(iSum, m_bDamageAllAttackers);
-	CheckSum(iSum, m_bDamageAttackerCapable);
-	CheckSum(iSum, m_bQuarantine);
-	CheckSum(iSum, m_iMaxPopAllowed);
+	CheckSum(iSum, m_ePropertySpawnUnit); // readPass3
+	CheckSum(iSum, m_bDamageAttackerCapable); // derived from bDamageAllAttackers / may-damage list
 
 	//Structs
 	foreach_(const FreePromoTypes& freePromotion, m_aFreePromoTypes)
@@ -2046,22 +1604,16 @@ void CvBuildingInfo::getCheckSum(uint32_t& iSum) const
 		CheckSum(iSum, m_aEnabledCivilizationTypes[i].eCivilization);
 	}
 
-	CheckSumC(iSum, m_aiUnitCombatRetrainTypes);
 	CheckSumC(iSum, m_aiMayDamageAttackingUnitCombatTypes);
-	CheckSumC(iSum, m_aeMapCategoryTypes);
 	CheckSumC(iSum, m_aUnitCombatDefenseAgainstModifiers);
 	CheckSumC(iSum, m_aUnitCombatProdModifiers);
 	CheckSumC(iSum, m_aiFreeTraitTypes);
-	CheckSumC(iSum, m_freeBonuses);
-	CheckSumC(iSum, m_aePrereqOrRawVicinityBonuses);
-	CheckSumC(iSum, m_aePrereqOrBonuses);
-	CheckSumC(iSum, m_prereqOrHeritage);
 	CheckSumC(iSum, m_aiCategories);
 	CheckSumC(iSum, m_aiPrereqInCityBuildings);
 	CheckSumC(iSum, m_vPrereqNotInCityBuildings);
 	CheckSumC(iSum, m_vPrereqOrBuilding);
 	CheckSumC(iSum, m_vReplacementBuilding);
-	CheckSumC(iSum, m_vReplacedBuilding);
+	CheckSumC(iSum, m_vReplacedBuilding); // derived in doPostLoadCaching
 
 	// Arrays
 	CheckSumI(iSum, GC.getNumHurryInfos(), m_pabHurry);
@@ -2070,24 +1622,47 @@ void CvBuildingInfo::getCheckSum(uint32_t& iSum) const
 	//	m_pExprFreePromotionCondition->getCheckSum(iSum);
 	//TB Combat Mods (Buildings) end
 
-	CheckSum(iSum, m_iMaxGlobalInstances);
-	CheckSum(iSum, m_iMaxTeamInstances);
-	CheckSum(iSum, m_iMaxPlayerInstances);
-	CheckSum(iSum, m_iExtraPlayerInstances);
+	CheckSum(iSum, m_iGreatPeopleUnitType); // readPass3
 	CheckSum(iSum, m_piVictoryThreshold, GC.getNumVictoryInfos());
 
-	CheckSumC(iSum, m_techYieldChanges);
-	CheckSumC(iSum, m_techYieldModifiers);
-	CheckSumC(iSum, m_techCommerceChanges);
-	CheckSumC(iSum, m_techCommerceModifiers);
-	CheckSumC(iSum, m_aTerrainYieldChanges);
 	CheckSumC(iSum, m_aPlotYieldChanges);
-	CheckSumC(iSum, m_aImprovementYieldChanges);
-	CheckSumC(iSum, m_aGlobalImprovementYieldChanges);
 }
 
 void CvBuildingInfo::getDataMembers(CvInfoUtil& util)
 {
+	// Kept hand-written (each at its read()/copyNonDefaults/getCheckSum site):
+	// - readPass3 machinery: m_iGreatPeopleUnitType ("GreatPeopleUnitType"), m_ePropertySpawnUnit
+	//   ("PropertySpawnUnit") - resolved via m_aszExtraXMLforPass3.
+	// - m_szArtDefineTag - setNotShowInCity() side effect must run after read AND after merge-copy.
+	// - SetVariableListTagPair dynamic arrays (no wrapper): m_piSpecialistCount,
+	//   m_piFreeSpecialistCount, m_piBonusProductionModifier, m_piDomainFreeExperience,
+	//   m_piDomainProductionModifier, m_piFlavorValue, m_piBonusDefenseChanges, m_pabHurry,
+	//   m_piVictoryThreshold; m_pbCommerceFlexible is a bool* read via SetCommerce (no bool-array
+	//   wrapper).
+	// - 2D int** tables (no wrapper yet, #196 deferral): Specialist/LocalSpecialist Yield+Commerce,
+	//   BonusYieldModifier, BonusCommerceModifier, BonusCommercePercentChanges, BonusYieldChanges,
+	//   VicinityBonusYieldChanges, TechSpecialistChange, ImprovementYieldChanges (m_ppi).
+	// - Delayed-resolution vectors (no wrapper): m_aePrereqOrCivics, m_aePrereqAndCivics,
+	//   m_aiFreeTraitTypes, m_aiCategories, m_aiPrereqInCityBuildings, m_vPrereqNotInCityBuildings,
+	//   m_vPrereqOrBuilding, m_vReplacementBuilding.
+	// - m_aUnitProductionModifier: UnitTypes loads AFTER buildings, but isDelayedResolutionRequired
+	//   reads m_infoClassXmlLoadOrder, which has no entry yet for classes that have not started
+	//   loading - the auto decision would pick immediate resolution and lose every entry. Must stay
+	//   on readWithDelayedResolution until the order table covers unloaded classes.
+	// - m_aPlotYieldChanges: PlotTypes is not an info class (no InfoClassTraits specialization), so
+	//   the IDValueMap wrapper's delayed-resolution check would index the load-order table at -1.
+	// - Struct-vectors (structs live in CvStructs.h without getDataMembers; EnabledCivilizations
+	//   additionally needs delayed resolution, which addStruct forces off): m_aFreePromoTypes,
+	//   m_aHealUnitCombatTypes, m_aBonusAidModifiers, m_aAidRateChanges, m_aEnabledCivilizationTypes.
+	// - Pair-vectors via SetOptionalPairVector (no wrapper): m_aUnitCombatDefenseAgainstModifiers,
+	//   m_aUnitCombatProdModifiers.
+	// - m_aiMayDamageAttackingUnitCombatTypes: legacy merge-copy sets m_bDamageAttackerCapable from
+	//   the copied entries - a side effect the vector wrapper cannot reproduce.
+	// - CvProperties sub-objects (self-reading, no wrapper): m_Properties, m_PropertiesAllCities,
+	//   m_PrereqMin/MaxProperties, m_PrereqPlayerMin/MaxProperties.
+	// - Runtime/derived (not XML-backed): m_iMissionType, m_bNotShowInCity, m_bEnablesOtherBuildings,
+	//   m_bEnablesUnits, m_bDamageAttackerCapable, m_vReplacedBuilding, m_constructRequirements,
+	//   m_consumptionRelevantBonuses.
 	util
 		.addEnum(m_iObsoleteTech, L"ObsoleteTech")
 		.add(m_piBonusHealthChanges, L"BonusHealthChanges")
@@ -2106,6 +1681,245 @@ void CvBuildingInfo::getDataMembers(CvInfoUtil& util)
 		.addBoolExpr(m_pExprNewCityFree, L"NewCityFree")
 		.addBoolExpr(m_pExprConstructCondition, L"ConstructCondition")
 		.addYields(m_piYieldChange, L"YieldChanges")
+
+		// Enum FKs (delayed/immediate resolution picked automatically; the six building
+		// self-references resolve via the delayed-resolution map, as the legacy reads did)
+		.addEnum(m_eSpecialBuilding, L"SpecialBuildingType")
+		.addEnum(m_iFreeStartEra, L"FreeStartEra")
+		.addEnum(m_eFreeSpecialTech, L"FreeSpecialTech")
+		.addEnum(m_ePropertySpawnProperty, L"PropertySpawnProperty")
+		.addEnum(m_ePromotionLineType, L"PromotionLineType")
+		.addEnum(m_iFreeBuilding, L"FreeBuilding")
+		.addEnum(m_iFreeAreaBuilding, L"FreeAreaBuilding")
+		.addEnum(m_iProductionContinueBuilding, L"ProductionContinueBuilding")
+		.addEnum(m_iPrereqAnyoneBuilding, L"PrereqAnyoneBuilding")
+		.addEnum(m_iExtendsBuilding, L"ExtendsBuilding")
+		.addEnum(m_iObsoletesToBuilding, L"ObsoletesToBuilding")
+
+		// Legacy int members holding a type index (immediate resolution, default -1)
+		.addEnumAsInt(m_iAdvisorType, L"Advisor")
+		.addEnumAsInt(m_iPrereqGameOption, L"PrereqGameOption")
+		.addEnumAsInt(m_iNotGameOption, L"NotGameOption")
+		.addEnumAsInt(m_iHolyCity, L"HolyCity")
+		.addEnumAsInt(m_iReligionType, L"ReligionType")
+		.addEnumAsInt(m_iStateReligion, L"StateReligion")
+		.addEnumAsInt(m_iPrereqReligion, L"PrereqReligion")
+		.addEnumAsInt(m_iPrereqCorporation, L"PrereqCorporation")
+		.addEnumAsInt(m_iFoundsCorporation, L"FoundsCorporation")
+		.addEnumAsInt(m_iGlobalReligionCommerce, L"GlobalReligionCommerce")
+		.addEnumAsInt(m_iGlobalCorporationCommerce, L"GlobalCorporationCommerce")
+		.addEnumAsInt(m_iVictoryPrereq, L"VictoryPrereq")
+		.addEnumAsInt(m_iMaxStartEra, L"MaxStartEra")
+		.addEnumAsInt(m_iPrereqAndTech, L"PrereqTech")
+		.addEnumAsInt(m_iPrereqAndBonus, L"Bonus")
+		.addEnumAsInt(m_iPowerBonus, L"PowerBonus")
+		.addEnumAsInt(m_iCivicOption, L"CivicOption")
+		.addEnumAsInt(m_iVoteSourceType, L"DiploVoteType")
+		.addEnumAsInt(m_iPrereqCultureLevel, L"PrereqCultureLevel")
+		.addEnumAsInt(m_iPrereqVicinityBonus, L"VicinityBonus")
+		.addEnumAsInt(m_iPrereqRawVicinityBonus, L"RawVicinityBonus")
+
+		// Booleans
+		.add(m_bNoLimit, L"bNoLimit")
+		.add(m_bTeamShare, L"bTeamShare")
+		.add(m_bAutoBuild, L"bAutoBuild")
+		.add(m_bWater, L"bWater")
+		.add(m_bRiver, L"bRiver")
+		.add(m_bFreshWater, L"bFreshWater")
+		.add(m_bPower, L"bPower")
+		.add(m_bOrbital, L"bOrbital")
+		.add(m_bOrbitalInfrastructure, L"bOrbitalInfrastructure")
+		.add(m_bNoHolyCity, L"bNoHolyCity")
+		.add(m_bAreaBorderObstacle, L"bBorderObstacle")
+		.add(m_bForceTeamVoteEligible, L"bForceTeamVoteEligible")
+		.add(m_bCapital, L"bCapital")
+		.add(m_bGovernmentCenter, L"bGovernmentCenter")
+		.add(m_bGoldenAge, L"bGoldenAge")
+		.add(m_bAllowsNukes, L"bAllowsNukes")
+		.add(m_bMapCentering, L"bMapCentering")
+		.add(m_bNoUnhappiness, L"bNoUnhappiness")
+		.add(m_bNoUnhealthyPopulation, L"bNoUnhealthyPopulation")
+		.add(m_bBuildingOnlyHealthy, L"bBuildingOnlyHealthy")
+		.add(m_bNeverCapture, L"bNeverCapture")
+		.add(m_bNukeImmune, L"bNukeImmune")
+		.add(m_bCenterInCity, L"bCenterInCity")
+		.add(m_bStateReligionInCity, L"bNeedStateReligionInCity")
+		.add(m_bApplyFreePromotionOnMove, L"bApplyFreePromotionOnMove")
+		.add(m_bNoEnemyPillagingIncome, L"bNoEnemyPillagingIncome")
+		.add(m_bProvidesFreshWater, L"bProvidesFreshWater")
+		.add(m_bForceAllTradeRoutes, L"bForceAllTradeRoutes")
+		.add(m_bPrereqPower, L"bPrereqPower")
+		.add(m_bForceNoPrereqScaling, L"bForceNoPrereqScaling")
+		.add(m_bPrereqWar, L"bPrereqWar")
+		.add(m_bRequiresActiveCivics, L"bRequiresActiveCivics")
+		.add(m_bZoneOfControl, L"bZoneOfControl")
+		.add(m_bProtectedCulture, L"bProtectedCulture")
+		.add(m_bDamageAllAttackers, L"bDamageAllAttackers") // read() derives m_bDamageAttackerCapable from it
+		.add(m_bQuarantine, L"bQuarantine")
+
+		// Integers
+		.add(m_iGreatPeopleRateChange, L"iGreatPeopleRateChange")
+		.add(m_iDCMAirbombMission, L"iDCMAirbombMission")
+		.add(m_iAIWeight, L"iAIWeight")
+		.add(m_iProductionCost, L"iCost", -1)
+		.add(m_iProductionCostSize, L"iCostSizeModifier", -1)
+		.add(m_iProductionCostCount, L"iCostCountModifier", -1)
+		.add(m_iProductionCostMaterials, L"iCostMaterialsModifier", -1)
+		.add(m_iProductionCostComplexity, L"iCostComplexityModifier", -1)
+		.add(m_iHurryCostModifier, L"iHurryCostModifier")
+		.add(m_iHurryAngerModifier, L"iHurryAngerModifier")
+		.add(m_iMinAreaSize, L"iMinAreaSize")
+		.add(m_iConquestProbability, L"iConquestProb", 50)
+		.add(m_iNumCitiesPrereq, L"iCitiesPrereq")
+		.add(m_iNumTeamsPrereq, L"iTeamsPrereq")
+		.add(m_iUnitLevelPrereq, L"iLevelPrereq")
+		.add(m_iMinLatitude, L"iMinLatitude")
+		.add(m_iMaxLatitude, L"iMaxLatitude", 90)
+		.add(m_iGreatPeopleRateModifier, L"iGreatPeopleRateModifier")
+		.add(m_iGreatGeneralRateModifier, L"iGreatGeneralRateModifier")
+		.add(m_iDomesticGreatGeneralRateModifier, L"iDomesticGreatGeneralRateModifier")
+		.add(m_iGlobalGreatPeopleRateModifier, L"iGlobalGreatPeopleRateModifier")
+		.add(m_iAnarchyModifier, L"iAnarchyModifier")
+		.add(m_iGoldenAgeModifier, L"iGoldenAgeModifier")
+		.add(m_iGlobalHurryModifier, L"iGlobalHurryModifier")
+		.add(m_iFreeExperience, L"iExperience")
+		.add(m_iGlobalFreeExperience, L"iGlobalExperience")
+		.add(m_iFoodKept, L"iFoodKept")
+		.add(m_iAirlift, L"iAirlift")
+		.add(m_iAirModifier, L"iAirModifier")
+		.add(m_iAirUnitCapacity, L"iAirUnitCapacity")
+		.add(m_iNukeModifier, L"iNukeModifier")
+		.add(m_iNukeExplosionRand, L"iNukeExplosionRand")
+		.add(m_iFreeSpecialist, L"iFreeSpecialist")
+		.add(m_iAreaFreeSpecialist, L"iAreaFreeSpecialist")
+		.add(m_iGlobalFreeSpecialist, L"iGlobalFreeSpecialist")
+		.add(m_iMaintenanceModifier, L"iMaintenanceModifier")
+		.add(m_iGlobalMaintenanceModifier, L"iGlobalMaintenanceModifier")
+		.add(m_iAreaMaintenanceModifier, L"iAreaMaintenanceModifier")
+		.add(m_iOtherAreaMaintenanceModifier, L"iOtherAreaMaintenanceModifier")
+		.add(m_iDistanceMaintenanceModifier, L"iDistanceMaintenanceModifier")
+		.add(m_iNumCitiesMaintenanceModifier, L"iNumCitiesMaintenanceModifier")
+		.add(m_iCoastalDistanceMaintenanceModifier, L"iCoastalDistanceMaintenanceModifier")
+		.add(m_iConnectedCityMaintenanceModifier, L"iConnectedCityMaintenanceModifier")
+		.add(m_iWarWearinessModifier, L"iWarWearinessModifier")
+		.add(m_iGlobalWarWearinessModifier, L"iGlobalWarWearinessModifier")
+		.add(m_iEnemyWarWearinessModifier, L"iEnemyWarWearinessModifier")
+		.add(m_iHealRateChange, L"iHealRateChange")
+		.add(m_iHealth, L"iHealth")
+		.add(m_iAreaHealth, L"iAreaHealth")
+		.add(m_iGlobalHealth, L"iGlobalHealth")
+		.add(m_iHappiness, L"iHappiness")
+		.add(m_iAreaHappiness, L"iAreaHappiness")
+		.add(m_iGlobalHappiness, L"iGlobalHappiness")
+		.add(m_iStateReligionHappiness, L"iStateReligionHappiness")
+		.add(m_iWorkerSpeedModifier, L"iWorkerSpeedModifier")
+		.add(m_iMilitaryProductionModifier, L"iMilitaryProductionModifier")
+		.add(m_iSpaceProductionModifier, L"iSpaceProductionModifier")
+		.add(m_iGlobalSpaceProductionModifier, L"iGlobalSpaceProductionModifier")
+		.add(m_iTradeRoutes, L"iTradeRoutes")
+		.add(m_iCoastalTradeRoutes, L"iCoastalTradeRoutes")
+		.add(m_iGlobalTradeRoutes, L"iGlobalTradeRoutes")
+		.add(m_iTradeRouteModifier, L"iTradeRouteModifier")
+		.add(m_iForeignTradeRouteModifier, L"iForeignTradeRouteModifier")
+		.add(m_iGlobalPopulationChange, L"iGlobalPopulationChange")
+		.add(m_iFreeTechs, L"iFreeTechs")
+		.add(m_iDefenseModifier, L"iDefense")
+		.add(m_iBombardDefenseModifier, L"iBombardDefense")
+		.add(m_iAllCityDefenseModifier, L"iAllCityDefense")
+		.add(m_iEspionageDefenseModifier, L"iEspionageDefense")
+		.add(m_iUnitUpgradePriceModifier, L"iUnitUpgradePriceModifier")
+		.add(m_iRevIdxLocal, L"iRevIdxLocal")
+		.add(m_iRevIdxNational, L"iRevIdxNational")
+		.add(m_iRevIdxDistanceModifier, L"iRevIdxDistanceModifier")
+		.add(m_iMaxPopAllowed, L"iObsoletePopulation", -1)
+		.add(m_iAssetValue, L"iAsset")
+		.add(m_iPowerValue, L"iPower")
+		.add(m_iPillageGoldModifier, L"iPillageGoldModifier")
+		.add(m_iWorldTradeRoutes, L"iWorldTradeRoutes")
+		.add(m_iGlobalPopulationgrowthratepercentage, L"iGlobalPopulationgrowthratepercentage")
+		.add(m_iPopulationgrowthratepercentage, L"iPopulationgrowthratepercentage")
+		.add(m_iLineOfSight, L"iLineOfSight")
+		.add(m_iInflationModifier, L"iInflationModifier")
+		.add(m_iAdjacentDamagePercent, L"iAdjacentDamagePercent")
+		.add(m_iPrereqPopulation, L"iPrereqPopulation")
+		.add(m_iWorkableRadius, L"iWorkableRadius")
+		.add(m_iOccupationTimeModifier, L"iOccupationTimeModifier")
+		.add(m_iNoEntryDefenseLevel, L"iNoEntryDefenseLevel")
+		.add(m_iNumUnitFullHeal, L"iNumUnitFullHeal")
+		.add(m_iNumPopulationEmployed, L"iNumPopulationEmployed")
+		.add(m_iHealthPercentPerPopulation, L"iHealthPercentPerPopulation")
+		.add(m_iHappinessPercentPerPopulation, L"iHappinessPercentPerPopulation")
+		.add(m_iLinePriority, L"iLinePriority")
+		.add(m_iNationalCaptureProbabilityModifier, L"iNationalCaptureProbabilityModifier")
+		.add(m_iNationalCaptureResistanceModifier, L"iNationalCaptureResistanceModifier")
+		.add(m_iLocalCaptureProbabilityModifier, L"iLocalCaptureProbabilityModifier")
+		.add(m_iLocalCaptureResistanceModifier, L"iLocalCaptureResistanceModifier")
+		.add(m_iLocalDynamicDefense, L"iLocalDynamicDefense")
+		.add(m_iRiverDefensePenalty, L"iRiverDefensePenalty")
+		.add(m_iMinDefense, L"iMinDefense")
+		.add(m_iBuildingDefenseRecoverySpeedModifier, L"iBuildingDefenseRecoverySpeedModifier")
+		.add(m_iCityDefenseRecoverySpeedModifier, L"iCityDefenseRecoverySpeedModifier")
+		.add(m_iDamageAttackerChance, L"iDamageAttackerChance")
+		.add(m_iDamageToAttacker, L"iDamageToAttacker")
+		.add(m_iMaxPopulationAllowed, L"iMaxPopulationAllowed", -1)
+		.add(m_iMaxPopulationChange, L"iMaxPopulationChange")
+		.add(m_iInsidiousness, L"iInsidiousness")
+		.add(m_iInvestigation, L"iInvestigation")
+		.add(m_iPopulationChange, L"iPopulationChange")
+		.add(m_iMaxGlobalInstances, L"iMaxGlobalInstances", -1)
+		.add(m_iMaxTeamInstances, L"iMaxTeamInstances", -1)
+		.add(m_iMaxPlayerInstances, L"iMaxPlayerInstances", -1)
+		.add(m_iExtraPlayerInstances, L"iExtraPlayerInstances")
+
+		// Membership vectors (immediate resolution, like the legacy SetOptionalVector reads)
+		.add(m_piPrereqAndTechs, L"TechTypes")
+		.add(m_aePrereqOrBonuses, L"PrereqBonuses")
+		.add(m_prereqOrHeritage, L"PrereqOrHeritage")
+		.add(m_piPrereqOrVicinityBonuses, L"PrereqVicinityBonuses")
+		.add(m_aePrereqOrRawVicinityBonuses, L"PrereqRawVicinityBonuses")
+		.add(m_aiUnitCombatRetrainTypes, L"UnitCombatRetrainTypes")
+		.add(m_aeMapCategoryTypes, L"MapCategoryTypes")
+
+		// IDValueMaps (the building-keyed ones pick delayed resolution automatically,
+		// matching the legacy readWithDelayedResolution calls)
+		.add(m_piBonusHappinessChanges, L"BonusHappinessChanges")
+		.add(m_aUnitCombatFreeExperience, L"UnitCombatFreeExperiences")
+		.add(m_aUnitCombatExtraStrength, L"UnitCombatExtraStrengths")
+		.add(m_aBuildingHappinessChanges, L"BuildingHappinessChanges")
+		.add(m_aBuildingProductionModifier, L"BuildingProductionModifiers")
+		.add(m_aGlobalBuildingProductionModifier, L"GlobalBuildingProductionModifiers")
+		.add(m_aPrereqNumOfBuilding, L"PrereqAmountBuildings")
+		.add(m_aGlobalBuildingCostModifier, L"GlobalBuildingCostModifiers")
+
+		// IDValueMaps of paired arrays
+		.add(m_techYieldChanges, L"TechYieldChanges", L"PrereqTech", L"TechYield")
+		.add(m_techYieldModifiers, L"TechYieldModifiers", L"PrereqTech", L"TechYield")
+		.add(m_techCommerceChanges, L"TechCommerceChanges", L"TechType", L"CommercePercents")
+		.add(m_techCommerceModifiers, L"TechCommerceModifiers", L"PrereqTech", L"TechCommerce")
+		.add(m_aTerrainYieldChanges, L"TerrainYieldChanges", L"TerrainType", L"YieldChanges")
+		.add(m_aImprovementYieldChanges, L"ImprovementYieldChanges", L"ImprovementType", L"YieldChanges")
+		.add(m_aGlobalImprovementYieldChanges, L"GlobalImprovementYieldChanges", L"ImprovementType", L"YieldChanges")
+
+		// Yield / commerce arrays (wrapper-owned)
+		.addYields(m_piRiverPlotYieldChange, L"RiverPlotYieldChanges")
+		.addYields(m_piGlobalSeaPlotYieldChange, L"GlobalSeaPlotYieldChanges")
+		.addYields(m_piYieldPerPopChange, L"YieldPerPopChanges")
+		.addYields(m_piYieldModifier, L"YieldModifiers")
+		.addYields(m_piPowerYieldModifier, L"PowerYieldModifiers")
+		.addYields(m_piAreaYieldModifier, L"AreaYieldModifiers")
+		.addYields(m_piGlobalYieldModifier, L"GlobalYieldModifiers")
+		.addCommerce(m_piCommerceChange, L"CommerceChanges")
+		.addCommerce(m_piCommercePerPopChange, L"CommercePerPopChanges")
+		.addCommerce(m_piCommerceChangeDoubleTime, L"CommerceChangeDoubleTimes")
+		.addCommerce(m_piCommerceModifier, L"CommerceModifiers")
+		.addCommerce(m_piGlobalCommerceModifier, L"GlobalCommerceModifiers")
+		.addCommerce(m_piSpecialistExtraCommerce, L"SpecialistExtraCommerces")
+		.addCommerce(m_piStateReligionCommerce, L"StateReligionCommerces")
+		.addCommerce(m_piCommerceHappiness, L"CommerceHappinesses")
+
+		// Strings (not checksummed, same as before)
+		.add(m_szMovieDefineTag, L"MovieDefineTag")
+		.add(m_szConstructSound, L"ConstructSound")
 	;
 }
 
@@ -2124,353 +1938,12 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 
 	CvInfoUtil(this).readXml(pXML);
 
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"SpecialBuildingType");
-	m_eSpecialBuilding = static_cast<SpecialBuildingTypes>(pXML->GetInfoClass(szTextVal));
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"Advisor");
-	m_iAdvisorType = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(&m_bNoLimit, L"bNoLimit");
-
 	pXML->GetOptionalChildXmlValByName(m_szArtDefineTag, L"ArtDefineTag");
 
 	setNotShowInCity();
 
-	pXML->GetOptionalChildXmlValByName(m_szMovieDefineTag, L"MovieDefineTag");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PrereqGameOption");
-	m_iPrereqGameOption = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"NotGameOption");
-	m_iNotGameOption = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"HolyCity");
-	m_iHolyCity = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"ReligionType");
-	m_iReligionType = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"StateReligion");
-	m_iStateReligion = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PrereqReligion");
-	m_iPrereqReligion = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PrereqCorporation");
-	m_iPrereqCorporation = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"FoundsCorporation");
-	m_iFoundsCorporation = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"GlobalReligionCommerce");
-	m_iGlobalReligionCommerce = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"GlobalCorporationCommerce");
-	m_iGlobalCorporationCommerce = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"VictoryPrereq");
-	m_iVictoryPrereq = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"FreeStartEra");
-	m_iFreeStartEra = static_cast<EraTypes>(pXML->GetInfoClass(szTextVal));
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"MaxStartEra");
-	m_iMaxStartEra = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PrereqTech");
-	m_iPrereqAndTech = pXML->GetInfoClass(szTextVal);
-
-	pXML->SetOptionalVector(&m_piPrereqAndTechs, L"TechTypes");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"Bonus");
-	m_iPrereqAndBonus = pXML->GetInfoClass(szTextVal);
-
-	pXML->SetOptionalVector(&m_aePrereqOrBonuses, L"PrereqBonuses");
-	pXML->SetOptionalVector(&m_prereqOrHeritage, L"PrereqOrHeritage");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PowerBonus");
-	m_iPowerBonus = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"CivicOption");
-	m_iCivicOption = pXML->GetInfoClass(szTextVal);
-
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"GreatPeopleUnitType");
 	m_aszExtraXMLforPass3.push_back(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"DiploVoteType");
-	m_iVoteSourceType = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(&m_iGreatPeopleRateChange, L"iGreatPeopleRateChange");
-	pXML->GetOptionalChildXmlValByName(&m_bTeamShare, L"bTeamShare");
-	pXML->GetOptionalChildXmlValByName(&m_bAutoBuild, L"bAutoBuild");
-	pXML->GetOptionalChildXmlValByName(&m_bWater, L"bWater");
-	pXML->GetOptionalChildXmlValByName(&m_bRiver, L"bRiver");
-	pXML->GetOptionalChildXmlValByName(&m_bFreshWater, L"bFreshWater");
-	pXML->GetOptionalChildXmlValByName(&m_bPower, L"bPower");
-	pXML->GetOptionalChildXmlValByName(&m_bOrbital, L"bOrbital");
-	pXML->GetOptionalChildXmlValByName(&m_bOrbitalInfrastructure, L"bOrbitalInfrastructure");
-	pXML->GetOptionalChildXmlValByName(&m_bNoHolyCity, L"bNoHolyCity");
-	pXML->GetOptionalChildXmlValByName(&m_bAreaBorderObstacle, L"bBorderObstacle");
-	pXML->GetOptionalChildXmlValByName(&m_bForceTeamVoteEligible, L"bForceTeamVoteEligible");
-	pXML->GetOptionalChildXmlValByName(&m_bCapital, L"bCapital");
-	pXML->GetOptionalChildXmlValByName(&m_iDCMAirbombMission, L"iDCMAirbombMission");
-	pXML->GetOptionalChildXmlValByName(&m_bGovernmentCenter, L"bGovernmentCenter");
-	pXML->GetOptionalChildXmlValByName(&m_bGoldenAge, L"bGoldenAge");
-	pXML->GetOptionalChildXmlValByName(&m_bAllowsNukes, L"bAllowsNukes");
-	pXML->GetOptionalChildXmlValByName(&m_bMapCentering, L"bMapCentering");
-	pXML->GetOptionalChildXmlValByName(&m_bNoUnhappiness, L"bNoUnhappiness");
-	pXML->GetOptionalChildXmlValByName(&m_bNoUnhealthyPopulation, L"bNoUnhealthyPopulation");
-	pXML->GetOptionalChildXmlValByName(&m_bBuildingOnlyHealthy, L"bBuildingOnlyHealthy");
-	pXML->GetOptionalChildXmlValByName(&m_bNeverCapture, L"bNeverCapture");
-	pXML->GetOptionalChildXmlValByName(&m_bNukeImmune, L"bNukeImmune");
-	pXML->GetOptionalChildXmlValByName(&m_bCenterInCity, L"bCenterInCity");
-	pXML->GetOptionalChildXmlValByName(&m_bStateReligionInCity, L"bNeedStateReligionInCity");
-	pXML->GetOptionalChildXmlValByName(&m_iAIWeight, L"iAIWeight");
-	pXML->GetOptionalChildXmlValByName(&m_iProductionCost, L"iCost", -1);
-	pXML->GetOptionalChildXmlValByName(&m_iProductionCostSize, L"iCostSizeModifier", -1);
-	pXML->GetOptionalChildXmlValByName(&m_iProductionCostCount, L"iCostCountModifier", -1);
-	pXML->GetOptionalChildXmlValByName(&m_iProductionCostMaterials, L"iCostMaterialsModifier", -1);
-	pXML->GetOptionalChildXmlValByName(&m_iProductionCostComplexity, L"iCostComplexityModifier", -1);
-	pXML->GetOptionalChildXmlValByName(&m_iHurryCostModifier, L"iHurryCostModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iHurryAngerModifier, L"iHurryAngerModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iMinAreaSize, L"iMinAreaSize");
-	pXML->GetOptionalChildXmlValByName(&m_iConquestProbability, L"iConquestProb", 50);
-	pXML->GetOptionalChildXmlValByName(&m_iNumCitiesPrereq, L"iCitiesPrereq");
-	pXML->GetOptionalChildXmlValByName(&m_iNumTeamsPrereq, L"iTeamsPrereq");
-	pXML->GetOptionalChildXmlValByName(&m_iUnitLevelPrereq, L"iLevelPrereq");
-	pXML->GetOptionalChildXmlValByName(&m_iMinLatitude, L"iMinLatitude");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxLatitude, L"iMaxLatitude", 90);
-	pXML->GetOptionalChildXmlValByName(&m_iGreatPeopleRateModifier, L"iGreatPeopleRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGreatGeneralRateModifier, L"iGreatGeneralRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iDomesticGreatGeneralRateModifier, L"iDomesticGreatGeneralRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalGreatPeopleRateModifier, L"iGlobalGreatPeopleRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iAnarchyModifier, L"iAnarchyModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGoldenAgeModifier, L"iGoldenAgeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalHurryModifier, L"iGlobalHurryModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeExperience, L"iExperience");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalFreeExperience, L"iGlobalExperience");
-	pXML->GetOptionalChildXmlValByName(&m_iFoodKept, L"iFoodKept");
-	pXML->GetOptionalChildXmlValByName(&m_iAirlift, L"iAirlift");
-	pXML->GetOptionalChildXmlValByName(&m_iAirModifier, L"iAirModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iAirUnitCapacity, L"iAirUnitCapacity");
-	pXML->GetOptionalChildXmlValByName(&m_iNukeModifier, L"iNukeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iNukeExplosionRand, L"iNukeExplosionRand");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeSpecialist, L"iFreeSpecialist");
-	pXML->GetOptionalChildXmlValByName(&m_iAreaFreeSpecialist, L"iAreaFreeSpecialist");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalFreeSpecialist, L"iGlobalFreeSpecialist");
-	pXML->GetOptionalChildXmlValByName(&m_iMaintenanceModifier, L"iMaintenanceModifier");
-    pXML->GetOptionalChildXmlValByName(&m_iGlobalMaintenanceModifier, L"iGlobalMaintenanceModifier");
-    pXML->GetOptionalChildXmlValByName(&m_iAreaMaintenanceModifier, L"iAreaMaintenanceModifier");
-    pXML->GetOptionalChildXmlValByName(&m_iOtherAreaMaintenanceModifier, L"iOtherAreaMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iDistanceMaintenanceModifier, L"iDistanceMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iNumCitiesMaintenanceModifier, L"iNumCitiesMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iCoastalDistanceMaintenanceModifier, L"iCoastalDistanceMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iConnectedCityMaintenanceModifier, L"iConnectedCityMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iWarWearinessModifier, L"iWarWearinessModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalWarWearinessModifier, L"iGlobalWarWearinessModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iEnemyWarWearinessModifier, L"iEnemyWarWearinessModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iHealRateChange, L"iHealRateChange");
-	pXML->GetOptionalChildXmlValByName(&m_iHealth, L"iHealth");
-	pXML->GetOptionalChildXmlValByName(&m_iAreaHealth, L"iAreaHealth");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalHealth, L"iGlobalHealth");
-	pXML->GetOptionalChildXmlValByName(&m_iHappiness, L"iHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iAreaHappiness, L"iAreaHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalHappiness, L"iGlobalHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iStateReligionHappiness, L"iStateReligionHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iWorkerSpeedModifier, L"iWorkerSpeedModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iMilitaryProductionModifier, L"iMilitaryProductionModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iSpaceProductionModifier, L"iSpaceProductionModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalSpaceProductionModifier, L"iGlobalSpaceProductionModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iTradeRoutes, L"iTradeRoutes");
-	pXML->GetOptionalChildXmlValByName(&m_iCoastalTradeRoutes, L"iCoastalTradeRoutes");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalTradeRoutes, L"iGlobalTradeRoutes");
-	pXML->GetOptionalChildXmlValByName(&m_iTradeRouteModifier, L"iTradeRouteModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iForeignTradeRouteModifier, L"iForeignTradeRouteModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalPopulationChange, L"iGlobalPopulationChange");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeTechs, L"iFreeTechs");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"FreeSpecialTech");
-	m_eFreeSpecialTech = (TechTypes) pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(&m_iDefenseModifier, L"iDefense");
-	pXML->GetOptionalChildXmlValByName(&m_iBombardDefenseModifier, L"iBombardDefense");
-	pXML->GetOptionalChildXmlValByName(&m_iAllCityDefenseModifier, L"iAllCityDefense");
-	pXML->GetOptionalChildXmlValByName(&m_iEspionageDefenseModifier, L"iEspionageDefense");
-	pXML->GetOptionalChildXmlValByName(&m_iUnitUpgradePriceModifier, L"iUnitUpgradePriceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iRevIdxLocal, L"iRevIdxLocal");
-	pXML->GetOptionalChildXmlValByName(&m_iRevIdxNational, L"iRevIdxNational");
-	pXML->GetOptionalChildXmlValByName(&m_iRevIdxDistanceModifier, L"iRevIdxDistanceModifier");
-
-	pXML->GetOptionalChildXmlValByName(&m_iMaxPopAllowed, L"iObsoletePopulation", -1);
-
-	pXML->GetOptionalChildXmlValByName(&m_iAssetValue, L"iAsset");
-	pXML->GetOptionalChildXmlValByName(&m_iPowerValue, L"iPower");
-
-	// if we can set the current xml node to it's next sibling
-	if (pXML->TryMoveToXmlFirstChild(L"RiverPlotYieldChanges"))
-	{
-		// call the function that sets the yield change variable
-		pXML->SetYields(&m_piRiverPlotYieldChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piRiverPlotYieldChange);
-	}
-
-	// if we can set the current xml node to it's next sibling
-	if (pXML->TryMoveToXmlFirstChild(L"GlobalSeaPlotYieldChanges"))
-	{
-		// call the function that sets the yield change variable
-		pXML->SetYields(&m_piGlobalSeaPlotYieldChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piGlobalSeaPlotYieldChange);
-	}
-
-	// if we can set the current xml node to it's next sibling
-
-	// if we can set the current xml node to it's next sibling
-	if (pXML->TryMoveToXmlFirstChild(L"YieldPerPopChanges"))
-	{
-		// call the function that sets the yield change variable
-		pXML->SetYields(&m_piYieldPerPopChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piYieldPerPopChange);
-	}
-
-	// if we can set the current xml node to it's next sibling
-	if (pXML->TryMoveToXmlFirstChild(L"YieldModifiers"))
-	{
-		// call the function that sets the yield change variable
-		pXML->SetYields(&m_piYieldModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piYieldModifier);
-	}
-
-	// if we can set the current xml node to it's next sibling
-	if (pXML->TryMoveToXmlFirstChild(L"PowerYieldModifiers"))
-	{
-		// call the function that sets the yield change variable
-		pXML->SetYields(&m_piPowerYieldModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piPowerYieldModifier);
-	}
-
-	// if we can set the current xml node to it's next sibling
-	if (pXML->TryMoveToXmlFirstChild(L"AreaYieldModifiers"))
-	{
-		// call the function that sets the yield change variable
-		pXML->SetYields(&m_piAreaYieldModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piAreaYieldModifier);
-	}
-
-	// if we can set the current xml node to it's next sibling
-	if (pXML->TryMoveToXmlFirstChild(L"GlobalYieldModifiers"))
-	{
-		// call the function that sets the yield change variable
-		pXML->SetYields(&m_piGlobalYieldModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piGlobalYieldModifier);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CommerceChanges"))
-	{
-		pXML->SetCommerce(&m_piCommerceChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCommerceChange);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CommercePerPopChanges"))
-	{
-		pXML->SetCommerce(&m_piCommercePerPopChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCommercePerPopChange);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CommerceChangeDoubleTimes"))
-	{
-		pXML->SetCommerce(&m_piCommerceChangeDoubleTime);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCommerceChangeDoubleTime);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CommerceModifiers"))
-	{
-		pXML->SetCommerce(&m_piCommerceModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCommerceModifier);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"GlobalCommerceModifiers"))
-	{
-		pXML->SetCommerce(&m_piGlobalCommerceModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piGlobalCommerceModifier);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"SpecialistExtraCommerces"))
-	{
-		pXML->SetCommerce(&m_piSpecialistExtraCommerce);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piSpecialistExtraCommerce);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"StateReligionCommerces"))
-	{
-		pXML->SetCommerce(&m_piStateReligionCommerce);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piStateReligionCommerce);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CommerceHappinesses"))
-	{
-		pXML->SetCommerce(&m_piCommerceHappiness);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCommerceHappiness);
-	}
 
 	pXML->SetVariableListTagPair(&m_piSpecialistCount, L"SpecialistCounts", GC.getNumSpecialistInfos());
 	pXML->SetVariableListTagPair(&m_piFreeSpecialistCount, L"FreeSpecialistCounts", GC.getNumSpecialistInfos());
@@ -2483,12 +1956,7 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	else
 		SAFE_DELETE_ARRAY(m_pbCommerceFlexible);
 
-	pXML->GetOptionalChildXmlValByName(m_szConstructSound, L"ConstructSound");
-
-	//m_piBonusHealthChanges.read(pXML, L"BonusHealthChanges");
-	m_piBonusHappinessChanges.read(pXML, L"BonusHappinessChanges");
 	pXML->SetVariableListTagPair(&m_piBonusProductionModifier, L"BonusProductionModifiers", GC.getNumBonusInfos());
-	m_aUnitCombatFreeExperience.read(pXML, L"UnitCombatFreeExperiences");
 	pXML->SetVariableListTagPair(&m_piDomainFreeExperience, L"DomainFreeExperiences", NUM_DOMAIN_TYPES);
 	pXML->SetVariableListTagPair(&m_piDomainProductionModifier, L"DomainProductionModifiers", NUM_DOMAIN_TYPES);
 
@@ -2710,44 +2178,7 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 
 	pXML->SetVariableListTagPair(&m_piFlavorValue, L"Flavors", GC.getNumFlavorTypes());
 
-	//pXML->GetOptionalChildXmlValByName(&m_iRevIdxLocal, L"iRevolutionIndexModifier");
-	pXML->GetOptionalChildXmlValByName(&m_bApplyFreePromotionOnMove, L"bApplyFreePromotionOnMove");
-	pXML->GetOptionalChildXmlValByName(&m_bNoEnemyPillagingIncome, L"bNoEnemyPillagingIncome");
-	pXML->GetOptionalChildXmlValByName(&m_bProvidesFreshWater, L"bProvidesFreshWater");
-	pXML->GetOptionalChildXmlValByName(&m_bForceAllTradeRoutes, L"bForceAllTradeRoutes");
-	pXML->GetOptionalChildXmlValByName(&m_iPillageGoldModifier, L"iPillageGoldModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iWorldTradeRoutes, L"iWorldTradeRoutes");
-	pXML->GetOptionalChildXmlValByName(&m_bPrereqPower, L"bPrereqPower");
-	pXML->GetOptionalChildXmlValByName(&m_bForceNoPrereqScaling, L"bForceNoPrereqScaling");
-	pXML->GetOptionalChildXmlValByName(&m_bPrereqWar, L"bPrereqWar");
-	pXML->GetOptionalChildXmlValByName(&m_bRequiresActiveCivics, L"bRequiresActiveCivics");
-	pXML->GetOptionalChildXmlValByName(&m_bZoneOfControl, L"bZoneOfControl");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalPopulationgrowthratepercentage, L"iGlobalPopulationgrowthratepercentage");
-	pXML->GetOptionalChildXmlValByName(&m_iPopulationgrowthratepercentage, L"iPopulationgrowthratepercentage");
-	pXML->GetOptionalChildXmlValByName(&m_iLineOfSight, L"iLineOfSight");
-	pXML->GetOptionalChildXmlValByName(&m_iInflationModifier, L"iInflationModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iAdjacentDamagePercent, L"iAdjacentDamagePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iPrereqPopulation, L"iPrereqPopulation");
-	pXML->GetOptionalChildXmlValByName(&m_iWorkableRadius, L"iWorkableRadius");
-	pXML->GetOptionalChildXmlValByName(&m_iOccupationTimeModifier, L"iOccupationTimeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iNoEntryDefenseLevel, L"iNoEntryDefenseLevel");
-	pXML->GetOptionalChildXmlValByName(&m_iNumUnitFullHeal, L"iNumUnitFullHeal");
-	pXML->GetOptionalChildXmlValByName(&m_iNumPopulationEmployed, L"iNumPopulationEmployed");
-	pXML->GetOptionalChildXmlValByName(&m_iHealthPercentPerPopulation, L"iHealthPercentPerPopulation");
-	pXML->GetOptionalChildXmlValByName(&m_iHappinessPercentPerPopulation, L"iHappinessPercentPerPopulation");
-	pXML->GetOptionalChildXmlValByName(&m_bProtectedCulture, L"bProtectedCulture");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PrereqCultureLevel");
-	m_iPrereqCultureLevel = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"VicinityBonus");
-	m_iPrereqVicinityBonus = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"RawVicinityBonus");
-	m_iPrereqRawVicinityBonus = pXML->GetInfoClass(szTextVal);
-
 	pXML->SetVariableListTagPair(&m_piBonusDefenseChanges, L"BonusDefenseChanges", GC.getNumBonusInfos());
-	m_aUnitCombatExtraStrength.read(pXML, L"UnitCombatExtraStrengths");
 
 	if (pXML->TryMoveToXmlFirstChild(L"BonusCommerceModifiers"))
 	{
@@ -2924,9 +2355,6 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	pXML->SetOptionalVectorWithDelayedResolution(m_aePrereqOrCivics, L"PrereqOrCivics");
 	pXML->SetOptionalVectorWithDelayedResolution(m_aePrereqAndCivics, L"PrereqAndCivics");
 
-	pXML->SetOptionalVector(&m_piPrereqOrVicinityBonuses, L"PrereqVicinityBonuses");
-	pXML->SetOptionalVector(&m_aePrereqOrRawVicinityBonuses, L"PrereqRawVicinityBonuses");
-
 	if (pXML->TryMoveToXmlFirstChild(L"TechSpecialistChanges"))
 	{
 		const int iNumSibs = pXML->GetXmlChildrenNumber();
@@ -3022,35 +2450,11 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"PropertySpawnUnit");
 	m_aszExtraXMLforPass3.push_back(szTextVal);
 
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PropertySpawnProperty");
-	m_ePropertySpawnProperty = (PropertyTypes) pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PromotionLineType");
-	m_ePromotionLineType = (PromotionLineTypes) pXML->GetInfoClass(szTextVal);
-	//integers
-	pXML->GetOptionalChildXmlValByName(&m_iLinePriority, L"iLinePriority");
-	pXML->GetOptionalChildXmlValByName(&m_iNationalCaptureProbabilityModifier, L"iNationalCaptureProbabilityModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iNationalCaptureResistanceModifier, L"iNationalCaptureResistanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iLocalCaptureProbabilityModifier, L"iLocalCaptureProbabilityModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iLocalCaptureResistanceModifier, L"iLocalCaptureResistanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iLocalDynamicDefense, L"iLocalDynamicDefense");
-	pXML->GetOptionalChildXmlValByName(&m_iRiverDefensePenalty, L"iRiverDefensePenalty");
-	pXML->GetOptionalChildXmlValByName(&m_iMinDefense, L"iMinDefense");
-	pXML->GetOptionalChildXmlValByName(&m_iBuildingDefenseRecoverySpeedModifier, L"iBuildingDefenseRecoverySpeedModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iCityDefenseRecoverySpeedModifier, L"iCityDefenseRecoverySpeedModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iDamageAttackerChance, L"iDamageAttackerChance");
-	pXML->GetOptionalChildXmlValByName(&m_iDamageToAttacker, L"iDamageToAttacker");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxPopulationAllowed, L"iMaxPopulationAllowed", -1);
-	pXML->GetOptionalChildXmlValByName(&m_iMaxPopulationChange, L"iMaxPopulationChange");
-	pXML->GetOptionalChildXmlValByName(&m_iInsidiousness, L"iInsidiousness");
-	pXML->GetOptionalChildXmlValByName(&m_iInvestigation, L"iInvestigation");
-	pXML->GetOptionalChildXmlValByName(&m_iPopulationChange, L"iPopulationChange");
-	pXML->GetOptionalChildXmlValByName(&m_bDamageAllAttackers, L"bDamageAllAttackers");
+	// m_bDamageAllAttackers itself is read declaratively above; this derived flag is not XML-backed.
 	if (m_bDamageAllAttackers)
 	{
 		m_bDamageAttackerCapable = true;
 	}
-	pXML->GetOptionalChildXmlValByName(&m_bQuarantine, L"bQuarantine");
 
 	//Structs
 
@@ -3182,9 +2586,7 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	pXML->SetOptionalVector(&m_aiUnitCombatRetrainTypes, L"UnitCombatRetrainTypes");
 	pXML->SetOptionalVector(&m_aiMayDamageAttackingUnitCombatTypes, L"MayDamageAttackingUnitCombatTypes");
-	pXML->SetOptionalVector(&m_aeMapCategoryTypes, L"MapCategoryTypes");
 
 	// int vector utilizing pairing without delayed resolution
 	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aUnitCombatDefenseAgainstModifiers, L"UnitCombatDefenseAgainstModifiers");
@@ -3196,35 +2598,13 @@ bool CvBuildingInfo::read(CvXMLLoadUtility* pXML)
 	pXML->SetVariableListTagPair(&m_pabHurry, L"Hurrys", GC.getNumHurryInfos());
 	//TB Combat Mods (Buildings) end
 
-	pXML->GetOptionalChildXmlValByName(&m_iMaxGlobalInstances, L"iMaxGlobalInstances", -1);
-	pXML->GetOptionalChildXmlValByName(&m_iMaxTeamInstances, L"iMaxTeamInstances", -1);
-	pXML->GetOptionalChildXmlValByName(&m_iMaxPlayerInstances, L"iMaxPlayerInstances", -1);
-	pXML->GetOptionalChildXmlValByName(&m_iExtraPlayerInstances, L"iExtraPlayerInstances", 0);
-
 	pXML->SetVariableListTagPair(&m_piVictoryThreshold, L"VictoryThresholds", GC.getNumVictoryInfos());
 
-	pXML->GetOptionalTypeEnumWithDelayedResolution(m_iFreeBuilding, L"FreeBuilding");
-	pXML->GetOptionalTypeEnumWithDelayedResolution(m_iFreeAreaBuilding, L"FreeAreaBuilding");
-	pXML->GetOptionalTypeEnumWithDelayedResolution(m_iProductionContinueBuilding, L"ProductionContinueBuilding");
-	pXML->GetOptionalTypeEnumWithDelayedResolution(m_iPrereqAnyoneBuilding, L"PrereqAnyoneBuilding");
-	pXML->GetOptionalTypeEnumWithDelayedResolution(m_iExtendsBuilding, L"ExtendsBuilding");
-	pXML->GetOptionalTypeEnumWithDelayedResolution(m_iObsoletesToBuilding, L"ObsoletesToBuilding");
-
-	m_aBuildingHappinessChanges.readWithDelayedResolution(pXML, L"BuildingHappinessChanges");
+	// UnitTypes loads after buildings; must stay on explicit delayed resolution (see getDataMembers).
 	m_aUnitProductionModifier.readWithDelayedResolution(pXML, L"UnitProductionModifiers");
-	m_aBuildingProductionModifier.readWithDelayedResolution(pXML, L"BuildingProductionModifiers");
-	m_aGlobalBuildingProductionModifier.readWithDelayedResolution(pXML, L"GlobalBuildingProductionModifiers");
-	m_aPrereqNumOfBuilding.readWithDelayedResolution(pXML, L"PrereqAmountBuildings");
-	m_aGlobalBuildingCostModifier.readWithDelayedResolution(pXML, L"GlobalBuildingCostModifiers");
 
-	m_techYieldChanges.readPairedArrays(pXML, L"TechYieldChanges", L"PrereqTech", L"TechYield");
-	m_techYieldModifiers.readPairedArrays(pXML, L"TechYieldModifiers", L"PrereqTech", L"TechYield");
-	m_techCommerceChanges.readPairedArrays(pXML, L"TechCommerceChanges", L"TechType", L"CommercePercents");
-	m_techCommerceModifiers.readPairedArrays(pXML, L"TechCommerceModifiers", L"PrereqTech", L"TechCommerce");
-	m_aTerrainYieldChanges.readPairedArrays(pXML, L"TerrainYieldChanges", L"TerrainType", L"YieldChanges");
+	// PlotTypes is not an info class, so the paired-array wrapper cannot take this one (see getDataMembers).
 	m_aPlotYieldChanges.readPairedArrays(pXML, L"PlotYieldChanges", L"PlotType", L"Yields");
-	m_aImprovementYieldChanges.readPairedArrays(pXML, L"ImprovementYieldChanges", L"ImprovementType", L"YieldChanges");
-	m_aGlobalImprovementYieldChanges.readPairedArrays(pXML, L"GlobalImprovementYieldChanges", L"ImprovementType", L"YieldChanges");
 
 	return true;
 }
@@ -3254,7 +2634,6 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 	const bool bDefault = false;
 	const int iDefault = 0;
 	const int iTextDefault = -1;
-	const float fDefault = 0.0f;
 	const CvString cDefault = CvString::format("").GetCString();
 
 	if ( getArtDefineTag() == cDefault ) // "ArtDefineTag"
@@ -3262,268 +2641,16 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 		m_szArtDefineTag = pClassInfo->getArtDefineTag();
 		setNotShowInCity();
 	}
-	if ( getMovieDefineTag() == cDefault ) // "ArtDefineTag"
-	{
-		m_szMovieDefineTag = pClassInfo->getMovieDefineTag();
-	}
 
 	CvHotkeyInfo::copyNonDefaults(pClassInfo);
 
 	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
-	if (getSpecialBuilding() == iTextDefault) m_eSpecialBuilding = pClassInfo->getSpecialBuilding();
-	if (getAdvisorType() == iTextDefault) m_iAdvisorType = pClassInfo->getAdvisorType();
-
-	if (isNoLimit() == bDefault) m_bNoLimit = pClassInfo->isNoLimit();
-
-	if (getPrereqGameOption() == iTextDefault) m_iPrereqGameOption = pClassInfo->getPrereqGameOption();
-	if (getNotGameOption() == iTextDefault) m_iNotGameOption = pClassInfo->getNotGameOption();
-	if (getHolyCity() == iTextDefault) m_iHolyCity = pClassInfo->getHolyCity();
-	if (getReligionType() == iTextDefault) m_iReligionType = pClassInfo->getReligionType();
-	if (getPrereqStateReligion() == iTextDefault) m_iStateReligion = pClassInfo->getPrereqStateReligion();
-	if (getPrereqReligion() == iTextDefault) m_iPrereqReligion = pClassInfo->getPrereqReligion();
-	if (getPrereqCorporation() == iTextDefault) m_iPrereqCorporation = pClassInfo->getPrereqCorporation();
-	if (getFoundsCorporation() == iTextDefault) m_iFoundsCorporation = pClassInfo->getFoundsCorporation();
-	if (getGlobalReligionCommerce() == iTextDefault) m_iGlobalReligionCommerce = pClassInfo->getGlobalReligionCommerce();
-	if (getGlobalCorporationCommerce() == iTextDefault) m_iGlobalCorporationCommerce = pClassInfo->getGlobalCorporationCommerce();
-	if (getVictoryPrereq() == iTextDefault) m_iVictoryPrereq = pClassInfo->getVictoryPrereq();
-	if (getFreeStartEra() == iTextDefault) m_iFreeStartEra = pClassInfo->getFreeStartEra();
-	if (getMaxStartEra() == iTextDefault) m_iMaxStartEra = pClassInfo->getMaxStartEra();
-	if (getPrereqAndTech() == iTextDefault) m_iPrereqAndTech = pClassInfo->getPrereqAndTech();
-	if (getPrereqVicinityBonus() == iTextDefault) m_iPrereqVicinityBonus = pClassInfo->getPrereqVicinityBonus();
-	if (getPrereqRawVicinityBonus() == iTextDefault) m_iPrereqRawVicinityBonus = pClassInfo->getPrereqRawVicinityBonus();
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_piPrereqAndTechs, pClassInfo->getPrereqAndTechs());
-
-	if (getPrereqAndBonus() == NO_BONUS) m_iPrereqAndBonus = pClassInfo->getPrereqAndBonus();
-
-	if (getPowerBonus() == iTextDefault) m_iPowerBonus = pClassInfo->getPowerBonus();
-	if (getCivicOption() == iTextDefault) m_iCivicOption = pClassInfo->getCivicOption();
 	if (getGreatPeopleUnitType() == iTextDefault) m_iGreatPeopleUnitType = pClassInfo->getGreatPeopleUnitType();
-	if (getVoteSourceType() == iTextDefault) m_iVoteSourceType = pClassInfo->getVoteSourceType();
 
-	if (getGreatPeopleRateChange() == iDefault) m_iGreatPeopleRateChange = pClassInfo->getGreatPeopleRateChange();
-	if (isTeamShare() == bDefault) m_bTeamShare = pClassInfo->isTeamShare();
-	if (isAutoBuild() == bDefault) m_bAutoBuild = pClassInfo->isAutoBuild();
-	if (isWater() == bDefault) m_bWater = pClassInfo->isWater();
-	if (isRiver() == bDefault) m_bRiver = pClassInfo->isRiver();
-	if (isPower() == bDefault) m_bPower = pClassInfo->isPower();
-	if (isOrbital() == bDefault) m_bOrbital = pClassInfo->isOrbital();
-	if (isOrbitalInfrastructure() == bDefault) m_bOrbitalInfrastructure = pClassInfo->isOrbitalInfrastructure();
-	if (isNoHolyCity() == bDefault) m_bNoHolyCity = pClassInfo->isNoHolyCity();
-	if (isAreaBorderObstacle() == bDefault) m_bAreaBorderObstacle = pClassInfo->isAreaBorderObstacle();
-	if (isForceTeamVoteEligible() == bDefault) m_bForceTeamVoteEligible = pClassInfo->isForceTeamVoteEligible();
-	if (isCapital() == bDefault) m_bCapital = pClassInfo->isCapital();
-	if (isGovernmentCenter() == bDefault) m_bGovernmentCenter = pClassInfo->isGovernmentCenter();
-	if (isGoldenAge () == bDefault) m_bGoldenAge = pClassInfo->isGoldenAge ();
-	if (isAllowsNukes() == bDefault) m_bAllowsNukes = pClassInfo->isAllowsNukes();
-	if (isMapCentering() == bDefault) m_bMapCentering = pClassInfo->isMapCentering();
-	if (isNoUnhappiness() == bDefault) m_bNoUnhappiness = pClassInfo->isNoUnhappiness();
-	if (isNoUnhealthyPopulation() == bDefault) m_bNoUnhealthyPopulation = pClassInfo->isNoUnhealthyPopulation();
-	if (isBuildingOnlyHealthy() == bDefault) m_bBuildingOnlyHealthy = pClassInfo->isBuildingOnlyHealthy();
-	if (isNeverCapture() == bDefault) m_bNeverCapture = pClassInfo->isNeverCapture();
-	if (isNukeImmune() == bDefault) m_bNukeImmune = pClassInfo->isNukeImmune();
-	if (isCenterInCity() == bDefault) m_bCenterInCity = pClassInfo->isCenterInCity();
-	if (needStateReligionInCity() == bDefault) m_bStateReligionInCity = pClassInfo->needStateReligionInCity();
-
-	if (getAIWeight() == iDefault) m_iAIWeight = pClassInfo->getAIWeight();
-	if (m_iProductionCost == iTextDefault) m_iProductionCost = pClassInfo->getProductionCost();
-	if (m_iProductionCostSize == iTextDefault) m_iProductionCostSize = pClassInfo->getProductionCostSize();
-	if (m_iProductionCostCount == iTextDefault) m_iProductionCostCount = pClassInfo->getProductionCostCount();
-	if (m_iProductionCostMaterials == iTextDefault) m_iProductionCostMaterials = pClassInfo->getProductionCostMaterials();
-	if (m_iProductionCostComplexity == iTextDefault) m_iProductionCostComplexity = pClassInfo->getProductionCostComplexity();
-	if (getHurryCostModifier() == iDefault) m_iHurryCostModifier = pClassInfo->getHurryCostModifier();
-	if (getHurryAngerModifier() == iDefault) m_iHurryAngerModifier = pClassInfo->getHurryAngerModifier();
-	if (getMinAreaSize() == iDefault) m_iMinAreaSize = pClassInfo->getMinAreaSize();
-	if (getConquestProbability() == 50) m_iConquestProbability = pClassInfo->getConquestProbability();
-	if (getNumCitiesPrereq() == iDefault) m_iNumCitiesPrereq = pClassInfo->getNumCitiesPrereq();
-	if (getNumTeamsPrereq() == iDefault) m_iNumTeamsPrereq = pClassInfo->getNumTeamsPrereq();
-	if (getUnitLevelPrereq() == iDefault) m_iUnitLevelPrereq = pClassInfo->getUnitLevelPrereq();
-	if (getMinLatitude() == iDefault) m_iMinLatitude = pClassInfo->getMinLatitude();
-	if (getMaxLatitude() == 90) m_iMaxLatitude = pClassInfo->getMaxLatitude();
-	if (getGreatPeopleRateModifier() == iDefault) m_iGreatPeopleRateModifier = pClassInfo->getGreatPeopleRateModifier();
-	if (getGreatGeneralRateModifier() == iDefault) m_iGreatGeneralRateModifier = pClassInfo->getGreatGeneralRateModifier();
-	if (getDomesticGreatGeneralRateModifier() == iDefault) m_iDomesticGreatGeneralRateModifier = pClassInfo->getDomesticGreatGeneralRateModifier();
-	if (getGlobalGreatPeopleRateModifier() == iDefault) m_iGlobalGreatPeopleRateModifier = pClassInfo->getGlobalGreatPeopleRateModifier();
-	if (getAnarchyModifier() == iDefault) m_iAnarchyModifier = pClassInfo->getAnarchyModifier();
-	if (getGoldenAgeModifier() == iDefault) m_iGoldenAgeModifier = pClassInfo->getGoldenAgeModifier();
-	if (getGlobalHurryModifier() == iDefault) m_iGlobalHurryModifier = pClassInfo->getGlobalHurryModifier();
-	if (getFreeExperience() == iDefault) m_iFreeExperience = pClassInfo->getFreeExperience();
-	if (getGlobalFreeExperience() == iDefault) m_iGlobalFreeExperience = pClassInfo->getGlobalFreeExperience();
-	if (getFoodKept() == iDefault) m_iFoodKept = pClassInfo->getFoodKept();
-	if (getAirlift() == iDefault) m_iAirlift = pClassInfo->getAirlift();
-	if (getAirModifier() == iDefault) m_iAirModifier = pClassInfo->getAirModifier();
-	if (getAirUnitCapacity() == iDefault) m_iAirUnitCapacity = pClassInfo->getAirUnitCapacity();
-	if (getNukeModifier() == iDefault) m_iNukeModifier = pClassInfo->getNukeModifier();
-	if (getNukeExplosionRand() == iDefault) m_iNukeExplosionRand = pClassInfo->getNukeExplosionRand();
-	if (getFreeSpecialist() == iDefault) m_iFreeSpecialist = pClassInfo->getFreeSpecialist();
-	if (getAreaFreeSpecialist() == iDefault) m_iAreaFreeSpecialist = pClassInfo->getAreaFreeSpecialist();
-	if (getGlobalFreeSpecialist() == iDefault) m_iGlobalFreeSpecialist = pClassInfo->getGlobalFreeSpecialist();
-	if (getMaintenanceModifier() == iDefault) m_iMaintenanceModifier = pClassInfo->getMaintenanceModifier();
-	if (getWarWearinessModifier() == iDefault) m_iWarWearinessModifier = pClassInfo->getWarWearinessModifier();
-	if (getGlobalWarWearinessModifier() == iDefault) m_iGlobalWarWearinessModifier = pClassInfo->getGlobalWarWearinessModifier();
-	if (getEnemyWarWearinessModifier() == iDefault) m_iEnemyWarWearinessModifier = pClassInfo->getEnemyWarWearinessModifier();
-	if (getHealRateChange() == iDefault) m_iHealRateChange = pClassInfo->getHealRateChange();
-	if (getHealth() == iDefault) m_iHealth = pClassInfo->getHealth();
-	if (getAreaHealth() == iDefault) m_iAreaHealth = pClassInfo->getAreaHealth();
-	if (getGlobalHealth() == iDefault) m_iGlobalHealth = pClassInfo->getGlobalHealth();
-	if (getHappiness() == iDefault) m_iHappiness = pClassInfo->getHappiness();
-	if (getAreaHappiness() == iDefault) m_iAreaHappiness = pClassInfo->getAreaHappiness();
-	if (getGlobalHappiness() == iDefault) m_iGlobalHappiness = pClassInfo->getGlobalHappiness();
-	if (getStateReligionHappiness() == iDefault) m_iStateReligionHappiness = pClassInfo->getStateReligionHappiness();
-	if (getWorkerSpeedModifier() == iDefault) m_iWorkerSpeedModifier = pClassInfo->getWorkerSpeedModifier();
-	if (getMilitaryProductionModifier() == iDefault) m_iMilitaryProductionModifier = pClassInfo->getMilitaryProductionModifier();
-	if (getSpaceProductionModifier() == iDefault) m_iSpaceProductionModifier = pClassInfo->getSpaceProductionModifier();
-	if (getGlobalSpaceProductionModifier() == iDefault) m_iGlobalSpaceProductionModifier = pClassInfo->getGlobalSpaceProductionModifier();
-	if (getTradeRoutes() == iDefault) m_iTradeRoutes = pClassInfo->getTradeRoutes();
-	if (getCoastalTradeRoutes() == iDefault) m_iCoastalTradeRoutes = pClassInfo->getCoastalTradeRoutes();
-	if (getGlobalTradeRoutes() == iDefault) m_iGlobalTradeRoutes = pClassInfo->getGlobalTradeRoutes();
-	if (getTradeRouteModifier() == iDefault) m_iTradeRouteModifier = pClassInfo->getTradeRouteModifier();
-	if (getForeignTradeRouteModifier() == iDefault) m_iForeignTradeRouteModifier = pClassInfo->getForeignTradeRouteModifier();
-	if (getGlobalPopulationChange() == iDefault) m_iGlobalPopulationChange = pClassInfo->getGlobalPopulationChange();
-	if (getFreeTechs() == iDefault) m_iFreeTechs = pClassInfo->getFreeTechs();
-	if (getFreeSpecialTech() == NO_TECH) m_eFreeSpecialTech = pClassInfo->getFreeSpecialTech();
-	if (getDefenseModifier() == iDefault) m_iDefenseModifier = pClassInfo->getDefenseModifier();
-	if (getBombardDefenseModifier() == iDefault) m_iBombardDefenseModifier = pClassInfo->getBombardDefenseModifier();
-	if (getAllCityDefenseModifier() == iDefault) m_iAllCityDefenseModifier = pClassInfo->getAllCityDefenseModifier();
-	if (getEspionageDefenseModifier() == iDefault) m_iEspionageDefenseModifier = pClassInfo->getEspionageDefenseModifier();
-	if (m_iAssetValue == iDefault) m_iAssetValue = pClassInfo->m_iAssetValue;
-	if (m_iPowerValue == iDefault) m_iPowerValue = pClassInfo->m_iPowerValue;
-
-	if (getUnitUpgradePriceModifier() == iDefault) m_iUnitUpgradePriceModifier = pClassInfo->getUnitUpgradePriceModifier();
-	if (getRevIdxLocal() == iDefault) m_iRevIdxLocal = pClassInfo->getRevIdxLocal();
-	if (getRevIdxNational() == iDefault) m_iRevIdxNational = pClassInfo->getRevIdxNational();
-	if (getRevIdxDistanceModifier() == iDefault) m_iRevIdxDistanceModifier = pClassInfo->getRevIdxDistanceModifier();
-
-	if (getMaxPopAllowed() == -1) m_iMaxPopAllowed = pClassInfo->getMaxPopAllowed();
-
-
-	for ( int j = 0; j < NUM_YIELD_TYPES; j++)
-	{
-		if ( getRiverPlotYieldChange(j) == iDefault && pClassInfo->getRiverPlotYieldChange(j) != iDefault)
-		{
-			if ( NULL == m_piRiverPlotYieldChange )
-			{
-				CvXMLLoadUtility::InitList(&m_piRiverPlotYieldChange,NUM_YIELD_TYPES,iDefault);
-			}
-			m_piRiverPlotYieldChange[j] = pClassInfo->getRiverPlotYieldChange(j);
-		}
-		if ( getGlobalSeaPlotYieldChange(j) == iDefault && pClassInfo->getGlobalSeaPlotYieldChange(j) != iDefault)
-		{
-			if ( NULL == m_piGlobalSeaPlotYieldChange )
-			{
-				CvXMLLoadUtility::InitList(&m_piGlobalSeaPlotYieldChange,NUM_YIELD_TYPES,iDefault);
-			}
-			m_piGlobalSeaPlotYieldChange[j] = pClassInfo->getGlobalSeaPlotYieldChange(j);
-		}
-		if ( getYieldPerPopChange(j) == iDefault && pClassInfo->getYieldPerPopChange(j) != iDefault)
-		{
-			if ( NULL == m_piYieldPerPopChange )
-			{
-				CvXMLLoadUtility::InitList(&m_piYieldPerPopChange,NUM_YIELD_TYPES,iDefault);
-			}
-			m_piYieldPerPopChange[j] = pClassInfo->getYieldPerPopChange(j);
-		}
-		if ( getYieldModifier(j) == iDefault && pClassInfo->getYieldModifier(j) != iDefault)
-		{
-			if ( NULL == m_piYieldModifier )
-			{
-				CvXMLLoadUtility::InitList(&m_piYieldModifier,NUM_YIELD_TYPES,iDefault);
-			}
-			m_piYieldModifier[j] = pClassInfo->getYieldModifier(j);
-		}
-		if ( getPowerYieldModifier(j) == iDefault && pClassInfo->getPowerYieldModifier(j) != iDefault)
-		{
-			if ( NULL == m_piPowerYieldModifier )
-			{
-				CvXMLLoadUtility::InitList(&m_piPowerYieldModifier,NUM_YIELD_TYPES,iDefault);
-			}
-			m_piPowerYieldModifier[j] = pClassInfo->getPowerYieldModifier(j);
-		}
-		if ( getAreaYieldModifier(j) == iDefault && pClassInfo->getAreaYieldModifier(j) != iDefault)
-		{
-			if ( NULL == m_piAreaYieldModifier )
-			{
-				CvXMLLoadUtility::InitList(&m_piAreaYieldModifier,NUM_YIELD_TYPES,iDefault);
-			}
-			m_piAreaYieldModifier[j] = pClassInfo->getAreaYieldModifier(j);
-		}
-		if ( getGlobalYieldModifier(j) == iDefault && pClassInfo->getGlobalYieldModifier(j) != iDefault)
-		{
-			if ( NULL == m_piGlobalYieldModifier )
-			{
-				CvXMLLoadUtility::InitList(&m_piGlobalYieldModifier,NUM_YIELD_TYPES,iDefault);
-			}
-			m_piGlobalYieldModifier[j] = pClassInfo->getGlobalYieldModifier(j);
-		}
-	}
 
 	for ( int j = 0; j < NUM_COMMERCE_TYPES; j++)
 	{
-		if ( getCommerceChange(j) == iDefault && pClassInfo->getCommerceChange(j) != iDefault)
-		{
-			if ( NULL == m_piCommerceChange )
-			{
-				CvXMLLoadUtility::InitList(&m_piCommerceChange,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_piCommerceChange[j] = pClassInfo->getCommerceChange(j);
-		}
-		if ( getCommercePerPopChange(j) == iDefault && pClassInfo->getCommercePerPopChange(j) != iDefault)
-		{
-			if ( NULL == m_piCommercePerPopChange )
-			{
-				CvXMLLoadUtility::InitList(&m_piCommercePerPopChange,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_piCommercePerPopChange[j] = pClassInfo->getCommercePerPopChange(j);
-		}
-		if ( getCommerceChangeDoubleTime(j) == iDefault && pClassInfo->getCommerceChangeDoubleTime(j) != iDefault)
-		{
-			if ( NULL == m_piCommerceChangeDoubleTime )
-			{
-				CvXMLLoadUtility::InitList(&m_piCommerceChangeDoubleTime,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_piCommerceChangeDoubleTime[j] = pClassInfo->getCommerceChangeDoubleTime(j);
-		}
-		if ( getCommerceModifier(j) == iDefault && pClassInfo->getCommerceModifier(j) != iDefault)
-		{
-			if ( NULL == m_piCommerceModifier )
-			{
-				CvXMLLoadUtility::InitList(&m_piCommerceModifier,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_piCommerceModifier[j] = pClassInfo->getCommerceModifier(j);
-		}
-		if ( getGlobalCommerceModifier(j) == iDefault && pClassInfo->getGlobalCommerceModifier(j) != iDefault)
-		{
-			if ( NULL == m_piGlobalCommerceModifier )
-			{
-				CvXMLLoadUtility::InitList(&m_piGlobalCommerceModifier,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_piGlobalCommerceModifier[j] = pClassInfo->getGlobalCommerceModifier(j);
-		}
-		if ( getSpecialistExtraCommerce(j) == iDefault && pClassInfo->getSpecialistExtraCommerce(j) != iDefault)
-		{
-			if ( NULL == m_piSpecialistExtraCommerce )
-			{
-				CvXMLLoadUtility::InitList(&m_piSpecialistExtraCommerce,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_piSpecialistExtraCommerce[j] = pClassInfo->getSpecialistExtraCommerce(j);
-		}
-		if ( getStateReligionCommerce(j) == iDefault && pClassInfo->getStateReligionCommerce(j) != iDefault)
-		{
-			if ( NULL == m_piStateReligionCommerce )
-			{
-				CvXMLLoadUtility::InitList(&m_piStateReligionCommerce,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_piStateReligionCommerce[j] = pClassInfo->getStateReligionCommerce(j);
-		}
-		if ( getCommerceHappiness(j) == iDefault && pClassInfo->getCommerceHappiness(j) != iDefault)
-		{
-			if ( NULL == m_piCommerceHappiness )
-			{
-				CvXMLLoadUtility::InitList(&m_piCommerceHappiness,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_piCommerceHappiness[j] = pClassInfo->getCommerceHappiness(j);
-		}
 		if ( isCommerceFlexible(j) == bDefault && pClassInfo->isCommerceFlexible(j) != bDefault)
 		{
 			if ( NULL == m_pbCommerceFlexible )
@@ -3554,11 +2681,6 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 		}
 	}
 
-	if (getConstructSound() == cDefault) m_szConstructSound = pClassInfo->getConstructSound();
-
-	//m_piBonusHealthChanges.copyNonDefaults(pClassInfo->m_piBonusHealthChanges);
-	m_piBonusHappinessChanges.copyNonDefaults(pClassInfo->m_piBonusHappinessChanges);
-
 	for ( int j = 0; j < GC.getNumBonusInfos(); j++)
 	{
 		if ( getBonusProductionModifier(j) == iDefault && pClassInfo->getBonusProductionModifier(j) != iDefault )
@@ -3570,7 +2692,6 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 			m_piBonusProductionModifier[j] = pClassInfo->getBonusProductionModifier(j);
 		}
 	}
-	m_aUnitCombatFreeExperience.copyNonDefaults(pClassInfo->getUnitCombatFreeExperience());
 
 	for ( int j = 0; j < NUM_DOMAIN_TYPES; j++)
 	{
@@ -3710,43 +2831,6 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 			m_piFlavorValue[j] = pClassInfo->getFlavorValue(j);
 		}
 	}
-
-	if (isApplyFreePromotionOnMove() == bDefault) m_bApplyFreePromotionOnMove = pClassInfo->isApplyFreePromotionOnMove();
-	if (isNoEnemyPillagingIncome() == bDefault) m_bNoEnemyPillagingIncome = pClassInfo->isNoEnemyPillagingIncome();
-	if (isProvidesFreshWater() == bDefault) m_bProvidesFreshWater = pClassInfo->isProvidesFreshWater();
-	if (isForceAllTradeRoutes() == bDefault) m_bForceAllTradeRoutes = pClassInfo->isForceAllTradeRoutes();
-	if (getPillageGoldModifier() == iDefault) m_iPillageGoldModifier = pClassInfo->getPillageGoldModifier();
-	if (getWorldTradeRoutes() == iDefault) m_iWorldTradeRoutes = pClassInfo->getWorldTradeRoutes();
-	if (isForceNoPrereqScaling() == bDefault) m_bForceNoPrereqScaling = pClassInfo->isForceNoPrereqScaling();
-	if (isPrereqWar() == bDefault) m_bPrereqWar = pClassInfo->isPrereqWar();
-	if (isRequiresActiveCivics() == bDefault) m_bRequiresActiveCivics = pClassInfo->isRequiresActiveCivics();
-	if (isZoneOfControl() == bDefault) m_bZoneOfControl = pClassInfo->isZoneOfControl();
-	if (isPrereqPower() == bDefault) m_bPrereqPower = pClassInfo->isPrereqPower();
-	if (getGlobalPopulationgrowthratepercentage() == iDefault) m_iGlobalPopulationgrowthratepercentage = pClassInfo->getGlobalPopulationgrowthratepercentage();
-	if (getPopulationgrowthratepercentage() == iDefault) m_iPopulationgrowthratepercentage = pClassInfo->getPopulationgrowthratepercentage();
-	if (getLineOfSight() == iDefault) m_iLineOfSight = pClassInfo->getLineOfSight();
-	if (getInflationModifier() == iDefault) m_iInflationModifier = pClassInfo->getInflationModifier();
-	if (getAdjacentDamagePercent() == iDefault) m_iAdjacentDamagePercent = pClassInfo->getAdjacentDamagePercent();
-	if (getPrereqPopulation() == iDefault) m_iPrereqPopulation = pClassInfo->getPrereqPopulation();
-	if (getPrereqCultureLevel() == NO_CULTURELEVEL) m_iPrereqCultureLevel = pClassInfo->getPrereqCultureLevel();
-	if (getWorkableRadius() == iDefault) m_iWorkableRadius = pClassInfo->getWorkableRadius();
-	if (getOccupationTimeModifier() == iDefault) m_iOccupationTimeModifier = pClassInfo->getOccupationTimeModifier();
-	if (m_iNoEntryDefenseLevel == iDefault) m_iNoEntryDefenseLevel = pClassInfo->m_iNoEntryDefenseLevel;
-	if (getNumUnitFullHeal() == iDefault) m_iNumUnitFullHeal = pClassInfo->getNumUnitFullHeal();
-	if (getNumPopulationEmployed() == iDefault) m_iNumPopulationEmployed = pClassInfo->getNumPopulationEmployed();
-	if (getHealthPercentPerPopulation() == iDefault) m_iHealthPercentPerPopulation = pClassInfo->getHealthPercentPerPopulation();
-	if (getHappinessPercentPerPopulation() == iDefault) m_iHappinessPercentPerPopulation = pClassInfo->getHappinessPercentPerPopulation();
-	if (isProtectedCulture() == bDefault) m_bProtectedCulture = pClassInfo->isProtectedCulture();
-
-	if (!m_iGlobalMaintenanceModifier) m_iGlobalMaintenanceModifier = pClassInfo->getGlobalMaintenanceModifier();
-	if (!m_iAreaMaintenanceModifier) m_iAreaMaintenanceModifier = pClassInfo->getAreaMaintenanceModifier();
-	if (!m_iOtherAreaMaintenanceModifier) m_iOtherAreaMaintenanceModifier = pClassInfo->getOtherAreaMaintenanceModifier();
-	if (!m_iDistanceMaintenanceModifier) m_iDistanceMaintenanceModifier = pClassInfo->getDistanceMaintenanceModifier();
-	if (!m_iNumCitiesMaintenanceModifier) m_iNumCitiesMaintenanceModifier = pClassInfo->getNumCitiesMaintenanceModifier();
-	if (!m_iCoastalDistanceMaintenanceModifier) m_iCoastalDistanceMaintenanceModifier = pClassInfo->getCoastalDistanceMaintenanceModifier();
-	if (!m_iConnectedCityMaintenanceModifier) m_iConnectedCityMaintenanceModifier = pClassInfo->getConnectedCityMaintenanceModifier();
-
-	m_aUnitCombatExtraStrength.copyNonDefaults(pClassInfo->getUnitCombatExtraStrength());
 
 	for ( int j = 0; j < GC.getNumBonusInfos(); j++)
 	{
@@ -3924,9 +3008,6 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 		}
 	}
 
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_piPrereqOrVicinityBonuses, pClassInfo->m_piPrereqOrVicinityBonuses);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aePrereqOrRawVicinityBonuses, pClassInfo->getPrereqOrRawVicinityBonuses());
-
 	for ( int i = 0; i < GC.getNumTechInfos(); i++)
 	{
 		for ( int j = 0; j < GC.getNumSpecialistInfos(); j++)
@@ -3973,29 +3054,8 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 
 	//TB Combat Mods (Buildings) begin
 	if (m_ePropertySpawnUnit == NO_UNIT) m_ePropertySpawnUnit = pClassInfo->getPropertySpawnUnit();
-	if (getPropertySpawnProperty() == NO_PROPERTY) m_ePropertySpawnProperty = pClassInfo->getPropertySpawnProperty();
-	if (getPromotionLineType() == NO_PROMOTIONLINE) m_ePromotionLineType = pClassInfo->getPromotionLineType();
-	//integers
-	if (getLinePriority() == iDefault) m_iLinePriority = pClassInfo->getLinePriority();
-	if (getNationalCaptureProbabilityModifier() == iDefault) m_iNationalCaptureProbabilityModifier = pClassInfo->getNationalCaptureProbabilityModifier();
-	if (getNationalCaptureResistanceModifier() == iDefault) m_iNationalCaptureResistanceModifier = pClassInfo->getNationalCaptureResistanceModifier();
-	if (getLocalCaptureProbabilityModifier() == iDefault) m_iLocalCaptureProbabilityModifier = pClassInfo->getLocalCaptureProbabilityModifier();
-	if (getLocalCaptureResistanceModifier() == iDefault) m_iLocalCaptureResistanceModifier = pClassInfo->getLocalCaptureResistanceModifier();
-	if (getLocalDynamicDefense() == iDefault) m_iLocalDynamicDefense = pClassInfo->getLocalDynamicDefense();
-	if (getRiverDefensePenalty() == iDefault) m_iRiverDefensePenalty = pClassInfo->getRiverDefensePenalty();
-	if (m_iMinDefense == iDefault) m_iMinDefense = pClassInfo->m_iMinDefense;
-	if (getBuildingDefenseRecoverySpeedModifier() == iDefault) m_iBuildingDefenseRecoverySpeedModifier = pClassInfo->getBuildingDefenseRecoverySpeedModifier();
-	if (getCityDefenseRecoverySpeedModifier() == iDefault) m_iCityDefenseRecoverySpeedModifier = pClassInfo->getCityDefenseRecoverySpeedModifier();
-	if (getDamageAttackerChance() == iDefault) m_iDamageAttackerChance = pClassInfo->getDamageAttackerChance();
-	if (getDamageToAttacker() == iDefault) m_iDamageToAttacker = pClassInfo->getDamageToAttacker();
-	if (m_iMaxPopulationAllowed == -1) m_iMaxPopulationAllowed = pClassInfo->m_iMaxPopulationAllowed;
-	if (m_iMaxPopulationChange == iDefault) m_iMaxPopulationChange = pClassInfo->m_iMaxPopulationChange;
-	if (getInsidiousness() == iDefault) m_iInsidiousness = pClassInfo->getInsidiousness();
-	if (getInvestigation() == iDefault) m_iInvestigation = pClassInfo->getInvestigation();
-	if (getPopulationChange() == iDefault) m_iPopulationChange = pClassInfo->getPopulationChange();
-	//Booleans
-	if (isDamageAllAttackers() == bDefault) m_bDamageAllAttackers = pClassInfo->isDamageAllAttackers();
-	if (isQuarantine() == bDefault) m_bQuarantine = pClassInfo->isQuarantine();
+
+	// m_bDamageAllAttackers itself merges declaratively above; this derived flag does not.
 	if (isDamageAllAttackers() || pClassInfo->isDamageAllAttackers())
 	{
 		m_bDamageAttackerCapable = true;
@@ -4020,9 +3080,6 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 			GC.copyNonDefaultDelayedResolution((int*)&(m_aEnabledCivilizationTypes[i].eCivilization), (int*)&(pClassInfo->m_aEnabledCivilizationTypes[i].eCivilization));
 		}
 	}
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeMapCategoryTypes, pClassInfo->getMapCategories());
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiUnitCombatRetrainTypes, pClassInfo->m_aiUnitCombatRetrainTypes);
 
 	if (getNumMayDamageAttackingUnitCombatTypes() == 0)
 	{
@@ -4074,21 +3131,6 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 	}
 	//TB Combat Mods (Buildings) end
 
-	if (!pClassInfo->m_aePrereqOrBonuses.empty())
-	{
-		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aePrereqOrBonuses, pClassInfo->m_aePrereqOrBonuses);
-	}
-
-	if (!pClassInfo->m_prereqOrHeritage.empty())
-	{
-		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_prereqOrHeritage, pClassInfo->m_prereqOrHeritage);
-	}
-
-	if (getMaxGlobalInstances() == -1) m_iMaxGlobalInstances = pClassInfo->getMaxGlobalInstances();
-	if (getMaxTeamInstances() == -1) m_iMaxTeamInstances = pClassInfo->getMaxTeamInstances();
-	if (getMaxPlayerInstances() == -1) m_iMaxPlayerInstances = pClassInfo->getMaxPlayerInstances();
-	if (getExtraPlayerInstances() == 0) m_iExtraPlayerInstances = pClassInfo->getExtraPlayerInstances();
-
 	for ( int i = 0; i < GC.getNumVictoryInfos(); i++ )
 	{
 		if (getVictoryThreshold(i) == 0 && pClassInfo->getVictoryThreshold(i) != 0)
@@ -4100,28 +3142,12 @@ void CvBuildingInfo::copyNonDefaults(CvBuildingInfo* pClassInfo)
 			m_piVictoryThreshold[i] = pClassInfo->getVictoryThreshold(i);
 		}
 	}
-	GC.copyNonDefaultDelayedResolution((int*)&m_iFreeBuilding, (int*)&pClassInfo->m_iFreeBuilding);
-	GC.copyNonDefaultDelayedResolution((int*)&m_iFreeAreaBuilding, (int*)&pClassInfo->m_iFreeAreaBuilding);
-	GC.copyNonDefaultDelayedResolution((int*)&m_iProductionContinueBuilding, (int*)&pClassInfo->m_iProductionContinueBuilding);
-	GC.copyNonDefaultDelayedResolution((int*)&m_iPrereqAnyoneBuilding, (int*)&pClassInfo->m_iPrereqAnyoneBuilding);
-	GC.copyNonDefaultDelayedResolution((int*)&m_iExtendsBuilding, (int*)&pClassInfo->m_iExtendsBuilding);
-	GC.copyNonDefaultDelayedResolution((int*)&m_iObsoletesToBuilding, (int*)&pClassInfo->m_iObsoletesToBuilding);
 
-	m_aBuildingHappinessChanges.copyNonDefaultDelayedResolution(pClassInfo->getBuildingHappinessChanges());
+	// UnitTypes loads after buildings; stays on explicit delayed resolution (see getDataMembers).
 	m_aUnitProductionModifier.copyNonDefaultDelayedResolution(pClassInfo->getUnitProductionModifiers());
-	m_aBuildingProductionModifier.copyNonDefaultDelayedResolution(pClassInfo->getBuildingProductionModifiers());
-	m_aGlobalBuildingProductionModifier.copyNonDefaultDelayedResolution(pClassInfo->getGlobalBuildingProductionModifiers());
-	m_aPrereqNumOfBuilding.copyNonDefaultDelayedResolution(pClassInfo->getPrereqNumOfBuildings());
-	m_aGlobalBuildingCostModifier.copyNonDefaultDelayedResolution(pClassInfo->getGlobalBuildingCostModifiers());
 
-	m_techYieldChanges.copyNonDefaults(pClassInfo->getTechYieldChanges100());
-	m_techYieldModifiers.copyNonDefaults(pClassInfo->getTechYieldModifiers());
-	m_techCommerceChanges.copyNonDefaults(pClassInfo->getTechCommerceChanges100());
-	m_techCommerceModifiers.copyNonDefaults(pClassInfo->getTechCommerceModifiers());
-	m_aTerrainYieldChanges.copyNonDefaults(pClassInfo->getTerrainYieldChanges());
+	// PlotTypes is not an info class; the paired-array wrapper cannot take this one (see getDataMembers).
 	m_aPlotYieldChanges.copyNonDefaults(pClassInfo->getPlotYieldChanges());
-	m_aImprovementYieldChanges.copyNonDefaults(pClassInfo->getImprovementYieldChanges());
-	m_aGlobalImprovementYieldChanges.copyNonDefaults(pClassInfo->getGlobalImprovementYieldChanges());
 }
 
 bool CvBuildingInfo::isNewCityFree(const CvGameObject* pObject) const
