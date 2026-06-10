@@ -819,6 +819,7 @@ static void ValidatePathNode(CvPathNode* node)
 bool CvPathGenerator::generatePath(const CvPlot* pFrom, const CvPlot* pTo, CvSelectionGroup* pGroup, int iFlags, int iMaxTurns, int iOptimizationLimit)
 {
 	PROFILE_FUNC();
+	PERF_ACCUM(gPerfPathGenAccumMs); ++gPerfPathGenN;
 	PROFILE_BEGIN_CONDITIONAL("CvPathGenerator::generatePath.Success", "CvPathGenerator::generatePath.Failure",PATH1);
 
 	CvPathNode* root;

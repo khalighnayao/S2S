@@ -111,4 +111,37 @@ private:
 // Accumulate the enclosing scope's ms into dAccumMs (a double the caller declares + logs).
 #define PERF_ACCUM(dAccumMs) PerfAccumTimer PERF_SCOPE_CONCAT(perfAccum_, __LINE__)(dAccumMs)
 
+//	Whole-turn accumulators for the frame-driven span the [PERF/phase] doTurn tree does NOT
+//	cover: AI unit movement and all other per-frame DLL work run from CvGame::update between
+//	turn boundaries (the EXE calls update per rendered frame). Accumulated here across the
+//	turn and logged + reset at CvGame::doTurn, so wall-clock turn time can be split into
+//	doTurn phases / frame-driven compute / engine+render residual. Defined in BetterBTSAI.cpp.
+extern double gPerfGameUpdateAccumMs;    // total time inside CvGame::update
+extern double gPerfUpdateMovesAccumMs;   // inside CvGame::updateMoves (unit movement driver)
+extern double gPerfAutoMissionAccumMs;   // ...of which: selection-group autoMission sweeps
+extern double gPerfUnitUpdateAccumMs;    // ...of which: CvPlayerAI::AI_unitUpdate decisions
+extern double gPerfBrokerPPAccumMs;      // ...of which: contract-broker post-processing
+
+//	Second-tier attribution inside the frame span (same log+reset cycle):
+extern double gPerfPathGenAccumMs;       // CvPathGenerator::generatePath total
+extern int    gPerfPathGenN;             // ...call count
+extern double gPerfReachableAccumMs;     // CvReachablePlotSet construction total
+extern int    gPerfReachableN;           // ...call count
+extern double gPerfPlotPagingAccumMs;    // CvPlotPaging::UpdatePaging per slice
+extern double gPerfPyGameUpdateAccumMs;  // Python "gameUpdate" generic event per slice
+extern double gPerfUpdateScoreAccumMs;   // CvGame::updateScore per slice
+extern double gPerfUpdateTimersAccumMs;  // updateTimers + updateTurnTimer per slice
+extern double gPerfAssignWorkAccumMs;    // CvGame::AI_updateAssignWork per slice
+extern double gPerfTestAliveAccumMs;     // CvGame::testAlive per slice
+//	Per-UNITAI-type decision time (CvSelectionGroupAI::AI_update attributed to the head
+//	unit's AI type) -- logged as a [PERF/unitai] table at the turn boundary.
+extern double gPerfUnitAITypeAccumMs[];
+extern int    gPerfUnitAITypeAccumN[];
+//	Churn discriminators per UNITAI type: how AI_update calls arrive (force-armed vs
+//	awake-ready) and how many exit with the group STILL ready to move (a non-terminating
+//	decision cascade -- the re-decide spin signature).
+extern int    gPerfUnitAITypeForceN[];
+extern int    gPerfUnitAITypeAwakeN[];
+extern int    gPerfUnitAITypeExitReadyN[];
+
 #endif

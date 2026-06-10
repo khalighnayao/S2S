@@ -91,6 +91,7 @@ void CvReachablePlotSet::const_iterator::setOpaqueInfo(int iActivityId, int iVal
 
 CvReachablePlotSet::CvReachablePlotSet(const CvSelectionGroup * group, int iFlags, int iRange, bool bCachable, int iOutsideOwnedRange)
 {
+	PERF_ACCUM(gPerfReachableAccumMs); ++gPerfReachableN;
 	m_group = group;
 	//	Always include move-through-enemy flag when constructing reachable sets
 	//	because otherwise any flagless move that tries to target a tile to attack
