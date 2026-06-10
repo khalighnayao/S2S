@@ -140,6 +140,10 @@ change*, so every contributor and every agent sees one shared source of truth:
 - A change or initiative you intend to make (plan, scope, rollout, removal) → `Sources/docs/plans/`.
 - Cross-cutting, must-not-rediscover facts → "Key Subsystem Knowledge" above (or the nearest `AGENTS.md`).
 - Player-facing rules, manuals, FAQs → top-level `docs/`.
+- **Rules and conventions for agents/contributors → THIS file (`AGENTS.md`), always.**
+  `AGENTS.md` is the one unified place for rules and docs. The root `CLAUDE.md` exists
+  only as a session-bootstrap shim that imports this file — never add rules or content
+  to `CLAUDE.md` directly.
 
 Any per-developer assistant memory store is a personal *index/cache* only — it is
 **not** a substitute for the in-repo copy, and the in-repo copy is authoritative.
