@@ -97,7 +97,6 @@ DllExport CvPlayerAI& CvPlayerAI::getPlayerNonInl(PlayerTypes ePlayer)
 CvPlayerAI::CvPlayerAI()
 {
 	PROFILE_EXTRA_FUNC();
-	m_dataRepository.init(this);
 	m_aiNumTrainAIUnits = new int[NUM_UNITAI_TYPES];
 	m_aiNumAIUnits = new int[NUM_UNITAI_TYPES];
 	m_aiSameReligionCounter = new int[MAX_PLAYERS];

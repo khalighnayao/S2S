@@ -57,6 +57,7 @@ CvGame::CvGame()
 	, m_eCurrentMap(MAP_EARTH)
 {
 	PROFILE_EXTRA_FUNC();
+	m_dataRepository.init(this);
 	m_aiRankPlayer = new int[MAX_PLAYERS];        // Ordered by rank...
 	m_aiPlayerRank = new int[MAX_PLAYERS];        // Ordered by player ID...
 	m_aiPlayerScore = new int[MAX_PLAYERS];       // Ordered by player ID...
@@ -881,6 +882,7 @@ CvString create_game_id()
 void CvGame::reset(HandicapTypes eHandicap, bool bConstructorCall)
 {
 	PROFILE_EXTRA_FUNC();
+	m_dataRepository.reset();
 	CvPlotPaging::ResetPaging();
 
 	// Toffer - bStartingGameSession is true when starting any new game or when loading any save,

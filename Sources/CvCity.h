@@ -11,6 +11,7 @@
 #include "CvProperties.h"
 #include "CvBuildingList.h"
 #include "CvUnitList.h"
+#include "CvDerivedData.h"
 #include "CityOutputHistory.h"
 #include "CvGameObject.h"
 
@@ -58,6 +59,11 @@ public:
 	CvGameObjectCity* getGameObject() { return &m_GameObject; }
 	const CvGameObjectCity* getGameObject() const { return &m_GameObject; }
 
+	//	City-level derived-data repository (see CvDerivedData.h). Constructible set, building
+	//	values, declared needs; empty for now.
+	CvCityDataRepository&       dataRepository()       { return m_dataRepository; }
+	const CvCityDataRepository& dataRepository() const { return m_dataRepository; }
+
 	int getNumWorkers() const { return m_workers.size(); }
 	std::vector<int> getWorkers() const { return m_workers; }
 	void setWorkerHave(const int iUnitID, const bool bNewValue);
@@ -71,6 +77,7 @@ private:
 
 protected:
 	CvGameObjectCity m_GameObject;
+	CvCityDataRepository m_dataRepository;
 	CityOutputHistory m_outputHistory;
 
 

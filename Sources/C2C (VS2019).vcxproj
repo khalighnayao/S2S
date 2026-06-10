@@ -271,6 +271,7 @@
     <ClCompile Include="CvContractBroker.cpp" />
     <ClCompile Include="CvDate.cpp" />
     <ClCompile Include="CvDeal.cpp" />
+    <ClCompile Include="CvDerivedData.cpp" />
     <ClCompile Include="CvDiploParameters.cpp" />
     <ClCompile Include="CvDLLButtonPopup.cpp" />
     <ClCompile Include="CvDLLEntity.cpp" />
@@ -545,6 +546,7 @@
     <ClInclude Include="CvDate.h" />
     <ClInclude Include="CvDeal.h" />
     <ClInclude Include="CvDefines.h" />
+    <ClInclude Include="CvDerivedData.h" />
     <ClInclude Include="CvDiploParameters.h" />
     <ClInclude Include="CvDLLButtonPopup.h" />
     <ClInclude Include="CvDLLEngineIFaceBase.h" />

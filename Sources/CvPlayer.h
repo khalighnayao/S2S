@@ -20,6 +20,7 @@
 #include "CvTalkingHeadMessage.h"
 #include "CvUnitList.h"
 #include "CvUnitAI.h"
+#include "CvDerivedData.h"
 #include "index_iterator_base.h"
 #include "LinkedList.h"
 #ifdef CVARMY_BREAKSAVE
@@ -91,8 +92,15 @@ public:
 	int getHeritageCommerceEraChange(const CommerceTypes eType, const EraTypes eEra) const;
 	std::vector<HeritageTypes> getHeritage() const { return m_myHeritage; }
 
+public:
+	//	Player-level derived-data repository (see CvDerivedData.h). Tech/civic/promotion/bonus
+	//	values, counts, etc.; empty for now.
+	CvPlayerDataRepository&       dataRepository()       { return m_dataRepository; }
+	const CvPlayerDataRepository& dataRepository() const { return m_dataRepository; }
+
 protected:
 	CvGameObjectPlayer m_GameObject;
+	CvPlayerDataRepository m_dataRepository;
 	void baseInit(PlayerTypes eID);
 	void initMore(PlayerTypes eID, LeaderHeadTypes ePersonality, bool bSetAlive = true);
 

@@ -774,6 +774,9 @@
     <ClCompile Include="CvDeal.cpp">
       <Filter>Source\Base\Deal</Filter>
     </ClCompile>
+    <ClCompile Include="CvDerivedData.cpp">
+      <Filter>Source\Base</Filter>
+    </ClCompile>
     <ClCompile Include="CvPlayer.cpp">
       <Filter>Source\Base\Player</Filter>
     </ClCompile>
@@ -1276,6 +1279,9 @@
     </ClInclude>
     <ClInclude Include="CvDeal.h">
       <Filter>Source\Base\Deal</Filter>
+    </ClInclude>
+    <ClInclude Include="CvDerivedData.h">
+      <Filter>Source\Base</Filter>
     </ClInclude>
     <ClInclude Include="CvFractal.h">
       <Filter>Source\Tools\Math</Filter>

@@ -7,6 +7,7 @@
 
 #include "CvGameObject.h"
 #include "CvProperties.h"
+#include "CvDerivedData.h"
 
 class CvArea;
 
@@ -21,8 +22,14 @@ public:
 	DllExport void reset(TeamTypes eID = NO_TEAM, bool bConstructorCall = false);
 
 	CvGameObjectTeam* getGameObject() { return &m_GameObject; }
+
+	//	Team-level derived-data repository (see CvDerivedData.h). Tech/war-shared facts; empty for now.
+	CvTeamDataRepository&       dataRepository()       { return m_dataRepository; }
+	const CvTeamDataRepository& dataRepository() const { return m_dataRepository; }
+
 protected:
 	CvGameObjectTeam m_GameObject;
+	CvTeamDataRepository m_dataRepository;
 	void uninit();
 
 public:

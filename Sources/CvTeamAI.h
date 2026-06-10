@@ -11,18 +11,11 @@
 class CvArea;
 class CvCity;
 
-#include "CvDerivedData.h"
-
 class CvTeamAI : public CvTeam
 {
 public:
 	CvTeamAI();
 	virtual ~CvTeamAI();
-
-	//	Team-level derived-data repository (see CvDerivedData.h). Tech/war-shared facts; empty for now.
-	CvTeamDataRepository&       AI_dataRepository()       { return m_dataRepository; }
-	const CvTeamDataRepository& AI_dataRepository() const { return m_dataRepository; }
-	CvTeamDataRepository        m_dataRepository;
 
 	DllExport static CvTeamAI& getTeam(TeamTypes eTeam);
 

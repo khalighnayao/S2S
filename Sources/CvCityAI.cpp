@@ -66,10 +66,73 @@
 
 #define NUM_ALL_BUILDINGFOCUS_FLAGS				20
 
+//	[PERF/choose] accumulators -- decompose one AI_chooseProduction call across its helper
+//	families. Reset on entry by ChoosePerfScope, logged once on exit (the AI is single-
+//	threaded). Each helper accumulates inside its own body, so calls from outside a choose
+//	window are wiped by the next reset and never pollute the line. Fields OVERLAP where
+//	helpers nest (defender/leastRep call unit; unit calls unitImm; unitImm/bestUnit call
+//	bestUnitAI) -- read them as a ranking, not a partition. residual = total - the
+//	non-nested families ~= the cascade's inline setup/glue cost.
+static double g_chooseUnitMs = 0, g_chooseUnitImmMs = 0, g_chooseDefenderMs = 0, g_chooseLeastRepMs = 0;
+static double g_chooseBuildingMs = 0, g_chooseProcessMs = 0, g_bestUnitMs = 0, g_bestUnitAIMs = 0;
+static double g_bestBldgsMs = 0, g_scoreBldgsMs = 0;
+static int g_chooseUnitN = 0, g_chooseUnitImmN = 0, g_chooseDefenderN = 0, g_chooseLeastRepN = 0;
+static int g_chooseBuildingN = 0, g_chooseProcessN = 0, g_bestUnitN = 0, g_bestUnitAIN = 0;
+static int g_bestBldgsN = 0, g_scoreBldgsN = 0;
+
+namespace {
+//	RAII: AI_chooseProduction has ~100 early returns, so only scope-exit logging catches
+//	every path. One [PERF/choose] line per call.
+struct ChoosePerfScope
+{
+	//	iHeadOrder/iDirty capture WHY the choose ran (the doProduction gate state at entry):
+	//	head = the OrderTypes of the current head order (-1 = none), dirty = the re-decide flag.
+	ChoosePerfScope(int iOwner, int iCity, int iHeadOrder, int iDirty)
+		: m_iOwner(iOwner), m_iCity(iCity), m_iHeadOrder(iHeadOrder), m_iDirty(iDirty)
+		, m_bActive(gPerfLogLevel >= 1)
+	{
+		if (m_bActive)
+		{
+			g_chooseUnitMs = g_chooseUnitImmMs = g_chooseDefenderMs = g_chooseLeastRepMs = 0;
+			g_chooseBuildingMs = g_chooseProcessMs = g_bestUnitMs = g_bestUnitAIMs = 0;
+			g_bestBldgsMs = g_scoreBldgsMs = 0;
+			g_chooseUnitN = g_chooseUnitImmN = g_chooseDefenderN = g_chooseLeastRepN = 0;
+			g_chooseBuildingN = g_chooseProcessN = g_bestUnitN = g_bestUnitAIN = 0;
+			g_bestBldgsN = g_scoreBldgsN = 0;
+			m_stopwatch.Start();
+		}
+	}
+	~ChoosePerfScope()
+	{
+		if (m_bActive)
+		{
+			m_stopwatch.Stop();
+			logPerf(1, "[PERF/choose] turn=%d owner=%d city=%d head=%d dirty=%d total=%.3f building=%.3f(%d) bestBldgs=%.3f(%d) scoreBldgs=%.3f(%d) unit=%.3f(%d) unitImm=%.3f(%d) defender=%.3f(%d) leastRep=%.3f(%d) process=%.3f(%d) bestUnit=%.3f(%d) bestUnitAI=%.3f(%d)",
+				GC.getGame().getGameTurn(), m_iOwner, m_iCity, m_iHeadOrder, m_iDirty,
+				m_stopwatch.ElapsedMilliseconds(),
+				g_chooseBuildingMs, g_chooseBuildingN, g_bestBldgsMs, g_bestBldgsN,
+				g_scoreBldgsMs, g_scoreBldgsN,
+				g_chooseUnitMs, g_chooseUnitN, g_chooseUnitImmMs, g_chooseUnitImmN,
+				g_chooseDefenderMs, g_chooseDefenderN, g_chooseLeastRepMs, g_chooseLeastRepN,
+				g_chooseProcessMs, g_chooseProcessN,
+				g_bestUnitMs, g_bestUnitN, g_bestUnitAIMs, g_bestUnitAIN);
+		}
+	}
+	win32::Stopwatch m_stopwatch;
+	int m_iOwner;
+	int m_iCity;
+	int m_iHeadOrder;
+	int m_iDirty;
+	bool m_bActive;
+
+private:
+	ChoosePerfScope(const ChoosePerfScope&);
+	ChoosePerfScope& operator=(const ChoosePerfScope&);
+};
+}
 
 CvCityAI::CvCityAI()
 {
-	m_dataRepository.init(this);
 	m_aiEmphasizeYieldCount = new int[NUM_YIELD_TYPES];
 	m_aiEmphasizeCommerceCount = new int[NUM_COMMERCE_TYPES];
 	m_bForceEmphasizeCulture = false;
@@ -766,6 +829,10 @@ void CvCityAI::AI_chooseProduction()
 {
 	PROFILE_FUNC();
 	PERF_SCOPE("city.AI_chooseProduction", getOwner());
+	const bst::optional<OrderData> perfHeadOrder = getHeadOrder();
+	ChoosePerfScope choosePerf((int)getOwner(), getID(),
+		perfHeadOrder ? (int)perfHeadOrder->eOrderType : -1,
+		AI_isChooseProductionDirty() ? 1 : 0);
 	//#0 START OF AI_CHOOSEPRODUCTION
 	m_iRequestedBuilding = 0;
 	m_iRequestedUnit = 0;
@@ -3765,6 +3832,7 @@ bool CvCityAI::AI_chooseExperienceBuilding(const UnitAITypes eUnitAI, const int 
 UnitTypes CvCityAI::AI_bestUnit(int& iBestUnitValue, int iNumSelectableTypes, UnitAITypes* pSelectableTypes, bool bAsync, UnitAITypes* peBestUnitAI, bool bNoRand, bool bNoWeighting, const CvUnitSelectionCriteria* criteria)
 {
 	PROFILE_EXTRA_FUNC();
+	PERF_ACCUM(g_bestUnitMs); ++g_bestUnitN;
 	iBestUnitValue = 0;
 
 	if (peBestUnitAI != NULL)
@@ -4025,7 +4093,10 @@ UnitTypes CvCityAI::AI_bestUnit(int& iBestUnitValue, int iNumSelectableTypes, Un
 UnitTypes CvCityAI::AI_bestUnitAI(UnitAITypes eUnitAI, int& iBestValue, bool bAsync, bool bNoRand, const CvUnitSelectionCriteria* criteria)
 {
 	PROFILE_FUNC();
-	PERF_SCOPE("city.AI_bestUnitAI", getOwner());
+	//	Accumulated into [PERF/choose] (one line per choose) instead of a per-call PERF_SCOPE:
+	//	~230 calls per choose made the per-call line itself a measurable I/O cost (~200k
+	//	lines / 4 turns) inside the timed turns.
+	PERF_ACCUM(g_bestUnitAIMs); ++g_bestUnitAIN;
 
 	FAssert(eUnitAI != NO_UNITAI);
 
@@ -4225,6 +4296,7 @@ BuildingTypes CvCityAI::AI_bestBuildingThreshold(int iFocusFlags, int iMaxTurns,
 const std::vector<CvCity::ScoredBuilding> CvCityAI::AI_bestBuildingsThreshold(int iFocusFlags, int iMaxTurns, int iMinThreshold, bool bAsync, AdvisorTypes eIgnoreAdvisor, bool bMaximizeFlaggedValue, PropertyTypes eProperty)
 {
 	PROFILE_EXTRA_FUNC();
+	PERF_ACCUM(g_bestBldgsMs); ++g_bestBldgsN;
 	std::vector<ScoredBuilding> scoredBuildings;
 
 	std::vector<BuildingTypes> possibles;
@@ -4266,6 +4338,7 @@ bool AI_buildingInfluencesProperty(const CvCity* city, const CvBuildingInfo& bui
 bool CvCityAI::AI_scoreBuildingsFromListThreshold(std::vector<ScoredBuilding>& scoredBuildings, const std::vector<BuildingTypes>& possibleBuildings, int iFocusFlags, int iMaxTurns, int iMinThreshold, bool bAsync, AdvisorTypes eIgnoreAdvisor = NO_ADVISOR, bool bMaximizeFlaggedValue = false, PropertyTypes eProperty = NO_PROPERTY)
 {
 	PROFILE_FUNC();
+	PERF_ACCUM(g_scoreBldgsMs); ++g_scoreBldgsN;
 
 	// If we want score for the capital building (palace then we just give the production turns)
 	if (iFocusFlags & BUILDINGFOCUS_CAPITAL)
@@ -4360,38 +4433,48 @@ bool CvCityAI::AI_scoreBuildingsFromListThreshold(std::vector<ScoredBuilding>& s
 			{
 				PROFILE("CvCityAI::AI_bestBuildingThreshold.EnablesOthers");
 
-				const CvGameObjectCity* pObject = getGameObject();
-				// add the extra building and its bonuses to the override to see if they influence the construct condition of this building
-				std::vector<GOMOverride> queries;
-				GOMOverride query = { pObject, GOM_BUILDING, eBuilding, true };
-				queries.push_back(query);
-				query.GOM = GOM_BONUS;
-				foreach_(const BonusModifier& pair, buildingInfo.getFreeBonuses())
+				// #195: candidate dependents come from the precomputed static reverse-index
+				// (GC.getBuildingsEnabledBy, O(dependents)) instead of the legacy O(buildings)
+				// re-scan -- this was the last surviving copy of the pattern the CABV PreLoop
+				// migrated off. The original trigger triple (construct-condition BECOMES_TRUE /
+				// PrereqInCity / PrereqOr) and the canConstructInternal(..., eExtraBuilding)
+				// confirm are kept verbatim, just evaluated over the index's few dependents,
+				// so the scored value is unchanged.
+				const std::vector<BuildingTypes>& aDependents = GC.getBuildingsEnabledBy(eBuilding);
+				if (!aDependents.empty())
 				{
-					query.id = pair.first;
+					const CvGameObjectCity* pObject = getGameObject();
+					// add the extra building and its bonuses to the override to see if they influence the construct condition
+					std::vector<GOMOverride> queries;
+					GOMOverride query = { pObject, GOM_BUILDING, eBuilding, true };
 					queries.push_back(query);
-				}
-
-				// TODO OPT: convert the masks to vectors so this look is faster
-				for (int iI = 0; iI < GC.getNumBuildingInfos(); iI++)
-				{
-					if (hasBuilding((BuildingTypes)iI)) continue;
-
-					// check if this building enables the construct condition of another building
-					bool bEnablesCondition = false;
-					const BoolExpr* condition = GC.getBuildingInfo((BuildingTypes)iI).getConstructCondition();
-					if (condition && condition->evaluateChange(pObject, queries) == BOOLEXPR_CHANGE_BECOMES_TRUE)
+					query.GOM = GOM_BONUS;
+					foreach_(const BonusModifier& pair, buildingInfo.getFreeBonuses())
 					{
-						bEnablesCondition = true;
+						query.id = pair.first;
+						queries.push_back(query);
 					}
 
-					if ((bEnablesCondition || GC.getBuildingInfo((BuildingTypes)iI).isPrereqInCityBuilding(eBuilding) || GC.getBuildingInfo((BuildingTypes)iI).isPrereqOrBuilding(eBuilding))
-					&& canConstructInternal((BuildingTypes)iI, false, false, false, true, eBuilding))
+					foreach_(const BuildingTypes eDependent, aDependents)
 					{
-						PROFILE("AI_bestBuildingThreshold.Enablement");
+						if (hasBuilding(eDependent)) continue;
 
-						// We only value the unlocked building at 1/2 rate
-						iValue += AI_buildingValueThreshold((BuildingTypes)iI, iFocusFlags, 0, false, true) / 2;
+						// check if this building enables the construct condition of the dependent
+						bool bEnablesCondition = false;
+						const BoolExpr* condition = GC.getBuildingInfo(eDependent).getConstructCondition();
+						if (condition && condition->evaluateChange(pObject, queries) == BOOLEXPR_CHANGE_BECOMES_TRUE)
+						{
+							bEnablesCondition = true;
+						}
+
+						if ((bEnablesCondition || GC.getBuildingInfo(eDependent).isPrereqInCityBuilding(eBuilding) || GC.getBuildingInfo(eDependent).isPrereqOrBuilding(eBuilding))
+						&& canConstructInternal(eDependent, false, false, false, true, eBuilding))
+						{
+							PROFILE("AI_bestBuildingThreshold.Enablement");
+
+							// We only value the unlocked building at 1/2 rate
+							iValue += AI_buildingValueThreshold(eDependent, iFocusFlags, 0, false, true) / 2;
+						}
 					}
 				}
 			}
@@ -8573,6 +8656,7 @@ void CvCityAI::AI_doEmphasize()
 //Fuyu bIgnoreNotUnitAIs
 bool CvCityAI::AI_chooseUnit(const char* reason, UnitAITypes eUnitAI, int iOdds, int iUnitStrength, int iPriorityOverride, const CvUnitSelectionCriteria* criteria)
 {//Adding a unit type direct selection here...
+	PERF_ACCUM(g_chooseUnitMs); ++g_chooseUnitN;
 #ifdef USE_UNIT_TENDERING
 	//	Have we already contracted for a unit?
 	if (m_iRequestedUnit > MAX_REQUESTEDUNIT_PER_CITY)
@@ -8623,6 +8707,7 @@ bool CvCityAI::AI_chooseUnit(const char* reason, UnitAITypes eUnitAI, int iOdds,
 
 bool CvCityAI::AI_chooseUnitImmediate(const char* reason, UnitAITypes eUnitAI, const CvUnitSelectionCriteria* criteria, UnitTypes eUnitType)
 {
+	PERF_ACCUM(g_chooseUnitImmMs); ++g_chooseUnitImmN;
 	UnitTypes eBestUnit = NO_UNIT;
 
 	if (eUnitType == NO_UNIT)
@@ -8667,6 +8752,7 @@ bool CvCityAI::AI_chooseUnit(UnitTypes eUnit, UnitAITypes eUnitAI)
 
 bool CvCityAI::AI_chooseDefender(const char* reason)
 {
+	PERF_ACCUM(g_chooseDefenderMs); ++g_chooseDefenderN;
 	if (plot()->plotCheck(PUF_isUnitAIType, UNITAI_CITY_SPECIAL, -1, NULL, getOwner()) == NULL)
 	{
 		if (AI_chooseUnit(reason, UNITAI_CITY_SPECIAL))
@@ -8694,6 +8780,7 @@ bool CvCityAI::AI_chooseDefender(const char* reason)
 bool CvCityAI::AI_chooseLeastRepresentedUnit(const char* reason, UnitTypeWeightArray& allowedTypes, int iOdds)
 {
 	PROFILE_EXTRA_FUNC();
+	PERF_ACCUM(g_chooseLeastRepMs); ++g_chooseLeastRepN;
 	if (iOdds < 0 || iOdds > GC.getGame().getSorenRandNum(100, "AI choose least represented unit overall odds"))
 	{
 		std::multimap<int, UnitAITypes, std::greater<int> > bestTypes;
@@ -8885,6 +8972,7 @@ bool CvCityAI::AI_bestSpreadUnit(bool bMissionary, bool bExecutive, int iBaseCha
 bool CvCityAI::AI_chooseBuilding(int iFocusFlags, int iMaxTurns, int iMinThreshold, int iOdds, bool bMaximizeFlaggedValue, PropertyTypes eProperty)
 {
 	PROFILE_EXTRA_FUNC();
+	PERF_ACCUM(g_chooseBuildingMs); ++g_chooseBuildingN;
 #ifdef USE_UNIT_TENDERING
 	//	Have we already selected a building?
 	if (m_iRequestedBuilding > MAX_REQUESTEDBUILDING_PER_CITY)
@@ -8972,6 +9060,7 @@ bool CvCityAI::AI_chooseProject()
 
 bool CvCityAI::AI_chooseProcess(CommerceTypes eCommerceType, int64_t* commerceWeights,bool bforce)
 {
+	PERF_ACCUM(g_chooseProcessMs); ++g_chooseProcessN;
 #ifdef USE_UNIT_TENDERING
 	if (eCommerceType != NO_COMMERCE && (m_iRequestedBuilding > MAX_REQUESTEDBUILDING_PER_CITY && m_iRequestedUnit > MAX_REQUESTEDUNIT_PER_CITY))
 	{

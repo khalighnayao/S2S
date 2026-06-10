@@ -33,6 +33,7 @@
 CvTeam::CvTeam() : m_GameObject(this),
 m_Properties(this)
 {
+	m_dataRepository.init(this);
 	m_aiStolenVisibilityTimer = new int[MAX_TEAMS];
 	m_aiWarWearinessTimes100 = new int[MAX_TEAMS];
 	m_aiTechShareCount = new int[MAX_TEAMS];
@@ -188,6 +189,8 @@ void CvTeam::reset(TeamTypes eID, bool bConstructorCall)
 {
 	PROFILE_EXTRA_FUNC();
 	int iI, iJ;
+
+	m_dataRepository.reset();
 
 	//--------------------------------
 	// Uninit class
