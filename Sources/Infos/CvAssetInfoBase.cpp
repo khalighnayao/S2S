@@ -48,17 +48,11 @@ void CvAssetInfoBase::setPath(const char* szDesc)
 }
 
 
-bool CvAssetInfoBase::read(CvXMLLoadUtility* pXML)
+void CvAssetInfoBase::getDataMembers(CvInfoUtil& util)
 {
-	CvString szTextVal;
-	if (!CvInfoBase::read(pXML))		// 'tag' is the same as 'type'
-	{
-		return false;
-	}
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"Path");
-	setPath(szTextVal);
-
-	return true;
+	// 'tag' is the same as 'type' (read by CvInfoBase::read).
+	util
+		.add(m_szPath, L"Path")
+	;
 }
 

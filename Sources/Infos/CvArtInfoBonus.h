@@ -19,7 +19,9 @@ public:
 	DllExport const char* getShaderNIF() const;
 	void setShaderNIF(const char* szDesc);
 
-	bool read(CvXMLLoadUtility* pXML);
+	// No read() override: all fields are declarative, so the inherited
+	// CvArtInfoScalableAsset::read -> CvArtInfoAsset::read delegation reads them.
+	void getDataMembers(CvInfoUtil& util);
 	void copyNonDefaults(const CvArtInfoBonus* pClassInfo);
 
 protected:

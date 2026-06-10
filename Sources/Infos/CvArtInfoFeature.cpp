@@ -24,12 +24,12 @@
 // CvArtInfoFeature
 //////////////////////////////////////////////////////////////////////////
 
-CvArtInfoFeature::CvArtInfoFeature() :
-m_bAnimated(false),
-m_bRiverArt(false),
-m_eTileArtType(TILE_ART_TYPE_NONE),
-m_eLightType(LIGHT_TYPE_NONE)
+CvArtInfoFeature::CvArtInfoFeature()
+	// Non-declarative fields (bespoke string-parsed graphics enums, see read())
+	: m_eTileArtType(TILE_ART_TYPE_NONE)
+	, m_eLightType(LIGHT_TYPE_NONE)
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -62,16 +62,24 @@ LightTypes CvArtInfoFeature::getLightType() const
 }
 
 
+void CvArtInfoFeature::getDataMembers(CvInfoUtil& util)
+{
+	CvArtInfoScalableAsset::getDataMembers(util);
+	util
+		.add(m_bAnimated, L"bAnimated")
+		.add(m_bRiverArt, L"bRiverArt")
+	;
+}
+
+
 bool CvArtInfoFeature::read(CvXMLLoadUtility* pXML)
 {
 	PROFILE_EXTRA_FUNC();
+	// Single declarative delegation (covers this class's declared fields too via virtual dispatch)
 	if (!CvArtInfoScalableAsset::read(pXML))
 	{
 		return false;
 	}
-
-	pXML->GetOptionalChildXmlValByName(&m_bAnimated, L"bAnimated");
-	pXML->GetOptionalChildXmlValByName(&m_bRiverArt, L"bRiverArt");
 
 	CvString szTemp;
 	pXML->GetOptionalChildXmlValByName(szTemp, L"TileArtType", "TILE_ART_TYPE_NONE");

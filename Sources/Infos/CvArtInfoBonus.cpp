@@ -24,19 +24,16 @@
 // CvArtInfoBonus
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-bool CvArtInfoBonus::read(CvXMLLoadUtility* pXML)
+void CvArtInfoBonus::getDataMembers(CvInfoUtil& util)
 {
-	if (!CvArtInfoScalableAsset::read(pXML))
-	{
-		return false;
-	}
-	CvString szTextVal;
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"SHADERNIF");
-	setShaderNIF(szTextVal);
-
-	pXML->GetChildXmlValByName(&m_iFontButtonIndex, L"FontButtonIndex");
-
-	return true;
+	CvArtInfoScalableAsset::getDataMembers(util);
+	// FontButtonIndex was a MANDATORY read (GetChildXmlValByName) in the legacy loader; the
+	// declarative read is optional, so a missing tag now loads 0 silently instead of also
+	// emitting an FErrorMsg. Same loaded value either way.
+	util
+		.add(m_szShaderNIF, L"SHADERNIF")
+		.add(m_iFontButtonIndex, L"FontButtonIndex")
+	;
 }
 
 
@@ -48,7 +45,7 @@ void CvArtInfoBonus::copyNonDefaults(const CvArtInfoBonus* pClassInfo)
 
 CvArtInfoBonus::CvArtInfoBonus()
 {
-	m_iFontButtonIndex = 0;
+	CvInfoUtil(this).initDataMembers();
 }
 
 
