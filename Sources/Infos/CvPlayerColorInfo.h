@@ -25,6 +25,7 @@ public:
 	DllExport int getColorTypeSecondary() const;
 	int getTextColorType() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvPlayerColorInfo* pClassInfo);
 

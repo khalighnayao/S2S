@@ -111,6 +111,14 @@ not findings to re-discover.
   `git checkout`-ing away silently removes the changes from their build. **Never switch
   branches while the user may be mid-build.** (Read-only git — `status`/`log`/`diff` — is
   always fine.)
+- **Before adding commits to a PR, verify it has not already been merged.** Run
+  `gh pr view <n> --json state,baseRefName` first and confirm (1) `state` is `OPEN` —
+  pushing to a merged/closed PR's branch lands the commit on a dead branch that never
+  reaches `main` — and (2) `baseRefName` is what you assume: stacked PRs here can target a
+  feature branch instead of `main`, and the stack can merge out of order (PR #332 merged
+  into its base *after* that base had already gone to `main` via #331, so its content
+  silently missed `main` and needed a re-delivery PR, #334). If state or base is
+  surprising, surface it before pushing.
 - **Confirm behaviour before opening a PR:** a behaviour/feature change needs a real
   in-game playtest (the user runs `FinalRelease` + `rebuild deploy`), not just a green
   Assert build. A merged or committed change does nothing in a running game until the DLL
@@ -132,6 +140,10 @@ change*, so every contributor and every agent sees one shared source of truth:
 - A change or initiative you intend to make (plan, scope, rollout, removal) → `Sources/docs/plans/`.
 - Cross-cutting, must-not-rediscover facts → "Key Subsystem Knowledge" above (or the nearest `AGENTS.md`).
 - Player-facing rules, manuals, FAQs → top-level `docs/`.
+- **Rules and conventions for agents/contributors → THIS file (`AGENTS.md`), always.**
+  `AGENTS.md` is the one unified place for rules and docs. The root `CLAUDE.md` exists
+  only as a session-bootstrap shim that imports this file — never add rules or content
+  to `CLAUDE.md` directly.
 
 Any per-developer assistant memory store is a personal *index/cache* only — it is
 **not** a substitute for the in-repo copy, and the in-repo copy is authoritative.

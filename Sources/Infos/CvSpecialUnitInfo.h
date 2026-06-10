@@ -31,6 +31,7 @@ public:
 	int getCombatPercent() const;
 	int getWithdrawalChange() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvSpecialUnitInfo* pClassInfo);

@@ -73,6 +73,7 @@ path segments after the `/` are lowercase and may nest (`[XXX/group/detail]`).
 | Combat | `[COM]` | `CombatAI.log` | unit | `CvUnitAI`, `CvSelectionGroupAI` |
 | ContractBroker | `[CTB]` | `ContractBroker.log` | player | `CvContractBroker` |
 | Game session header | `[GAME]` | `GameInfo.log` | (ungated) | `CvGame::onFinalInitialized` |
+| Engine integrity | `[ENG]` | `Engine.log` | team | `CvPlot` (more as asserts are demoted) |
 | Turn timing | `[PERF]` | `Performance.log` | **`gPerfLogLevel`** (own knob) | `CvGame`, `CvPlayer`, `CvPlayerAI`, `CvCity`, `CvCityAI`, `CvPropertySolver` |
 
 `GameInfo.log` is written once on game start/load (speed, handicap, map, options, players)
@@ -147,6 +148,20 @@ Pipeline side (`CvCity::pushOrder`/`popOrder`/`doProduction`):
 The unit work/contract market. High volume by nature. Headline events
 (`[CTB/contract]` unit→work, `[CTB/tender/win]`) are level 1; per-candidate tender
 evaluation is level 3; the per-unit assess/reject/suitability spam is level 4.
+
+### `[ENG]` — engine integrity (`Engine.log`)
+
+"Should never happen" sanity checks demoted from `FAssert`/`FErrorMsg` so they still
+surface in FinalRelease (where `FASSERT` compiles out) without popping dialogs or writing
+per-hit stack traces to `Asserts.log`. One `key=value` line per occurrence — the
+repeated-line count is itself the signal.
+
+- `[ENG/viscap]` (2) — `CvPlot::changeVisibilityCount`: a team's plot visibility count
+  went negative and was capped to zero (`team= plot= count= change=`). Known to fire en
+  masse during `recalculateModifiers` (its remove/re-add sight passes subtract sight that
+  the reset state never added); a flood *outside* recalc means a real sight-accounting bug.
+  Note the cap itself is suspect — plots capped to 0 on the remove pass get re-added on
+  top, which can leave them permanently visible.
 
 ### `[PERF]` — turn timing (`Performance.log`, own `gPerfLogLevel` knob)
 

@@ -31,13 +31,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvRouteModelInfo::CvRouteModelInfo() :
-m_eRouteType(NO_ROUTE),
-m_bAnimated(false)
+CvRouteModelInfo::CvRouteModelInfo()
 {
-	m_szConnectString[0] = '\0';
-	m_szModelConnectString[0] = '\0';
-	m_szRotateString[0] = '\0';
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -101,23 +97,29 @@ const char* CvRouteModelInfo::getRotateString() const
 }
 
 
+void CvRouteModelInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szModelFile, L"ModelFile")
+		.add(m_szLateModelFile, L"LateModelFile")
+		.add(m_szModelFileKey, L"ModelFileKey")
+		.add(m_bAnimated, L"Animated")
+		.addEnum(m_eRouteType, L"RouteType")
+		.add(m_szConnectString, L"Connections")
+		.add(m_szModelConnectString, L"ModelConnections")
+		.add(m_szRotateString, L"Rotations")
+	;
+}
+
+
 bool CvRouteModelInfo::read(CvXMLLoadUtility* pXML)
 {
-	CvString szTextVal;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(m_szModelFile, L"ModelFile");
-	pXML->GetChildXmlValByName(m_szLateModelFile, L"LateModelFile");
-	pXML->GetChildXmlValByName(m_szModelFileKey, L"ModelFileKey");
-	pXML->GetChildXmlValByName(&m_bAnimated, L"Animated");
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"RouteType");
-	m_eRouteType = (RouteTypes)(pXML->GetInfoClass(szTextVal));
-	pXML->GetOptionalChildXmlValByName(m_szConnectString, L"Connections");
-	pXML->GetOptionalChildXmlValByName(m_szModelConnectString, L"ModelConnections");
-	pXML->GetOptionalChildXmlValByName(m_szRotateString, L"Rotations");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -125,22 +127,8 @@ bool CvRouteModelInfo::read(CvXMLLoadUtility* pXML)
 
 void CvRouteModelInfo::copyNonDefaults(const CvRouteModelInfo* pClassInfo)
 {
-	const bool bDefault = false;
-	const int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getModelFile() == cDefault) m_szModelFile = pClassInfo->getModelFile();
-	if (getLateModelFile() == cDefault) m_szLateModelFile = pClassInfo->getLateModelFile();
-	if (getModelFileKey() == cDefault) m_szModelFileKey = pClassInfo->getModelFileKey();
-
-	if (isAnimated() == bDefault) m_bAnimated = pClassInfo->isAnimated();
-
-	if (getRouteType() == iTextDefault) m_eRouteType = pClassInfo->getRouteType();
-
-	if (getConnectString() == cDefault) strcpy(m_szConnectString, (const char*) CvString::format("%s", pClassInfo->getConnectString()));
-	if (getModelConnectString() == cDefault) strcpy(m_szModelConnectString, (const char*) CvString::format("%s", pClassInfo->getModelConnectString()));
-	if (getRotateString() == cDefault) strcpy(m_szRotateString, (const char*) CvString::format("%s", pClassInfo->getRotateString()));
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

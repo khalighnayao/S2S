@@ -40,6 +40,7 @@ public:
 
 	const char* getMovie() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvVictoryInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

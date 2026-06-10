@@ -32,13 +32,10 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvSpecialUnitInfo::CvSpecialUnitInfo() :
-	m_bValid(false),
-	m_bCityLoad(false),
-	m_bSMLoadSame(false),
-	m_iCombatPercent(0),
-	m_iWithdrawalChange(0)
-{ }
+CvSpecialUnitInfo::CvSpecialUnitInfo()
+{
+	CvInfoUtil(this).initDataMembers();
+}
 
 
 //------------------------------------------------------------------------------------------------------
@@ -86,19 +83,26 @@ int CvSpecialUnitInfo::getWithdrawalChange() const
 // Arrays
 
 
+void CvSpecialUnitInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_bValid, L"bValid")
+		.add(m_bCityLoad, L"bCityLoad")
+		.add(m_bSMLoadSame, L"bSMLoadSame")
+		.add(m_iCombatPercent, L"iCombatPercent")
+		.add(m_iWithdrawalChange, L"iWithdrawalChange")
+	;
+}
+
+
 bool CvSpecialUnitInfo::read(CvXMLLoadUtility* pXML)
 {
-
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
-	pXML->GetOptionalChildXmlValByName(&m_bValid, L"bValid");
-	pXML->GetOptionalChildXmlValByName(&m_bCityLoad, L"bCityLoad");
-	pXML->GetOptionalChildXmlValByName(&m_bSMLoadSame, L"bSMLoadSame");
-	pXML->GetOptionalChildXmlValByName(&m_iCombatPercent, L"iCombatPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iWithdrawalChange, L"iWithdrawalChange");
 
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -106,27 +110,19 @@ bool CvSpecialUnitInfo::read(CvXMLLoadUtility* pXML)
 
 void CvSpecialUnitInfo::copyNonDefaults(const CvSpecialUnitInfo* pClassInfo)
 {
-	PROFILE_EXTRA_FUNC();
-	const bool bDefault = false;
-	const int iDefault = 0;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (isValid() == bDefault) m_bValid = pClassInfo->isValid();
-	if (isCityLoad() == bDefault) m_bCityLoad = pClassInfo->isCityLoad();
-	if (isSMLoadSame() == bDefault) m_bSMLoadSame = pClassInfo->isSMLoadSame();
-	if (getCombatPercent() == iDefault) m_iCombatPercent = pClassInfo->getCombatPercent();
-	if (getWithdrawalChange() == iDefault) m_iWithdrawalChange = pClassInfo->getWithdrawalChange();
-
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvSpecialUnitInfo::getCheckSum(uint32_t& iSum) const
 {
+	// NOTE: kept explicit (not delegated to CvInfoUtil) to preserve the exact legacy checksum, which
+	// historically omits m_bCityLoad. Folding it in would change the value.
 	CheckSum(iSum, m_bValid);
 	CheckSum(iSum, m_bSMLoadSame);
 	CheckSum(iSum, m_iCombatPercent);
 	CheckSum(iSum, m_iWithdrawalChange);
-
 }
 
