@@ -25,38 +25,56 @@
 //======================================================================================================
 CvSpawnInfo::CvSpawnInfo()
 	:
-	m_eUnitType(NO_UNIT),
-	m_ePrereqTech(NO_TECH),
-	m_eObsoleteTechType(NO_TECH),
-	m_iPlayerType(-1),
-	m_iTurns(-1),
-	m_iGlobalTurns(-1),
-	m_iMaxLocalDensity(0),
-	m_iMinAreaPlotsPerPlayerUnit(0),
-	m_iMinAreaPlotsPerUnitType(0),
-	m_iStartDate(-200000),
-	m_iEndDate(50000),
-	m_bTreatAsBarbarian(false),
-	m_bNeutralOnly(true),
-	m_bNotInView(false),
-	m_bNoSpeedNormalization(false),
-	m_iRateOverride(100),
-	m_bHills(false),
-	m_bFlatlands(false),
-	m_bPeaks(false),
-	m_bFreshWaterOnly(false),
-	m_bLatitudeAbs(true),
-	m_iMinLatitude(-90),
-	m_iMaxLatitude(90),
-	m_iMinLongitude(-180),
-	m_iMaxLongitude(180),
-	m_pExprSpawnCondition(NULL)
-{ }
+	m_iRateOverride(100)
+{
+	CvInfoUtil(this).initDataMembers();
+}
 
 
 CvSpawnInfo::~CvSpawnInfo()
 {
-	SAFE_DELETE(m_pExprSpawnCondition);
+	CvInfoUtil(this).uninitDataMembers();
+}
+
+
+void CvSpawnInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order. Hand-written fields (see read()):
+	// - m_iRateOverride: indirect read - <rateOverrideDefineName> names a GlobalDefines entry
+	//   whose value is looked up via GC.getDefineINT; not a plain tag-value read.
+	// - The five type lists (m_bonusTypes, m_terrainTypes, m_featureTypes, m_featureTerrainTypes,
+	//   m_spawnGroup): the legacy walks preserve duplicates and document order; SetOptionalVector
+	//   (the vector wrapper) dedups and sorts. SpawnGroups legitimately list the same unit twice
+	//   in CIV4SpawnInfos.xml (UNIT_BISON, UNIT_WOLF), and one unit is spawned per entry, so
+	//   dedup would change gameplay; sorting would change the asset checksum.
+	// getCheckSum stays explicit because these fields sit mid-order in the legacy checksum.
+	util
+		.addEnum(m_eUnitType, L"UnitType")
+		.addEnum(m_ePrereqTech, L"PrereqTech")
+		.addEnum(m_eObsoleteTechType, L"ObsoleteTech")
+		.addEnumAsInt(m_iPlayerType, L"PlayerType")
+		.add(m_iTurns, L"iTurns")
+		.add(m_iGlobalTurns, L"iGlobalTurns", -1)
+		.add(m_iMaxLocalDensity, L"iMaxLocalDensity")
+		.add(m_iMinAreaPlotsPerPlayerUnit, L"iMinAreaPlotsPerPlayerUnit")
+		.add(m_iMinAreaPlotsPerUnitType, L"iMinAreaPlotsPerUnitType")
+		.add(m_iStartDate, L"iStartDate", -200000)
+		.add(m_iEndDate, L"iEndDate", 50000)
+		.add(m_bTreatAsBarbarian, L"bTreatAsBarbarian")
+		.add(m_bNeutralOnly, L"bNeutralOnly", true)
+		.add(m_bNotInView, L"bNotInView")
+		.add(m_bNoSpeedNormalization, L"bNoSpeedNormalization")
+		.add(m_bHills, L"bHills")
+		.add(m_bFlatlands, L"bFlatlands", true)
+		.add(m_bPeaks, L"bPeaks")
+		.add(m_bFreshWaterOnly, L"bFreshWaterOnly")
+		.add(m_bLatitudeAbs, L"bLatitudeAbs", true)
+		.add(m_iMinLatitude, L"iMinLatitude", -90)
+		.add(m_iMaxLatitude, L"iMaxLatitude", 90)
+		.add(m_iMinLongitude, L"iMinLongitude", -180)
+		.add(m_iMaxLongitude, L"iMaxLongitude", 180)
+		.addBoolExpr(m_pExprSpawnCondition, L"SpawnCondition")
+	;
 }
 
 
@@ -64,44 +82,14 @@ bool CvSpawnInfo::read(CvXMLLoadUtility* pXML)
 {
 	PROFILE_EXTRA_FUNC();
 	CvString szTextVal;
-	CvString szTextVal2;
 
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(szTextVal, L"UnitType");
-	m_eUnitType = (UnitTypes)pXML->GetInfoClass(szTextVal);
+	CvInfoUtil(this).readXml(pXML);
 
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PrereqTech");
-	m_ePrereqTech = (TechTypes) pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"ObsoleteTech");
-	m_eObsoleteTechType = (TechTypes) pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalTypeEnum(m_iPlayerType, L"PlayerType");
-
-	pXML->GetOptionalChildXmlValByName(&m_iTurns, L"iTurns");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalTurns, L"iGlobalTurns", -1);
-	pXML->GetOptionalChildXmlValByName(&m_iMaxLocalDensity, L"iMaxLocalDensity");
-	pXML->GetOptionalChildXmlValByName(&m_iMinAreaPlotsPerPlayerUnit, L"iMinAreaPlotsPerPlayerUnit");
-	pXML->GetOptionalChildXmlValByName(&m_iMinAreaPlotsPerUnitType, L"iMinAreaPlotsPerUnitType");
-	pXML->GetOptionalChildXmlValByName(&m_iStartDate, L"iStartDate", -200000);
-	pXML->GetOptionalChildXmlValByName(&m_iEndDate, L"iEndDate", 50000);
-	pXML->GetOptionalChildXmlValByName(&m_bTreatAsBarbarian, L"bTreatAsBarbarian", false);
-	pXML->GetOptionalChildXmlValByName(&m_bNeutralOnly, L"bNeutralOnly", true);
-	pXML->GetOptionalChildXmlValByName(&m_bNoSpeedNormalization, L"bNoSpeedNormalization");
-	pXML->GetOptionalChildXmlValByName(&m_bNotInView, L"bNotInView");
-	pXML->GetOptionalChildXmlValByName(&m_bHills, L"bHills");
-	pXML->GetOptionalChildXmlValByName(&m_bFlatlands, L"bFlatlands", true);
-	pXML->GetOptionalChildXmlValByName(&m_bPeaks, L"bPeaks");
-	pXML->GetOptionalChildXmlValByName(&m_bFreshWaterOnly, L"bFreshWaterOnly");
-	pXML->GetOptionalChildXmlValByName(&m_bLatitudeAbs, L"bLatitudeAbs", true);
-	pXML->GetOptionalChildXmlValByName(&m_iMinLatitude, L"iMinLatitude", -90);
-	pXML->GetOptionalChildXmlValByName(&m_iMaxLatitude, L"iMaxLatitude", 90);
-	pXML->GetOptionalChildXmlValByName(&m_iMinLongitude, L"iMinLongitude", -180);
-	pXML->GetOptionalChildXmlValByName(&m_iMaxLongitude, L"iMaxLongitude", 180);
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"rateOverrideDefineName");
 	if ( szTextVal.GetLength() != 0 )
 	{
@@ -213,30 +201,18 @@ bool CvSpawnInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	if (pXML->TryMoveToXmlFirstChild(L"SpawnCondition"))
-	{
-		m_pExprSpawnCondition = BoolExpr::read(pXML);
-		pXML->MoveToXmlParent();
-	}
-
 	return true;
 }
 
 
-void CvSpawnInfo::copyNonDefaults(CvSpawnInfo* pClassInfo)
+void CvSpawnInfo::copyNonDefaults(const CvSpawnInfo* pClassInfo)
 {
-	CvString cDefault = CvString::format("").GetCString();
-	CvWString wDefault = CvWString::format(L"").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (!m_pExprSpawnCondition)
-	{
-		m_pExprSpawnCondition = pClassInfo->m_pExprSpawnCondition;
-		pClassInfo->m_pExprSpawnCondition = NULL;
-	}
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
-	// not yet implemented
+	// The hand-written fields (m_iRateOverride and the five type lists) were never merged by the
+	// legacy copyNonDefaults ("not yet implemented"); that behaviour is kept unchanged.
 }
 
 

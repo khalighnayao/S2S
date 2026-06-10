@@ -71,6 +71,7 @@ public:
 	int getNumBuildings() const;
 	bool isBuilding(int i) const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvPromotionLineInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

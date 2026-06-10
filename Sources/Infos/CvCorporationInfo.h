@@ -77,6 +77,7 @@ public:
 	int getNumCategories() const;
 	bool isCategory(int i) const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool readPass3();
 	int getYieldChange(int i) const;
 	int* getYieldChangeArray() const;

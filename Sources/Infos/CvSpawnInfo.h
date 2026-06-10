@@ -21,8 +21,9 @@ public:
 	CvSpawnInfo();
 	virtual ~CvSpawnInfo();
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
-	void copyNonDefaults(CvSpawnInfo* pClassInfo);
+	void copyNonDefaults(const CvSpawnInfo* pClassInfo);
 
 	const std::vector<BonusTypes>& getBonuses() const { return m_bonusTypes; }
 	const std::vector<UnitTypes>& getSpawnGroups() const { return m_spawnGroup; }

@@ -70,6 +70,7 @@ public:
 
 	//TB Specialist Tags end
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvSpecialistInfo* pClassInfo);
 

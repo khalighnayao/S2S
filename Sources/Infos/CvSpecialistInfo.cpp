@@ -32,20 +32,16 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvSpecialistInfo::CvSpecialistInfo() :
+// m_iMissionType is a non-XML, runtime-assigned field (see setMissionType); m_iGreatPeopleUnitType
+// (delayed-resolution int FK), m_piFlavorValue (SetVariableListTagPair) and the
+// UnitCombatExperienceTypes pair stay hand-written. Every other XML-backed field is declared in
+// getDataMembers() and defaulted by initDataMembers() below.
  m_iGreatPeopleUnitType(NO_UNIT)
-,m_iGreatPeopleRateChange(0)
 ,m_iMissionType(NO_MISSION)
-,m_bVisible(false)
-,m_piYieldChange(NULL)
-,m_piCommerceChange(NULL)
 ,m_piFlavorValue(NULL)
-,m_iExperience(0)
-,m_iHealthPercent(0)
-,m_iHappinessPercent(0)
-,m_iInsidiousness(0)
-,m_iInvestigation(0)
-,m_bSlave(false)
-{ }
+{
+	CvInfoUtil(this).initDataMembers();
+}
 
 
 //------------------------------------------------------------------------------------------------------
@@ -58,12 +54,9 @@ CvSpecialistInfo::CvSpecialistInfo() :
 CvSpecialistInfo::~CvSpecialistInfo()
 {
 	PROFILE_EXTRA_FUNC();
-	SAFE_DELETE_ARRAY(m_piYieldChange);
-	SAFE_DELETE_ARRAY(m_piCommerceChange);
+	// Owns the declared yield/commerce arrays and the tech maps' delayed-resolution registrations.
+	CvInfoUtil(this).uninitDataMembers();
 	SAFE_DELETE_ARRAY(m_piFlavorValue);
-
-	m_aTechHappinessTypes.removeDelayedResolution();
-	m_aTechHealthTypes.removeDelayedResolution();
 
 	for (int i=0; i<(int)m_aUnitCombatExperienceTypes.size(); i++)
 	{
@@ -242,11 +235,38 @@ const UnitCombatModifier& CvSpecialistInfo::getUnitCombatExperienceType(int iUni
 
 
 
+void CvSpecialistInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Kept hand-written: m_iGreatPeopleUnitType (delayed-resolution int FK - no wrapper yet),
+	// m_piFlavorValue (SetVariableListTagPair dynamic array) and the UnitCombatExperienceTypes block
+	// (one XML walk fills two parallel vectors - the real one and the zero-modifier Null twin - with
+	// delayed-resolution pointers into both). m_iMissionType is runtime-assigned, not XML-backed.
+	// getCheckSum stays explicit: the hand-written fields and the runtime m_iMissionType sit
+	// mid-order in the legacy checksum.
+	util
+		.add(m_bVisible, L"bVisible")
+		.add(m_iGreatPeopleRateChange, L"iGreatPeopleRateChange")
+		.add(m_aiCategories, L"Categories")
+		.addYields(m_piYieldChange, L"Yields")
+		.addCommerce(m_piCommerceChange, L"Commerces")
+		.add(m_iExperience, L"iExperience")
+		.add(m_PropertyManipulators)
+		.add(m_iHealthPercent, L"iHealthPercent")
+		.add(m_iHappinessPercent, L"iHappinessPercent")
+		.add(m_bSlave, L"bSlave")
+		.add(m_iInsidiousness, L"iInsidiousness")
+		.add(m_iInvestigation, L"iInvestigation")
+		.add(m_aTechHappinessTypes, L"TechHappinessTypes")
+		.add(m_aTechHealthTypes, L"TechHealthTypes")
+		.add(m_szTexture, L"Texture")
+	;
+}
+
+
 // read from xml
 //
 bool CvSpecialistInfo::read(CvXMLLoadUtility* pXML)
 {
-
 	PROFILE_EXTRA_FUNC();
 	CvString szTextVal;
 	if (!CvHotkeyInfo::read(pXML))
@@ -254,49 +274,12 @@ bool CvSpecialistInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(m_szTexture, L"Texture");
-	pXML->GetOptionalChildXmlValByName(&m_bVisible, L"bVisible");
+	CvInfoUtil(this).readXml(pXML);
+
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"GreatPeopleUnitType");
 	GC.addDelayedResolution((int*)&m_iGreatPeopleUnitType, szTextVal);
-	pXML->GetOptionalChildXmlValByName(&m_iGreatPeopleRateChange, L"iGreatPeopleRateChange");
-	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
-
-	if (pXML->TryMoveToXmlFirstChild(L"Yields"))
-	{
-		pXML->SetYields(&m_piYieldChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piYieldChange);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"Commerces"))
-	{
-		pXML->SetCommerce(&m_piCommerceChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCommerceChange);
-	}
-
-	pXML->GetOptionalChildXmlValByName(&m_iExperience, L"iExperience");
-
-	m_PropertyManipulators.read(pXML);
 
 	pXML->SetVariableListTagPair(&m_piFlavorValue, L"Flavors", GC.getNumFlavorTypes());
-
-	pXML->GetOptionalChildXmlValByName(&m_iHealthPercent, L"iHealthPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iHappinessPercent, L"iHappinessPercent");
-	pXML->GetOptionalChildXmlValByName(&m_bSlave, L"bSlave");
-
-	//TB Specialist Tags
-	pXML->GetOptionalChildXmlValByName(&m_iInsidiousness, L"iInsidiousness");
-	pXML->GetOptionalChildXmlValByName(&m_iInvestigation, L"iInvestigation");
-
-	m_aTechHappinessTypes.readWithDelayedResolution(pXML, L"TechHappinessTypes");
-	m_aTechHealthTypes.readWithDelayedResolution(pXML, L"TechHealthTypes");
 
 	if(pXML->TryMoveToXmlFirstChild(L"UnitCombatExperienceTypes"))
 	{
@@ -330,38 +313,15 @@ bool CvSpecialistInfo::read(CvXMLLoadUtility* pXML)
 void CvSpecialistInfo::copyNonDefaults(const CvSpecialistInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	bool bDefault = false;
-	int iDefault = 0;
-	CvString cDefault = CvString::format("").GetCString();
-
 	CvHotkeyInfo::copyNonDefaults(pClassInfo);
 
-	if (getTexture() == cDefault) m_szTexture = pClassInfo->getTexture();
-	if (isVisible() == bDefault) m_bVisible = pClassInfo->isVisible();
+	// NOTE: the legacy copy dereferenced m_piCommerceChange without a NULL check (a latent crash for
+	// modular merges when this definition has no Commerces tag); the wrapper handles NULL correctly.
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
+
 	GC.copyNonDefaultDelayedResolution((int*)&m_iGreatPeopleUnitType, (int*)&pClassInfo->m_iGreatPeopleUnitType);
-	if (getGreatPeopleRateChange() == iDefault) m_iGreatPeopleRateChange = pClassInfo->getGreatPeopleRateChange();
 
-	for ( int i = 0; i < NUM_YIELD_TYPES; i++ )
-	{
-		if ( getYieldChange(i) == iDefault && pClassInfo->getYieldChange(i) != iDefault)
-		{
-			if ( m_piYieldChange == NULL )
-			{
-				CvXMLLoadUtility::InitList(&m_piYieldChange, NUM_YIELD_TYPES);
-			}
-			m_piYieldChange[i] = pClassInfo->getYieldChange(i);
-		}
-	}
-
-	for ( int i = 0; i < NUM_COMMERCE_TYPES; i++ )
-	{
-		if ( getCommerceChange(i) == iDefault ) m_piCommerceChange[i] = pClassInfo->getCommerceChange(i);
-	}
-
-	if (getExperience() == iDefault) m_iExperience = pClassInfo->getExperience();
-
-	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
-
+	const int iDefault = 0;
 	for ( int i = 0; i < GC.getNumFlavorTypes(); i++ )
 	{
 		if ( getFlavorValue(i) == iDefault && pClassInfo->getFlavorValue(i) != iDefault )
@@ -373,19 +333,6 @@ void CvSpecialistInfo::copyNonDefaults(const CvSpecialistInfo* pClassInfo)
 			m_piFlavorValue[i] = pClassInfo->getFlavorValue(i);
 		}
 	}
-
-	if (getHealthPercent() == iDefault) m_iHealthPercent = pClassInfo->getHealthPercent();
-	if (getHappinessPercent() == iDefault) m_iHappinessPercent = pClassInfo->getHappinessPercent();
-	if (isSlave() == bDefault) m_bSlave = pClassInfo->isSlave();
-
-	//TB Specialist Tags
-	if (getInsidiousness() == iDefault) m_iInsidiousness = pClassInfo->getInsidiousness();
-	if (getInvestigation() == iDefault) m_iInvestigation = pClassInfo->getInvestigation();
-
-	m_aTechHappinessTypes.copyNonDefaultDelayedResolution(pClassInfo->getTechHappinessTypes());
-	m_aTechHealthTypes.copyNonDefaultDelayedResolution(pClassInfo->getTechHealthTypes());
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
 
 	if (getNumUnitCombatExperienceTypes() == 0)
 	{
@@ -406,6 +353,9 @@ void CvSpecialistInfo::copyNonDefaults(const CvSpecialistInfo* pClassInfo)
 void CvSpecialistInfo::getCheckSum(uint32_t& iSum) const
 {
 	PROFILE_EXTRA_FUNC();
+	// NOTE: kept explicit (not delegated to CvInfoUtil) to preserve the exact legacy checksum: the
+	// hand-written m_iGreatPeopleUnitType/m_piFlavorValue/UnitCombatExperienceTypes and the runtime
+	// m_iMissionType sit mid-order between declared fields.
 	CheckSum(iSum, m_iGreatPeopleUnitType);
 	CheckSum(iSum, m_iGreatPeopleRateChange);
 	CheckSum(iSum, m_iMissionType);

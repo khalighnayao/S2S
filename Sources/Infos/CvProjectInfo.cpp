@@ -32,40 +32,17 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvProjectInfo::CvProjectInfo() :
-	m_iVictoryPrereq(NO_VICTORY),
-	m_iTechPrereq(NO_TECH),
+	// m_iAnyoneProjectPrereq and the ProjectsNeeded pair are readPass3 machinery; the
+	// SetVariableListTagPair arrays stay hand-written. Every other XML-backed field is declared in
+	// getDataMembers() and defaulted by initDataMembers() below.
 	m_iAnyoneProjectPrereq(NO_PROJECT),
-	m_iMaxGlobalInstances(-1),
-	m_iMaxTeamInstances(-1),
-	m_iProductionCost(0),
-	m_iNukeInterception(0),
-	m_iTechShare(0),
-
-	m_iGlobalMaintenanceModifier(0),
-	m_iDistanceMaintenanceModifier(0),
-	m_iNumCitiesMaintenanceModifier(0),
-	m_iConnectedCityMaintenanceModifier(0),
-
-	m_iEveryoneSpecialUnit(NO_SPECIALUNIT),
-	m_iEveryoneSpecialBuilding(NO_SPECIALBUILDING),
-	m_iVictoryDelayPercent(0),
-	m_iSuccessRate(0),
-	m_bSpaceship(false),
-	m_bAllowsNukes(false),
 	m_piBonusProductionModifier(NULL),
 	m_piVictoryThreshold(NULL),
 	m_piVictoryMinThreshold(NULL),
 	m_piProjectsNeeded(NULL)
-
-	,m_iWorldHappiness(0)
-	,m_iGlobalHappiness(0)
-	,m_iWorldHealth(0)
-	,m_iGlobalHealth(0)
-	,m_iWorldTradeRoutes(0)
-	,m_iInflationModifier(0)
-	,m_bTechShareWithHalfCivs(false)
-	,m_piCommerceModifier(NULL)
-{}
+{
+	CvInfoUtil(this).initDataMembers();
+}
 
 
 //------------------------------------------------------------------------------------------------------
@@ -77,11 +54,11 @@ CvProjectInfo::CvProjectInfo() :
 //------------------------------------------------------------------------------------------------------
 CvProjectInfo::~CvProjectInfo()
 {
+	CvInfoUtil(this).uninitDataMembers(); // owns the declared CommerceModifiers array
 	SAFE_DELETE_ARRAY(m_piBonusProductionModifier);
 	SAFE_DELETE_ARRAY(m_piVictoryThreshold);
 	SAFE_DELETE_ARRAY(m_piVictoryMinThreshold);
 	SAFE_DELETE_ARRAY(m_piProjectsNeeded);
-
 }
 
 
@@ -330,6 +307,47 @@ int CvProjectInfo::getProjectsNeededValuesVectorElement(int i) const		{ return m
 
 
 
+void CvProjectInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Kept hand-written: the SetVariableListTagPair dynamic arrays (m_piBonusProductionModifier and
+	// the victory-keyed m_piVictoryThreshold/m_piVictoryMinThreshold - no wrapper) plus the
+	// PrereqProjects/AnyonePrereqProject readPass3 machinery (m_piProjectsNeeded,
+	// m_iAnyoneProjectPrereq). getCheckSum stays explicit: the hand-written and pass3 fields sit
+	// mid-order in the legacy checksum.
+	util
+		.addEnumAsInt(m_iVictoryPrereq, L"VictoryPrereq")
+		.addEnum(m_iTechPrereq, L"TechPrereq")
+		.add(m_iMaxGlobalInstances, L"iMaxGlobalInstances", -1)
+		.add(m_iMaxTeamInstances, L"iMaxTeamInstances", -1)
+		.add(m_iProductionCost, L"iCost")
+		.add(m_iNukeInterception, L"iNukeInterception")
+		.add(m_iTechShare, L"iTechShare")
+		.add(m_iGlobalMaintenanceModifier, L"iGlobalMaintenanceModifier")
+		.add(m_iDistanceMaintenanceModifier, L"iDistanceMaintenanceModifier")
+		.add(m_iNumCitiesMaintenanceModifier, L"iNumCitiesMaintenanceModifier")
+		.add(m_iConnectedCityMaintenanceModifier, L"iConnectedCityMaintenanceModifier")
+		.addEnumAsInt(m_iEveryoneSpecialUnit, L"EveryoneSpecialUnit")
+		.addEnumAsInt(m_iEveryoneSpecialBuilding, L"EveryoneSpecialBuilding")
+		.add(m_iVictoryDelayPercent, L"iVictoryDelayPercent")
+		.add(m_iSuccessRate, L"iSuccessRate")
+		.add(m_bSpaceship, L"bSpaceship")
+		.add(m_bAllowsNukes, L"bAllowsNukes")
+		.add(m_iWorldHappiness, L"iWorldHappiness")
+		.add(m_iGlobalHappiness, L"iGlobalHappiness")
+		.add(m_iWorldHealth, L"iWorldHealth")
+		.add(m_iGlobalHealth, L"iGlobalHealth")
+		.add(m_iWorldTradeRoutes, L"iWorldTradeRoutes")
+		.add(m_bTechShareWithHalfCivs, L"bTechShareWithHalfCivs")
+		.add(m_iInflationModifier, L"iInflationModifier")
+		.addCommerce(m_piCommerceModifier, L"CommerceModifiers")
+		.add(m_aiCategories, L"Categories")
+		.add(m_aeMapCategoryTypes, L"MapCategoryTypes")
+		.add(m_szMovieArtDef, L"MovieDefineTag")
+		.add(m_szCreateSound, L"CreateSound")
+	;
+}
+
+
 bool CvProjectInfo::read(CvXMLLoadUtility* pXML)
 {
 	PROFILE_EXTRA_FUNC();
@@ -339,55 +357,11 @@ bool CvProjectInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"VictoryPrereq");
-	m_iVictoryPrereq = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalTypeEnum(m_iTechPrereq, L"TechPrereq");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxGlobalInstances, L"iMaxGlobalInstances", -1);
-	pXML->GetOptionalChildXmlValByName(&m_iMaxTeamInstances, L"iMaxTeamInstances", -1);
-	pXML->GetOptionalChildXmlValByName(&m_iProductionCost, L"iCost");
-	pXML->GetOptionalChildXmlValByName(&m_iNukeInterception, L"iNukeInterception");
-	pXML->GetOptionalChildXmlValByName(&m_iTechShare, L"iTechShare");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalMaintenanceModifier, L"iGlobalMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iDistanceMaintenanceModifier, L"iDistanceMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iNumCitiesMaintenanceModifier, L"iNumCitiesMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iConnectedCityMaintenanceModifier, L"iConnectedCityMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"EveryoneSpecialUnit");
-	m_iEveryoneSpecialUnit = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"EveryoneSpecialBuilding");
-	m_iEveryoneSpecialBuilding = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(&m_bSpaceship, L"bSpaceship");
-	pXML->GetOptionalChildXmlValByName(&m_bAllowsNukes, L"bAllowsNukes");
-	pXML->GetOptionalChildXmlValByName(m_szMovieArtDef, L"MovieDefineTag");
+	CvInfoUtil(this).readXml(pXML);
 
 	pXML->SetVariableListTagPair(&m_piBonusProductionModifier, L"BonusProductionModifiers", GC.getNumBonusInfos());
 	pXML->SetVariableListTagPair(&m_piVictoryThreshold, L"VictoryThresholds",  GC.getNumVictoryInfos());
 	pXML->SetVariableListTagPair(&m_piVictoryMinThreshold, L"VictoryMinThresholds",  GC.getNumVictoryInfos());
-	pXML->GetOptionalChildXmlValByName(&m_iVictoryDelayPercent, L"iVictoryDelayPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iSuccessRate, L"iSuccessRate");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"CreateSound");
-	setCreateSound(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(&m_iWorldHappiness, L"iWorldHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalHappiness, L"iGlobalHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iWorldHealth, L"iWorldHealth");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalHealth, L"iGlobalHealth");
-	pXML->GetOptionalChildXmlValByName(&m_iWorldTradeRoutes, L"iWorldTradeRoutes");
-	pXML->GetOptionalChildXmlValByName(&m_bTechShareWithHalfCivs, L"bTechShareWithHalfCivs");
-	pXML->GetOptionalChildXmlValByName(&m_iInflationModifier, L"iInflationModifier");
-
-	if (pXML->TryMoveToXmlFirstChild(L"CommerceModifiers"))
-	{
-		pXML->SetCommerce(&m_piCommerceModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCommerceModifier);
-	}
 
 	if (pXML->TryMoveToXmlFirstChild(L"PrereqProjects"))
 	{
@@ -420,9 +394,6 @@ bool CvProjectInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
-	pXML->SetOptionalVector(&m_aeMapCategoryTypes, L"MapCategoryTypes");
-
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"AnyonePrereqProject");
 	m_aszExtraXMLforPass3.push_back(szTextVal);
 
@@ -434,28 +405,15 @@ bool CvProjectInfo::read(CvXMLLoadUtility* pXML)
 void CvProjectInfo::copyNonDefaults(const CvProjectInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	bool bDefault = false;
-	int iDefault = 0;
-	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	CvString cDefault = CvString::format("").GetCString();
+	const int iDefault = 0;
+	const int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getVictoryPrereq() == iTextDefault) m_iVictoryPrereq = pClassInfo->getVictoryPrereq();
-	if (getTechPrereq() == iTextDefault) m_iTechPrereq = pClassInfo->getTechPrereq();
-	if (getEveryoneSpecialUnit() == iTextDefault) m_iEveryoneSpecialUnit = pClassInfo->getEveryoneSpecialUnit();
-	if (getEveryoneSpecialBuilding() == iTextDefault) m_iEveryoneSpecialBuilding = pClassInfo->getEveryoneSpecialBuilding();
-
-	if (getMaxGlobalInstances() == -1) m_iMaxGlobalInstances = pClassInfo->getMaxGlobalInstances();
-	if (getMaxTeamInstances() == -1) m_iMaxTeamInstances = pClassInfo->getMaxTeamInstances();
-	if (getProductionCost() == iDefault) m_iProductionCost = pClassInfo->getProductionCost();
-	if (getNukeInterception() == iDefault) m_iNukeInterception = pClassInfo->getNukeInterception();
-	if (getTechShare() == iDefault) m_iTechShare = pClassInfo->getTechShare();
-
-	if (isSpaceship() == bDefault) m_bSpaceship = pClassInfo->isSpaceship();
-	if (isAllowsNukes() == bDefault) m_bAllowsNukes = pClassInfo->isAllowsNukes();
-
-	if (getMovieArtDef() == cDefault) m_szMovieArtDef = pClassInfo->getMovieArtDef();
+	// NOTE: the legacy copy dereferenced m_piCommerceModifier without a NULL check (a latent crash
+	// for modular merges when this definition has no CommerceModifiers tag); the wrapper handles
+	// NULL correctly.
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	for ( int i = 0; i < GC.getNumBonusInfos(); i++)
 	{
@@ -487,43 +445,14 @@ void CvProjectInfo::copyNonDefaults(const CvProjectInfo* pClassInfo)
 			m_piVictoryMinThreshold[i] = pClassInfo->getVictoryMinThreshold(i);
 		}
 	}
-	if (getVictoryDelayPercent() == iDefault) m_iVictoryDelayPercent = pClassInfo->getVictoryDelayPercent();
-	if (getSuccessRate() == iDefault) m_iSuccessRate = pClassInfo->getSuccessRate();
-
-	if (getCreateSound() == cDefault) setCreateSound(pClassInfo->getCreateSound());
-
 
 	if (m_iAnyoneProjectPrereq == iTextDefault) m_iAnyoneProjectPrereq = pClassInfo->getAnyoneProjectPrereq();
-
-	if (getWorldHappiness() == iDefault) m_iWorldHappiness = pClassInfo->getWorldHappiness();
-	if (getGlobalHappiness() == iDefault) m_iGlobalHappiness= pClassInfo->getGlobalHappiness();
-	if (getWorldHealth() == iDefault) m_iWorldHealth = pClassInfo->getWorldHealth();
-	if (getGlobalHealth() == iDefault) m_iGlobalHealth = pClassInfo->getGlobalHealth();
-	if (isTechShareWithHalfCivs() == bDefault) m_bTechShareWithHalfCivs = pClassInfo->isTechShareWithHalfCivs();
-	if (getWorldTradeRoutes() == iDefault) m_iWorldTradeRoutes = pClassInfo->getWorldTradeRoutes();
-	if (getInflationModifier() == iDefault) m_iInflationModifier = pClassInfo->getInflationModifier();
-
-	if (!m_iGlobalMaintenanceModifier) m_iGlobalMaintenanceModifier = pClassInfo->getGlobalMaintenanceModifier();
-	if (!m_iDistanceMaintenanceModifier) m_iDistanceMaintenanceModifier = pClassInfo->getDistanceMaintenanceModifier();
-	if (!m_iNumCitiesMaintenanceModifier) m_iNumCitiesMaintenanceModifier = pClassInfo->getNumCitiesMaintenanceModifier();
-	if (!m_iConnectedCityMaintenanceModifier) m_iConnectedCityMaintenanceModifier = pClassInfo->getConnectedCityMaintenanceModifier();
-
-	for ( int j = 0; j < NUM_COMMERCE_TYPES; j++)
-	{
-		if ( m_piCommerceModifier[j] == iDefault )
-		{
-			m_piCommerceModifier[j] = pClassInfo->getCommerceModifier(j);
-		}
-	}
 
 	for ( int i = 0; i < pClassInfo->getProjectsNeededVectorSize(); i++ )
 	{
 		m_aiProjectsNeededforPass3.push_back(pClassInfo->getProjectsNeededValuesVectorElement(i));
 		m_aszProjectsNeededforPass3.push_back(pClassInfo->getProjectsNeededNamesVectorElement(i));
 	}
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeMapCategoryTypes, pClassInfo->getMapCategories());
 }
 
 
@@ -562,6 +491,9 @@ bool CvProjectInfo::readPass3()
 
 void CvProjectInfo::getCheckSum(uint32_t &iSum) const
 {
+	// NOTE: kept explicit (not delegated to CvInfoUtil) to preserve the exact legacy checksum: the
+	// hand-written SetVariableListTagPair arrays and the pass3 fields (m_iAnyoneProjectPrereq,
+	// m_piProjectsNeeded) sit mid-order between declared fields.
 	CheckSum(iSum, m_iWorldHappiness);
 	CheckSum(iSum, m_iGlobalHappiness);
 	CheckSum(iSum, m_iWorldHealth);

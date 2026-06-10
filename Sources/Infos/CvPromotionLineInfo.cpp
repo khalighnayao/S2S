@@ -27,17 +27,36 @@
 //  DESC:   Contains info about Promotion Lines
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-CvPromotionLineInfo::CvPromotionLineInfo() :
-									m_ePrereqTech(NO_TECH),
-									m_eObsoleteTech(NO_TECH),
-									m_ePropertyType(NO_PROPERTY),
-									m_bBuildUp(false),
-									m_bPoison(false)
+CvPromotionLineInfo::CvPromotionLineInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 CvPromotionLineInfo::~CvPromotionLineInfo()
 {
+	CvInfoUtil(this).uninitDataMembers();
+}
+
+void CvPromotionLineInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order; Categories is parked last because the legacy
+	// checksum deliberately omits it. The class keeps an explicit getCheckSum: the two pair-vectors
+	// (SetOptionalPairVector has no wrapper) close out the legacy checksum, and Categories must
+	// stay out of it.
+	util
+		.addEnum(m_ePrereqTech, L"PrereqTech")
+		.addEnum(m_eObsoleteTech, L"ObsoleteTech")
+		.add(m_bBuildUp, L"bBuildUp")
+		.add(m_bPoison, L"bPoison")
+		.addEnum(m_ePropertyType, L"PropertyType")
+		.add(m_aiUnitCombatPrereqTypes, L"UnitCombatPrereqTypes")
+		.add(m_aiNotOnUnitCombatTypes, L"NotOnUnitCombatTypes")
+		.add(m_aiNotOnDomainTypes, L"NotOnDomainTypes")
+		.add(m_aiOnGameOptions, L"OnGameOptions")
+		.add(m_aiNotOnGameOptions, L"NotOnGameOptions")
+		// Not in the legacy checksum:
+		.add(m_aiCategories, L"Categories")
+	;
 }
 
 bool CvPromotionLineInfo::read(CvXMLLoadUtility* pXML)
@@ -47,32 +66,12 @@ bool CvPromotionLineInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	CvString szTextVal;
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PrereqTech");
-	m_ePrereqTech = (TechTypes) pXML->GetInfoClass(szTextVal);
+	CvInfoUtil(this).readXml(pXML);
 
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"ObsoleteTech");
-	m_eObsoleteTech = (TechTypes) pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PropertyType");
-	m_ePropertyType = (PropertyTypes) pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(&m_bBuildUp, L"bBuildUp");
-	pXML->GetOptionalChildXmlValByName(&m_bPoison, L"bPoison");
-
-	// bool vector without delayed resolution
-	pXML->SetOptionalVector(&m_aiUnitCombatPrereqTypes, L"UnitCombatPrereqTypes");
-	pXML->SetOptionalVector(&m_aiNotOnUnitCombatTypes, L"NotOnUnitCombatTypes");
-	pXML->SetOptionalVector(&m_aiNotOnDomainTypes, L"NotOnDomainTypes");
-	pXML->SetOptionalVector(&m_aiOnGameOptions, L"OnGameOptions");
-	pXML->SetOptionalVector(&m_aiNotOnGameOptions, L"NotOnGameOptions");
-
-	// int vector utilizing pairing without delayed resolution
+	// Hand-written: int vectors utilizing pairing (no CvInfoUtil wrapper for plain pair-vectors)
 	pXML->SetOptionalPairVector<UnitCombatModifierArray, UnitCombatTypes, int>(&m_aUnitCombatContractChanceChanges, L"UnitCombatContractChanceChanges");
 
 	pXML->SetOptionalPairVector<TechModifierArray, TechTypes, int>(&m_aTechContractChanceChanges, L"TechContractChanceChanges");
-
-	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
 
 	return true;
 }
@@ -80,67 +79,11 @@ bool CvPromotionLineInfo::read(CvXMLLoadUtility* pXML)
 void CvPromotionLineInfo::copyNonDefaults(const CvPromotionLineInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	const bool bDefault = false;
-	const int iDefault = 0;
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getPrereqTech() == NO_TECH) m_ePrereqTech = pClassInfo->getPrereqTech();
-	if (getObsoleteTech() == NO_TECH) m_eObsoleteTech = pClassInfo->getObsoleteTech();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
-	if (isBuildUp() == bDefault) m_bBuildUp = pClassInfo->isBuildUp();
-	if (isPoison() == bDefault) m_bPoison = pClassInfo->isPoison();
-
-	if (getPropertyType() != NO_PROPERTY) m_ePropertyType = pClassInfo->getPropertyType();
-
-	// bool vectors without delayed resolution
-	if (getNumUnitCombatPrereqTypes() == 0)
-	{
-		m_aiUnitCombatPrereqTypes.clear();
-		for ( int i = 0; i < pClassInfo->getNumUnitCombatPrereqTypes(); i++)
-		{
-			m_aiUnitCombatPrereqTypes.push_back(pClassInfo->getUnitCombatPrereqType(i));
-		}
-	}
-
-	if (getNumNotOnUnitCombatTypes() == 0)
-	{
-		m_aiNotOnUnitCombatTypes.clear();
-		for ( int i = 0; i < pClassInfo->getNumNotOnUnitCombatTypes(); i++)
-		{
-			m_aiNotOnUnitCombatTypes.push_back(pClassInfo->getNotOnUnitCombatType(i));
-		}
-	}
-
-	if (getNumNotOnDomainTypes() == 0)
-	{
-		m_aiNotOnDomainTypes.clear();
-		for ( int i = 0; i < pClassInfo->getNumNotOnDomainTypes(); i++)
-		{
-			m_aiNotOnDomainTypes.push_back(pClassInfo->getNotOnDomainType(i));
-		}
-	}
-
-	if (getNumOnGameOptions() == 0)
-	{
-		m_aiOnGameOptions.clear();
-		for ( int i = 0; i < pClassInfo->getNumOnGameOptions(); i++)
-		{
-			m_aiOnGameOptions.push_back(pClassInfo->getOnGameOption(i));
-		}
-	}
-
-	if (getNumNotOnGameOptions() == 0)
-	{
-		m_aiNotOnGameOptions.clear();
-		for ( int i = 0; i < pClassInfo->getNumNotOnGameOptions(); i++)
-		{
-			m_aiNotOnGameOptions.push_back(pClassInfo->getNotOnGameOption(i));
-		}
-	}
-
-	// int vector utilizing pairing without delayed resolution
+	// Hand-written: int vector utilizing pairing without delayed resolution
 	if (getNumUnitCombatContractChanceChanges()==0)
 	{
 		for (int i=0; i < pClassInfo->getNumUnitCombatContractChanceChanges(); i++)
@@ -160,11 +103,11 @@ void CvPromotionLineInfo::copyNonDefaults(const CvPromotionLineInfo* pClassInfo)
 			m_aTechContractChanceChanges.push_back(std::make_pair(eTech, iChange));
 		}
 	}
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
-
 }
 
+// Explicit (not delegated to CvInfoUtil) on purpose: the hand-written pair-vectors close out the
+// legacy checksum, and the legacy checksum deliberately omits the (read) Categories vector.
+// Keep this byte-identical to the legacy order.
 void CvPromotionLineInfo::getCheckSum(uint32_t& iSum) const
 {
 	CheckSum(iSum, m_ePrereqTech);

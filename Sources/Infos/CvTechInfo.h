@@ -121,6 +121,7 @@ public:
 	int getCommerceModifier(int i) const;
 	int* getCommerceModifierArray() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvTechInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;
