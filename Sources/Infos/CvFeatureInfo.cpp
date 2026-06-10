@@ -45,41 +45,12 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvFeatureInfo::CvFeatureInfo() :
-m_iMovementCost(0),
-m_iSeeThroughChange(0),
-m_iHealthPercent(0),
-m_iAppearanceProbability(0),
-m_iDisappearanceProbability(0),
-m_iGrowthProbability(0),
-m_iDefenseModifier(0),
-m_iAdvancedStartRemoveCost(0),
-m_iWarmingDefense(0), //GWMod new xml field M.A.
-m_bNoCoast(false),
-m_bNoRiver(false),
-m_bNoAdjacent(false),
-m_bRequiresFlatlands(false),
-m_bRequiresRiver(false),
-m_bCoastalOnly(false),
-m_bAddsFreshWater(false),
-m_bImpassable(false),
-m_bNoCity(false),
-m_bNoImprovement(false),
-m_bNoBonus(false),
-m_bVisibleAlways(false),
-m_bNukeImmune(false),
-m_bCountsAsPeak(false),
+// Only non-declarative fields here; everything else defaults via initDataMembers().
 m_iWorldSoundscapeScriptId(0),
-m_iEffectProbability(0),
-m_piYieldChange(NULL),
-m_piRiverYieldChange(NULL),
-m_pi3DAudioScriptFootstepIndex(NULL),
-m_iSpreadProbability(0)
-,m_iCultureDistance(0)
-,m_iPopDestroys(-1)
-,m_bIgnoreTerrainCulture(false)
-,m_bCanGrowAnywhere(false)
-,m_PropertyManipulators()
+m_pi3DAudioScriptFootstepIndex(NULL)
 {
+	CvInfoUtil(this).initDataMembers();
+
 	m_zobristValue = GC.getGame().getSorenRand().getInt();
 }
 
@@ -93,10 +64,9 @@ m_iSpreadProbability(0)
 //------------------------------------------------------------------------------------------------------
 CvFeatureInfo::~CvFeatureInfo()
 {
-	SAFE_DELETE_ARRAY(m_piYieldChange);
-	SAFE_DELETE_ARRAY(m_piRiverYieldChange);
-	SAFE_DELETE_ARRAY(m_pi3DAudioScriptFootstepIndex);
+	CvInfoUtil(this).uninitDataMembers(); // frees m_piYieldChange / m_piRiverYieldChange (owned by addYields)
 
+	SAFE_DELETE_ARRAY(m_pi3DAudioScriptFootstepIndex);
 }
 
 
@@ -389,59 +359,65 @@ bool CvFeatureInfo::isCategory(int i) const
 
 
 
+void CvFeatureInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order. The checksum is NOT delegated (see getCheckSum),
+	// but keeping the order aligned makes the two trivially comparable.
+	// Stays hand-written: m_pi3DAudioScriptFootstepIndex (SetVariableListTagPair-style dynamic
+	// array), m_iWorldSoundscapeScriptId (audio tag index lookup), m_zobristValue (runtime).
+	util
+		.add(m_iSpreadProbability, L"iSpread")
+		.add(m_iCultureDistance, L"iCultureDistance")
+		.add(m_bIgnoreTerrainCulture, L"bIgnoreTerrainCulture")
+		.add(m_bCanGrowAnywhere, L"bCanGrowAnywhere")
+		.add(m_iMovementCost, L"iMovement")
+		.add(m_iSeeThroughChange, L"iSeeThrough")
+		.add(m_iHealthPercent, L"iHealthPercent")
+		.add(m_iAppearanceProbability, L"iAppearance")
+		.add(m_iDisappearanceProbability, L"iDisappearance")
+		.add(m_iGrowthProbability, L"iGrowth")
+		.add(m_iDefenseModifier, L"iDefense")
+		.add(m_iAdvancedStartRemoveCost, L"iAdvancedStartRemoveCost")
+		.add(m_iWarmingDefense, L"iWarmingDefense") //GWMod new xml field M.A.
+		.add(m_iPopDestroys, L"iPopDestroys", -1)
+		.add(m_bNoCoast, L"bNoCoast")
+		.add(m_bNoRiver, L"bNoRiver")
+		.add(m_bNoAdjacent, L"bNoAdjacent")
+		.add(m_bRequiresFlatlands, L"bRequiresFlatlands")
+		.add(m_bRequiresRiver, L"bRequiresRiver")
+		.add(m_bCoastalOnly, L"bCoastalOnly")
+		.add(m_bAddsFreshWater, L"bAddsFreshWater")
+		.add(m_bImpassable, L"bImpassable")
+		.add(m_bNoCity, L"bNoCity")
+		.add(m_bNoImprovement, L"bNoImprovement")
+		.add(m_bNoBonus, L"bNoBonus")
+		.add(m_bVisibleAlways, L"bVisibleAlways")
+		.add(m_bNukeImmune, L"bNukeImmune")
+		.add(m_bCountsAsPeak, L"bCountsAsPeak")
+		.add(m_szOnUnitChangeTo, L"OnUnitChangeTo") // checksummed by the legacy hand-written getCheckSum
+		.add(m_aeMapCategoryTypes, L"MapCategoryTypes")
+		.add(m_aiCategories, L"Categories")
+		.addYields(m_piYieldChange, L"YieldChanges")
+		.addYields(m_piRiverYieldChange, L"RiverYieldChange")
+		.add(m_aeTerrain, L"TerrainBooleans")
+		.add(m_PropertyManipulators)
+		.add(m_iEffectProbability, L"iEffectProbability") // read but not checksummed (legacy omission, preserved)
+		.add(m_szEffectType, L"EffectType")
+		.add(m_szGrowthSound, L"GrowthSound")
+		.add(m_szArtDefineTag, L"ArtDefineTag")
+	;
+}
+
+
 bool CvFeatureInfo::read(CvXMLLoadUtility* pXML)
 {
-
-	PROFILE_EXTRA_FUNC();
 	CvString szTextVal;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(m_szArtDefineTag, L"ArtDefineTag");
-
-	if (pXML->TryMoveToXmlFirstChild(L"YieldChanges"))
-	{
-		pXML->SetYields(&m_piYieldChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-		SAFE_DELETE_ARRAY(m_piYieldChange);
-
-	if (pXML->TryMoveToXmlFirstChild(L"RiverYieldChange"))
-	{
-		pXML->SetYields(&m_piRiverYieldChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-		SAFE_DELETE_ARRAY(m_piRiverYieldChange);
-
-	pXML->GetOptionalChildXmlValByName(&m_iMovementCost, L"iMovement");
-	pXML->GetOptionalChildXmlValByName(&m_iSeeThroughChange, L"iSeeThrough");
-	pXML->GetOptionalChildXmlValByName(&m_iHealthPercent, L"iHealthPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iDefenseModifier, L"iDefense");
-	pXML->GetOptionalChildXmlValByName(&m_iAdvancedStartRemoveCost, L"iAdvancedStartRemoveCost");
-	pXML->GetOptionalChildXmlValByName(&m_iWarmingDefense, L"iWarmingDefense"); //GWMod new xml field M.A.
-	pXML->GetOptionalChildXmlValByName(&m_iAppearanceProbability, L"iAppearance");
-	pXML->GetOptionalChildXmlValByName(&m_iDisappearanceProbability, L"iDisappearance");
-	pXML->GetOptionalChildXmlValByName(&m_iGrowthProbability, L"iGrowth");
-	pXML->GetOptionalChildXmlValByName(&m_iPopDestroys, L"iPopDestroys", -1);
-	pXML->GetOptionalChildXmlValByName(&m_bNoCoast, L"bNoCoast");
-	pXML->GetOptionalChildXmlValByName(&m_bNoRiver, L"bNoRiver");
-	pXML->GetOptionalChildXmlValByName(&m_bNoAdjacent, L"bNoAdjacent");
-	pXML->GetOptionalChildXmlValByName(&m_bRequiresFlatlands, L"bRequiresFlatlands");
-	pXML->GetOptionalChildXmlValByName(&m_bRequiresRiver, L"bRequiresRiver");
-	pXML->GetOptionalChildXmlValByName(&m_bCoastalOnly, L"bCoastalOnly");
-	pXML->GetOptionalChildXmlValByName(&m_bAddsFreshWater, L"bAddsFreshWater");
-	pXML->GetOptionalChildXmlValByName(&m_bImpassable, L"bImpassable");
-	pXML->GetOptionalChildXmlValByName(&m_bNoCity, L"bNoCity");
-	pXML->GetOptionalChildXmlValByName(&m_bNoImprovement, L"bNoImprovement");
-	pXML->GetOptionalChildXmlValByName(&m_bNoBonus, L"bNoBonus");
-	pXML->GetOptionalChildXmlValByName(&m_bVisibleAlways, L"bVisibleAlways");
-	pXML->GetOptionalChildXmlValByName(&m_bNukeImmune, L"bNukeImmune");
-	pXML->GetOptionalChildXmlValByName(&m_bCountsAsPeak, L"bCountsAsPeak");
-	pXML->GetOptionalChildXmlValByName(m_szOnUnitChangeTo, L"OnUnitChangeTo");
+	CvInfoUtil(this).readXml(pXML);
 
 	pXML->SetVariableListTagPairForAudioScripts(&m_pi3DAudioScriptFootstepIndex, L"FootstepSounds", GC.getNumFootstepAudioTypes());
 
@@ -451,20 +427,6 @@ bool CvFeatureInfo::read(CvXMLLoadUtility* pXML)
 	else
 		m_iWorldSoundscapeScriptId = -1;
 
-	pXML->GetOptionalChildXmlValByName(m_szEffectType, L"EffectType");
-	pXML->GetOptionalChildXmlValByName(&m_iEffectProbability, L"iEffectProbability");
-
-	pXML->SetOptionalVector(&m_aeTerrain, L"TerrainBooleans");
-
-	pXML->GetOptionalChildXmlValByName(&m_iSpreadProbability, L"iSpread");
-	pXML->GetOptionalChildXmlValByName(&m_iCultureDistance, L"iCultureDistance");
-	pXML->GetOptionalChildXmlValByName(&m_bIgnoreTerrainCulture, L"bIgnoreTerrainCulture");
-	pXML->GetOptionalChildXmlValByName(&m_bCanGrowAnywhere, L"bCanGrowAnywhere");
-	pXML->GetOptionalChildXmlValByName(m_szGrowthSound, L"GrowthSound");
-	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
-	pXML->SetOptionalVector(&m_aeMapCategoryTypes, L"MapCategoryTypes");
-
-	m_PropertyManipulators.read(pXML);
 	return true;
 }
 
@@ -472,60 +434,12 @@ bool CvFeatureInfo::read(CvXMLLoadUtility* pXML)
 void CvFeatureInfo::copyNonDefaults(const CvFeatureInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	bool bDefault = false;
 	int iDefault = 0;
 	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	CvString cDefault = CvString::format("").GetCString();
-
-	if (getArtDefineTag() == cDefault) m_szArtDefineTag = pClassInfo->getArtDefineTag();
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	for ( int i = 0; i < NUM_YIELD_TYPES; i++ )
-	{
-		if ( getYieldChange(i) == iDefault && pClassInfo->getYieldChange(i) != iDefault)
-		{
-			if ( m_piYieldChange == NULL )
-			{
-				CvXMLLoadUtility::InitList(&m_piYieldChange, NUM_YIELD_TYPES);
-			}
-			m_piYieldChange[i] = pClassInfo->getYieldChange(i);
-		}
-		if ( getRiverYieldChange(i) == iDefault && pClassInfo->getRiverYieldChange(i) != iDefault)
-		{
-			if ( m_piYieldChange == NULL )
-			{
-				CvXMLLoadUtility::InitList(&m_piRiverYieldChange, NUM_YIELD_TYPES);
-			}
-			m_piRiverYieldChange[i] = pClassInfo->getRiverYieldChange(i);
-		}
-	}
-
-	if (getMovementCost() == iDefault) m_iMovementCost = pClassInfo->getMovementCost();
-	if (getSeeThroughChange() == iDefault) m_iSeeThroughChange = pClassInfo->getSeeThroughChange();
-	if (getHealthPercent() == iDefault) m_iHealthPercent = pClassInfo->getHealthPercent();
-	if (getDefenseModifier() == iDefault) m_iDefenseModifier = pClassInfo->getDefenseModifier();
-	if (getAdvancedStartRemoveCost() == iDefault) m_iAdvancedStartRemoveCost = pClassInfo->getAdvancedStartRemoveCost();
-	if (getAppearanceProbability() == iDefault) m_iAppearanceProbability = pClassInfo->getAppearanceProbability();
-	if (getDisappearanceProbability() == iDefault) m_iDisappearanceProbability = pClassInfo->getDisappearanceProbability();
-	if (getGrowthProbability() == iDefault) m_iGrowthProbability = pClassInfo->getGrowthProbability();
-	if (getPopDestroys() == -1) m_iPopDestroys = pClassInfo->getPopDestroys();
-	if (isNoCoast() == bDefault) m_bNoCoast = pClassInfo->isNoCoast();
-	if (isNoRiver() == bDefault) m_bNoRiver = pClassInfo->isNoRiver();
-	if (isNoAdjacent() == bDefault) m_bNoAdjacent = pClassInfo->isNoAdjacent();
-	if (isRequiresFlatlands() == bDefault) m_bRequiresFlatlands = pClassInfo->isRequiresFlatlands();
-	if (isRequiresRiver() == bDefault) m_bRequiresRiver = pClassInfo->isRequiresRiver();
-	if (m_bCoastalOnly == bDefault) m_bCoastalOnly = pClassInfo->isCoastalOnly();
-	if (isAddsFreshWater() == bDefault) m_bAddsFreshWater = pClassInfo->isAddsFreshWater();
-	if (isImpassable() == bDefault) m_bImpassable = pClassInfo->isImpassable();
-	if (isNoCity() == bDefault) m_bNoCity = pClassInfo->isNoCity();
-	if (isNoImprovement() == bDefault) m_bNoImprovement = pClassInfo->isNoImprovement();
-	if (m_bNoBonus == bDefault) m_bNoBonus = pClassInfo->isNoBonus();
-	if (isVisibleAlways() == bDefault) m_bVisibleAlways = pClassInfo->isVisibleAlways();
-	if (isNukeImmune() == bDefault) m_bNukeImmune = pClassInfo->isNukeImmune();
-	if (isCountsAsPeak() == bDefault) m_bCountsAsPeak = pClassInfo->isCountsAsPeak();
-
-	if (getOnUnitChangeTo() == cDefault) m_szOnUnitChangeTo = pClassInfo->getOnUnitChangeTo();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	for ( int i = 0; i < GC.getNumFootstepAudioTypes(); i++ )
 	{
@@ -539,22 +453,12 @@ void CvFeatureInfo::copyNonDefaults(const CvFeatureInfo* pClassInfo)
 		}
 	}
 	if (getWorldSoundscapeScriptId() == iTextDefault) m_iWorldSoundscapeScriptId = pClassInfo->getWorldSoundscapeScriptId();
-
-	if (getEffectType() == cDefault) m_szEffectType = pClassInfo->getEffectType();
-	if (getEffectProbability() == iDefault) m_iEffectProbability = pClassInfo->getEffectProbability();
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeTerrain, pClassInfo->m_aeTerrain);
-
-	if (getSpreadProbability() == iDefault) m_iSpreadProbability = pClassInfo->getSpreadProbability();
-	if (getCultureDistance() == iDefault) m_iCultureDistance = pClassInfo->getCultureDistance();
-	if (!isIgnoreTerrainCulture()) m_bIgnoreTerrainCulture = pClassInfo->isIgnoreTerrainCulture();
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeMapCategoryTypes, pClassInfo->getMapCategories());
-	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
 }
 
 
+// Explicit (not delegated to CvInfoUtil) because the legacy checksum folds the STRING
+// m_szOnUnitChangeTo mid-order (StringWrapper checksums are no-ops) and omits the read fields
+// m_iEffectProbability / m_szEffectType / m_szGrowthSound. Body kept byte-identical to legacy.
 void CvFeatureInfo::getCheckSum(uint32_t &iSum) const
 {
 	PROFILE_EXTRA_FUNC();

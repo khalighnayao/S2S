@@ -12,42 +12,17 @@
 #include "CvGameAI.h"
 
 CvBonusInfo::CvBonusInfo() :
-	m_iBonusClassType(NO_BONUSCLASS)
-	, m_iChar(0)
-	, m_iTechReveal(NO_TECH)
-	, m_iTechCityTrade(NO_TECH)
-	, m_iTechObsolete(NO_TECH)
-	, m_iAITradeModifier(0)
-	, m_iAIObjective(0)
-	, m_iHealth(0)
-	, m_iHappiness(0)
-	, m_iMinAreaSize(0)
-	, m_iMinLatitude(0)
-	, m_iMaxLatitude(90)
-	, m_iPlacementOrder(-1)
-	, m_iConstAppearance(0)
-	, m_iRandAppearance1(0)
+	// Only non-declarative fields here; everything else defaults via initDataMembers().
+	m_iRandAppearance1(0)
 	, m_iRandAppearance2(0)
 	, m_iRandAppearance3(0)
 	, m_iRandAppearance4(0)
-	, m_iPercentPerPlayer(0)
-	, m_iTilesPer(0)
-	, m_iMinLandPercent(0)
-	, m_iUniqueRange(0)
-	, m_iGroupRange(0)
-	, m_iGroupRand(0)
-	, m_bOneArea(false)
-	, m_bHills(false)
-	, m_bFlatlands(false)
-	, m_bBonusCoastalOnly(false)
-	, m_bNoRiverSide(false)
-	, m_bNormalize(false)
-	, m_piYieldChange(NULL)
+	, m_iChar(0)
 	, m_piImprovementChange(NULL)
-	, m_bPeaks(false)
-	, m_PropertyManipulators()
 	, m_tradeProvidingImprovements(NULL)
-{ }
+{
+	CvInfoUtil(this).initDataMembers();
+}
 
 //------------------------------------------------------------------------------------------------------
 //
@@ -58,7 +33,8 @@ CvBonusInfo::CvBonusInfo() :
 //------------------------------------------------------------------------------------------------------
 CvBonusInfo::~CvBonusInfo()
 {
-	SAFE_DELETE_ARRAY(m_piYieldChange);
+	CvInfoUtil(this).uninitDataMembers(); // frees m_piYieldChange (owned by addYields)
+
 	SAFE_DELETE_ARRAY(m_piImprovementChange);
 }
 
@@ -303,6 +279,53 @@ void CvBonusInfo::setProvidedByImprovementTypes(const ImprovementTypes eType)
 }
 
 
+void CvBonusInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order. The checksum is NOT delegated (see getCheckSum),
+	// but keeping the order aligned makes the two trivially comparable.
+	// Stays hand-written: m_iRandAppearance1-4 (nested under <Rands>, no wrapper for nested scalar
+	// groups), m_piImprovementChange (dead member - never read from XML), m_iChar (runtime GameFont).
+	util
+		.addEnumAsInt(m_iBonusClassType, L"BonusClassType")
+		.addEnumAsInt(m_iTechReveal, L"TechReveal")
+		.addEnumAsInt(m_iTechCityTrade, L"TechCityTrade")
+		.addEnumAsInt(m_iTechObsolete, L"TechObsolete")
+		.add(m_iAITradeModifier, L"iAITradeModifier")
+		.add(m_iAIObjective, L"iAIObjective")
+		.add(m_iHealth, L"iHealth")
+		.add(m_iHappiness, L"iHappiness")
+		.add(m_iMinAreaSize, L"iMinAreaSize")
+		.add(m_iMinLatitude, L"iMinLatitude")
+		.add(m_iMaxLatitude, L"iMaxLatitude", 90)
+		.add(m_iPlacementOrder, L"iPlacementOrder", -1)
+		.add(m_iConstAppearance, L"iConstAppearance")
+		.add(m_iPercentPerPlayer, L"iPlayer")
+		.add(m_iTilesPer, L"iTilesPer")
+		.add(m_iMinLandPercent, L"iMinLandPercent")
+		.add(m_iUniqueRange, L"iUniqueRange")
+		.add(m_iGroupRange, L"iGroupRange")
+		.add(m_iGroupRand, L"iGroupRand")
+		.add(m_bOneArea, L"bArea")
+		.add(m_bHills, L"bHills")
+		.add(m_bFlatlands, L"bFlatlands")
+		.add(m_bBonusCoastalOnly, L"bBonusCoastalOnly")
+		.add(m_bNoRiverSide, L"bNoRiverSide")
+		.add(m_bNormalize, L"bNormalize")
+		.addYields(m_piYieldChange, L"YieldChanges")
+		.add(m_aeTerrain, L"TerrainBooleans")
+		.add(m_aeFeature, L"FeatureBooleans")
+		.add(m_aeFeatureTerrain, L"FeatureTerrainBooleans")
+		.add(m_aeMapCategoryTypes, L"MapCategoryTypes")
+		.add(m_bPeaks, L"bPeaks")
+		.add(m_aiCategories, L"Categories")
+		.add(m_PropertyManipulators)
+		.add(m_szArtDefineTag, L"ArtDefineTag")
+	;
+}
+
+// Explicit (not delegated to CvInfoUtil) because the hand-written m_iRandAppearance1-4 sit
+// mid-order; delegating would drop them and change the asset checksum. Body kept byte-identical
+// to the legacy checksum (m_piImprovementChange is always NULL and contributes nothing).
 void CvBonusInfo::getCheckSum(uint32_t& iSum) const
 {
 	PROFILE_EXTRA_FUNC();
@@ -351,49 +374,14 @@ void CvBonusInfo::getCheckSum(uint32_t& iSum) const
 
 bool CvBonusInfo::read(CvXMLLoadUtility* pXML)
 {
-
-	PROFILE_EXTRA_FUNC();
-	CvString szTextVal;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"BonusClassType");
-	m_iBonusClassType = pXML->GetInfoClass(szTextVal);
+	CvInfoUtil(this).readXml(pXML);
 
-	pXML->GetOptionalChildXmlValByName(m_szArtDefineTag, L"ArtDefineTag");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"TechReveal");
-	m_iTechReveal = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"TechCityTrade");
-	m_iTechCityTrade = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"TechObsolete");
-	m_iTechObsolete = pXML->GetInfoClass(szTextVal);
-
-	if (pXML->TryMoveToXmlFirstChild(L"YieldChanges"))
-	{
-		pXML->SetYields(&m_piYieldChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piYieldChange);
-	}
-
-	pXML->GetOptionalChildXmlValByName(&m_iAITradeModifier, L"iAITradeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iAIObjective, L"iAIObjective");
-	pXML->GetOptionalChildXmlValByName(&m_iHealth, L"iHealth");
-	pXML->GetOptionalChildXmlValByName(&m_iHappiness, L"iHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iMinAreaSize, L"iMinAreaSize");
-	pXML->GetOptionalChildXmlValByName(&m_iMinLatitude, L"iMinLatitude");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxLatitude, L"iMaxLatitude", 90);
-	pXML->GetOptionalChildXmlValByName(&m_iPlacementOrder, L"iPlacementOrder", -1);
-	pXML->GetOptionalChildXmlValByName(&m_iConstAppearance, L"iConstAppearance");
-
-	// if we can set the current xml node to it's next sibling
+	// Appearance rands are nested under <Rands>; no wrapper for nested scalar groups.
 	if (pXML->TryMoveToXmlFirstChild(L"Rands"))
 	{
 		pXML->GetOptionalChildXmlValByName(&m_iRandAppearance1, L"iRandApp1");
@@ -401,99 +389,22 @@ bool CvBonusInfo::read(CvXMLLoadUtility* pXML)
 		pXML->GetOptionalChildXmlValByName(&m_iRandAppearance3, L"iRandApp3");
 		pXML->GetOptionalChildXmlValByName(&m_iRandAppearance4, L"iRandApp4");
 
-		// set the current xml node to it's parent node
 		pXML->MoveToXmlParent();
 	}
 
-	pXML->GetOptionalChildXmlValByName(&m_iPercentPerPlayer, L"iPlayer");
-	pXML->GetOptionalChildXmlValByName(&m_iTilesPer, L"iTilesPer");
-	pXML->GetOptionalChildXmlValByName(&m_iMinLandPercent, L"iMinLandPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iUniqueRange, L"iUniqueRange");
-	pXML->GetOptionalChildXmlValByName(&m_iGroupRange, L"iGroupRange");
-	pXML->GetOptionalChildXmlValByName(&m_iGroupRand, L"iGroupRand");
-	pXML->GetOptionalChildXmlValByName(&m_bOneArea, L"bArea");
-	pXML->GetOptionalChildXmlValByName(&m_bHills, L"bHills");
-	pXML->GetOptionalChildXmlValByName(&m_bFlatlands, L"bFlatlands");
-	pXML->GetOptionalChildXmlValByName(&m_bBonusCoastalOnly, L"bBonusCoastalOnly");
-	pXML->GetOptionalChildXmlValByName(&m_bNoRiverSide, L"bNoRiverSide");
-	pXML->GetOptionalChildXmlValByName(&m_bNormalize, L"bNormalize");
-	pXML->GetOptionalChildXmlValByName(&m_bPeaks, L"bPeaks");
-
-	pXML->SetOptionalVector(&m_aeTerrain, L"TerrainBooleans");
-	pXML->SetOptionalVector(&m_aeFeature, L"FeatureBooleans");
-	pXML->SetOptionalVector(&m_aeFeatureTerrain, L"FeatureTerrainBooleans");
-	pXML->SetOptionalVector(&m_aeMapCategoryTypes, L"MapCategoryTypes");
-	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
-
-	m_PropertyManipulators.read(pXML);
-
 	return true;
 }
+
 void CvBonusInfo::copyNonDefaults(const CvBonusInfo* pClassInfo)
 {
-	PROFILE_EXTRA_FUNC();
-	bool bDefault = false;
-	int iDefault = 0;
-	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	CvString cDefault = CvString::format("").GetCString();
-
-	//this must always be in advance to the Hotkeyinfo initialization
-	if (getArtDefineTag() == cDefault) m_szArtDefineTag = pClassInfo->getArtDefineTag();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getBonusClassType() == iTextDefault) m_iBonusClassType = pClassInfo->getBonusClassType();
-	if (getTechReveal() == iTextDefault) m_iTechReveal = pClassInfo->getTechReveal();
-	if (getTechCityTrade() == iTextDefault) m_iTechCityTrade = pClassInfo->getTechCityTrade();
-	if (getTechObsolete() == iTextDefault) m_iTechObsolete = pClassInfo->getTechObsolete();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
-	for (int i = 0; i < NUM_YIELD_TYPES; i++)
-	{
-		if (getYieldChange(i) == iDefault && pClassInfo->getYieldChange(i) != iDefault)
-		{
-			if (m_piYieldChange == NULL)
-			{
-				CvXMLLoadUtility::InitList(&m_piYieldChange, NUM_YIELD_TYPES);
-			}
-
-			m_piYieldChange[i] = pClassInfo->getYieldChange(i);
-		}
-	}
-	if (getAITradeModifier() == iDefault) m_iAITradeModifier = pClassInfo->getAITradeModifier();
-	if (getAIObjective() == iDefault) m_iAIObjective = pClassInfo->getAIObjective();
-	if (getHealth() == iDefault) m_iHealth = pClassInfo->getHealth();
-	if (getHappiness() == iDefault) m_iHappiness = pClassInfo->getHappiness();
-	if (getMinAreaSize() == iDefault) m_iMinAreaSize = pClassInfo->getMinAreaSize();
-	if (getMinLatitude() == iDefault) m_iMinLatitude = pClassInfo->getMinLatitude();
-	if (getMaxLatitude() == 90) m_iMaxLatitude = pClassInfo->getMaxLatitude();
-	if (getPlacementOrder() == -1) m_iPlacementOrder = pClassInfo->getPlacementOrder();
-	if (m_iConstAppearance == iDefault) m_iConstAppearance = pClassInfo->m_iConstAppearance;
-	if (m_iRandAppearance1 == iDefault) m_iRandAppearance1 = pClassInfo->m_iRandAppearance1;
-	if (m_iRandAppearance2 == iDefault) m_iRandAppearance2 = pClassInfo->m_iRandAppearance2;
-	if (m_iRandAppearance3 == iDefault) m_iRandAppearance3 = pClassInfo->m_iRandAppearance3;
-	if (m_iRandAppearance4 == iDefault) m_iRandAppearance4 = pClassInfo->m_iRandAppearance4;
-	if (getPercentPerPlayer() == iDefault) m_iPercentPerPlayer = pClassInfo->getPercentPerPlayer();
-	if (getTilesPer() == iDefault) m_iTilesPer = pClassInfo->getTilesPer();
-	if (getMinLandPercent() == iDefault) m_iMinLandPercent = pClassInfo->getMinLandPercent();
-	if (getUniqueRange() == iDefault) m_iUniqueRange = pClassInfo->getUniqueRange();
-	if (getGroupRange() == iDefault) m_iGroupRange = pClassInfo->getGroupRange();
-	if (getGroupRand() == iDefault) m_iGroupRand = pClassInfo->getGroupRand();
-	if (isOneArea() == bDefault) m_bOneArea = pClassInfo->isOneArea();
-	if (isHills() == bDefault) m_bHills = pClassInfo->isHills();
-	if (m_bFlatlands == bDefault) m_bFlatlands = pClassInfo->isFlatlands();
-	if (m_bBonusCoastalOnly == bDefault) m_bBonusCoastalOnly = pClassInfo->isBonusCoastalOnly();
-	if (isNoRiverSide() == bDefault) m_bNoRiverSide = pClassInfo->isNoRiverSide();
-	if (isNormalize() == bDefault) m_bNormalize = pClassInfo->isNormalize();
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeTerrain, pClassInfo->m_aeTerrain);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeFeatureTerrain, pClassInfo->m_aeFeatureTerrain);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeFeature, pClassInfo->m_aeFeature);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeMapCategoryTypes, pClassInfo->getMapCategories());
-	if (isPeaks() == bDefault) m_bPeaks = pClassInfo->isPeaks();
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
-
-	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
+	if (m_iRandAppearance1 == 0) m_iRandAppearance1 = pClassInfo->m_iRandAppearance1;
+	if (m_iRandAppearance2 == 0) m_iRandAppearance2 = pClassInfo->m_iRandAppearance2;
+	if (m_iRandAppearance3 == 0) m_iRandAppearance3 = pClassInfo->m_iRandAppearance3;
+	if (m_iRandAppearance4 == 0) m_iRandAppearance4 = pClassInfo->m_iRandAppearance4;
 }
 
 const std::vector<std::pair<ImprovementTypes, BuildTypes> >* CvBonusInfo::getTradeProvidingImprovements()

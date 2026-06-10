@@ -81,6 +81,7 @@ public:
 	DllExport const CvArtInfoFeature* getArtInfo() const;
 	const char* getButton() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 
 	const char* getGrowthSound() const;

@@ -32,23 +32,13 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvTerrainInfo::CvTerrainInfo() :
-m_iMovementCost(0),
-m_iBuildModifier(0),
-m_iDefenseModifier(0),
-m_iDistanceToLand(0),
+// Only non-declarative fields here; everything else defaults via initDataMembers().
 m_eClimate(NO_CLIMATE_ZONE),
-m_bImpassable(false),
-m_bFound(false),
-m_bFoundCoast(false),
-m_bFoundFreshWater(false),
-m_bFreshWaterTerrain(false),
 m_iWorldSoundscapeScriptId(0),
-m_piYields(NULL),
 m_pi3DAudioScriptFootstepIndex(NULL)
-,m_iCultureDistance(0)
-,m_iHealthPercent(0)
-,m_PropertyManipulators()
 {
+	CvInfoUtil(this).initDataMembers();
+
 	m_zobristValue = GC.getGame().getSorenRand().getInt();
 }
 
@@ -62,9 +52,9 @@ m_pi3DAudioScriptFootstepIndex(NULL)
 //------------------------------------------------------------------------------------------------------
 CvTerrainInfo::~CvTerrainInfo()
 {
-	SAFE_DELETE_ARRAY(m_piYields);
-	SAFE_DELETE_ARRAY(m_pi3DAudioScriptFootstepIndex);
+	CvInfoUtil(this).uninitDataMembers(); // frees m_piYields (owned by addYields)
 
+	SAFE_DELETE_ARRAY(m_pi3DAudioScriptFootstepIndex);
 }
 
 
@@ -180,53 +170,55 @@ bool CvTerrainInfo::isCategory(int i) const
 
 
 
+void CvTerrainInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order. The checksum is NOT delegated (see getCheckSum),
+	// but keeping the order aligned makes the two trivially comparable.
+	// Stays hand-written: m_eClimate (ClimateZoneTypes is a registered enum with NO InfoClassTraits
+	// specialization, so addEnum would index m_infoClassXmlLoadOrder[NO_INFO_CLASS] out of bounds),
+	// m_pi3DAudioScriptFootstepIndex (SetVariableListTagPair-style dynamic array),
+	// m_iWorldSoundscapeScriptId (audio tag index lookup), m_zobristValue (runtime).
+	util
+		.add(m_iMovementCost, L"iMovement")
+		.add(m_iBuildModifier, L"iBuildModifier")
+		.add(m_iDefenseModifier, L"iDefense")
+		.add(m_iDistanceToLand, L"iDistanceToLand")
+		.add(m_bImpassable, L"bImpassable")
+		.add(m_bFound, L"bFound")
+		.add(m_bFoundCoast, L"bFoundCoast")
+		.add(m_bFoundFreshWater, L"bFoundFreshWater")
+		.add(m_bFreshWaterTerrain, L"bFreshWaterTerrain")
+		.addYields(m_piYields, L"Yields")
+		.add(m_iCultureDistance, L"iCultureDistance")
+		.add(m_iHealthPercent, L"iHealthPercent")
+		.add(m_PropertyManipulators)
+		.add(m_aiCategories, L"Categories")
+		.add(m_aeMapCategoryTypes, L"MapCategoryTypes")
+		.add(m_szArtDefineTag, L"ArtDefineTag")
+	;
+}
+
+
 bool CvTerrainInfo::read(CvXMLLoadUtility* pXML)
 {
-	PROFILE_EXTRA_FUNC();
 	CvString szTextVal;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(m_szArtDefineTag, L"ArtDefineTag");
+	CvInfoUtil(this).readXml(pXML);
 
-	if (pXML->TryMoveToXmlFirstChild(L"Yields"))
-	{
-		pXML->SetYields(&m_piYields);
-		pXML->MoveToXmlParent();
-	}
-	else SAFE_DELETE_ARRAY(m_piYields);
-
-	pXML->GetOptionalChildXmlValByName(&m_iDistanceToLand, L"iDistanceToLand");
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"ClimateZoneType");
 	m_eClimate = (ClimateZoneTypes) pXML->GetInfoClass(szTextVal);
-	pXML->GetOptionalChildXmlValByName(&m_bImpassable, L"bImpassable");
-	pXML->GetOptionalChildXmlValByName(&m_bFound, L"bFound");
-	pXML->GetOptionalChildXmlValByName(&m_bFoundCoast, L"bFoundCoast");
-	pXML->GetOptionalChildXmlValByName(&m_bFoundFreshWater, L"bFoundFreshWater");
-	pXML->GetOptionalChildXmlValByName(&m_bFreshWaterTerrain, L"bFreshWaterTerrain");
-
-	pXML->GetOptionalChildXmlValByName(&m_iMovementCost, L"iMovement");
-	pXML->GetOptionalChildXmlValByName(&m_iBuildModifier, L"iBuildModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iDefenseModifier, L"iDefense");
 
 	pXML->SetVariableListTagPairForAudioScripts(&m_pi3DAudioScriptFootstepIndex, L"FootstepSounds", GC.getNumFootstepAudioTypes());
-
-	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
-	pXML->SetOptionalVector(&m_aeMapCategoryTypes, L"MapCategoryTypes");
 
 	if (pXML->GetOptionalChildXmlValByName(szTextVal, L"WorldSoundscapeAudioScript"))
 		m_iWorldSoundscapeScriptId = gDLL->getAudioTagIndex( szTextVal.GetCString(), AUDIOTAG_SOUNDSCAPE );
 	else
 		m_iWorldSoundscapeScriptId = -1;
 
-	pXML->GetOptionalChildXmlValByName(&m_iCultureDistance, L"iCultureDistance");
-	pXML->GetOptionalChildXmlValByName(&m_iHealthPercent, L"iHealthPercent");
-
-	m_PropertyManipulators.read(pXML);
-	//TB Combat Mods begin
-	//TB Combat Mods end
 	return true;
 }
 
@@ -234,40 +226,15 @@ bool CvTerrainInfo::read(CvXMLLoadUtility* pXML)
 void CvTerrainInfo::copyNonDefaults(const CvTerrainInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	bool bDefault = false;
-	int iDefault = 0;
 	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	CvString cDefault = CvString::format("").GetCString();
-
-	if (getArtDefineTag() == cDefault) m_szArtDefineTag = pClassInfo->getArtDefineTag();
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	for ( int i = 0; i < NUM_YIELD_TYPES; i++)
-	{
-		if (!m_piYields)
-		{
-			if (pClassInfo->getYield(i))
-			{
-				CvXMLLoadUtility::InitList(&m_piYields, NUM_YIELD_TYPES);
-			}
-		}
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
-		if (m_piYields && (m_piYields[i] == iDefault))
-		{
-			m_piYields[i] = pClassInfo->getYield(i);
-		}
-	}
-	if (m_iDistanceToLand == 0) m_iDistanceToLand = pClassInfo->isWaterTerrain();
+	// Legacy quirk preserved: compares against CLIMATE_ZONE_TEMPERATE instead of NO_CLIMATE_ZONE
+	// (-1, the read default), so a module override lacking <ClimateZoneType> does NOT inherit it.
 	if (m_eClimate == CLIMATE_ZONE_TEMPERATE) m_eClimate = pClassInfo->getClimate();
-	if (isImpassable() == bDefault) m_bImpassable = pClassInfo->isImpassable();
-	if (isFound() == bDefault) m_bFound = pClassInfo->isFound();
-	if (isFoundCoast() == bDefault) m_bFoundCoast = pClassInfo->isFoundCoast();
-	if (isFoundFreshWater() == bDefault) m_bFoundFreshWater = pClassInfo->isFoundFreshWater();
-	if (isFreshWaterTerrain() == bDefault) m_bFreshWaterTerrain = pClassInfo->isFreshWaterTerrain();
-	if (getMovementCost() == iDefault) m_iMovementCost = pClassInfo->getMovementCost();
-	if (getBuildModifier() == iDefault) m_iBuildModifier = pClassInfo->getBuildModifier();
-	if (getDefenseModifier() == iDefault) m_iDefenseModifier = pClassInfo->getDefenseModifier();
 
 	for ( int i = 0; i < GC.getNumFootstepAudioTypes(); i++)
 	{
@@ -282,20 +249,12 @@ void CvTerrainInfo::copyNonDefaults(const CvTerrainInfo* pClassInfo)
 	}
 
 	if (getWorldSoundscapeScriptId() == iTextDefault) m_iWorldSoundscapeScriptId = pClassInfo->getWorldSoundscapeScriptId();
-
-	if (getCultureDistance() == iDefault) m_iCultureDistance = pClassInfo->getCultureDistance();
-	if (getHealthPercent() == iDefault) m_iHealthPercent = pClassInfo->getHealthPercent();
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeMapCategoryTypes, pClassInfo->getMapCategories());
-	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
-
-	//TB Combat Mods begin
-	//TB Combat Mods end
 }
 
 
 
+// Explicit (not delegated to CvInfoUtil) because the hand-written m_eClimate sits mid-order;
+// delegating would drop it and change the asset checksum. Body kept byte-identical to legacy.
 void CvTerrainInfo::getCheckSum(uint32_t &iSum) const
 {
 	PROFILE_EXTRA_FUNC();
