@@ -36,6 +36,16 @@ void logFoundAI(int level, const char* format, ...);
 void logGameInfo(const char* format, ...);
 void logCombatAI(int level, const char* format, ...);
 
+// Engine-integrity warnings -- [ENG/*] tags -> Engine.log, gated by gTeamLogLevel.
+// Home for "should never happen" sanity checks demoted from FAssert/FErrorMsg so they
+// still surface in FinalRelease (where FASSERT compiles out) without popping dialogs or
+// flooding Asserts.log with stack traces. One key=value line per occurrence; the
+// repeated-line count is itself the signal (don't dedup).
+//   [ENG/viscap] (lvl 2, CvPlot::changeVisibilityCount) = a team's plot visibility
+//   count went negative and was capped to zero (fires en masse during
+//   recalculateModifiers' remove/re-add sight passes).
+void logEngine(int level, const char* format, ...);
+
 // Wall-clock turn-phase timing -> Performance.log, gated by gPerfLogLevel.
 // Works with ANY DLL config (Assert/Release); no special Profile build needed.
 // Emits one grep-friendly line per phase:

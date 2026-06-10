@@ -4,6 +4,7 @@
 #include "FProfiler.h"
 
 #include "CvGameCoreDLL.h"
+#include "BetterBTSAI.h"
 #include "CvArea.h"
 #include "CvArtFileMgr.h"
 #include "CvBonusInfo.h"
@@ -9096,7 +9097,8 @@ void CvPlot::changeVisibilityCount(TeamTypes eTeam, int iChange, InvisibleTypes 
 
 			if (m_aiVisibilityCount[eTeam] < 0)
 			{
-				FErrorMsg("Negative value should never happen, capping it to zero");
+				logEngine(2, "[ENG/viscap] team=%d plot=(%d,%d) count=%d change=%d - negative visibility count capped to 0",
+					eTeam, getX(), getY(), m_aiVisibilityCount[eTeam], iChange);
 				m_aiVisibilityCount[eTeam] = 0;
 			}
 		}
