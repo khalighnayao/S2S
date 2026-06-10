@@ -31,13 +31,10 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvSpecialBuildingInfo::CvSpecialBuildingInfo() :
-	m_iObsoleteTech(NO_TECH),
-	m_iTechPrereq(NO_TECH),
-	m_iTechPrereqAnyone(NO_TECH),
-	m_iMaxPlayerInstances(-1),
-	m_bValid(false)
-{}
+CvSpecialBuildingInfo::CvSpecialBuildingInfo()
+{
+	CvInfoUtil(this).initDataMembers();
+}
 
 
 //------------------------------------------------------------------------------------------------------
@@ -47,7 +44,26 @@ CvSpecialBuildingInfo::CvSpecialBuildingInfo() :
 //  PURPOSE :   Default destructor
 //
 //------------------------------------------------------------------------------------------------------
-CvSpecialBuildingInfo::~CvSpecialBuildingInfo() { }
+CvSpecialBuildingInfo::~CvSpecialBuildingInfo()
+{
+	CvInfoUtil(this).uninitDataMembers();
+}
+
+
+void CvSpecialBuildingInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order so the delegated checksum stays byte-identical.
+	// NOTE: the legacy hand-written copyNonDefaults compared the three tech FKs against 0 instead of
+	// the type-correct -1 (NO_TECH), so a modular merge could never inherit them; the wrappers use -1,
+	// fixing that latent modular-merge bug.
+	util
+		.addEnum(m_iObsoleteTech, L"ObsoleteTech")
+		.addEnum(m_iTechPrereq, L"TechPrereq")
+		.addEnumAsInt(m_iTechPrereqAnyone, L"TechPrereqAnyone")
+		.add(m_iMaxPlayerInstances, L"iMaxPlayerInstances", -1)
+		.add(m_bValid, L"bValid")
+	;
+}
 
 
 TechTypes CvSpecialBuildingInfo::getObsoleteTech() const
@@ -76,22 +92,12 @@ bool CvSpecialBuildingInfo::isValid() const
 
 bool CvSpecialBuildingInfo::read(CvXMLLoadUtility* pXML)
 {
-	CvString szTextVal;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"ObsoleteTech");
-	m_iObsoleteTech = static_cast<TechTypes>(pXML->GetInfoClass(szTextVal));
 
-	pXML->GetOptionalTypeEnum(m_iTechPrereq, L"TechPrereq");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"TechPrereqAnyone");
-	m_iTechPrereqAnyone = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(&m_iMaxPlayerInstances, L"iMaxPlayerInstances", -1);
-
-	pXML->GetOptionalChildXmlValByName(&m_bValid, L"bValid");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -101,25 +107,12 @@ void CvSpecialBuildingInfo::copyNonDefaults(const CvSpecialBuildingInfo* pClassI
 {
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	const bool bDefault = false;
-	const int iDefault = 0;
-
-	if (getObsoleteTech() == iDefault) m_iObsoleteTech = pClassInfo->getObsoleteTech();
-	if (getTechPrereq() == iDefault) m_iTechPrereq = pClassInfo->getTechPrereq();
-	if (getTechPrereqAnyone() == iDefault) m_iTechPrereqAnyone = pClassInfo->getTechPrereqAnyone();
-	if (getMaxPlayerInstances() == -1) m_iMaxPlayerInstances = pClassInfo->getMaxPlayerInstances();
-
-	if (isValid() == bDefault) m_bValid = pClassInfo->isValid();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvSpecialBuildingInfo::getCheckSum(uint32_t& iSum) const
 {
-	CheckSum(iSum, m_iObsoleteTech);
-	CheckSum(iSum, m_iTechPrereq);
-	CheckSum(iSum, m_iTechPrereqAnyone);
-	CheckSum(iSum, m_iMaxPlayerInstances);
-
-	CheckSum(iSum, m_bValid);
+	CvInfoUtil(this).checkSum(iSum);
 }
 

@@ -32,20 +32,13 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvYieldInfo::CvYieldInfo() :
+// m_iChar is a non-XML, runtime-assigned GameFont symbol index (see setChar); m_paszSymbolPath is
+// the hand-written SymbolPaths array. Every other field is declared in getDataMembers() and
+// defaulted by initDataMembers() below.
 m_iChar(0),
-m_iHillsChange(0),
-m_iPeakChange(0),
-m_iRiverChange(0),
-m_iCityChange(0),
-m_iPopulationChangeDivisor(0),
-m_iMinCity(0),
-m_iTradeModifier(0),
-m_iGoldenAgeYield(0),
-m_iGoldenAgeYieldThreshold(0),
-m_iAIWeightPercent(0),
-m_iColorType(NO_COLOR),
 m_paszSymbolPath(NULL)
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -150,6 +143,31 @@ const char* CvYieldInfo::getSymbolPath(int i) const
 }
 
 
+void CvYieldInfo::getDataMembers(CvInfoUtil& util)
+{
+	// HYBRID migration:
+	// - m_iChar is a non-XML runtime GameFont field (setChar) — not declared, and (matching legacy)
+	//   not checksummed either.
+	// - m_paszSymbolPath stays hand-written in read()/copyNonDefaults()/dtor: a CvString array
+	//   sized by GC.getDefineINT("MAX_YIELD_STACK") with no matching wrapper.
+	// - getCheckSum() is NOT delegated (see comment there): the legacy checksum omits m_iColorType,
+	//   which IS read; declared order = legacy checksum order, ColorType last.
+	util
+		.add(m_iHillsChange, L"iHillsChange")
+		.add(m_iPeakChange, L"iPeakChange")
+		.add(m_iRiverChange, L"iRiverChange")
+		.add(m_iCityChange, L"iCityChange")
+		.add(m_iPopulationChangeDivisor, L"iPopulationChangeDivisor")
+		.add(m_iMinCity, L"iMinCity")
+		.add(m_iTradeModifier, L"iTradeModifier")
+		.add(m_iGoldenAgeYield, L"iGoldenAgeYield")
+		.add(m_iGoldenAgeYieldThreshold, L"iGoldenAgeYieldThreshold")
+		.add(m_iAIWeightPercent, L"iAIWeightPercent")
+		.addEnumAsInt(m_iColorType, L"ColorType")
+	;
+}
+
+
 bool CvYieldInfo::read(CvXMLLoadUtility* pXML)
 {
 	PROFILE_EXTRA_FUNC();
@@ -161,19 +179,7 @@ bool CvYieldInfo::read(CvXMLLoadUtility* pXML)
 
 	int iNumSibs, j;
 
-	pXML->GetOptionalChildXmlValByName(&m_iHillsChange, L"iHillsChange");
-	pXML->GetOptionalChildXmlValByName(&m_iPeakChange, L"iPeakChange");
-	pXML->GetOptionalChildXmlValByName(&m_iRiverChange, L"iRiverChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCityChange, L"iCityChange");
-	pXML->GetOptionalChildXmlValByName(&m_iPopulationChangeDivisor, L"iPopulationChangeDivisor");
-	pXML->GetOptionalChildXmlValByName(&m_iMinCity, L"iMinCity");
-	pXML->GetOptionalChildXmlValByName(&m_iTradeModifier, L"iTradeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGoldenAgeYield, L"iGoldenAgeYield");
-	pXML->GetOptionalChildXmlValByName(&m_iGoldenAgeYieldThreshold, L"iGoldenAgeYieldThreshold");
-	pXML->GetOptionalChildXmlValByName(&m_iAIWeightPercent, L"iAIWeightPercent");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"ColorType");
-	m_iColorType = pXML->GetInfoClass(szTextVal);
+	CvInfoUtil(this).readXml(pXML);
 
 	if (pXML->TryMoveToXmlFirstChild(L"SymbolPaths"))
 	{
@@ -218,23 +224,11 @@ bool CvYieldInfo::read(CvXMLLoadUtility* pXML)
 void CvYieldInfo::copyNonDefaults(const CvYieldInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	const int iDefault = 0;
-	const int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
 	const CvString cDefault = CvString::format("").GetCString();
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getHillsChange() == iDefault) m_iHillsChange = pClassInfo->getHillsChange();
-	if (getPeakChange() == iDefault) m_iPeakChange = pClassInfo->getPeakChange();
-	if (m_iRiverChange == iDefault) m_iRiverChange = pClassInfo->getRiverChange();
-	if (getCityChange() == iDefault) m_iCityChange = pClassInfo->getCityChange();
-	if (getPopulationChangeDivisor() == iDefault) m_iPopulationChangeDivisor = pClassInfo->getPopulationChangeDivisor();
-	if (getMinCity() == iDefault) m_iMinCity = pClassInfo->getMinCity();
-	if (getTradeModifier() == iDefault) m_iTradeModifier = pClassInfo->getTradeModifier();
-	if (getGoldenAgeYield() == iDefault) m_iGoldenAgeYield = pClassInfo->getGoldenAgeYield();
-	if (getGoldenAgeYieldThreshold() == iDefault) m_iGoldenAgeYieldThreshold = pClassInfo->getGoldenAgeYieldThreshold();
-	if (getAIWeightPercent() == iDefault) m_iAIWeightPercent = pClassInfo->getAIWeightPercent();
-	if (getColorType() == iTextDefault) m_iColorType = pClassInfo->getColorType();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	for ( int i = 0; i < GC.getDefineINT("MAX_YIELD_STACK"); i++)
 	{
@@ -248,6 +242,8 @@ void CvYieldInfo::copyNonDefaults(const CvYieldInfo* pClassInfo)
 
 void CvYieldInfo::getCheckSum(uint32_t& iSum) const
 {
+	// NOT delegated to CvInfoUtil: the legacy checksum omits m_iColorType (which read() does load),
+	// and delegating would fold it in and change the asset checksum. Reproduces the legacy set.
 	CheckSum(iSum, m_iHillsChange);
 	CheckSum(iSum, m_iPeakChange);
 	CheckSum(iSum, m_iRiverChange);

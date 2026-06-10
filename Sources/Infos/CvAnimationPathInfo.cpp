@@ -31,9 +31,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvAnimationPathInfo::CvAnimationPathInfo() :
-	m_bMissionPath(false)
+CvAnimationPathInfo::CvAnimationPathInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -79,6 +79,18 @@ bool CvAnimationPathInfo::isMissionPath() const
 }
 
 
+void CvAnimationPathInfo::getDataMembers(CvInfoUtil& util)
+{
+	// HYBRID migration: m_vctPathDefinition (vector of (category,param) pairs) stays hand-written in
+	// read()/copyNonDefaults() — its XML is tag-dispatched per <PathEntry> (either <Category>, or
+	// <Operator> offset by ANIMOP_FIRST plus <Parameter>), which no CvInfoUtil wrapper models.
+	// No legacy getCheckSum (CvInfoBase's empty default applies), so none is added.
+	util
+		.add(m_bMissionPath, L"bMissionPath")
+	;
+}
+
+
 //------------------------------------------------------------------------------------------------
 // FUNCTION:	CvAnimationPathInfo::read
 //! \brief	  Reads in a CvAnimationPathInfo definition from XML
@@ -93,7 +105,7 @@ bool CvAnimationPathInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(&m_bMissionPath, L"bMissionPath");
+	CvInfoUtil(this).readXml(pXML);
 
 	CvString animPathName;
 	if (!pXML->GetChildXmlValByName(animPathName, L"Type"))
@@ -140,11 +152,9 @@ bool CvAnimationPathInfo::read(CvXMLLoadUtility* pXML)
 void CvAnimationPathInfo::copyNonDefaults(CvAnimationPathInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	const bool bDefault = false;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (isMissionPath() == bDefault) m_bMissionPath = pClassInfo->isMissionPath();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	int		iCurrentCategory;
 	float	fParameter;

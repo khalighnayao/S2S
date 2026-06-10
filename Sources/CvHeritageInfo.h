@@ -17,6 +17,7 @@ public:
 	CvHeritageInfo();
 	virtual ~CvHeritageInfo();
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvHeritageInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

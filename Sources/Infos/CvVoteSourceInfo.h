@@ -31,6 +31,7 @@ public:
 	int getReligionYield(int i) const;
 	int getReligionCommerce(int i) const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvVoteSourceInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

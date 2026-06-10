@@ -28,6 +28,7 @@ public:
 	bool getConfirmCommand() const;
 	bool getVisible() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvAutomateInfo* pClassInfo);
 

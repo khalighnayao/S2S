@@ -26,18 +26,12 @@
 //
 
 CvCultureLevelInfo::CvCultureLevelInfo() :
+// Only the non-XML runtime field (m_iLevel, assigned post-load by CvGlobals) and the hand-written
+// array need explicit init here; every declared field is defaulted by initDataMembers() below.
 m_iLevel(-1),
-m_iCityDefenseModifier(0),
-
-m_iCityRadius(1),
-m_iMaxWorldWonders(1),
-m_iMaxTeamWonders(1),
-m_iMaxNationalWonders(1),
-m_iMaxNationalWondersOCC(1),
-m_iPrereqGameOption(NO_GAMEOPTION),
-
 m_paiSpeedThreshold(NULL)
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -98,6 +92,23 @@ int CvCultureLevelInfo::getPrereqGameOption() const
 
 
 
+void CvCultureLevelInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order. m_paiSpeedThreshold (dynamic GameSpeed-length int array
+	// via SetVariableListTagPair) has no wrapper yet and stays hand-written in read/copyNonDefaults;
+	// it is appended after the delegated checksum below, preserving the legacy checksum byte-for-byte.
+	util
+		.add(m_iCityDefenseModifier, L"iCityDefenseModifier")
+		.add(m_iCityRadius, L"iCityRadius", 1)
+		.add(m_iMaxWorldWonders, L"iMaxWorldWonders", 1)
+		.add(m_iMaxTeamWonders, L"iMaxTeamWonders", 1)
+		.add(m_iMaxNationalWonders, L"iMaxNationalWonders", 1)
+		.add(m_iMaxNationalWondersOCC, L"iMaxNationalWondersOCC", 1)
+		.addEnumAsInt(m_iPrereqGameOption, L"PrereqGameOption")
+	;
+}
+
+
 bool CvCultureLevelInfo::read(CvXMLLoadUtility* pXml)
 {
 	if (!CvInfoBase::read(pXml))
@@ -105,16 +116,7 @@ bool CvCultureLevelInfo::read(CvXMLLoadUtility* pXml)
 		return false;
 	}
 
-	pXml->GetOptionalChildXmlValByName(&m_iCityDefenseModifier, L"iCityDefenseModifier");
-
-	pXml->GetOptionalChildXmlValByName(&m_iCityRadius, L"iCityRadius", 1);
-	pXml->GetOptionalChildXmlValByName(&m_iMaxWorldWonders, L"iMaxWorldWonders", 1);
-	pXml->GetOptionalChildXmlValByName(&m_iMaxTeamWonders, L"iMaxTeamWonders", 1);
-	pXml->GetOptionalChildXmlValByName(&m_iMaxNationalWonders, L"iMaxNationalWonders", 1);
-	pXml->GetOptionalChildXmlValByName(&m_iMaxNationalWondersOCC, L"iMaxNationalWondersOCC", 1);
-	CvString szTextVal;
-	pXml->GetOptionalChildXmlValByName(szTextVal, L"PrereqGameOption");
-	m_iPrereqGameOption = pXml->GetInfoClass(szTextVal);
+	CvInfoUtil(this).readXml(pXml);
 
 	pXml->SetVariableListTagPair(&m_paiSpeedThreshold, L"SpeedThresholds", GC.getNumGameSpeedInfos());
 
@@ -125,19 +127,11 @@ bool CvCultureLevelInfo::read(CvXMLLoadUtility* pXml)
 void CvCultureLevelInfo::copyNonDefaults(const CvCultureLevelInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	int iDefault = 0;
-	CvString cDefault = CvString::format("").GetCString();
-	CvWString wDefault = CvWString::format(L"").GetCString();
+	const int iDefault = 0;
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getCityDefenseModifier() == iDefault) m_iCityDefenseModifier = pClassInfo->getCityDefenseModifier();
-	if (getCityRadius() == 1) m_iCityRadius = pClassInfo->getCityRadius();
-	if (getMaxWorldWonders() == 1) m_iMaxWorldWonders = pClassInfo->getMaxWorldWonders();
-	if (getMaxTeamWonders() == 1) m_iMaxTeamWonders = pClassInfo->getMaxTeamWonders();
-	if (getMaxNationalWonders() == 1) m_iMaxNationalWonders = pClassInfo->getMaxNationalWonders();
-	if (getMaxNationalWondersOCC() == 1) m_iMaxNationalWondersOCC = pClassInfo->getMaxNationalWondersOCC();
-	if (getPrereqGameOption() == NO_GAMEOPTION) m_iPrereqGameOption = pClassInfo->getPrereqGameOption();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	for ( int i = 0; i < GC.getNumGameSpeedInfos(); i++ )
 	{
@@ -155,13 +149,7 @@ void CvCultureLevelInfo::copyNonDefaults(const CvCultureLevelInfo* pClassInfo)
 
 void CvCultureLevelInfo::getCheckSum(uint32_t &iSum) const
 {
-	CheckSum(iSum, m_iCityDefenseModifier);
-	CheckSum(iSum, m_iCityRadius);
-	CheckSum(iSum, m_iMaxWorldWonders);
-	CheckSum(iSum, m_iMaxTeamWonders);
-	CheckSum(iSum, m_iMaxNationalWonders);
-	CheckSum(iSum, m_iMaxNationalWondersOCC);
-	CheckSum(iSum, m_iPrereqGameOption);
+	CvInfoUtil(this).checkSum(iSum);
 
 	CheckSum(iSum, m_paiSpeedThreshold, GC.getNumGameSpeedInfos());
 }
