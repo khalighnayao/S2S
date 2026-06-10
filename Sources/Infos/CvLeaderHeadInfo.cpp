@@ -31,104 +31,29 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvLeaderHeadInfo::CvLeaderHeadInfo() :
-m_bNPC(false),
-m_iWonderConstructRand(0),
-m_iBaseAttitude(0),
-m_iBasePeaceWeight(0),
-m_iPeaceWeightRand(0),
-m_iWarmongerRespect(0),
-m_iEspionageWeight(0),
-m_iRefuseToTalkWarThreshold(0),
-m_iNoTechTradeThreshold(0),
-m_iTechTradeKnownPercent(0),
-m_iMaxGoldTradePercent(0),
-m_iMaxGoldPerTurnTradePercent(0),
-m_iCultureVictoryWeight(0),
-m_iSpaceVictoryWeight(0),
-m_iConquestVictoryWeight(0),
-m_iDominationVictoryWeight(0),
-m_iDiplomacyVictoryWeight(0),
-m_iMaxWarRand(0),
-m_iMaxWarNearbyPowerRatio(0),
-m_iMaxWarDistantPowerRatio(0),
-m_iMaxWarMinAdjacentLandPercent(0),
-m_iLimitedWarRand(0),
-m_iLimitedWarPowerRatio(0),
-m_iDogpileWarRand(0),
-m_iMakePeaceRand(0),
-m_iDeclareWarTradeRand(0),
-m_iDemandRebukedSneakProb(0),
-m_iDemandRebukedWarProb(0),
-m_iRazeCityProb(0),
-m_iBuildUnitProb(0),
-m_iBaseAttackOddsChange(0),
-m_iAttackOddsChangeRand(0),
-m_iWorseRankDifferenceAttitudeChange(0),
-m_iBetterRankDifferenceAttitudeChange(0),
-m_iCloseBordersAttitudeChange(0),
-m_iLostWarAttitudeChange(0),
-m_iAtWarAttitudeDivisor(0),
-m_iAtWarAttitudeChangeLimit(0),
-m_iAtPeaceAttitudeDivisor(0),
-m_iAtPeaceAttitudeChangeLimit(0),
-m_iSameReligionAttitudeChange(0),
-m_iSameReligionAttitudeDivisor(0),
-m_iSameReligionAttitudeChangeLimit(0),
-m_iDifferentReligionAttitudeChange(0),
-m_iDifferentReligionAttitudeDivisor(0),
-m_iDifferentReligionAttitudeChangeLimit(0),
-m_iBonusTradeAttitudeDivisor(0),
-m_iBonusTradeAttitudeChangeLimit(0),
-m_iOpenBordersAttitudeDivisor(0),
-m_iOpenBordersAttitudeChangeLimit(0),
-m_iDefensivePactAttitudeDivisor(0),
-m_iDefensivePactAttitudeChangeLimit(0),
-m_iShareWarAttitudeChange(0),
-m_iShareWarAttitudeDivisor(0),
-m_iShareWarAttitudeChangeLimit(0),
-m_iFavoriteCivicAttitudeChange(0),
-m_iFavoriteCivicAttitudeDivisor(0),
-m_iFavoriteCivicAttitudeChangeLimit(0),
-m_iDemandTributeAttitudeThreshold(NO_ATTITUDE),
-m_iNoGiveHelpAttitudeThreshold(NO_ATTITUDE),
-m_iTechRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iStrategicBonusRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iHappinessBonusRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iHealthBonusRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iMapRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iDeclareWarRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iDeclareWarThemRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iStopTradingRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iStopTradingThemRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iAdoptCivicRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iConvertReligionRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iOpenBordersRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iDefensivePactRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iPermanentAllianceRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iVassalRefuseAttitudeThreshold(NO_ATTITUDE),
-m_iVassalPowerModifier(0),
-m_iFreedomAppreciation(0),
-m_iFavoriteCivic(NO_CIVIC),
-m_iFavoriteReligion(NO_RELIGION),
-m_piFlavorValue(NULL),
-m_piContactRand(NULL),
-m_piContactDelay(NULL),
-m_piMemoryDecayRand(NULL),
-m_piMemoryAttitudePercent(NULL),
-m_piNoWarAttitudeProb(NULL),
-m_piUnitAIWeightModifier(NULL),
-m_piImprovementWeightModifier(NULL),
-m_piDiploPeaceIntroMusicScriptIds(NULL),
-m_piDiploPeaceMusicScriptIds(NULL),
-m_piDiploWarIntroMusicScriptIds(NULL),
-m_piDiploWarMusicScriptIds(NULL)
-
-,m_iMilitaryUnitRefuseAttitudeThreshold(ATTITUDE_ANNOYED)
-,m_iWorkerRefuseAttitudeThreshold(ATTITUDE_ANNOYED)
-,m_iCorporationRefuseAttitudeThreshold(ATTITUDE_CAUTIOUS)
-,m_iSecretaryGeneralVoteRefuseAttitudeThreshold(ATTITUDE_ANNOYED)
-{ }
+CvLeaderHeadInfo::CvLeaderHeadInfo()
+	// Only the hand-written-loaded fields are initialized here; everything declared in
+	// getDataMembers() is initialized by initDataMembers() (ints/bools to 0/false,
+	// enum-as-int FKs to -1 == NO_ATTITUDE/NO_CIVIC/NO_RELIGION, matching the legacy defaults).
+	: m_iMilitaryUnitRefuseAttitudeThreshold(ATTITUDE_ANNOYED)
+	, m_iWorkerRefuseAttitudeThreshold(ATTITUDE_ANNOYED)
+	, m_iCorporationRefuseAttitudeThreshold(ATTITUDE_CAUTIOUS)
+	, m_iSecretaryGeneralVoteRefuseAttitudeThreshold(ATTITUDE_ANNOYED)
+	, m_piFlavorValue(NULL)
+	, m_piContactRand(NULL)
+	, m_piContactDelay(NULL)
+	, m_piMemoryDecayRand(NULL)
+	, m_piMemoryAttitudePercent(NULL)
+	, m_piNoWarAttitudeProb(NULL)
+	, m_piUnitAIWeightModifier(NULL)
+	, m_piImprovementWeightModifier(NULL)
+	, m_piDiploPeaceIntroMusicScriptIds(NULL)
+	, m_piDiploPeaceMusicScriptIds(NULL)
+	, m_piDiploWarIntroMusicScriptIds(NULL)
+	, m_piDiploWarMusicScriptIds(NULL)
+{
+	CvInfoUtil(this).initDataMembers();
+}
 
 
 //------------------------------------------------------------------------------------------------------
@@ -833,6 +758,11 @@ bool CvLeaderHeadInfo::isDefaultComplexTrait(int i) const
 
 
 
+// Kept explicit (NOT delegated to CvInfoUtil::checkSum): hand-written fields sit mid-order in
+// the legacy checksum — the SetVariableListTagPair arrays come after m_aeTraits but before the
+// four ATTITUDE_*-defaulted refuse thresholds and the Default*Traits vectors. This reproduces
+// the legacy stream byte-identically; keep it in sync with getDataMembers() + the hand-written
+// reads if fields are added.
 void CvLeaderHeadInfo::getCheckSum(uint32_t& iSum) const
 {
 	CheckSum(iSum, m_bNPC);
@@ -951,12 +881,112 @@ const CvArtInfoLeaderhead* CvLeaderHeadInfo::getArtInfo() const
 }
 
 
+void CvLeaderHeadInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order (stylistic only here: this class keeps its explicit
+	// getCheckSum because hand-written fields — the SetVariableListTagPair arrays and the four
+	// non-(-1)-defaulted refuse-attitude thresholds — sit mid-order in the legacy checksum).
+	// The 17 *AttitudeThreshold FKs, FavoriteCivic and FavoriteReligion are int-typed type indices
+	// resolved immediately via GetInfoClass => addEnumAsInt (init -1, copy-if -1), byte-identical
+	// to the legacy reads (absent tag => GetInfoClass("") == -1).
+	// m_szArtDefineTag is NOT declared: CvInfoBase::copyNonDefaults calls the virtual getButton(),
+	// which resolves through getArtDefineTag(), so the art tag must merge BEFORE the base copy
+	// ("art files must be reread first") — it stays hand-written in read()/copyNonDefaults().
+	util
+		.add(m_bNPC, L"bNPC")
+		.add(m_iWonderConstructRand, L"iWonderConstructRand")
+		.add(m_iBaseAttitude, L"iBaseAttitude")
+		.add(m_iBasePeaceWeight, L"iBasePeaceWeight")
+		.add(m_iPeaceWeightRand, L"iPeaceWeightRand")
+		.add(m_iWarmongerRespect, L"iWarmongerRespect")
+		.add(m_iEspionageWeight, L"iEspionageWeight")
+		.add(m_iRefuseToTalkWarThreshold, L"iRefuseToTalkWarThreshold")
+		.add(m_iNoTechTradeThreshold, L"iNoTechTradeThreshold")
+		.add(m_iTechTradeKnownPercent, L"iTechTradeKnownPercent")
+		.add(m_iMaxGoldTradePercent, L"iMaxGoldTradePercent")
+		.add(m_iMaxGoldPerTurnTradePercent, L"iMaxGoldPerTurnTradePercent")
+		.add(m_iCultureVictoryWeight, L"iCultureVictoryWeight")
+		.add(m_iSpaceVictoryWeight, L"iSpaceVictoryWeight")
+		.add(m_iConquestVictoryWeight, L"iConquestVictoryWeight")
+		.add(m_iDominationVictoryWeight, L"iDominationVictoryWeight")
+		.add(m_iDiplomacyVictoryWeight, L"iDiplomacyVictoryWeight")
+		.add(m_iMaxWarRand, L"iMaxWarRand")
+		.add(m_iMaxWarNearbyPowerRatio, L"iMaxWarNearbyPowerRatio")
+		.add(m_iMaxWarDistantPowerRatio, L"iMaxWarDistantPowerRatio")
+		.add(m_iMaxWarMinAdjacentLandPercent, L"iMaxWarMinAdjacentLandPercent")
+		.add(m_iLimitedWarRand, L"iLimitedWarRand")
+		.add(m_iLimitedWarPowerRatio, L"iLimitedWarPowerRatio")
+		.add(m_iDogpileWarRand, L"iDogpileWarRand")
+		.add(m_iMakePeaceRand, L"iMakePeaceRand")
+		.add(m_iDeclareWarTradeRand, L"iDeclareWarTradeRand")
+		.add(m_iDemandRebukedSneakProb, L"iDemandRebukedSneakProb")
+		.add(m_iDemandRebukedWarProb, L"iDemandRebukedWarProb")
+		.add(m_iRazeCityProb, L"iRazeCityProb")
+		.add(m_iBuildUnitProb, L"iBuildUnitProb")
+		.add(m_iBaseAttackOddsChange, L"iBaseAttackOddsChange")
+		.add(m_iAttackOddsChangeRand, L"iAttackOddsChangeRand")
+		.add(m_iWorseRankDifferenceAttitudeChange, L"iWorseRankDifferenceAttitudeChange")
+		.add(m_iBetterRankDifferenceAttitudeChange, L"iBetterRankDifferenceAttitudeChange")
+		.add(m_iCloseBordersAttitudeChange, L"iCloseBordersAttitudeChange")
+		.add(m_iLostWarAttitudeChange, L"iLostWarAttitudeChange")
+		.add(m_iAtWarAttitudeDivisor, L"iAtWarAttitudeDivisor")
+		.add(m_iAtWarAttitudeChangeLimit, L"iAtWarAttitudeChangeLimit")
+		.add(m_iAtPeaceAttitudeDivisor, L"iAtPeaceAttitudeDivisor")
+		.add(m_iAtPeaceAttitudeChangeLimit, L"iAtPeaceAttitudeChangeLimit")
+		.add(m_iSameReligionAttitudeChange, L"iSameReligionAttitudeChange")
+		.add(m_iSameReligionAttitudeDivisor, L"iSameReligionAttitudeDivisor")
+		.add(m_iSameReligionAttitudeChangeLimit, L"iSameReligionAttitudeChangeLimit")
+		.add(m_iDifferentReligionAttitudeChange, L"iDifferentReligionAttitudeChange")
+		.add(m_iDifferentReligionAttitudeDivisor, L"iDifferentReligionAttitudeDivisor")
+		.add(m_iDifferentReligionAttitudeChangeLimit, L"iDifferentReligionAttitudeChangeLimit")
+		.add(m_iBonusTradeAttitudeDivisor, L"iBonusTradeAttitudeDivisor")
+		.add(m_iBonusTradeAttitudeChangeLimit, L"iBonusTradeAttitudeChangeLimit")
+		.add(m_iOpenBordersAttitudeDivisor, L"iOpenBordersAttitudeDivisor")
+		.add(m_iOpenBordersAttitudeChangeLimit, L"iOpenBordersAttitudeChangeLimit")
+		.add(m_iDefensivePactAttitudeDivisor, L"iDefensivePactAttitudeDivisor")
+		.add(m_iDefensivePactAttitudeChangeLimit, L"iDefensivePactAttitudeChangeLimit")
+		.add(m_iShareWarAttitudeChange, L"iShareWarAttitudeChange")
+		.add(m_iShareWarAttitudeDivisor, L"iShareWarAttitudeDivisor")
+		.add(m_iShareWarAttitudeChangeLimit, L"iShareWarAttitudeChangeLimit")
+		.add(m_iFavoriteCivicAttitudeChange, L"iFavoriteCivicAttitudeChange")
+		.add(m_iFavoriteCivicAttitudeDivisor, L"iFavoriteCivicAttitudeDivisor")
+		.add(m_iFavoriteCivicAttitudeChangeLimit, L"iFavoriteCivicAttitudeChangeLimit")
+		.addEnumAsInt(m_iDemandTributeAttitudeThreshold, L"DemandTributeAttitudeThreshold")
+		.addEnumAsInt(m_iNoGiveHelpAttitudeThreshold, L"NoGiveHelpAttitudeThreshold")
+		.addEnumAsInt(m_iTechRefuseAttitudeThreshold, L"TechRefuseAttitudeThreshold")
+		.addEnumAsInt(m_iStrategicBonusRefuseAttitudeThreshold, L"StrategicBonusRefuseAttitudeThreshold")
+		.addEnumAsInt(m_iHappinessBonusRefuseAttitudeThreshold, L"HappinessBonusRefuseAttitudeThreshold")
+		.addEnumAsInt(m_iHealthBonusRefuseAttitudeThreshold, L"HealthBonusRefuseAttitudeThreshold")
+		.addEnumAsInt(m_iMapRefuseAttitudeThreshold, L"MapRefuseAttitudeThreshold")
+		.addEnumAsInt(m_iDeclareWarRefuseAttitudeThreshold, L"DeclareWarRefuseAttitudeThreshold")
+		.addEnumAsInt(m_iDeclareWarThemRefuseAttitudeThreshold, L"DeclareWarThemRefuseAttitudeThreshold")
+		.addEnumAsInt(m_iStopTradingRefuseAttitudeThreshold, L"StopTradingRefuseAttitudeThreshold")
+		.addEnumAsInt(m_iStopTradingThemRefuseAttitudeThreshold, L"StopTradingThemRefuseAttitudeThreshold")
+		.addEnumAsInt(m_iAdoptCivicRefuseAttitudeThreshold, L"AdoptCivicRefuseAttitudeThreshold")
+		.addEnumAsInt(m_iConvertReligionRefuseAttitudeThreshold, L"ConvertReligionRefuseAttitudeThreshold")
+		.addEnumAsInt(m_iOpenBordersRefuseAttitudeThreshold, L"OpenBordersRefuseAttitudeThreshold")
+		.addEnumAsInt(m_iDefensivePactRefuseAttitudeThreshold, L"DefensivePactRefuseAttitudeThreshold")
+		.addEnumAsInt(m_iPermanentAllianceRefuseAttitudeThreshold, L"PermanentAllianceRefuseAttitudeThreshold")
+		.addEnumAsInt(m_iVassalRefuseAttitudeThreshold, L"VassalRefuseAttitudeThreshold")
+		.add(m_iVassalPowerModifier, L"iVassalPowerModifier")
+		.add(m_iFreedomAppreciation, L"iFreedomAppreciation")
+		.addEnumAsInt(m_iFavoriteCivic, L"FavoriteCivic")
+		.addEnumAsInt(m_iFavoriteReligion, L"FavoriteReligion")
+		.add(m_aeTraits, L"Traits")
+		.add(m_aiDefaultTraits, L"DefaultTraits")
+		.add(m_aiDefaultComplexTraits, L"DefaultComplexTraits")
+	;
+}
+
+
 bool CvLeaderHeadInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
+	CvInfoUtil(this).readXml(pXML);
+
 	if (!m_piMemoryDecayRand)
 	{
 		CvXMLLoadUtility::InitList(&m_piMemoryDecayRand, NUM_MEMORY_TYPES, 0);
@@ -966,126 +996,11 @@ bool CvLeaderHeadInfo::read(CvXMLLoadUtility* pXML)
 	}
 	CvString szTextVal;
 
+	// Hand-written remainder — see getDataMembers() for why each group stays manual:
+	// the art tag (must merge pre-base-copy), the SetVariableListTagPair fixed-length keyed
+	// arrays (no wrapper), the audio-script arrays (runtime audio-tag resolution), and the
+	// four attitude thresholds with non-(-1) string defaults (addEnumAsInt is -1-default only).
 	pXML->GetOptionalChildXmlValByName(m_szArtDefineTag, L"ArtDefineTag");
-	pXML->GetOptionalChildXmlValByName(&m_bNPC, L"bNPC");
-	pXML->GetOptionalChildXmlValByName(&m_iWonderConstructRand, L"iWonderConstructRand");
-	pXML->GetOptionalChildXmlValByName(&m_iBaseAttitude, L"iBaseAttitude");
-	pXML->GetOptionalChildXmlValByName(&m_iBasePeaceWeight, L"iBasePeaceWeight");
-	pXML->GetOptionalChildXmlValByName(&m_iPeaceWeightRand, L"iPeaceWeightRand");
-	pXML->GetOptionalChildXmlValByName(&m_iWarmongerRespect, L"iWarmongerRespect");
-	pXML->GetOptionalChildXmlValByName(&m_iEspionageWeight, L"iEspionageWeight");
-	pXML->GetOptionalChildXmlValByName(&m_iRefuseToTalkWarThreshold, L"iRefuseToTalkWarThreshold");
-	pXML->GetOptionalChildXmlValByName(&m_iNoTechTradeThreshold, L"iNoTechTradeThreshold");
-	pXML->GetOptionalChildXmlValByName(&m_iTechTradeKnownPercent, L"iTechTradeKnownPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxGoldTradePercent, L"iMaxGoldTradePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxGoldPerTurnTradePercent, L"iMaxGoldPerTurnTradePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iCultureVictoryWeight, L"iCultureVictoryWeight");
-	pXML->GetOptionalChildXmlValByName(&m_iSpaceVictoryWeight, L"iSpaceVictoryWeight");
-	pXML->GetOptionalChildXmlValByName(&m_iConquestVictoryWeight, L"iConquestVictoryWeight");
-	pXML->GetOptionalChildXmlValByName(&m_iDominationVictoryWeight, L"iDominationVictoryWeight");
-	pXML->GetOptionalChildXmlValByName(&m_iDiplomacyVictoryWeight, L"iDiplomacyVictoryWeight");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxWarRand, L"iMaxWarRand");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxWarNearbyPowerRatio, L"iMaxWarNearbyPowerRatio");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxWarDistantPowerRatio, L"iMaxWarDistantPowerRatio");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxWarMinAdjacentLandPercent, L"iMaxWarMinAdjacentLandPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iLimitedWarRand, L"iLimitedWarRand");
-	pXML->GetOptionalChildXmlValByName(&m_iLimitedWarPowerRatio, L"iLimitedWarPowerRatio");
-	pXML->GetOptionalChildXmlValByName(&m_iDogpileWarRand, L"iDogpileWarRand");
-	pXML->GetOptionalChildXmlValByName(&m_iMakePeaceRand, L"iMakePeaceRand");
-	pXML->GetOptionalChildXmlValByName(&m_iDeclareWarTradeRand, L"iDeclareWarTradeRand");
-	pXML->GetOptionalChildXmlValByName(&m_iDemandRebukedSneakProb, L"iDemandRebukedSneakProb");
-	pXML->GetOptionalChildXmlValByName(&m_iDemandRebukedWarProb, L"iDemandRebukedWarProb");
-	pXML->GetOptionalChildXmlValByName(&m_iRazeCityProb, L"iRazeCityProb");
-	pXML->GetOptionalChildXmlValByName(&m_iBuildUnitProb, L"iBuildUnitProb");
-	pXML->GetOptionalChildXmlValByName(&m_iBaseAttackOddsChange, L"iBaseAttackOddsChange");
-	pXML->GetOptionalChildXmlValByName(&m_iAttackOddsChangeRand, L"iAttackOddsChangeRand");
-	pXML->GetOptionalChildXmlValByName(&m_iWorseRankDifferenceAttitudeChange, L"iWorseRankDifferenceAttitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_iBetterRankDifferenceAttitudeChange, L"iBetterRankDifferenceAttitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCloseBordersAttitudeChange, L"iCloseBordersAttitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_iLostWarAttitudeChange, L"iLostWarAttitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_iAtWarAttitudeDivisor, L"iAtWarAttitudeDivisor");
-	pXML->GetOptionalChildXmlValByName(&m_iAtWarAttitudeChangeLimit, L"iAtWarAttitudeChangeLimit");
-	pXML->GetOptionalChildXmlValByName(&m_iAtPeaceAttitudeDivisor, L"iAtPeaceAttitudeDivisor");
-	pXML->GetOptionalChildXmlValByName(&m_iAtPeaceAttitudeChangeLimit, L"iAtPeaceAttitudeChangeLimit");
-	pXML->GetOptionalChildXmlValByName(&m_iSameReligionAttitudeChange, L"iSameReligionAttitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_iSameReligionAttitudeDivisor, L"iSameReligionAttitudeDivisor");
-	pXML->GetOptionalChildXmlValByName(&m_iSameReligionAttitudeChangeLimit, L"iSameReligionAttitudeChangeLimit");
-	pXML->GetOptionalChildXmlValByName(&m_iDifferentReligionAttitudeChange, L"iDifferentReligionAttitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_iDifferentReligionAttitudeDivisor, L"iDifferentReligionAttitudeDivisor");
-	pXML->GetOptionalChildXmlValByName(&m_iDifferentReligionAttitudeChangeLimit, L"iDifferentReligionAttitudeChangeLimit");
-	pXML->GetOptionalChildXmlValByName(&m_iBonusTradeAttitudeDivisor, L"iBonusTradeAttitudeDivisor");
-	pXML->GetOptionalChildXmlValByName(&m_iBonusTradeAttitudeChangeLimit, L"iBonusTradeAttitudeChangeLimit");
-	pXML->GetOptionalChildXmlValByName(&m_iOpenBordersAttitudeDivisor, L"iOpenBordersAttitudeDivisor");
-	pXML->GetOptionalChildXmlValByName(&m_iOpenBordersAttitudeChangeLimit, L"iOpenBordersAttitudeChangeLimit");
-	pXML->GetOptionalChildXmlValByName(&m_iDefensivePactAttitudeDivisor, L"iDefensivePactAttitudeDivisor");
-	pXML->GetOptionalChildXmlValByName(&m_iDefensivePactAttitudeChangeLimit, L"iDefensivePactAttitudeChangeLimit");
-	pXML->GetOptionalChildXmlValByName(&m_iShareWarAttitudeChange, L"iShareWarAttitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_iShareWarAttitudeDivisor, L"iShareWarAttitudeDivisor");
-	pXML->GetOptionalChildXmlValByName(&m_iShareWarAttitudeChangeLimit, L"iShareWarAttitudeChangeLimit");
-	pXML->GetOptionalChildXmlValByName(&m_iFavoriteCivicAttitudeChange, L"iFavoriteCivicAttitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_iFavoriteCivicAttitudeDivisor, L"iFavoriteCivicAttitudeDivisor");
-	pXML->GetOptionalChildXmlValByName(&m_iFavoriteCivicAttitudeChangeLimit, L"iFavoriteCivicAttitudeChangeLimit");
-	pXML->GetOptionalChildXmlValByName(&m_iVassalPowerModifier, L"iVassalPowerModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iFreedomAppreciation, L"iFreedomAppreciation");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"DemandTributeAttitudeThreshold");
-	m_iDemandTributeAttitudeThreshold = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"NoGiveHelpAttitudeThreshold");
-	m_iNoGiveHelpAttitudeThreshold = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"TechRefuseAttitudeThreshold");
-	m_iTechRefuseAttitudeThreshold = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"StrategicBonusRefuseAttitudeThreshold");
-	m_iStrategicBonusRefuseAttitudeThreshold = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"HappinessBonusRefuseAttitudeThreshold");
-	m_iHappinessBonusRefuseAttitudeThreshold = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"HealthBonusRefuseAttitudeThreshold");
-	m_iHealthBonusRefuseAttitudeThreshold = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"MapRefuseAttitudeThreshold");
-	m_iMapRefuseAttitudeThreshold = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"DeclareWarRefuseAttitudeThreshold");
-	m_iDeclareWarRefuseAttitudeThreshold = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"DeclareWarThemRefuseAttitudeThreshold");
-	m_iDeclareWarThemRefuseAttitudeThreshold = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"StopTradingRefuseAttitudeThreshold");
-	m_iStopTradingRefuseAttitudeThreshold = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"StopTradingThemRefuseAttitudeThreshold");
-	m_iStopTradingThemRefuseAttitudeThreshold = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"AdoptCivicRefuseAttitudeThreshold");
-	m_iAdoptCivicRefuseAttitudeThreshold = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"ConvertReligionRefuseAttitudeThreshold");
-	m_iConvertReligionRefuseAttitudeThreshold = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"OpenBordersRefuseAttitudeThreshold");
-	m_iOpenBordersRefuseAttitudeThreshold = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"DefensivePactRefuseAttitudeThreshold");
-	m_iDefensivePactRefuseAttitudeThreshold = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PermanentAllianceRefuseAttitudeThreshold");
-	m_iPermanentAllianceRefuseAttitudeThreshold = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"VassalRefuseAttitudeThreshold");
-	m_iVassalRefuseAttitudeThreshold = pXML->GetInfoClass( szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"FavoriteCivic");
-	m_iFavoriteCivic = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"FavoriteReligion");
-	m_iFavoriteReligion = pXML->GetInfoClass(szTextVal);
-
-	pXML->SetOptionalVector(&m_aeTraits, L"Traits");
 
 	pXML->SetVariableListTagPair(&m_piFlavorValue, L"Flavors", GC.getNumFlavorTypes());
 	pXML->SetVariableListTagPair(&m_piContactRand, L"ContactRands", NUM_CONTACT_TYPES);
@@ -1112,10 +1027,6 @@ bool CvLeaderHeadInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"SecretaryGeneralVoteRefuseAttitudeThreshold", "ATTITUDE_ANNOYED");
 	m_iSecretaryGeneralVoteRefuseAttitudeThreshold = pXML->GetInfoClass(szTextVal);
 
-	//Int list Vector without delayed resolution
-	pXML->SetOptionalVector(&m_aiDefaultTraits, L"DefaultTraits");
-	pXML->SetOptionalVector(&m_aiDefaultComplexTraits, L"DefaultComplexTraits");
-
 	setDefaultMemoryInfo();
 	setDefaultContactInfo();
 
@@ -1128,88 +1039,14 @@ void CvLeaderHeadInfo::copyNonDefaults(const CvLeaderHeadInfo* pClassInfo)
 	PROFILE_EXTRA_FUNC();
 	CvString cDefault = CvString::format("").GetCString();
 
-	//Art files must be reread first!
+	// Art files must be reread first! CvInfoBase::copyNonDefaults calls the virtual getButton(),
+	// which resolves through this class's getArtDefineTag(), so the art tag must be merged
+	// before the base copy — which is why it is not declared in getDataMembers().
 	if (getArtDefineTag() == cDefault) m_szArtDefineTag = pClassInfo->getArtDefineTag();
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (!isNPC()) m_bNPC = pClassInfo->isNPC();
-	if (getWonderConstructRand() == 0) m_iWonderConstructRand = pClassInfo->getWonderConstructRand();
-	if (getBaseAttitude() == 0) m_iBaseAttitude = pClassInfo->getBaseAttitude();
-	if (getBasePeaceWeight() == 0) m_iBasePeaceWeight = pClassInfo->getBasePeaceWeight();
-	if (getPeaceWeightRand() == 0) m_iPeaceWeightRand = pClassInfo->getPeaceWeightRand();
-	if (getWarmongerRespect() == 0) m_iWarmongerRespect = pClassInfo->getWarmongerRespect();
-	if (getEspionageWeight() == 0) m_iEspionageWeight = pClassInfo->getEspionageWeight();
-	if (getRefuseToTalkWarThreshold() == 0) m_iRefuseToTalkWarThreshold = pClassInfo->getRefuseToTalkWarThreshold();
-	if (getNoTechTradeThreshold() == 0) m_iNoTechTradeThreshold = pClassInfo->getNoTechTradeThreshold();
-	if (getTechTradeKnownPercent() == 0) m_iTechTradeKnownPercent = pClassInfo->getTechTradeKnownPercent();
-	if (getMaxGoldTradePercent() == 0) m_iMaxGoldTradePercent = pClassInfo->getMaxGoldTradePercent();
-	if (getMaxGoldPerTurnTradePercent() == 0) m_iMaxGoldPerTurnTradePercent = pClassInfo->getMaxGoldPerTurnTradePercent();
-	if (getMaxWarRand() == 0) m_iMaxWarRand = pClassInfo->getMaxWarRand();
-	if (getMaxWarNearbyPowerRatio() == 0) m_iMaxWarNearbyPowerRatio = pClassInfo->getMaxWarNearbyPowerRatio();
-	if (getMaxWarDistantPowerRatio() == 0) m_iMaxWarDistantPowerRatio = pClassInfo->getMaxWarDistantPowerRatio();
-	if (getMaxWarMinAdjacentLandPercent() == 0) m_iMaxWarMinAdjacentLandPercent = pClassInfo->getMaxWarMinAdjacentLandPercent();
-	if (getLimitedWarRand() == 0) m_iLimitedWarRand = pClassInfo->getLimitedWarRand();
-	if (getLimitedWarPowerRatio() == 0) m_iLimitedWarPowerRatio = pClassInfo->getLimitedWarPowerRatio();
-	if (getDogpileWarRand() == 0) m_iDogpileWarRand = pClassInfo->getDogpileWarRand();
-	if (getMakePeaceRand() == 0) m_iMakePeaceRand = pClassInfo->getMakePeaceRand();
-	if (getDeclareWarTradeRand() == 0) m_iDeclareWarTradeRand = pClassInfo->getDeclareWarTradeRand();
-	if (getDemandRebukedSneakProb() == 0) m_iDemandRebukedSneakProb = pClassInfo->getDemandRebukedSneakProb();
-	if (getDemandRebukedWarProb() == 0) m_iDemandRebukedWarProb = pClassInfo->getDemandRebukedWarProb();
-	if (getRazeCityProb() == 0) m_iRazeCityProb = pClassInfo->getRazeCityProb();
-	if (getBuildUnitProb() == 0) m_iBuildUnitProb = pClassInfo->getBuildUnitProb();
-	if (getBaseAttackOddsChange() == 0) m_iBaseAttackOddsChange = pClassInfo->getBaseAttackOddsChange();
-	if (getAttackOddsChangeRand() == 0) m_iAttackOddsChangeRand = pClassInfo->getAttackOddsChangeRand();
-	if (getWorseRankDifferenceAttitudeChange() == 0) m_iWorseRankDifferenceAttitudeChange = pClassInfo->getWorseRankDifferenceAttitudeChange();
-	if (getBetterRankDifferenceAttitudeChange() == 0) m_iBetterRankDifferenceAttitudeChange = pClassInfo->getBetterRankDifferenceAttitudeChange();
-	if (getCloseBordersAttitudeChange() == 0) m_iCloseBordersAttitudeChange = pClassInfo->getCloseBordersAttitudeChange();
-	if (getLostWarAttitudeChange() == 0) m_iLostWarAttitudeChange = pClassInfo->getLostWarAttitudeChange();
-	if (getAtWarAttitudeDivisor() == 0) m_iAtWarAttitudeDivisor = pClassInfo->getAtWarAttitudeDivisor();
-	if (getAtWarAttitudeChangeLimit() == 0) m_iAtWarAttitudeChangeLimit = pClassInfo->getAtWarAttitudeChangeLimit();
-	if (getAtPeaceAttitudeDivisor() == 0) m_iAtPeaceAttitudeDivisor = pClassInfo->getAtPeaceAttitudeDivisor();
-	if (getAtPeaceAttitudeChangeLimit() == 0) m_iAtPeaceAttitudeChangeLimit = pClassInfo->getAtPeaceAttitudeChangeLimit();
-	if (getSameReligionAttitudeChange() == 0) m_iSameReligionAttitudeChange = pClassInfo->getSameReligionAttitudeChange();
-	if (getSameReligionAttitudeDivisor() == 0) m_iSameReligionAttitudeDivisor = pClassInfo->getSameReligionAttitudeDivisor();
-	if (getSameReligionAttitudeChangeLimit() == 0) m_iSameReligionAttitudeChangeLimit = pClassInfo->getSameReligionAttitudeChangeLimit();
-	if (getDifferentReligionAttitudeChange() == 0) m_iDifferentReligionAttitudeChange = pClassInfo->getDifferentReligionAttitudeChange();
-	if (getDifferentReligionAttitudeDivisor() == 0) m_iDifferentReligionAttitudeDivisor = pClassInfo->getDifferentReligionAttitudeDivisor();
-	if (getDifferentReligionAttitudeChangeLimit() == 0) m_iDifferentReligionAttitudeChangeLimit = pClassInfo->getDifferentReligionAttitudeChangeLimit();
-	if (getBonusTradeAttitudeDivisor() == 0) m_iBonusTradeAttitudeDivisor = pClassInfo->getBonusTradeAttitudeDivisor();
-	if (getBonusTradeAttitudeChangeLimit() == 0) m_iBonusTradeAttitudeChangeLimit = pClassInfo->getBonusTradeAttitudeChangeLimit();
-	if (getOpenBordersAttitudeDivisor() == 0) m_iOpenBordersAttitudeDivisor = pClassInfo->getOpenBordersAttitudeDivisor();
-	if (getOpenBordersAttitudeChangeLimit() == 0) m_iOpenBordersAttitudeChangeLimit = pClassInfo->getOpenBordersAttitudeChangeLimit();
-	if (getDefensivePactAttitudeDivisor() == 0) m_iDefensivePactAttitudeDivisor = pClassInfo->getDefensivePactAttitudeDivisor();
-	if (getDefensivePactAttitudeChangeLimit() == 0) m_iDefensivePactAttitudeChangeLimit = pClassInfo->getDefensivePactAttitudeChangeLimit();
-	if (getShareWarAttitudeChange() == 0) m_iShareWarAttitudeChange = pClassInfo->getShareWarAttitudeChange();
-	if (getShareWarAttitudeDivisor() == 0) m_iShareWarAttitudeDivisor = pClassInfo->getShareWarAttitudeDivisor();
-	if (getShareWarAttitudeChangeLimit() == 0) m_iShareWarAttitudeChangeLimit = pClassInfo->getShareWarAttitudeChangeLimit();
-	if (getFavoriteCivicAttitudeChange() == 0) m_iFavoriteCivicAttitudeChange = pClassInfo->getFavoriteCivicAttitudeChange();
-	if (getFavoriteCivicAttitudeDivisor() == 0) m_iFavoriteCivicAttitudeDivisor = pClassInfo->getFavoriteCivicAttitudeDivisor();
-	if (getFavoriteCivicAttitudeChangeLimit() == 0) m_iFavoriteCivicAttitudeChangeLimit = pClassInfo->getFavoriteCivicAttitudeChangeLimit();
-	if (getVassalPowerModifier() == 0) m_iVassalPowerModifier = pClassInfo->getVassalPowerModifier();
-	if (getFreedomAppreciation() == 0) m_iFreedomAppreciation = pClassInfo->getFreedomAppreciation();
-
-	if (getDemandTributeAttitudeThreshold() == -1) m_iDemandTributeAttitudeThreshold = pClassInfo->getDemandTributeAttitudeThreshold();
-	if (getNoGiveHelpAttitudeThreshold() == -1) m_iNoGiveHelpAttitudeThreshold = pClassInfo->getNoGiveHelpAttitudeThreshold();
-	if (getTechRefuseAttitudeThreshold() == -1) m_iTechRefuseAttitudeThreshold = pClassInfo->getTechRefuseAttitudeThreshold();
-	if (getStrategicBonusRefuseAttitudeThreshold() == -1) m_iStrategicBonusRefuseAttitudeThreshold = pClassInfo->getStrategicBonusRefuseAttitudeThreshold();
-	if (getHappinessBonusRefuseAttitudeThreshold() == -1) m_iHappinessBonusRefuseAttitudeThreshold = pClassInfo->getHappinessBonusRefuseAttitudeThreshold();
-	if (getHealthBonusRefuseAttitudeThreshold() == -1) m_iHealthBonusRefuseAttitudeThreshold = pClassInfo->getHealthBonusRefuseAttitudeThreshold();
-	if (getMapRefuseAttitudeThreshold() == -1) m_iMapRefuseAttitudeThreshold = pClassInfo->getMapRefuseAttitudeThreshold();
-	if (getDeclareWarRefuseAttitudeThreshold() == -1) m_iDeclareWarRefuseAttitudeThreshold = pClassInfo->getDeclareWarRefuseAttitudeThreshold();
-	if (getDeclareWarThemRefuseAttitudeThreshold() == -1) m_iDeclareWarThemRefuseAttitudeThreshold = pClassInfo->getDeclareWarThemRefuseAttitudeThreshold();
-	if (getStopTradingRefuseAttitudeThreshold() == -1) m_iStopTradingRefuseAttitudeThreshold = pClassInfo->getStopTradingRefuseAttitudeThreshold();
-	if (getStopTradingThemRefuseAttitudeThreshold() == -1) m_iStopTradingThemRefuseAttitudeThreshold = pClassInfo->getStopTradingThemRefuseAttitudeThreshold();
-	if (getAdoptCivicRefuseAttitudeThreshold() == -1) m_iAdoptCivicRefuseAttitudeThreshold = pClassInfo->getAdoptCivicRefuseAttitudeThreshold();
-	if (getConvertReligionRefuseAttitudeThreshold() == -1) m_iConvertReligionRefuseAttitudeThreshold = pClassInfo->getConvertReligionRefuseAttitudeThreshold();
-	if (getOpenBordersRefuseAttitudeThreshold() == -1) m_iOpenBordersRefuseAttitudeThreshold = pClassInfo->getOpenBordersRefuseAttitudeThreshold();
-	if (getDefensivePactRefuseAttitudeThreshold() == -1) m_iDefensivePactRefuseAttitudeThreshold = pClassInfo->getDefensivePactRefuseAttitudeThreshold();
-	if (getPermanentAllianceRefuseAttitudeThreshold() == -1) m_iPermanentAllianceRefuseAttitudeThreshold = pClassInfo->getPermanentAllianceRefuseAttitudeThreshold();
-	if (getVassalRefuseAttitudeThreshold() == -1) m_iVassalRefuseAttitudeThreshold = pClassInfo->getVassalRefuseAttitudeThreshold();
-	if (getFavoriteCivic() == -1) m_iFavoriteCivic = pClassInfo->getFavoriteCivic();
-	if (getFavoriteReligion() == -1) m_iFavoriteReligion = pClassInfo->getFavoriteReligion();
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeTraits, pClassInfo->m_aeTraits);
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	for (int j = 0; j < GC.getNumFlavorTypes(); j++)
 	{
@@ -1318,15 +1155,6 @@ void CvLeaderHeadInfo::copyNonDefaults(const CvLeaderHeadInfo* pClassInfo)
 	if (getWorkerRefuseAttitudeThreshold() == ATTITUDE_ANNOYED) m_iWorkerRefuseAttitudeThreshold = pClassInfo->getWorkerRefuseAttitudeThreshold();
 	if (getCorporationRefuseAttitudeThreshold() == ATTITUDE_CAUTIOUS) m_iCorporationRefuseAttitudeThreshold = pClassInfo->getCorporationRefuseAttitudeThreshold();
 	if (getSecretaryGeneralVoteRefuseAttitudeThreshold() == ATTITUDE_ANNOYED) m_iSecretaryGeneralVoteRefuseAttitudeThreshold = pClassInfo->getSecretaryGeneralVoteRefuseAttitudeThreshold();
-	if (getCultureVictoryWeight() == 0) m_iCultureVictoryWeight = pClassInfo->getCultureVictoryWeight();
-	if (getSpaceVictoryWeight() == 0) m_iSpaceVictoryWeight = pClassInfo->getSpaceVictoryWeight();
-	if (getConquestVictoryWeight() == 0) m_iConquestVictoryWeight = pClassInfo->getConquestVictoryWeight();
-	if (getDominationVictoryWeight() == 0) m_iDominationVictoryWeight = pClassInfo->getDominationVictoryWeight();
-	if (getDiplomacyVictoryWeight() == 0) m_iDiplomacyVictoryWeight = pClassInfo->getDiplomacyVictoryWeight();
-
-	//Int list Vector without delayed resolution
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiDefaultTraits, pClassInfo->m_aiDefaultTraits);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiDefaultComplexTraits, pClassInfo->m_aiDefaultComplexTraits);
 }
 
 

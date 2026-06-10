@@ -1,6 +1,7 @@
 #include "CvGameCoreDLL.h"
 #include "CvUnitCombatInfo.h"
 #include "CvGameAI.h"
+#include "CvInfoUtil.h"
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
@@ -11,155 +12,21 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 CvUnitCombatInfo::CvUnitCombatInfo()
-	//Textual References
-	: m_eReligion(NO_RELIGION)
-	, m_eCulture(NO_BONUS)
-	, m_eEra(NO_ERA)
-	//Integers
-	, m_iVisibilityChange(0)
-	, m_iMovesChange(0)
-	, m_iMoveDiscountChange(0)
-	, m_iAirRangeChange(0)
-	, m_iInterceptChange(0)
-	, m_iEvasionChange(0)
-	, m_iWithdrawalChange(0)
-	, m_iCargoChange(0)
-	, m_iSMCargoChange(0)
-	, m_iSMCargoVolumeChange(0)
-	, m_iSMCargoVolumeModifierChange(0)
-	, m_iCollateralDamageChange(0)
-	, m_iBombardRateChange(0)
-	, m_iFirstStrikesChange(0)
-	, m_iChanceFirstStrikesChange(0)
-	, m_iEnemyHealChange(0)
-	, m_iNeutralHealChange(0)
-	, m_iFriendlyHealChange(0)
-	, m_iSameTileHealChange(0)
-	, m_iAdjacentTileHealChange(0)
-	, m_iCombatPercent(0)
-	, m_iCityAttackPercent(0)
-	, m_iCityDefensePercent(0)
-	, m_iHillsAttackPercent(0)
-	, m_iHillsDefensePercent(0)
-	, m_iHillsWorkPercent(0)
-	, m_iPeaksWorkPercent(0)
-	, m_iWorkRatePercent(0)
-	, m_iRevoltProtection(0)
-	, m_iCollateralDamageProtection(0)
-	, m_iPillageChange(0)
-	, m_iUpgradeDiscount(0)
-	, m_iExperiencePercent(0)
-	, m_iKamikazePercent(0)
-	, m_iAirCombatLimitChange(0)
-	, m_iCelebrityHappy(0)
-	, m_iCollateralDamageLimitChange(0)
-	, m_iCollateralDamageMaxUnitsChange(0)
-	, m_iCombatLimitChange(0)
-	, m_iExtraDropRange(0)
-	, m_iSurvivorChance(0)
-	, m_iVictoryAdjacentHeal(0)
-	, m_iVictoryHeal(0)
-	, m_iVictoryStackHeal(0)
-	, m_iAttackCombatModifierChange(0)
-	, m_iDefenseCombatModifierChange(0)
-	, m_iVSBarbsChange(0)
-	, m_iUnnerveChange(0)
-	, m_iEncloseChange(0)
-	, m_iLungeChange(0)
-	, m_iDynamicDefenseChange(0)
-	, m_iStrengthChange(0)
-	, m_iEnduranceChange(0)
-	, m_iPoisonProbabilityModifierChange(0)
-	, m_iCaptureProbabilityModifierChange(0)
-	, m_iCaptureResistanceModifierChange(0)
-	, m_iBreakdownChanceChange(0)
-	, m_iBreakdownDamageChange(0)
-	, m_iTauntChange(0)
-	, m_iMaxHPChange(0)
-	, m_iStrengthModifier(0)
-	, m_iQualityBase(-10)
-	, m_iGroupBase(-10)
-	, m_iSizeBase(-10)
-	, m_iDamageModifierChange(0)
-	, m_iUpkeepModifier(0)
-	, m_iExtraUpkeep100(0)
-	, m_iRBombardDamageBase(0)
-	, m_iRBombardDamageLimitBase(0)
-	, m_iRBombardDamageMaxUnitsBase(0)
-	, m_iDCMBombRangeBase(0)
-	, m_iDCMBombAccuracyBase(0)
-	, m_iCombatModifierPerSizeMoreChange(0)
-	, m_iCombatModifierPerSizeLessChange(0)
-	, m_iCombatModifierPerVolumeMoreChange(0)
-	, m_iCombatModifierPerVolumeLessChange(0)
-	, m_iSelfHealModifier(0)
-	, m_iNumHealSupport(0)
-	, m_iExcileChange(0)
-	, m_iPassageChange(0)
-	, m_iNoNonOwnedCityEntryChange(0)
-	, m_iBarbCoExistChange(0)
-	, m_iBlendIntoCityChange(0)
-	, m_iInsidiousnessChange(0)
-	, m_iInvestigationChange(0)
-	, m_iStealthStrikesChange(0)
-	, m_iStealthCombatModifierChange(0)
-	, m_iStealthDefenseChange(0)
-	, m_iDefenseOnlyChange(0)
-	, m_iNoInvisibilityChange(0)
-	, m_iNoCaptureChange(0)
-	, m_iAnimalIgnoresBordersChange(0)
-	, m_iNoDefensiveBonusChange(0)
-	, m_iGatherHerdChange(0)
-	, m_iReligiousCombatModifierChange(0)
-	//Booleans
-	, m_bDefensiveVictoryMove(false)
-	, m_bFreeDrop(false)
-	, m_bOffensiveVictoryMove(false)
-	, m_bOneUp(false)
-	, m_bPillageEspionage(false)
-	, m_bPillageMarauder(false)
-	, m_bPillageOnMove(false)
-	, m_bPillageOnVictory(false)
-	, m_bPillageResearch(false)
-	, m_bBlitz(false)
-	, m_bAmphib(false)
-	, m_bRiver(false)
-	, m_bEnemyRoute(false)
-	, m_bAlwaysHeal(false)
-	, m_bHillsDoubleMove(false)
-	, m_bImmuneToFirstStrikes(false)
-	, m_bStampedeChange(false)
-	, m_bRemoveStampede(false)
-	, m_bOnslaughtChange(false)
-	, m_bAttackOnlyCitiesAdd(false)
-	, m_bAttackOnlyCitiesSubtract(false)
-	, m_bIgnoreNoEntryLevelAdd(false)
-	, m_bIgnoreNoEntryLevelSubtract(false)
-	, m_bIgnoreZoneofControlAdd(false)
-	, m_bIgnoreZoneofControlSubtract(false)
-	, m_bFliesToMoveAdd(false)
-	, m_bFliesToMoveSubtract(false)
-	, m_bCanMovePeaks(false)
-	, m_bCanLeadThroughPeaks(false)
-	, m_bZoneOfControl(false)
-	, m_bSpy(false)
-	, m_bCannotMergeSplit(false)
-	, m_bRBombardDirect(false)
-	, m_bRBombardForceAbility(false)
-	, m_bInvisible(false)
-	, m_bForMilitary(false)
-	, m_bForNavalMilitary(false)
-	, m_bHealsAs(false)
-	, m_bNoSelfHeal(false)
-	, m_piDomainModifierPercent(NULL)
-	, m_PropertyManipulators()
+	: m_piDomainModifierPercent(NULL)
 {
+	CvInfoUtil(this).initDataMembers();
+
+	// Non-XML runtime field; never read, copied or checksummed.
 	m_zobristValue = GC.getGame().getSorenRand().getInt();
 }
 
 CvUnitCombatInfo::~CvUnitCombatInfo()
 {
 	PROFILE_EXTRA_FUNC();
+	// Clears any pending delayed-resolution entries registered by the declared FK wrappers
+	// (addEnum may pick the delayed path depending on XML load order).
+	CvInfoUtil(this).uninitDataMembers();
+
 	SAFE_DELETE_ARRAY(m_piDomainModifierPercent);
 
 	foreach_(const CvOutcomeMission* outcomeMission, m_aOutcomeMissions)
@@ -1395,6 +1262,171 @@ const InvisibleImprovementChanges& CvUnitCombatInfo::getVisibleImprovementRangeC
 	return m_aVisibleImprovementRangeChanges[iIndex];
 }
 
+void CvUnitCombatInfo::getDataMembers(CvInfoUtil& util)
+{
+	// HYBRID migration (#196/#302): every wrapper-expressible field is declared here; the
+	// remainder stays hand-written in read()/copyNonDefaults() (see the notes there).
+	// getCheckSum is kept fully explicit/legacy (NOT delegated to CvInfoUtil): the legacy hash
+	// leads with the hand-written outcome lists, deliberately omits m_bZoneOfControl, and
+	// interleaves the hand-written arrays/pair-vectors/struct-vectors mid-order.
+	// Declarations follow the legacy checksum order anyway, for readability.
+	util
+		// Textual references
+		.addEnum(m_eReligion, L"ReligionType")
+		.addEnum(m_eCulture, L"CultureType")
+		.addEnum(m_eEra, L"EraType")
+		// Integers
+		.add(m_iVisibilityChange, L"iVisibilityChange")
+		.add(m_iMovesChange, L"iMovesChange")
+		.add(m_iMoveDiscountChange, L"iMoveDiscountChange")
+		.add(m_iAirRangeChange, L"iAirRangeChange")
+		.add(m_iInterceptChange, L"iInterceptChange")
+		.add(m_iEvasionChange, L"iEvasionChange")
+		.add(m_iWithdrawalChange, L"iWithdrawalChange")
+		.add(m_iCargoChange, L"iCargoChange")
+		.add(m_iSMCargoChange, L"iSMCargoChange")
+		.add(m_iSMCargoVolumeChange, L"iSMCargoVolumeChange")
+		.add(m_iSMCargoVolumeModifierChange, L"iSMCargoVolumeModifierChange")
+		.add(m_iCollateralDamageChange, L"iCollateralDamageChange")
+		.add(m_iBombardRateChange, L"iBombardRateChange")
+		.add(m_iFirstStrikesChange, L"iFirstStrikesChange")
+		.add(m_iChanceFirstStrikesChange, L"iChanceFirstStrikesChange")
+		.add(m_iEnemyHealChange, L"iEnemyHealChange")
+		.add(m_iNeutralHealChange, L"iNeutralHealChange")
+		.add(m_iFriendlyHealChange, L"iFriendlyHealChange")
+		.add(m_iSameTileHealChange, L"iSameTileHealChange")
+		.add(m_iAdjacentTileHealChange, L"iAdjacentTileHealChange")
+		.add(m_iCombatPercent, L"iCombatPercent")
+		.add(m_iCityAttackPercent, L"iCityAttack")
+		.add(m_iCityDefensePercent, L"iCityDefense")
+		.add(m_iHillsAttackPercent, L"iHillsAttack")
+		.add(m_iHillsDefensePercent, L"iHillsDefense")
+		.add(m_iHillsWorkPercent, L"iHillsWorkModifier")
+		.add(m_iPeaksWorkPercent, L"iPeaksWorkModifier")
+		.add(m_iWorkRatePercent, L"iWorkRateModifier")
+		.add(m_iRevoltProtection, L"iRevoltProtection")
+		.add(m_iCollateralDamageProtection, L"iCollateralDamageProtection")
+		.add(m_iPillageChange, L"iPillageChange")
+		.add(m_iUpgradeDiscount, L"iUpgradeDiscount")
+		.add(m_iExperiencePercent, L"iExperiencePercent")
+		.add(m_iKamikazePercent, L"iKamikazePercent")
+		.add(m_iAirCombatLimitChange, L"iAirCombatLimitChange")
+		.add(m_iCelebrityHappy, L"iCelebrityHappy")
+		.add(m_iCollateralDamageLimitChange, L"iCollateralDamageLimitChange")
+		.add(m_iCollateralDamageMaxUnitsChange, L"iCollateralDamageMaxUnitsChange")
+		.add(m_iCombatLimitChange, L"iCombatLimitChange")
+		.add(m_iExtraDropRange, L"iExtraDropRange")
+		.add(m_iSurvivorChance, L"iSurvivorChance")
+		.add(m_iVictoryAdjacentHeal, L"iVictoryAdjacentHeal")
+		.add(m_iVictoryHeal, L"iVictoryHeal")
+		.add(m_iVictoryStackHeal, L"iVictoryStackHeal")
+		.add(m_iAttackCombatModifierChange, L"iAttackCombatModifierChange")
+		.add(m_iDefenseCombatModifierChange, L"iDefenseCombatModifierChange")
+		.add(m_iVSBarbsChange, L"iVSBarbsChange")
+		.add(m_iUnnerveChange, L"iUnnerveChange")
+		.add(m_iEncloseChange, L"iEncloseChange")
+		.add(m_iLungeChange, L"iLungeChange")
+		.add(m_iDynamicDefenseChange, L"iDynamicDefenseChange")
+		.add(m_iStrengthChange, L"iStrengthChange")
+		.add(m_iEnduranceChange, L"iEnduranceChange")
+		.add(m_iPoisonProbabilityModifierChange, L"iPoisonProbabilityModifierChange")
+		.add(m_iCaptureProbabilityModifierChange, L"iCaptureProbabilityModifierChange")
+		.add(m_iCaptureResistanceModifierChange, L"iCaptureResistanceModifierChange")
+		.add(m_iBreakdownChanceChange, L"iBreakdownChanceChange")
+		.add(m_iBreakdownDamageChange, L"iBreakdownDamageChange")
+		.add(m_iTauntChange, L"iTauntChange")
+		.add(m_iMaxHPChange, L"iMaxHPChange")
+		.add(m_iStrengthModifier, L"iStrengthModifier")
+		.add(m_iQualityBase, L"iQualityBase", -10)
+		.add(m_iGroupBase, L"iGroupBase", -10)
+		.add(m_iSizeBase, L"iSizeBase", -10)
+		.add(m_iDamageModifierChange, L"iDamageModifierChange")
+		.add(m_iUpkeepModifier, L"iUpkeepModifier")
+		.add(m_iExtraUpkeep100, L"iExtraUpkeep100")
+		.add(m_iRBombardDamageBase, L"iRBombardDamageBase")
+		.add(m_iRBombardDamageLimitBase, L"iRBombardDamageLimitBase")
+		.add(m_iRBombardDamageMaxUnitsBase, L"iRBombardDamageMaxUnitsBase")
+		.add(m_iDCMBombRangeBase, L"iDCMBombRangeBase")
+		.add(m_iDCMBombAccuracyBase, L"iDCMBombAccuracyBase")
+		.add(m_iCombatModifierPerSizeMoreChange, L"iCombatModifierPerSizeMoreChange")
+		.add(m_iCombatModifierPerSizeLessChange, L"iCombatModifierPerSizeLessChange")
+		.add(m_iCombatModifierPerVolumeMoreChange, L"iCombatModifierPerVolumeMoreChange")
+		.add(m_iCombatModifierPerVolumeLessChange, L"iCombatModifierPerVolumeLessChange")
+		.add(m_iSelfHealModifier, L"iSelfHealModifier")
+		.add(m_iNumHealSupport, L"iNumHealSupport")
+		.add(m_iExcileChange, L"iExcileChange")
+		.add(m_iPassageChange, L"iPassageChange")
+		.add(m_iNoNonOwnedCityEntryChange, L"iNoNonOwnedCityEntryChange")
+		.add(m_iBarbCoExistChange, L"iBarbCoExistChange")
+		.add(m_iBlendIntoCityChange, L"iBlendIntoCityChange")
+		.add(m_iInsidiousnessChange, L"iInsidiousnessChange")
+		.add(m_iInvestigationChange, L"iInvestigationChange")
+		.add(m_iStealthStrikesChange, L"iStealthStrikesChange")
+		.add(m_iStealthCombatModifierChange, L"iStealthCombatModifierChange")
+		.add(m_iStealthDefenseChange, L"iStealthDefenseChange")
+		.add(m_iDefenseOnlyChange, L"iDefenseOnlyChange")
+		.add(m_iNoInvisibilityChange, L"iNoInvisibilityChange")
+		.add(m_iNoCaptureChange, L"iNoCaptureChange")
+		.add(m_iAnimalIgnoresBordersChange, L"iAnimalIgnoresBordersChange")
+		.add(m_iNoDefensiveBonusChange, L"iNoDefensiveBonusChange")
+		.add(m_iGatherHerdChange, L"iGatherHerdChange")
+		.add(m_iReligiousCombatModifierChange, L"iReligiousCombatModifierChange")
+		// Booleans
+		.add(m_bDefensiveVictoryMove, L"bDefensiveVictoryMove")
+		.add(m_bFreeDrop, L"bFreeDrop")
+		.add(m_bOffensiveVictoryMove, L"bOffensiveVictoryMove")
+		.add(m_bOneUp, L"bOneUp")
+		.add(m_bPillageEspionage, L"bPillageEspionage")
+		.add(m_bPillageMarauder, L"bPillageMarauder")
+		.add(m_bPillageOnMove, L"bPillageOnMove")
+		.add(m_bPillageOnVictory, L"bPillageOnVictory")
+		.add(m_bPillageResearch, L"bPillageResearch")
+		.add(m_bBlitz, L"bBlitz")
+		.add(m_bAmphib, L"bAmphib")
+		.add(m_bRiver, L"bRiver")
+		.add(m_bEnemyRoute, L"bEnemyRoute")
+		.add(m_bAlwaysHeal, L"bAlwaysHeal")
+		.add(m_bHillsDoubleMove, L"bHillsDoubleMove")
+		.add(m_bImmuneToFirstStrikes, L"bImmuneToFirstStrikes")
+		.add(m_bStampedeChange, L"bStampedeChange")
+		.add(m_bRemoveStampede, L"bRemoveStampede")
+		.add(m_bOnslaughtChange, L"bOnslaughtChange")
+		.add(m_bAttackOnlyCitiesAdd, L"bAttackOnlyCitiesAdd")
+		.add(m_bAttackOnlyCitiesSubtract, L"bAttackOnlyCitiesSubtract")
+		.add(m_bIgnoreNoEntryLevelAdd, L"bIgnoreNoEntryLevelAdd")
+		.add(m_bIgnoreNoEntryLevelSubtract, L"bIgnoreNoEntryLevelSubtract")
+		.add(m_bIgnoreZoneofControlAdd, L"bIgnoreZoneofControlAdd")
+		.add(m_bIgnoreZoneofControlSubtract, L"bIgnoreZoneofControlSubtract")
+		.add(m_bFliesToMoveAdd, L"bFliesToMoveAdd")
+		.add(m_bFliesToMoveSubtract, L"bFliesToMoveSubtract")
+		.add(m_bCanMovePeaks, L"bCanMovePeaks")
+		.add(m_bCanLeadThroughPeaks, L"bCanLeadThroughPeaks")
+		// Read and merged, but deliberately absent from the (hand-written) legacy checksum:
+		.add(m_bZoneOfControl, L"bZoneOfControl")
+		.add(m_bSpy, L"bSpy")
+		.add(m_bCannotMergeSplit, L"bCannotMergeSplit")
+		.add(m_bRBombardDirect, L"bRBombardDirect")
+		.add(m_bRBombardForceAbility, L"bRBombardForceAbility")
+		.add(m_bInvisible, L"bInvisible") // legacy read this tag twice; once is enough
+		.add(m_bForMilitary, L"bForMilitary")
+		.add(m_bForNavalMilitary, L"bForNavalMilitary")
+		.add(m_bHealsAs, L"bHealsAs")
+		.add(m_bNoSelfHeal, L"bNoSelfHeal")
+		// Membership int-vectors (immediate resolution; wrapper merge = unique+sort).
+		// NOTE: TrapImmunityUnitCombatTypes' legacy copyNonDefaults wrongly used the
+		// delayed-resolution copy on an immediately-resolved vector (modular merge copied
+		// zeros); the wrapper merge fixes that.
+		.add(m_aiTerrainDoubleMoveChangeTypes, L"TerrainDoubleMoveChangeTypes")
+		.add(m_aiFeatureDoubleMoveChangeTypes, L"FeatureDoubleMoveChangeTypes")
+		.add(m_aiOnGameOptions, L"OnGameOptions")
+		.add(m_aiNotOnGameOptions, L"NotOnGameOptions")
+		.add(m_aiTrapImmunityUnitCombatTypes, L"TrapImmunityUnitCombatTypes")
+		.add(m_aiCategories, L"Categories")
+		// Self-contained sub-object
+		.add(m_PropertyManipulators)
+	;
+}
+
 bool CvUnitCombatInfo::read(CvXMLLoadUtility* pXML)
 {
 	PROFILE_EXTRA_FUNC();
@@ -1406,6 +1438,16 @@ bool CvUnitCombatInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
+	CvInfoUtil(this).readXml(pXML);
+
+	// Hand-written remainder, in legacy order:
+	// - KillOutcomes / Actions: bespoke self-reading outcome objects (no wrapper).
+	// - DomainMods: SetVariableListTagPair int array (no wrapper).
+	// - GGptsforUnitTypes / DefaultStatusTypes: delayed-resolution int vectors (no wrapper yet).
+	// - the 4 *IntensityChangeTypes lists: plain pair-vectors (no wrapper).
+	// - the modifier/visibility struct-vectors: their structs (CvStructs.h) have no
+	//   getDataMembers, and several columns need delayed resolution (BuildType and the
+	//   self-referencing UnitCombatType FKs), which addStruct forces immediate.
 	m_KillOutcomeList.read(pXML, L"KillOutcomes");
 
 	if(pXML->TryMoveToXmlFirstChild(L"Actions"))
@@ -1426,176 +1468,12 @@ bool CvUnitCombatInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	// Textual References
-
-	if ( pXML->GetOptionalChildXmlValByName(szTextVal, L"ReligionType") )
-		m_eReligion = (ReligionTypes)pXML->GetInfoClass(szTextVal);
-	else
-		m_eReligion = NO_RELIGION;
-
-	if ( pXML->GetOptionalChildXmlValByName(szTextVal, L"CultureType") )
-		m_eCulture = (BonusTypes)pXML->GetInfoClass(szTextVal);
-	else
-		m_eCulture = NO_BONUS;
-
-	if ( pXML->GetOptionalChildXmlValByName(szTextVal, L"EraType") )
-		m_eEra = (EraTypes)pXML->GetInfoClass(szTextVal);
-	else
-		m_eEra = NO_ERA;
-
-	//Integers
-	pXML->GetOptionalChildXmlValByName(&m_iVisibilityChange, L"iVisibilityChange");
-	pXML->GetOptionalChildXmlValByName(&m_iMovesChange, L"iMovesChange");
-	pXML->GetOptionalChildXmlValByName(&m_iMoveDiscountChange, L"iMoveDiscountChange");
-	pXML->GetOptionalChildXmlValByName(&m_iAirRangeChange, L"iAirRangeChange");
-	pXML->GetOptionalChildXmlValByName(&m_iInterceptChange, L"iInterceptChange");
-	pXML->GetOptionalChildXmlValByName(&m_iEvasionChange, L"iEvasionChange");
-	pXML->GetOptionalChildXmlValByName(&m_iWithdrawalChange, L"iWithdrawalChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCargoChange, L"iCargoChange");
-	pXML->GetOptionalChildXmlValByName(&m_iSMCargoChange, L"iSMCargoChange");
-	pXML->GetOptionalChildXmlValByName(&m_iSMCargoVolumeChange, L"iSMCargoVolumeChange");
-	pXML->GetOptionalChildXmlValByName(&m_iSMCargoVolumeModifierChange, L"iSMCargoVolumeModifierChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCollateralDamageChange, L"iCollateralDamageChange");
-	pXML->GetOptionalChildXmlValByName(&m_iBombardRateChange, L"iBombardRateChange");
-	pXML->GetOptionalChildXmlValByName(&m_iFirstStrikesChange, L"iFirstStrikesChange");
-	pXML->GetOptionalChildXmlValByName(&m_iChanceFirstStrikesChange, L"iChanceFirstStrikesChange");
-	pXML->GetOptionalChildXmlValByName(&m_iEnemyHealChange, L"iEnemyHealChange");
-	pXML->GetOptionalChildXmlValByName(&m_iNeutralHealChange, L"iNeutralHealChange");
-	pXML->GetOptionalChildXmlValByName(&m_iFriendlyHealChange, L"iFriendlyHealChange");
-	pXML->GetOptionalChildXmlValByName(&m_iSameTileHealChange, L"iSameTileHealChange");
-	pXML->GetOptionalChildXmlValByName(&m_iAdjacentTileHealChange, L"iAdjacentTileHealChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCombatPercent, L"iCombatPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iCityAttackPercent, L"iCityAttack");
-	pXML->GetOptionalChildXmlValByName(&m_iCityDefensePercent, L"iCityDefense");
-	pXML->GetOptionalChildXmlValByName(&m_iHillsAttackPercent, L"iHillsAttack");
-	pXML->GetOptionalChildXmlValByName(&m_iHillsDefensePercent, L"iHillsDefense");
-	pXML->GetOptionalChildXmlValByName(&m_iHillsWorkPercent, L"iHillsWorkModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iPeaksWorkPercent, L"iPeaksWorkModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iWorkRatePercent, L"iWorkRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iRevoltProtection, L"iRevoltProtection");
-	pXML->GetOptionalChildXmlValByName(&m_iCollateralDamageProtection, L"iCollateralDamageProtection");
-	pXML->GetOptionalChildXmlValByName(&m_iPillageChange, L"iPillageChange");
-	pXML->GetOptionalChildXmlValByName(&m_iUpgradeDiscount, L"iUpgradeDiscount");
-	pXML->GetOptionalChildXmlValByName(&m_iExperiencePercent, L"iExperiencePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iKamikazePercent, L"iKamikazePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAirCombatLimitChange, L"iAirCombatLimitChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCelebrityHappy, L"iCelebrityHappy");
-	pXML->GetOptionalChildXmlValByName(&m_iCollateralDamageLimitChange, L"iCollateralDamageLimitChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCollateralDamageMaxUnitsChange, L"iCollateralDamageMaxUnitsChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCombatLimitChange, L"iCombatLimitChange");
-	pXML->GetOptionalChildXmlValByName(&m_iExtraDropRange, L"iExtraDropRange");
-	pXML->GetOptionalChildXmlValByName(&m_iSurvivorChance, L"iSurvivorChance");
-	pXML->GetOptionalChildXmlValByName(&m_iVictoryAdjacentHeal, L"iVictoryAdjacentHeal");
-	pXML->GetOptionalChildXmlValByName(&m_iVictoryHeal, L"iVictoryHeal");
-	pXML->GetOptionalChildXmlValByName(&m_iVictoryStackHeal, L"iVictoryStackHeal");
-	pXML->GetOptionalChildXmlValByName(&m_iAttackCombatModifierChange, L"iAttackCombatModifierChange");
-	pXML->GetOptionalChildXmlValByName(&m_iDefenseCombatModifierChange, L"iDefenseCombatModifierChange");
-	pXML->GetOptionalChildXmlValByName(&m_iVSBarbsChange, L"iVSBarbsChange");
-	pXML->GetOptionalChildXmlValByName(&m_iUnnerveChange, L"iUnnerveChange");
-	pXML->GetOptionalChildXmlValByName(&m_iEncloseChange, L"iEncloseChange");
-	pXML->GetOptionalChildXmlValByName(&m_iLungeChange, L"iLungeChange");
-	pXML->GetOptionalChildXmlValByName(&m_iDynamicDefenseChange, L"iDynamicDefenseChange");
-	pXML->GetOptionalChildXmlValByName(&m_iStrengthChange, L"iStrengthChange");
-	pXML->GetOptionalChildXmlValByName(&m_iEnduranceChange, L"iEnduranceChange");
-	pXML->GetOptionalChildXmlValByName(&m_iPoisonProbabilityModifierChange, L"iPoisonProbabilityModifierChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCaptureProbabilityModifierChange, L"iCaptureProbabilityModifierChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCaptureResistanceModifierChange, L"iCaptureResistanceModifierChange");
-	pXML->GetOptionalChildXmlValByName(&m_iBreakdownChanceChange, L"iBreakdownChanceChange");
-	pXML->GetOptionalChildXmlValByName(&m_iBreakdownDamageChange, L"iBreakdownDamageChange");
-	pXML->GetOptionalChildXmlValByName(&m_iTauntChange, L"iTauntChange");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxHPChange, L"iMaxHPChange");
-	pXML->GetOptionalChildXmlValByName(&m_iStrengthModifier, L"iStrengthModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iQualityBase, L"iQualityBase", -10);
-	pXML->GetOptionalChildXmlValByName(&m_iGroupBase, L"iGroupBase", -10);
-	pXML->GetOptionalChildXmlValByName(&m_iSizeBase, L"iSizeBase", -10);
-	pXML->GetOptionalChildXmlValByName(&m_iDamageModifierChange, L"iDamageModifierChange");
-
-	pXML->GetOptionalChildXmlValByName(&m_iUpkeepModifier, L"iUpkeepModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iExtraUpkeep100, L"iExtraUpkeep100");
-
-	pXML->GetOptionalChildXmlValByName(&m_iRBombardDamageBase, L"iRBombardDamageBase");
-	pXML->GetOptionalChildXmlValByName(&m_iRBombardDamageLimitBase, L"iRBombardDamageLimitBase");
-	pXML->GetOptionalChildXmlValByName(&m_iRBombardDamageMaxUnitsBase, L"iRBombardDamageMaxUnitsBase");
-	pXML->GetOptionalChildXmlValByName(&m_iDCMBombRangeBase, L"iDCMBombRangeBase");
-	pXML->GetOptionalChildXmlValByName(&m_iDCMBombAccuracyBase, L"iDCMBombAccuracyBase");
-	pXML->GetOptionalChildXmlValByName(&m_iCombatModifierPerSizeMoreChange, L"iCombatModifierPerSizeMoreChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCombatModifierPerSizeLessChange, L"iCombatModifierPerSizeLessChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCombatModifierPerVolumeMoreChange, L"iCombatModifierPerVolumeMoreChange");
-	pXML->GetOptionalChildXmlValByName(&m_iCombatModifierPerVolumeLessChange, L"iCombatModifierPerVolumeLessChange");
-	pXML->GetOptionalChildXmlValByName(&m_iSelfHealModifier, L"iSelfHealModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iNumHealSupport, L"iNumHealSupport");
-	pXML->GetOptionalChildXmlValByName(&m_iExcileChange, L"iExcileChange");
-	pXML->GetOptionalChildXmlValByName(&m_iPassageChange, L"iPassageChange");
-	pXML->GetOptionalChildXmlValByName(&m_iNoNonOwnedCityEntryChange, L"iNoNonOwnedCityEntryChange");
-	pXML->GetOptionalChildXmlValByName(&m_iBarbCoExistChange, L"iBarbCoExistChange");
-	pXML->GetOptionalChildXmlValByName(&m_iBlendIntoCityChange, L"iBlendIntoCityChange");
-	pXML->GetOptionalChildXmlValByName(&m_iInsidiousnessChange, L"iInsidiousnessChange");
-	pXML->GetOptionalChildXmlValByName(&m_iInvestigationChange, L"iInvestigationChange");
-	pXML->GetOptionalChildXmlValByName(&m_iStealthStrikesChange, L"iStealthStrikesChange");
-	pXML->GetOptionalChildXmlValByName(&m_iStealthCombatModifierChange, L"iStealthCombatModifierChange");
-	pXML->GetOptionalChildXmlValByName(&m_iStealthDefenseChange, L"iStealthDefenseChange");
-	pXML->GetOptionalChildXmlValByName(&m_iDefenseOnlyChange, L"iDefenseOnlyChange");
-	pXML->GetOptionalChildXmlValByName(&m_iNoInvisibilityChange, L"iNoInvisibilityChange");
-	pXML->GetOptionalChildXmlValByName(&m_iNoCaptureChange, L"iNoCaptureChange");
-	pXML->GetOptionalChildXmlValByName(&m_iAnimalIgnoresBordersChange, L"iAnimalIgnoresBordersChange");
-	pXML->GetOptionalChildXmlValByName(&m_iNoDefensiveBonusChange, L"iNoDefensiveBonusChange");
-	pXML->GetOptionalChildXmlValByName(&m_iGatherHerdChange, L"iGatherHerdChange");
-	pXML->GetOptionalChildXmlValByName(&m_iReligiousCombatModifierChange, L"iReligiousCombatModifierChange");
-
-	//Booleans
-	pXML->GetOptionalChildXmlValByName(&m_bDefensiveVictoryMove, L"bDefensiveVictoryMove");
-	pXML->GetOptionalChildXmlValByName(&m_bFreeDrop, L"bFreeDrop");
-	pXML->GetOptionalChildXmlValByName(&m_bOffensiveVictoryMove, L"bOffensiveVictoryMove");
-	pXML->GetOptionalChildXmlValByName(&m_bOneUp, L"bOneUp");
-	pXML->GetOptionalChildXmlValByName(&m_bPillageEspionage, L"bPillageEspionage");
-	pXML->GetOptionalChildXmlValByName(&m_bPillageMarauder, L"bPillageMarauder");
-	pXML->GetOptionalChildXmlValByName(&m_bPillageOnMove, L"bPillageOnMove");
-	pXML->GetOptionalChildXmlValByName(&m_bPillageOnVictory, L"bPillageOnVictory");
-	pXML->GetOptionalChildXmlValByName(&m_bPillageResearch, L"bPillageResearch");
-	pXML->GetOptionalChildXmlValByName(&m_bBlitz, L"bBlitz");
-	pXML->GetOptionalChildXmlValByName(&m_bAmphib, L"bAmphib");
-	pXML->GetOptionalChildXmlValByName(&m_bRiver, L"bRiver");
-	pXML->GetOptionalChildXmlValByName(&m_bEnemyRoute, L"bEnemyRoute");
-	pXML->GetOptionalChildXmlValByName(&m_bAlwaysHeal, L"bAlwaysHeal");
-	pXML->GetOptionalChildXmlValByName(&m_bHillsDoubleMove, L"bHillsDoubleMove");
-	pXML->GetOptionalChildXmlValByName(&m_bImmuneToFirstStrikes, L"bImmuneToFirstStrikes");
-	pXML->GetOptionalChildXmlValByName(&m_bStampedeChange, L"bStampedeChange");
-	pXML->GetOptionalChildXmlValByName(&m_bRemoveStampede, L"bRemoveStampede");
-	pXML->GetOptionalChildXmlValByName(&m_bOnslaughtChange, L"bOnslaughtChange");
-	pXML->GetOptionalChildXmlValByName(&m_bAttackOnlyCitiesAdd, L"bAttackOnlyCitiesAdd");
-	pXML->GetOptionalChildXmlValByName(&m_bAttackOnlyCitiesSubtract, L"bAttackOnlyCitiesSubtract");
-	pXML->GetOptionalChildXmlValByName(&m_bIgnoreNoEntryLevelAdd, L"bIgnoreNoEntryLevelAdd");
-	pXML->GetOptionalChildXmlValByName(&m_bIgnoreNoEntryLevelSubtract, L"bIgnoreNoEntryLevelSubtract");
-	pXML->GetOptionalChildXmlValByName(&m_bIgnoreZoneofControlAdd, L"bIgnoreZoneofControlAdd");
-	pXML->GetOptionalChildXmlValByName(&m_bIgnoreZoneofControlSubtract, L"bIgnoreZoneofControlSubtract");
-	pXML->GetOptionalChildXmlValByName(&m_bFliesToMoveAdd, L"bFliesToMoveAdd");
-	pXML->GetOptionalChildXmlValByName(&m_bFliesToMoveSubtract, L"bFliesToMoveSubtract");
-	pXML->GetOptionalChildXmlValByName(&m_bCanMovePeaks, L"bCanMovePeaks");
-	pXML->GetOptionalChildXmlValByName(&m_bCanLeadThroughPeaks, L"bCanLeadThroughPeaks");
-	pXML->GetOptionalChildXmlValByName(&m_bZoneOfControl, L"bZoneOfControl");
-	pXML->GetOptionalChildXmlValByName(&m_bSpy, L"bSpy");
-	pXML->GetOptionalChildXmlValByName(&m_bInvisible, L"bInvisible");
-	pXML->GetOptionalChildXmlValByName(&m_bCannotMergeSplit, L"bCannotMergeSplit");
-	pXML->GetOptionalChildXmlValByName(&m_bRBombardDirect, L"bRBombardDirect");
-	pXML->GetOptionalChildXmlValByName(&m_bRBombardForceAbility, L"bRBombardForceAbility");
-	pXML->GetOptionalChildXmlValByName(&m_bInvisible, L"bInvisible");
-	pXML->GetOptionalChildXmlValByName(&m_bForMilitary, L"bForMilitary");
-	pXML->GetOptionalChildXmlValByName(&m_bForNavalMilitary, L"bForNavalMilitary");
-	pXML->GetOptionalChildXmlValByName(&m_bHealsAs, L"bHealsAs");
-	pXML->GetOptionalChildXmlValByName(&m_bNoSelfHeal, L"bNoSelfHeal");
-
 	//Arrays
 	pXML->SetVariableListTagPair(&m_piDomainModifierPercent, L"DomainMods", NUM_DOMAIN_TYPES);
 
-	// bool vector with delayed resolution
-	pXML->SetOptionalVector(&m_aiTerrainDoubleMoveChangeTypes, L"TerrainDoubleMoveChangeTypes");
-	pXML->SetOptionalVector(&m_aiFeatureDoubleMoveChangeTypes, L"FeatureDoubleMoveChangeTypes");
-	pXML->SetOptionalVector(&m_aiOnGameOptions, L"OnGameOptions");
-	pXML->SetOptionalVector(&m_aiNotOnGameOptions, L"NotOnGameOptions");
+	// int vectors with delayed resolution (no wrapper yet)
 	pXML->SetOptionalVectorWithDelayedResolution(m_aiGGptsforUnitTypes, L"GGptsforUnitTypes");
 	pXML->SetOptionalVectorWithDelayedResolution(m_aiDefaultStatusTypes, L"DefaultStatusTypes");
-	pXML->SetOptionalVector(&m_aiTrapImmunityUnitCombatTypes, L"TrapImmunityUnitCombatTypes");
-	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
 
 	// int vector utilizing pairing without delayed resolution
 	m_aVisibilityIntensityChangeTypes.clear();
@@ -2196,17 +2074,13 @@ bool CvUnitCombatInfo::read(CvXMLLoadUtility* pXML)
 		}
 		pXML->MoveToXmlParent();
 	}
-	m_PropertyManipulators.read(pXML);
 
 	return true;
 }
 void CvUnitCombatInfo::copyNonDefaults(CvUnitCombatInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	const bool bDefault = false;
 	const int iDefault = 0;
-	const CvString cDefault = CvString::format("").GetCString();
-	const CvWString wDefault = CvWString::format(L"").GetCString();
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
@@ -2222,149 +2096,10 @@ void CvUnitCombatInfo::copyNonDefaults(CvUnitCombatInfo* pClassInfo)
 		}
 	}
 
-	// Textual References
-	if (getReligion() == NO_RELIGION) m_eReligion = pClassInfo->getReligion();
-	if (getCulture() == NO_BONUS) m_eCulture = pClassInfo->getCulture();
-	if (getEra() == NO_ERA) m_eEra = pClassInfo->getEra();
-	//Integers
-	if (getVisibilityChange() == iDefault) m_iVisibilityChange = pClassInfo->getVisibilityChange();
-	if (getMovesChange() == iDefault) m_iMovesChange = pClassInfo->getMovesChange();
-	if (getMoveDiscountChange() == iDefault) m_iMoveDiscountChange = pClassInfo->getMoveDiscountChange();
-	if (getAirRangeChange() == iDefault) m_iAirRangeChange = pClassInfo->getAirRangeChange();
-	if (getInterceptChange() == iDefault) m_iInterceptChange = pClassInfo->getInterceptChange();
-	if (getEvasionChange() == iDefault) m_iEvasionChange = pClassInfo->getEvasionChange();
-	if (getWithdrawalChange() == iDefault) m_iWithdrawalChange = pClassInfo->getWithdrawalChange();
-	if (getCargoChange() == iDefault) m_iCargoChange = pClassInfo->getCargoChange();
-	if (getSMCargoChange() == iDefault) m_iSMCargoChange = pClassInfo->getSMCargoChange();
-	if (getSMCargoVolumeChange() == iDefault) m_iSMCargoVolumeChange = pClassInfo->getSMCargoVolumeChange();
-	if (getSMCargoVolumeModifierChange() == iDefault) m_iSMCargoVolumeModifierChange = pClassInfo->getSMCargoVolumeModifierChange();
-	if (getCollateralDamageChange() == iDefault) m_iCollateralDamageChange = pClassInfo->getCollateralDamageChange();
-	if (getBombardRateChange() == iDefault) m_iBombardRateChange = pClassInfo->getBombardRateChange();
-	if (getFirstStrikesChange() == iDefault) m_iFirstStrikesChange = pClassInfo->getFirstStrikesChange();
-	if (getChanceFirstStrikesChange() == iDefault) m_iChanceFirstStrikesChange = pClassInfo->getChanceFirstStrikesChange();
-	if (getEnemyHealChange() == iDefault) m_iEnemyHealChange = pClassInfo->getEnemyHealChange();
-	if (getNeutralHealChange() == iDefault) m_iNeutralHealChange = pClassInfo->getNeutralHealChange();
-	if (getFriendlyHealChange() == iDefault) m_iFriendlyHealChange = pClassInfo->getFriendlyHealChange();
-	if (getSameTileHealChange() == iDefault) m_iSameTileHealChange = pClassInfo->getSameTileHealChange();
-	if (getAdjacentTileHealChange() == iDefault) m_iAdjacentTileHealChange = pClassInfo->getAdjacentTileHealChange();
-	if (getCombatPercent() == iDefault) m_iCombatPercent = pClassInfo->getCombatPercent();
-	if (getCityAttackPercent() == iDefault) m_iCityAttackPercent = pClassInfo->getCityAttackPercent();
-	if (getCityDefensePercent() == iDefault) m_iCityDefensePercent = pClassInfo->getCityDefensePercent();
-	if (getHillsAttackPercent() == iDefault) m_iHillsAttackPercent = pClassInfo->getHillsAttackPercent();
-	if (getHillsDefensePercent() == iDefault) m_iHillsDefensePercent = pClassInfo->getHillsDefensePercent();
-	if (getHillsWorkPercent() == iDefault) m_iHillsWorkPercent = pClassInfo->getHillsWorkPercent();
-	if (getPeaksWorkPercent() == iDefault) m_iPeaksWorkPercent = pClassInfo->getPeaksWorkPercent();
-	if (getWorkRatePercent() == iDefault) m_iWorkRatePercent = pClassInfo->getWorkRatePercent();
-	if (getRevoltProtection() == iDefault) m_iRevoltProtection = pClassInfo->getRevoltProtection();
-	if (getCollateralDamageProtection() == iDefault) m_iCollateralDamageProtection = pClassInfo->getCollateralDamageProtection();
-	if (getPillageChange() == iDefault) m_iPillageChange = pClassInfo->getPillageChange();
-	if (getUpgradeDiscount() == iDefault) m_iUpgradeDiscount = pClassInfo->getUpgradeDiscount();
-	if (getExperiencePercent() == iDefault) m_iExperiencePercent = pClassInfo->getExperiencePercent();
-	if (getKamikazePercent() == iDefault) m_iKamikazePercent = pClassInfo->getKamikazePercent();
-	if (getAirCombatLimitChange() == iDefault) m_iAirCombatLimitChange = pClassInfo->getAirCombatLimitChange();
-	if (getCelebrityHappy() == iDefault) m_iCelebrityHappy = pClassInfo->getCelebrityHappy();
-	if (getCollateralDamageLimitChange() == iDefault) m_iCollateralDamageLimitChange = pClassInfo->getCollateralDamageLimitChange();
-	if (getCollateralDamageMaxUnitsChange() == iDefault) m_iCollateralDamageMaxUnitsChange = pClassInfo->getCollateralDamageMaxUnitsChange();
-	if (getCombatLimitChange() == iDefault) m_iCombatLimitChange = pClassInfo->getCombatLimitChange();
-	if (getExtraDropRange() == iDefault) m_iExtraDropRange = pClassInfo->getExtraDropRange();
-	if (getSurvivorChance() == iDefault) m_iSurvivorChance = pClassInfo->getSurvivorChance();
-	if (getVictoryAdjacentHeal() == iDefault) m_iVictoryAdjacentHeal = pClassInfo->getVictoryAdjacentHeal();
-	if (getVictoryHeal() == iDefault) m_iVictoryHeal = pClassInfo->getVictoryHeal();
-	if (getVictoryStackHeal() == iDefault) m_iVictoryStackHeal = pClassInfo->getVictoryStackHeal();
-	if (getAttackCombatModifierChange() == iDefault) m_iAttackCombatModifierChange = pClassInfo->getAttackCombatModifierChange();
-	if (getDefenseCombatModifierChange() == iDefault) m_iDefenseCombatModifierChange = pClassInfo->getDefenseCombatModifierChange();
-	if (getVSBarbsChange() == iDefault) m_iVSBarbsChange = pClassInfo->getVSBarbsChange();
-	if (m_iUnnerveChange == iDefault) m_iUnnerveChange = pClassInfo->m_iUnnerveChange;
-	if (m_iEncloseChange == iDefault) m_iEncloseChange = pClassInfo->m_iEncloseChange;
-	if (m_iLungeChange == iDefault) m_iLungeChange = pClassInfo->m_iLungeChange;
-	if (m_iDynamicDefenseChange == iDefault) m_iDynamicDefenseChange = pClassInfo->m_iDynamicDefenseChange;
-	if (getStrengthChange() == iDefault) m_iStrengthChange = pClassInfo->getStrengthChange();
-	if (getEnduranceChange() == iDefault) m_iEnduranceChange = pClassInfo->getEnduranceChange();
-	if (getPoisonProbabilityModifierChange() == iDefault) m_iPoisonProbabilityModifierChange = pClassInfo->getPoisonProbabilityModifierChange();
-	if (getCaptureProbabilityModifierChange() == iDefault) m_iCaptureProbabilityModifierChange = pClassInfo->getCaptureProbabilityModifierChange();
-	if (getCaptureResistanceModifierChange() == iDefault) m_iCaptureResistanceModifierChange = pClassInfo->getCaptureResistanceModifierChange();
-	if (getBreakdownChanceChange() == iDefault) m_iBreakdownChanceChange = pClassInfo->getBreakdownChanceChange();
-	if (getBreakdownDamageChange() == iDefault) m_iBreakdownDamageChange = pClassInfo->getBreakdownDamageChange();
-	if (getTauntChange() == iDefault) m_iTauntChange = pClassInfo->getTauntChange();
-	if (m_iMaxHPChange == iDefault) m_iMaxHPChange = pClassInfo->m_iMaxHPChange;
-	if (getStrengthModifier() == iDefault) m_iStrengthModifier = pClassInfo->getStrengthModifier();
-	if (getQualityBase() == -10) m_iQualityBase = pClassInfo->getQualityBase();
-	if (getGroupBase() == -10) m_iGroupBase = pClassInfo->getGroupBase();
-	if (getSizeBase() == -10) m_iSizeBase = pClassInfo->getSizeBase();
-	if (getDamageModifierChange() == iDefault) m_iDamageModifierChange = pClassInfo->getDamageModifierChange();
+	// All declared fields (scalars, enums, membership vectors, property manipulators)
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
-	if (m_iUpkeepModifier == iDefault) m_iUpkeepModifier = pClassInfo->getUpkeepModifier();
-	if (m_iExtraUpkeep100 == iDefault) m_iExtraUpkeep100 = pClassInfo->getExtraUpkeep100();
-
-	if (getRBombardDamageBase() == iDefault) m_iRBombardDamageBase = pClassInfo->getRBombardDamageBase();
-	if (getRBombardDamageLimitBase() == iDefault) m_iRBombardDamageLimitBase = pClassInfo->getRBombardDamageLimitBase();
-	if (getRBombardDamageMaxUnitsBase() == iDefault) m_iRBombardDamageMaxUnitsBase = pClassInfo->getRBombardDamageMaxUnitsBase();
-	if (getDCMBombRangeBase() == iDefault) m_iDCMBombRangeBase = pClassInfo->getDCMBombRangeBase();
-	if (getDCMBombAccuracyBase() == iDefault) m_iDCMBombAccuracyBase = pClassInfo->getDCMBombAccuracyBase();
-	if (m_iCombatModifierPerSizeMoreChange == iDefault) m_iCombatModifierPerSizeMoreChange = pClassInfo->m_iCombatModifierPerSizeMoreChange;
-	if (m_iCombatModifierPerSizeLessChange == iDefault) m_iCombatModifierPerSizeLessChange = pClassInfo->m_iCombatModifierPerSizeLessChange;
-	if (m_iCombatModifierPerVolumeMoreChange == iDefault) m_iCombatModifierPerVolumeMoreChange = pClassInfo->m_iCombatModifierPerVolumeMoreChange;
-	if (m_iCombatModifierPerVolumeLessChange == iDefault) m_iCombatModifierPerVolumeLessChange = pClassInfo->m_iCombatModifierPerVolumeLessChange;
-	if (getSelfHealModifier() == iDefault) m_iSelfHealModifier = pClassInfo->getSelfHealModifier();
-	if (getNumHealSupport() == iDefault) m_iNumHealSupport = pClassInfo->getNumHealSupport();
-	if (getExcileChange() == iDefault) m_iExcileChange = pClassInfo->getExcileChange();
-	if (getPassageChange() == iDefault) m_iPassageChange = pClassInfo->getPassageChange();
-	if (getNoNonOwnedCityEntryChange() == iDefault) m_iNoNonOwnedCityEntryChange = pClassInfo->getNoNonOwnedCityEntryChange();
-	if (getBarbCoExistChange() == iDefault) m_iBarbCoExistChange = pClassInfo->getBarbCoExistChange();
-	if (getBlendIntoCityChange() == iDefault) m_iBlendIntoCityChange = pClassInfo->getBlendIntoCityChange();
-	if (getInsidiousnessChange() == iDefault) m_iInsidiousnessChange = pClassInfo->getInsidiousnessChange();
-	if (getInvestigationChange() == iDefault) m_iInvestigationChange = pClassInfo->getInvestigationChange();
-	if (m_iStealthStrikesChange == iDefault) m_iStealthStrikesChange = pClassInfo->m_iStealthStrikesChange;
-	if (m_iStealthCombatModifierChange == iDefault) m_iStealthCombatModifierChange = pClassInfo->m_iStealthCombatModifierChange;
-	if (m_iStealthDefenseChange == iDefault) m_iStealthDefenseChange = pClassInfo->m_iStealthDefenseChange;
-	if (getDefenseOnlyChange() == iDefault) m_iDefenseOnlyChange = pClassInfo->getDefenseOnlyChange();
-	if (getNoInvisibilityChange() == iDefault) m_iNoInvisibilityChange = pClassInfo->getNoInvisibilityChange();
-	if (getNoCaptureChange() == iDefault) m_iNoCaptureChange = pClassInfo->getNoCaptureChange();
-	if (getAnimalIgnoresBordersChange() == iDefault) m_iAnimalIgnoresBordersChange = pClassInfo->getAnimalIgnoresBordersChange();
-	if (getNoDefensiveBonusChange() == iDefault) m_iNoDefensiveBonusChange = pClassInfo->getNoDefensiveBonusChange();
-	if (getGatherHerdChange() == iDefault) m_iGatherHerdChange = pClassInfo->getGatherHerdChange();
-	if (getReligiousCombatModifierChange() == iDefault) m_iReligiousCombatModifierChange = pClassInfo->getReligiousCombatModifierChange();
-	//Booleans
-	if (isDefensiveVictoryMove() == bDefault) m_bDefensiveVictoryMove = pClassInfo->isDefensiveVictoryMove();
-	if (isFreeDrop() == bDefault) m_bFreeDrop = pClassInfo->isFreeDrop();
-	if (isOffensiveVictoryMove() == bDefault) m_bOffensiveVictoryMove = pClassInfo->isOffensiveVictoryMove();
-	if (isOneUp() == bDefault) m_bOneUp = pClassInfo->isOneUp();
-	if (isPillageEspionage() == bDefault) m_bPillageEspionage = pClassInfo->isPillageEspionage();
-	if (isPillageMarauder() == bDefault) m_bPillageMarauder = pClassInfo->isPillageMarauder();
-	if (isPillageOnMove() == bDefault) m_bPillageOnMove = pClassInfo->isPillageOnMove();
-	if (isPillageOnVictory() == bDefault) m_bPillageOnVictory = pClassInfo->isPillageOnVictory();
-	if (isPillageResearch() == bDefault) m_bPillageResearch = pClassInfo->isPillageResearch();
-	if (isBlitz() == bDefault) m_bBlitz = pClassInfo->isBlitz();
-	if (isAmphib() == bDefault) m_bAmphib = pClassInfo->isAmphib();
-	if (isRiver() == bDefault) m_bRiver = pClassInfo->isRiver();
-	if (isEnemyRoute() == bDefault) m_bEnemyRoute = pClassInfo->isEnemyRoute();
-	if (isAlwaysHeal() == bDefault) m_bAlwaysHeal = pClassInfo->isAlwaysHeal();
-	if (isHillsDoubleMove() == bDefault) m_bHillsDoubleMove = pClassInfo->isHillsDoubleMove();
-	if (isImmuneToFirstStrikes() == bDefault) m_bImmuneToFirstStrikes = pClassInfo->isImmuneToFirstStrikes();
-	if (isStampedeChange() == bDefault) m_bStampedeChange = pClassInfo->isStampedeChange();
-	if (isRemoveStampede() == bDefault) m_bRemoveStampede = pClassInfo->isRemoveStampede();
-	if (isOnslaughtChange() == bDefault) m_bOnslaughtChange = pClassInfo->isOnslaughtChange();
-	if (isAttackOnlyCitiesAdd() == bDefault) m_bAttackOnlyCitiesAdd = pClassInfo->isAttackOnlyCitiesAdd();
-	if (isAttackOnlyCitiesSubtract() == bDefault) m_bAttackOnlyCitiesSubtract = pClassInfo->isAttackOnlyCitiesSubtract();
-	if (isIgnoreNoEntryLevelAdd() == bDefault) m_bIgnoreNoEntryLevelAdd = pClassInfo->isIgnoreNoEntryLevelAdd();
-	if (isIgnoreNoEntryLevelSubtract() == bDefault) m_bIgnoreNoEntryLevelSubtract = pClassInfo->isIgnoreNoEntryLevelSubtract();
-	if (isIgnoreZoneofControlAdd() == bDefault) m_bIgnoreZoneofControlAdd = pClassInfo->isIgnoreZoneofControlAdd();
-	if (isIgnoreZoneofControlSubtract() == bDefault) m_bIgnoreZoneofControlSubtract = pClassInfo->isIgnoreZoneofControlSubtract();
-	if (isFliesToMoveAdd() == bDefault) m_bFliesToMoveAdd = pClassInfo->isFliesToMoveAdd();
-	if (isFliesToMoveSubtract() == bDefault) m_bFliesToMoveSubtract = pClassInfo->isFliesToMoveSubtract();
-	if (isCanMovePeaks() == bDefault) m_bCanMovePeaks = pClassInfo->isCanMovePeaks();
-	if (isCanLeadThroughPeaks() == bDefault) m_bCanLeadThroughPeaks = pClassInfo->isCanLeadThroughPeaks();
-	if (isZoneOfControl() == bDefault) m_bZoneOfControl = pClassInfo->isZoneOfControl();
-	if (isSpy() == bDefault) m_bSpy = pClassInfo->isSpy();
-	if (isCannotMergeSplit() == bDefault) m_bCannotMergeSplit = pClassInfo->isCannotMergeSplit();
-	if (isRBombardDirect() == bDefault) m_bRBombardDirect = pClassInfo->isRBombardDirect();
-	if (isRBombardForceAbility() == bDefault) m_bRBombardForceAbility = pClassInfo->isRBombardForceAbility();
-	if (isAlwaysInvisible() == bDefault) m_bInvisible = pClassInfo->isAlwaysInvisible();
-	if (isForMilitary() == bDefault) m_bForMilitary = pClassInfo->isForMilitary();
-	if (isForNavalMilitary() == bDefault) m_bForNavalMilitary = pClassInfo->isForNavalMilitary();
-	if (isHealsAs() == bDefault) m_bHealsAs = pClassInfo->isHealsAs();
-	if (isNoSelfHeal() == bDefault) m_bNoSelfHeal = pClassInfo->isNoSelfHeal();
-
+	// Hand-written remainder (see the note in getDataMembers)
 	//Arrays
 	for (int j = 0; j < NUM_DOMAIN_TYPES; j++)
 	{
@@ -2379,26 +2114,6 @@ void CvUnitCombatInfo::copyNonDefaults(CvUnitCombatInfo* pClassInfo)
 		}
 	}
 
-
-	if (getNumTerrainDoubleMoveChangeTypes() == 0)
-	{
-		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiTerrainDoubleMoveChangeTypes, pClassInfo->m_aiTerrainDoubleMoveChangeTypes);
-	}
-
-	if (getNumFeatureDoubleMoveChangeTypes() == 0)
-	{
-		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiFeatureDoubleMoveChangeTypes, pClassInfo->m_aiFeatureDoubleMoveChangeTypes);
-	}
-
-	if (getNumOnGameOptions() == 0)
-	{
-		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiOnGameOptions, pClassInfo->m_aiOnGameOptions);
-	}
-
-	if (getNumNotOnGameOptions() == 0)
-	{
-		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiNotOnGameOptions, pClassInfo->m_aiNotOnGameOptions);
-	}
 
 	if (getNumGGptsforUnitTypes() == 0)
 	{
@@ -2419,18 +2134,6 @@ void CvUnitCombatInfo::copyNonDefaults(CvUnitCombatInfo* pClassInfo)
 			GC.copyNonDefaultDelayedResolution((int*)&(m_aiDefaultStatusTypes[i]), (int*)&(pClassInfo->m_aiDefaultStatusTypes[i]));
 		}
 	}
-
-	if (getNumTrapImmunityUnitCombatTypes() == 0)
-	{
-		const int iNum = pClassInfo->getNumTrapImmunityUnitCombatTypes();
-		m_aiTrapImmunityUnitCombatTypes.resize(iNum);
-		for (int i=0; i<iNum; i++)
-		{
-			GC.copyNonDefaultDelayedResolution((int*)&(m_aiTrapImmunityUnitCombatTypes[i]), (int*)&(pClassInfo->m_aiTrapImmunityUnitCombatTypes[i]));
-		}
-	}
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
 
 	// int vectors utilizing pairing without delayed resolution
 
@@ -2592,9 +2295,12 @@ void CvUnitCombatInfo::copyNonDefaults(CvUnitCombatInfo* pClassInfo)
 	{
 		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aVisibleImprovementRangeChanges, pClassInfo->m_aVisibleImprovementRangeChanges);
 	}
-	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
 }
 
+// Explicit (NOT delegated to CvInfoUtil) on purpose, byte-identical to the legacy hash:
+// the hand-written outcome lists lead it, m_bZoneOfControl is read+merged but deliberately
+// absent, and the hand-written arrays/pair-vectors/struct-vectors sit mid-order between
+// declared fields. Keep this in the legacy order.
 void CvUnitCombatInfo::getCheckSum(uint32_t& iSum) const
 {
 	PROFILE_EXTRA_FUNC();

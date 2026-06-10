@@ -30,140 +30,35 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvCivicInfo::CvCivicInfo()
-
-	: m_iCivicOptionType(NO_CIVICOPTION)
-	, m_iAnarchyLength(0)
-	, m_iUpkeep(NO_UPKEEP)
-	, m_iAIWeight(0)
-	, m_iGreatPeopleRateModifier(0)
-	, m_iGreatGeneralRateModifier(0)
-	, m_iDomesticGreatGeneralRateModifier(0)
-	, m_iStateReligionGreatPeopleRateModifier(0)
-	, m_iDistanceMaintenanceModifier(0)
-	, m_iNumCitiesMaintenanceModifier(0)
-	, m_iHomeAreaMaintenanceModifier(0)
-	, m_iOtherAreaMaintenanceModifier(0)
-	, m_iCorporationMaintenanceModifier(0)
-	, m_iExtraHealth(0)
-	, m_iFreeExperience(0)
-	, m_iWorkerSpeedModifier(0)
-	, m_iImprovementUpgradeRateModifier(0)
-	, m_iMilitaryProductionModifier(0)
-	, m_iFreeUnitUpkeepCivilian(0)
-	, m_iFreeUnitUpkeepMilitary(0)
-	, m_iFreeUnitUpkeepCivilianPopPercent(0)
-	, m_iFreeUnitUpkeepMilitaryPopPercent(0)
-
-	, m_iCivilianUnitUpkeepMod(0)
-	, m_iMilitaryUnitUpkeepMod(0)
-
-	, m_iHappyPerMilitaryUnit(0)
-	, m_iLargestCityHappiness(0)
-	, m_iWarWearinessModifier(0)
-	, m_iFreeSpecialist(0)
-	, m_iTradeRoutes(0)
-	, m_iTechPrereq(NO_TECH)
-	, m_iCivicPercentAnger(0)
-	, m_iMaxConscript(0)
-	, m_iStateReligionHappiness(0)
-	, m_iNonStateReligionHappiness(0)
-	, m_iStateReligionUnitProductionModifier(0)
-	, m_iStateReligionBuildingProductionModifier(0)
-	, m_iStateReligionFreeExperience(0)
-	, m_iExpInBorderModifier(0)
-
-	, m_bUpgradeAnywhere(false)
-	, m_bAllowInquisitions(false)
-	, m_bDisallowInquisitions(false)
-	, m_iRevIdxLocal(0)
-	, m_iRevIdxNational(0)
-	, m_iRevIdxDistanceModifier(0)
-	, m_iRevIdxHolyCityGood(0)
-	, m_iRevIdxHolyCityBad(0)
-	, m_iRevIdxSwitchTo(0)
-	, m_fRevIdxNationalityMod(0)
-	, m_fRevIdxGoodReligionMod(0)
-	, m_fRevIdxBadReligionMod(0)
-	, m_fRevViolentMod(0)
-	, m_iRevReligiousFreedom(0)
-	, m_iRevLaborFreedom(0)
-	, m_iRevEnvironmentalProtection(0)
-	, m_iRevDemocracyLevel(0)
-	, m_bCommunism(false)
-	, m_bFreeSpeech(false)
-	, m_bCanDoElection(false)
-
-	, m_bMilitaryFoodProduction(false)
-	, m_bNoUnhealthyPopulation(false)
-	, m_bBuildingOnlyHealthy(false)
-	, m_bNoForeignTrade(false)
-	, m_bNoCorporations(false)
-	, m_bNoForeignCorporations(false)
-	, m_bStateReligion(false)
-	, m_bNoNonStateReligionSpread(false)
-	, m_piYieldModifier(NULL)
-	, m_piCapitalYieldModifier(NULL)
-	, m_piTradeYieldModifier(NULL)
-	, m_piCommerceModifier(NULL)
-	, m_piCapitalCommerceModifier(NULL)
-	, m_piSpecialistExtraCommerce(NULL)
+	// Fields declared in getDataMembers() are initialized by initDataMembers();
+	// only the hand-written (non-declarative) members remain in this list.
+	: m_pszCivicAttitudeReason(NULL)
+	, m_bAnyImprovementYieldChange(false)
+	, m_piBonusMintedPercent(NULL)
+	, m_piImprovementHappinessChanges(NULL)
+	, m_piImprovementHealthPercentChanges(NULL)
+	, m_piFreeSpecialistCount(NULL)
+	, m_piUnitProductionModifier(NULL)
+	, m_piFlavorValue(NULL)
+	, m_piCivicAttitudeChanges(NULL)
+	, m_paiUnitCombatProductionModifier(NULL)
 	, m_paiBuildingHappinessChanges(NULL)
 	, m_paiBuildingHealthChanges(NULL)
-	, m_bSparseListsCached(false)
 	, m_paiFeatureHappinessChanges(NULL)
 	, m_pabHurry(NULL)
 	, m_pabSpecialBuildingNotRequired(NULL)
 	, m_pabSpecialistValid(NULL)
-
-	, m_ppiImprovementYieldChanges(NULL)
-	, m_bAnyImprovementYieldChange(false)
-
-	, m_iAttitudeShareMod(0)
-	, m_iEnslavementChance(0)
-	, m_iPopulationgrowthratepercentage(0)
-	, m_iReligionSpreadRate(0)
-	, m_iCivicHappiness(0)
-	, m_iDistantUnitSupportCostModifier(0)
-	, m_iExtraCityDefense(0)
-	, m_iForeignTradeRouteModifier(0)
-	, m_iTaxRateUnhappiness(0)
-	, m_iInflationModifier(0)
-	, m_iHurryInflationModifier(0)
-	, m_iHurryCostModifier(0)
-	, m_iSharedCivicTradeRouteModifier(0)
-	, m_iLandmarkHappiness(0)
-	, m_iCorporationSpreadRate(0)
-	, m_iForeignerUnhappyPercent(0)
-	, m_iCityLimit(0)
-	, m_iCityOverLimitUnhappy(0)
-	, m_bFixedBorders(false)
-	, m_bNoCapitalUnhappiness(false)
-	, m_bNoLandmarkAnger(false)
-	, m_piBonusMintedPercent(NULL)
-	, m_piImprovementHappinessChanges(NULL)
-	, m_piImprovementHealthPercentChanges(NULL)
 	, m_ppiSpecialistYieldPercentChanges(NULL)
 	, m_ppiSpecialistCommercePercentChanges(NULL)
-	, m_piLandmarkYieldChanges(NULL)
-	, m_piFreeSpecialistCount(NULL)
-	, m_paiUnitCombatProductionModifier(NULL)
-	, m_piUnitProductionModifier(NULL)
 	, m_ppiTerrainYieldChanges(NULL)
-	, m_piFlavorValue(NULL)
-	, m_piCivicAttitudeChanges(NULL)
-	, m_pszCivicAttitudeReason(NULL)
-	, m_ppiBuildingCommerceModifier(NULL)
 	, m_ppiBuildingCommerceChange(NULL)
+	, m_ppiBuildingCommerceModifier(NULL)
 	, m_ppiBonusCommerceModifier(NULL)
-	, m_iNationalCaptureProbabilityModifier(0)
-	, m_iNationalCaptureResistanceModifier(0)
-	, m_iFreedomFighterChange(0)
-	, m_bAllReligionsActive(false)
-	, m_bBansNonStateReligions(false)
-	, m_bFreedomFighter(false)
-	, m_bPolicy(false)
-	, m_PropertyManipulators()
-	{ }
+	, m_ppiImprovementYieldChanges(NULL)
+	, m_bSparseListsCached(false)
+{
+	CvInfoUtil(this).initDataMembers();
+}
 
 
 //------------------------------------------------------------------------------------------------------
@@ -175,12 +70,10 @@ CvCivicInfo::CvCivicInfo()
 //------------------------------------------------------------------------------------------------------
 CvCivicInfo::~CvCivicInfo()
 {
-	SAFE_DELETE_ARRAY(m_piYieldModifier);
-	SAFE_DELETE_ARRAY(m_piCapitalYieldModifier);
-	SAFE_DELETE_ARRAY(m_piTradeYieldModifier);
-	SAFE_DELETE_ARRAY(m_piCommerceModifier);
-	SAFE_DELETE_ARRAY(m_piCapitalCommerceModifier);
-	SAFE_DELETE_ARRAY(m_piSpecialistExtraCommerce);
+	// The yield/commerce arrays declared via addYields/addCommerce in getDataMembers()
+	// are owned by the wrappers and freed here.
+	CvInfoUtil(this).uninitDataMembers();
+
 	SAFE_DELETE_ARRAY(m_paiBuildingHappinessChanges);
 	SAFE_DELETE_ARRAY(m_paiBuildingHealthChanges);
 	SAFE_DELETE_ARRAY(m_paiFeatureHappinessChanges);
@@ -194,7 +87,6 @@ CvCivicInfo::~CvCivicInfo()
 	SAFE_DELETE_ARRAY(m_pszCivicAttitudeReason);
 	SAFE_DELETE_ARRAY(m_paiUnitCombatProductionModifier);
 	SAFE_DELETE_ARRAY(m_piUnitProductionModifier);
-	SAFE_DELETE_ARRAY(m_piLandmarkYieldChanges);
 	SAFE_DELETE_ARRAY(m_piFreeSpecialistCount);
 	SAFE_DELETE_ARRAY(m_piImprovementHappinessChanges);
 	SAFE_DELETE_ARRAY(m_piImprovementHealthPercentChanges);
@@ -1202,6 +1094,133 @@ CvString CvCivicInfo::getCivicAttitudeReasonValuesVectorElement(int i) const	{ r
 
 
 
+void CvCivicInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order for readability. The checksum is NOT delegated
+	// to these wrappers (see the explicit getCheckSum below), so this order carries no
+	// checksum significance; readXml order is irrelevant to loaded values.
+	util
+		.addEnumAsInt(m_iCivicOptionType, L"CivicOptionType")
+		.add(m_iAnarchyLength, L"iAnarchyLength")
+		.addEnumAsInt(m_iUpkeep, L"Upkeep")
+		.add(m_iAIWeight, L"iAIWeight")
+		.add(m_iGreatPeopleRateModifier, L"iGreatPeopleRateModifier")
+		.add(m_iGreatGeneralRateModifier, L"iGreatGeneralRateModifier")
+		.add(m_iDomesticGreatGeneralRateModifier, L"iDomesticGreatGeneralRateModifier")
+		.add(m_iStateReligionGreatPeopleRateModifier, L"iStateReligionGreatPeopleRateModifier")
+		.add(m_iDistanceMaintenanceModifier, L"iDistanceMaintenanceModifier")
+		.add(m_iNumCitiesMaintenanceModifier, L"iNumCitiesMaintenanceModifier")
+		.add(m_iHomeAreaMaintenanceModifier, L"iHomeAreaMaintenanceModifier")
+		.add(m_iOtherAreaMaintenanceModifier, L"iOtherAreaMaintenanceModifier")
+		.add(m_iCorporationMaintenanceModifier, L"iCorporationMaintenanceModifier")
+		.add(m_iExtraHealth, L"iExtraHealth")
+		.add(m_iFreeExperience, L"iFreeExperience")
+		.add(m_iWorkerSpeedModifier, L"iWorkerSpeedModifier")
+		.add(m_iImprovementUpgradeRateModifier, L"iImprovementUpgradeRateModifier")
+		.add(m_iMilitaryProductionModifier, L"iMilitaryProductionModifier")
+		.add(m_iFreeUnitUpkeepCivilian, L"iFreeUnitUpkeepCivilian")
+		.add(m_iFreeUnitUpkeepMilitary, L"iFreeUnitUpkeepMilitary")
+		.add(m_iFreeUnitUpkeepCivilianPopPercent, L"iFreeUnitUpkeepCivilianPopPercent")
+		.add(m_iFreeUnitUpkeepMilitaryPopPercent, L"iFreeUnitUpkeepMilitaryPopPercent")
+		.add(m_iCivilianUnitUpkeepMod, L"iCivilianUnitUpkeepMod")
+		.add(m_iMilitaryUnitUpkeepMod, L"iMilitaryUnitUpkeepMod")
+		.add(m_iHappyPerMilitaryUnit, L"iHappyPerMilitaryUnit")
+		.add(m_iLargestCityHappiness, L"iLargestCityHappiness")
+		.add(m_iWarWearinessModifier, L"iWarWearinessModifier")
+		.add(m_iFreeSpecialist, L"iFreeSpecialist")
+		.add(m_iTradeRoutes, L"iTradeRoutes")
+		.addEnum(m_iTechPrereq, L"TechPrereq")
+		.add(m_iCivicPercentAnger, L"iCivicPercentAnger")
+		.add(m_iMaxConscript, L"iMaxConscript")
+		.add(m_iStateReligionHappiness, L"iStateReligionHappiness")
+		.add(m_iNonStateReligionHappiness, L"iNonStateReligionHappiness")
+		.add(m_iStateReligionUnitProductionModifier, L"iStateReligionUnitProductionModifier")
+		.add(m_iStateReligionBuildingProductionModifier, L"iStateReligionBuildingProductionModifier")
+		.add(m_iStateReligionFreeExperience, L"iStateReligionFreeExperience")
+		.add(m_iExpInBorderModifier, L"iExpInBorderModifier")
+		.add(m_iRevIdxLocal, L"iRevIdxLocal")
+		.add(m_iRevIdxNational, L"iRevIdxNational")
+		.add(m_iRevIdxDistanceModifier, L"iRevIdxDistanceModifier")
+		.add(m_iRevIdxHolyCityGood, L"iRevIdxHolyCityGood")
+		.add(m_iRevIdxHolyCityBad, L"iRevIdxHolyCityBad")
+		.add(m_iRevIdxSwitchTo, L"iRevIdxSwitchTo")
+		.add(m_iRevReligiousFreedom, L"iRevReligiousFreedom")
+		.add(m_iRevLaborFreedom, L"iRevLaborFreedom")
+		.add(m_iRevEnvironmentalProtection, L"iRevEnvironmentalProtection")
+		.add(m_iRevDemocracyLevel, L"iRevDemocracyLevel")
+		.add(m_iAttitudeShareMod, L"iAttitudeShareMod")
+		.add(m_iEnslavementChance, L"iEnslavementChance")
+		.add(m_iPopulationgrowthratepercentage, L"iPopulationgrowthratepercentage")
+		.add(m_iReligionSpreadRate, L"iReligionSpreadRate")
+		.add(m_iCivicHappiness, L"iCivicHappiness")
+		.add(m_iDistantUnitSupportCostModifier, L"iDistantUnitSupportCostModifier")
+		.add(m_iExtraCityDefense, L"iExtraCityDefense")
+		.add(m_iForeignTradeRouteModifier, L"iForeignTradeRouteModifier")
+		.add(m_iTaxRateUnhappiness, L"iTaxRateUnhappiness")
+		.add(m_iInflationModifier, L"iInflation")
+		.add(m_iHurryInflationModifier, L"iHurryInflationModifier")
+		.add(m_iHurryCostModifier, L"iHurryCostModifier")
+		.add(m_iSharedCivicTradeRouteModifier, L"iSharedCivicTradeRouteModifier")
+		.add(m_iLandmarkHappiness, L"iLandmarkHappiness")
+		// Legacy read() loaded <iCorporationSpreadRate> into m_iLandmarkHappiness (copy-paste bug)
+		// and never filled m_iCorporationSpreadRate. Declaring it correctly fixes that; no current
+		// XML uses the tag, so loaded data and the asset checksum are unchanged today.
+		.add(m_iCorporationSpreadRate, L"iCorporationSpreadRate")
+		.add(m_iForeignerUnhappyPercent, L"iForeignerUnhappyPercent")
+		.add(m_iCityLimit, L"iCityLimit")
+		.add(m_iCityOverLimitUnhappy, L"iCityOverLimitUnhappy") // not in the legacy checksum — one reason getCheckSum stays explicit
+		.add(m_iNationalCaptureProbabilityModifier, L"iNationalCaptureProbabilityModifier")
+		.add(m_iNationalCaptureResistanceModifier, L"iNationalCaptureResistanceModifier")
+		.add(m_iFreedomFighterChange, L"iFreedomFighterChange")
+
+		.add(m_fRevIdxNationalityMod, L"fRevIdxNationalityMod")
+		.add(m_fRevIdxBadReligionMod, L"fRevIdxBadReligionMod")
+		.add(m_fRevIdxGoodReligionMod, L"fRevIdxGoodReligionMod")
+		.add(m_fRevViolentMod, L"fRevViolentMod")
+
+		.add(m_bUpgradeAnywhere, L"bUpgradeAnywhere")
+		.add(m_bAllowInquisitions, L"bAllowInquisitions")
+		.add(m_bDisallowInquisitions, L"bDisallowInquisitions")
+		.add(m_bCommunism, L"bCommunism")
+		.add(m_bFreeSpeech, L"bFreeSpeech")
+		.add(m_bCanDoElection, L"bCanDoElection")
+		.add(m_bMilitaryFoodProduction, L"bMilitaryFoodProduction")
+		.add(m_bNoUnhealthyPopulation, L"bNoUnhealthyPopulation")
+		.add(m_bBuildingOnlyHealthy, L"bBuildingOnlyHealthy")
+		.add(m_bNoForeignTrade, L"bNoForeignTrade")
+		.add(m_bNoCorporations, L"bNoCorporations")
+		.add(m_bNoForeignCorporations, L"bNoForeignCorporations")
+		.add(m_bStateReligion, L"bStateReligion")
+		.add(m_bNoNonStateReligionSpread, L"bNoNonStateReligionSpread")
+		.add(m_bFixedBorders, L"bFixedBorders")
+		.add(m_bNoCapitalUnhappiness, L"bNoCapitalUnhappiness")
+		.add(m_bNoLandmarkAnger, L"bNoLandmarkAnger")
+		.add(m_bAllReligionsActive, L"bAllReligionsActive")
+		.add(m_bBansNonStateReligions, L"bBansNonStateReligions")
+		.add(m_bFreedomFighter, L"bFreedomFighter")
+		.add(m_bPolicy, L"bPolicy")
+
+		.addYields(m_piYieldModifier, L"YieldModifiers")
+		.addYields(m_piCapitalYieldModifier, L"CapitalYieldModifiers")
+		.addYields(m_piTradeYieldModifier, L"TradeYieldModifiers")
+		.addCommerce(m_piCommerceModifier, L"CommerceModifiers")
+		.addCommerce(m_piCapitalCommerceModifier, L"CapitalCommerceModifiers")
+		.addCommerce(m_piSpecialistExtraCommerce, L"SpecialistExtraCommerces")
+		.addYields(m_piLandmarkYieldChanges, L"LandmarkYieldChanges")
+
+		.add(m_aBuildingProductionModifier, L"BuildingProductionModifiers")
+		.add(m_aiCategories, L"Categories")
+		.add(m_PropertyManipulators)
+	;
+}
+
+
+// Kept explicit (NOT delegated to CvInfoUtil) for byte-identical asset-checksum parity:
+//  - hand-written fields (SetVariableListTagPair dense arrays, the int** 2D tables, the
+//    readPass3 civic-attitude/unit-production arrays) interleave mid-order with the
+//    declarative fields, and
+//  - the legacy sum omits m_iCityOverLimitUnhappy even though it is read and copied.
+// Delegating would reorder/extend the fold and change every existing save's checksum.
 void CvCivicInfo::getCheckSum(uint32_t& iSum) const
 {
 	PROFILE_EXTRA_FUNC();
@@ -1398,172 +1417,16 @@ bool CvCivicInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
+	// Scalars, FK enums, yield/commerce arrays, BuildingProductionModifiers, Categories and the
+	// property manipulators are declared in getDataMembers() and read here. NOTE: this fixes a
+	// legacy copy-paste bug — read() used to load <iCorporationSpreadRate> into m_iLandmarkHappiness
+	// (stomping <iLandmarkHappiness>) and never filled m_iCorporationSpreadRate at all. No current
+	// XML uses the tag, so loaded data is unchanged today.
+	CvInfoUtil(this).readXml(pXML);
+
 	int j;
 	int iNumSibs=0;				// the number of siblings the current xml node has
 	int iIndex;
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"CivicOptionType");
-	m_iCivicOptionType = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalTypeEnum(m_iTechPrereq, L"TechPrereq");
-
-	pXML->GetOptionalChildXmlValByName(&m_iAnarchyLength, L"iAnarchyLength");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"Upkeep");
-	m_iUpkeep = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(&m_iAIWeight, L"iAIWeight");
-	pXML->GetOptionalChildXmlValByName(&m_iGreatPeopleRateModifier, L"iGreatPeopleRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGreatGeneralRateModifier, L"iGreatGeneralRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iDomesticGreatGeneralRateModifier, L"iDomesticGreatGeneralRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iStateReligionGreatPeopleRateModifier, L"iStateReligionGreatPeopleRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iDistanceMaintenanceModifier, L"iDistanceMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iNumCitiesMaintenanceModifier, L"iNumCitiesMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iHomeAreaMaintenanceModifier, L"iHomeAreaMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iOtherAreaMaintenanceModifier, L"iOtherAreaMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iCorporationMaintenanceModifier, L"iCorporationMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iExtraHealth, L"iExtraHealth");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeExperience, L"iFreeExperience");
-	pXML->GetOptionalChildXmlValByName(&m_iWorkerSpeedModifier, L"iWorkerSpeedModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iImprovementUpgradeRateModifier, L"iImprovementUpgradeRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iMilitaryProductionModifier, L"iMilitaryProductionModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeUnitUpkeepCivilian, L"iFreeUnitUpkeepCivilian");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeUnitUpkeepMilitary, L"iFreeUnitUpkeepMilitary");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeUnitUpkeepCivilianPopPercent, L"iFreeUnitUpkeepCivilianPopPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeUnitUpkeepMilitaryPopPercent, L"iFreeUnitUpkeepMilitaryPopPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iCivilianUnitUpkeepMod, L"iCivilianUnitUpkeepMod");
-	pXML->GetOptionalChildXmlValByName(&m_iMilitaryUnitUpkeepMod, L"iMilitaryUnitUpkeepMod");
-	pXML->GetOptionalChildXmlValByName(&m_iHappyPerMilitaryUnit, L"iHappyPerMilitaryUnit");
-	pXML->GetOptionalChildXmlValByName(&m_bMilitaryFoodProduction, L"bMilitaryFoodProduction");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxConscript, L"iMaxConscript");
-	pXML->GetOptionalChildXmlValByName(&m_bNoUnhealthyPopulation, L"bNoUnhealthyPopulation");
-	pXML->GetOptionalChildXmlValByName(&m_bBuildingOnlyHealthy, L"bBuildingOnlyHealthy");
-	pXML->GetOptionalChildXmlValByName(&m_iLargestCityHappiness, L"iLargestCityHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iWarWearinessModifier, L"iWarWearinessModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeSpecialist, L"iFreeSpecialist");
-	pXML->GetOptionalChildXmlValByName(&m_iTradeRoutes, L"iTradeRoutes");
-	pXML->GetOptionalChildXmlValByName(&m_bNoForeignTrade, L"bNoForeignTrade");
-	pXML->GetOptionalChildXmlValByName(&m_bNoCorporations, L"bNoCorporations");
-	pXML->GetOptionalChildXmlValByName(&m_bNoForeignCorporations, L"bNoForeignCorporations");
-	pXML->GetOptionalChildXmlValByName(&m_iCivicPercentAnger, L"iCivicPercentAnger");
-	pXML->GetOptionalChildXmlValByName(&m_bStateReligion, L"bStateReligion");
-	pXML->GetOptionalChildXmlValByName(&m_bNoNonStateReligionSpread, L"bNoNonStateReligionSpread");
-	pXML->GetOptionalChildXmlValByName(&m_iStateReligionHappiness, L"iStateReligionHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iNonStateReligionHappiness, L"iNonStateReligionHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iStateReligionUnitProductionModifier, L"iStateReligionUnitProductionModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iStateReligionBuildingProductionModifier, L"iStateReligionBuildingProductionModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iStateReligionFreeExperience, L"iStateReligionFreeExperience");
-	pXML->GetOptionalChildXmlValByName(&m_iExpInBorderModifier, L"iExpInBorderModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iRevIdxLocal, L"iRevIdxLocal");
-	pXML->GetOptionalChildXmlValByName(&m_iRevIdxNational, L"iRevIdxNational");
-	pXML->GetOptionalChildXmlValByName(&m_iRevIdxDistanceModifier, L"iRevIdxDistanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iRevIdxHolyCityGood, L"iRevIdxHolyCityGood");
-	pXML->GetOptionalChildXmlValByName(&m_iRevIdxHolyCityBad, L"iRevIdxHolyCityBad");
-	pXML->GetOptionalChildXmlValByName(&m_iRevIdxSwitchTo, L"iRevIdxSwitchTo");
-	pXML->GetOptionalChildXmlValByName(&m_iRevReligiousFreedom, L"iRevReligiousFreedom");
-	pXML->GetOptionalChildXmlValByName(&m_iRevLaborFreedom, L"iRevLaborFreedom");
-	pXML->GetOptionalChildXmlValByName(&m_iRevEnvironmentalProtection, L"iRevEnvironmentalProtection");
-	pXML->GetOptionalChildXmlValByName(&m_iRevDemocracyLevel, L"iRevDemocracyLevel");
-	pXML->GetOptionalChildXmlValByName(&m_iAttitudeShareMod, L"iAttitudeShareMod");
-	pXML->GetOptionalChildXmlValByName(&m_iPopulationgrowthratepercentage, L"iPopulationgrowthratepercentage");
-	pXML->GetOptionalChildXmlValByName(&m_iReligionSpreadRate, L"iReligionSpreadRate");
-	pXML->GetOptionalChildXmlValByName(&m_iCivicHappiness, L"iCivicHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iDistantUnitSupportCostModifier, L"iDistantUnitSupportCostModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iExtraCityDefense, L"iExtraCityDefense");
-	pXML->GetOptionalChildXmlValByName(&m_iForeignTradeRouteModifier, L"iForeignTradeRouteModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iTaxRateUnhappiness, L"iTaxRateUnhappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iInflationModifier, L"iInflation");
-	pXML->GetOptionalChildXmlValByName(&m_iHurryInflationModifier, L"iHurryInflationModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iHurryCostModifier, L"iHurryCostModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iSharedCivicTradeRouteModifier, L"iSharedCivicTradeRouteModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iLandmarkHappiness, L"iLandmarkHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iLandmarkHappiness, L"iCorporationSpreadRate");
-	pXML->GetOptionalChildXmlValByName(&m_iForeignerUnhappyPercent, L"iForeignerUnhappyPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iCityLimit, L"iCityLimit");
-	pXML->GetOptionalChildXmlValByName(&m_iCityOverLimitUnhappy, L"iCityOverLimitUnhappy");
-	pXML->GetOptionalChildXmlValByName(&m_iNationalCaptureProbabilityModifier, L"iNationalCaptureProbabilityModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iNationalCaptureResistanceModifier, L"iNationalCaptureResistanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iFreedomFighterChange, L"iFreedomFighterChange");
-
-	pXML->GetOptionalChildXmlValByName(&m_fRevIdxNationalityMod, L"fRevIdxNationalityMod");
-	pXML->GetOptionalChildXmlValByName(&m_fRevIdxBadReligionMod, L"fRevIdxBadReligionMod");
-	pXML->GetOptionalChildXmlValByName(&m_fRevIdxGoodReligionMod, L"fRevIdxGoodReligionMod");
-	pXML->GetOptionalChildXmlValByName(&m_fRevViolentMod, L"fRevViolentMod");
-
-	pXML->GetOptionalChildXmlValByName(&m_bUpgradeAnywhere, L"bUpgradeAnywhere");
-	pXML->GetOptionalChildXmlValByName(&m_bAllowInquisitions, L"bAllowInquisitions");
-	pXML->GetOptionalChildXmlValByName(&m_bDisallowInquisitions, L"bDisallowInquisitions");
-	pXML->GetOptionalChildXmlValByName(&m_bCommunism, L"bCommunism");
-	pXML->GetOptionalChildXmlValByName(&m_bFreeSpeech, L"bFreeSpeech");
-	pXML->GetOptionalChildXmlValByName(&m_bCanDoElection, L"bCanDoElection");
-	pXML->GetOptionalChildXmlValByName(&m_bFixedBorders, L"bFixedBorders");
-	pXML->GetOptionalChildXmlValByName(&m_bNoCapitalUnhappiness, L"bNoCapitalUnhappiness");
-	pXML->GetOptionalChildXmlValByName(&m_bNoLandmarkAnger, L"bNoLandmarkAnger");
-	pXML->GetOptionalChildXmlValByName(&m_bAllReligionsActive, L"bAllReligionsActive");
-	pXML->GetOptionalChildXmlValByName(&m_bBansNonStateReligions, L"bBansNonStateReligions");
-	pXML->GetOptionalChildXmlValByName(&m_bFreedomFighter, L"bFreedomFighter");
-	pXML->GetOptionalChildXmlValByName(&m_bPolicy, L"bPolicy");
-
-
-	if (pXML->TryMoveToXmlFirstChild(L"YieldModifiers"))
-	{
-		pXML->SetYields(&m_piYieldModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piYieldModifier);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CapitalYieldModifiers"))
-	{
-		pXML->SetYields(&m_piCapitalYieldModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCapitalYieldModifier);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"TradeYieldModifiers"))
-	{
-		pXML->SetYields(&m_piTradeYieldModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piTradeYieldModifier);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CommerceModifiers"))
-	{
-		pXML->SetCommerce(&m_piCommerceModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCommerceModifier);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CapitalCommerceModifiers"))
-	{
-		pXML->SetCommerce(&m_piCapitalCommerceModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCapitalCommerceModifier);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"SpecialistExtraCommerces"))
-	{
-		pXML->SetCommerce(&m_piSpecialistExtraCommerce);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piSpecialistExtraCommerce);
-	}
 
 	pXML->SetVariableListTagPair(&m_pabHurry, L"Hurrys", GC.getNumHurryInfos());
 	pXML->SetVariableListTagPair(&m_pabSpecialBuildingNotRequired, L"SpecialBuildingNotRequireds",  GC.getNumSpecialBuildingInfos());
@@ -1571,8 +1434,6 @@ bool CvCivicInfo::read(CvXMLLoadUtility* pXML)
 	pXML->SetVariableListTagPair(&m_paiBuildingHappinessChanges, L"BuildingHappinessChanges", GC.getNumBuildingInfos());
 	pXML->SetVariableListTagPair(&m_paiBuildingHealthChanges, L"BuildingHealthChanges", GC.getNumBuildingInfos());
 	pXML->SetVariableListTagPair(&m_paiFeatureHappinessChanges, L"FeatureHappinessChanges", GC.getNumFeatureInfos());
-
-	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
 
 	m_bAnyImprovementYieldChange = false;
 	if (pXML->TryMoveToXmlFirstChild(L"ImprovementYieldChanges"))
@@ -1637,8 +1498,6 @@ bool CvCivicInfo::read(CvXMLLoadUtility* pXML)
 	pXML->SetVariableListTagPair(&m_piImprovementHealthPercentChanges, L"ImprovementHealthPercentChanges", GC.getNumImprovementInfos());
 	pXML->SetVariableListTagPair(&m_paiUnitCombatProductionModifier, L"UnitCombatProductionModifiers", GC.getNumUnitCombatInfos());
 
-	m_aBuildingProductionModifier.read(pXML, L"BuildingProductionModifiers");
-
 	if (pXML->TryMoveToXmlFirstChild(L"UnitProductionModifiers"))
 	{
 		const int iNumSibs = pXML->GetXmlChildrenNumber();
@@ -1669,17 +1528,6 @@ bool CvCivicInfo::read(CvXMLLoadUtility* pXML)
 
 	pXML->SetVariableListTagPair(&m_piFlavorValue, L"Flavors", GC.getNumFlavorTypes());
 	pXML->SetVariableListTagPair(&m_piFreeSpecialistCount, L"FreeSpecialistCounts", GC.getNumSpecialistInfos());
-	pXML->GetOptionalChildXmlValByName(&m_iEnslavementChance, L"iEnslavementChance");
-
-	if (pXML->TryMoveToXmlFirstChild(L"LandmarkYieldChanges"))
-	{
-		pXML->SetYields(&m_piLandmarkYieldChanges);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piLandmarkYieldChanges);
-	}
 
 	if (pXML->TryMoveToXmlFirstChild(L"SpecialistYieldPercentChanges"))
 	{
@@ -1956,7 +1804,6 @@ bool CvCivicInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	m_PropertyManipulators.read(pXML);
 	return true;
 }
 
@@ -2025,139 +1872,17 @@ void CvCivicInfo::copyNonDefaults(const CvCivicInfo* pClassInfo)
 	PROFILE_EXTRA_FUNC();
 	bool bDefault = false;
 	int iDefault = 0;
-	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	float fDefault = 0.0f;
-	CvString cDefault = CvString::format("").GetCString();
 	CvWString wDefault = CvWString::format(L"").GetCString();
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getCivicOptionType() == iTextDefault) m_iCivicOptionType = pClassInfo->getCivicOptionType();
-	if (getTechPrereq() == iTextDefault) m_iTechPrereq = pClassInfo->getTechPrereq();
-	if (getAnarchyLength() == iDefault) m_iAnarchyLength = pClassInfo->getAnarchyLength();
-	if (getUpkeep() == iTextDefault) m_iUpkeep = pClassInfo->getUpkeep();
-
-	if (getAIWeight() == iDefault) m_iAIWeight = pClassInfo->getAIWeight();
-	if (getGreatPeopleRateModifier() == iDefault) m_iGreatPeopleRateModifier = pClassInfo->getGreatPeopleRateModifier();
-	if (getGreatGeneralRateModifier() == iDefault) m_iGreatGeneralRateModifier = pClassInfo->getGreatGeneralRateModifier();
-	if (getDomesticGreatGeneralRateModifier() == iDefault) m_iDomesticGreatGeneralRateModifier = pClassInfo->getDomesticGreatGeneralRateModifier();
-	if (getStateReligionGreatPeopleRateModifier() == iDefault) m_iStateReligionGreatPeopleRateModifier = pClassInfo->getStateReligionGreatPeopleRateModifier();
-	if (getDistanceMaintenanceModifier() == iDefault) m_iDistanceMaintenanceModifier = pClassInfo->getDistanceMaintenanceModifier();
-	if (getNumCitiesMaintenanceModifier() == iDefault) m_iNumCitiesMaintenanceModifier = pClassInfo->getNumCitiesMaintenanceModifier();
-	if (getCorporationMaintenanceModifier() == iDefault) m_iCorporationMaintenanceModifier = pClassInfo->getCorporationMaintenanceModifier();
-	if (getExtraHealth() == iDefault) m_iExtraHealth = pClassInfo->getExtraHealth();
-	if (getFreeExperience() == iDefault) m_iFreeExperience = pClassInfo->getFreeExperience();
-	if (getWorkerSpeedModifier() == iDefault) m_iWorkerSpeedModifier = pClassInfo->getWorkerSpeedModifier();
-	if (getImprovementUpgradeRateModifier() == iDefault) m_iImprovementUpgradeRateModifier = pClassInfo->getImprovementUpgradeRateModifier();
-	if (getMilitaryProductionModifier() == iDefault) m_iMilitaryProductionModifier = pClassInfo->getMilitaryProductionModifier();
-	if (m_iFreeUnitUpkeepCivilian == iDefault) m_iFreeUnitUpkeepCivilian = pClassInfo->getFreeUnitUpkeepCivilian();
-	if (m_iFreeUnitUpkeepMilitary == iDefault) m_iFreeUnitUpkeepMilitary = pClassInfo->getFreeUnitUpkeepMilitary();
-	if (m_iFreeUnitUpkeepCivilianPopPercent == iDefault) m_iFreeUnitUpkeepCivilianPopPercent = pClassInfo->getFreeUnitUpkeepCivilianPopPercent();
-	if (m_iFreeUnitUpkeepMilitaryPopPercent == iDefault) m_iFreeUnitUpkeepMilitaryPopPercent = pClassInfo->getFreeUnitUpkeepMilitaryPopPercent();
-	if (m_iCivilianUnitUpkeepMod == iDefault) m_iCivilianUnitUpkeepMod = pClassInfo->getCivilianUnitUpkeepMod();
-	if (m_iMilitaryUnitUpkeepMod == iDefault) m_iMilitaryUnitUpkeepMod = pClassInfo->getMilitaryUnitUpkeepMod();
-	if (getHappyPerMilitaryUnit() == iDefault) m_iHappyPerMilitaryUnit = pClassInfo->getHappyPerMilitaryUnit();
-	if (isMilitaryFoodProduction() == bDefault) m_bMilitaryFoodProduction = pClassInfo->isMilitaryFoodProduction();
-	if (getMaxConscript() == iDefault) m_iMaxConscript = pClassInfo->getMaxConscript();
-	if (isNoUnhealthyPopulation() == bDefault) m_bNoUnhealthyPopulation = pClassInfo->isNoUnhealthyPopulation();
-	if (isBuildingOnlyHealthy() == bDefault) m_bBuildingOnlyHealthy = pClassInfo->isBuildingOnlyHealthy();
-	if (getLargestCityHappiness() == iDefault) m_iLargestCityHappiness = pClassInfo->getLargestCityHappiness();
-	if (getWarWearinessModifier() == iDefault) m_iWarWearinessModifier = pClassInfo->getWarWearinessModifier();
-	if (getFreeSpecialist() == iDefault) m_iFreeSpecialist = pClassInfo->getFreeSpecialist();
-	if (getTradeRoutes() == iDefault) m_iTradeRoutes = pClassInfo->getTradeRoutes();
-	if (isNoForeignTrade() == bDefault) m_bNoForeignTrade = pClassInfo->isNoForeignTrade();
-	if (isNoCorporations() == bDefault) m_bNoCorporations = pClassInfo->isNoCorporations();
-	if (isNoForeignCorporations() == bDefault) m_bNoForeignCorporations = pClassInfo->isNoForeignCorporations();
-	if (getCivicPercentAnger() == iDefault) m_iCivicPercentAnger = pClassInfo->getCivicPercentAnger();
-	if (isStateReligion() == bDefault) m_bStateReligion = pClassInfo->isStateReligion();
-	if (isNoNonStateReligionSpread() == bDefault) m_bNoNonStateReligionSpread = pClassInfo->isNoNonStateReligionSpread();
-	if (getStateReligionHappiness() == iDefault) m_iStateReligionHappiness = pClassInfo->getStateReligionHappiness();
-	if (getNonStateReligionHappiness() == iDefault) m_iNonStateReligionHappiness = pClassInfo->getNonStateReligionHappiness();
-	if (getStateReligionUnitProductionModifier() == iDefault) m_iStateReligionUnitProductionModifier = pClassInfo->getStateReligionUnitProductionModifier();
-	if (getStateReligionBuildingProductionModifier() == iDefault) m_iStateReligionBuildingProductionModifier = pClassInfo->getStateReligionBuildingProductionModifier();
-	if (getStateReligionFreeExperience() == iDefault) m_iStateReligionFreeExperience = pClassInfo->getStateReligionFreeExperience();
-	if (getExpInBorderModifier() == iDefault) m_iExpInBorderModifier = pClassInfo->getExpInBorderModifier();
-	if (isUpgradeAnywhere() == bDefault) m_bUpgradeAnywhere = pClassInfo->isUpgradeAnywhere();
-	if (isAllowInquisitions() == bDefault) m_bAllowInquisitions = pClassInfo->isAllowInquisitions();
-	if (isDisallowInquisitions() == bDefault) m_bDisallowInquisitions = pClassInfo->isDisallowInquisitions();
-	if (getRevIdxLocal() == iDefault) m_iRevIdxLocal = pClassInfo->getRevIdxLocal();
-	if (getRevIdxNational() == iDefault) m_iRevIdxNational = pClassInfo->getRevIdxNational();
-	if (getRevIdxDistanceModifier() == iDefault) m_iRevIdxDistanceModifier = pClassInfo->getRevIdxDistanceModifier();
-	if (getRevIdxHolyCityGood() == iDefault) m_iRevIdxHolyCityGood = pClassInfo->getRevIdxHolyCityGood();
-	if (getRevIdxHolyCityBad() == iDefault) m_iRevIdxHolyCityBad = pClassInfo->getRevIdxHolyCityBad();
-	if (getRevIdxSwitchTo() == iDefault) m_iRevIdxSwitchTo = pClassInfo->getRevIdxSwitchTo();
-	if (getRevIdxNationalityMod() == fDefault) m_fRevIdxNationalityMod = pClassInfo->getRevIdxNationalityMod();
-	if (getRevIdxBadReligionMod() == fDefault) m_fRevIdxBadReligionMod = pClassInfo->getRevIdxBadReligionMod();
-	if (getRevIdxGoodReligionMod() == fDefault) m_fRevIdxGoodReligionMod = pClassInfo->getRevIdxGoodReligionMod();
-	if (getRevViolentMod() == fDefault) m_fRevViolentMod = pClassInfo->getRevViolentMod();
-	if (getRevReligiousFreedom() == iDefault) m_iRevReligiousFreedom = pClassInfo->getRevReligiousFreedom();
-	if (getRevLaborFreedom() == iDefault) m_iRevLaborFreedom = pClassInfo->getRevLaborFreedom();
-	if (getRevEnvironmentalProtection() == iDefault) m_iRevEnvironmentalProtection = pClassInfo->getRevEnvironmentalProtection();
-	if (getRevDemocracyLevel() == iDefault) m_iRevDemocracyLevel = pClassInfo->getRevDemocracyLevel();
-	if (getFreedomFighterChange() == iDefault) m_iFreedomFighterChange = pClassInfo->getFreedomFighterChange();
-	if (isCommunism() == bDefault) m_bCommunism = pClassInfo->isCommunism();
-	if (isFreeSpeech() == bDefault) m_bFreeSpeech = pClassInfo->isFreeSpeech();
-	if (isCanDoElection() == bDefault) m_bCanDoElection = pClassInfo->isCanDoElection();
-	if (isFreedomFighter() == bDefault) m_bFreedomFighter = pClassInfo->isFreedomFighter();
-	if (isPolicy() == bDefault) m_bPolicy = pClassInfo->isPolicy();
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
-
-	for ( int i = 0; i < NUM_YIELD_TYPES; i++ )
-	{
-		if ( getYieldModifier(i) == iDefault && pClassInfo->getYieldModifier(i) != iDefault)
-		{
-			if ( NULL == m_piYieldModifier )
-			{
-				CvXMLLoadUtility::InitList(&m_piYieldModifier,NUM_YIELD_TYPES,iDefault);
-			}
-			m_piYieldModifier[i] = pClassInfo->getYieldModifier(i);
-		}
-		if ( getCapitalYieldModifier(i) == iDefault && pClassInfo->getCapitalYieldModifier(i) != iDefault)
-		{
-			if ( NULL == m_piCapitalYieldModifier )
-			{
-				CvXMLLoadUtility::InitList(&m_piCapitalYieldModifier,NUM_YIELD_TYPES,iDefault);
-			}
-			m_piCapitalYieldModifier[i] = pClassInfo->getCapitalYieldModifier(i);
-		}
-		if ( getTradeYieldModifier(i) == iDefault && pClassInfo->getTradeYieldModifier(i) != iDefault)
-		{
-			if ( NULL == m_piTradeYieldModifier )
-			{
-				CvXMLLoadUtility::InitList(&m_piTradeYieldModifier,NUM_YIELD_TYPES,iDefault);
-			}
-			m_piTradeYieldModifier[i] = pClassInfo->getTradeYieldModifier(i);
-		}
-	}
-
-	for ( int i = 0; i < NUM_COMMERCE_TYPES; i++ )
-	{
-		if ( getCommerceModifier(i) == iDefault && pClassInfo->getCommerceModifier(i) != iDefault)
-		{
-			if ( NULL == m_piCommerceModifier )
-			{
-				CvXMLLoadUtility::InitList(&m_piCommerceModifier,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_piCommerceModifier[i] = pClassInfo->getCommerceModifier(i);
-		}
-		if ( getCapitalCommerceModifier(i) == iDefault && pClassInfo->getCapitalCommerceModifier(i) != iDefault)
-		{
-			if ( NULL == m_piCapitalCommerceModifier )
-			{
-				CvXMLLoadUtility::InitList(&m_piCapitalCommerceModifier,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_piCapitalCommerceModifier[i] = pClassInfo->getCapitalCommerceModifier(i);
-		}
-		if ( getSpecialistExtraCommerce(i) == iDefault && pClassInfo->getSpecialistExtraCommerce(i) != iDefault)
-		{
-			if ( NULL == m_piSpecialistExtraCommerce )
-			{
-				CvXMLLoadUtility::InitList(&m_piSpecialistExtraCommerce,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_piSpecialistExtraCommerce[i] = pClassInfo->getSpecialistExtraCommerce(i);
-		}
-	}
+	// Scalars, FK enums, yield/commerce arrays, BuildingProductionModifiers, Categories and the
+	// property manipulators merge via the field wrappers. NOTE: this fixes the legacy m_iCityLimit
+	// merge bug — the old code compared getCityLimit(NO_PLAYER), which always returns 0 (and calls
+	// GC.getGame() during XML load), so a modular override unconditionally stomped m_iCityLimit
+	// with 0. The wrapper compares the member against its default like every other field. No
+	// modular civic XML exists today, so behaviour is unchanged for current assets.
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	for ( int i = 0; i < GC.getNumHurryInfos(); i++ )
 	{
@@ -2256,31 +1981,6 @@ void CvCivicInfo::copyNonDefaults(const CvCivicInfo* pClassInfo)
 		m_szWeLoveTheKingKey = pClassInfo->getWeLoveTheKingKey();
 	}
 
-	if (getAttitudeShareMod() == iDefault) m_iAttitudeShareMod = pClassInfo->getAttitudeShareMod();
-	if (getEnslavementChance() == iDefault) m_iEnslavementChance = pClassInfo->getEnslavementChance();
-	if (getForeignTradeRouteModifier() == iDefault) m_iForeignTradeRouteModifier = pClassInfo->getForeignTradeRouteModifier();
-	if (getPopulationgrowthratepercentage() == iDefault) m_iPopulationgrowthratepercentage = pClassInfo->getPopulationgrowthratepercentage();
-	if (getReligionSpreadRate() == iDefault) m_iReligionSpreadRate = pClassInfo->getReligionSpreadRate();
-	if (getCivicHappiness() == iDefault) m_iCivicHappiness = pClassInfo->getCivicHappiness();
-	if (getDistantUnitSupportCostModifier() == iDefault) m_iDistantUnitSupportCostModifier = pClassInfo->getDistantUnitSupportCostModifier();
-	if (getExtraCityDefense() == iDefault) m_iExtraCityDefense = pClassInfo->getExtraCityDefense();
-	if (getTaxRateUnhappiness() == iDefault) m_iTaxRateUnhappiness = pClassInfo->getTaxRateUnhappiness();
-	if (IsFixedBorders() == bDefault) m_bFixedBorders = pClassInfo->IsFixedBorders();
-	if (isNoCapitalUnhappiness() == bDefault) m_bNoCapitalUnhappiness = pClassInfo->isNoCapitalUnhappiness();
-	if (getInflationModifier() == iDefault) m_iInflationModifier = pClassInfo->getInflationModifier();
-	if (getHurryInflationModifier() == iDefault) m_iHurryInflationModifier = pClassInfo->getHurryInflationModifier();
-	if (getHurryCostModifier() == iDefault) m_iHurryCostModifier = pClassInfo->getHurryCostModifier();
-	if (getSharedCivicTradeRouteModifier() == iDefault) m_iSharedCivicTradeRouteModifier = pClassInfo->getSharedCivicTradeRouteModifier();
-	if (getLandmarkHappiness() == iDefault) m_iLandmarkHappiness = pClassInfo->getLandmarkHappiness();
-	if (getCorporationSpreadRate() == iDefault) m_iCorporationSpreadRate = pClassInfo->getCorporationSpreadRate();
-	if (isNoLandmarkAnger() == bDefault) m_bNoLandmarkAnger = pClassInfo->isNoLandmarkAnger();
-	if (getCityLimit(NO_PLAYER) == iDefault) m_iCityLimit = pClassInfo->getCityLimit(NO_PLAYER);
-	if (getCityOverLimitUnhappy() == iDefault) m_iCityOverLimitUnhappy = pClassInfo->getCityOverLimitUnhappy();
-	if (getForeignerUnhappyPercent() == iDefault) m_iForeignerUnhappyPercent = pClassInfo->getForeignerUnhappyPercent();
-
-	if (!m_iHomeAreaMaintenanceModifier) m_iHomeAreaMaintenanceModifier = pClassInfo->getHomeAreaMaintenanceModifier();
-	if (!m_iOtherAreaMaintenanceModifier) m_iOtherAreaMaintenanceModifier = pClassInfo->getOtherAreaMaintenanceModifier();
-
 	for ( int i = 0; i < GC.getNumImprovementInfos(); i++ )
 	{
 		if ( getImprovementHealthPercentChanges(i) == iDefault && pClassInfo->getImprovementHealthPercentChanges(i) != iDefault)
@@ -2302,18 +2002,6 @@ void CvCivicInfo::copyNonDefaults(const CvCivicInfo* pClassInfo)
 		}
 	}
 
-
-	for ( int i = 0; i < NUM_YIELD_TYPES; i++ )
-	{
-		if ( getLandmarkYieldChanges(i) == iDefault && pClassInfo->getLandmarkYieldChanges(i) != iDefault)
-		{
-			if ( NULL == m_piLandmarkYieldChanges )
-			{
-				CvXMLLoadUtility::InitList(&m_piLandmarkYieldChanges,NUM_YIELD_TYPES,iDefault);
-			}
-			m_piLandmarkYieldChanges[i] = pClassInfo->getLandmarkYieldChanges(i);
-		}
-	}
 
 	for ( int i = 0; i < GC.getNumSpecialistInfos(); i++ )
 	{
@@ -2370,8 +2058,6 @@ void CvCivicInfo::copyNonDefaults(const CvCivicInfo* pClassInfo)
 			m_paiUnitCombatProductionModifier[i] = pClassInfo->getUnitCombatProductionModifier(i);
 		}
 	}
-
-	m_aBuildingProductionModifier.copyNonDefaults(pClassInfo->getBuildingProductionModifiers());
 
 	for ( int i = 0; i < GC.getNumBuildingInfos(); i++ )
 	{
@@ -2459,16 +2145,5 @@ void CvCivicInfo::copyNonDefaults(const CvCivicInfo* pClassInfo)
 		m_aiCivicAttitudeforPass3.push_back(pClassInfo->getCivicAttitudeValuesVectorElement(i));
 		m_aszCivicAttitudeforPass3.push_back(pClassInfo->getCivicAttitudeNamesVectorElement(i));
 	}
-
-	//TB Civic Tags
-	//Integers
-	if (getNationalCaptureProbabilityModifier() == iDefault) m_iNationalCaptureProbabilityModifier = pClassInfo->getNationalCaptureProbabilityModifier();
-	if (getNationalCaptureResistanceModifier() == iDefault) m_iNationalCaptureResistanceModifier = pClassInfo->getNationalCaptureResistanceModifier();
-
-	//Booleans
-	if (isAllReligionsActive() == bDefault) m_bAllReligionsActive = pClassInfo->isAllReligionsActive();
-	if (isBansNonStateReligions() == bDefault) m_bBansNonStateReligions = pClassInfo->isBansNonStateReligions();
-
-	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
 }
 
