@@ -3364,7 +3364,6 @@
 					<MissionType>MISSION_CAPTIVE_UPGRADE_TO_WORKER</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>30</Constant>
 						</Adapt>
 					</iCost>
@@ -3388,7 +3387,6 @@
 					<MissionType>MISSION_CAPTIVE_UPGRADE_TO_NEANDERTHAL_GATHERER</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>15</Constant>
 						</Adapt>
 					</iCost>
@@ -3488,7 +3486,6 @@
 					<MissionType>MISSION_CAPTIVE_UPGRADE_TO_NEANDERTHAL_WARRIOR</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>15</Constant>
 						</Adapt>
 					</iCost>
@@ -3512,7 +3509,6 @@
 					<MissionType>MISSION_CAPTIVE_UPGRADE_TO_NEANDERTHAL_TRACKER</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>15</Constant>
 						</Adapt>
 					</iCost>
@@ -3546,7 +3542,6 @@
 								<iYield>0</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>2</Constant>
 									</Adapt>
 								</iYield>
@@ -3563,13 +3558,11 @@
 							<Yields>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>8</Constant>
 									</Adapt>
 								</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>2</Constant>
 									</Adapt>
 								</iYield>
@@ -3581,13 +3574,11 @@
 							<Yields>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>10</Constant>
 									</Adapt>
 								</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>4</Constant>
 									</Adapt>
 								</iYield>
@@ -3602,13 +3593,11 @@
 							<Yields>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>10</Constant>
 									</Adapt>
 								</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>4</Constant>
 									</Adapt>
 								</iYield>
@@ -3623,13 +3612,11 @@
 							<Yields>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>10</Constant>
 									</Adapt>
 								</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>4</Constant>
 									</Adapt>
 								</iYield>

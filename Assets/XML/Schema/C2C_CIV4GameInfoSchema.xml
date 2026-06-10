@@ -29,6 +29,8 @@
 	<ElementType name="Equal"/>
 	<ElementType name="Random"/>
 	<ElementType name="Adapt"/>
+	<ElementType name="AdaptHammerCost"/>
+	<ElementType name="AdaptUnitYield"/>
 	<ElementType name="Plus"/>
 	<ElementType name="Minus"/>
 	<ElementType name="Mult"/>
@@ -106,9 +108,6 @@
 		<element type="PropertyInteraction" minOccurs="0" maxOccurs="*"/>
 		<element type="PropertyPropagator" minOccurs="0" maxOccurs="*"/>
 	</ElementType>
-	<ElementType name="Percents"/>
-	<ElementType name="Percent"/>
-	<ElementType name="iValue"/>
 	<!-- TB's Tags begin -->
 	<!--Textual References-->
 	<!--Integers-->
@@ -1355,6 +1354,7 @@
 		<element type="CivicInfo" maxOccurs="*"/>
 	</ElementType>
 	<ElementType name="iEventChancePerTurn" content="textOnly" dt:type="int"/>
+	<ElementType name="iUnitYieldScalePercent" content="textOnly" dt:type="int"/>
 	<ElementType name="GameSpeedInfo" content="eltOnly">
 		<element type="Type"/>
 		<element type="bForceOverwrite" minOccurs="0"/>
@@ -1365,6 +1365,7 @@
 		<element type="Description" minOccurs="0"/>
 		<element type="Help" minOccurs="0"/>
 		<element type="iSpeedPercent" minOccurs="0"/>
+		<element type="iUnitYieldScalePercent" minOccurs="0"/>
 		<element type="GameTurnInfos" minOccurs="0"/>
 	</ElementType>
 	<ElementType name="GameSpeedInfos" content="eltOnly">

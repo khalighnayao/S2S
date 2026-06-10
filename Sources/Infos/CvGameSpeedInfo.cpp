@@ -33,6 +33,7 @@
 //------------------------------------------------------------------------------------------------------
 CvGameSpeedInfo::CvGameSpeedInfo() :
 m_iSpeedPercent(0),
+m_iUnitYieldScalePercent(100),
 m_iNumTurnIncrements(0),
 m_pGameTurnInfo(NULL),
 m_bEndDatesCalculated(false)
@@ -66,6 +67,12 @@ int CvGameSpeedInfo::getHammerCostPercent() const
 		return getModifiedIntValue(m_iSpeedPercent, GC.getUPSCALED_HAMMER_COST_MODIFIER());
 	}
 	return m_iSpeedPercent;
+}
+
+
+int CvGameSpeedInfo::getUnitYieldScalePercent() const
+{
+	return m_iUnitYieldScalePercent;
 }
 
 
@@ -111,12 +118,6 @@ void CvGameSpeedInfo::allocateGameTurnInfos(int iSize)
 }
 
 
-int CvGameSpeedInfo::getPercent(int iID) const
-{
-	return m_Percent.getValue(iID);
-}
-
-
 bool CvGameSpeedInfo::read(CvXMLLoadUtility* pXML)
 {
 	PROFILE_EXTRA_FUNC();
@@ -125,6 +126,7 @@ bool CvGameSpeedInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 	pXML->GetOptionalChildXmlValByName(&m_iSpeedPercent, L"iSpeedPercent");
+	pXML->GetOptionalChildXmlValByName(&m_iUnitYieldScalePercent, L"iUnitYieldScalePercent", 100);
 
 	if (pXML->TryMoveToXmlFirstChild(L"GameTurnInfos"))
 	{
@@ -165,7 +167,6 @@ bool CvGameSpeedInfo::read(CvXMLLoadUtility* pXML)
 		}
 		pXML->MoveToXmlParent();
 	}
-	m_Percent.read(pXML, L"Percents");
 
 	return true;
 }
@@ -179,6 +180,7 @@ void CvGameSpeedInfo::copyNonDefaults(const CvGameSpeedInfo* pClassInfo)
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
 	if (m_iSpeedPercent == iDefault) m_iSpeedPercent = pClassInfo->getSpeedPercent();
+	if (m_iUnitYieldScalePercent == 100) m_iUnitYieldScalePercent = pClassInfo->getUnitYieldScalePercent();
 
 	if (getNumTurnIncrements() == iDefault)
 	{
@@ -192,7 +194,6 @@ void CvGameSpeedInfo::copyNonDefaults(const CvGameSpeedInfo* pClassInfo)
 		}
 	}
 
-	m_Percent.copyNonDefaults(pClassInfo->m_Percent);
 }
 
 
@@ -200,6 +201,7 @@ void CvGameSpeedInfo::getCheckSum(uint32_t& iSum) const
 {
 	PROFILE_EXTRA_FUNC();
 	CheckSum(iSum, m_iSpeedPercent);
+	CheckSum(iSum, m_iUnitYieldScalePercent);
 
 	for (int j = 0; j < m_iNumTurnIncrements; j++)
 	{
@@ -207,6 +209,5 @@ void CvGameSpeedInfo::getCheckSum(uint32_t& iSum) const
 		CheckSum(iSum, m_pGameTurnInfo[j].iNumGameTurnsPerIncrement);
 		CheckSum(iSum, m_aIncrements[j].m_iIncrementDay);
 	}
-	CheckSumC(iSum, m_Percent);
 }
 

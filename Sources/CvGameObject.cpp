@@ -1586,26 +1586,21 @@ void CvGameObjectPlot::disposePythonWrapper(void *pArgument)
 
 
 // World-size scaling knobs are named fields on CvWorldInfo (e.g. getCityLimitsScalePercent),
-// not Adapt IDs, so adaptValueToGame scales by game speed and handicap only.
-int CvGameObject::adaptValueToGame(int iID, int iValue) const
+// not Adapt channels, so adaptValueToGame scales by game speed only. (The former
+// per-handicap leg was dead data: no handicap XML ever defined Percents.)
+int CvGameObject::adaptValueToGame(AdaptTypes eAdapt, int iValue) const
 {
-	return iValue * GC.getGameSpeedInfo(GC.getGame().getGameSpeedType()).getPercent(iID) / 100;
+	const CvGameSpeedInfo& kSpeed = GC.getGameSpeedInfo(GC.getGame().getGameSpeedType());
+	switch (eAdapt)
+	{
+		case ADAPT_BUILDING_AND_UNIT_COSTS:
+			return iValue * kSpeed.getHammerCostPercent() / 100;
+		case ADAPT_UNIT_YIELD:
+			return iValue * kSpeed.getUnitYieldScalePercent() / 100;
+		default:
+			return iValue * kSpeed.getSpeedPercent() / 100;
+	}
 }
 
-int CvGameObjectPlayer::adaptValueToGame(int iID, int iValue) const
-{
-	iValue = iValue * GC.getGameSpeedInfo(GC.getGame().getGameSpeedType()).getPercent(iID) / 100;
-	return iValue * GC.getHandicapInfo(m_pPlayer->getHandicapType()).getPercent(iID) / 100;
-}
 
-int CvGameObjectCity::adaptValueToGame(int iID, int iValue) const
-{
-	iValue = iValue * GC.getGameSpeedInfo(GC.getGame().getGameSpeedType()).getPercent(iID) / 100;
-	return iValue * GC.getHandicapInfo(GET_PLAYER(m_pCity->getOwner()).getHandicapType()).getPercent(iID) / 100;
-}
 
-int CvGameObjectUnit::adaptValueToGame(int iID, int iValue) const
-{
-	iValue = iValue * GC.getGameSpeedInfo(GC.getGame().getGameSpeedType()).getPercent(iID) / 100;
-	return iValue * GC.getHandicapInfo(GET_PLAYER(m_pUnit->getOwner()).getHandicapType()).getPercent(iID) / 100;
-}

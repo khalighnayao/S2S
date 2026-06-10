@@ -1088,6 +1088,17 @@ enum GameSpeedTypes
 	NO_GAMESPEED = -1,
 };
 
+// Scaling channels for XML <Adapt> integer expressions (IntExprAdapt).
+// Each maps to a named CvGameSpeedInfo accessor in CvGameObject::adaptValueToGame.
+enum AdaptTypes
+{
+	NO_ADAPT = -1,
+	ADAPT_DEFAULT,
+	ADAPT_BUILDING_AND_UNIT_COSTS,
+	ADAPT_UNIT_YIELD,
+	NUM_ADAPT_TYPES
+};
+
 enum TurnTimerTypes
 {
 	NO_TURNTIMER = -1,

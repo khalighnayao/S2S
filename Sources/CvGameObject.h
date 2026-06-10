@@ -62,7 +62,7 @@ public:
 	virtual void* createPythonWrapper(PyObject*& pyObj) = 0;
 	virtual void disposePythonWrapper(void* pArgument) = 0;
 
-	virtual int adaptValueToGame(int iID, int iValue) const;
+	int adaptValueToGame(AdaptTypes eAdapt, int iValue) const;
 };
 
 // Python wrapper specialization
@@ -159,8 +159,6 @@ public:
 	virtual void* createPythonWrapper(PyObject*& pyObj);
 	virtual void disposePythonWrapper(void* pArgument);
 
-	virtual int adaptValueToGame(int iID, int iValue) const;
-
 protected:
 	CvPlayer* m_pPlayer;
 };
@@ -188,8 +186,6 @@ public:
 	virtual void* createPythonWrapper(PyObject*& pyObj);
 	virtual void disposePythonWrapper(void* pArgument);
 
-	virtual int adaptValueToGame(int iID, int iValue) const;
-
 protected:
 	CvCity* m_pCity;
 };
@@ -216,8 +212,6 @@ public:
 
 	virtual void* createPythonWrapper(PyObject*& pyObj);
 	virtual void disposePythonWrapper(void* pArgument);
-
-	virtual int adaptValueToGame(int iID, int iValue) const;
 
 protected:
 	CvUnit* m_pUnit;

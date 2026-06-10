@@ -24,6 +24,7 @@ public:
 
 	int getSpeedPercent() const;
 	int getHammerCostPercent() const;
+	int getUnitYieldScalePercent() const;
 	int getNumTurnIncrements() const;
 
 	const GameTurnInfo& getGameTurnInfo(int iIndex) const;
@@ -34,8 +35,6 @@ public:
 
 	void allocateGameTurnInfos(int iSize);
 
-	int getPercent(int iID) const;
-
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvGameSpeedInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;
@@ -44,14 +43,15 @@ public:
 protected:
 
 	int m_iSpeedPercent;
+	// Scale for unit-produced yields (e.g. subdued-animal food/production), the
+	// ADAPT_UNIT_YIELD channel of <AdaptUnitYield> expressions. Grows slower than
+	// iSpeedPercent (~sqrt) so yields don't outpace the longer research/build times.
+	int m_iUnitYieldScalePercent;
 	int m_iNumTurnIncrements;
 
-	CvString m_szGameSpeedName;
 	GameTurnInfo* m_pGameTurnInfo;
 	std::vector<CvDateIncrement> m_aIncrements;
 	bool m_bEndDatesCalculated;
-
-	IDValueMapPercent m_Percent;
 };
 
 #endif // CV_GAME_SPEED_INFO_H
