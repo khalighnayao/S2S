@@ -43,17 +43,6 @@ void CyStructsPythonInterface1()
 		.def_readwrite("iID", &IDInfo::iID)
 		;
 
-	python::class_<GameTurnInfo>("GameTurnInfo")
-		.def_readwrite("iMonthIncrement", &GameTurnInfo::iMonthIncrement)
-		.def_readwrite("iNumGameTurnsPerIncrement", &GameTurnInfo::iNumGameTurnsPerIncrement)
-		;
-
-	python::class_<CvDateIncrement>("CvDateIncrement")
-		.def_readwrite("iIncrementDay", &CvDateIncrement::m_iIncrementDay)
-		.def_readwrite("iIncrementMonth", &CvDateIncrement::m_iIncrementMonth)
-		.def_readwrite("iendTurn", &CvDateIncrement::m_iendTurn)
-		;
-
 	python::class_<OrderData>("OrderData")
 		.def_readwrite("eOrderType", &OrderData::eOrderType)
 		.def_readwrite("iData1", &OrderData::iData1)

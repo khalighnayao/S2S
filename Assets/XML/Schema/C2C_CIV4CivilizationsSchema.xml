@@ -24,6 +24,8 @@
 	<ElementType name="Equal"/>
 	<ElementType name="Random"/>
 	<ElementType name="Adapt"/>
+	<ElementType name="AdaptHammerCost"/>
+	<ElementType name="AdaptUnitYield"/>
 	<ElementType name="Plus"/>
 	<ElementType name="Minus"/>
 	<ElementType name="Mult"/>

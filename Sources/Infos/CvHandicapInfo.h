@@ -85,8 +85,6 @@ public:
 
 	int getGoodies(int i) const;
 
-	int getPercent(int iID) const;
-
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvHandicapInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;
@@ -149,8 +147,6 @@ private:
 	int m_iAIAdvancedStartPercent;
 
 	CvString m_szHandicapName;
-
-	IDValueMapPercent m_Percent;
 
 	std::vector<int> m_piGoodies;
 };

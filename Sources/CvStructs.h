@@ -301,14 +301,6 @@ struct IDInfo
 	}
 };
 
-struct GameTurnInfo
-{
-	int iMonthIncrement;
-	int iNumGameTurnsPerIncrement;
-
-	GameTurnInfo() : iMonthIncrement(0), iNumGameTurnsPerIncrement(0) {}
-};
-
 //	Koshling - need to cram some extra info into some orders.  Existing usage
 //	means iData1 and iData2 can actually be shorts, so we divide them into two 16 bit fields
 //	iData1 gets the unitType in the external data (previous usage), and the location the unit

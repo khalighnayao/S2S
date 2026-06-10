@@ -57,44 +57,40 @@ const IntExpr* IntExpr::read(CvXMLLoadUtility *pXML)
 		}
 	}
 
-	if (wcscmp(szTag, L"Adapt") == 0)
+	// Adapt nodes scale the contained expression to the running game (game speed):
+	// the tag picks the scaling channel, the body is a constant or a subexpression.
 	{
-		// this is an Adapt node, check number of children
-		int iNumChildren = pXML->GetXmlChildrenNumber();
-		if (iNumChildren < 1)
+		AdaptTypes eAdapt = NO_ADAPT;
+		if (wcscmp(szTag, L"Adapt") == 0)
 		{
-			// Adapt node with constant and default adaption
-			int iConstant = 0;
-			pXML->GetXmlVal(&iConstant);
-			return new IntExprAdapt(new IntExprConstant(iConstant));
+			eAdapt = ADAPT_DEFAULT;
 		}
-		if (iNumChildren < 2)
+		else if (wcscmp(szTag, L"AdaptHammerCost") == 0)
 		{
-			// one child, so adapt node with subexpression
+			eAdapt = ADAPT_BUILDING_AND_UNIT_COSTS;
+		}
+		else if (wcscmp(szTag, L"AdaptUnitYield") == 0)
+		{
+			eAdapt = ADAPT_UNIT_YIELD;
+		}
+
+		if (eAdapt != NO_ADAPT)
+		{
+			if (pXML->GetXmlChildrenNumber() < 1)
+			{
+				// Adapt node with constant
+				int iConstant = 0;
+				pXML->GetXmlVal(&iConstant);
+				return new IntExprAdapt(new IntExprConstant(iConstant), eAdapt);
+			}
 			if (pXML->TryMoveToXmlFirstChild())
 			{
-				// read the subnode
+				// Adapt node with subexpression
 				const IntExpr* pExpr = read(pXML);
 
 				pXML->MoveToXmlParent();
-				return new IntExprAdapt(pExpr);
+				return new IntExprAdapt(pExpr, eAdapt);
 			}
-		}
-		// first child is ID, second is subexpression
-		else if (pXML->TryMoveToXmlFirstChild())
-		{
-			CvString szTextVal;
-			pXML->GetXmlVal(szTextVal);
-
-			if (!pXML->TryMoveToXmlNextSibling())
-			{
-				FErrorMsg("Adapt usb expression is not correctly constructed");
-			}
-			// read the subnode
-			const IntExpr* pExpr = read(pXML);
-
-			pXML->MoveToXmlParent();
-			return new IntExprAdapt(pExpr, GC.getOrCreateInfoTypeForString(szTextVal));
 		}
 	}
 
@@ -742,13 +738,13 @@ IntExprAdapt::~IntExprAdapt()
 
 int IntExprAdapt::evaluate(const CvGameObject* pObject) const
 {
-	return pObject->adaptValueToGame(m_iID, m_pExpr->evaluate(pObject));
+	return pObject->adaptValueToGame(m_eAdapt, m_pExpr->evaluate(pObject));
 }
 
 void IntExprAdapt::buildDisplayString(CvWStringBuffer &szBuffer) const
 {
 	CvWString szTextVal;
-	szTextVal.Format(L"%d", GC.getGame().getGameObject()->adaptValueToGame(m_iID, m_pExpr->evaluate(GC.getGame().getGameObject())));
+	szTextVal.Format(L"%d", GC.getGame().getGameObject()->adaptValueToGame(m_eAdapt, m_pExpr->evaluate(GC.getGame().getGameObject())));
 	szBuffer.append(szTextVal);
 }
 
@@ -760,7 +756,7 @@ int IntExprAdapt::getBindingStrength() const
 void IntExprAdapt::getCheckSum(uint32_t& iSum) const
 {
 	m_pExpr->getCheckSum(iSum);
-	CheckSum(iSum, m_iID);
+	CheckSum(iSum, (int)m_eAdapt);
 }
 
 

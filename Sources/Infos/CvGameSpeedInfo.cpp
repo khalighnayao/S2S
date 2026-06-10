@@ -2,21 +2,12 @@
 //  FILE:    CvGameSpeedInfo.cpp
 //------------------------------------------------------------------------------------------------
 #include "CvGameCoreDLL.h"
-#include "CvArtFileMgr.h"
-#include "CvBuildingInfo.h"
-#include "CvHeritageInfo.h"
 #include "CvGameAI.h"
-#include "CvGameTextMgr.h"
 #include "CvGlobals.h"
 #include "CvInfos.h"
 #include "CvInfoUtil.h"
-#include "CvPlayerAI.h"
-#include "CvPython.h"
 #include "CvXMLLoadUtility.h"
-#include "CvXMLLoadUtilityModTools.h"
-#include "CheckSum.h"
-#include "CvImprovementInfo.h"
-#include "CvBonusInfo.h"
+#include "CvEraInfo.h"
 #include "CvGameSpeedInfo.h"
 
 
@@ -24,32 +15,19 @@
 //					CvGameSpeedInfo
 //======================================================================================================
 
-//------------------------------------------------------------------------------------------------------
-//
-//  FUNCTION:   CvGameSpeedInfo()
-//
-//  PURPOSE :   Default constructor
-//
-//------------------------------------------------------------------------------------------------------
-CvGameSpeedInfo::CvGameSpeedInfo() :
-m_iSpeedPercent(0),
-m_iNumTurnIncrements(0),
-m_pGameTurnInfo(NULL),
-m_bEndDatesCalculated(false)
+CvGameSpeedInfo::CvGameSpeedInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
-//------------------------------------------------------------------------------------------------------
-//
-//  FUNCTION:   ~CvGameSpeedInfo()
-//
-//  PURPOSE :   Default destructor
-//
-//------------------------------------------------------------------------------------------------------
-CvGameSpeedInfo::~CvGameSpeedInfo()
+// Every XML-backed field is declared here (#196); read/copy/checksum all derive from it.
+void CvGameSpeedInfo::getDataMembers(CvInfoUtil& util)
 {
-	SAFE_DELETE_ARRAY(m_pGameTurnInfo);
+	util
+		.add(m_iSpeedPercent, L"iSpeedPercent")
+		.add(m_iUnitYieldScalePercent, L"iUnitYieldScalePercent", 100)
+	;
 }
 
 
@@ -69,103 +47,62 @@ int CvGameSpeedInfo::getHammerCostPercent() const
 }
 
 
-int CvGameSpeedInfo::getNumTurnIncrements() const
+int CvGameSpeedInfo::getUnitYieldScalePercent() const
 {
-	return m_iNumTurnIncrements;
+	return m_iUnitYieldScalePercent;
 }
 
 
-const CvDateIncrement& CvGameSpeedInfo::getDateIncrement(int iIndex) const
+int CvGameSpeedInfo::getTurnsInEra(int iEra) const
 {
-	return m_aIncrements[iIndex];
+	FASSERT_BOUNDS(0, GC.getNumEraInfos(), iEra);
+	return std::max(1, (GC.getEraInfo((EraTypes)iEra).getNormalSpeedTurns() * m_iSpeedPercent + 50) / 100);
 }
 
 
-std::vector<CvDateIncrement>& CvGameSpeedInfo::getIncrements()
+int CvGameSpeedInfo::getEraStartTurn(int iEra) const
 {
-	return m_aIncrements;
+	PROFILE_EXTRA_FUNC();
+	FASSERT_BOUNDS(0, GC.getNumEraInfos(), iEra);
+	int iTurn = 0;
+	for (int i = 0; i < iEra; i++)
+	{
+		iTurn += getTurnsInEra(i);
+	}
+	return iTurn;
 }
 
 
-bool CvGameSpeedInfo::getEndDatesCalculated() const
+int CvGameSpeedInfo::getTotalTurns() const
 {
-	return m_bEndDatesCalculated;
+	PROFILE_EXTRA_FUNC();
+	int iTurns = 0;
+	for (int i = 0; i < GC.getNumEraInfos(); i++)
+	{
+		iTurns += getTurnsInEra(i);
+	}
+	return iTurns;
 }
 
 
-void CvGameSpeedInfo::setEndDatesCalculated(bool bCalculated)
+// Calendar ticks (days; 30/month, 360/year) that one turn advances within the era.
+int CvGameSpeedInfo::getTicksPerTurnInEra(int iEra) const
 {
-	m_bEndDatesCalculated = bCalculated;
-}
-
-
-const GameTurnInfo& CvGameSpeedInfo::getGameTurnInfo(int iIndex) const
-{
-	return m_pGameTurnInfo[iIndex];
-}
-
-
-void CvGameSpeedInfo::allocateGameTurnInfos(int iSize)
-{
-	m_pGameTurnInfo = new GameTurnInfo[iSize];
-}
-
-
-int CvGameSpeedInfo::getPercent(int iID) const
-{
-	return m_Percent.getValue(iID);
+	FASSERT_BOUNDS(0, GC.getNumEraInfos(), iEra);
+	const CvEraInfo& kEra = GC.getEraInfo((EraTypes)iEra);
+	const int iSpanTicks = (kEra.getHistoricalEndYear() - kEra.getHistoricalStartYear()) * 360;
+	const int iTurns = getTurnsInEra(iEra);
+	return std::max(1, (iSpanTicks + iTurns / 2) / iTurns);
 }
 
 
 bool CvGameSpeedInfo::read(CvXMLLoadUtility* pXML)
 {
-	PROFILE_EXTRA_FUNC();
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
-	pXML->GetOptionalChildXmlValByName(&m_iSpeedPercent, L"iSpeedPercent");
-
-	if (pXML->TryMoveToXmlFirstChild(L"GameTurnInfos"))
-	{
-		m_bEndDatesCalculated = false;
-		m_iNumTurnIncrements = pXML->GetXmlChildrenNumber(L"GameTurnInfo");
-		char szLog[1000];
-		sprintf(szLog, ":: %i", m_iNumTurnIncrements);
-#ifdef _DEBUG
-		OutputDebugString(szLog);
-#endif
-		if (pXML->TryMoveToXmlFirstChild(L"GameTurnInfo"))
-		{
-			allocateGameTurnInfos(getNumTurnIncrements());
-			int iTempVal;
-
-			// loop through each tag
-			for (int j = 0; j < getNumTurnIncrements(); j++)
-			{
-				CvDateIncrement inc;
-				pXML->GetOptionalChildXmlValByName(&iTempVal, L"iMonthIncrement");
-				m_pGameTurnInfo[j].iMonthIncrement = iTempVal;
-				inc.m_iIncrementMonth = iTempVal;
-				pXML->GetOptionalChildXmlValByName(&iTempVal, L"iTurnsPerIncrement");
-				m_pGameTurnInfo[j].iNumGameTurnsPerIncrement = iTempVal;
-				inc.m_iendTurn = iTempVal + (m_aIncrements.empty() ? 0 : m_aIncrements[m_aIncrements.size()-1].m_iendTurn);
-				pXML->GetOptionalChildXmlValByName(&iTempVal, L"iDayIncrement");
-				inc.m_iIncrementDay = iTempVal;
-				m_aIncrements.push_back(inc);
-
-				// if we cannot set the current xml node to it's next sibling then we will break out of the for loop
-				// otherwise we will continue looping
-				if (!pXML->TryMoveToXmlNextSibling(L"GameTurnInfo"))
-				{
-					break;
-				}
-			}
-			pXML->MoveToXmlParent();
-		}
-		pXML->MoveToXmlParent();
-	}
-	m_Percent.read(pXML, L"Percents");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -173,40 +110,12 @@ bool CvGameSpeedInfo::read(CvXMLLoadUtility* pXML)
 
 void CvGameSpeedInfo::copyNonDefaults(const CvGameSpeedInfo* pClassInfo)
 {
-	PROFILE_EXTRA_FUNC();
-	const int iDefault = 0;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
-
-	if (m_iSpeedPercent == iDefault) m_iSpeedPercent = pClassInfo->getSpeedPercent();
-
-	if (getNumTurnIncrements() == iDefault)
-	{
-		m_iNumTurnIncrements = pClassInfo->getNumTurnIncrements();
-		allocateGameTurnInfos(getNumTurnIncrements());
-		// loop through each tag
-		for (int j = 0; j < getNumTurnIncrements(); j++)
-		{
-			m_pGameTurnInfo[j] = pClassInfo->getGameTurnInfo(j);
-			m_aIncrements[j] = pClassInfo->getDateIncrement(j);
-		}
-	}
-
-	m_Percent.copyNonDefaults(pClassInfo->m_Percent);
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvGameSpeedInfo::getCheckSum(uint32_t& iSum) const
 {
-	PROFILE_EXTRA_FUNC();
-	CheckSum(iSum, m_iSpeedPercent);
-
-	for (int j = 0; j < m_iNumTurnIncrements; j++)
-	{
-		CheckSum(iSum, m_pGameTurnInfo[j].iMonthIncrement);
-		CheckSum(iSum, m_pGameTurnInfo[j].iNumGameTurnsPerIncrement);
-		CheckSum(iSum, m_aIncrements[j].m_iIncrementDay);
-	}
-	CheckSumC(iSum, m_Percent);
+	CvInfoUtil(this).checkSum(iSum);
 }
-

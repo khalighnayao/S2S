@@ -28,7 +28,9 @@ public:
 	int getAdvancedStartPoints() const;
 	int getStartingGold() const;
 	int getFreePopulation() const;
-	int getStartPercent() const;
+	int getHistoricalStartYear() const;
+	int getHistoricalEndYear() const;
+	int getNormalSpeedTurns() const;
 	int getGrowthPercent() const;
 	int getTrainPercent() const;
 	int getConstructPercent() const;
@@ -58,6 +60,7 @@ public:
 	int getSoundtracks(int i) const;
 	int getCitySoundscapeSciptId(int i) const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvEraInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;
@@ -71,7 +74,13 @@ protected:
 	int m_iAdvancedStartPoints;
 	int m_iStartingGold;
 	int m_iFreePopulation;
-	int m_iStartPercent;
+	// Calendar pacing (declared in getDataMembers): the era's real-history year span
+	// and how many game turns it lasts at Normal (100%) speed. Other speeds scale the
+	// turn count by CvGameSpeedInfo::getSpeedPercent; CvDate interpolates dates from
+	// the year span. Eras must be contiguous (start == previous era's end).
+	int m_iHistoricalStartYear;
+	int m_iHistoricalEndYear;
+	int m_iNormalSpeedTurns;
 	int m_iGrowthPercent;
 	int m_iTrainPercent;
 	int m_iConstructPercent;

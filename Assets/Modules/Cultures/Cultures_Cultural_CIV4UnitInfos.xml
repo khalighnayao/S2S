@@ -17389,7 +17389,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>6</Constant>
 									</Adapt>
 								</iCommerce>
@@ -17405,7 +17404,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>12</Constant>
 									</Adapt>
 								</iCommerce>
@@ -19152,10 +19150,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>81</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -21874,7 +21871,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>5</Constant>
 									</Adapt>
 								</iCommerce>
@@ -21890,7 +21886,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>10</Constant>
 									</Adapt>
 								</iCommerce>
@@ -22273,10 +22268,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>104</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -22294,7 +22288,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>5</Constant>
 									</Adapt>
 								</iCommerce>
@@ -22310,7 +22303,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>10</Constant>
 									</Adapt>
 								</iCommerce>
@@ -22630,10 +22622,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>216</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -24407,10 +24398,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>104</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -24715,7 +24705,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>6</Constant>
 									</Adapt>
 								</iCommerce>
@@ -24731,7 +24720,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>12</Constant>
 									</Adapt>
 								</iCommerce>
@@ -24841,10 +24829,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>117</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -25931,7 +25918,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>5</Constant>
 									</Adapt>
 								</iCommerce>
@@ -25947,7 +25933,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>10</Constant>
 									</Adapt>
 								</iCommerce>
@@ -26852,7 +26837,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>6</Constant>
 									</Adapt>
 								</iCommerce>
@@ -26868,7 +26852,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>12</Constant>
 									</Adapt>
 								</iCommerce>
@@ -28146,7 +28129,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>6</Constant>
 									</Adapt>
 								</iCommerce>
@@ -28162,7 +28144,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>12</Constant>
 									</Adapt>
 								</iCommerce>
@@ -30950,10 +30931,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>36</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -31956,10 +31936,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>36</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -34262,7 +34241,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>5</Constant>
 									</Adapt>
 								</iCommerce>
@@ -34278,7 +34256,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>10</Constant>
 									</Adapt>
 								</iCommerce>
@@ -34381,10 +34358,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>216</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -36474,10 +36450,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>216</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -37355,10 +37330,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>80</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -39560,7 +39534,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>6</Constant>
 									</Adapt>
 								</iCommerce>
@@ -39576,7 +39549,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>12</Constant>
 									</Adapt>
 								</iCommerce>
@@ -40761,10 +40733,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>104</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -41051,10 +41022,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>104</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -41347,7 +41317,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>5</Constant>
 									</Adapt>
 								</iCommerce>
@@ -41363,7 +41332,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>10</Constant>
 									</Adapt>
 								</iCommerce>

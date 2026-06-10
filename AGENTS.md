@@ -111,6 +111,14 @@ not findings to re-discover.
   `git checkout`-ing away silently removes the changes from their build. **Never switch
   branches while the user may be mid-build.** (Read-only git — `status`/`log`/`diff` — is
   always fine.)
+- **Verify the current branch immediately before every commit.** Run
+  `git branch --show-current` (or `git status`) in the same command as the commit and
+  confirm it is the branch you intend. The working copy is shared with the owner, who may
+  check out another branch at any moment between an agent's commands — this has happened:
+  a mid-session checkout to `main` put two #248 commits on local `main` even though the
+  agent had created and verified a work branch earlier in the session. Never assume the
+  branch from earlier context; if HEAD is not where you expect, stop and repair
+  (`git branch -f <work-branch> <commits>`, restore `main` to `origin/main`) before pushing.
 - **Before adding commits to a PR, verify it has not already been merged.** Run
   `gh pr view <n> --json state,baseRefName` first and confirm (1) `state` is `OPEN` —
   pushing to a merged/closed PR's branch lands the commit on a dead branch that never

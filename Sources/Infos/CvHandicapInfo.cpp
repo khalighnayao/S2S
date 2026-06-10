@@ -414,12 +414,6 @@ int CvHandicapInfo::getGoodies(int i) const
 }
 
 
-int CvHandicapInfo::getPercent(int iID) const
-{
-	return m_Percent.getValue(iID);
-}
-
-
 int CvHandicapInfo::getRevolutionIndexPercent() const
 {
 	return m_iRevolutionIndexPercent;
@@ -480,7 +474,6 @@ void CvHandicapInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_iAIWarWearinessPercent);
 	CheckSum(iSum, m_iAIPerEraModifier);
 	CheckSum(iSum, m_iAIAdvancedStartPercent);
-	CheckSumC(iSum, m_Percent);
 
 	m_PropertyManipulators.getCheckSum(iSum);
 
@@ -554,8 +547,6 @@ bool CvHandicapInfo::read(CvXMLLoadUtility* pXML)
 
 	pXML->GetOptionalChildXmlValByName(&m_iRevolutionIndexPercent, L"iRevolutionIndexPercent");
 
-	m_Percent.read(pXML, L"Percents");
-
 	m_PropertyManipulators.read(pXML);
 
 	return true;
@@ -624,8 +615,6 @@ void CvHandicapInfo::copyNonDefaults(const CvHandicapInfo* pClassInfo)
 	if (getRevolutionIndexPercent() == iDefault) m_iRevolutionIndexPercent = pClassInfo->getRevolutionIndexPercent();
 
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_piGoodies, pClassInfo->m_piGoodies);
-
-	m_Percent.copyNonDefaults(pClassInfo->m_Percent);
 
 	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
 }

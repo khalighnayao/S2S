@@ -86,10 +86,12 @@ void CyInfoPythonInterface2()
 
 		.def("getSpeedPercent", &CvGameSpeedInfo::getSpeedPercent, "int ()")
 		.def("getHammerCostPercent", &CvGameSpeedInfo::getHammerCostPercent, "int ()")
+		.def("getUnitYieldScalePercent", &CvGameSpeedInfo::getUnitYieldScalePercent, "int ()")
 
-		.def("getNumTurnIncrements", &CvGameSpeedInfo::getNumTurnIncrements, "int ()")
-		.def("getGameTurnInfo", &CvGameSpeedInfo::getGameTurnInfo, python::return_value_policy<python::reference_existing_object>(), "GameTurnInfo ()")
-		.def("getDateIncrement", &CvGameSpeedInfo::getDateIncrement, python::return_value_policy<python::reference_existing_object>(), "CvDateIncrement ()")
+		.def("getTurnsInEra", &CvGameSpeedInfo::getTurnsInEra, "int (int iEra)")
+		.def("getEraStartTurn", &CvGameSpeedInfo::getEraStartTurn, "int (int iEra)")
+		.def("getTotalTurns", &CvGameSpeedInfo::getTotalTurns, "int ()")
+		.def("getTicksPerTurnInEra", &CvGameSpeedInfo::getTicksPerTurnInEra, "int (int iEra)")
 	;
 
 	python::class_<CvTurnTimerInfo, python::bases<CvInfoBase>, boost::noncopyable>("CvTurnTimerInfo", python::no_init)

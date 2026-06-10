@@ -1,7 +1,7 @@
 //  $Header:
 //------------------------------------------------------------------------------------------------
 //
-//  FILE:    CvDate.h
+//  FILE:    CvDate.cpp
 //
 //  PURPOSE: Class to keep a Civ4 date and methods related to the time/turn relationship
 //
@@ -14,6 +14,27 @@
 #include "CvGameAI.h"
 #include "CvGlobals.h"
 #include "CvInfos.h"
+#include "CvEraInfo.h"
+
+namespace
+{
+	GameSpeedTypes resolveGameSpeed(GameSpeedTypes eGameSpeed)
+	{
+		return eGameSpeed == NO_GAMESPEED ? GC.getGame().getGameSpeedType() : eGameSpeed;
+	}
+
+	// Calendar ticks spanned by an era's historical years (asserts contiguity once).
+	int eraSpanTicks(int iEra)
+	{
+		const CvEraInfo& kEra = GC.getEraInfo((EraTypes)iEra);
+		FAssertMsg(kEra.getHistoricalEndYear() > kEra.getHistoricalStartYear(), "era needs a positive historical year span");
+		FAssertMsg(
+			iEra == 0 || GC.getEraInfo((EraTypes)(iEra - 1)).getHistoricalEndYear() == kEra.getHistoricalStartYear(),
+			"era historical years must be contiguous"
+		);
+		return (kEra.getHistoricalEndYear() - kEra.getHistoricalStartYear()) * 360;
+	}
+}
 
 CvDate::CvDate()
 {
@@ -40,7 +61,7 @@ uint32_t CvDate::GetTick() const
 	return m_iTick;
 }
 
-void CvDate::setTick(uint32_t newTick) 
+void CvDate::setTick(uint32_t newTick)
 {
 	m_iTick = newTick;
 }
@@ -71,57 +92,31 @@ SeasonTypes CvDate::getSeason() const
 	{
 		return SEASON_SUMMER; // Summer
 	}
-	if (month >= 8 && month <= 10)
-	{
-		return SEASON_AUTUMN; // Autumn
-	}
-	return NO_SEASON; // This will never be executed
+	return SEASON_AUTUMN; // Autumn (months 8-10)
 }
 
 
-CvDateIncrement CvDate::getIncrement(GameSpeedTypes eGameSpeed) const
+int CvDate::getTicksPerTurn(GameSpeedTypes eGameSpeed) const
 {
 	PROFILE_EXTRA_FUNC();
-	GameSpeedTypes eActualGameSpeed = eGameSpeed;
-	if (eGameSpeed == NO_GAMESPEED)
-	{
-		eActualGameSpeed = GC.getGame().getGameSpeedType();
-	}
-	CvGameSpeedInfo& kInfo = GC.getGameSpeedInfo(eActualGameSpeed);
-	const std::vector<CvDateIncrement>& aIncrements = kInfo.getIncrements();
-	if (!kInfo.getEndDatesCalculated())
-	{
-		calculateEndDates(eActualGameSpeed);
-	}
+	const CvGameSpeedInfo& kSpeed = GC.getGameSpeedInfo(resolveGameSpeed(eGameSpeed));
 
-	foreach_(const CvDateIncrement& it, aIncrements)
+	uint32_t iEraStartTick = 0;
+	for (int iEra = 0; iEra < GC.getNumEraInfos(); iEra++)
 	{
-		if (*this < it.m_endDate)
+		iEraStartTick += eraSpanTicks(iEra);
+		if (m_iTick < iEraStartTick)
 		{
-			return it;
+			return kSpeed.getTicksPerTurnInEra(iEra);
 		}
 	}
-	return aIncrements[aIncrements.size()-1];
+	// past the end of history: keep the last era's rate
+	return kSpeed.getTicksPerTurnInEra(GC.getNumEraInfos() - 1);
 }
 
 void CvDate::increment(GameSpeedTypes eGameSpeed)
 {
-	const CvDateIncrement inc = getIncrement(eGameSpeed);
-
-	double dateModifier = 1.0;
-	GameSpeedTypes eActualGameSpeed = eGameSpeed;
-	if (eGameSpeed == NO_GAMESPEED)
-	{
-		eActualGameSpeed = GC.getGame().getGameSpeedType();
-	}
-	CvGameSpeedInfo& kInfo = GC.getGameSpeedInfo(eActualGameSpeed);
-
-	int incrementValue = 0;
-	incrementValue += static_cast<uint32_t>(inc.m_iIncrementDay);
-	incrementValue += static_cast<uint32_t>(inc.m_iIncrementMonth * 30);
-
-
-	m_iTick += incrementValue;
+	m_iTick += getTicksPerTurn(eGameSpeed);
 }
 
 void CvDate::increment(int iTurns, GameSpeedTypes eGameSpeed)
@@ -168,75 +163,33 @@ CvDate CvDate::getStartingDate()
 	return CvDate();
 }
 
+// Turn -> date: linear interpolation of the era's historical year span over the
+// era's turn count at the given speed.
 CvDate CvDate::getDate(int iTurn, GameSpeedTypes eGameSpeed)
 {
 	PROFILE_EXTRA_FUNC();
-	CvDate date;
-	int iRemainingTurns = 0;
-
-	GameSpeedTypes eActualGameSpeed = eGameSpeed;
-	if (eGameSpeed == NO_GAMESPEED)
+	if (iTurn <= 0)
 	{
-		eActualGameSpeed = GC.getGame().getGameSpeedType();
+		return getStartingDate();
 	}
-	CvGameSpeedInfo& kInfo = GC.getGameSpeedInfo(eActualGameSpeed);
-	const std::vector<CvDateIncrement>& aIncrements = kInfo.getIncrements();
-	if (!kInfo.getEndDatesCalculated())
-	{
-		calculateEndDates(eActualGameSpeed);
-	}
+	const CvGameSpeedInfo& kSpeed = GC.getGameSpeedInfo(resolveGameSpeed(eGameSpeed));
 
-
-	for (int i=0; i<(int)aIncrements.size(); i++)
+	int iTurnsBefore = 0;
+	uint32_t iEraStartTick = 0;
+	for (int iEra = 0; iEra < GC.getNumEraInfos(); iEra++)
 	{
-		if (iTurn <= aIncrements[i].m_iendTurn)
+		const int iTurnsInEra = kSpeed.getTurnsInEra(iEra);
+		const int iSpanTicks = eraSpanTicks(iEra);
+
+		if (iTurn < iTurnsBefore + iTurnsInEra)
 		{
-			if (i==0)
-			{
-				iRemainingTurns = iTurn;
-				date = getStartingDate();
-			}
-			else
-			{
-				iRemainingTurns = iTurn - aIncrements[i-1].m_iendTurn;
-				date = aIncrements[i-1].m_endDate;
-			}
-			break;
+			const int iTurnsIntoEra = iTurn - iTurnsBefore;
+			return CvDate(iEraStartTick + (uint32_t)((int64_t)iSpanTicks * iTurnsIntoEra / iTurnsInEra));
 		}
-		else
-		{
-			iRemainingTurns = iTurn - aIncrements[i].m_iendTurn;
-			date = aIncrements[i].m_endDate;
-		}
+		iTurnsBefore += iTurnsInEra;
+		iEraStartTick += iSpanTicks;
 	}
-
-	//date.increment(iRemainingTurns, eGameSpeed);
-	bool bHistoricalCalendar = GC.getGame().isModderGameOption(MODDERGAMEOPTION_USE_HISTORICAL_ACCURATE_CALENDAR);
-	if (bHistoricalCalendar) 
-	{
-		uint32_t currentTick = calculateCurrentTick();
-
-		if (currentTick > date.GetTick())
-		{
-			date.setTick(currentTick);
-		}
-	}
-	else
-	{
-		date.increment(iRemainingTurns, eGameSpeed);
-	}
-	return date;
-}
-
-void CvDate::calculateEndDates(GameSpeedTypes eGameSpeed)
-{
-	PROFILE_EXTRA_FUNC();
-	CvGameSpeedInfo& kInfo = GC.getGameSpeedInfo(eGameSpeed);
-	std::vector<CvDateIncrement>& aIncrements = kInfo.getIncrements();
-	kInfo.setEndDatesCalculated(true);
-	for (int i=0; i<(int)aIncrements.size(); i++)
-	{
-		aIncrements[i].m_endDate = CvDate(MAX_UNSIGNED_INT);
-		aIncrements[i].m_endDate = getDate(aIncrements[i].m_iendTurn, eGameSpeed);
-	}
+	// past the end of history: extrapolate at the last era's rate
+	const int iLastEra = GC.getNumEraInfos() - 1;
+	return CvDate(iEraStartTick + (uint32_t)(kSpeed.getTicksPerTurnInEra(iLastEra) * (iTurn - iTurnsBefore)));
 }

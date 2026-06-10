@@ -424,12 +424,7 @@ class WBGameDataScreen:
 					iEstimateEndTurn = iGameTurn + iMaxTurns
 					self.GAME.setEstimateEndTurn(iGameTurn + iMaxTurns)
 				else:
-					iEstimateEndTurn = 0
-					gameSpeed = self.GC.getGameSpeedInfo(self.GAME.getGameSpeedType())
-
-					for i in xrange(gameSpeed.getNumTurnIncrements()):
-						iEstimateEndTurn += gameSpeed.getGameTurnInfo(i).iNumGameTurnsPerIncrement
-
+					iEstimateEndTurn = self.GC.getGameSpeedInfo(self.GAME.getGameSpeedType()).getTotalTurns()
 					self.GAME.setEstimateEndTurn(iEstimateEndTurn)
 
 				screen.hide("EstimateEndTurn")

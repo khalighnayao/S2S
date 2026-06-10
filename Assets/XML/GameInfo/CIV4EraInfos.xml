@@ -16,6 +16,9 @@ Good luck! -->
 			<iStartingUnitMultiplier>0</iStartingUnitMultiplier>
 			<iStartingExploreUnits>0</iStartingExploreUnits>
 			<iStartingGold>10</iStartingGold>
+			<iHistoricalStartYear>-200000</iHistoricalStartYear>
+			<iHistoricalEndYear>-12000</iHistoricalEndYear>
+			<iNormalSpeedTurns>200</iNormalSpeedTurns>
 			<iGrowthPercent>150</iGrowthPercent>
 			<iTrainPercent>100</iTrainPercent>
 			<iConstructPercent>100</iConstructPercent>
@@ -66,7 +69,9 @@ Good luck! -->
 			<iStartingUnitMultiplier>1</iStartingUnitMultiplier>
 			<iStartingExploreUnits>1</iStartingExploreUnits>
 			<iStartingGold>40</iStartingGold>
-			<iStartPercent>10</iStartPercent>
+			<iHistoricalStartYear>-12000</iHistoricalStartYear>
+			<iHistoricalEndYear>-1200</iHistoricalEndYear>
+			<iNormalSpeedTurns>180</iNormalSpeedTurns>
 			<iGrowthPercent>140</iGrowthPercent>
 			<iTrainPercent>100</iTrainPercent>
 			<iConstructPercent>100</iConstructPercent>
@@ -135,7 +140,9 @@ Good luck! -->
 			<iStartingWorkerUnits>1</iStartingWorkerUnits>
 			<iStartingExploreUnits>1</iStartingExploreUnits>
 			<iStartingGold>100</iStartingGold>
-			<iStartPercent>19</iStartPercent>
+			<iHistoricalStartYear>-1200</iHistoricalStartYear>
+			<iHistoricalEndYear>450</iHistoricalEndYear>
+			<iNormalSpeedTurns>120</iNormalSpeedTurns>
 			<iGrowthPercent>130</iGrowthPercent>
 			<iTrainPercent>100</iTrainPercent>
 			<iConstructPercent>100</iConstructPercent>
@@ -194,7 +201,9 @@ Good luck! -->
 			<iStartingWorkerUnits>1</iStartingWorkerUnits>
 			<iStartingExploreUnits>1</iStartingExploreUnits>
 			<iStartingGold>1000</iStartingGold>
-			<iStartPercent>25</iStartPercent>
+			<iHistoricalStartYear>450</iHistoricalStartYear>
+			<iHistoricalEndYear>1400</iHistoricalEndYear>
+			<iNormalSpeedTurns>120</iNormalSpeedTurns>
 			<iGrowthPercent>120</iGrowthPercent>
 			<iTrainPercent>100</iTrainPercent>
 			<iConstructPercent>100</iConstructPercent>
@@ -271,7 +280,9 @@ Good luck! -->
 			<iStartingExploreUnits>1</iStartingExploreUnits>
 			<iStartingGold>4000</iStartingGold>
 			<iFreePopulation>1</iFreePopulation>
-			<iStartPercent>31</iStartPercent>
+			<iHistoricalStartYear>1400</iHistoricalStartYear>
+			<iHistoricalEndYear>1750</iHistoricalEndYear>
+			<iNormalSpeedTurns>120</iNormalSpeedTurns>
 			<iGrowthPercent>110</iGrowthPercent>
 			<iTrainPercent>100</iTrainPercent>
 			<iConstructPercent>100</iConstructPercent>
@@ -334,7 +345,9 @@ Good luck! -->
 			<iStartingExploreUnits>2</iStartingExploreUnits>
 			<iStartingGold>10000</iStartingGold>
 			<iFreePopulation>2</iFreePopulation>
-			<iStartPercent>37</iStartPercent>
+			<iHistoricalStartYear>1750</iHistoricalStartYear>
+			<iHistoricalEndYear>1900</iHistoricalEndYear>
+			<iNormalSpeedTurns>140</iNormalSpeedTurns>
 			<iGrowthPercent>100</iGrowthPercent>
 			<iTrainPercent>100</iTrainPercent>
 			<iConstructPercent>100</iConstructPercent>
@@ -395,7 +408,9 @@ Good luck! -->
 			<iStartingExploreUnits>2</iStartingExploreUnits>
 			<iStartingGold>20000</iStartingGold>
 			<iFreePopulation>2</iFreePopulation>
-			<iStartPercent>44</iStartPercent>
+			<iHistoricalStartYear>1900</iHistoricalStartYear>
+			<iHistoricalEndYear>1990</iHistoricalEndYear>
+			<iNormalSpeedTurns>220</iNormalSpeedTurns>
 			<iGrowthPercent>100</iGrowthPercent>
 			<iTrainPercent>100</iTrainPercent>
 			<iConstructPercent>100</iConstructPercent>
@@ -454,7 +469,9 @@ Good luck! -->
 			<iStartingExploreUnits>2</iStartingExploreUnits>
 			<iStartingGold>30000</iStartingGold>
 			<iFreePopulation>3</iFreePopulation>
-			<iStartPercent>55</iStartPercent>
+			<iHistoricalStartYear>1990</iHistoricalStartYear>
+			<iHistoricalEndYear>2050</iHistoricalEndYear>
+			<iNormalSpeedTurns>160</iNormalSpeedTurns>
 			<iGrowthPercent>100</iGrowthPercent>
 			<iTrainPercent>100</iTrainPercent>
 			<iConstructPercent>100</iConstructPercent>
@@ -513,7 +530,9 @@ Good luck! -->
 			<iStartingExploreUnits>2</iStartingExploreUnits>
 			<iStartingGold>40000</iStartingGold>
 			<iFreePopulation>3</iFreePopulation>
-			<iStartPercent>63</iStartPercent>
+			<iHistoricalStartYear>2050</iHistoricalStartYear>
+			<iHistoricalEndYear>2150</iHistoricalEndYear>
+			<iNormalSpeedTurns>200</iNormalSpeedTurns>
 			<iGrowthPercent>100</iGrowthPercent>
 			<iTrainPercent>100</iTrainPercent>
 			<iConstructPercent>100</iConstructPercent>
@@ -565,7 +584,9 @@ Good luck! -->
 			<iStartingExploreUnits>2</iStartingExploreUnits>
 			<iStartingGold>50000</iStartingGold>
 			<iFreePopulation>4</iFreePopulation>
-			<iStartPercent>73</iStartPercent>
+			<iHistoricalStartYear>2150</iHistoricalStartYear>
+			<iHistoricalEndYear>2300</iHistoricalEndYear>
+			<iNormalSpeedTurns>180</iNormalSpeedTurns>
 			<iGrowthPercent>100</iGrowthPercent>
 			<iTrainPercent>100</iTrainPercent>
 			<iConstructPercent>100</iConstructPercent>
@@ -617,7 +638,9 @@ Good luck! -->
 			<iStartingExploreUnits>2</iStartingExploreUnits>
 			<iStartingGold>60000</iStartingGold>
 			<iFreePopulation>4</iFreePopulation>
-			<iStartPercent>82</iStartPercent>
+			<iHistoricalStartYear>2300</iHistoricalStartYear>
+			<iHistoricalEndYear>3000</iHistoricalEndYear>
+			<iNormalSpeedTurns>140</iNormalSpeedTurns>
 			<iGrowthPercent>100</iGrowthPercent>
 			<iTrainPercent>100</iTrainPercent>
 			<iConstructPercent>100</iConstructPercent>
@@ -665,7 +688,9 @@ Good luck! -->
 			<iStartingExploreUnits>2</iStartingExploreUnits>
 			<iStartingGold>80000</iStartingGold>
 			<iFreePopulation>5</iFreePopulation>
-			<iStartPercent>89</iStartPercent>
+			<iHistoricalStartYear>3000</iHistoricalStartYear>
+			<iHistoricalEndYear>4000</iHistoricalEndYear>
+			<iNormalSpeedTurns>100</iNormalSpeedTurns>
 			<iGrowthPercent>100</iGrowthPercent>
 			<iTrainPercent>100</iTrainPercent>
 			<iConstructPercent>100</iConstructPercent>
@@ -714,7 +739,9 @@ Good luck! -->
 			<iStartingExploreUnits>2</iStartingExploreUnits>
 			<iStartingGold>100000</iStartingGold>
 			<iFreePopulation>5</iFreePopulation>
-			<iStartPercent>94</iStartPercent>
+			<iHistoricalStartYear>4000</iHistoricalStartYear>
+			<iHistoricalEndYear>6000</iHistoricalEndYear>
+			<iNormalSpeedTurns>100</iNormalSpeedTurns>
 			<iGrowthPercent>100</iGrowthPercent>
 			<iTrainPercent>100</iTrainPercent>
 			<iConstructPercent>100</iConstructPercent>
@@ -763,7 +790,9 @@ Good luck! -->
 			<iStartingExploreUnits>3</iStartingExploreUnits>
 			<iStartingGold>125000</iStartingGold>
 			<iFreePopulation>6</iFreePopulation>
-			<iStartPercent>99</iStartPercent>
+			<iHistoricalStartYear>6000</iHistoricalStartYear>
+			<iHistoricalEndYear>7000</iHistoricalEndYear>
+			<iNormalSpeedTurns>20</iNormalSpeedTurns>
 			<iGrowthPercent>100</iGrowthPercent>
 			<iTrainPercent>100</iTrainPercent>
 			<iConstructPercent>100</iConstructPercent>

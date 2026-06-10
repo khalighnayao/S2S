@@ -37813,7 +37813,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>4</Constant>
 									</Adapt>
 								</iCommerce>
@@ -37829,7 +37828,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>6</Constant>
 									</Adapt>
 								</iCommerce>
@@ -37932,7 +37930,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>5</Constant>
 									</Adapt>
 								</iCommerce>
@@ -37948,7 +37945,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>10</Constant>
 									</Adapt>
 								</iCommerce>
@@ -38039,7 +38035,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>6</Constant>
 									</Adapt>
 								</iCommerce>
@@ -38055,7 +38050,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>12</Constant>
 									</Adapt>
 								</iCommerce>
@@ -38142,7 +38136,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>8</Constant>
 									</Adapt>
 								</iCommerce>
@@ -38158,7 +38151,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>16</Constant>
 									</Adapt>
 								</iCommerce>
@@ -38835,10 +38827,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>30</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -39006,10 +38997,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>72</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -39096,10 +39086,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>204</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -39186,10 +39175,9 @@
 							<Yields>
 								<iYield>0</iYield>
 								<iYield>
-									<Adapt>
-										<ID>ADAPT_BUILDING_AND_UNIT_COSTS</ID>
+									<AdaptHammerCost>
 										<Constant>594</Constant>
-									</Adapt>
+									</AdaptHammerCost>
 								</iYield>
 							</Yields>
 						</Outcome>
@@ -39865,7 +39853,6 @@
 							<Yields>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>55</Constant>
 									</Adapt>
 								</iYield>
@@ -39887,7 +39874,6 @@
 								<iYield>0</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>3</Constant>
 									</Adapt>
 								</iYield>
@@ -39899,7 +39885,6 @@
 					<MissionType>MISSION_CAPTIVE_UPGRADE_TO_GATHERER</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>15</Constant>
 						</Adapt>
 					</iCost>
@@ -39923,7 +39908,6 @@
 					<MissionType>MISSION_CAPTIVE_UPGRADE_TO_WORKER</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>30</Constant>
 						</Adapt>
 					</iCost>
@@ -39947,7 +39931,6 @@
 					<MissionType>MISSION_CAPTIVE_UPGRADE_TO_STONE_THROWER</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>5</Constant>
 						</Adapt>
 					</iCost>
@@ -39971,7 +39954,6 @@
 					<MissionType>MISSION_CAPTIVE_UPGRADE_TO_ARCHER</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>20</Constant>
 						</Adapt>
 					</iCost>
@@ -40008,7 +39990,6 @@
 					<MissionType>MISSION_CAPTIVE_UPGRADE_TO_AXEMAN</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>30</Constant>
 						</Adapt>
 					</iCost>
@@ -40058,7 +40039,6 @@
 					<MissionType>MISSION_CAPTIVE_UPGRADE_TO_SPEARMAN</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>25</Constant>
 						</Adapt>
 					</iCost>
@@ -40284,7 +40264,6 @@
 								<iYield>0</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>6</Constant>
 									</Adapt>
 								</iYield>
@@ -40301,7 +40280,6 @@
 								<iYield>0</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>12</Constant>
 									</Adapt>
 								</iYield>
@@ -40321,13 +40299,11 @@
 							<Yields>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>8</Constant>
 									</Adapt>
 								</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>2</Constant>
 									</Adapt>
 								</iYield>
@@ -40342,13 +40318,11 @@
 							<Yields>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>10</Constant>
 									</Adapt>
 								</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>4</Constant>
 									</Adapt>
 								</iYield>
@@ -40363,13 +40337,11 @@
 							<Yields>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>10</Constant>
 									</Adapt>
 								</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>4</Constant>
 									</Adapt>
 								</iYield>
@@ -40384,13 +40356,11 @@
 							<Yields>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>10</Constant>
 									</Adapt>
 								</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>4</Constant>
 									</Adapt>
 								</iYield>
@@ -40412,7 +40382,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>3</Constant>
 									</Adapt>
 								</iCommerce>
@@ -40431,7 +40400,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>6</Constant>
 									</Adapt>
 								</iCommerce>
@@ -40450,7 +40418,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>12</Constant>
 									</Adapt>
 								</iCommerce>
@@ -40469,7 +40436,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>6</Constant>
 									</Adapt>
 								</iCommerce>
@@ -40488,7 +40454,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>12</Constant>
 									</Adapt>
 								</iCommerce>
@@ -40507,7 +40472,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>24</Constant>
 									</Adapt>
 								</iCommerce>
@@ -40526,7 +40490,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>6</Constant>
 									</Adapt>
 								</iCommerce>
@@ -40545,7 +40508,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>12</Constant>
 									</Adapt>
 								</iCommerce>
@@ -40564,7 +40526,6 @@
 								<iCommerce>0</iCommerce>
 								<iCommerce>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>24</Constant>
 									</Adapt>
 								</iCommerce>
@@ -40676,7 +40637,6 @@
 					<MissionType>MISSION_CAPTIVE_UPGRADE_TO_IMMIGRANT</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>10</Constant>
 						</Adapt>
 					</iCost>
@@ -40700,7 +40660,6 @@
 					<MissionType>MISSION_CAPTIVE_UPGRADE_TO_SETTLER</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>20</Constant>
 						</Adapt>
 					</iCost>
@@ -40732,13 +40691,11 @@
 							<Yields>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>40</Constant>
 									</Adapt>
 								</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>10</Constant>
 									</Adapt>
 								</iYield>
@@ -40753,13 +40710,11 @@
 							<Yields>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>50</Constant>
 									</Adapt>
 								</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>15</Constant>
 									</Adapt>
 								</iYield>
@@ -40774,13 +40729,11 @@
 							<Yields>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>50</Constant>
 									</Adapt>
 								</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>15</Constant>
 									</Adapt>
 								</iYield>
@@ -40795,13 +40748,11 @@
 							<Yields>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>50</Constant>
 									</Adapt>
 								</iYield>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>15</Constant>
 									</Adapt>
 								</iYield>
@@ -40934,7 +40885,6 @@
 							<Yields>
 								<iYield>
 									<Adapt>
-										<ID>ADAPT_DEFAULT</ID>
 										<Constant>100</Constant>
 									</Adapt>
 								</iYield>

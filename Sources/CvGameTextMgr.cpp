@@ -195,7 +195,6 @@ void CvGameTextMgr::setDateStr(CvWString& szString, int iGameTurn, bool bSave, C
 	CvWString szYearBuffer;
 	CvWString szWeekBuffer;
 	CvDate date;
-	CvDateIncrement inc;
 
 	setYearStr(szYearBuffer, iGameTurn, bSave, eCalendar, iStartYear, eSpeed);
 	const int iyear = date.getDate(iGameTurn, eSpeed).getYear();;
@@ -212,6 +211,7 @@ void CvGameTextMgr::setDateStr(CvWString& szString, int iGameTurn, bool bSave, C
 	switch (eCalendar)
 	{
 	case CALENDAR_DEFAULT:
+	{
 		if (GC.getGame().getGameTurn() == iGameTurn)
 		{
 			date = GC.getGame().getCurrentDate();
@@ -220,13 +220,14 @@ void CvGameTextMgr::setDateStr(CvWString& szString, int iGameTurn, bool bSave, C
 		{
 			date = CvDate::getDate(iGameTurn, eSpeed);
 		}
-		inc = date.getIncrement(eSpeed);
-		if (((0 == inc.m_iIncrementMonth % numMonths) && (inc.m_iIncrementMonth > 0)) || inc.m_iIncrementMonth >= 2 * numMonths)
+		// pick the display granularity from how much calendar a turn covers here
+		const int iTicksPerTurn = date.getTicksPerTurn(eSpeed);
+		if (iTicksPerTurn >= 30 * numMonths)
 		{
 			// Years
 			szString = szYearBuffer;
 		}
-		else if (inc.m_iIncrementMonth >= 3)
+		else if (iTicksPerTurn >= 30 * numMonths / numSeasons)
 		{
 			// Seasons
 			if (bSave)
@@ -238,7 +239,7 @@ void CvGameTextMgr::setDateStr(CvWString& szString, int iGameTurn, bool bSave, C
 				szString = (GC.getSeasonInfo(date.getSeason())).getDescription() + CvString(", ") + szYearBuffer;
 			}
 		}
-		else if ((inc.m_iIncrementDay == 0) || (inc.m_iIncrementMonth >= 2))
+		else if (iTicksPerTurn >= 30)
 		{
 			// Months
 			if (bSave)
@@ -256,7 +257,9 @@ void CvGameTextMgr::setDateStr(CvWString& szString, int iGameTurn, bool bSave, C
 			szString = gDLL->getText("TXT_KEY_TIME_DATE", szYearBuffer.GetCString(), GC.getMonthInfo((MonthTypes)date.getMonth()).getDescription(), date.getDay());
 		}
 		break;
+	}
 	case CALENDAR_NO_SEASONS:
+	{
 		if (GC.getGame().getGameTurn() == iGameTurn)
 		{
 			date = GC.getGame().getCurrentDate();
@@ -265,13 +268,13 @@ void CvGameTextMgr::setDateStr(CvWString& szString, int iGameTurn, bool bSave, C
 		{
 			date = CvDate::getDate(iGameTurn, eSpeed);
 		}
-		inc = date.getIncrement(eSpeed);
-		if (((0 == inc.m_iIncrementMonth % numMonths) && (inc.m_iIncrementMonth > 0)) || inc.m_iIncrementMonth >= 2 * numMonths)
+		const int iTicksPerTurn = date.getTicksPerTurn(eSpeed);
+		if (iTicksPerTurn >= 30 * numMonths)
 		{
 			// Years
 			szString = szYearBuffer;
 		}
-		else if ((inc.m_iIncrementDay == 0) || (inc.m_iIncrementMonth >= 2))
+		else if (iTicksPerTurn >= 30)
 		{
 			// Months
 			if (bSave)
@@ -289,6 +292,7 @@ void CvGameTextMgr::setDateStr(CvWString& szString, int iGameTurn, bool bSave, C
 			szString = gDLL->getText("TXT_KEY_TIME_DATE", szYearBuffer.GetCString(), GC.getMonthInfo((MonthTypes)date.getMonth()).getDescription(), date.getDay());
 		}
 		break;
+	}
 	case CALENDAR_YEARS:
 	case CALENDAR_BI_YEARLY:
 		szString = szYearBuffer;

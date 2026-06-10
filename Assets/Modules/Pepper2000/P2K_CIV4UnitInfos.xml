@@ -151,7 +151,6 @@
 					<MissionType>MISSION_EXPLORE_MOON</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -197,7 +196,6 @@
 					<MissionType>MISSION_EXPLORE_MOON_SURFACE</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -289,7 +287,6 @@
 					<MissionType>MISSION_PLANET_LAND</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -382,7 +379,6 @@
 					<MissionType>MISSION_PLANET_LAND</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -481,7 +477,6 @@
 					<MissionType>MISSION_PLANET_LAND</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -593,7 +588,6 @@
 					<MissionType>MISSION_PLANET_LAND</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -681,7 +675,6 @@
 					<MissionType>MISSION_PLANET_LAND</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -784,7 +777,6 @@
 					<MissionType>MISSION_PLANET_LAND</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -895,7 +887,6 @@
 					<MissionType>MISSION_PLANET_LAND</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -987,7 +978,6 @@
 					<MissionType>MISSION_PLANET_LAND</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -1090,7 +1080,6 @@
 					<MissionType>MISSION_PLANET_LAND</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -2379,7 +2368,6 @@
 					<MissionType>MISSION_CAPTURE_ASTEROID</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -2498,7 +2486,6 @@
 					<MissionType>MISSION_CAPTURE_ASTEROID</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -2618,7 +2605,6 @@
 					<MissionType>MISSION_CAPTURE_ASTEROID</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -3655,7 +3641,6 @@
 					<MissionType>MISSION_LAUNCH_SATELLITE</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -3688,7 +3673,6 @@
 					<MissionType>MISSION_LAUNCH_SATELLITE_CISLUNAR</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -3802,7 +3786,6 @@
 					<MissionType>MISSION_EXPLORE_SS1</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -3835,7 +3818,6 @@
 					<MissionType>MISSION_EXPLORE_SS2</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -3868,7 +3850,6 @@
 					<MissionType>MISSION_EXPLORE_SS3</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -3966,7 +3947,6 @@
 					<MissionType>MISSION_EXPLORE_INNER_SOLAR_SYSTEM</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -3999,7 +3979,6 @@
 					<MissionType>MISSION_EXPLORE_OUTER_SOLAR_SYSTEM</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4032,7 +4011,6 @@
 					<MissionType>MISSION_EXPLORE_TRANSNEPTUNIAN</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4065,7 +4043,6 @@
 					<MissionType>MISSION_EXPLORE_MERCURY</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4100,7 +4077,6 @@
 					<MissionType>MISSION_EXPLORE_VENUS</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4135,7 +4111,6 @@
 					<MissionType>MISSION_EXPLORE_MARS</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4170,7 +4145,6 @@
 					<MissionType>MISSION_EXPLORE_ASTEROID</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4205,7 +4179,6 @@
 					<MissionType>MISSION_EXPLORE_JUPITER</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4240,7 +4213,6 @@
 					<MissionType>MISSION_EXPLORE_SATURN</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4275,7 +4247,6 @@
 					<MissionType>MISSION_EXPLORE_EUROPA</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4310,7 +4281,6 @@
 					<MissionType>MISSION_EXPLORE_TITAN</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4345,7 +4315,6 @@
 					<MissionType>MISSION_EXPLORE_URANUS</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4380,7 +4349,6 @@
 					<MissionType>MISSION_EXPLORE_NEPTUNE</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4415,7 +4383,6 @@
 					<MissionType>MISSION_EXPLORE_KBO</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4450,7 +4417,6 @@
 					<MissionType>MISSION_EXPLORE_SEDNOID</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4483,7 +4449,6 @@
 					<MissionType>MISSION_EXPLORE_SOLAR_SYSTEM_LIFE</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4581,7 +4546,6 @@
 					<MissionType>MISSION_EXPLORE_OORT_CLOUD</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4616,7 +4580,6 @@
 					<MissionType>MISSION_EXPLORE_INTERSTELLAR</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4649,7 +4612,6 @@
 					<MissionType>MISSION_EXPLORE_EXOPLANET</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4684,7 +4646,6 @@
 					<MissionType>MISSION_EXPLORE_INTERSTELLAR_LIFE</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4774,7 +4735,6 @@
 					<MissionType>MISSION_EXPLORE_BRACEWELL</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4807,7 +4767,6 @@
 					<MissionType>MISSION_EXPLORE_ANCIENT_CIVILIZATION</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4840,7 +4799,6 @@
 					<MissionType>MISSION_EXPLORE_GALACTIC_CORE</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4931,7 +4889,6 @@
 					<MissionType>MISSION_EXPLORE_VON_NEUMANN</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -4964,7 +4921,6 @@
 					<MissionType>MISSION_EXPLORE_ANCIENT_CIVILIZATION</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -5055,7 +5011,6 @@
 					<MissionType>MISSION_EXPLORE_DISTANT_COSMOS</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -5146,7 +5101,6 @@
 					<MissionType>MISSION_EXPLORE_HYPERSPACE</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -5179,7 +5133,6 @@
 					<MissionType>MISSION_EXPLORE_MULTIVERSE</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -5287,7 +5240,6 @@
 					<MissionType>MISSION_EXPLORE_SS1</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -5320,7 +5272,6 @@
 					<MissionType>MISSION_EXPLORE_SS2</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>
@@ -5353,7 +5304,6 @@
 					<MissionType>MISSION_EXPLORE_SS3</MissionType>
 					<iCost>
 						<Adapt>
-							<ID>ADAPT_DEFAULT</ID>
 							<Constant>0</Constant>
 						</Adapt>
 					</iCost>

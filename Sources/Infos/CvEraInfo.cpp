@@ -33,7 +33,6 @@ m_iStartingExploreUnits(0),
 m_iAdvancedStartPoints(0),
 m_iStartingGold(0),
 m_iFreePopulation(0),
-m_iStartPercent(0),
 m_iGrowthPercent(0),
 m_iTrainPercent(0),
 m_iConstructPercent(0),
@@ -55,7 +54,21 @@ m_bFirstSoundtrackFirst(false),
 m_paiCitySoundscapeSciptIds(NULL),
 m_paiSoundtracks(NULL)
 ,m_iInitialCityMaintenancePercent(0)
-{ }
+{
+	CvInfoUtil(this).initDataMembers();
+}
+
+
+// Fields declared here are read/copied/checksummed by CvInfoUtil (#196);
+// the rest of the class is still hand-written.
+void CvEraInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_iHistoricalStartYear, L"iHistoricalStartYear")
+		.add(m_iHistoricalEndYear, L"iHistoricalEndYear")
+		.add(m_iNormalSpeedTurns, L"iNormalSpeedTurns")
+	;
+}
 
 
 CvEraInfo::~CvEraInfo()
@@ -107,9 +120,21 @@ int CvEraInfo::getFreePopulation() const
 }
 
 
-int CvEraInfo::getStartPercent() const
+int CvEraInfo::getHistoricalStartYear() const
 {
-	return m_iStartPercent;
+	return m_iHistoricalStartYear;
+}
+
+
+int CvEraInfo::getHistoricalEndYear() const
+{
+	return m_iHistoricalEndYear;
+}
+
+
+int CvEraInfo::getNormalSpeedTurns() const
+{
+	return m_iNormalSpeedTurns;
 }
 
 
@@ -276,7 +301,6 @@ bool CvEraInfo::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(&m_iAdvancedStartPoints, L"iAdvancedStartPoints");
 	pXML->GetOptionalChildXmlValByName(&m_iStartingGold, L"iStartingGold");
 	pXML->GetOptionalChildXmlValByName(&m_iFreePopulation, L"iFreePopulation");
-	pXML->GetOptionalChildXmlValByName(&m_iStartPercent, L"iStartPercent");
 	pXML->GetOptionalChildXmlValByName(&m_iGrowthPercent, L"iGrowthPercent");
 	pXML->GetOptionalChildXmlValByName(&m_iTrainPercent, L"iTrainPercent");
 	pXML->GetOptionalChildXmlValByName(&m_iConstructPercent, L"iConstructPercent");
@@ -326,6 +350,8 @@ bool CvEraInfo::read(CvXMLLoadUtility* pXML)
 
 	pXML->SetVariableListTagPairForAudioScripts(&m_paiCitySoundscapeSciptIds, L"CitySoundscapes", GC.getNumCitySizeTypes());
 
+	CvInfoUtil(this).readXml(pXML);
+
 	return true;
 }
 
@@ -352,7 +378,6 @@ void CvEraInfo::copyNonDefaults(const CvEraInfo* pClassInfo)
 	if (getAdvancedStartPoints() == iDefault) m_iAdvancedStartPoints = pClassInfo->getAdvancedStartPoints();
 	if (getStartingGold() == iDefault) m_iStartingGold = pClassInfo->getStartingGold();
 	if (getFreePopulation() == iDefault) m_iFreePopulation = pClassInfo->getFreePopulation();
-	if (getStartPercent() == iDefault) m_iStartPercent = pClassInfo->getStartPercent();
 	if (getGrowthPercent() == iDefault) m_iGrowthPercent = pClassInfo->getGrowthPercent();
 	if (getTrainPercent() == iDefault) m_iTrainPercent = pClassInfo->getTrainPercent();
 	if (getConstructPercent() == iDefault) m_iConstructPercent = pClassInfo->getConstructPercent();
@@ -410,6 +435,8 @@ void CvEraInfo::copyNonDefaults(const CvEraInfo* pClassInfo)
 			m_paiCitySoundscapeSciptIds[i] = pClassInfo->getCitySoundscapeSciptId(i);
 		}
 	}
+
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
@@ -422,7 +449,6 @@ void CvEraInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_iAdvancedStartPoints);
 	CheckSum(iSum, m_iStartingGold);
 	CheckSum(iSum, m_iFreePopulation);
-	CheckSum(iSum, m_iStartPercent);
 	CheckSum(iSum, m_iGrowthPercent);
 	CheckSum(iSum, m_iTrainPercent);
 	CheckSum(iSum, m_iConstructPercent);
@@ -439,5 +465,7 @@ void CvEraInfo::getCheckSum(uint32_t& iSum) const
 	CheckSum(iSum, m_bNoAnimals);
 	CheckSum(iSum, m_bNoBarbUnits);
 	CheckSum(iSum, m_bNoBarbCities);
+
+	CvInfoUtil(this).checkSum(iSum);
 }
 

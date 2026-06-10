@@ -7,13 +7,14 @@
 //
 //  PURPOSE: Class to keep a Civ4 date and methods related to the time/turn relationship
 //
+//  A date is a tick count from the calendar epoch (the first era's historical start
+//  year): 30 ticks per month, 360 per year. Dates are derived from the per-era pacing
+//  data on CvEraInfo (historical year span + Normal-speed turn count) scaled by the
+//  game speed (CvGameSpeedInfo) — there is no stored turn->date table.
+//
 //------------------------------------------------------------------------------------------------
 #ifndef CV_DATE_H
 #define CV_DATE_H
-
-//#include "CvEnums.h"
-
-struct CvDateIncrement;
 
 class CvDate
 {
@@ -30,13 +31,13 @@ public:
 	uint32_t GetTick() const;
 	void setTick(uint32_t newTick);
 
-	CvDateIncrement getIncrement(GameSpeedTypes eGameSpeed = NO_GAMESPEED) const;
+	// Calendar ticks one turn advances at this date (rate of the era containing it).
+	int getTicksPerTurn(GameSpeedTypes eGameSpeed = NO_GAMESPEED) const;
+
 	void increment(GameSpeedTypes eGameSpeed = NO_GAMESPEED);
 	void increment(int iTurns, GameSpeedTypes eGameSpeed = NO_GAMESPEED); // inefficient
 	static CvDate getDate(int iTurn, GameSpeedTypes eGameSpeed = NO_GAMESPEED);
 	static CvDate getStartingDate();
-
-	static void calculateEndDates(GameSpeedTypes eGameSpeed);
 
 	bool operator<(const CvDate& kDate) const;
 	bool operator<=(const CvDate& kDate) const;
@@ -47,20 +48,6 @@ public:
 
 protected:
 	uint32_t m_iTick;
-};
-
-struct CvDateIncrement
-{
-	CvDateIncrement()
-		: m_iendTurn(0)
-		, m_iIncrementMonth(0)
-		, m_iIncrementDay(0)
-	{}
-
-	CvDate m_endDate;
-	int m_iendTurn;
-	int m_iIncrementMonth;
-	int m_iIncrementDay;
 };
 
 #endif

@@ -44,6 +44,7 @@ This folder is split by intent:
 | [doProduction](reference/doProduction.md) | `CvCity::doProduction` — the per-turn city production step |
 | [constructibility-and-prerequisites](reference/constructibility-and-prerequisites.md) | The unified `ConstructRequirement` model, the static enabler reverse-index (CABV turn-time), and help-text rendering |
 | [declarative-info-loading](reference/declarative-info-loading.md) | `CvInfoUtil` / `getDataMembers` — how `Cv*Info` classes load from XML, the wrapper catalog, and the byte-identical migration recipe (#196) |
+| [calendar-and-gamespeed](reference/calendar-and-gamespeed.md) | Era-driven turn counts & calendar (`CvEraInfo` pacing fields, `CvGameSpeedInfo` derived accessors, `CvDate` interpolation, Adapt channels) |
 | [MapScript_Process](reference/MapScript_Process.md) | End-to-end lifecycle of a C2C mapscript (`C2C_World`) |
 
 ## Plans — work in flight
@@ -58,6 +59,7 @@ This folder is split by intent:
 | [ai-logging-rollout](plans/ai-logging-rollout.md) | Plan to roll the tagged-logging structure across the AI codebase |
 | [sea-ai-rework](plans/sea-ai-rework.md) | Naval AI weaknesses, the attack-sea cascade, and the logging driving the rework |
 | [dead-code-xml-pass](plans/dead-code-xml-pass.md) | Tiered dead-code / dead-XML removal plan; XML→JSON web-Civilopedia north-star |
+| [gamespeed-simplification](plans/gamespeed-simplification.md) | `CvGameSpeedInfo`: Percents→named fields, GameTurnInfos collapse, derived calendar table (#196) |
 | [fight-or-flight](plans/fight-or-flight.md) | `FIGHT_OR_FLIGHT` design capture (removal + plugin reimplementation) |
 | [surround-destroy-removal-map](plans/surround-destroy-removal-map.md) | `SURROUND_DESTROY` removal map (deferred) |
 
