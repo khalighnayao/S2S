@@ -1,16 +1,82 @@
 # Turn-Time Optimization — Investigation & Hot-Path Map
 
-**Status:** Measured. `[PERF]` wall-clock instrumentation has located the cost. The static
-big-O suspect list (below) was the starting hypothesis; **measurement superseded it** —
-most suspects are negligible and one path nobody flagged dominates. Optimization target
-identified; first lever not yet implemented.
+**Status:** Measured; **#1 hotspot FIXED.** The CABV PreLoop (was ~30% of the whole late-game
+turn) is gone: within-turn memoization (3.6× CABV) + the load-time **static enabler
+reverse-index** (#195 Phase 1, PR #314 — PreLoop ~390×, ~11.7 s/turn → ~0.05 s, set-identical
+shadow-verified). See [`unified-prerequisites-and-constructibility.md`](unified-prerequisites-and-constructibility.md).
+**Every whole-turn number below predates #314** — treat the measurement sections as the
+historical record that located the cost, and the "Current state & next levers" section as the
+live plan.
 
 **Question that started this:** late-game turns take *significantly* longer than early
 turns — what scales worse than "more cities"?
 
 ---
 
-## MEASURED CONCLUSION (authoritative — supersedes the static suspects below)
+## Current state & next levers (MEASURED 2026-06-10, post PR #314 — the live plan)
+
+Clean instrumented FinalRelease sessions on the turn-1336 late-game save (`[PERF/choose]`
+decomposition + phase tree; per-turn, all AI players):
+
+- `CvPlayer::doTurn` **~20.6 s/turn** (was ~32.6 pre-#314 on the same save — the index banked ~11 s).
+- `doTurn.cities` ~13.8 → `city.doProduction` ~10 → `AI_chooseProduction` ~9.5 (~47 ms × ~220 calls).
+- **`AI_chooseBuilding` is ~96% of the choose**; inside it `AI_scoreBuildingsFromListThreshold`
+  is **~91% of the whole choose**, splitting ≈half CABV value recompute (~4.4 s/turn) and ≈half
+  the **pure scoring loop** over the (cached) values (~4.6 s/turn). The unit-tender family is ~1%
+  (the 55k/turn `AI_bestUnitAI` calls are cache-cheap noise).
+- **The scoring runs ~8.5× per choose**: the decision cascade calls `AI_chooseBuilding` once per
+  focus-flag rule, each re-gathering candidates and re-running per-building production math that
+  is focus-independent — pure repetition.
+- **Gate data (`head=`/`dirty=`):** 77% of chooses enter with an **empty order queue** (a build
+  completed — legitimate decisions, ~190/turn) and carry ~99.6% of the cost; `head=1` re-checks
+  on running constructions are free (keep-current early-outs work); **process cities are ~0**
+  (5/980 — S2S cities always have buildings available, so the vanilla "late-game cities run
+  wealth" assumption is dead here, and so is the process-gate lever).
+- Tail: `recalculateAllResourceConsumption` ~2.8 s/turn, `doTurnUnits` ~1.4, `pre.AI_doCivics`
+  ~1.2, `game.autoSave` ~1.1 (cosmetic).
+
+Ranked levers (the repository migration steps — authoritative sequence in
+[`derived-data-repository.md`](derived-data-repository.md) §6):
+
+1. **Building-value retention — SHIPPED + MEASURED (2026-06-10).** Staggered periodic refresh
+   (period 4, offset by city id) replacing the per-turn flush; `setHasBuilding` event flush
+   unchanged. Result over 6 clean turns: **0 `[CIT/spin]`** (no stale incidents),
+   `CvPlayer::doTurn` ~20.6 → **~18.6 s/turn**, CABV 4.4 → **2.7 s/turn** (−40%). Why not 4×:
+   ~190 cities/turn complete a building, so the `setHasBuilding` retain-flush legitimately
+   re-invalidates most cities before the period expires — the remaining CABV cost is
+   event-driven. Future refinement (phase c): on completion, rebuild only the candidate SET
+   (0.06 ms via the index) and let VALUES age out on the period instead of retain-flushing.
+2. **Scoring loop — FIXED + MEASURED (2026-06-10): a second legacy O(buildings²) enabler sweep.**
+   `AI_scoreBuildingsFromListThreshold`'s "enables other buildings" bonus
+   (`CvCityAI.cpp:~4431`) ran the full all-buildings `BoolExpr::evaluateChange` scan per
+   enabler-candidate — the same pattern #195/PR #314 killed in the PreLoop, surviving
+   un-migrated (it even carried a `// TODO OPT`). Migrated to `getBuildingsEnabledBy` with the
+   legacy trigger triple + confirm kept verbatim. Measured: `scoreBldgs` 5.05 → **1.84 ms/run**;
+   pure scoring ~4.55 → **~0.8 s/turn**; `AI_chooseProduction` ~8.1 → **~4.2 s/turn**; whole
+   `CvPlayer::doTurn` ~18.6 → **~14.6 s/turn**. 0 `[CIT/spin]`; building picks and order volume
+   match the prior session (no behaviour drift). The "score-once memo" is dropped — the work is
+   gone, nothing left worth caching there.
+3. **`city.doTurn` non-production — now the biggest un-attributed block (~3.7 s/turn).** The
+   known sub-scopes (`AI_doTurn`, `AI_updateBestBuild`, `AI_updateWorkersNeededHere`,
+   `doCheckProduction`, `doCulture`, …) measured small; ~3 s/turn is inline/un-scoped city-turn
+   work. Next instrumentation pass goes here.
+4. **`recalculateAllResourceConsumption` → event-driven** (~2.05 s/turn) — repository tenant.
+5. **CABV residual (~2.6 s/turn) — invalidation granularity** (phase (c) of the pilot): on
+   completion rebuild only the candidate SET via the index; let VALUES age out on the period.
+6. *(behaviour call, owner's)* Deepen build queues so completions don't trigger ~190 full
+   re-chooses/turn — the per-item odds roll `break`s the queue-fill early.
+7. **Parallel read-side value pass** (north-star §4); `pre.AI_doCivics` ~1.1 s/turn also worth
+   a look once the above land.
+
+**Scoreboard (same turn-1336 save, CvPlayer::doTurn per turn):** pre-#314 ~32.6 s → enabler
+index ~20.6 → value retention ~18.6 → scoring-sweep fix **~14.6 s** (2026-06-10).
+
+Deprioritized (measured negligible): visibility stickytape, property solver, trade routes,
+the unit-choose family.
+
+---
+
+## MEASURED CONCLUSION (historical — pre-#314; located the cost, since fixed)
 
 The turn is **not** spread across the plot/unit-scaling passes we first suspected. It is
 ~80% **one chain**, and within it a single loop dominates. Per-turn averages from a clean
@@ -408,37 +474,13 @@ The repo also ships a complete sampling profiler.
 
 ---
 
-## Suggested next steps (in order) — REVISED post-measurement
+## Suggested next steps (SUPERSEDED — see "Current state & next levers" at the top)
 
-Measurement is done; the ranking is no longer "go measure" — it's "go fix the PreLoop." In
-priority order by measured payoff:
-
-1. **CABV PreLoop cross-turn retention (the win).** Retain the constructible set across turns
-   with event-driven invalidation instead of rebuilding it ~91×/turn. This is **step 1 of the
-   derived-data repository** ([`derived-data-repository.md`](derived-data-repository.md) §6.1) —
-   the within-turn memoization (`m_buildingsToCalculate` + `m_buildingsToCalculateValid`) is
-   already in place; this extends it across the turn boundary, invalidating on
-   tech/building/civic/bonus events. Target: most of 11.2 s/turn (~25–30% of the whole turn).
-   Safety: the constructible *set* is an input, not a loop-driving value — does not risk the
-   `AI_chooseProduction` hang (repository §5.2). Backstop: keep the per-turn flush until the
-   event hooks are proven complete (debug-verify mode, §5.6).
-2. **Prune the quadratic enabler loop.** A Game-level reverse-index of construct-condition
-   dependencies (`EnablesOtherBuildings` graph) lets the PreLoop skip the `O(enablers ×
-   buildings)` `evaluateChange` scan — repository §6.3 (the global/static tier). Tackle if
-   step 1's retention isn't enough (it usually will be).
-3. **`recalculateAllResourceConsumption` (1.9 s/turn)** — full recompute every turn; convert to
-   event-driven (repository §6.2). Secondary; an order of magnitude below the PreLoop.
-4. **`game.autoSave` periodic spike** — the every-N-turns `CvGame::doTurn` spike is the engine
-   autosave (line 5995, inside the timer). Not AI cost; if the perf metric should exclude it,
-   end the `CvGame::doTurn` PERF_SCOPE before `AutoSave()` while keeping the `game.autoSave`
-   sub-scope. Cosmetic, not a speedup.
-5. Re-measure with `[PERF]` after each change; `Tools/turn-perf-trend.awk` is the regression check.
-
-Deprioritized by measurement (kept for completeness, NOT worth the risk now): the visibility
-"stickytape" (~35 ms), pathfinding/unit spins (`doTurnUnits` ~1.2 s and not the bottleneck),
-property solver (~180 ms). The original "measure with a ProfileExtra DLL" step is done — the
-`[PERF]` wall-clock path replaced it; FProfiler remains the fallback for drilling *inside* the
-PreLoop if step 1 needs it.
+This section's ranking is done: step 1's *within-turn* form shipped (memoization, 3.6×), and
+step 2 — the static enabler reverse-index — shipped as #195 Phase 1 (PR #314, ~390× on the
+PreLoop) and turned out to be the decisive fix, not the fallback. The live lever ranking is
+maintained in **"Current state & next levers (post PR #314)"** at the top of this doc, and the
+authoritative migration sequence in [`derived-data-repository.md`](derived-data-repository.md) §6.
 
 ## City & Unit AI loop hot-paths (structural; confirm with `[PERF]`/FProfiler)
 

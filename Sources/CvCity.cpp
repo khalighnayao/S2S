@@ -47,6 +47,7 @@ CvCity::CvCity()
 	m_Properties(this),
 	m_outputHistory()
 {
+	m_dataRepository.init(this);
 	m_aiRiverPlotYield = new int[NUM_YIELD_TYPES];
 	m_aiBaseYieldRate = new int[NUM_YIELD_TYPES];
 	m_aiExtraYield = new int[NUM_YIELD_TYPES];
@@ -454,6 +455,8 @@ void CvCity::uninit()
 void CvCity::reset(int iID, PlayerTypes eOwner, int iX, int iY, bool bConstructorCall)
 {
 	PROFILE_EXTRA_FUNC();
+	m_dataRepository.reset();
+
 	//--------------------------------
 	// Uninit class
 	uninit();
@@ -1253,12 +1256,23 @@ void CvCity::doTurn()
 	//	flush anyway to be safe
 	{
 		PERF_SCOPE("city.cacheFlush", getOwner());
-		//	NOTE: experiments to retain/periodically-refresh this per-city building-value cache
-		//	(to cut the ~87% late-game CalculateAllBuildingValues cost) caused a turn HANG -- a
-		//	stale cache sends AI_chooseProduction into a re-decision loop. Reverted to the original
-		//	full per-turn flush. Redo with EVENT-DRIVEN invalidation (flush on tech / civic /
-		//	building-built) so values are never stale. See Sources/docs/plans/turn-time-optimization.md.
-		AI_FlushBuildingValueCache();
+		//	Building-value retention (derived-data repository pilot, bounded staleness --
+		//	Sources/docs/plans/derived-data-repository.md §6.2). The per-city building-value
+		//	cache is retained across turns: a full refresh runs only every
+		//	BUILDING_VALUE_REFRESH_PERIOD turns, staggered by city id so ~1/period of the
+		//	cities recompute each turn. Building changes still flush immediately
+		//	(setHasBuilding -> AI_FlushBuildingValueCache(true)); other inputs (tech, civics,
+		//	bonuses, pop) reach the values with at most period-turns lag, which the AI
+		//	deliberately tolerates for production choices. An earlier attempt at this HUNG:
+		//	stale data could spin doProduction's completion loop -- that loop is now bounded
+		//	with gated [CIT/spin] diagnostics, so worst case is one logged idle city-turn.
+		{
+			const int BUILDING_VALUE_REFRESH_PERIOD = 4;
+			if ((GC.getGame().getGameTurn() + getID()) % BUILDING_VALUE_REFRESH_PERIOD == 0)
+			{
+				AI_FlushBuildingValueCache();
+			}
+		}
 		FlushCanConstructCache();
 		setBuildingListInvalid();
 		setUnitListInvalid();
@@ -16516,8 +16530,20 @@ void CvCity::doProduction(bool bAllowNoProduction)
 		setBuiltFoodProducedUnit(isFoodProduction());
 		clearLostProduction();
 
+		int iCompletionSafety = 0;
 		while (productionLeft() <= 0)
 		{
+			//	Stale-tolerance bound: stale value/canConstruct data can make the AI re-choose a
+			//	building it just completed (or a zero-cost item), which the overflow instantly
+			//	re-completes -- popOrder(bChoose) then re-picks it and this loop cycles forever
+			//	(the never-ending-turn hang the building-value retention experiment hit). Cap the
+			//	completions per city-turn; a hit means stale advisory data, not a logic error.
+			if (++iCompletionSafety > 50)
+			{
+				logCityAI(1, "[CIT/spin] city=%S owner=%d reason=produceLoopCap",
+					getName().GetCString(), (int)getOwner());
+				break;
+			}
 			popOrder(0, true, true);
 
 			if (!isProduction())
@@ -16526,9 +16552,17 @@ void CvCity::doProduction(bool bAllowNoProduction)
 				{
 					break;
 				}
-				else AI_chooseProduction();
+				AI_chooseProduction();
 
-				FAssertMsg(isProduction(), "AI set city to produce nothing at all!")
+				if (!isProduction())
+				{
+					//	The AI failed to establish ANY production (every candidate failed its live
+					//	re-check). Defensive: idle this turn, flag a re-decide for next turn.
+					AI_setChooseProductionDirty(true);
+					logCityAI(1, "[CIT/spin] city=%S owner=%d reason=noProductionChosen",
+						getName().GetCString(), (int)getOwner());
+					break;
+				}
 			}
 
 			/* Toffer - Don't think the wonder limit can be breached here just like that.

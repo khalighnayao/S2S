@@ -161,8 +161,10 @@ pull-up; the constraints (§2); advisory-only safety; no rewrite.
 ## 6. Module catalog (where responsibilities go)
 
 Read-side (repository, base objects, change-driven):
-- **Game:** static XML reverse-indices (prereq → units/buildings, the enabler graph), built once at
-  load, never invalidated.
+- **Static (DELIVERED):** XML reverse-indices (prereq → units/buildings, the enabler graph) live on
+  `cvInternalGlobals` (`getBuildingsEnabledBy`/`getUnitsEnabledBy`, built once in
+  `doPostLoadCaching`, never invalidated — #195 Phase 1, PR #314). The Game *repository* is for
+  game-state-derived data only.
 - **Team:** known/obsolete tech sets, tech-derived availability.
 - **Player:** tech / civic / promotion / bonus values, building & area-unit counts, needed-building
   counts. (Absorb the `AI_doTurnPre` blanket `.clear()`s.)
@@ -179,8 +181,8 @@ Decide-side (behaviour, interfaces):
 
 | Plan / initiative | Role in the frame | Status |
 |---|---|---|
-| `derived-data-repository.md` | the read-side modules + invalidation mechanism | skeleton landed; first real datum (constructible set) identified |
-| `turn-time-optimization.md` | the *payoff* of change-driven read-side + a parallel pass | CABV PreLoop root-caused; within-turn memo shipped (3.6×); instrumentation in place |
+| `derived-data-repository.md` | the read-side modules + invalidation mechanism | skeleton v2 landed on the BASE objects (`dataRepository()`): versioning, bounded staleness, auto-registration, read-only phase; first tenants = building values + the 3 canConstruct caches |
+| `turn-time-optimization.md` | the *payoff* of change-driven read-side + a parallel pass | CABV PreLoop FIXED (memo 3.6× + #195 enabler index PR #314 ~390×); next lever = building-value retention (blocked on chooseProduction hardening) |
 | `unit-ai-valuation.md` | decide-side correctness (what `IUnitAI` modules must get right) | living report; several bugs found |
 | `sea-ai-rework.md` | decide-side (naval) — early example of carving behaviour out of `CvUnitAI` | PRs merged; one spin root-cause open |
 | `improvement-category-yields.md`, `subdued-animal-ai.md`, `worker-stranded-tiles-reachability.md` | decide-side + read-side (city declared-needs) for worker/improvement AI | planned |
@@ -202,17 +204,20 @@ read-side / Game-static-index work (steps 1–3) and `dead-code-xml-pass`. Per t
 (§ banner), **do that XML restructuring now**, while the playerbase is small, rather than later. The
 in-memory carve-outs (steps 4–6) don't break saves, so their timing is driven purely by risk/value.
 
-1. **Pilot — read-side repository absorbing the existing `canConstruct` caches.** Make the three
-   current caches (`CvPlayer::m_bCanConstruct[]`, `CvCity::m_bCanConstruct`,
-   `CvCityAI::BuildingValueCache::m_buildingsToCalculate`) the *first tenants* of a base-object
-   repository — **replacing** `clearCanConstructCache`/`FlushCanConstructCache`/
-   `AI_FlushBuildingValueCache`, not adding a 4th layer. Constructible set as bounded-staleness
-   (advisory, input-set, can't loop). Run debug-verify. This banks most of the ~30% turn-time and
-   proves the cascade + getter pattern on real, shared, hot data.
+1. **Pilot — read-side repository absorbing the existing `canConstruct` caches + building values.**
+   (The old "~30% turn-time" PreLoop payoff is already banked by the #195 static index, PR #314 —
+   the remaining prize is the building-VALUE recompute chain.) Make the three current caches
+   (`CvPlayer::m_bCanConstruct[]`, `CvCity::m_bCanConstruct`,
+   `CvCityAI::BuildingValueCache::m_buildingsToCalculate`) and the building values the *first
+   tenants* of the base-object repository — **replacing** `clearCanConstructCache`/
+   `FlushCanConstructCache`/`AI_FlushBuildingValueCache`, not adding a 4th layer. Bounded
+   staleness + events; debug-verify via gated logging. **Precondition:** harden
+   `AI_chooseProduction` against stale inputs first (the retention experiment hang —
+   `CvCity.cpp:1256`).
 2. **Absorb the `AI_doTurnPre` blanket clears** (tech value, civic value, bonus value, needed counts)
    one at a time → event-driven invalidation behind the same pattern.
-3. **Game-level static indices** computed once at load (prereq/enabler graph), deleting the
-   hand-rolled re-derivations across the AI files.
+3. **Game-level static indices — DELIVERED** (#195 Phase 1, PR #314): prereq/enabler reverse-indices
+   on `cvInternalGlobals`, built once at load; the CABV PreLoop and unit-enabler loops now read them.
 4. **Parallelise a clean read-side pass** (value calcs), Win32 threads in-process, deterministic
    reduction. Prereq: the data it reads is computed-then-read-only (steps 1–3).
 5. **First decide-side carve-out — `IUnitAI`** for one UNITAI type, behind the interface, flyweight +

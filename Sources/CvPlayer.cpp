@@ -155,6 +155,7 @@ m_pBuildLists(NULL),
 m_cachedBonusCount(NULL)
 {
 	PROFILE_EXTRA_FUNC();
+	m_dataRepository.init(this);
 	m_aiSeaPlotYield = new int[NUM_YIELD_TYPES];
 	m_aiYieldRateModifier = new int[NUM_YIELD_TYPES];
 	m_aiCapitalYieldRateModifier = new int[NUM_YIELD_TYPES];
@@ -755,6 +756,8 @@ void CvPlayer::reset(PlayerTypes eID, bool bConstructorCall)
 {
 	PROFILE_EXTRA_FUNC();
 	int iI, iJ;
+
+	m_dataRepository.reset();
 
 	//--------------------------------
 	// Uninit class

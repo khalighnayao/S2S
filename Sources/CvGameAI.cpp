@@ -14,7 +14,6 @@
 
 CvGameAI::CvGameAI()
 {
-	m_dataRepository.init(this);
 	AI_reset();
 }
 
