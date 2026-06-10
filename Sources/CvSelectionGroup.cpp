@@ -289,7 +289,46 @@ void CvSelectionGroup::doTurn()
 
 		if (AI_isControlled())
 		{
-			if ((getActivityType() != ACTIVITY_MISSION) || (!canDefend() && (GET_PLAYER(getOwner()).AI_getAnyPlotDanger(plot(), 2))))
+			if (getActivityType() != ACTIVITY_MISSION)
+			{
+				//	Parked AI groups re-plan from scratch when force-updated. Garrison /
+				//	passive roles re-planning EVERY turn measured ~6k full decision cascades
+				//	per turn (CITY_DEFENSE alone ~4k ≈ 16 s plus their pathfinding), almost
+				//	always re-deriving the same "keep doing what you're doing". Those roles
+				//	now re-plan on a staggered 4-turn cycle; nearby danger still wakes them
+				//	immediately, and every other role (attack stacks, workers, ...) keeps its
+				//	every-turn cadence so war machinery is unaffected.
+				bool bForce = true;
+				const CvUnit* pHead = getHeadUnit();
+				if (pHead != NULL)
+				{
+					switch (pHead->AI_getUnitAIType())
+					{
+						case UNITAI_CITY_DEFENSE:
+						case UNITAI_CITY_COUNTER:
+						case UNITAI_CITY_SPECIAL:
+						case UNITAI_PROPERTY_CONTROL:
+						case UNITAI_HEALER:
+						case UNITAI_SEE_INVISIBLE:
+						case UNITAI_INVESTIGATOR:
+						case UNITAI_INFILTRATOR:
+						{
+							bForce = (GC.getGame().getGameTurn() + getID()) % 4 == 0
+								|| GET_PLAYER(getOwner()).AI_getAnyPlotDanger(plot(), 2);
+							break;
+						}
+						default:
+						{
+							break;
+						}
+					}
+				}
+				if (bForce)
+				{
+					setForceUpdate(true);
+				}
+			}
+			else if (!canDefend() && GET_PLAYER(getOwner()).AI_getAnyPlotDanger(plot(), 2))
 			{
 				setForceUpdate(true);
 			}
