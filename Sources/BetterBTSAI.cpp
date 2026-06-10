@@ -268,6 +268,23 @@ void logCombatAI(int level, const char* format, ...)
 	}
 }
 
+// Engine-integrity warnings -- [ENG/*] tags, gated by gTeamLogLevel. Demoted
+// "should never happen" asserts that must still surface in FinalRelease (FASSERT
+// compiles out there). See the tag table in BetterBTSAI.h.
+void logEngine(int level, const char* format, ...)
+{
+	if (level <= gTeamLogLevel)
+	{
+		static char buf[2048];
+		_vsnprintf(buf, 2048 - 4, format, (char*)(&format + 1));
+		gDLL->logMsg("Engine.log", buf);
+
+		// Echo to debugger
+		strcat(buf, "\n");
+		OutputDebugString(buf);
+	}
+}
+
 // Game session header -- [GAME/*] -> GameInfo.log. Written once on game start/load
 // (from CvGame::onFinalInitialized) so every other AI log can be read against the
 // active options/rules/setup. No level gate; the caller decides when to emit.
