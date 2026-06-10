@@ -4,12 +4,13 @@ version: 1.BETA.{build}
 skip_tags: true
 skip_branch_with_pr: true
 
-# Only run commit (push) builds on main and release. PR builds still run because
-# AppVeyor checks the pull request's BASE branch against this filter. This stops
-# feature-branch pushes from triggering a redundant branch build alongside the PR build.
+# TEMPORARY (2026-06-10, owner request): CI builds only on the release branch.
+# We are building locally during day-to-day development, so neither main pushes nor
+# PR builds run in AppVeyor (PR builds trigger off the BASE branch matching this
+# filter; with only "release" here, PRs targeting main are skipped). To re-enable
+# main/PR builds, add "- main" back to this list.
 branches:
   only:
-    - main
     - release
 
 environment:
