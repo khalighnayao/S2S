@@ -32,75 +32,15 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvTechInfo::CvTechInfo() :
-m_iAdvisorType(NO_ADVISOR),
-m_iAIWeight(0),
-m_iAITradeModifier(0),
-m_iResearchCost(-1),
-m_iEra(NO_ERA),
-m_iTradeRoutes(0),
-m_iFeatureProductionModifier(0),
-m_iWorkerSpeedModifier(0),
-//DPII < Maintenance Modifier >
-m_iMaintenanceModifier(0),
-m_iDistanceMaintenanceModifier(0),
-m_iNumCitiesMaintenanceModifier(0),
-m_iCoastalDistanceMaintenanceModifier(0),
-//DPII < Maintenance Modifier >
+// Hand-written (non-declarative) fields only - everything else is initialized by initDataMembers()
 m_iFirstFreeUnit(NO_UNIT),
 m_iFirstFreeProphet(NO_UNIT),
-m_iHealth(0),
-m_iHappiness(0),
-m_iFirstFreeTechs(0),
-m_iAssetValue(0),
-m_iPowerValue(0),
-m_iGridX(0),
-m_iGridY(0),
-m_bRepeat(false),
-m_bTrade(false),
-m_bDisable(false),
-m_bGoodyTech(false),
-m_bExtraWaterSeeFrom(false),
-m_bMapCentering(false),
-m_bMapVisible(false),
-m_bMapTrading(false),
-m_bTechTrading(false),
-m_bGoldTrading(false),
-m_bOpenBordersTrading(false),
-m_bDefensivePactTrading(false),
-m_bPermanentAllianceTrading(false),
-m_bVassalStateTrading(false),
-m_bBridgeBuilding(false),
-m_bIrrigation(false),
-m_bIgnoreIrrigation(false),
-m_bWaterWork(false),
-m_bRiverTrade(false),
-m_bLanguage(false),
-// Dale - AB: Bombing START
-m_bDCMAirBombTech1(0),
-m_bDCMAirBombTech2(0),
-// Dale - AB: Bombing END
 m_piDomainExtraMoves(NULL),
 m_piFlavorValue(NULL),
-m_pbCommerceFlexible(NULL),
-//ls612: Tech Commerce Modifiers
-m_piCommerceModifier(NULL)
-,m_bEmbassyTrading(false)
-,m_bCanPassPeaks(false)
-,m_bMoveFastPeaks(false)
-,m_bCanFoundOnPeaks(false)
-,m_bEnableDarkAges(false)
-,m_bRebaseAnywhere(false)
-,m_bEnablesDesertFarming(false)
-,m_iInflationModifier(0)
-,m_iGlobalTradeModifier(0)
-,m_iGlobalForeignTradeModifier(0)
-,m_iTradeMissionModifier(0)
-,m_iCorporationRevenueModifier(0)
-,m_iCorporationMaintenanceModifier(0)
-,m_iPrereqGameOption(NO_GAMEOPTION)
-,m_piFreeSpecialistCount(NULL)
-,m_bGlobal(false)
+m_piFreeSpecialistCount(NULL),
+m_pbCommerceFlexible(NULL)
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -113,10 +53,12 @@ m_piCommerceModifier(NULL)
 //------------------------------------------------------------------------------------------------------
 CvTechInfo::~CvTechInfo()
 {
+	CvInfoUtil(this).uninitDataMembers(); // frees the wrapper-owned m_piCommerceModifier array
+
 	SAFE_DELETE_ARRAY(m_piDomainExtraMoves);
 	SAFE_DELETE_ARRAY(m_piFlavorValue);
 	SAFE_DELETE_ARRAY(m_pbCommerceFlexible);
-	SAFE_DELETE_ARRAY(m_piCommerceModifier);
+	SAFE_DELETE_ARRAY(m_piFreeSpecialistCount); // was leaked by the legacy dtor
 	GC.removeDelayedResolutionVector(m_piPrereqOrTechs);
 	GC.removeDelayedResolutionVector(m_piPrereqAndTechs);
 	GC.removeDelayedResolutionVector(m_aPrereqBuilding);
@@ -611,6 +553,82 @@ bool CvTechInfo::isGlobal() const
 }
 
 
+void CvTechInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order for the wrapped subset; non-checksummed fields
+	// (iGridX/iGridY, the DCM air-bomb bools, the strings) are parked at the end. The class keeps an
+	// explicit getCheckSum because hand-written fields (FirstFreeUnit/Prophet, DomainExtraMoves,
+	// Flavors, the prereq tech/building vectors, CommerceFlexible, FreeSpecialistCounts) sit
+	// mid-order in the legacy checksum, and the legacy checksum deliberately omits several read
+	// fields (see above).
+	util
+		.addEnumAsInt(m_iAdvisorType, L"Advisor")
+		.add(m_iAIWeight, L"iAIWeight")
+		.add(m_iAITradeModifier, L"iAITradeModifier")
+		.add(m_iResearchCost, L"iCost")
+		.addEnumAsInt(m_iEra, L"Era")
+		.add(m_iTradeRoutes, L"iTradeRoutes")
+		.add(m_iFeatureProductionModifier, L"iFeatureProductionModifier")
+		.add(m_iWorkerSpeedModifier, L"iWorkerSpeedModifier")
+		.add(m_iMaintenanceModifier, L"iMaintenanceModifier")
+		.add(m_iDistanceMaintenanceModifier, L"iDistanceMaintenanceModifier")
+		.add(m_iNumCitiesMaintenanceModifier, L"iNumCitiesMaintenanceModifier")
+		.add(m_iCoastalDistanceMaintenanceModifier, L"iCoastalDistanceMaintenanceModifier")
+		.add(m_iHealth, L"iHealth")
+		.add(m_iHappiness, L"iHappiness")
+		.add(m_iFirstFreeTechs, L"iFirstFreeTechs")
+		.add(m_iAssetValue, L"iAsset")
+		.add(m_iPowerValue, L"iPower")
+		.add(m_bRepeat, L"bRepeat")
+		.add(m_bTrade, L"bTrade")
+		.add(m_bDisable, L"bDisable")
+		.add(m_bGoodyTech, L"bGoodyTech")
+		.add(m_bExtraWaterSeeFrom, L"bExtraWaterSeeFrom")
+		.add(m_bMapCentering, L"bMapCentering")
+		.add(m_bMapVisible, L"bMapVisible")
+		.add(m_bMapTrading, L"bMapTrading")
+		.add(m_bTechTrading, L"bTechTrading")
+		.add(m_bGoldTrading, L"bGoldTrading")
+		.add(m_bOpenBordersTrading, L"bOpenBordersTrading")
+		.add(m_bDefensivePactTrading, L"bDefensivePactTrading")
+		.add(m_bPermanentAllianceTrading, L"bPermanentAllianceTrading")
+		.add(m_bVassalStateTrading, L"bVassalTrading")
+		.add(m_bBridgeBuilding, L"bBridgeBuilding")
+		.add(m_bIrrigation, L"bIrrigation")
+		.add(m_bIgnoreIrrigation, L"bIgnoreIrrigation")
+		.add(m_bWaterWork, L"bWaterWork")
+		.add(m_bRiverTrade, L"bRiverTrade")
+		.add(m_bLanguage, L"bLanguage")
+		.add(m_aeTerrainTrade, L"TerrainTrades")
+		.addCommerce(m_piCommerceModifier, L"CommerceModifiers")
+		.add(m_bCanPassPeaks, L"bCanPassPeaks")
+		.add(m_bMoveFastPeaks, L"bMoveFastPeaks")
+		.add(m_bCanFoundOnPeaks, L"bCanFoundOnPeaks")
+		.add(m_bEmbassyTrading, L"bEmbassyTrading")
+		.add(m_bEnableDarkAges, L"bEnableDarkAges")
+		.add(m_bRebaseAnywhere, L"bRebaseAnywhere")
+		.add(m_bEnablesDesertFarming, L"bAllowsDesertFarming")
+		.add(m_iInflationModifier, L"iInflationModifier")
+		.add(m_iGlobalTradeModifier, L"iGlobalTradeModifier")
+		.add(m_iGlobalForeignTradeModifier, L"iGlobalForeignTradeModifier")
+		.add(m_iTradeMissionModifier, L"iTradeMissionModifier")
+		.add(m_iCorporationRevenueModifier, L"iCorporationRevenueModifier")
+		.add(m_iCorporationMaintenanceModifier, L"iCorporationMaintenanceModifier")
+		.addEnumAsInt(m_iPrereqGameOption, L"PrereqGameOption")
+		.add(m_aiCategories, L"Categories")
+		.add(m_bGlobal, L"bGlobal")
+		// Not in the legacy checksum:
+		.add(m_iGridX, L"iGridX")
+		.add(m_iGridY, L"iGridY")
+		.add(m_bDCMAirBombTech1, L"bDCMAirBombTech1")
+		.add(m_bDCMAirBombTech2, L"bDCMAirBombTech2")
+		.add(m_szQuoteKey, L"Quote")
+		.add(m_szSound, L"Sound")
+		.add(m_szSoundMP, L"SoundMP")
+	;
+}
+
+
 bool CvTechInfo::read(CvXMLLoadUtility* pXML)
 {
 	PROFILE_EXTRA_FUNC();
@@ -620,61 +638,16 @@ bool CvTechInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"Advisor");
-	m_iAdvisorType = pXML->GetInfoClass(szTextVal);
+	CvInfoUtil(this).readXml(pXML);
 
-	pXML->GetOptionalChildXmlValByName(&m_iAIWeight, L"iAIWeight");
-	pXML->GetOptionalChildXmlValByName(&m_iAITradeModifier, L"iAITradeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iResearchCost, L"iCost");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"Era");
-	m_iEra = pXML->GetInfoClass(szTextVal);
-
+	// Hand-written: int FKs with delayed resolution (addEnumAsInt is immediate-only)
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"FirstFreeUnit");
 	GC.addDelayedResolution((int*)&m_iFirstFreeUnit, szTextVal);
 
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"FirstFreeProphet");
 	GC.addDelayedResolution((int*)&m_iFirstFreeProphet, szTextVal);
 
-	pXML->GetOptionalChildXmlValByName(&m_iFeatureProductionModifier, L"iFeatureProductionModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iWorkerSpeedModifier, L"iWorkerSpeedModifier");
-	//DPII < Maintenance Modifiers >
-	pXML->GetOptionalChildXmlValByName(&m_iMaintenanceModifier, L"iMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iDistanceMaintenanceModifier, L"iDistanceMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iNumCitiesMaintenanceModifier, L"iNumCitiesMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iCoastalDistanceMaintenanceModifier, L"iCoastalDistanceMaintenanceModifier");
-	//DPII < Maintenance Modifiers >
-	pXML->GetOptionalChildXmlValByName(&m_iTradeRoutes, L"iTradeRoutes");
-	pXML->GetOptionalChildXmlValByName(&m_iHealth, L"iHealth");
-	pXML->GetOptionalChildXmlValByName(&m_iHappiness, L"iHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iFirstFreeTechs, L"iFirstFreeTechs");
-	pXML->GetOptionalChildXmlValByName(&m_iAssetValue, L"iAsset");
-	pXML->GetOptionalChildXmlValByName(&m_iPowerValue, L"iPower");
-	pXML->GetOptionalChildXmlValByName(&m_bRepeat, L"bRepeat");
-	pXML->GetOptionalChildXmlValByName(&m_bTrade, L"bTrade");
-	pXML->GetOptionalChildXmlValByName(&m_bDisable, L"bDisable");
-	pXML->GetOptionalChildXmlValByName(&m_bGoodyTech, L"bGoodyTech");
-	pXML->GetOptionalChildXmlValByName(&m_bExtraWaterSeeFrom, L"bExtraWaterSeeFrom");
-	pXML->GetOptionalChildXmlValByName(&m_bMapCentering, L"bMapCentering");
-	pXML->GetOptionalChildXmlValByName(&m_bMapVisible, L"bMapVisible");
-	pXML->GetOptionalChildXmlValByName(&m_bMapTrading, L"bMapTrading");
-	pXML->GetOptionalChildXmlValByName(&m_bTechTrading, L"bTechTrading");
-	pXML->GetOptionalChildXmlValByName(&m_bGoldTrading, L"bGoldTrading");
-	pXML->GetOptionalChildXmlValByName(&m_bOpenBordersTrading, L"bOpenBordersTrading");
-	pXML->GetOptionalChildXmlValByName(&m_bDefensivePactTrading, L"bDefensivePactTrading");
-	pXML->GetOptionalChildXmlValByName(&m_bPermanentAllianceTrading, L"bPermanentAllianceTrading");
-	pXML->GetOptionalChildXmlValByName(&m_bVassalStateTrading, L"bVassalTrading");
-	pXML->GetOptionalChildXmlValByName(&m_bBridgeBuilding, L"bBridgeBuilding");
-	pXML->GetOptionalChildXmlValByName(&m_bIrrigation, L"bIrrigation");
-	pXML->GetOptionalChildXmlValByName(&m_bIgnoreIrrigation, L"bIgnoreIrrigation");
-	pXML->GetOptionalChildXmlValByName(&m_bWaterWork, L"bWaterWork");
-	pXML->GetOptionalChildXmlValByName(&m_bRiverTrade, L"bRiverTrade");
-	pXML->GetOptionalChildXmlValByName(&m_bLanguage, L"bLanguage");
-	pXML->GetOptionalChildXmlValByName(&m_iGridX, L"iGridX");
-	pXML->GetOptionalChildXmlValByName(&m_iGridY, L"iGridY");
-	pXML->GetOptionalChildXmlValByName(&m_bDCMAirBombTech1, L"bDCMAirBombTech1");
-	pXML->GetOptionalChildXmlValByName(&m_bDCMAirBombTech2, L"bDCMAirBombTech2");
-
+	// Hand-written: bool array via SetCommerce (no bool-array wrapper)
 	if (pXML->TryMoveToXmlFirstChild(L"CommerceFlexible"))
 	{
 		pXML->SetCommerce(&m_pbCommerceFlexible);
@@ -685,43 +658,9 @@ bool CvTechInfo::read(CvXMLLoadUtility* pXML)
 		SAFE_DELETE_ARRAY(m_pbCommerceFlexible);
 	}
 
+	// Hand-written: SetVariableListTagPair dynamic arrays
 	pXML->SetVariableListTagPair(&m_piDomainExtraMoves, L"DomainExtraMoves", NUM_DOMAIN_TYPES);
-	pXML->SetOptionalVector(&m_aeTerrainTrade, L"TerrainTrades");
-	//ls612: Tech Commerce Modifiers
-	if (pXML->TryMoveToXmlFirstChild(L"CommerceModifiers"))
-	{
-		pXML->SetCommerce(&m_piCommerceModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCommerceModifier);
-	}
-
 	pXML->SetVariableListTagPair(&m_piFlavorValue, L"Flavors", GC.getNumFlavorTypes());
-
-	pXML->GetOptionalChildXmlValByName(m_szQuoteKey, L"Quote");
-	pXML->GetOptionalChildXmlValByName(m_szSound, L"Sound");
-	pXML->GetOptionalChildXmlValByName(m_szSoundMP, L"SoundMP");
-
-	pXML->GetOptionalChildXmlValByName(&m_bEmbassyTrading, L"bEmbassyTrading");
-	pXML->GetOptionalChildXmlValByName(&m_bCanPassPeaks, L"bCanPassPeaks");
-	pXML->GetOptionalChildXmlValByName(&m_bMoveFastPeaks, L"bMoveFastPeaks");
-	pXML->GetOptionalChildXmlValByName(&m_bCanFoundOnPeaks, L"bCanFoundOnPeaks");
-	pXML->GetOptionalChildXmlValByName(&m_bEnableDarkAges, L"bEnableDarkAges");
-	pXML->GetOptionalChildXmlValByName(&m_bRebaseAnywhere, L"bRebaseAnywhere");
-	pXML->GetOptionalChildXmlValByName(&m_bEnablesDesertFarming, L"bAllowsDesertFarming");
-
-	pXML->GetOptionalChildXmlValByName(&m_iInflationModifier, L"iInflationModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalTradeModifier, L"iGlobalTradeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalForeignTradeModifier, L"iGlobalForeignTradeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iTradeMissionModifier, L"iTradeMissionModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iCorporationRevenueModifier, L"iCorporationRevenueModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iCorporationMaintenanceModifier, L"iCorporationMaintenanceModifier");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PrereqGameOption");
-	m_iPrereqGameOption = pXML->GetInfoClass(szTextVal);
-
 	pXML->SetVariableListTagPair(&m_piFreeSpecialistCount, L"FreeSpecialistCounts", GC.getNumSpecialistInfos());
 
 	if(pXML->TryMoveToXmlFirstChild(L"PrereqBuildings"))
@@ -770,13 +709,9 @@ bool CvTechInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	//TB Tech Tags
-	pXML->GetOptionalChildXmlValByName(&m_bGlobal, L"bGlobal");
-	//TB Tech Tags end
-
+	// Hand-written: self-FK tech vectors with delayed resolution
 	pXML->SetOptionalVectorWithDelayedResolution(m_piPrereqOrTechs, L"OrPreReqs");
 	pXML->SetOptionalVectorWithDelayedResolution(m_piPrereqAndTechs, L"AndPreReqs");
-	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
 
 	return true;
 }
@@ -787,52 +722,13 @@ void CvTechInfo::copyNonDefaults(const CvTechInfo* pClassInfo)
 	PROFILE_EXTRA_FUNC();
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
+
 	const bool bDefault = false;
 	const int iDefault = 0;
-	const int iTextDefault = -1;
-	const CvString cDefault = CvString::format("").GetCString();
 
-	if (m_iAdvisorType == NO_ADVISOR) m_iAdvisorType = pClassInfo->getAdvisorType();
-	if (getAIWeight() == iDefault) m_iAIWeight = pClassInfo->getAIWeight();
-	if (getAITradeModifier() == iDefault) m_iAITradeModifier = pClassInfo->getAITradeModifier();
-	if (m_iResearchCost == iDefault) m_iResearchCost = pClassInfo->m_iResearchCost;
-	if (m_iEra == NO_ERA) m_iEra = pClassInfo->getEra();
 	GC.copyNonDefaultDelayedResolution((int*)&m_iFirstFreeUnit, (int*)&pClassInfo->m_iFirstFreeUnit);
 	GC.copyNonDefaultDelayedResolution((int*)&m_iFirstFreeProphet, (int*)&pClassInfo->m_iFirstFreeProphet);
-	if (getFeatureProductionModifier() == iDefault) m_iFeatureProductionModifier = pClassInfo->getFeatureProductionModifier();
-	if (getWorkerSpeedModifier() == iDefault) m_iWorkerSpeedModifier = pClassInfo->getWorkerSpeedModifier();
-	if (getTradeRoutes() == iDefault) m_iTradeRoutes = pClassInfo->getTradeRoutes();
-	if (getHealth() == iDefault) m_iHealth = pClassInfo->getHealth();
-	if (getHappiness() == iDefault) m_iHappiness = pClassInfo->getHappiness();
-	if (getFirstFreeTechs() == iDefault) m_iFirstFreeTechs = pClassInfo->getFirstFreeTechs();
-	if (m_iAssetValue == iDefault) m_iAssetValue = pClassInfo->m_iAssetValue;
-	if (m_iPowerValue == iDefault) m_iPowerValue = pClassInfo->m_iPowerValue;
-
-	if (isRepeat() == bDefault) m_bRepeat = pClassInfo->isRepeat();
-	if (isTrade() == bDefault) m_bTrade = pClassInfo->isTrade();
-	if (isDisable() == bDefault) m_bDisable = pClassInfo->isDisable();
-	if (isGoodyTech() == bDefault) m_bGoodyTech = pClassInfo->isGoodyTech();
-	if (isExtraWaterSeeFrom() == bDefault) m_bExtraWaterSeeFrom = pClassInfo->isExtraWaterSeeFrom();
-	if (isMapCentering() == bDefault) m_bMapCentering = pClassInfo->isMapCentering();
-	if (isMapVisible() == bDefault) m_bMapVisible = pClassInfo->isMapVisible();
-	if (isMapTrading() == bDefault) m_bMapTrading = pClassInfo->isMapTrading();
-	if (isTechTrading() == bDefault) m_bTechTrading = pClassInfo->isTechTrading();
-	if (isGoldTrading() == bDefault) m_bGoldTrading = pClassInfo->isGoldTrading();
-	if (isOpenBordersTrading() == bDefault) m_bOpenBordersTrading = pClassInfo->isOpenBordersTrading();
-	if (isDefensivePactTrading() == bDefault) m_bDefensivePactTrading = pClassInfo->isDefensivePactTrading();
-	if (isPermanentAllianceTrading() == bDefault) m_bPermanentAllianceTrading = pClassInfo->isPermanentAllianceTrading();
-	if (isVassalStateTrading() == bDefault) m_bVassalStateTrading = pClassInfo->isVassalStateTrading();
-	if (isBridgeBuilding() == bDefault) m_bBridgeBuilding = pClassInfo->isBridgeBuilding();
-	if (isIrrigation() == bDefault) m_bIrrigation = pClassInfo->isIrrigation();
-	if (isIgnoreIrrigation() == bDefault) m_bIgnoreIrrigation = pClassInfo->isIgnoreIrrigation();
-	if (isWaterWork() == bDefault) m_bWaterWork = pClassInfo->isWaterWork();
-	if (isRiverTrade() == bDefault) m_bRiverTrade = pClassInfo->isRiverTrade();
-	if (m_bLanguage == bDefault) m_bLanguage = pClassInfo->isLanguage();
-
-	if (getGridX() == iDefault) m_iGridX = pClassInfo->getGridX();
-	if (getGridY() == iDefault) m_iGridY = pClassInfo->getGridY();
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
 
 	for ( int j = 0; j < NUM_COMMERCE_TYPES; j++)
 	{
@@ -857,19 +753,6 @@ void CvTechInfo::copyNonDefaults(const CvTechInfo* pClassInfo)
 			m_piDomainExtraMoves[j] = pClassInfo->getDomainExtraMoves(j);
 		}
 	}
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeTerrainTrade, pClassInfo->m_aeTerrainTrade);
-	//ls612: Tech Commerce Modifiers
-	for ( int j = 0; j < NUM_COMMERCE_TYPES; j++)
-	{
-		if ( getCommerceModifier(j) == iDefault && pClassInfo->getCommerceModifier(j) != iDefault)
-		{
-			if ( NULL == m_piCommerceModifier )
-			{
-				CvXMLLoadUtility::InitList(&m_piCommerceModifier,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_piCommerceModifier[j] = pClassInfo->getCommerceModifier(j);
-		}
-	}
 	for ( int j = 0; j < GC.getNumFlavorTypes(); j++)
 	{
 		if ((m_piFlavorValue == NULL || m_piFlavorValue[j] == iDefault) &&
@@ -882,33 +765,6 @@ void CvTechInfo::copyNonDefaults(const CvTechInfo* pClassInfo)
 			m_piFlavorValue[j] = pClassInfo->getFlavorValue(j);
 		}
 	}
-
-	if (getQuoteKey() == cDefault) m_szQuoteKey = pClassInfo->getQuoteKey();
-	if (getSound() == cDefault) m_szSound = pClassInfo->getSound();
-	if (getSoundMP() == cDefault) m_szSoundMP = pClassInfo->getSoundMP();
-	//TB Tech Tags
-	if (isGlobal() == bDefault) m_bGlobal = pClassInfo->isGlobal();
-	//TB Tech Tags end
-	if (!isEmbassyTrading()) m_bEmbassyTrading = pClassInfo->isEmbassyTrading();
-	if (!isCanPassPeaks()) m_bCanPassPeaks = pClassInfo->isCanPassPeaks();
-	if (!isMoveFastPeaks()) m_bMoveFastPeaks = pClassInfo->isMoveFastPeaks();
-	if (!isCanFoundOnPeaks()) m_bCanFoundOnPeaks = pClassInfo->isCanFoundOnPeaks();
-	if (!isEnableDarkAges()) m_bEnableDarkAges = pClassInfo->isEnableDarkAges();
-	if (!isRebaseAnywhere()) m_bRebaseAnywhere = pClassInfo->isRebaseAnywhere();
-	if (!isEnablesDesertFarming()) m_bEnablesDesertFarming = pClassInfo->isEnablesDesertFarming();
-
-	if (m_iInflationModifier == 0) m_iInflationModifier = pClassInfo->getInflationModifier();
-	if (m_iGlobalTradeModifier == 0) m_iGlobalTradeModifier = pClassInfo->getGlobalTradeModifier();
-	if (m_iGlobalForeignTradeModifier == 0) m_iGlobalForeignTradeModifier = pClassInfo->getGlobalForeignTradeModifier();
-	if (m_iTradeMissionModifier == 0) m_iTradeMissionModifier = pClassInfo->getTradeMissionModifier();
-	if (m_iCorporationRevenueModifier == 0) m_iCorporationRevenueModifier = pClassInfo->getCorporationRevenueModifier();
-	if (m_iCorporationMaintenanceModifier == 0) m_iCorporationMaintenanceModifier = pClassInfo->getCorporationMaintenanceModifier();
-	if (m_iPrereqGameOption == iTextDefault) m_iPrereqGameOption = pClassInfo->getPrereqGameOption();
-
-	if (!m_iMaintenanceModifier) m_iMaintenanceModifier = pClassInfo->getMaintenanceModifier();
-	if (!m_iDistanceMaintenanceModifier) m_iDistanceMaintenanceModifier = pClassInfo->getDistanceMaintenanceModifier();
-	if (!m_iNumCitiesMaintenanceModifier) m_iNumCitiesMaintenanceModifier = pClassInfo->getNumCitiesMaintenanceModifier();
-	if (!m_iCoastalDistanceMaintenanceModifier) m_iCoastalDistanceMaintenanceModifier = pClassInfo->getCoastalDistanceMaintenanceModifier();
 
 	for ( int j = 0; j < GC.getNumSpecialistInfos(); j++)
 	{
@@ -949,6 +805,10 @@ void CvTechInfo::copyNonDefaults(const CvTechInfo* pClassInfo)
 }
 
 
+// Explicit (not delegated to CvInfoUtil) on purpose: hand-written fields (FirstFreeUnit/Prophet,
+// DomainExtraMoves, Flavors, prereq tech/building vectors, CommerceFlexible, FreeSpecialistCounts)
+// sit mid-order, and the legacy checksum deliberately omits several read fields (iGridX/iGridY,
+// bDCMAirBombTech1/2). Keep this byte-identical to the legacy order.
 void CvTechInfo::getCheckSum(uint32_t& iSum) const
 {
 	PROFILE_EXTRA_FUNC();

@@ -125,6 +125,11 @@ public:
 	DllExport float getScale() const;
 	DllExport float getInterfaceScale() const;
 
+	// Declarative field registry for the mixin; NOT virtual (CvScalableInfo is not a CvInfoBase).
+	// Chained explicitly from CvArtInfoScalableAsset::getDataMembers. The hand-written
+	// read()/copyNonDefaults() below are kept for the non-declarative consumers of this mixin
+	// (CvAttachableInfo, CvEffectInfo) and must stay in sync with getDataMembers.
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvScalableInfo* pClassInfo);
 

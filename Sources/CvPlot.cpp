@@ -507,7 +507,10 @@ void CvPlot::enableGraphicsPaging()
 
 void CvPlot::disableGraphicsPaging()
 {
-	FAssertMsg(isGraphicPagingEnabled(), "Graphics paging is already disabled");
+	// No already-disabled assert here: the only caller is CvPlotPaging's whole-map sweep when
+	// the paging option turns (or starts) off, where plots that never paged are the normal case
+	// (one assert per plot, twice a session, with the option off). The body is a no-op-safe
+	// restore for them.
 	// Show all graphics, as we aren't paging any more
 	setRequireGraphicsVisible(ECvPlotGraphics::ALL, true);
 	// Disable paging

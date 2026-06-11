@@ -12,72 +12,14 @@
 #include "IDValueMap.h"
 
 CvImprovementInfo::CvImprovementInfo() :
-	m_iAdvancedStartCost(100),
-	m_iTilesPerGoody(0),
-	m_iGoodyUniqueRange(0),
-	m_iFeatureGrowthProbability(0),
-	m_iUpgradeTime(0),
-	m_iAirBombDefense(0),
-	m_iDefenseModifier(0),
-	m_iHappiness(0),
-	m_iPillageGold(0),
-	m_iImprovementPillage(NO_IMPROVEMENT),
-	m_iImprovementUpgrade(NO_IMPROVEMENT),
-	// Super Forts begin *XML*
-	m_iCulture(0),
-	m_iCultureRange(0),
-	m_iVisibilityChange(0),
-	m_iSeeFrom(0),
-	m_iUniqueRange(0),
-	m_bBombardable(false),
-	m_bUpgradeRequiresFortify(false),
-	// Super Forts end
-	// Super forts C2C adaptation
-	m_bIsUniversalTradeBonusProvider(false),
-	m_bIsZOCSource(false),
-	// Super forts C2C adaptation end
-	m_bActsAsCity(false),
-	m_bHillsMakesValid(false),
-	m_bFreshWaterMakesValid(false),
-	m_bRiverSideMakesValid(false),
-	m_bNoFreshWater(false),
-	m_bRequiresFlatlands(false),
-	m_bRequiresRiverSide(false),
-	m_bRequiresIrrigation(false),
-	m_bCarriesIrrigation(false),
-	m_bRequiresFeature(false),
-	m_bPeakImprovement(false),
-	m_bWaterImprovement(false),
-	m_bGoody(false),
-	m_bOutsideBorders(false),
-	m_bMilitaryStructure(false),
-	m_bPlacesBonus(false),
-	m_bPlacesFeature(false),
-	m_bPlacesTerrain(false),
-	m_bExtraterresial(false),
+	// Only non-declared members are initialized here; everything in getDataMembers is
+	// initialized by initDataMembers() below.
 	m_iWorldSoundscapeScriptId(0),
-	m_piPrereqNatureYield(NULL),
-	m_piYieldChange(NULL),
-	m_piRiverSideYieldChange(NULL),
-	m_piIrrigatedChange(NULL),
 	m_ppiTechYieldChanges(NULL),
 	m_ppiRouteYieldChanges(NULL),
+	//m_ppiTraitYieldChanges(NULL),
 	m_paImprovementBonus(NULL)
-
-	, m_bPeakMakesValid(false)
-	, m_iHealthPercent(0)
-	, m_iPrereqTech(NO_TECH)
-	//,m_ppiTraitYieldChanges(NULL)
-
-	, m_PropertyManipulators()
-	//TB Improvements
-	, m_bCanMoveSeaUnits(true)
-	, m_bChangeRemove(false)
-	, m_bNotOnAnyBonus(false)
-	, m_bNational(false)
-	, m_bGlobal(false)
 	//,m_iHighestCost(0)
-	, m_iBonusChange(NO_BONUS)
 {
 	CvInfoUtil(this).initDataMembers();
 }
@@ -91,21 +33,15 @@ CvImprovementInfo::CvImprovementInfo() :
 //------------------------------------------------------------------------------------------------------
 CvImprovementInfo::~CvImprovementInfo()
 {
+	// Frees the declared yield arrays (addYields => wrapper-owned) and unregisters the declared
+	// delayed-resolution enums (ImprovementPillage/ImprovementUpgrade/BonusChange).
 	CvInfoUtil(this).uninitDataMembers();
 
-	SAFE_DELETE_ARRAY(m_piPrereqNatureYield);
-	SAFE_DELETE_ARRAY(m_piYieldChange);
-	SAFE_DELETE_ARRAY(m_piRiverSideYieldChange);
-	SAFE_DELETE_ARRAY(m_piIrrigatedChange);
 	SAFE_DELETE_ARRAY(m_paImprovementBonus); // XXX make sure this isn't leaking memory...
 	SAFE_DELETE_ARRAY2(m_ppiTechYieldChanges, GC.getNumTechInfos());
 	SAFE_DELETE_ARRAY2(m_ppiRouteYieldChanges, GC.getNumRouteInfos());
 	//	SAFE_DELETE_ARRAY2(m_ppiTraitYieldChanges, GC.getNumTraitInfos());
-	GC.removeDelayedResolution((int*)&m_iImprovementPillage);
-	GC.removeDelayedResolution((int*)&m_iImprovementUpgrade);
-	GC.removeDelayedResolution((int*)&m_iBonusChange);
 	GC.removeDelayedResolutionVector(m_aiAlternativeImprovementUpgradeTypes);
-	GC.removeDelayedResolutionVector(m_aiFeatureChangeTypes);
 }
 
 int CvImprovementInfo::getAdvancedStartCost() const
@@ -531,16 +467,100 @@ bool CvImprovementInfo::isCategory(int i) const
 
 void CvImprovementInfo::getDataMembers(CvInfoUtil& util)
 {
+	// Kept hand-written:
+	// - m_ppiTechYieldChanges / m_ppiRouteYieldChanges: 2D int** arrays (the known m_ppi blocker).
+	// - m_paImprovementBonus: bespoke per-bonus CvImprovementBonusInfo array (SetImprovementBonuses).
+	// - m_aiAlternativeImprovementUpgradeTypes: delayed-resolution int vector (no wrapper yet).
+	// - m_iWorldSoundscapeScriptId: resolved through gDLL->getAudioTagIndex at read, and its
+	//   absent-tag default is -1 while the ctor default is 0 (no wrapper default reproduces that).
+	// - the <iHealth> component of m_iHealthPercent: composite tag, folded in read().
+	// m_improvementBuildTypes is a runtime cache (doPostLoadCaching), not XML.
+	// getCheckSum stays explicit: the hand-written fields sit mid-order in the legacy checksum
+	// stream, so delegating would reorder it. Declaration order below mirrors that stream.
 	util
 		.add(m_aeTerrainMakesValid, L"TerrainMakesValids")
 		.add(m_aeFeatureMakesValid, L"FeatureMakesValids")
+		.add(m_iAdvancedStartCost, L"iAdvancedStartCost", 100)
+		.add(m_iTilesPerGoody, L"iTilesPerGoody")
+		.add(m_iGoodyUniqueRange, L"iGoodyRange")
+		.add(m_iFeatureGrowthProbability, L"iFeatureGrowth")
+		.add(m_iUpgradeTime, L"iUpgradeTime")
+		.add(m_iAirBombDefense, L"iAirBombDefense")
+		.add(m_iDefenseModifier, L"iDefenseModifier")
+		.add(m_iHappiness, L"iHappiness")
+		.add(m_iPillageGold, L"iPillageGold")
+		.addEnum(m_iImprovementPillage, L"ImprovementPillage") // self-FK => delayed resolution
+		.addEnum(m_iImprovementUpgrade, L"ImprovementUpgrade") // self-FK => delayed resolution
+		// Super Forts begin *XML*
+		.add(m_iCulture, L"iCulture")
+		.add(m_iCultureRange, L"iCultureRange")
+		.add(m_iVisibilityChange, L"iVisibilityChange")
+		.add(m_iSeeFrom, L"iSeeFrom")
+		.add(m_iUniqueRange, L"iUniqueRange")
+		.add(m_bBombardable, L"bBombardable")
+		.add(m_bUpgradeRequiresFortify, L"bUpgradeRequiresFortify")
+		// Super Forts end
+		.add(m_bIsUniversalTradeBonusProvider, L"bIsUniversalTradeBonusProvider")
+		.add(m_bIsZOCSource, L"bIsZOCSource")
+		.add(m_bActsAsCity, L"bActsAsCity")
+		.add(m_bHillsMakesValid, L"bHillsMakesValid")
+		.add(m_bFreshWaterMakesValid, L"bFreshWaterMakesValid")
+		.add(m_bRiverSideMakesValid, L"bRiverSideMakesValid")
+		.add(m_bNoFreshWater, L"bNoFreshWater")
+		.add(m_bRequiresFlatlands, L"bRequiresFlatlands")
+		.add(m_bRequiresRiverSide, L"bRequiresRiverSide")
+		.add(m_bRequiresIrrigation, L"bRequiresIrrigation")
+		.add(m_bCarriesIrrigation, L"bCarriesIrrigation")
+		.add(m_bRequiresFeature, L"bRequiresFeature")
+		.add(m_bPeakImprovement, L"bPeakImprovement")
+		.add(m_bWaterImprovement, L"bWaterImprovement")
+		.add(m_bGoody, L"bGoody")
+		.add(m_bOutsideBorders, L"bOutsideBorders")
+		.add(m_bMilitaryStructure, L"bMilitaryStructure")
+		.add(m_bPlacesBonus, L"bPlacesBonus")
+		.add(m_bPlacesFeature, L"bPlacesFeature")
+		.add(m_bPlacesTerrain, L"bPlacesTerrain")
+		.add(m_bExtraterresial, L"bExtraterresial")
+		.add(m_aeMapCategoryTypes, L"MapCategoryTypes")
+		.addYields(m_piPrereqNatureYield, L"PrereqNatureYields")
+		.addYields(m_piYieldChange, L"YieldChanges")
+		.addYields(m_piRiverSideYieldChange, L"RiverSideYieldChange")
+		.addYields(m_piIrrigatedChange, L"IrrigatedYieldChange")
+		.add(m_iHealthPercent, L"iHealthPercent") // read() folds <iHealth>*100 in afterwards
+		.add(m_bPeakMakesValid, L"bPeakMakesValid")
+		// NOTE: the legacy copyNonDefaults never copied m_iDepletionRand (dead field: read and
+		// checksummed, but no getter); the wrapper now also merges it on modular redefinition.
+		.add(m_iDepletionRand, L"iDepletionRand")
+		.addEnum(m_iPrereqTech, L"PrereqTech")
+		// NOTE: the legacy copyNonDefaults OMITTED the property-manipulator merge (unlike every
+		// other manipulator-bearing info class), so a modular redefinition silently dropped the
+		// base definition's manipulators; the wrapper merges them (sanctioned fix).
+		.add(m_PropertyManipulators)
+		// Legacy read used delayed resolution here; bonuses load before improvements, so the
+		// wrapper resolves it immediately - same resolved value either way.
+		.addEnum(m_iBonusChange, L"BonusChange")
+		// Effective legacy read-default was false (the old ctor 'true' was always overwritten by
+		// the read default), and the legacy copy compared against false; false it is.
+		.add(m_bCanMoveSeaUnits, L"bCanMoveSeaUnits")
+		.add(m_bChangeRemove, L"bChangeRemove")
+		.add(m_bNotOnAnyBonus, L"bNotOnAnyBonus")
+		.add(m_bNational, L"bNational")
+		.add(m_bGlobal, L"bGlobal")
+		.add(m_aiFeatureChangeTypes, L"FeatureChangeTypes")
+		.add(m_aiCategories, L"Categories")
+		.add(m_szArtDefineTag, L"ArtDefineTag")
 	;
 }
 
 void CvImprovementInfo::getCheckSum(uint32_t& iSum) const
 {
 	PROFILE_EXTRA_FUNC();
-	CvInfoUtil(this).checkSum(iSum);
+	// NOTE: kept explicit (not delegated to CvInfoUtil) to preserve the exact legacy checksum:
+	// CheckSum is order-sensitive and the hand-written fields (m_paImprovementBonus, the int**
+	// yield matrices, m_aiAlternativeImprovementUpgradeTypes) sit mid-order between declared
+	// fields. Do not reorder.
+	CheckSumC(iSum, m_aeTerrainMakesValid);
+	CheckSumC(iSum, m_aeFeatureMakesValid);
 
 	CheckSum(iSum, m_iAdvancedStartCost);
 
@@ -655,96 +675,12 @@ bool CvImprovementInfo::read(CvXMLLoadUtility* pXML)
 
 	int iIndex, j, iNumSibs;
 
-	pXML->GetOptionalChildXmlValByName(m_szArtDefineTag, L"ArtDefineTag");
+	// Composite tag: <iHealth> folds into the declared m_iHealthPercent (1 health = 100 percent).
+	// Must stay after the CvInfoUtil readXml above, which reads <iHealthPercent>.
+	int iHealth = 0;
+	pXML->GetOptionalChildXmlValByName(&iHealth, L"iHealth");
+	m_iHealthPercent += iHealth * 100;
 
-	if (pXML->TryMoveToXmlFirstChild(L"PrereqNatureYields"))
-	{
-		// call the function that sets the yield change variable
-		pXML->SetYields(&m_piPrereqNatureYield);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piPrereqNatureYield);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"YieldChanges"))
-	{
-		// call the function that sets the yield change variable
-		pXML->SetYields(&m_piYieldChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piYieldChange);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"RiverSideYieldChange"))
-	{
-		// call the function that sets the yield change variable
-		pXML->SetYields(&m_piRiverSideYieldChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piRiverSideYieldChange);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"IrrigatedYieldChange"))
-	{
-		// call the function that sets the yield change variable
-		pXML->SetYields(&m_piIrrigatedChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piIrrigatedChange);
-	}
-
-	pXML->GetOptionalChildXmlValByName(&m_iAdvancedStartCost, L"iAdvancedStartCost", 100);
-	pXML->GetOptionalChildXmlValByName(&m_bActsAsCity, L"bActsAsCity");
-	pXML->GetOptionalChildXmlValByName(&m_bHillsMakesValid, L"bHillsMakesValid");
-	pXML->GetOptionalChildXmlValByName(&m_bFreshWaterMakesValid, L"bFreshWaterMakesValid");
-	pXML->GetOptionalChildXmlValByName(&m_bRiverSideMakesValid, L"bRiverSideMakesValid");
-	pXML->GetOptionalChildXmlValByName(&m_bNoFreshWater, L"bNoFreshWater");
-	pXML->GetOptionalChildXmlValByName(&m_bRequiresFlatlands, L"bRequiresFlatlands");
-	pXML->GetOptionalChildXmlValByName(&m_bRequiresRiverSide, L"bRequiresRiverSide");
-	pXML->GetOptionalChildXmlValByName(&m_bRequiresIrrigation, L"bRequiresIrrigation");
-	pXML->GetOptionalChildXmlValByName(&m_bCarriesIrrigation, L"bCarriesIrrigation");
-	pXML->GetOptionalChildXmlValByName(&m_bRequiresFeature, L"bRequiresFeature");
-	pXML->GetOptionalChildXmlValByName(&m_bPeakImprovement, L"bPeakImprovement");
-	pXML->GetOptionalChildXmlValByName(&m_bWaterImprovement, L"bWaterImprovement");
-	pXML->GetOptionalChildXmlValByName(&m_bGoody, L"bGoody");
-	pXML->GetOptionalChildXmlValByName(&m_iTilesPerGoody, L"iTilesPerGoody");
-	pXML->GetOptionalChildXmlValByName(&m_iGoodyUniqueRange, L"iGoodyRange");
-	pXML->GetOptionalChildXmlValByName(&m_iFeatureGrowthProbability, L"iFeatureGrowth");
-	pXML->GetOptionalChildXmlValByName(&m_iUpgradeTime, L"iUpgradeTime");
-	pXML->GetOptionalChildXmlValByName(&m_iAirBombDefense, L"iAirBombDefense");
-	pXML->GetOptionalChildXmlValByName(&m_iDefenseModifier, L"iDefenseModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iHappiness, L"iHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iPillageGold, L"iPillageGold");
-	pXML->GetOptionalChildXmlValByName(&m_bOutsideBorders, L"bOutsideBorders");
-	pXML->GetOptionalChildXmlValByName(&m_bMilitaryStructure, L"bMilitaryStructure");
-	pXML->GetOptionalChildXmlValByName(&m_bPlacesBonus, L"bPlacesBonus");
-	pXML->GetOptionalChildXmlValByName(&m_bPlacesFeature, L"bPlacesFeature");
-	pXML->GetOptionalChildXmlValByName(&m_bPlacesTerrain, L"bPlacesTerrain");
-	pXML->GetOptionalChildXmlValByName(&m_bExtraterresial, L"bExtraterresial");
-	// Super Forts begin *XML*
-	pXML->GetOptionalChildXmlValByName(&m_iCulture, L"iCulture");
-	pXML->GetOptionalChildXmlValByName(&m_iCultureRange, L"iCultureRange");
-	pXML->GetOptionalChildXmlValByName(&m_iVisibilityChange, L"iVisibilityChange");
-	pXML->GetOptionalChildXmlValByName(&m_iSeeFrom, L"iSeeFrom");
-	pXML->GetOptionalChildXmlValByName(&m_iUniqueRange, L"iUniqueRange");
-	pXML->GetOptionalChildXmlValByName(&m_bBombardable, L"bBombardable");
-	pXML->GetOptionalChildXmlValByName(&m_bUpgradeRequiresFortify, L"bUpgradeRequiresFortify");
-	// Super Forts end
-	// Super forts C2C adaptation
-	pXML->GetOptionalChildXmlValByName(&m_bIsUniversalTradeBonusProvider, L"bIsUniversalTradeBonusProvider");
-	pXML->GetOptionalChildXmlValByName(&m_bIsZOCSource, L"bIsZOCSource");
-	// Super forts C2C adaptation end
-
-
-	pXML->SetOptionalVector(&m_aeMapCategoryTypes, L"MapCategoryTypes");
 	if (pXML->TryMoveToXmlFirstChild(L"BonusTypeStructs"))
 	{
 		// call the function that sets the bonus booleans
@@ -845,15 +781,6 @@ bool CvImprovementInfo::read(CvXMLLoadUtility* pXML)
 	else
 		m_iWorldSoundscapeScriptId = -1;
 
-	int iHealth = 0;
-	pXML->GetOptionalChildXmlValByName(&iHealth, L"iHealth");
-	pXML->GetOptionalChildXmlValByName(&m_iHealthPercent, L"iHealthPercent");
-	m_iHealthPercent += iHealth * 100;
-	pXML->GetOptionalChildXmlValByName(&m_bPeakMakesValid, L"bPeakMakesValid");
-	pXML->GetOptionalChildXmlValByName(&m_iDepletionRand, L"iDepletionRand");
-
-	pXML->GetOptionalTypeEnum(m_iPrereqTech, L"PrereqTech");
-
 	// initialize the boolean list to the correct size and all the booleans to false
 	//FAssertMsg((GC.getNumTraitInfos() > 0) && (NUM_YIELD_TYPES > 0),"either the number of trait infos is zero or less or the number of yield types is zero or less");
 	//if (pXML->TryMoveToXmlFirstChild(L"TraitYieldChanges"))
@@ -898,19 +825,7 @@ bool CvImprovementInfo::read(CvXMLLoadUtility* pXML)
 	//	pXML->MoveToXmlParent();
 	//}
 
-	m_PropertyManipulators.read(pXML);
-
-	pXML->GetOptionalChildXmlValByName(&m_bCanMoveSeaUnits, L"bCanMoveSeaUnits");
-	pXML->GetOptionalChildXmlValByName(&m_bChangeRemove, L"bChangeRemove");
-	pXML->GetOptionalChildXmlValByName(&m_bNotOnAnyBonus, L"bNotOnAnyBonus");
-	pXML->GetOptionalChildXmlValByName(&m_bNational, L"bNational");
-	pXML->GetOptionalChildXmlValByName(&m_bGlobal, L"bGlobal");
-	pXML->GetOptionalTypeEnumWithDelayedResolution(m_iImprovementPillage, L"ImprovementPillage");
-	pXML->GetOptionalTypeEnumWithDelayedResolution(m_iImprovementUpgrade, L"ImprovementUpgrade");
-	pXML->GetOptionalTypeEnumWithDelayedResolution(m_iBonusChange, L"BonusChange");
 	pXML->SetOptionalVectorWithDelayedResolution(m_aiAlternativeImprovementUpgradeTypes, L"AlternativeImprovementUpgradeTypes");
-	pXML->SetOptionalVector(&m_aiFeatureChangeTypes, L"FeatureChangeTypes");
-	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
 
 	return true;
 }
@@ -921,89 +836,15 @@ void CvImprovementInfo::copyNonDefaults(const CvImprovementInfo* pClassInfo)
 	const bool bDefault = false;
 	const int iDefault = 0;
 	const int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	const CvString cDefault = CvString::format("").GetCString();
 
-	if (getArtDefineTag() == cDefault) m_szArtDefineTag = pClassInfo->getArtDefineTag();
+	// The art tag must merge BEFORE the base copy: CvInfoBase::copyNonDefaults calls the virtual
+	// getButton(), which resolves through getArtDefineTag(). The declared StringWrapper copy
+	// then no-ops.
+	if (m_szArtDefineTag.empty()) m_szArtDefineTag = pClassInfo->getArtDefineTag();
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
 	CvInfoUtil(this).copyNonDefaults(pClassInfo);
-
-	for (int i = 0; i < NUM_YIELD_TYPES; i++)
-	{
-		if (getPrereqNatureYield(i) == iDefault && pClassInfo->getPrereqNatureYield(i) != iDefault)
-		{
-			if (NULL == m_piPrereqNatureYield)
-			{
-				CvXMLLoadUtility::InitList(&m_piPrereqNatureYield, NUM_YIELD_TYPES, iDefault);
-			}
-			m_piPrereqNatureYield[i] = pClassInfo->getPrereqNatureYield(i);
-		}
-		if (getYieldChange(i) == iDefault && pClassInfo->getYieldChange(i) != iDefault)
-		{
-			if (NULL == m_piYieldChange)
-			{
-				CvXMLLoadUtility::InitList(&m_piYieldChange, NUM_YIELD_TYPES, iDefault);
-			}
-			m_piYieldChange[i] = pClassInfo->getYieldChange(i);
-		}
-		if (getRiverSideYieldChange(i) == iDefault && pClassInfo->getRiverSideYieldChange(i) != iDefault)
-		{
-			if (NULL == m_piRiverSideYieldChange)
-			{
-				CvXMLLoadUtility::InitList(&m_piRiverSideYieldChange, NUM_YIELD_TYPES, iDefault);
-			}
-			m_piRiverSideYieldChange[i] = pClassInfo->getRiverSideYieldChange(i);
-		}
-		if (getIrrigatedYieldChange(i) == iDefault && pClassInfo->getIrrigatedYieldChange(i) != iDefault)
-		{
-			if (NULL == m_piIrrigatedChange)
-			{
-				CvXMLLoadUtility::InitList(&m_piIrrigatedChange, NUM_YIELD_TYPES, iDefault);
-			}
-			m_piIrrigatedChange[i] = pClassInfo->getIrrigatedYieldChange(i);
-		}
-	}
-
-	if (getAdvancedStartCost() == 100) m_iAdvancedStartCost = pClassInfo->getAdvancedStartCost();
-	if (getTilesPerGoody() == iDefault) m_iTilesPerGoody = pClassInfo->getTilesPerGoody();
-	if (getGoodyUniqueRange() == iDefault) m_iGoodyUniqueRange = pClassInfo->getGoodyUniqueRange();
-	if (getFeatureGrowthProbability() == iDefault) m_iFeatureGrowthProbability = pClassInfo->getFeatureGrowthProbability();
-	if (getUpgradeTime() == iDefault) m_iUpgradeTime = pClassInfo->getUpgradeTime();
-	if (getAirBombDefense() == iDefault) m_iAirBombDefense = pClassInfo->getAirBombDefense();
-	if (getDefenseModifier() == iDefault) m_iDefenseModifier = pClassInfo->getDefenseModifier();
-	if (getHappiness() == iDefault) m_iHappiness = pClassInfo->getHappiness();
-	if (getPillageGold() == iDefault) m_iPillageGold = pClassInfo->getPillageGold();
-	// Super forts C2C adaptation
-	if (getCulture() == iDefault) m_iCulture = pClassInfo->getCulture();
-	if (getCultureRange() == iDefault) m_iCultureRange = pClassInfo->getCultureRange();
-	if (getVisibilityChange() == iDefault) m_iVisibilityChange = pClassInfo->getVisibilityChange();
-	if (getSeeFrom() == iDefault) m_iSeeFrom = pClassInfo->getSeeFrom();
-	if (getUniqueRange() == iDefault) m_iUniqueRange = pClassInfo->getUniqueRange();
-	if (isBombardable() == bDefault) m_bBombardable = pClassInfo->isBombardable();
-	if (isUpgradeRequiresFortify() == bDefault) m_bUpgradeRequiresFortify = pClassInfo->isUpgradeRequiresFortify();
-	if (m_bIsUniversalTradeBonusProvider == bDefault) m_bIsUniversalTradeBonusProvider = pClassInfo->isImprovementBonusTrade();
-	if (isZOCSource() == bDefault) m_bIsZOCSource = pClassInfo->isZOCSource();
-	// Super forts C2C adaptation end
-	if (m_bActsAsCity == bDefault) m_bActsAsCity = pClassInfo->isActsAsCity();
-	if (isHillsMakesValid() == bDefault) m_bHillsMakesValid = pClassInfo->isHillsMakesValid();
-	if (isFreshWaterMakesValid() == bDefault) m_bFreshWaterMakesValid = pClassInfo->isFreshWaterMakesValid();
-	if (isRiverSideMakesValid() == bDefault) m_bRiverSideMakesValid = pClassInfo->isRiverSideMakesValid();
-	if (isNoFreshWater() == bDefault) m_bNoFreshWater = pClassInfo->isNoFreshWater();
-	if (isRequiresFlatlands() == bDefault) m_bRequiresFlatlands = pClassInfo->isRequiresFlatlands();
-	if (isRequiresRiverSide() == bDefault) m_bRequiresRiverSide = pClassInfo->isRequiresRiverSide();
-	if (isRequiresIrrigation() == bDefault) m_bRequiresIrrigation = pClassInfo->isRequiresIrrigation();
-	if (isCarriesIrrigation() == bDefault) m_bCarriesIrrigation = pClassInfo->isCarriesIrrigation();
-	if (isRequiresFeature() == bDefault) m_bRequiresFeature = pClassInfo->isRequiresFeature();
-	if (isPeakImprovement() == bDefault) m_bPeakImprovement = pClassInfo->isPeakImprovement();
-	if (isWaterImprovement() == bDefault) m_bWaterImprovement = pClassInfo->isWaterImprovement();
-	if (isGoody() == bDefault) m_bGoody = pClassInfo->isGoody();
-	if (isOutsideBorders() == bDefault) m_bOutsideBorders = pClassInfo->isOutsideBorders();
-	if (m_bMilitaryStructure == bDefault) m_bMilitaryStructure = pClassInfo->isMilitaryStructure();
-	if (m_bPlacesBonus == bDefault) m_bPlacesBonus = pClassInfo->isPlacesBonus();
-	if (m_bPlacesFeature == bDefault) m_bPlacesFeature = pClassInfo->isPlacesFeature();
-	if (m_bPlacesTerrain == bDefault) m_bPlacesTerrain = pClassInfo->isPlacesTerrain();
-	if (m_bExtraterresial == bDefault) m_bExtraterresial = pClassInfo->isExtraterresial();
 
 	for (int i = 0; i < GC.getNumBonusInfos(); i++)
 	{
@@ -1075,10 +916,6 @@ void CvImprovementInfo::copyNonDefaults(const CvImprovementInfo* pClassInfo)
 
 	if (m_iWorldSoundscapeScriptId == iTextDefault) m_iWorldSoundscapeScriptId = pClassInfo->getWorldSoundscapeScriptId();
 
-	if (isPeakMakesValid() == bDefault) m_bPeakMakesValid = pClassInfo->isPeakMakesValid();
-	if (getHealthPercent() == iDefault) m_iHealthPercent = pClassInfo->getHealthPercent();
-	if (getPrereqTech() == NO_TECH) m_iPrereqTech = pClassInfo->getPrereqTech();
-
 	//for ( int i = 0; i < GC.getNumTraitInfos(); i++)
 	//{
 	//	for ( int j = 0; j < NUM_YIELD_TYPES; j++)
@@ -1098,16 +935,6 @@ void CvImprovementInfo::copyNonDefaults(const CvImprovementInfo* pClassInfo)
 	//	}
 	//}
 
-	//TB Improvements
-	//Object Indexes
-	if (m_iBonusChange == iTextDefault) m_iBonusChange = pClassInfo->getBonusChange();
-	//booleans
-	if (isCanMoveSeaUnits() == bDefault) m_bCanMoveSeaUnits = pClassInfo->isCanMoveSeaUnits();
-	if (isChangeRemove() == bDefault) m_bChangeRemove = pClassInfo->isChangeRemove();
-	if (isNotOnAnyBonus() == bDefault) m_bNotOnAnyBonus = pClassInfo->isNotOnAnyBonus();
-	if (isNational() == bDefault) m_bNational = pClassInfo->isNational();
-	if (isGlobal() == bDefault) m_bGlobal = pClassInfo->isGlobal();
-
 	if (getNumAlternativeImprovementUpgradeTypes() == 0)
 	{
 		const int iNum = pClassInfo->getNumAlternativeImprovementUpgradeTypes();
@@ -1117,14 +944,6 @@ void CvImprovementInfo::copyNonDefaults(const CvImprovementInfo* pClassInfo)
 			GC.copyNonDefaultDelayedResolution((int*)&(m_aiAlternativeImprovementUpgradeTypes[i]), (int*)&(pClassInfo->m_aiAlternativeImprovementUpgradeTypes[i]));
 		}
 	}
-
-	GC.copyNonDefaultDelayedResolution((int*)&m_iImprovementPillage, (int*)&pClassInfo->m_iImprovementPillage);
-	GC.copyNonDefaultDelayedResolution((int*)&m_iImprovementUpgrade, (int*)&pClassInfo->m_iImprovementUpgrade);
-	GC.copyNonDefaultDelayedResolution((int*)&m_iBonusChange, (int*)&pClassInfo->m_iBonusChange);
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiFeatureChangeTypes, pClassInfo->m_aiFeatureChangeTypes);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeMapCategoryTypes, pClassInfo->getMapCategories());
 }
 
 void CvImprovementInfo::doPostLoadCaching(uint32_t iThis)

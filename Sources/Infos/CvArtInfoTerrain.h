@@ -28,6 +28,9 @@ public:
 	DllExport bool useAlphaShader();
 	DllExport CvTextureBlendSlotList& getBlendList(int blendMask);
 
+	void getDataMembers(CvInfoUtil& util);
+	// HYBRID read: the declarative chain covers the scalars/strings; the TextureBlend01..15
+	// slot-list parsing stays hand-written below.
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvArtInfoTerrain* pClassInfo);
 

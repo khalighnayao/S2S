@@ -26,15 +26,18 @@ public:
 	DllExport std::string getLoading() const;
 	DllExport std::string getLoadingSlideshow() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvMainMenuInfo* pClassInfo);
 
 protected:
-	std::string m_szScene;
-	std::string m_szSceneNoShader;
-	std::string m_szSoundtrack;
-	std::string m_szLoading;
-	std::string m_szLoadingSlideshow;
+	// CvString (is-a std::string, no added data) so CvInfoUtil's StringWrapper can bind;
+	// the getters still return std::string by value.
+	CvString m_szScene;
+	CvString m_szSceneNoShader;
+	CvString m_szSoundtrack;
+	CvString m_szLoading;
+	CvString m_szLoadingSlideshow;
 };
 
 #endif // CV_MAIN_MENU_INFO_H

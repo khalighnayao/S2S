@@ -162,6 +162,8 @@ private:
 	std::vector<int> m_aiClearEventChanceforPass3;
 public:
 
+	void getDataMembers(CvInfoUtil& util);
+
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvEventInfo* pClassInfo);

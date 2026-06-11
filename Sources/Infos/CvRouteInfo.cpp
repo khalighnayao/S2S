@@ -32,16 +32,12 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvRouteInfo::CvRouteInfo() :
-m_iAdvancedStartCost(100),
-m_iValue(0),
-m_iMovementCost(0),
-m_iFlatMovementCost(0),
-m_bSeaTunnel(false),
-m_iPrereqBonus(NO_BONUS),
-m_piYieldChange(NULL),
-m_piTechMovementChange(NULL),
-m_PropertyManipulators()
+// Only the non-XML runtime field (m_zobristValue, below) and the hand-written array need explicit
+// init here; every declared field is defaulted by initDataMembers() below.
+m_piTechMovementChange(NULL)
 {
+	CvInfoUtil(this).initDataMembers();
+
 	m_zobristValue = GC.getGame().getSorenRand().getInt();
 }
 
@@ -55,7 +51,8 @@ m_PropertyManipulators()
 //------------------------------------------------------------------------------------------------------
 CvRouteInfo::~CvRouteInfo()
 {
-	SAFE_DELETE_ARRAY(m_piYieldChange);
+	// m_piYieldChange is owned by its addYields wrapper and freed by uninitDataMembers.
+	CvInfoUtil(this).uninitDataMembers();
 	SAFE_DELETE_ARRAY(m_piTechMovementChange);
 }
 
@@ -140,9 +137,28 @@ const std::vector<BonusTypes>& CvRouteInfo::getPrereqOrBonuses() const
 }
 
 
+void CvRouteInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order. m_piTechMovementChange (dynamic tech-length int array
+	// via SetVariableListTagPair) has no wrapper yet and stays hand-written in read/copyNonDefaults;
+	// because it sits mid-order in the legacy checksum, getCheckSum below stays explicit too.
+	util
+		.add(m_iAdvancedStartCost, L"iAdvancedStartCost", 100)
+		.add(m_iValue, L"iValue")
+		.add(m_iMovementCost, L"iMovement")
+		.add(m_iFlatMovementCost, L"iFlatMovement")
+		.add(m_bSeaTunnel, L"bSeaTunnel")
+		.addEnumAsInt(m_iPrereqBonus, L"BonusType")
+		.addYields(m_piYieldChange, L"Yields")
+		.add(m_piPrereqOrBonuses, L"PrereqOrBonuses")
+		.add(m_aiCategories, L"Categories")
+		.add(m_PropertyManipulators)
+	;
+}
+
+
 bool CvRouteInfo::read(CvXMLLoadUtility* pXML)
 {
-	CvString szTextVal;
 	//shouldHaveType = true;
 	if (!CvInfoBase::read(pXML))
 	{
@@ -156,36 +172,9 @@ bool CvRouteInfo::read(CvXMLLoadUtility* pXML)
 	}
 	//shouldHaveType = false;
 
-	pXML->GetOptionalChildXmlValByName(&m_iAdvancedStartCost, L"iAdvancedStartCost", 100);
-
-	pXML->GetOptionalChildXmlValByName(&m_iValue, L"iValue");
-	pXML->GetOptionalChildXmlValByName(&m_iMovementCost, L"iMovement");
-	pXML->GetOptionalChildXmlValByName(&m_iFlatMovementCost, L"iFlatMovement");
-	pXML->GetOptionalChildXmlValByName(&m_bSeaTunnel, L"bSeaTunnel");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"BonusType");
-	m_iPrereqBonus = pXML->GetInfoClass(szTextVal);
-
-	// if we can set the current xml node to it's next sibling
-	if (pXML->TryMoveToXmlFirstChild(L"Yields"))
-	{
-		// call the function that sets the yield change variable
-		pXML->SetYields(&m_piYieldChange);
-		// set the current xml node to it's parent node
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piYieldChange);
-	}
+	CvInfoUtil(this).readXml(pXML);
 
 	pXML->SetVariableListTagPair(&m_piTechMovementChange, L"TechMovementChanges", GC.getNumTechInfos());
-
-	pXML->SetOptionalVector(&m_piPrereqOrBonuses, L"PrereqOrBonuses");
-
-	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
-
-	m_PropertyManipulators.read(pXML);
 
 	return true;
 }
@@ -194,38 +183,11 @@ bool CvRouteInfo::read(CvXMLLoadUtility* pXML)
 void CvRouteInfo::copyNonDefaults(const CvRouteInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	int iDefault = 0;
-	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	CvString cDefault = CvString::format("").GetCString();
+	const int iDefault = 0;
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getAdvancedStartCost() == 100) m_iAdvancedStartCost = pClassInfo->getAdvancedStartCost();
-	if (getValue() == iDefault) m_iValue = pClassInfo->getValue();
-	if (getMovementCost() == iDefault) m_iMovementCost = pClassInfo->getMovementCost();
-	if (getFlatMovementCost() == iDefault) m_iFlatMovementCost = pClassInfo->getFlatMovementCost();
-/************************************************************************************************/
-/* JOOYO_ADDON, Added by Jooyo, 07/07/09														*/
-/*																							  */
-/*																							  */
-/************************************************************************************************/
-	if (!isSeaTunnel()) m_bSeaTunnel = pClassInfo->isSeaTunnel();
-/************************************************************************************************/
-/* JOOYO_ADDON						  END													 */
-/************************************************************************************************/
-	if (getPrereqBonus() == iTextDefault) m_iPrereqBonus = pClassInfo->getPrereqBonus();
-
-	for ( int i = 0;  i < NUM_YIELD_TYPES; i++)
-	{
-		if (getYieldChange(i) == iDefault && pClassInfo->getYieldChange(i) != iDefault)
-		{
-			if ( m_piYieldChange == NULL )
-			{
-				CvXMLLoadUtility::InitList(&m_piYieldChange, NUM_YIELD_TYPES);
-			}
-			m_piYieldChange[i] = pClassInfo->getYieldChange(i);
-		}
-	}
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	for ( int i = 0;  i < GC.getNumTechInfos(); i++)
 	{
@@ -238,17 +200,13 @@ void CvRouteInfo::copyNonDefaults(const CvRouteInfo* pClassInfo)
 			m_piTechMovementChange[i] = pClassInfo->getTechMovementChange(i);
 		}
 	}
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_piPrereqOrBonuses, pClassInfo->getPrereqOrBonuses());
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
-
-	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
 }
 
 
 void CvRouteInfo::getCheckSum(uint32_t& iSum) const
 {
+	// Explicit (not delegated) to keep the legacy checksum byte-identical: the hand-written
+	// m_piTechMovementChange sits mid-order between the declared fields.
 	CheckSum(iSum, m_iAdvancedStartCost);
 
 	CheckSum(iSum, m_iValue);

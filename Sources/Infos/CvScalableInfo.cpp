@@ -23,6 +23,21 @@
 //======================================================================================================
 //					CvScalableInfo
 //======================================================================================================
+
+// Wrapper defaults mirror the READ defaults (fScale absent => 0.0f, fInterfaceScale absent => 1.0f),
+// not the constructor's (1.0f/1.0f) — post-read values are identical to the legacy path.
+void CvScalableInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_fScale, L"fScale")
+		.add(m_fInterfaceScale, L"fInterfaceScale", 1.0f)
+	;
+}
+
+
+// Kept hand-written (in sync with getDataMembers above) for the non-declarative mixin
+// consumers CvAttachableInfo and CvEffectInfo. The declarative art-info family reads these
+// fields through CvArtInfoScalableAsset::getDataMembers instead and does NOT call this.
 bool CvScalableInfo::read(CvXMLLoadUtility* pXML)
 {
 	pXML->GetOptionalChildXmlValByName(&m_fScale, L"fScale");

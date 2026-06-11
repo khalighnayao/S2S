@@ -16,6 +16,12 @@ class CvArtInfoScalableAsset
 	, public CvScalableInfo
 {
 public:
+	// Chains CvArtInfoAsset's fields + the CvScalableInfo mixin's. Also resolves the name
+	// ambiguity between CvInfoBase::getDataMembers (virtual) and CvScalableInfo::getDataMembers
+	// for this and all derived classes — keep this override even if it ever becomes trivial.
+	void getDataMembers(CvInfoUtil& util);
+	// read/copyNonDefaults forward to CvArtInfoAsset (the family's single declarative delegation
+	// point); they must stay declared here to shadow CvScalableInfo's same-named methods.
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvArtInfoScalableAsset* pClassInfo);
 };

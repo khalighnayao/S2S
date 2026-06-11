@@ -20,7 +20,9 @@ public:
 	DllExport const char* getBackgroundKFM() const;
 	void setBackgroundKFM( const char* szKFM);
 
-	bool read(CvXMLLoadUtility* pXML);
+	// No read() override: all fields are declarative, so the inherited
+	// CvArtInfoAsset::read delegation reads them.
+	void getDataMembers(CvInfoUtil& util);
 	void copyNonDefaults(const CvArtInfoLeaderhead* pClassInfo);
 
 protected:

@@ -24,9 +24,9 @@
 // CvArtInfoBuilding
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-CvArtInfoBuilding::CvArtInfoBuilding() :
-m_bAnimated(false)
+CvArtInfoBuilding::CvArtInfoBuilding()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -47,18 +47,13 @@ const char* CvArtInfoBuilding::getLSystemName() const
 }
 
 
-bool CvArtInfoBuilding::read(CvXMLLoadUtility* pXML)
+void CvArtInfoBuilding::getDataMembers(CvInfoUtil& util)
 {
-
-	if (!CvArtInfoScalableAsset::read(pXML))
-	{
-		return false;
-	}
-
-	pXML->GetOptionalChildXmlValByName(m_szLSystemName, L"LSystem");
-
-	pXML->GetOptionalChildXmlValByName(&m_bAnimated, L"bAnimated");
-	return true;
+	CvArtInfoScalableAsset::getDataMembers(util);
+	util
+		.add(m_szLSystemName, L"LSystem")
+		.add(m_bAnimated, L"bAnimated")
+	;
 }
 
 void CvArtInfoBuilding::copyNonDefaults(const CvArtInfoBuilding* pClassInfo)

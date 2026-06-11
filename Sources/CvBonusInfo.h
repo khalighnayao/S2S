@@ -73,6 +73,7 @@ public:
 
 	const CvPropertyManipulators* getPropertyManipulators() const { return &m_PropertyManipulators; }
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvBonusInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

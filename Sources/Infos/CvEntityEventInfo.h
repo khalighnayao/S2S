@@ -22,6 +22,7 @@ class CvEntityEventInfo
 		CvEntityEventInfo();
 		virtual ~CvEntityEventInfo();
 
+		void getDataMembers(CvInfoUtil& util);
 		bool read(CvXMLLoadUtility* pXML);
 		void copyNonDefaults(const CvEntityEventInfo* pClassInfo);
 

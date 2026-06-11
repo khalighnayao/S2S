@@ -48,25 +48,13 @@ void CvArtInfoLeaderhead::setBackgroundKFM(const char* szKFM)
 }
 
 
-bool CvArtInfoLeaderhead::read(CvXMLLoadUtility* pXML)
+void CvArtInfoLeaderhead::getDataMembers(CvInfoUtil& util)
 {
-	CvString szTextVal;
-	if (!CvArtInfoAsset::read(pXML))
-	{
-		return false;
-	}
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"NoShaderNIF");
-	setNoShaderNIF(szTextVal);
-
-	if (pXML->GetOptionalChildXmlValByName(szTextVal, L"BackgroundKFM"))
-	{
-		setBackgroundKFM(szTextVal);
-	}
-	else
-		setBackgroundKFM("");
-
-	return true;
+	CvArtInfoAsset::getDataMembers(util);
+	util
+		.add(m_szNoShaderNIF, L"NoShaderNIF")
+		.add(m_szBackgroundKFM, L"BackgroundKFM")
+	;
 }
 
 

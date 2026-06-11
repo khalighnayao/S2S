@@ -48,6 +48,7 @@ public:
 	const CvArtInfoTerrain* getArtInfo() const;
 	const char* getButton() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvTerrainInfo* pClassInfo);

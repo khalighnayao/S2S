@@ -32,6 +32,7 @@ public:
 	DllExport int getArtType();
 	DllExport int getEventCode();
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(CvSpaceShipInfo* pClassInfo);
 

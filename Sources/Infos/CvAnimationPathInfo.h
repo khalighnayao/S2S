@@ -31,6 +31,7 @@ class CvAnimationPathInfo
 		DllExport CvAnimationPathDefinition* getPath();
 		DllExport bool isMissionPath() const;
 
+		void getDataMembers(CvInfoUtil& util);
 		bool read(CvXMLLoadUtility* pXML);
 		void copyNonDefaults(CvAnimationPathInfo* pClassInfo);
 

@@ -26,56 +26,9 @@
 //	Event triggers
 //
 //
-CvEventTriggerInfo::CvEventTriggerInfo() :
-	m_iPercentGamesActive(0),
-	m_iProbability(0),
-	m_iNumUnits(0),
-	m_iNumBuildings(0),
-	m_iNumUnitsGlobal(0),
-	m_iNumBuildingsGlobal(0),
-	m_iNumPlotsRequired(0),
-	m_iPlotType(NO_PLOT),
-	m_iNumReligions(0),
-	m_iNumCorporations(0),
-	m_iOtherPlayerShareBorders(0),
-	m_iOtherPlayerHasTech(NO_TECH),
-	m_iCivic(NO_CIVIC),
-	m_iMinPopulation(0),
-	m_iMaxPopulation(0),
-	m_iMinMapLandmass(0),
-	m_iMinOurLandmass(0),
-	m_iMaxOurLandmass(-1),
-	m_iMinDifficulty(NO_HANDICAP),
-	m_iAngry(0),
-	m_iUnhealthy(0),
-	m_iUnitDamagedWeight(0),
-	m_iUnitDistanceWeight(0),
-	m_iUnitExperienceWeight(0),
-	m_iMinTreasury(0),
-	m_bSinglePlayer(false),
-	m_bTeam(false),
-	m_bRecurring(false),
-	m_bGlobal(false),
-	m_bPickPlayer(false),
-	m_bOtherPlayerWar(false),
-	m_bOtherPlayerHasReligion(false),
-	m_bOtherPlayerHasOtherReligion(false),
-	m_bOtherPlayerAI(false),
-	m_bPickCity(false),
-	m_bPickOtherPlayerCity(false),
-	m_bShowPlot(true),
-	m_iCityFoodWeight(0),
-	m_bUnitsOnPlot(false),
-	m_bOwnPlot(false),
-	m_bPickReligion(false),
-	m_bStateReligion(false),
-	m_bHolyCity(false),
-	m_bPickCorporation(false),
-	m_bHeadquarters(false),
-	m_bProbabilityUnitMultiply(false),
-	m_bProbabilityBuildingMultiply(false),
-	m_bPrereqEventCity(false)
+CvEventTriggerInfo::CvEventTriggerInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -674,6 +627,89 @@ bool CvEventTriggerInfo::isOnGameOption(int i) const
 }
 
 
+void CvEventTriggerInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order for readability; the checksum itself stays
+	// hand-written (see getCheckSum below), so declaration order carries no checksum weight here.
+	util
+		.add(m_iPercentGamesActive, L"iPercentGamesActive")
+		.add(m_iProbability, L"iWeight")
+		.add(m_iNumUnits, L"iNumUnits")
+		.add(m_iNumBuildings, L"iNumBuildings")
+		.add(m_iNumUnitsGlobal, L"iNumUnitsGlobal")
+		.add(m_iNumBuildingsGlobal, L"iNumBuildingsGlobal")
+		.add(m_iNumPlotsRequired, L"iNumPlotsRequired")
+		.add(m_iPlotType, L"iPlotType", NO_PLOT)
+		.add(m_iNumReligions, L"iNumReligions")
+		.add(m_iNumCorporations, L"iNumCorporations")
+		.add(m_iOtherPlayerShareBorders, L"iOtherPlayerShareBorders")
+		.addEnumAsInt(m_iOtherPlayerHasTech, L"OtherPlayerHasTech")
+		.addEnumAsInt(m_iCivic, L"Civic")
+		.add(m_iMinPopulation, L"iMinPopulation")
+		.add(m_iMaxPopulation, L"iMaxPopulation")
+		.add(m_iMinMapLandmass, L"iMinMapLandmass")
+		.add(m_iMinOurLandmass, L"iMinOurLandmass")
+		.add(m_iMaxOurLandmass, L"iMaxOurLandmass", -1)
+		.addEnumAsInt(m_iMinDifficulty, L"MinDifficulty")
+		.add(m_iAngry, L"iAngry")
+		.add(m_iUnhealthy, L"iUnhealthy")
+		.add(m_iUnitDamagedWeight, L"iUnitDamagedWeight")
+		.add(m_iUnitDistanceWeight, L"iUnitDistanceWeight")
+		.add(m_iUnitExperienceWeight, L"iUnitExperienceWeight")
+		.add(m_iMinTreasury, L"iMinTreasury")
+		.add(m_aiUnitsRequired, L"UnitsRequired")
+		.add(m_aiBuildingsRequired, L"BuildingsRequired")
+		.add(m_aiPrereqOrTechs, L"OrPreReqs")
+		.add(m_aiPrereqAndTechs, L"AndPreReqs")
+		.add(m_aiObsoleteTechs, L"ObsoleteTechs")
+		.add(m_aiEvents, L"Events")
+		.add(m_aiPrereqEvents, L"PrereqEvents")
+		.add(m_aiFeaturesRequired, L"FeaturesRequired")
+		.add(m_aiTerrainsRequired, L"TerrainsRequired")
+		.add(m_aiImprovementsRequired, L"ImprovementsRequired")
+		.add(m_aiBonusesRequired, L"BonusesRequired")
+		.add(m_aiRoutesRequired, L"RoutesRequired")
+		.add(m_aiReligionsRequired, L"ReligionsRequired")
+		.add(m_aiCorporationsRequired, L"CorporationsRequired")
+		.add(m_bSinglePlayer, L"bSinglePlayer")
+		.add(m_bTeam, L"bTeam")
+		.add(m_bRecurring, L"bRecurring")
+		.add(m_bGlobal, L"bGlobal")
+		.add(m_bPickPlayer, L"bPickPlayer")
+		.add(m_bOtherPlayerWar, L"bOtherPlayerWar")
+		.add(m_bOtherPlayerHasReligion, L"bOtherPlayerHasReligion")
+		.add(m_bOtherPlayerHasOtherReligion, L"bOtherPlayerHasOtherReligion")
+		.add(m_bOtherPlayerAI, L"bOtherPlayerAI")
+		.add(m_bPickCity, L"bPickCity")
+		.add(m_bPickOtherPlayerCity, L"bPickOtherPlayerCity")
+		.add(m_bShowPlot, L"bShowPlot", true)
+		.add(m_iCityFoodWeight, L"iCityFoodWeight")
+		.add(m_bUnitsOnPlot, L"bUnitsOnPlot")
+		.add(m_bOwnPlot, L"bOwnPlot")
+		.add(m_bPickReligion, L"bPickReligion")
+		.add(m_bStateReligion, L"bStateReligion")
+		.add(m_bHolyCity, L"bHolyCity")
+		.add(m_bPickCorporation, L"bPickCorporation")
+		.add(m_bHeadquarters, L"bHeadquarters")
+		.add(m_bProbabilityUnitMultiply, L"bProbabilityUnitMultiply")
+		.add(m_bProbabilityBuildingMultiply, L"bProbabilityBuildingMultiply")
+		.add(m_bPrereqEventCity, L"bPrereqEventPlot")
+		.add(m_aiNotOnGameOptions, L"NotOnGameOptions")
+		.add(m_aiOnGameOptions, L"OnGameOptions")
+		.add(m_szEventArt, L"EventArt")
+		.add(m_szPythonCallback, L"PythonCallback")
+		.add(m_szPythonCanDo, L"PythonCanDo")
+		.add(m_szPythonCanDoCity, L"PythonCanDoCity")
+		.add(m_szPythonCanDoUnit, L"PythonCanDoUnit")
+	;
+}
+
+
+// Kept fully hand-written (NOT delegated to CvInfoUtil) to preserve the legacy asset checksum
+// byte-for-byte:
+//  - the CvProperties blocks sit mid-order between declarative fields;
+//  - the python callback CvStrings ARE folded in here via CheckSumC, which the declarative
+//    StringWrapper cannot reproduce (its checkSum is a no-op).
 void CvEventTriggerInfo::getCheckSum(uint32_t& iSum) const
 {
 	CheckSum(iSum, m_iPercentGamesActive);
@@ -766,53 +802,7 @@ bool CvEventTriggerInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(&m_iPercentGamesActive, L"iPercentGamesActive");
-	pXML->GetOptionalChildXmlValByName(&m_iProbability, L"iWeight");
-	pXML->GetOptionalChildXmlValByName(&m_iNumUnits, L"iNumUnits");
-	pXML->GetOptionalChildXmlValByName(&m_iNumBuildings, L"iNumBuildings");
-	pXML->GetOptionalChildXmlValByName(&m_iNumUnitsGlobal, L"iNumUnitsGlobal");
-	pXML->GetOptionalChildXmlValByName(&m_iNumBuildingsGlobal, L"iNumBuildingsGlobal");
-	pXML->GetOptionalChildXmlValByName(&m_iNumPlotsRequired, L"iNumPlotsRequired");
-	pXML->GetOptionalChildXmlValByName(&m_iPlotType, L"iPlotType", NO_PLOT);
-	pXML->GetOptionalChildXmlValByName(&m_iNumReligions, L"iNumReligions");
-	pXML->GetOptionalChildXmlValByName(&m_iNumCorporations, L"iNumCorporations");
-	pXML->GetOptionalChildXmlValByName(&m_iOtherPlayerShareBorders, L"iOtherPlayerShareBorders");
-	pXML->GetOptionalChildXmlValByName(&m_iMinPopulation, L"iMinPopulation");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxPopulation, L"iMaxPopulation");
-	pXML->GetOptionalChildXmlValByName(&m_iMinMapLandmass, L"iMinMapLandmass");
-	pXML->GetOptionalChildXmlValByName(&m_iMinOurLandmass, L"iMinOurLandmass");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxOurLandmass, L"iMaxOurLandmass", -1);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"MinDifficulty");
-	m_iMinDifficulty = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(&m_iAngry, L"iAngry");
-	pXML->GetOptionalChildXmlValByName(&m_iUnhealthy, L"iUnhealthy");
-	pXML->GetOptionalChildXmlValByName(&m_iUnitDamagedWeight, L"iUnitDamagedWeight");
-	pXML->GetOptionalChildXmlValByName(&m_iUnitDistanceWeight, L"iUnitDistanceWeight");
-	pXML->GetOptionalChildXmlValByName(&m_iUnitExperienceWeight, L"iUnitExperienceWeight");
-	pXML->GetOptionalChildXmlValByName(&m_iMinTreasury, L"iMinTreasury");
-	pXML->SetOptionalVector(&m_aiUnitsRequired, L"UnitsRequired");
-	pXML->SetOptionalVector(&m_aiBuildingsRequired, L"BuildingsRequired");
-	pXML->SetOptionalVector(&m_aiPrereqOrTechs, L"OrPreReqs");
-	pXML->SetOptionalVector(&m_aiPrereqAndTechs, L"AndPreReqs");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"OtherPlayerHasTech");
-	m_iOtherPlayerHasTech = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"Civic");
-	m_iCivic = pXML->GetInfoClass(szTextVal);
-
-	pXML->SetOptionalVector(&m_aiObsoleteTechs, L"ObsoleteTechs");
-	pXML->SetOptionalVector(&m_aiEvents, L"Events");
-	pXML->SetOptionalVector(&m_aiPrereqEvents, L"PrereqEvents");
-	pXML->SetOptionalVector(&m_aiFeaturesRequired, L"FeaturesRequired");
-	pXML->SetOptionalVector(&m_aiTerrainsRequired, L"TerrainsRequired");
-	pXML->SetOptionalVector(&m_aiImprovementsRequired, L"ImprovementsRequired");
-	pXML->SetOptionalVector(&m_aiBonusesRequired, L"BonusesRequired");
-	pXML->SetOptionalVector(&m_aiRoutesRequired, L"RoutesRequired");
-	pXML->SetOptionalVector(&m_aiReligionsRequired, L"ReligionsRequired");
-	pXML->SetOptionalVector(&m_aiCorporationsRequired, L"CorporationsRequired");
+	CvInfoUtil(this).readXml(pXML);
 
 	m_aszText.clear();
 	m_aiTextEra.clear();
@@ -875,46 +865,11 @@ bool CvEventTriggerInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-// Begin EmperorFool: Events with Images
-	pXML->GetOptionalChildXmlValByName(m_szEventArt, L"EventArt");
-// End EmperorFool: Events with Images
-	pXML->GetOptionalChildXmlValByName(&m_bSinglePlayer, L"bSinglePlayer");
-	pXML->GetOptionalChildXmlValByName(&m_bTeam, L"bTeam");
-	pXML->GetOptionalChildXmlValByName(&m_bRecurring, L"bRecurring");
-	pXML->GetOptionalChildXmlValByName(&m_bGlobal, L"bGlobal");
-	pXML->GetOptionalChildXmlValByName(&m_bPickPlayer, L"bPickPlayer");
-	pXML->GetOptionalChildXmlValByName(&m_bOtherPlayerWar, L"bOtherPlayerWar");
-	pXML->GetOptionalChildXmlValByName(&m_bOtherPlayerHasReligion, L"bOtherPlayerHasReligion");
-	pXML->GetOptionalChildXmlValByName(&m_bOtherPlayerHasOtherReligion, L"bOtherPlayerHasOtherReligion");
-	pXML->GetOptionalChildXmlValByName(&m_bOtherPlayerAI, L"bOtherPlayerAI");
-	pXML->GetOptionalChildXmlValByName(&m_bPickCity, L"bPickCity");
-	pXML->GetOptionalChildXmlValByName(&m_bPickOtherPlayerCity, L"bPickOtherPlayerCity");
-	pXML->GetOptionalChildXmlValByName(&m_bShowPlot, L"bShowPlot", true);
-	pXML->GetOptionalChildXmlValByName(&m_iCityFoodWeight, L"iCityFoodWeight");
-	pXML->GetOptionalChildXmlValByName(&m_bUnitsOnPlot, L"bUnitsOnPlot");
-	pXML->GetOptionalChildXmlValByName(&m_bOwnPlot, L"bOwnPlot");
-	pXML->GetOptionalChildXmlValByName(&m_bPickReligion, L"bPickReligion");
-	pXML->GetOptionalChildXmlValByName(&m_bStateReligion, L"bStateReligion");
-	pXML->GetOptionalChildXmlValByName(&m_bHolyCity, L"bHolyCity");
-	pXML->GetOptionalChildXmlValByName(&m_bPickCorporation, L"bPickCorporation");
-	pXML->GetOptionalChildXmlValByName(&m_bHeadquarters, L"bHeadquarters");
-	pXML->GetOptionalChildXmlValByName(&m_bProbabilityUnitMultiply, L"bProbabilityUnitMultiply");
-	pXML->GetOptionalChildXmlValByName(&m_bProbabilityBuildingMultiply, L"bProbabilityBuildingMultiply");
-	pXML->GetOptionalChildXmlValByName(&m_bPrereqEventCity, L"bPrereqEventPlot");
-
 	m_PrereqMinProperties.read(pXML, L"PrereqMinProperties");
 	m_PrereqMaxProperties.read(pXML, L"PrereqMaxProperties");
 	m_PrereqPlayerMinProperties.read(pXML, L"PrereqPlayerMinProperties");
 	m_PrereqPlayerMaxProperties.read(pXML, L"PrereqPlayerMaxProperties");
 
-	pXML->GetOptionalChildXmlValByName(m_szPythonCallback, L"PythonCallback");
-	pXML->GetOptionalChildXmlValByName(m_szPythonCanDo, L"PythonCanDo");
-	pXML->GetOptionalChildXmlValByName(m_szPythonCanDoCity, L"PythonCanDoCity");
-	pXML->GetOptionalChildXmlValByName(m_szPythonCanDoUnit, L"PythonCanDoUnit");
-
-	// bool vector without delayed resolution
-	pXML->SetOptionalVector(&m_aiOnGameOptions, L"OnGameOptions");
-	pXML->SetOptionalVector(&m_aiNotOnGameOptions, L"NotOnGameOptions");
 	return true;
 }
 
@@ -922,109 +877,20 @@ bool CvEventTriggerInfo::read(CvXMLLoadUtility* pXML)
 void CvEventTriggerInfo::copyNonDefaults(const CvEventTriggerInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	bool bDefault = false;
-	int iDefault = 0;
-	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	CvString cDefault = CvString::format("").GetCString();
-	CvWString wDefault = CvWString::format(L"").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getPercentGamesActive() == iDefault) m_iPercentGamesActive = pClassInfo->getPercentGamesActive();
-	if (getProbability() == iDefault) m_iProbability = pClassInfo->getProbability();
-	if (getNumUnits() == iDefault) m_iNumUnits = pClassInfo->getNumUnits();
-	if (getNumBuildings() == iDefault) m_iNumBuildings = pClassInfo->getNumBuildings();
-	if (getNumUnitsGlobal() == iDefault) m_iNumUnitsGlobal = pClassInfo->getNumUnitsGlobal();
-	if (getNumBuildingsGlobal() == iDefault) m_iNumBuildingsGlobal = pClassInfo->getNumBuildingsGlobal();
-	if (getNumPlotsRequired() == iDefault) m_iNumPlotsRequired = pClassInfo->getNumPlotsRequired();
-	if (getPlotType() == NO_PLOT) m_iPlotType = pClassInfo->getPlotType();
-	if (getNumReligions() == iDefault) m_iNumReligions = pClassInfo->getNumReligions();
-	if (getNumCorporations() == iDefault) m_iNumCorporations = pClassInfo->getNumCorporations();
-	if (getOtherPlayerShareBorders() == iDefault) m_iOtherPlayerShareBorders = pClassInfo->getOtherPlayerShareBorders();
-	if (getMinPopulation() == iDefault) m_iMinPopulation = pClassInfo->getMinPopulation();
-	if (getMaxPopulation() == iDefault) m_iMaxPopulation = pClassInfo->getMaxPopulation();
-	if (getMinMapLandmass() == iDefault) m_iMinMapLandmass = pClassInfo->getMinMapLandmass();
-	if (getMinOurLandmass() == iDefault) m_iMinOurLandmass = pClassInfo->getMinOurLandmass();
-	if (getMaxOurLandmass() == -1) m_iMaxOurLandmass = pClassInfo->getMaxOurLandmass();
-	if (getMinDifficulty() == iTextDefault) m_iMinDifficulty = pClassInfo->getMinDifficulty();
-	if (getAngry() == iDefault) m_iAngry = pClassInfo->getAngry();
-	if (getUnhealthy() == iDefault) m_iUnhealthy = pClassInfo->getUnhealthy();
-	if (getUnitDamagedWeight() == iDefault) m_iUnitDamagedWeight = pClassInfo->getUnitDamagedWeight();
-	if (getUnitDistanceWeight() == iDefault) m_iUnitDistanceWeight = pClassInfo->getUnitDistanceWeight();
-	if (getUnitExperienceWeight() == iDefault) m_iUnitExperienceWeight = pClassInfo->getUnitExperienceWeight();
-	if (getMinTreasury() == iDefault) m_iMinTreasury = pClassInfo->getMinTreasury();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiUnitsRequired, pClassInfo->m_aiUnitsRequired);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiBuildingsRequired, pClassInfo->m_aiBuildingsRequired);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiPrereqOrTechs, pClassInfo->m_aiPrereqOrTechs);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiPrereqAndTechs, pClassInfo->m_aiPrereqAndTechs);
-
-	if (getOtherPlayerHasTech() == iTextDefault) m_iOtherPlayerHasTech = pClassInfo->getOtherPlayerHasTech();
-	if (getCivic() == iTextDefault) m_iCivic = pClassInfo->getCivic();
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiObsoleteTechs, pClassInfo->m_aiObsoleteTechs);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiEvents, pClassInfo->m_aiEvents);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiPrereqEvents, pClassInfo->m_aiPrereqEvents);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiFeaturesRequired, pClassInfo->m_aiFeaturesRequired);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiTerrainsRequired, pClassInfo->m_aiTerrainsRequired);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiImprovementsRequired, pClassInfo->m_aiImprovementsRequired);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiBonusesRequired, pClassInfo->m_aiBonusesRequired);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiRoutesRequired, pClassInfo->m_aiRoutesRequired);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiReligionsRequired, pClassInfo->m_aiReligionsRequired);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCorporationsRequired, pClassInfo->m_aiCorporationsRequired);
+	// Pre-existing quirk kept as-is (pure loader migration): these are parallel-by-index
+	// (text, era) lists, but CopyNonDefaultsFromVector dedups and sorts each list
+	// independently, so a modular override that adds texts can scramble the pairing.
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiTextEra, pClassInfo->m_aiTextEra);
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aszText, pClassInfo->m_aszText);
 	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aszWorldNews, pClassInfo->m_aszWorldNews);
-
-	if (isSinglePlayer() == bDefault) m_bSinglePlayer = pClassInfo->isSinglePlayer();
-	if (isTeam() == bDefault) m_bTeam = pClassInfo->isTeam();
-	if (isRecurring() == bDefault) m_bRecurring = pClassInfo->isRecurring();
-	if (isGlobal() == bDefault) m_bGlobal = pClassInfo->isGlobal();
-	if (isPickPlayer() == bDefault) m_bPickPlayer = pClassInfo->isPickPlayer();
-	if (isOtherPlayerWar() == bDefault) m_bOtherPlayerWar = pClassInfo->isOtherPlayerWar();
-	if (isOtherPlayerHasReligion() == bDefault) m_bOtherPlayerHasReligion = pClassInfo->isOtherPlayerHasReligion();
-	if (isOtherPlayerHasOtherReligion() == bDefault) m_bOtherPlayerHasOtherReligion = pClassInfo->isOtherPlayerHasOtherReligion();
-	if (isOtherPlayerAI() == bDefault) m_bOtherPlayerAI = pClassInfo->isOtherPlayerAI();
-	if (isPickCity() == bDefault) m_bPickCity = pClassInfo->isPickCity();
-	if (isPickOtherPlayerCity() == bDefault) m_bPickOtherPlayerCity = pClassInfo->isPickOtherPlayerCity();
-	if (isShowPlot()) m_bShowPlot = pClassInfo->isShowPlot();
-	if (getCityFoodWeight() == iDefault) m_iCityFoodWeight = pClassInfo->getCityFoodWeight();
-	if (isUnitsOnPlot() == bDefault) m_bUnitsOnPlot = pClassInfo->isUnitsOnPlot();
-	if (isOwnPlot() == bDefault) m_bOwnPlot = pClassInfo->isOwnPlot();
-	if (isPickReligion() == bDefault) m_bPickReligion = pClassInfo->isPickReligion();
-	if (isStateReligion() == bDefault) m_bStateReligion = pClassInfo->isStateReligion();
-	if (isHolyCity() == bDefault) m_bHolyCity = pClassInfo->isHolyCity();
-	if (isPickCorporation() == bDefault) m_bPickCorporation = pClassInfo->isPickCorporation();
-	if (isHeadquarters() == bDefault) m_bHeadquarters = pClassInfo->isHeadquarters();
-	if (isProbabilityUnitMultiply() == bDefault) m_bProbabilityUnitMultiply = pClassInfo->isProbabilityUnitMultiply();
-	if (isProbabilityBuildingMultiply() == bDefault) m_bProbabilityBuildingMultiply = pClassInfo->isProbabilityBuildingMultiply();
-	if (isPrereqEventCity() == bDefault) m_bPrereqEventCity = pClassInfo->isPrereqEventCity();
 
 	m_PrereqMinProperties.copyNonDefaults(pClassInfo->getPrereqMinProperties());
 	m_PrereqMaxProperties.copyNonDefaults(pClassInfo->getPrereqMaxProperties());
 	m_PrereqPlayerMinProperties.copyNonDefaults(pClassInfo->getPrereqPlayerMinProperties());
 	m_PrereqPlayerMaxProperties.copyNonDefaults(pClassInfo->getPrereqPlayerMaxProperties());
-
-	if (getPythonCallback() == cDefault) m_szPythonCallback = pClassInfo->getPythonCallback();
-	if (getPythonCanDo() == cDefault) m_szPythonCanDo = pClassInfo->getPythonCanDo();
-	if (getPythonCanDoCity() == cDefault) m_szPythonCanDoCity = pClassInfo->getPythonCanDoCity();
-	if (getPythonCanDoUnit() == cDefault) m_szPythonCanDoUnit = pClassInfo->getPythonCanDoUnit();
-	// bool vector without delayed resolution
-	if (getNumNotOnGameOptions() == 0)
-	{
-		m_aiNotOnGameOptions.clear();
-		for ( int i = 0; i < pClassInfo->getNumNotOnGameOptions(); i++)
-		{
-			m_aiNotOnGameOptions.push_back(pClassInfo->getNotOnGameOption(i));
-		}
-	}
-	if (getNumOnGameOptions() == 0)
-	{
-		m_aiOnGameOptions.clear();
-		for ( int i = 0; i < pClassInfo->getNumOnGameOptions(); i++)
-		{
-			m_aiOnGameOptions.push_back(pClassInfo->getOnGameOption(i));
-		}
-	}
 }
 

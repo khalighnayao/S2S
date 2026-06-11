@@ -26,6 +26,7 @@ public:
 	DllExport const char* getEraType()		{ return m_szEraType; }
 	DllExport const char* getFileName()		{ return m_szFileName; }
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvThroneRoomStyleInfo* pClassInfo);
 

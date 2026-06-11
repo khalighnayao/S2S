@@ -33,6 +33,7 @@
 //------------------------------------------------------------------------------------------------------
 CvAdvisorInfo::CvAdvisorInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -74,16 +75,28 @@ int CvAdvisorInfo::getDisableCode(uint32_t uiCode) const
 }
 
 
+// Declarative fields (#196); m_vctEnableDisableCodes stays hand-written in read() and
+// copyNonDefaults(): its <EventCodes> elements are direct children of the info node (no
+// container root tag, so the struct-vector wrapper shape doesn't apply), and the elements
+// are std::pair<int, int>, which has no getDataMembers.
+// No legacy getCheckSum, so declaration order follows the legacy read() order.
+void CvAdvisorInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szTexture, L"Texture")
+	;
+}
+
+
 bool CvAdvisorInfo::read(CvXMLLoadUtility* pXML)
 {
 	PROFILE_EXTRA_FUNC();
-	CvString szTextVal;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(m_szTexture, L"Texture", "");
+	CvInfoUtil(this).readXml(pXML);
 
 	if(pXML->TryMoveToXmlFirstChild())
 	{
@@ -104,11 +117,9 @@ bool CvAdvisorInfo::read(CvXMLLoadUtility* pXML)
 void CvAdvisorInfo::copyNonDefaults(const CvAdvisorInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getTexture() == cDefault) m_szTexture = pClassInfo->getTexture();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	if ( getNumCodes() == 0 )  //Only copy old values if the new doesn't hold a tag
 	{

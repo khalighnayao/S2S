@@ -15,7 +15,7 @@ public:
 	CvArtInfoMovie() {}
 	virtual ~CvArtInfoMovie() {}
 
-	bool read(CvXMLLoadUtility* pXML);
+	// No fields of its own; the inherited CvArtInfoAsset::read delegation covers everything.
 
 	void copyNonDefaults(const CvArtInfoMovie* pClassInfo);
 };

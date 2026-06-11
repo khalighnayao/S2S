@@ -25,30 +25,21 @@
 // CvArtInfoUnit
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-CvArtInfoUnit::CvArtInfoUnit() :
-m_fShadowScale(0.0f),
-m_iDamageStates(0),
-m_bActAsRanged(false),
-m_bActAsLand(false),
-m_bActAsAir(false),
-m_bCombatExempt(false),
-m_fTrailWidth(0.0f),
-m_fTrailLength(0.0f),
-m_fTrailTaper(0.0f),
-m_fTrailFadeStartTime(0.0f),
-m_fTrailFadeFalloff(0.0f),
-m_fBattleDistance(0.0f),
-m_fRangedDeathTime(0.0f),
-m_fExchangeAngle(0.0f),
-m_bSmoothMove(false),
-m_fAngleInterRate(FLT_MAX),
-m_fBankRate(0),
-m_iRunLoopSoundTag(0),
-m_iRunEndSoundTag(0),
-m_iSelectionSoundScriptId(0),
-m_iActionSoundScriptId(0),
-m_iPatrolSoundTag(0)
+CvArtInfoUnit::CvArtInfoUnit()
+	// Non-declarative fields (read by the hand-written part of read(), see getDataMembers)
+	: m_fShadowScale(0.0f)
+	, m_fTrailWidth(0.0f)
+	, m_fTrailLength(0.0f)
+	, m_fTrailTaper(0.0f)
+	, m_fTrailFadeStartTime(0.0f)
+	, m_fTrailFadeFalloff(0.0f)
+	, m_iRunLoopSoundTag(0)
+	, m_iRunEndSoundTag(0)
+	, m_iSelectionSoundScriptId(0)
+	, m_iActionSoundScriptId(0)
+	, m_iPatrolSoundTag(0)
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -190,9 +181,30 @@ float CvArtInfoUnit::getBankRate() const
 }
 
 
+void CvArtInfoUnit::getDataMembers(CvInfoUtil& util)
+{
+	CvArtInfoScalableAsset::getDataMembers(util);
+	util
+		.add(m_bActAsRanged, L"bActAsRanged")
+		.add(m_bActAsLand, L"bActAsLand")
+		.add(m_bActAsAir, L"bActAsAir")
+		.add(m_bCombatExempt, L"bCombatExempt")
+		.add(m_fExchangeAngle, L"fExchangeAngle")
+		.add(m_bSmoothMove, L"bSmoothMove")
+		.add(m_fAngleInterRate, L"fAngleInterpRate", FLT_MAX)
+		.add(m_fBankRate, L"fBankRate")
+		.add(m_iDamageStates, L"iDamageStates")
+		.add(m_fBattleDistance, L"fBattleDistance")
+		.add(m_fRangedDeathTime, L"fRangedDeathTime")
+		.add(m_szTrainSound, L"TrainSound")
+		.add(m_szShaderNIF, L"SHADERNIF")
+	;
+}
+
+
 bool CvArtInfoUnit::read(CvXMLLoadUtility* pXML)
 {
-
+	// Single declarative delegation (covers this class's declared fields too via virtual dispatch)
 	if (!CvArtInfoScalableAsset::read(pXML))
 	{
 		return false;
@@ -207,21 +219,6 @@ bool CvArtInfoUnit::read(CvXMLLoadUtility* pXML)
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"PatrolSound");
 	m_iPatrolSoundTag = (szTextVal.GetLength() > 0) ? gDLL->getAudioTagIndex( szTextVal.GetCString(), AUDIOTAG_3DSCRIPT ) : -1;
 
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"TrainSound");
-	setTrainSound(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(&m_bActAsRanged, L"bActAsRanged" );
-	pXML->GetOptionalChildXmlValByName(&m_bActAsLand,   L"bActAsLand" );
-	pXML->GetOptionalChildXmlValByName(&m_bActAsAir,	L"bActAsAir" );
-	pXML->GetOptionalChildXmlValByName(&m_bCombatExempt,   L"bCombatExempt");
-	pXML->GetOptionalChildXmlValByName(&m_fExchangeAngle,  L"fExchangeAngle");
-	pXML->GetOptionalChildXmlValByName(&m_bSmoothMove,	 L"bSmoothMove");
-	pXML->GetOptionalChildXmlValByName(&m_fAngleInterRate, L"fAngleInterpRate", FLT_MAX );
-	pXML->GetOptionalChildXmlValByName(&m_fBankRate,	   L"fBankRate");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"SHADERNIF");
-	setShaderNIF(szTextVal);
-
 	if ( pXML->TryMoveToXmlFirstChild(L"ShadowDef" ))
 	{
 		pXML->GetOptionalChildXmlValByName( m_szShadowAttach, L"ShadowAttachNode" );
@@ -229,10 +226,6 @@ bool CvArtInfoUnit::read(CvXMLLoadUtility* pXML)
 		pXML->GetOptionalChildXmlValByName(&m_fShadowScale, L"fShadowScale");
 		pXML->MoveToXmlParent();
 	}
-
-	pXML->GetOptionalChildXmlValByName(&m_iDamageStates,	L"iDamageStates");
-	pXML->GetOptionalChildXmlValByName(&m_fBattleDistance,  L"fBattleDistance");
-	pXML->GetOptionalChildXmlValByName(&m_fRangedDeathTime, L"fRangedDeathTime");
 
 	m_fTrailWidth = -1.0f; // invalid.
 	if (pXML->TryMoveToXmlFirstChild(L"TrailDefinition"))

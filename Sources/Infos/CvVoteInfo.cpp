@@ -31,24 +31,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvVoteInfo::CvVoteInfo() :
-m_iPopulationThreshold(0),
-m_iStateReligionVotePercent(0),
-m_iTradeRoutes(0),
-m_iMinVoters(0),
-m_bSecretaryGeneral(false),
-m_bVictory(false),
-m_bFreeTrade(false),
-m_bNoNukes(false),
-m_bCityVoting(false),
-m_bCivVoting(false),
-m_bDefensivePact(false),
-m_bOpenBorders(false),
-m_bForcePeace(false),
-m_bForceNoTrade(false),
-m_bForceWar(false),
-m_bAssignCity(false)
+CvVoteInfo::CvVoteInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -174,34 +159,40 @@ bool CvVoteInfo::isVoteSourceType(int i) const
 }
 
 
+void CvVoteInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order so the delegated checksum stays byte-identical.
+	util
+		.add(m_iPopulationThreshold, L"iPopulationThreshold")
+		.add(m_iStateReligionVotePercent, L"iStateReligionVotePercent")
+		.add(m_iTradeRoutes, L"iTradeRoutes")
+		.add(m_iMinVoters, L"iMinVoters")
+		.add(m_bSecretaryGeneral, L"bSecretaryGeneral")
+		.add(m_bVictory, L"bVictory")
+		.add(m_bFreeTrade, L"bFreeTrade")
+		.add(m_bNoNukes, L"bNoNukes")
+		.add(m_bCityVoting, L"bCityVoting")
+		.add(m_bCivVoting, L"bCivVoting")
+		.add(m_bDefensivePact, L"bDefensivePact")
+		.add(m_bOpenBorders, L"bOpenBorders")
+		.add(m_bForcePeace, L"bForcePeace")
+		.add(m_bForceNoTrade, L"bForceNoTrade")
+		.add(m_bForceWar, L"bForceWar")
+		.add(m_bAssignCity, L"bAssignCity")
+		.add(m_aeForceCivic, L"ForceCivics")
+		.add(m_aeVoteSourceTypes, L"DiploVotes")
+	;
+}
+
+
 bool CvVoteInfo::read(CvXMLLoadUtility* pXML)
 {
-
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(&m_iPopulationThreshold, L"iPopulationThreshold");
-	pXML->GetOptionalChildXmlValByName(&m_iStateReligionVotePercent, L"iStateReligionVotePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iTradeRoutes, L"iTradeRoutes");
-	pXML->GetOptionalChildXmlValByName(&m_iMinVoters, L"iMinVoters");
-
-	pXML->GetOptionalChildXmlValByName(&m_bSecretaryGeneral, L"bSecretaryGeneral");
-	pXML->GetOptionalChildXmlValByName(&m_bVictory, L"bVictory");
-	pXML->GetOptionalChildXmlValByName(&m_bFreeTrade, L"bFreeTrade");
-	pXML->GetOptionalChildXmlValByName(&m_bNoNukes, L"bNoNukes");
-	pXML->GetOptionalChildXmlValByName(&m_bCityVoting, L"bCityVoting");
-	pXML->GetOptionalChildXmlValByName(&m_bCivVoting, L"bCivVoting");
-	pXML->GetOptionalChildXmlValByName(&m_bDefensivePact, L"bDefensivePact");
-	pXML->GetOptionalChildXmlValByName(&m_bOpenBorders, L"bOpenBorders");
-	pXML->GetOptionalChildXmlValByName(&m_bForcePeace, L"bForcePeace");
-	pXML->GetOptionalChildXmlValByName(&m_bForceNoTrade, L"bForceNoTrade");
-	pXML->GetOptionalChildXmlValByName(&m_bForceWar, L"bForceWar");
-	pXML->GetOptionalChildXmlValByName(&m_bAssignCity, L"bAssignCity");
-
-	pXML->SetOptionalVector(&m_aeForceCivic, L"ForceCivics");
-	pXML->SetOptionalVector(&m_aeVoteSourceTypes, L"DiploVotes");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -209,58 +200,14 @@ bool CvVoteInfo::read(CvXMLLoadUtility* pXML)
 
 void CvVoteInfo::copyNonDefaults(const CvVoteInfo* pClassInfo)
 {
-	PROFILE_EXTRA_FUNC();
-	bool bDefault = false;
-	int iDefault = 0;
-	CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getPopulationThreshold() == iDefault) m_iPopulationThreshold = pClassInfo->getPopulationThreshold();
-	if (getStateReligionVotePercent() == iDefault) m_iStateReligionVotePercent = pClassInfo->getStateReligionVotePercent();
-	if (getTradeRoutes() == iDefault) m_iTradeRoutes = pClassInfo->getTradeRoutes();
-	if (getMinVoters() == iDefault) m_iMinVoters = pClassInfo->getMinVoters();
-	if (isSecretaryGeneral() == bDefault) m_bSecretaryGeneral = pClassInfo->isSecretaryGeneral();
-	if (isVictory() == bDefault) m_bVictory = pClassInfo->isVictory();
-	if (isFreeTrade() == bDefault) m_bFreeTrade = pClassInfo->isFreeTrade();
-	if (isNoNukes() == bDefault) m_bNoNukes = pClassInfo->isNoNukes();
-	if (isCityVoting() == bDefault) m_bCityVoting = pClassInfo->isCityVoting();
-	if (isCivVoting() == bDefault) m_bCivVoting = pClassInfo->isCivVoting();
-	if (isDefensivePact() == bDefault) m_bDefensivePact = pClassInfo->isDefensivePact();
-	if (isOpenBorders() == bDefault) m_bOpenBorders = pClassInfo->isOpenBorders();
-	if (isForcePeace() == bDefault) m_bForcePeace = pClassInfo->isForcePeace();
-	if (isForceNoTrade() == bDefault) m_bForceNoTrade = pClassInfo->isForceNoTrade();
-	if (isForceWar() == bDefault) m_bForceWar = pClassInfo->isForceWar();
-	if (isAssignCity() == bDefault) m_bAssignCity = pClassInfo->isAssignCity();
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeForceCivic, pClassInfo->m_aeForceCivic);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeVoteSourceTypes, pClassInfo->m_aeVoteSourceTypes);
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvVoteInfo::getCheckSum(uint32_t& iSum) const
 {
-	CheckSum(iSum, m_iPopulationThreshold);
-	CheckSum(iSum, m_iStateReligionVotePercent);
-	CheckSum(iSum, m_iTradeRoutes);
-	CheckSum(iSum, m_iMinVoters);
-
-	CheckSum(iSum, m_bSecretaryGeneral);
-	CheckSum(iSum, m_bVictory);
-	CheckSum(iSum, m_bFreeTrade);
-	CheckSum(iSum, m_bNoNukes);
-	CheckSum(iSum, m_bCityVoting);
-	CheckSum(iSum, m_bCivVoting);
-	CheckSum(iSum, m_bDefensivePact);
-	CheckSum(iSum, m_bOpenBorders);
-	CheckSum(iSum, m_bForcePeace);
-	CheckSum(iSum, m_bForceNoTrade);
-	CheckSum(iSum, m_bForceWar);
-	CheckSum(iSum, m_bAssignCity);
-
-	// Arrays
-
-	CheckSumC(iSum, m_aeForceCivic);
-	CheckSumC(iSum, m_aeVoteSourceTypes);
+	CvInfoUtil(this).checkSum(iSum);
 }
 

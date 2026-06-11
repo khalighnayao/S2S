@@ -26,10 +26,9 @@
 //	Game options and their default values
 //
 //
-CvGameOptionInfo::CvGameOptionInfo() :
-m_bDefault(false),
-m_bVisible(true)
+CvGameOptionInfo::CvGameOptionInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -40,15 +39,27 @@ CvGameOptionInfo::~CvGameOptionInfo()
 }
 
 
+void CvGameOptionInfo::getDataMembers(CvInfoUtil& util)
+{
+	// HYBRID migration: the two EnforcesGameOption*Types vectors stay hand-written in
+	// read()/copyNonDefaults()/getCheckSum()/dtor — they are self-referencing GameOptionTypes FKs
+	// read via SetOptionalVectorWithDelayedResolution, and CvInfoUtil has no delayed-resolution
+	// vector wrapper yet. Declared in the legacy getCheckSum order (bDefault, bVisible).
+	util
+		.add(m_bDefault, L"bDefault")
+		.add(m_bVisible, L"bVisible", true)
+	;
+}
+
+
 bool CvGameOptionInfo::read(CvXMLLoadUtility* pXML)
 {
-
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
-	pXML->GetOptionalChildXmlValByName(&m_bDefault, L"bDefault");
-	pXML->GetOptionalChildXmlValByName(&m_bVisible, L"bVisible", true);
+
+	CvInfoUtil(this).readXml(pXML);
 
 	pXML->SetOptionalVectorWithDelayedResolution(m_aEnforcesGameOptionOnTypes, L"EnforcesGameOptionOnTypes");
 	pXML->SetOptionalVectorWithDelayedResolution(m_aEnforcesGameOptionOffTypes, L"EnforcesGameOptionOffTypes");
@@ -59,12 +70,11 @@ bool CvGameOptionInfo::read(CvXMLLoadUtility* pXML)
 
 void CvGameOptionInfo::copyNonDefaults(const CvGameOptionInfo* pClassInfo)
 {
-	const bool bDefault = false;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getDefault() == bDefault) m_bDefault = pClassInfo->getDefault();
-	if (getVisible()) m_bVisible = pClassInfo->getVisible();
+	// Legacy quirk preserved by the wrapper: bVisible defaults to true, so the merge copies the
+	// source value whenever ours is still true ("if (getVisible())" == compare-against-default).
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	//TB's Tags
 	GC.copyNonDefaultDelayedResolutionVector(m_aEnforcesGameOptionOnTypes, pClassInfo->m_aEnforcesGameOptionOnTypes);
@@ -74,10 +84,9 @@ void CvGameOptionInfo::copyNonDefaults(const CvGameOptionInfo* pClassInfo)
 
 void CvGameOptionInfo::getCheckSum(uint32_t& iSum) const
 {
-	CheckSum(iSum, m_bDefault);
-	CheckSum(iSum, m_bVisible);
+	CvInfoUtil(this).checkSum(iSum); // m_bDefault, m_bVisible (legacy order)
 
-	//TB's Tags
+	//TB's Tags (hand-written: delayed-resolution vectors are not declarable yet)
 	CheckSumC(iSum, m_aEnforcesGameOptionOnTypes);
 	CheckSumC(iSum, m_aEnforcesGameOptionOffTypes);
 }

@@ -24,14 +24,31 @@
 // CvEntityEventInfo
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-CvEntityEventInfo::CvEntityEventInfo() :
-m_bUpdateFormation(true)
+CvEntityEventInfo::CvEntityEventInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
 CvEntityEventInfo::~CvEntityEventInfo()
 {
+}
+
+
+// Declarative fields (#196); the two enum vectors stay hand-written in read() and
+// copyNonDefaults(): the EXE indexes them via the DllExport getters, so XML document
+// order (and duplicates) must be preserved — the vector wrapper dedups and sorts.
+//
+// m_bUpdateFormation: the legacy constructor set true, but the legacy (mandatory) read
+// assigned the reader default false whenever the tag was absent, so the post-read state
+// for default false is identical and the legacy copyNonDefaults also compared against
+// false. The constructor-only true was never observable.
+// No legacy getCheckSum, so declaration order follows the legacy read() order.
+void CvEntityEventInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_bUpdateFormation, L"bUpdateFormation")
+	;
 }
 
 
@@ -110,7 +127,7 @@ bool CvEntityEventInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	pXML->GetChildXmlValByName( &m_bUpdateFormation, L"bUpdateFormation" );
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -119,11 +136,9 @@ bool CvEntityEventInfo::read(CvXMLLoadUtility* pXML)
 void CvEntityEventInfo::copyNonDefaults(const CvEntityEventInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	bool bDefault = false;
-	CvString cDefault = CvString::format("").GetCString();
-	CvWString wDefault = CvWString::format(L"").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
+
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	for ( int i = 0; i < pClassInfo->getAnimationPathCount(); i++ )
 	{
@@ -156,8 +171,6 @@ void CvEntityEventInfo::copyNonDefaults(const CvEntityEventInfo* pClassInfo)
 			m_vctEffectTypes.push_back( pClassInfo->getEffectType(i));
 		}
 	}
-
-	if (getUpdateFormation() == bDefault) m_bUpdateFormation = pClassInfo->getUpdateFormation();
 }
 
 

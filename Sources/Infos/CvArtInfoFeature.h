@@ -22,6 +22,9 @@ public:
 
 	void dump();
 
+	void getDataMembers(CvInfoUtil& util);
+	// HYBRID read: the declarative chain covers the flat bools; TileArtType/LightType (graphics
+	// enums with bespoke string parsing) and the FeatureVariety tree stay hand-written below.
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvArtInfoFeature* pClassInfo);

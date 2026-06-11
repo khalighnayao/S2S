@@ -42,6 +42,10 @@ public:
 	float getAngleInterpRate() const;
 	DllExport float getBankRate() const;
 
+	void getDataMembers(CvInfoUtil& util);
+	// HYBRID read: the declarative chain covers the flat scalars/strings; the runtime-resolved
+	// audio script ids and the nested ShadowDef/TrailDefinition/AudioRunSounds blocks stay
+	// hand-written below.
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvArtInfoUnit* pClassInfo);
 

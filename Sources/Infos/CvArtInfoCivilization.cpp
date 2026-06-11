@@ -24,9 +24,9 @@
 // CvArtInfoCivilization
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-CvArtInfoCivilization::CvArtInfoCivilization() :
-m_bWhiteFlag(false)
+CvArtInfoCivilization::CvArtInfoCivilization()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -41,15 +41,12 @@ bool CvArtInfoCivilization::isWhiteFlag() const
 }
 
 
-bool CvArtInfoCivilization::read(CvXMLLoadUtility* pXML)
+void CvArtInfoCivilization::getDataMembers(CvInfoUtil& util)
 {
-	if (!CvArtInfoAsset::read(pXML))
-	{
-		return false;
-	}
-
-	pXML->GetOptionalChildXmlValByName(&m_bWhiteFlag, L"bWhiteFlag");
-	return true;
+	CvArtInfoAsset::getDataMembers(util);
+	util
+		.add(m_bWhiteFlag, L"bWhiteFlag")
+	;
 }
 
 

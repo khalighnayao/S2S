@@ -23,6 +23,7 @@ public:
 	CvUnitCombatInfo();
 	virtual ~CvUnitCombatInfo();
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(CvUnitCombatInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

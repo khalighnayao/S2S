@@ -32,47 +32,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvEspionageMissionInfo::CvEspionageMissionInfo() :
-m_bNuke(false),
-m_bRevolt(false),
-m_bDisablePower(false),
-m_iWarWearinessCounter(0),
-m_iPrereqGameOption(NO_GAMEOPTION),
-m_iSabatogeResearchCostFactor(0),
-m_iRemoveReligionsCostFactor(0),
-m_iRemoveCorporationsCostFactor(0),
-m_iCost(0),
-m_bIsPassive(false),
-m_bIsTwoPhases(false),
-m_bTargetsCity(false),
-m_bSelectPlot(false),
-m_iTechPrereq(NO_TECH),
-m_iVisibilityLevel(0),
-m_bInvestigateCity(false),
-m_bSeeDemographics(false),
-m_bNoActiveMissions(false),
-m_bSeeResearch(false),
-m_bDestroyImprovement(false),
-m_iDestroyBuildingCostFactor(0),
-m_iDestroyUnitCostFactor(0),
-m_iDestroyProjectCostFactor(0),
-m_iDestroyProductionCostFactor(0),
-m_iBuyUnitCostFactor(0),
-m_iBuyCityCostFactor(0),
-m_iStealTreasuryTypes(0),
-m_iCityInsertCultureAmountFactor(0),
-m_iCityInsertCultureCostFactor(0),
-m_iCityPoisonWaterCounter(0),
-m_iCityUnhappinessCounter(0),
-m_iCityRevoltCounter(0),
-m_iBuyTechCostFactor(0),
-m_iSwitchCivicCostFactor(0),
-m_iSwitchReligionCostFactor(0),
-m_iPlayerAnarchyCounter(0),
-m_iCounterespionageNumTurns(0),
-m_iCounterespionageMod(0),
-m_iDifficultyMod(0)
+CvEspionageMissionInfo::CvEspionageMissionInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -85,6 +47,57 @@ m_iDifficultyMod(0)
 //------------------------------------------------------------------------------------------------------
 CvEspionageMissionInfo::~CvEspionageMissionInfo()
 {
+	CvInfoUtil(this).uninitDataMembers();
+}
+
+
+void CvEspionageMissionInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order. The last 8 fields (m_bNuke onward) are read from XML
+	// but were never part of the legacy checksum, so they are parked at the end and getCheckSum below
+	// stays explicit, reproducing the legacy field set byte-for-byte.
+	util
+		.add(m_iCost, L"iCost")
+		.add(m_bIsPassive, L"bIsPassive")
+		.add(m_bIsTwoPhases, L"bIsTwoPhases")
+		.add(m_bTargetsCity, L"bTargetsCity")
+		.add(m_bSelectPlot, L"bSelectPlot")
+		.addEnum(m_iTechPrereq, L"TechPrereq")
+		.add(m_iVisibilityLevel, L"iVisibilityLevel")
+		.add(m_bInvestigateCity, L"bInvestigateCity")
+		.add(m_bSeeDemographics, L"bSeeDemographics")
+		.add(m_bNoActiveMissions, L"bNoActiveMissions")
+		.add(m_bSeeResearch, L"bSeeResearch")
+		.add(m_bDestroyImprovement, L"bDestroyImprovement")
+		.add(m_iDestroyBuildingCostFactor, L"iDestroyBuildingCostFactor")
+		.add(m_iDestroyUnitCostFactor, L"iDestroyUnitCostFactor")
+		.add(m_iDestroyProjectCostFactor, L"iDestroyProjectCostFactor")
+		.add(m_iDestroyProductionCostFactor, L"iDestroyProductionCostFactor")
+		.add(m_iBuyUnitCostFactor, L"iBuyUnitCostFactor")
+		.add(m_iBuyCityCostFactor, L"iBuyCityCostFactor")
+		.add(m_iStealTreasuryTypes, L"iStealTreasuryTypes")
+		.add(m_iCityInsertCultureAmountFactor, L"iCityInsertCultureAmountFactor")
+		.add(m_iCityInsertCultureCostFactor, L"iCityInsertCultureCostFactor")
+		.add(m_iCityPoisonWaterCounter, L"iCityPoisonWaterCounter")
+		.add(m_iCityUnhappinessCounter, L"iCityUnhappinessCounter")
+		.add(m_iCityRevoltCounter, L"iCityRevoltCounter")
+		.add(m_iBuyTechCostFactor, L"iBuyTechCostFactor")
+		.add(m_iSwitchCivicCostFactor, L"iSwitchCivicCostFactor")
+		.add(m_iSwitchReligionCostFactor, L"iSwitchReligionCostFactor")
+		.add(m_iPlayerAnarchyCounter, L"iPlayerAnarchyCounter")
+		.add(m_iCounterespionageNumTurns, L"iCounterespionageNumTurns")
+		.add(m_iCounterespionageMod, L"iCounterespionageMod")
+		.add(m_iDifficultyMod, L"iDifficultyMod")
+		// Read but never checksummed (legacy omission, preserved):
+		.add(m_bNuke, L"bNuke")
+		.add(m_bRevolt, L"bRevolt")
+		.add(m_bDisablePower, L"bDisablePower")
+		.addEnumAsInt(m_iPrereqGameOption, L"PrereqGameOption")
+		.add(m_iWarWearinessCounter, L"iWarWearinessCounter")
+		.add(m_iSabatogeResearchCostFactor, L"iSabatogeResearchCostFactor")
+		.add(m_iRemoveReligionsCostFactor, L"iRemoveReligionsCostFactor")
+		.add(m_iRemoveCorporationsCostFactor, L"iRemoveCorporationsCostFactor")
+	;
 }
 
 
@@ -318,53 +331,12 @@ int CvEspionageMissionInfo::getRemoveCorporationsCostFactor() const
 
 bool CvEspionageMissionInfo::read(CvXMLLoadUtility* pXML)
 {
-	CvString szTextVal;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(&m_iCost, L"iCost");
-	pXML->GetOptionalChildXmlValByName(&m_bIsPassive, L"bIsPassive");
-	pXML->GetOptionalChildXmlValByName(&m_bIsTwoPhases, L"bIsTwoPhases");
-	pXML->GetOptionalChildXmlValByName(&m_bTargetsCity, L"bTargetsCity");
-	pXML->GetOptionalChildXmlValByName(&m_bSelectPlot, L"bSelectPlot");
-	pXML->GetOptionalTypeEnum(m_iTechPrereq, L"TechPrereq");
-	pXML->GetOptionalChildXmlValByName(&m_iVisibilityLevel, L"iVisibilityLevel");
-	pXML->GetOptionalChildXmlValByName(&m_bInvestigateCity, L"bInvestigateCity");
-	pXML->GetOptionalChildXmlValByName(&m_bSeeDemographics, L"bSeeDemographics");
-	pXML->GetOptionalChildXmlValByName(&m_bNoActiveMissions, L"bNoActiveMissions");
-	pXML->GetOptionalChildXmlValByName(&m_bSeeResearch, L"bSeeResearch");
-	pXML->GetOptionalChildXmlValByName(&m_bDestroyImprovement, L"bDestroyImprovement");
-	pXML->GetOptionalChildXmlValByName(&m_iDestroyBuildingCostFactor, L"iDestroyBuildingCostFactor");
-	pXML->GetOptionalChildXmlValByName(&m_iDestroyUnitCostFactor, L"iDestroyUnitCostFactor");
-	pXML->GetOptionalChildXmlValByName(&m_iDestroyProjectCostFactor, L"iDestroyProjectCostFactor");
-	pXML->GetOptionalChildXmlValByName(&m_iDestroyProductionCostFactor, L"iDestroyProductionCostFactor");
-	pXML->GetOptionalChildXmlValByName(&m_iBuyUnitCostFactor, L"iBuyUnitCostFactor");
-	pXML->GetOptionalChildXmlValByName(&m_iBuyCityCostFactor, L"iBuyCityCostFactor");
-	pXML->GetOptionalChildXmlValByName(&m_iStealTreasuryTypes, L"iStealTreasuryTypes");
-	pXML->GetOptionalChildXmlValByName(&m_iCityInsertCultureAmountFactor, L"iCityInsertCultureAmountFactor");
-	pXML->GetOptionalChildXmlValByName(&m_iCityInsertCultureCostFactor, L"iCityInsertCultureCostFactor");
-	pXML->GetOptionalChildXmlValByName(&m_iCityPoisonWaterCounter, L"iCityPoisonWaterCounter");
-	pXML->GetOptionalChildXmlValByName(&m_iCityUnhappinessCounter, L"iCityUnhappinessCounter");
-	pXML->GetOptionalChildXmlValByName(&m_iCityRevoltCounter, L"iCityRevoltCounter");
-	pXML->GetOptionalChildXmlValByName(&m_iBuyTechCostFactor, L"iBuyTechCostFactor");
-	pXML->GetOptionalChildXmlValByName(&m_iSwitchCivicCostFactor, L"iSwitchCivicCostFactor");
-	pXML->GetOptionalChildXmlValByName(&m_iSwitchReligionCostFactor, L"iSwitchReligionCostFactor");
-	pXML->GetOptionalChildXmlValByName(&m_iPlayerAnarchyCounter, L"iPlayerAnarchyCounter");
-	pXML->GetOptionalChildXmlValByName(&m_iCounterespionageNumTurns, L"iCounterespionageNumTurns");
-	pXML->GetOptionalChildXmlValByName(&m_iCounterespionageMod, L"iCounterespionageMod");
-	pXML->GetOptionalChildXmlValByName(&m_iDifficultyMod, L"iDifficultyMod");
-	pXML->GetOptionalChildXmlValByName(&m_bNuke, L"bNuke");
-	pXML->GetOptionalChildXmlValByName(&m_bRevolt, L"bRevolt");
-	pXML->GetOptionalChildXmlValByName(&m_bDisablePower, L"bDisablePower");
-	pXML->GetOptionalChildXmlValByName(&m_iWarWearinessCounter, L"iWarWearinessCounter");
-	pXML->GetOptionalChildXmlValByName(&m_iSabatogeResearchCostFactor, L"iSabatogeResearchCostFactor");
-	pXML->GetOptionalChildXmlValByName(&m_iRemoveReligionsCostFactor, L"iRemoveReligionsCostFactor");
-	pXML->GetOptionalChildXmlValByName(&m_iRemoveCorporationsCostFactor, L"iRemoveCorporationsCostFactor");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PrereqGameOption");
-	m_iPrereqGameOption = pXML->GetInfoClass(szTextVal);
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -372,61 +344,16 @@ bool CvEspionageMissionInfo::read(CvXMLLoadUtility* pXML)
 
 void CvEspionageMissionInfo::copyNonDefaults(const CvEspionageMissionInfo* pClassInfo)
 {
-	bool bDefault = false;
-	int iDefault = 0;
-	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	CvString cDefault = CvString::format("").GetCString();
-	CvWString wDefault = CvWString::format(L"").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getCost() == iDefault) m_iCost = pClassInfo->getCost();
-	if (isPassive() == bDefault) m_bIsPassive = pClassInfo->isPassive();
-	if (isTwoPhases() == bDefault) m_bIsTwoPhases = pClassInfo->isTwoPhases();
-	if (isTargetsCity() == bDefault) m_bTargetsCity = pClassInfo->isTargetsCity();
-	if (isSelectPlot() == bDefault) m_bSelectPlot = pClassInfo->isSelectPlot();
-
-	if (getTechPrereq() == iTextDefault) m_iTechPrereq = pClassInfo->getTechPrereq();
-
-	if (getVisibilityLevel() == iDefault) m_iVisibilityLevel = pClassInfo->getVisibilityLevel();
-	if (isInvestigateCity() == bDefault) m_bInvestigateCity = pClassInfo->isInvestigateCity();
-	if (isSeeDemographics() == bDefault) m_bSeeDemographics = pClassInfo->isSeeDemographics();
-	if (isNoActiveMissions() == bDefault) m_bNoActiveMissions = pClassInfo->isNoActiveMissions();
-	if (isSeeResearch() == bDefault) m_bSeeResearch = pClassInfo->isSeeResearch();
-
-	if (isDestroyImprovement() == bDefault) m_bDestroyImprovement = pClassInfo->isDestroyImprovement();
-	if (getDestroyBuildingCostFactor() == iDefault) m_iDestroyBuildingCostFactor = pClassInfo->getDestroyBuildingCostFactor();
-	if (getDestroyUnitCostFactor() == iDefault) m_iDestroyUnitCostFactor = pClassInfo->getDestroyUnitCostFactor();
-	if (getDestroyProjectCostFactor() == iDefault) m_iDestroyProjectCostFactor = pClassInfo->getDestroyProjectCostFactor();
-	if (getDestroyProductionCostFactor() == iDefault) m_iDestroyProductionCostFactor = pClassInfo->getDestroyProductionCostFactor();
-	if (getBuyUnitCostFactor() == iDefault) m_iBuyUnitCostFactor = pClassInfo->getBuyUnitCostFactor();
-	if (getBuyCityCostFactor() == iDefault) m_iBuyCityCostFactor = pClassInfo->getBuyCityCostFactor();
-	if (getStealTreasuryTypes() == iDefault) m_iStealTreasuryTypes = pClassInfo->getStealTreasuryTypes();
-	if (getCityInsertCultureAmountFactor() == iDefault) m_iCityInsertCultureAmountFactor = pClassInfo->getCityInsertCultureAmountFactor();
-	if (getCityInsertCultureCostFactor() == iDefault) m_iCityInsertCultureCostFactor = pClassInfo->getCityInsertCultureCostFactor();
-	if (getCityPoisonWaterCounter() == iDefault) m_iCityPoisonWaterCounter = pClassInfo->getCityPoisonWaterCounter();
-	if (getCityUnhappinessCounter() == iDefault) m_iCityUnhappinessCounter = pClassInfo->getCityUnhappinessCounter();
-	if (getCityRevoltCounter() == iDefault) m_iCityRevoltCounter = pClassInfo->getCityRevoltCounter();
-	if (getBuyTechCostFactor() == iDefault) m_iBuyTechCostFactor = pClassInfo->getBuyTechCostFactor();
-	if (getSwitchCivicCostFactor() == iDefault) m_iSwitchCivicCostFactor = pClassInfo->getSwitchCivicCostFactor();
-	if (getSwitchReligionCostFactor() == iDefault) m_iSwitchReligionCostFactor = pClassInfo->getSwitchReligionCostFactor();
-	if (getPlayerAnarchyCounter() == iDefault) m_iPlayerAnarchyCounter = pClassInfo->getPlayerAnarchyCounter();
-	if (getCounterespionageNumTurns() == iDefault) m_iCounterespionageNumTurns = pClassInfo->getCounterespionageNumTurns();
-	if (getCounterespionageMod() == iDefault) m_iCounterespionageMod = pClassInfo->getCounterespionageMod();
-	if (getDifficultyMod() == iDefault) m_iDifficultyMod = pClassInfo->getDifficultyMod();
-	if (isNuke() == bDefault) m_bNuke = pClassInfo->isNuke();
-	if (isRevolt() == bDefault) m_bRevolt = pClassInfo->isRevolt();
-	if (isDisablePower() == bDefault) m_bDisablePower = pClassInfo->isDisablePower();
-	if (getPrereqGameOption() == iTextDefault) m_iPrereqGameOption = pClassInfo->getPrereqGameOption();
-	if (getWarWearinessCounter() == iDefault) m_iWarWearinessCounter = pClassInfo->getWarWearinessCounter();
-	if (getSabatogeResearchCostFactor() == iDefault) m_iSabatogeResearchCostFactor = pClassInfo->getSabatogeResearchCostFactor();
-	if (getRemoveReligionsCostFactor() == iDefault) m_iRemoveReligionsCostFactor = pClassInfo->getRemoveReligionsCostFactor();
-	if (getRemoveCorporationsCostFactor() == iDefault) m_iRemoveCorporationsCostFactor = pClassInfo->getRemoveCorporationsCostFactor();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 
 void CvEspionageMissionInfo::getCheckSum(uint32_t& iSum) const
 {
+	// Explicit (not delegated): the legacy checksum omits the last 8 read fields (m_bNuke through
+	// m_iRemoveCorporationsCostFactor); delegating would fold them in and change the value.
 	CheckSum(iSum, m_iCost);
 	CheckSum(iSum, m_bIsPassive);
 	CheckSum(iSum, m_bIsTwoPhases);

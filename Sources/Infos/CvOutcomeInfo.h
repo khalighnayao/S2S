@@ -39,6 +39,7 @@ public:
 	int getExtraChancePromotionChance(int i) const;
 	const std::vector<OutcomeTypes>& getReplaceOutcomes() const { return m_aeReplaceOutcomes; }
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvOutcomeInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

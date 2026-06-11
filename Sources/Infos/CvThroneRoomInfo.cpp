@@ -31,11 +31,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvThroneRoomInfo::CvThroneRoomInfo() :
-m_iFromState(0),
-m_iToState(0),
-m_iAnimation(0)
+CvThroneRoomInfo::CvThroneRoomInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -81,6 +79,19 @@ int CvThroneRoomInfo::getAnimation()
 }
 
 
+// No legacy getCheckSum, so declaration order follows the legacy read() order.
+void CvThroneRoomInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szEvent, L"Event")
+		.add(m_iFromState, L"iFromState")
+		.add(m_iToState, L"iToState")
+		.add(m_szNodeName, L"NodeName")
+		.add(m_iAnimation, L"iAnimation")
+	;
+}
+
+
 bool CvThroneRoomInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
@@ -88,11 +99,7 @@ bool CvThroneRoomInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(m_szEvent, L"Event");
-	pXML->GetOptionalChildXmlValByName(&m_iFromState, L"iFromState" );
-	pXML->GetOptionalChildXmlValByName(&m_iToState, L"iToState" );
-	pXML->GetOptionalChildXmlValByName(m_szNodeName, L"NodeName");
-	pXML->GetOptionalChildXmlValByName(&m_iAnimation, L"iAnimation" );
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -100,15 +107,8 @@ bool CvThroneRoomInfo::read(CvXMLLoadUtility* pXML)
 
 void CvThroneRoomInfo::copyNonDefaults(CvThroneRoomInfo* pClassInfo)
 {
-	const int iDefault = 0;
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getEvent() == cDefault) m_szEvent = pClassInfo->getEvent();
-	if (getFromState() == iDefault) m_iFromState = pClassInfo->getFromState();
-	if (getToState() == iDefault) m_iToState = pClassInfo->getToState();
-	if (getNodeName() == cDefault) m_szNodeName = pClassInfo->getNodeName();
-	if (getAnimation() == iDefault) m_iAnimation = pClassInfo->getAnimation();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

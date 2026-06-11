@@ -28,6 +28,7 @@ public:
 	int getNumSiegeUnitEntries() const;
 	DllExport const CvUnitEntry &getSiegeUnitEntry(int index) const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvUnitFormationInfo* pClassInfo);
 

@@ -65,6 +65,7 @@ public:
 	const std::vector<BuildingTypes>& getShrineBuildings() const { return m_shrineBuildings; }
 	void addShrineBuilding(BuildingTypes eBuilding) { m_shrineBuildings.push_back(eBuilding); }
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvReligionInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

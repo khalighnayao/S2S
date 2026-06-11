@@ -32,13 +32,31 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvSpaceShipInfo::CvSpaceShipInfo() :
+// Hand-written fields: hand-mapped graphics enums (not info-type FKs) and the
+// ProjectName/ProjectType pair resolved through setProjectName().
 m_eSpaceShipInfoType(SPACE_SHIP_INFO_TYPE_NONE),
-m_iPartNumber(-1),
-m_iArtType(-1),
-m_iEventCode(-1),
 m_eProjectType(NO_PROJECT),
 m_eCameraUpAxis(AXIS_X)
 {
+	// NOTE: the legacy ctor initialized m_iPartNumber/m_iArtType/m_iEventCode to -1, but the
+	// legacy read() always stomped absent tags with 0 (GetOptionalChildXmlValByName default)
+	// and copyNonDefaults compared against 0, so the wrapper default of 0 reproduces all
+	// post-read behaviour; only the never-observed pre-read value changes.
+	CvInfoUtil(this).initDataMembers();
+}
+
+
+// Declared in legacy read() order (this class has no getCheckSum). ProjectName (paired with
+// m_eProjectType via setProjectName), CameraUpAxis and InfoType (hand-mapped engine enums,
+// not registered info types) stay hand-written in read()/copyNonDefaults().
+void CvSpaceShipInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szNodeName, L"NodeName")
+		.add(m_iPartNumber, L"PartNumber")
+		.add(m_iArtType, L"ArtType")
+		.add(m_iEventCode, L"EventCode")
+	;
 }
 
 
@@ -116,8 +134,9 @@ bool CvSpaceShipInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
+	CvInfoUtil(this).readXml(pXML);
+
 	CvString szTextVal;
-	pXML->GetChildXmlValByName(m_szNodeName, L"NodeName");
 	pXML->GetChildXmlValByName(szTextVal, L"ProjectName");
 	setProjectName(szTextVal);
 
@@ -133,10 +152,6 @@ bool CvSpaceShipInfo::read(CvXMLLoadUtility* pXML)
 	{
 		FErrorMsg("[Jason] Unknown Axis Type.");
 	}
-
-	pXML->GetOptionalChildXmlValByName(&m_iPartNumber, L"PartNumber");
-	pXML->GetOptionalChildXmlValByName(&m_iArtType, L"ArtType");
-	pXML->GetOptionalChildXmlValByName(&m_iEventCode, L"EventCode");
 
 	//type
 	pXML->GetChildXmlValByName(szTextVal, L"InfoType");
@@ -179,17 +194,13 @@ bool CvSpaceShipInfo::read(CvXMLLoadUtility* pXML)
 
 void CvSpaceShipInfo::copyNonDefaults(CvSpaceShipInfo* pClassInfo)
 {
-	const int iDefault = 0;
 	const CvString cDefault = CvString::format("").GetCString();
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getNodeName() == cDefault) m_szNodeName = pClassInfo->m_szNodeName;
-	if (getProjectName() == cDefault) setProjectName(pClassInfo->getProjectName());
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
-	if (getPartNumber() == iDefault) m_iPartNumber = pClassInfo->m_iPartNumber;
-	if (getArtType() == iDefault) m_iArtType = pClassInfo->m_iArtType;
-	if (getEventCode() == iDefault) m_iEventCode = pClassInfo->m_iEventCode;
+	if (getProjectName() == cDefault) setProjectName(pClassInfo->getProjectName());
 
 //	if (getCameraUpAxis() == cDefault) m_eCameraUpAxis = pClassInfo->getCameraUpAxis();
 //	if (getSpaceShipInfoType() == cDefault) m_eSpaceShipInfoType = pClassInfo->getSpaceShipInfoType();

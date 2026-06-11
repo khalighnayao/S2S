@@ -85,6 +85,7 @@ public:
 
 	int getGoodies(int i) const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvHandicapInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

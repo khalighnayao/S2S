@@ -33,6 +33,9 @@
 //------------------------------------------------------------------------------------------------------
 CvAnimationCategoryInfo::CvAnimationCategoryInfo()
 {
+	CvInfoUtil(this).initDataMembers();
+	// Runtime lazy-resolution sentinel, not an XML default: getCategoryDefaultTo() resolves
+	// m_szDefaultTo into m_kCategory.second on first access, after all categories are loaded.
 	m_kCategory.second = -7540; // invalid.
 }
 
@@ -66,6 +69,17 @@ int CvAnimationCategoryInfo::getCategoryDefaultTo( )
 }
 
 
+void CvAnimationCategoryInfo::getDataMembers(CvInfoUtil& util)
+{
+	// No legacy getCheckSum (CvInfoBase's empty default applies), so declaration order follows read order.
+	// m_kCategory.second is NOT declared: it is the runtime cache of the lazy DefaultTo resolution.
+	util
+		.add(m_szDefaultTo, L"DefaultTo")
+		.add(m_kCategory.first, L"BaseID")
+	;
+}
+
+
 bool CvAnimationCategoryInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
@@ -73,22 +87,20 @@ bool CvAnimationCategoryInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	int		iBaseID;						// Temporary
-	pXML->GetChildXmlValByName( m_szDefaultTo, L"DefaultTo");
-	pXML->GetChildXmlValByName( &iBaseID, L"BaseID");
-	m_kCategory.first = iBaseID;
+	CvInfoUtil(this).readXml(pXML);
+
 	return true;
 }
 
 
 void CvAnimationCategoryInfo::copyNonDefaults(const CvAnimationCategoryInfo* pClassInfo)
 {
-	const int iDefault = 0;
-	const int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getCategoryBaseID() == iDefault) m_kCategory.first = pClassInfo->m_kCategory.first;
-	if (getCategoryDefaultTo() == iTextDefault) m_kCategory.second = pClassInfo->m_kCategory.second;
+	// NOTE: the legacy merge resolved DefaultTo at merge time (getCategoryDefaultTo()) and copied the
+	// resolved int from pClassInfo (which could still be the -7540 unresolved sentinel) while never
+	// copying m_szDefaultTo itself. The wrapper instead copies the DefaultTo *string* when ours is
+	// empty and lets the target resolve lazily — a deliberate behaviour fix (owner-ruled acceptable).
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

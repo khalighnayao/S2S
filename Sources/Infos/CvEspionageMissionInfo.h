@@ -63,6 +63,8 @@ public:
 	int getRemoveReligionsCostFactor() const;
 	int getRemoveCorporationsCostFactor() const;
 
+	void getDataMembers(CvInfoUtil& util);
+
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvEspionageMissionInfo* pClassInfo);

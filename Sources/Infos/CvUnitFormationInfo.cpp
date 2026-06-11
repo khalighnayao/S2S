@@ -34,6 +34,7 @@
 //------------------------------------------------------------------------------------------------------
 CvUnitFormationInfo::CvUnitFormationInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -114,6 +115,20 @@ const CvUnitEntry &CvUnitFormationInfo::getSiegeUnitEntry(int index) const
 }
 
 
+void CvUnitFormationInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Hand-written fields (see read()):
+	// - m_vctEventTypes: flat <EventMaskList> walk that preserves document order and duplicates
+	//   for the EXE-facing getEventTypes(); the vector wrapper (SetOptionalVector) would dedup
+	//   and sort, changing the order delivered to the engine.
+	// - m_vctUnitEntries / m_vctGreatUnitEntries / m_vctSiegeUnitEntries: one <UnitEntry> stream
+	//   dispatched into three vectors on the <UnitEntryType> discriminator, with a nested
+	//   <Position> block per entry - not addStruct-shaped.
+	// This class has no getCheckSum (it is not part of the asset checksum).
+	util.add(m_szFormationType, L"FormationType");
+}
+
+
 //------------------------------------------------------------------------------------------------------
 //
 //  FUNCTION:   CvUnitFormationInfo()
@@ -134,7 +149,7 @@ bool CvUnitFormationInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(m_szFormationType, L"FormationType");
+	CvInfoUtil(this).readXml(pXML);
 
 	if (pXML->TryMoveToXmlFirstChild(L"EventMaskList" ))
 	{
@@ -195,11 +210,9 @@ bool CvUnitFormationInfo::read(CvXMLLoadUtility* pXML)
 void CvUnitFormationInfo::copyNonDefaults(const CvUnitFormationInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getFormationType() == cDefault) m_szFormationType = pClassInfo->getFormationType();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	for ( int i = 0; i < pClassInfo->getNumEventTypes(); i++ )
 	{
