@@ -27020,14 +27020,16 @@ bool CvUnitAI::AI_patrolBorders()
 			}
 			//	Split patrollers into two rotational streams (#24): units leaving the same city
 			//	all face the same way and the forward bias above then marches them around the
-			//	ring in one pack. Even unit IDs prefer veering right of their facing, odd ones
-			//	left — a mild, deterministic (sync-safe) bias against the non-preferred side.
+			//	ring in one pack. Birthmark parity (the per-unit variation seed, same idiom as
+			//	the other AI_getBirthmark() % N spreads) picks each unit's preferred side —
+			//	even prefer veering right of their facing, odd left — as a mild, deterministic
+			//	(sync-safe) bias against the non-preferred side.
 			const DirectionTypes eFacing = getFacingDirection(false);
 			if (eFacing != NO_DIRECTION && eNewDirection != NO_DIRECTION && eNewDirection != eFacing)
 			{
 				const int iRightSteps = (eNewDirection - eFacing + NUM_DIRECTION_TYPES) % NUM_DIRECTION_TYPES;
 				const bool bRightOfFacing = iRightSteps >= 1 && iRightSteps <= 3;
-				if (bRightOfFacing != ((getID() & 1) == 0))
+				if (bRightOfFacing != (AI_getBirthmark() % 2 == 0))
 				{
 					iValue /= 2;
 				}
