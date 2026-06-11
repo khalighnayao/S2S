@@ -342,6 +342,9 @@
     <ClCompile Include="CvWorkerAI.cpp">
       <Filter>Source\Base\Unit\Capabilities</Filter>
     </ClCompile>
+    <ClCompile Include="CvHttpServer.cpp">
+      <Filter>Source\Tools\Logging</Filter>
+    </ClCompile>
     <ClCompile Include="CvHunterAI.cpp">
       <Filter>Source\Base\Unit\Capabilities</Filter>
     </ClCompile>
@@ -1159,6 +1162,9 @@
     </ClInclude>
     <ClInclude Include="CvWorkerAI.h">
       <Filter>Source\Base\Unit\Capabilities</Filter>
+    </ClInclude>
+    <ClInclude Include="CvHttpServer.h">
+      <Filter>Source\Tools\Logging</Filter>
     </ClInclude>
     <ClInclude Include="CvHunterAI.h">
       <Filter>Source\Base\Unit\Capabilities</Filter>

@@ -6,6 +6,7 @@
 #include "CvBuildingInfo.h"
 #include "CvGameAI.h"
 #include "CvGlobals.h"
+#include "CvHttpServer.h"
 #include "CvImprovementInfo.h"
 #include "CvBonusInfo.h"
 #include "CvInfos.h"
@@ -3093,6 +3094,11 @@ void cvInternalGlobals::refreshOptionsBUG()
 	// Turn-timing has its own knob so wall-clock timing can run independently of the verbose
 	// AI logs. Deliberately NOT forced to 4 in _DEBUG -- timing a debug build is meaningless.
 	gPerfLogLevel = getBugOptionINT("Autolog__LogLevelPerf", 0);
+
+	// Dev live-state HTTP endpoint PoC (#387): GET-only hello-world server on
+	// 127.0.0.1:7227, own Win32 thread, zero game-state access. Starts/stops live
+	// when the option is toggled (this refresh runs on closing the BUG screen).
+	CvHttpServer::setEnabled(getBugOptionBOOL("Autolog__HttpServer", false));
 
 #ifdef _DEBUG
 	gPlayerLogLevel = 4;

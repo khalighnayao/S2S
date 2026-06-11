@@ -241,6 +241,18 @@ interface NOW (cheap to honor, expensive to retrofit): tenants must be **enumera
 serializable** — a uniform "dump tenant to JSON" hook plus the version/timestamp header — so
 the eventual endpoint is a thin reader over the registry rather than per-feature plumbing.
 
+**PoC shipped (2026-06-11):** `Sources/CvHttpServer.{h,cpp}` — a GET-only HTTP/1.0
+hello-world server on `127.0.0.1:7227`, on its own Win32 thread, gated by the BUG option
+`Autolog__HttpServer` (Logging tab, off by default; toggling takes effect on closing the
+options screen via `refreshOptionsBUG`). It serves canned bytes only and touches zero game
+state; the repository wiring above is the follow-up. Build pitfalls already solved in its
+comments — read them before touching: must include `winsock.h` (NOT `winsock2.h` — unity
+batches pull a full-fat `windows.h` whose `winsock.h` makes `winsock2.h` uncompilable), and
+winsock's `bind` must be taken through a typed function pointer because `boost::bind` is
+visible at global scope via the PCH and VC7.1 resolves even `::bind` calls to it. The DLL is
+pinned by the server thread (`GetModuleHandleEx` + `FreeLibraryAndExitThread`) so an EXE-side
+`FreeLibrary` can never unmap code under the running thread.
+
 ## 9. Decisions — resolved & open
 
 Resolved:
