@@ -2870,11 +2870,28 @@ void cvInternalGlobals::reprocessSigns()
 
 bool cvInternalGlobals::isDelayedResolutionRequired(InfoClassTypes eLoadingClass, InfoClassTypes eRefClass) const
 {
+	// Non-info-class callers (NO_INFO_CLASS enums, link-time CvInfoUtil reconstruction over
+	// CvInfoBase*) have no load-order entry — indexing the array with -1 is out of bounds.
+	// Immediate is the only resolution the link phase can offer them.
+	if (eLoadingClass <= NO_INFO_CLASS || eLoadingClass >= NUM_INFO_CLASSES
+	|| eRefClass <= NO_INFO_CLASS || eRefClass >= NUM_INFO_CLASSES)
+	{
+		return false;
+	}
 	// SPIKE (parse-then-link): force CvBuildInfo onto the deferred path regardless of load order, so
 	// its top-level FK columns resolve in InfoTable<CvBuildInfo>::link() instead of inline at read.
 	// This demonstrates that with a link phase the catalog no longer depends on XML load order.
 	// (Nested struct-element FKs still resolve immediately — see CvInfoUtil m_bForceImmediate.)
 	if (eLoadingClass == BUILD_INFO)
+		return true;
+	// Load-order stamps are 1-based (set when a category STARTS loading); 0 means the ref class
+	// has not begun loading, so none of its types exist yet and resolution MUST be deferred.
+	// Without this, an immediate read of a not-yet-loaded ref through IDValueMap::read would
+	// phantom-register the type string via getOrCreateInfoTypeForString, and the ref class's
+	// loader would later mistake its real definition for a duplicate and overwrite whatever
+	// info sits at the phantom index (observed: SPECIALIST_SLAVES' TechHappinessTypes registered
+	// TECH_HUMANISM/TECH_EMANCIPATION as ids 0/1, destroying the first two techs).
+	if (m_infoClassXmlLoadOrder[eRefClass] == 0)
 		return true;
 	return m_infoClassXmlLoadOrder[eLoadingClass] <= m_infoClassXmlLoadOrder[eRefClass];
 }
