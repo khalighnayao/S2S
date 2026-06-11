@@ -23,6 +23,7 @@ class BugAutologOptionsTab(BugOptionsTab.BugOptionsTab):
 		left, center, right = self.addThreeColumnLayout(screen, column, "Autolog0")
 		self.addCheckbox(screen, left, "Autolog__Enabled")
 		self.addCheckbox(screen, left, "Autolog__Silent")
+		self.addCheckbox(screen, left, "Autolog__HttpServer")
 		self.addIntDropdown(screen, center, center, "Autolog__LogLevelTeamBBAI")
 		self.addIntDropdown(screen, center, center, "Autolog__LogLevelPlayerBBAI")
 		self.addIntDropdown(screen, right, right, "Autolog__LogLevelUnitBBAI")

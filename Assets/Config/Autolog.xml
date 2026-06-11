@@ -18,6 +18,10 @@
 			<!-- Wall-clock turn-phase timing -> Performance.log; read in the DLL as gPerfLogLevel. Independent of the BBAI levels above. -->
 			<list id="LogLevelPerf" key="LogLevelPerf" type="int" default="0" listType="int" values="0,1,2,3,4"/>
 
+			<!-- Dev live-state HTTP endpoint PoC (#387); read in the DLL (CvHttpServer), takes effect on closing the options screen. -->
+			<option id="HttpServer" key="HttpServer" type="boolean" default="False" label="HTTP Server (dev)"
+				help="When checked, runs a GET-only dev HTTP server at http://127.0.0.1:7227/ (proof of concept for the live game-state endpoint). Local machine only; off by default."/>
+
 			<option id="MiscLogging" key="MiscLogging" type="boolean" default="True"/>
 
 			<!-- Log file -->
