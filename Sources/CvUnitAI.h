@@ -1644,7 +1644,10 @@ protected:
      *   2. Moves to the best plot for exploration.
      *   3. Returns true if exploration was refreshed.
      */
-	bool AI_refreshExploreRange(int iRange, bool bIncludeVisibilityRefresh = true);
+	// bAvoidRivalTerritory: skip plots owned by another team - hunters refresh visibility
+	// over their own hunting grounds, not rival borders (#392); explorers may legitimately
+	// scout foreign land, so it defaults off.
+	bool AI_refreshExploreRange(int iRange, bool bIncludeVisibilityRefresh = true, bool bAvoidRivalTerritory = false);
 
     /**
      * Picks a target city for attack or mission.

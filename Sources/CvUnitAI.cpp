@@ -16580,7 +16580,7 @@ bool CvUnitAI::AI_exploreRange(int iRange)
 
 
 // Returns true if a mission was pushed...
-bool CvUnitAI::AI_refreshExploreRange(int iRange, bool bIncludeVisibilityRefresh)
+bool CvUnitAI::AI_refreshExploreRange(int iRange, bool bIncludeVisibilityRefresh, bool bAvoidRivalTerritory)
 {
 	PROFILE_FUNC();
 
@@ -16614,6 +16614,14 @@ bool CvUnitAI::AI_refreshExploreRange(int iRange, bool bIncludeVisibilityRefresh
 
 		if (plotX && !atPlot(plotX))
 		{
+			//	The stale-visibility bonus below values ANY fogged plot, including deep
+			//	rival territory (the requester is not at war, so MOVE_NO_ENEMY_TERRITORY
+			//	does not exclude it) - that marched hunters into foreign borders (#392).
+			if (bAvoidRivalTerritory && plotX->isOwned() && plotX->getTeam() != getTeam())
+			{
+				continue;
+			}
+
 			int iAdjacentEnemies = 0;
 			bool bValidAdjacentEnemyValue = false;
 

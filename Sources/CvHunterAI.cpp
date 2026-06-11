@@ -315,6 +315,26 @@ bool CvHunterAI::hunterMove(CvUnitAI* unit, bool bWithCommander)
 					return true;
 				}
 			}
+			else if (unit->plot()->isOwned() && unit->plot()->getTeam() != unit->getTeam())
+			{
+				//	Waiting for an escort while standing in someone else's borders: take an
+				//	adjacent kill if one is offered, otherwise actually go home (#392).
+				//	AI_reachHome only reaches own plots one turn out, so AI_retreatToCity is
+				//	the terminal that covers any depth - the old fall-through to the skip
+				//	below left hunters camped in rival territory indefinitely.
+				if (unit->AI_huntRange(1, iMinimumOdds, false))
+				{
+					return true;
+				}
+				if (unit->AI_reachHome(false, 6))
+				{
+					return true;
+				}
+				if (unit->AI_retreatToCity())
+				{
+					return true;
+				}
+			}
 			else
 			{
 				if (unit->AI_huntRange(1, iMinimumOdds, false))
@@ -378,7 +398,7 @@ bool CvHunterAI::hunterMove(CvUnitAI* unit, bool bWithCommander)
 		}
 	}
 
-	if (unit->AI_refreshExploreRange(3, true))
+	if (unit->AI_refreshExploreRange(3, true, /*bAvoidRivalTerritory*/ true))
 	{
 		logHunterAI(2, "[HAI/spread] unit=%d action=refreshExplore", unit->getID());
 		return true;
