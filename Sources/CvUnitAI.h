@@ -2654,6 +2654,10 @@ public:
      */
 	bool AI_patrolBorders();
 
+	// Human "auto spread" automation (#381): chase heritage/construct targets, hold in a
+	// city otherwise; no terminal actions.
+	void AI_autoSpreadMove();
+
     /**
      * Moves the unit to the border of owned territory.
      * @brief Moves the unit towards the edge of national borders.

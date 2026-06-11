@@ -426,6 +426,11 @@ bool CvUnitAI::AI_update()
 			}
 			break;
 		}
+		case AUTOMATE_SPREAD:
+		{
+			AI_autoSpreadMove();
+			break;
+		}
 		default: FErrorMsg("error");
 		}
 		// if no longer automated, then we want to bail
@@ -6460,6 +6465,29 @@ void CvUnitAI::AI_subduedAnimalMove()
 
 	getGroup()->pushMission(MISSION_SKIP);
 	return;
+}
+
+//	Human "auto spread" automation (#381): the unit chases its heritage/construct targets
+//	each turn (tamed/subdued animals carrying their herd buildings to cities lacking the
+//	bonus) and holds in a city when nothing currently needs it. Deliberately NO terminal
+//	actions -- slaughter, record-tale and disband stay the player's call.
+void CvUnitAI::AI_autoSpreadMove()
+{
+	PROFILE_FUNC();
+
+	if (AI_heritage() || AI_construct(MAX_INT, MAX_INT, 0, false, true))
+	{
+		return;
+	}
+
+	//	Nothing needs us right now: wait somewhere safe and reconsider as cities are
+	//	founded, techs unlock buildings, and resources change hands.
+	if (!plot()->isCity(false) && AI_retreatToCity())
+	{
+		return;
+	}
+
+	getGroup()->pushMission(MISSION_SKIP);
 }
 
 void CvUnitAI::AI_engineerMove()
@@ -14142,8 +14170,13 @@ bool CvUnitAI::AI_scrapSubdued()
 	//	Count how many units of this type we have that couldn't find construction missions (by
 	//	implication of getting here no further units of this type could)
 	int	iSurplass = 0;
-	//	Hold a suplasss of each type of up to 2 (inside our borders) or 1 (outside), boosted by 1 if we have less then 4 cities
-	int	iExtra = (plot()->getOwner() == getOwner() ? 2 : 1) + (GET_PLAYER(getOwner()).getNumCities() < 4 ? 1 : 0);
+	//	Prompt disband when not needed (#381, owner ruling): hold at most ONE spare of each
+	//	type inside our borders (a hedge for tech-unlocked buildings later), none outside,
+	//	+1 while we have fewer than 4 cities. The old 2/1(+1) allowance times ~190 subdued/
+	//	tamed unit types kept a standing zoo on the map; outcome missions (slaughter /
+	//	record-tale) are tried BEFORE this in the cascade, so anything reaching here has no
+	//	productive use left.
+	int	iExtra = (plot()->getOwner() == getOwner() ? 1 : 0) + (GET_PLAYER(getOwner()).getNumCities() < 4 ? 1 : 0);
 
 	foreach_(const CvUnit * pLoopUnit, GET_PLAYER(getOwner()).units())
 	{
@@ -14376,6 +14409,25 @@ int CvUnitAI::getBestConstructValue(int iMaxCount, int iMaxSingleBuildingCount, 
 
 			if (player.getBuildingCount(buildingType) >= iMaxSingleBuildingCount)
 				continue;
+
+			//	#381: a building whose purpose is granting a free bonus (the tamed/herd
+			//	"spread the resource" line -- bonus access is city-local) is worth nothing to
+			//	a city that already has every bonus it grants. Skipping those cities fans the
+			//	herd buildings out to the cities that LACK the resource, and seeds the
+			//	same-value-everywhere cache below from a city that actually needs it.
+			{
+				bool bAllGrantedBonusesPresent = !GC.getBuildingInfo(buildingType).getFreeBonuses().empty();
+				foreach_(const BonusTypes eFreeBonus, GC.getBuildingInfo(buildingType).getFreeBonuses() | map_keys)
+				{
+					if (!pLoopCity->hasBonus(eFreeBonus))
+					{
+						bAllGrantedBonusesPresent = false;
+						break;
+					}
+				}
+				if (bAllGrantedBonusesPresent)
+					continue;
+			}
 
 			// Check some other unit hasn't already got this city targeted to construct this building
 			CityConstructMap::const_iterator foundUnit = constructions.find(CityConstruct(pLoopCity->plot(), buildingType));
