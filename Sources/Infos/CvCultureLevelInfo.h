@@ -36,6 +36,7 @@ public:
 
 	int getSpeedThreshold(int i) const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvCultureLevelInfo* pClassInfo);

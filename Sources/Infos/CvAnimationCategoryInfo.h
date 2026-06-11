@@ -25,6 +25,7 @@ class CvAnimationCategoryInfo
 		DllExport int getCategoryBaseID( );
 		DllExport int getCategoryDefaultTo( );
 
+		void getDataMembers(CvInfoUtil& util);
 		bool read(CvXMLLoadUtility* pXML);
 		void copyNonDefaults(const CvAnimationCategoryInfo* pClassInfo);
 

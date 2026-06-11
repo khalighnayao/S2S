@@ -1,9 +1,10 @@
 ﻿#include "CvGameCoreDLL.h"
+#include "CvInfoUtil.h"
 #include "CvPlayerOptionInfo.h"
 
-CvPlayerOptionInfo::CvPlayerOptionInfo() :
-m_bDefault(false)
+CvPlayerOptionInfo::CvPlayerOptionInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 CvPlayerOptionInfo::~CvPlayerOptionInfo()
@@ -15,6 +16,13 @@ bool CvPlayerOptionInfo::getDefault() const
 	return m_bDefault;
 }
 
+void CvPlayerOptionInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_bDefault, L"bDefault")
+	;
+}
+
 bool CvPlayerOptionInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
@@ -22,21 +30,19 @@ bool CvPlayerOptionInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(&m_bDefault, L"bDefault");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
 
 void CvPlayerOptionInfo::copyNonDefaults(const CvPlayerOptionInfo* pClassInfo)
 {
-	const bool bDefault = false;
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getDefault() == bDefault) m_bDefault = pClassInfo->getDefault();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 
 void CvPlayerOptionInfo::getCheckSum(uint32_t& iSum) const
 {
-	CheckSum(iSum, m_bDefault);
+	CvInfoUtil(this).checkSum(iSum);
 }

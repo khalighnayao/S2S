@@ -31,12 +31,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvAutomateInfo::CvAutomateInfo() :
-m_iCommand(NO_COMMAND),
-m_iAutomate(NO_AUTOMATE),
-m_bConfirmCommand(false),
-m_bVisible(false)
+CvAutomateInfo::CvAutomateInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -76,6 +73,20 @@ bool CvAutomateInfo::getVisible() const
 }
 
 
+void CvAutomateInfo::getDataMembers(CvInfoUtil& util)
+{
+	// No legacy getCheckSum (CvInfoBase's empty default applies), so declaration order follows read
+	// order and none is added. m_iCommand/m_iAutomate are int-typed type indices (NO_COMMAND /
+	// NO_AUTOMATE = -1 = the wrapper default), resolved immediately at read time.
+	util
+		.addEnumAsInt(m_iCommand, L"Command")
+		.addEnumAsInt(m_iAutomate, L"Automate")
+		.add(m_bConfirmCommand, L"bConfirmCommand")
+		.add(m_bVisible, L"bVisible")
+	;
+}
+
+
 bool CvAutomateInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvHotkeyInfo::read(pXML))
@@ -83,10 +94,7 @@ bool CvAutomateInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetOptionalTypeEnum(m_iCommand, L"Command");
-	pXML->GetOptionalTypeEnum(m_iAutomate, L"Automate");
-	pXML->GetOptionalChildXmlValByName(&m_bConfirmCommand, L"bConfirmCommand");
-	pXML->GetOptionalChildXmlValByName(&m_bVisible, L"bVisible");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -94,15 +102,8 @@ bool CvAutomateInfo::read(CvXMLLoadUtility* pXML)
 
 void CvAutomateInfo::copyNonDefaults(const CvAutomateInfo* pClassInfo)
 {
-	const bool bDefault = false;
-	const int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-
 	CvHotkeyInfo::copyNonDefaults(pClassInfo);
 
-	if (getCommand() == iTextDefault) m_iCommand = pClassInfo->getCommand();
-	if (getAutomate() == iTextDefault) m_iAutomate = pClassInfo->getAutomate();
-
-	if (getConfirmCommand() == bDefault) m_bConfirmCommand = pClassInfo->getConfirmCommand();
-	if (getVisible() == bDefault) m_bVisible = pClassInfo->getVisible();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

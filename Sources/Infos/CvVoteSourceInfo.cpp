@@ -21,21 +21,38 @@
 
 
 CvVoteSourceInfo::CvVoteSourceInfo() :
-	m_iVoteInterval(0),
-	m_iFreeSpecialist(NO_SPECIALIST),
-	m_iCivic(NO_CIVIC),
-	m_aiReligionYields(NULL),
-	m_aiReligionCommerces(NULL)
+	// Only the hand-written delayed-resolution FK needs explicit init here;
+	// every declared field is defaulted by initDataMembers() below.
+	m_iCivic(NO_CIVIC)
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
 CvVoteSourceInfo::~CvVoteSourceInfo()
 {
-	SAFE_DELETE_ARRAY(m_aiReligionYields);
-	SAFE_DELETE_ARRAY(m_aiReligionCommerces);
+	// m_aiReligionYields/m_aiReligionCommerces are owned by their addYields/addCommerce
+	// wrappers and freed by uninitDataMembers.
+	CvInfoUtil(this).uninitDataMembers();
 
 	GC.removeDelayedResolution((int*)&m_iCivic);
+}
+
+
+void CvVoteSourceInfo::getDataMembers(CvInfoUtil& util)
+{
+	// m_iCivic is an int FK read with DELAYED resolution (addEnumAsInt is immediate-only — see the
+	// "not yet supported" list in declarative-info-loading.md), so it stays hand-written in
+	// read/copyNonDefaults/dtor. It sits mid-order in the legacy checksum, which also includes the
+	// two CvStrings (StringWrapper checksum is a no-op), so getCheckSum below stays explicit.
+	util
+		.add(m_iVoteInterval, L"iVoteInterval")
+		.addEnumAsInt(m_iFreeSpecialist, L"FreeSpecialist")
+		.addYields(m_aiReligionYields, L"ReligionYields")
+		.addCommerce(m_aiReligionCommerces, L"ReligionCommerces")
+		.add(m_szPopupText, L"PopupText")
+		.add(m_szSecretaryGeneralText, L"SecretaryGeneralText")
+	;
 }
 
 
@@ -85,42 +102,16 @@ const CvWString CvVoteSourceInfo::getSecretaryGeneralText() const
 
 bool CvVoteSourceInfo::read(CvXMLLoadUtility* pXML)
 {
-
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(&m_iVoteInterval, L"iVoteInterval");
-	pXML->GetOptionalChildXmlValByName(m_szPopupText, L"PopupText");
-	pXML->GetOptionalChildXmlValByName(m_szSecretaryGeneralText, L"SecretaryGeneralText");
+	CvInfoUtil(this).readXml(pXML);
 
 	CvString szTextVal;
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"FreeSpecialist");
-	m_iFreeSpecialist = pXML->GetInfoClass(szTextVal);
-
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"Civic");
 	GC.addDelayedResolution((int*)&m_iCivic, szTextVal);
-
-	if (pXML->TryMoveToXmlFirstChild(L"ReligionYields"))
-	{
-		pXML->SetYields(&m_aiReligionYields);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_aiReligionYields);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"ReligionCommerces"))
-	{
-		pXML->SetCommerce(&m_aiReligionCommerces);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_aiReligionCommerces);
-	}
 
 	return true;
 }
@@ -128,40 +119,19 @@ bool CvVoteSourceInfo::read(CvXMLLoadUtility* pXML)
 
 void CvVoteSourceInfo::copyNonDefaults(const CvVoteSourceInfo* pClassInfo)
 {
-	PROFILE_EXTRA_FUNC();
-	int iDefault = 0;
-	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	CvString cDefault = CvString::format("").GetCString();
-	CvWString wDefault = CvWString::format(L"").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getVoteInterval() == iDefault) m_iVoteInterval = pClassInfo->getVoteInterval();
-	if (getPopupText() == wDefault) m_szPopupText = pClassInfo->m_szPopupText;
-	if (getSecretaryGeneralText() == wDefault) m_szSecretaryGeneralText = pClassInfo->m_szSecretaryGeneralText;
-	if (getFreeSpecialist() == iTextDefault) m_iFreeSpecialist = pClassInfo->getFreeSpecialist();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
+
 	GC.copyNonDefaultDelayedResolution((int*)&m_iCivic, (int*)&pClassInfo->m_iCivic);
-
-	for ( int i = 0; i < NUM_YIELD_TYPES; i++)
-	{
-		if ( getReligionYield(i) == iDefault )
-		{
-			m_aiReligionYields[i] = pClassInfo->getReligionYield(i);
-		}
-	}
-
-	for ( int i = 0; i < NUM_COMMERCE_TYPES; i++)
-	{
-		if ( getReligionCommerce(i) == iDefault )
-		{
-			m_aiReligionCommerces[i] = pClassInfo->getReligionCommerce(i);
-		}
-	}
 }
 
 
 void CvVoteSourceInfo::getCheckSum(uint32_t &iSum) const
 {
+	// Explicit (not delegated) to keep the legacy checksum byte-identical: the hand-written
+	// m_iCivic sits mid-order, and the two CvStrings ARE part of the legacy checksum
+	// (the declarative StringWrapper contributes nothing).
 	CheckSum(iSum, m_iVoteInterval);
 	CheckSum(iSum, m_iFreeSpecialist);
 	CheckSum(iSum, m_iCivic);

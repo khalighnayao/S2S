@@ -31,12 +31,9 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvCommandInfo::CvCommandInfo() :
-m_iAutomate(NO_AUTOMATE),
-m_bConfirmCommand(false),
-m_bVisible(false),
-m_bAll(false)
+CvCommandInfo::CvCommandInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -76,6 +73,20 @@ bool CvCommandInfo::getAll() const
 }
 
 
+void CvCommandInfo::getDataMembers(CvInfoUtil& util)
+{
+	// No legacy getCheckSum (CvInfoBase's empty default applies), so declaration order follows read
+	// order and none is added. m_iAutomate is an int-typed type index (NO_AUTOMATE = -1 = the
+	// wrapper default), resolved immediately at read time.
+	util
+		.addEnumAsInt(m_iAutomate, L"Automate")
+		.add(m_bConfirmCommand, L"bConfirmCommand")
+		.add(m_bVisible, L"bVisible")
+		.add(m_bAll, L"bAll")
+	;
+}
+
+
 bool CvCommandInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvHotkeyInfo::read(pXML))
@@ -83,10 +94,7 @@ bool CvCommandInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetOptionalTypeEnum(m_iAutomate, L"Automate");
-	pXML->GetOptionalChildXmlValByName(&m_bConfirmCommand, L"bConfirmCommand");
-	pXML->GetOptionalChildXmlValByName(&m_bVisible, L"bVisible");
-	pXML->GetOptionalChildXmlValByName(&m_bAll, L"bAll");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -94,14 +102,8 @@ bool CvCommandInfo::read(CvXMLLoadUtility* pXML)
 
 void CvCommandInfo::copyNonDefaults(const CvCommandInfo* pClassInfo)
 {
-	const bool bDefault = false;
-	const int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-
 	CvHotkeyInfo::copyNonDefaults(pClassInfo);
 
-	if (getAutomate() == iTextDefault) m_iAutomate = pClassInfo->getAutomate();
-	if (getConfirmCommand() == bDefault) m_bConfirmCommand = pClassInfo->getConfirmCommand();
-	if (getVisible() == bDefault) m_bVisible = pClassInfo->getVisible();
-	if (getAll() == bDefault) m_bAll = pClassInfo->getAll();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

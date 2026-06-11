@@ -47,6 +47,7 @@ public:
 	//	object without crashing the core engine :-(
 	inline int getZobristValue() const { return m_zobristValue; }
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvRouteInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;

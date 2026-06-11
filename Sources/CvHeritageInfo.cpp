@@ -3,25 +3,45 @@
 
 #include "CvDefines.h"
 #include "CvHeritageInfo.h"
+#include "CvInfoUtil.h"
 #include "CvXMLLoadUtility.h"
 #include "CheckSum.h"
 
 CvHeritageInfo::CvHeritageInfo()
-	:
-	 m_PropertyManipulators()
-	,m_iPrereqTech(NO_TECH)
-{ }
-
-CvHeritageInfo::~CvHeritageInfo() 
+	// Only the non-XML runtime field needs explicit init (assigned later via setMissionType);
+	// every declared field is defaulted by initDataMembers() below.
+	: m_iMissionType(NO_MISSION)
 {
+	CvInfoUtil(this).initDataMembers();
+}
+
+CvHeritageInfo::~CvHeritageInfo()
+{
+	CvInfoUtil(this).uninitDataMembers();
 	GC.removeDelayedResolutionVector(m_prereqOrHeritage);
+}
+
+
+void CvHeritageInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order. m_prereqOrHeritage (delayed-resolution vector,
+	// no wrapper yet) stays hand-written in read/copyNonDefaults/dtor. m_bNeedLanguage is read
+	// but was never part of the legacy checksum, so getCheckSum below stays explicit and this
+	// field is parked last.
+	util
+		.add(m_PropertyManipulators)
+		.addEnumAsInt(m_iPrereqTech, L"PrereqTech")
+		.add(m_eraCommerceChanges, L"EraCommerceChanges", L"EraType", L"CentiCommerce")
+		.add(m_bNeedLanguage, L"bNeedLanguage")
+	;
 }
 
 
 void CvHeritageInfo::getCheckSum(uint32_t& iSum) const
 {
-	PROFILE_EXTRA_FUNC();
-
+	// Explicit (not delegated) to reproduce the legacy field set and order byte-for-byte:
+	// m_bNeedLanguage is read but was never checksummed, and the hand-written m_prereqOrHeritage
+	// sits mid-order.
 	m_PropertyManipulators.getCheckSum(iSum);
 
 	CheckSum(iSum, m_iPrereqTech);
@@ -32,40 +52,25 @@ void CvHeritageInfo::getCheckSum(uint32_t& iSum) const
 
 bool CvHeritageInfo::read(CvXMLLoadUtility* pXML)
 {
-	PROFILE_EXTRA_FUNC();
-
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
-	CvString szTextVal;
 
-	m_PropertyManipulators.read(pXML);
-
-	pXML->GetOptionalChildXmlValByName(&m_bNeedLanguage, L"bNeedLanguage");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PrereqTech");
-	m_iPrereqTech = pXML->GetInfoClass(szTextVal);
+	CvInfoUtil(this).readXml(pXML);
 
 	pXML->SetOptionalVectorWithDelayedResolution(m_prereqOrHeritage, L"PrereqOrHeritage");
-
-	m_eraCommerceChanges.readPairedArrays(pXML, L"EraCommerceChanges", L"EraType", L"CentiCommerce");
 
 	return true;
 }
 
 void CvHeritageInfo::copyNonDefaults(const CvHeritageInfo* pClassInfo)
 {
-	PROFILE_EXTRA_FUNC();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
-	m_PropertyManipulators.copyNonDefaults(pClassInfo->getPropertyManipulators());
 
-	if (m_iPrereqTech == -1) m_iPrereqTech = pClassInfo->getPrereqTech();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	GC.copyNonDefaultDelayedResolutionVector(m_prereqOrHeritage, pClassInfo->getPrereqOrHeritage());
-
-	m_eraCommerceChanges.copyNonDefaults(pClassInfo->getEraCommerceChanges100());
 }
 
 void CvHeritageInfo::doPostLoadCaching(uint32_t iThis)

@@ -40,6 +40,7 @@ public:
 
 	const char* getSymbolPath(int i) const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvYieldInfo* pClassInfo);

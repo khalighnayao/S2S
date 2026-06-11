@@ -29,6 +29,8 @@ public:
 
 	bool isValid() const;
 
+	void getDataMembers(CvInfoUtil& util);
+
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvSpecialBuildingInfo* pClassInfo);
