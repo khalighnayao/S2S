@@ -121,7 +121,27 @@ layer above it nodded along.
 
 ---
 
-## 7. The Eternal Anesthesiologist — 60 cp
+## 7. The Bear Patrol — 62 cp
+
+The world's city defenders kept abandoning their posts to duel wildlife. Garrison sorties
+fire at a **55% odds bar** against any "enemy" within reach — and in the prehistoric era,
+the enemy is eleven hundred bears. A defender leaving the walls to fight one at coin-flip
+odds risks everything to remove a threat that **cannot attack cities**; multiplied across
+every garrison, every turn, the world's starting defense corps (84 units, including the
+non-renewable founding guardians) bled to **25 by turn 71** — protecting cities from
+creatures that were never coming. Bonus reveal: the second sortie path turned out to be
+the unexplained dispatch from the elephant cold case — `chokeDefend`'s "radius 1" attack
+actually searched 4–6 tiles, through the same range-inflation formula, the whole time.
+
+Is the Bear Patrol working? Citizens, look around: not a single city has ever fallen to a
+bear.
+
+*Status: fixed (#400) — garrisons ignore wildlife (hunters exist for that), chokeDefend
+uses the leashed sortie. The bears remain, unbothered.*
+
+---
+
+## 8. The Eternal Anesthesiologist — 60 cp
 
 `AI_heal` returned `true` for a heal no-op when the unit *couldn't heal*, so units
 re-decided "heal in city" **49–196 times per turn** — and in rare alignments, the turn
@@ -134,7 +154,7 @@ pressing it 195 more times. Except occasionally the building never lets you leav
 
 ---
 
-## 8. International Civil Asset Forfeiture — 55 cp
+## 9. International Civil Asset Forfeiture — 55 cp
 
 Foreign police cars were observed parked on the human player's **resource tiles**, mission
 hover proudly reading *"Maintain property control."* The mechanism: when a property-control
@@ -156,7 +176,7 @@ fortified. The uranium has been returned.*
 
 ---
 
-## 9. The .vcxproj of Lies — 47 cp
+## 10. The .vcxproj of Lies — 47 cp
 
 The Visual Studio project file confidently states `PlatformToolset: v142`. The actual
 compiler is the **Microsoft Visual C++ Toolkit 2003** (MSVC 7.1). The project file drives

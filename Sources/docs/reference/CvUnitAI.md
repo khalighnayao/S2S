@@ -88,6 +88,13 @@ Rules that follow (owner rulings, issue #384):
   2). Now `rect(2,2)`, matching the range-2 strength accounting; and the in-city recall
   preference includes garrison members, not just city-AI types, since auxiliaries keep
   their own UNITAI.
+- **Garrison sorties target real threats only (#400).** `AI_leaveAttack` from an own city
+  skips target plots whose visible units are all animals — wildlife cannot attack cities,
+  so a sortie against it risks a defender for zero defensive value (measured: it bled the
+  prehistoric world's defense corps 84 → 25 by turn 71). Field use keeps animals
+  targetable. `AI_chokeDefend` sorties via `AI_leaveAttack(1, 65, 150)`, not
+  `AI_anyAttack` — the anyAttack call was the #382 cold case's second site (range-inflated
+  to 4–6 tiles through `AI_searchRange`, no territory bound).
 - **Mis-typed primary defenders self-correct.** At its re-plan, a CITY_DEFENSE unit with
   `noDefensiveBonus()` — the categorical unsuitability test, the same one strict
   `AI_findBestDefender` uses to reject defense candidates — demotes back to its XML

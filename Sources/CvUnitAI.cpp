@@ -12799,7 +12799,12 @@ bool CvUnitAI::AI_chokeDefend()
 	{
 		const int iPlotDanger = GET_PLAYER(getOwner()).AI_getPlotDanger(plot(), 3);
 
-		if (iPlotDanger <= 4 && AI_anyAttack(1, 65, std::max(0, iPlotDanger - 1)))
+		//	Sortie via AI_leaveAttack, NOT AI_anyAttack (the #382 disease, second site):
+		//	anyAttack(1,..) ran through AI_searchRange ((1+1)*(moves+1) = 4-6 tiles) with no
+		//	territory bound, marching city defenders off to "choke-defend" distant targets.
+		//	leaveAttack is raw-radius 1, refuses when last defender, only sorties from
+		//	strength, and skips wildlife-only targets.
+		if (iPlotDanger <= 4 && AI_leaveAttack(1, 65, 150))
 		{
 			return true;
 		}
@@ -18043,6 +18048,29 @@ bool CvUnitAI::AI_leaveAttack(int iRange, int iOddsThreshold, int iStrengthThres
 		&& !atPlot(plotX)
 		&& (plotX->isVisibleEnemyUnit(this) || plotX->isCity(true) && AI_potentialEnemy(plotX->getTeam(), plotX)))
 		{
+			//	A garrison sorties against real threats only: animals cannot attack cities,
+			//	so leaving the walls to fight wildlife risks a defender for zero defensive
+			//	value (measured in the prehistoric era: wildlife sorties bled the world's
+			//	starting defense corps 84 -> 25 by turn 71). Wildlife is hunter work. Field
+			//	use (not standing in an own city) keeps animals targetable - stacks in the
+			//	wild genuinely get attacked by them.
+			if (pCity != NULL && pCity->getOwner() == getOwner() && plotX->getNumUnits() > 0)
+			{
+				bool bOnlyAnimals = true;
+				foreach_(const CvUnit * pTargetUnit, plotX->units())
+				{
+					if (!pTargetUnit->isAnimal())
+					{
+						bOnlyAnimals = false;
+						break;
+					}
+				}
+				if (bOnlyAnimals)
+				{
+					continue;
+				}
+			}
+
 			int iPathTurns;
 			if (generatePath(plotX, 0, true, &iPathTurns, iRange))
 			{
