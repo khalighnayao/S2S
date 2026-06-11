@@ -5899,7 +5899,7 @@ class Revolution:
 			print "[REV] Error: attempted spawning of revs for NPC player"
 			return
 
-		if pRevPlayer.isNPC() and not pRevPlayer.isNPC():
+		if pRevPlayer.isNPC() and pRevPlayer.getID() != GC.getBARBARIAN_PLAYER():
 			print "[REV] Error: attempted to spawn non barbarian NPC revolutionaries!"
 			return
 
