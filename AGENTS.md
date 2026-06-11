@@ -119,6 +119,13 @@ not findings to re-discover.
   agent had created and verified a work branch earlier in the session. Never assume the
   branch from earlier context; if HEAD is not where you expect, stop and repair
   (`git branch -f <work-branch> <commits>`, restore `main` to `origin/main`) before pushing.
+- **`release` is a strict follower of `main` (owner ruling 2026-06-11): it must NEVER contain a
+  commit that `main` does not already have.** Never commit, cherry-pick, or merge anything directly
+  to `release`; anything wanted in a release lands on `main` first. Sync flow: `git checkout main &&
+  git pull`, then `git checkout release && git rebase main` (a pure fast-forward when the rule holds
+  — if the rebase reports replayed commits, STOP: the rule has been violated upstream; surface it),
+  then `git push origin release`. Verify with `git log main..release` (must be empty) before
+  pushing. Pushing `release` is what triggers the AppVeyor release build.
 - **Before adding commits to a PR, verify it has not already been merged.** Run
   `gh pr view <n> --json state,baseRefName` first and confirm (1) `state` is `OPEN` —
   pushing to a merged/closed PR's branch lands the commit on a dead branch that never
