@@ -13,6 +13,7 @@
 //  Copyright (c) 2003 Firaxis Games, Inc. All rights reserved.
 //------------------------------------------------------------------------------------------------
 #include "CvGameCoreDLL.h"
+#include "CvInfoUtil.h"
 #include "CvInfoWater.h"
 #include "CvXMLLoadUtility.h"
 
@@ -95,6 +96,10 @@ float CvWaterPlaneInfo::getTextureScrollRateV() const
 	return m_fVRate;
 }
 //------------------------------------------------------------------------------------------------------
+// NOT migrated to CvInfoUtil (#196/#309): every field lives in bespoke nested XML
+// (NiColor r/g/b triplets under WaterMaterial/MaterialColors, and texture fields nested
+// under WaterTextures with <TextureFile> appearing in two different sub-elements), which
+// the flat-tag wrapper API cannot express without restructuring the XML.
 bool CvWaterPlaneInfo::read(CvXMLLoadUtility* pXML)
 {
 	CvString  szTextVal;
@@ -173,18 +178,30 @@ bool CvWaterPlaneInfo::read(CvXMLLoadUtility* pXML)
 //
 //------------------------------------------------------------------------------------------------------
 CvTerrainPlaneInfo::CvTerrainPlaneInfo() :
-	m_bVisible(false),
-	m_bGroundPlane(false),
-	m_fMaterialAlpha(0.0f),
-	m_fCloseAlpha(0.0f),
-	m_BaseTextureScaleU(0.0f),
-	m_BaseTextureScaleV(0.0f),
-	m_fURate(0.0f),
-	m_fVRate(0.0f),
-	m_fZHeight(0.0f),
+	// m_eFogType is hand-written: a hand-mapped engine enum (not a registered info type),
+	// with default FOG_TYPE_NONE (0) rather than the enum wrapper's -1.
 	m_eFogType(FOG_TYPE_NONE)
 {
+	CvInfoUtil(this).initDataMembers();
+}
 
+
+// Declared in legacy read() order (this class has no getCheckSum).
+// FogType stays hand-written in read()/copyNonDefaults() - see the ctor note.
+void CvTerrainPlaneInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_bVisible, L"bVisible")
+		.add(m_bGroundPlane, L"bGroundPlane")
+		.add(m_fMaterialAlpha, L"MaterialAlpha")
+		.add(m_fCloseAlpha, L"CloseAlpha")
+		.add(m_szBaseTexture, L"TextureFile")
+		.add(m_BaseTextureScaleU, L"TextureScalingU")
+		.add(m_BaseTextureScaleV, L"TextureScalingV")
+		.add(m_fURate, L"URate")
+		.add(m_fVRate, L"VRate")
+		.add(m_fZHeight, L"ZHeight")
+	;
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -259,19 +276,7 @@ bool CvTerrainPlaneInfo::read(CvXMLLoadUtility* pXML)
 	if (!CvInfoBase::read(pXML))
 		return false;
 
-	pXML->GetChildXmlValByName( &m_bVisible, L"bVisible");
-	pXML->GetChildXmlValByName( &m_bGroundPlane, L"bGroundPlane");
-	pXML->GetChildXmlValByName( &m_fMaterialAlpha, L"MaterialAlpha");
-	pXML->GetChildXmlValByName( &m_fCloseAlpha, L"CloseAlpha");
-
-	pXML->GetChildXmlValByName( szTextVal, L"TextureFile");
-	m_szBaseTexture = szTextVal;
-
-	pXML->GetChildXmlValByName( &m_BaseTextureScaleU, L"TextureScalingU");
-	pXML->GetChildXmlValByName( &m_BaseTextureScaleV, L"TextureScalingV");
-	pXML->GetChildXmlValByName( &m_fURate, L"URate");
-	pXML->GetChildXmlValByName( &m_fVRate, L"VRate");
-	pXML->GetChildXmlValByName( &m_fZHeight, L"ZHeight");
+	CvInfoUtil(this).readXml(pXML);
 
 	pXML->GetChildXmlValByName( szTextVal, L"FogType");
 	if(szTextVal.CompareNoCase("FOG_TYPE_NONE") == 0)
@@ -291,24 +296,9 @@ bool CvTerrainPlaneInfo::read(CvXMLLoadUtility* pXML)
 
 void CvTerrainPlaneInfo::copyNonDefaults(const CvTerrainPlaneInfo* pClassInfo)
 {
-	const bool bDefault = false;
-	const float fDefault = 0.0f;
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (isVisible() == bDefault) m_bVisible = pClassInfo->isVisible();
-	if (isGroundPlane() == bDefault) m_bGroundPlane = pClassInfo->isGroundPlane();
-	if (getMaterialAlpha() == fDefault) m_fMaterialAlpha = pClassInfo->getMaterialAlpha();
-	if (getCloseAlpha() == fDefault) m_fCloseAlpha = pClassInfo->getCloseAlpha();
-
-	if (getBaseTexture() == cDefault) m_szBaseTexture = pClassInfo->getBaseTexture();
-
-	if (getTextureScalingU() == fDefault) m_BaseTextureScaleU = pClassInfo->getTextureScalingU();
-	if (getTextureScalingV() == fDefault) m_BaseTextureScaleV = pClassInfo->getTextureScalingV();
-	if (getTextureScrollRateU() == fDefault) m_fURate = pClassInfo->getTextureScrollRateU();
-	if (getTextureScrollRateV() == fDefault) m_fVRate = pClassInfo->getTextureScrollRateV();
-	if (getZHeight() == fDefault) m_fZHeight = pClassInfo->getZHeight();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	if ( getFogType() == FOG_TYPE_NONE )
 	{
@@ -328,9 +318,22 @@ void CvTerrainPlaneInfo::copyNonDefaults(const CvTerrainPlaneInfo* pClassInfo)
 //
 //------------------------------------------------------------------------------------------------------
 CvCameraOverlayInfo::CvCameraOverlayInfo() :
-	m_bVisible(false),
+	// m_eCameraOverlayType is hand-written: a hand-mapped engine enum (not a registered
+	// info type), with default CAMERA_OVERLAY_DECAL (0) rather than the enum wrapper's -1.
 	m_eCameraOverlayType(CAMERA_OVERLAY_DECAL)
 {
+	CvInfoUtil(this).initDataMembers();
+}
+
+
+// Declared in legacy read() order (this class has no getCheckSum).
+// CameraOverlayType stays hand-written in read()/copyNonDefaults() - see the ctor note.
+void CvCameraOverlayInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_bVisible, L"bVisible")
+		.add(m_szBaseTexture, L"TextureFile")
+	;
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -365,10 +368,7 @@ bool CvCameraOverlayInfo::read(CvXMLLoadUtility* pXML)
 	if (!CvInfoBase::read(pXML))
 		return false;
 
-	pXML->GetChildXmlValByName( &m_bVisible, L"bVisible");
-
-	pXML->GetChildXmlValByName( szTextVal, L"TextureFile");
-	m_szBaseTexture = szTextVal;
+	CvInfoUtil(this).readXml(pXML);
 
 	pXML->GetChildXmlValByName( szTextVal, L"CameraOverlayType");
 	if(szTextVal.CompareNoCase("CAMERA_OVERLAY_DECAL") == 0)
@@ -386,13 +386,9 @@ bool CvCameraOverlayInfo::read(CvXMLLoadUtility* pXML)
 
 void CvCameraOverlayInfo::copyNonDefaults(const CvCameraOverlayInfo* pClassInfo)
 {
-	const bool bDefault = false;
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (isVisible() == bDefault) m_bVisible = pClassInfo->isVisible();
-	if (getBaseTexture() == cDefault) m_szBaseTexture = pClassInfo->getBaseTexture();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	if ( getCameraOverlayType() == CAMERA_OVERLAY_DECAL )
 	{

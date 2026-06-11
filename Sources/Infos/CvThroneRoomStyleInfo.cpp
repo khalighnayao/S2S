@@ -33,6 +33,7 @@
 //------------------------------------------------------------------------------------------------------
 CvThroneRoomStyleInfo::CvThroneRoomStyleInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -48,6 +49,20 @@ CvThroneRoomStyleInfo::~CvThroneRoomStyleInfo()
 }
 
 
+// Declarative fields (#196); m_aNodeNames and m_aTextureNames stay hand-written in read():
+// they are std::vector<CvString> lists read by a bespoke sibling-walking pattern, and the
+// legacy copyNonDefaults deliberately does not merge them.
+// No legacy getCheckSum, so declaration order follows the legacy read() order.
+void CvThroneRoomStyleInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szArtStyleType, L"ArtStyleType")
+		.add(m_szEraType, L"EraType")
+		.add(m_szFileName, L"FileName")
+	;
+}
+
+
 bool CvThroneRoomStyleInfo::read(CvXMLLoadUtility* pXML)
 {
 	PROFILE_EXTRA_FUNC();
@@ -56,9 +71,8 @@ bool CvThroneRoomStyleInfo::read(CvXMLLoadUtility* pXML)
 	{
 		return false;
 	}
-	pXML->GetOptionalChildXmlValByName(m_szArtStyleType, L"ArtStyleType");
-	pXML->GetOptionalChildXmlValByName(m_szEraType, L"EraType");
-	pXML->GetOptionalChildXmlValByName(m_szFileName, L"FileName");
+
+	CvInfoUtil(this).readXml(pXML);
 
 	//node names
 	if(pXML->TryMoveToXmlFirstChild())
@@ -88,13 +102,9 @@ bool CvThroneRoomStyleInfo::read(CvXMLLoadUtility* pXML)
 
 void CvThroneRoomStyleInfo::copyNonDefaults(const CvThroneRoomStyleInfo* pClassInfo)
 {
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getArtStyleType() == cDefault) m_szArtStyleType = pClassInfo->m_szArtStyleType;
-	if (getEraType() == cDefault) m_szEraType = pClassInfo->m_szEraType;
-	if (getFileName() == cDefault) m_szFileName = pClassInfo->m_szFileName;
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	/*
 	m_aNodeNames and m_aTextureNames don't seem to be used?

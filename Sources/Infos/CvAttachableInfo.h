@@ -24,6 +24,7 @@ public:
 	DllExport const char* getPath() const { return m_szPath; }
 	void setPath(const char* szVal) { m_szPath = szVal; }
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvAttachableInfo* pClassInfo);
 

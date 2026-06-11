@@ -22,6 +22,20 @@
 
 CvMainMenuInfo::CvMainMenuInfo()
 {
+	CvInfoUtil(this).initDataMembers();
+}
+
+
+// Declared in legacy read() order (this class has no getCheckSum).
+void CvMainMenuInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szScene, L"Scene")
+		.add(m_szSceneNoShader, L"SceneNoShader")
+		.add(m_szSoundtrack, L"Soundtrack")
+		.add(m_szLoading, L"Loading")
+		.add(m_szLoadingSlideshow, L"LoadingSlideshow")
+	;
 }
 
 
@@ -67,11 +81,7 @@ bool CvMainMenuInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(m_szScene, L"Scene");
-	pXML->GetChildXmlValByName(m_szSceneNoShader, L"SceneNoShader");
-	pXML->GetChildXmlValByName(m_szSoundtrack, L"Soundtrack");
-	pXML->GetChildXmlValByName(m_szLoading, L"Loading");
-	pXML->GetChildXmlValByName(m_szLoadingSlideshow, L"LoadingSlideshow");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -79,14 +89,8 @@ bool CvMainMenuInfo::read(CvXMLLoadUtility* pXML)
 
 void CvMainMenuInfo::copyNonDefaults(const CvMainMenuInfo* pClassInfo)
 {
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getScene() == cDefault) m_szScene = pClassInfo->getScene();
-	if (getSceneNoShader() == cDefault) m_szSceneNoShader = pClassInfo->getSceneNoShader();
-	if (getSoundtrack() == cDefault) m_szSoundtrack = pClassInfo->getSoundtrack();
-	if (getLoading() == cDefault) m_szLoading = pClassInfo->getLoading();
-	if (getLoadingSlideshow() == cDefault) m_szLoadingSlideshow = pClassInfo->getLoadingSlideshow();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

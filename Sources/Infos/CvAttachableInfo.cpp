@@ -27,8 +27,9 @@
 //
 //
 CvAttachableInfo::CvAttachableInfo() :
-m_fUpdateRate(0.0f)
+m_fUpdateRate(0.0f) // never read from XML (dead member, no getter); not declared to CvInfoUtil
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -37,9 +38,19 @@ CvAttachableInfo::~CvAttachableInfo()
 }
 
 
+// Declares this class's own fields only; the CvScalableInfo mixin keeps its
+// hand-written read/copyNonDefaults (called explicitly below).
+// No legacy getCheckSum, so declaration order follows the legacy read() order.
+void CvAttachableInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szPath, L"Path")
+	;
+}
+
+
 bool CvAttachableInfo::read(CvXMLLoadUtility* pXML)
 {
-	CvString szTextVal;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
@@ -47,8 +58,7 @@ bool CvAttachableInfo::read(CvXMLLoadUtility* pXML)
 
 	CvScalableInfo::read(pXML);
 
-	pXML->GetChildXmlValByName(szTextVal, L"Path");
-	setPath(szTextVal);
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -56,11 +66,9 @@ bool CvAttachableInfo::read(CvXMLLoadUtility* pXML)
 
 void CvAttachableInfo::copyNonDefaults(const CvAttachableInfo* pClassInfo)
 {
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 	CvScalableInfo::copyNonDefaults(pClassInfo);
 
-	if (getPath() == cDefault) setPath(pClassInfo->getPath());
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

@@ -33,6 +33,7 @@
 //------------------------------------------------------------------------------------------------------
 CvColorInfo::CvColorInfo()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -54,6 +55,20 @@ const NiColorA& CvColorInfo::getColor() const
 }
 
 
+// The NiColorA member is declared channel-wise: its four public floats are plain scalar
+// fields as far as XML loading is concerned (member type and getter are unchanged).
+// No legacy getCheckSum, so declaration order follows the legacy read() order.
+void CvColorInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_Color.r, L"fRed")
+		.add(m_Color.g, L"fGreen")
+		.add(m_Color.b, L"fBlue")
+		.add(m_Color.a, L"fAlpha")
+	;
+}
+
+
 bool CvColorInfo::read(CvXMLLoadUtility* pXML)
 {
 	if (!CvInfoBase::read(pXML))
@@ -61,14 +76,7 @@ bool CvColorInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	float afColorVals[4];	// array to hold the 4 color values, red, green, blue, and alpha
-
-	pXML->GetChildXmlValByName(&afColorVals[0], L"fRed");
-	pXML->GetChildXmlValByName(&afColorVals[1], L"fGreen");
-	pXML->GetChildXmlValByName(&afColorVals[2], L"fBlue");
-	pXML->GetChildXmlValByName(&afColorVals[3], L"fAlpha");
-
-	m_Color = NiColorA(afColorVals[0], afColorVals[1], afColorVals[2], afColorVals[3]);
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -76,11 +84,12 @@ bool CvColorInfo::read(CvXMLLoadUtility* pXML)
 
 void CvColorInfo::copyNonDefaults(const CvColorInfo* pClassInfo)
 {
-	//const float fDefault = 0.0f;
-
+	// Note (#196): the legacy copyNonDefaults was a no-op (commented out) — a modular
+	// replacement entry never inherited color channels from the entry it replaced. The
+	// wrapper now merges each channel that is at its default (0.0f), the standard
+	// non-default merge semantics (owner-sanctioned behaviour fix).
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-//	if (afColorVals[0] == fDefault && afColorVals[1] == fDefault && afColorVals[2] == fDefault
-//		 && afColorVals[3] == fDefault) m_Color = pClassInfo->getColor();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

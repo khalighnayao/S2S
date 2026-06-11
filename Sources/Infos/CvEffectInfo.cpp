@@ -27,21 +27,33 @@
 //
 //
 
-CvEffectInfo::CvEffectInfo() :
- m_fUpdateRate(0.0f)
-,m_bProjectile(false)
-,m_bSticky(false)
-,m_fProjectileSpeed(0.0f)
-,m_fProjectileArc(0.0f)
-{ }
+CvEffectInfo::CvEffectInfo()
+{
+	CvInfoUtil(this).initDataMembers();
+}
 
 
 CvEffectInfo::~CvEffectInfo() {}
 
 
+// Declares this class's own fields only; the CvScalableInfo mixin keeps its
+// hand-written read/copyNonDefaults (called explicitly below).
+// No legacy getCheckSum, so declaration order follows the legacy read() order.
+void CvEffectInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szPath, L"Path")
+		.add(m_fUpdateRate, L"fUpdateRate")
+		.add(m_bProjectile, L"bIsProjectile") // legacy read this through an int temp; same 0/1 XML values
+		.add(m_fProjectileSpeed, L"fSpeed")
+		.add(m_fProjectileArc, L"fArcValue")
+		.add(m_bSticky, L"bSticky")
+	;
+}
+
+
 bool CvEffectInfo::read(CvXMLLoadUtility* pXML)
 {
-	CvString szTextVal;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
@@ -49,18 +61,7 @@ bool CvEffectInfo::read(CvXMLLoadUtility* pXML)
 
 	CvScalableInfo::read(pXML);
 
-	pXML->GetChildXmlValByName(szTextVal, L"Path");
-	setPath(szTextVal);
-
-	pXML->GetChildXmlValByName(&m_fUpdateRate, L"fUpdateRate" );
-
-	int iTemporary;
-	pXML->GetOptionalChildXmlValByName(&iTemporary, L"bIsProjectile" );
-	m_bProjectile = iTemporary != 0;
-
-	pXML->GetOptionalChildXmlValByName(&m_fProjectileSpeed, L"fSpeed");
-	pXML->GetOptionalChildXmlValByName(&m_fProjectileArc, L"fArcValue");
-	pXML->GetOptionalChildXmlValByName(&m_bSticky, L"bSticky");
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -68,21 +69,9 @@ bool CvEffectInfo::read(CvXMLLoadUtility* pXML)
 
 void CvEffectInfo::copyNonDefaults(const CvEffectInfo* pClassInfo)
 {
-	const bool bDefault = false;
-	const float fDefault = 0.0f;
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 	CvScalableInfo::copyNonDefaults(pClassInfo);
 
-	if (getPath() == cDefault) setPath(pClassInfo->getPath());
-	if (getUpdateRate() == fDefault) m_fUpdateRate = pClassInfo->getUpdateRate();
-
-	if (isProjectile() == bDefault) m_bProjectile = pClassInfo->isProjectile();
-
-	if (getProjectileSpeed() == fDefault) m_fProjectileSpeed = pClassInfo->getProjectileSpeed();
-	if (getProjectileArc() == fDefault) m_fProjectileArc = pClassInfo->getProjectileArc();
-
-	if (isSticky() == bDefault) m_bSticky = pClassInfo->isSticky();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

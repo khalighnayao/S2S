@@ -33,6 +33,19 @@
 //------------------------------------------------------------------------------------------------------
 CvWorldPickerInfo::CvWorldPickerInfo()
 {
+	CvInfoUtil(this).initDataMembers();
+}
+
+
+// Declared in legacy read() order (this class has no getCheckSum). The four non-enum
+// vectors (float sizes, string paths) are not wrapper-expressible (SetOptionalVector
+// resolves elements via GetInfoClass) and stay hand-written in read()/copyNonDefaults().
+void CvWorldPickerInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_szMapName, L"MapName")
+		.add(m_szModelFile, L"ModelFile")
+	;
 }
 
 
@@ -118,8 +131,7 @@ bool CvWorldPickerInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetChildXmlValByName(m_szMapName, L"MapName");
-	pXML->GetChildXmlValByName(m_szModelFile, L"ModelFile");
+	CvInfoUtil(this).readXml(pXML);
 
 	//sizes
 	if(pXML->TryMoveToXmlFirstChild(L"Sizes"))
@@ -191,12 +203,9 @@ bool CvWorldPickerInfo::read(CvXMLLoadUtility* pXML)
 void CvWorldPickerInfo::copyNonDefaults(CvWorldPickerInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	const CvString cDefault = CvString::format("").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getMapName() == cDefault) m_szMapName = pClassInfo->m_szMapName;
-	if (getModelFile() == cDefault) m_szModelFile = pClassInfo->getModelFile();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	if ( getNumSizes() == 0 )
 	{
@@ -226,6 +235,9 @@ void CvWorldPickerInfo::copyNonDefaults(CvWorldPickerInfo* pClassInfo)
 	{
 		for ( int i = 0; i < pClassInfo->getNumWaterLevelGloss(); i++ )
 		{
+			// XXX pre-existing copy-paste bug: gloss paths are merged into the DECALS
+			// vector, so m_aWaterLevelGloss never receives merged entries. Preserved
+			// as-is by the #196 loader migration (pure-loader change, no semantics).
 			m_aWaterLevelDecals.push_back(pClassInfo->getWaterLevelGlossPath(i));
 		}
 	}

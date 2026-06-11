@@ -24,6 +24,7 @@ public:
 
 	DllExport const char* getFileName();
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvThroneRoomCamera* pClassInfo);
 

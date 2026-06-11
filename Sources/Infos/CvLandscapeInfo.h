@@ -49,6 +49,7 @@ class CvLandscapeInfo
 		const char* getNormalMap() const	{ return m_szNormalMap; }
 		const char* getBlendMap() const		{ return m_szBlendMap; }
 
+		void getDataMembers(CvInfoUtil& util);
 		bool read(CvXMLLoadUtility* pXML);
 		void copyNonDefaults(const CvLandscapeInfo* pClassInfo);
 
