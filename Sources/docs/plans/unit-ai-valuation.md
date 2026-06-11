@@ -126,6 +126,16 @@ logic rates your high-defense city plot as the best rest spot, the stay-put bonu
 it each turn, and it "parks." It isn't formally a scout — it's an **unemployed hunter using
 the explore/safety fallback**, with no rule preferring its *own/neutral* land over yours.
 
+**Partially fixed (#392, 2026-06-11, live-traced unit 1835350):** two of the stranding paths
+are closed — `hunterMove`'s refresh-explore now passes `bAvoidRivalTerritory` to
+`AI_refreshExploreRange` (the stale-visibility bonus no longer values rival fog, so hunters
+are not *sent* into foreign borders), and the escort-wait block has a foreign-territory
+branch (adjacent kill → `AI_reachHome` → `AI_retreatToCity`) instead of falling through to
+its skip-in-place — that skip left hunters advertising for an escort and idling in rival
+land indefinitely ("lost contact with the mothership"). Still open from the list above:
+the `AI_safetyEval` city-plot scoring (§3) and the broader fallback prefer-own-land rule
+(direction **C** below).
+
 ---
 
 ## D. War Dog spam — what it is, and where the cause is NOT
