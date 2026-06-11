@@ -136,8 +136,9 @@ not findings to re-discover.
   game is loading — agents must not start/kill the game themselves (a headless launch
   spawns a console window the agent cannot manage). Verify via
   `Documents/My Games/Beyond The Sword/Logs/`: `XmlLoad.log` per-category counts, no
-  `Xml_MissingTypes.log`, no new `Asserts.log` entries (the `CvPlot::disableGraphicsPaging`
-  main-menu spam is a known pre-existing assert — filter it out).
+  `Xml_MissingTypes.log`, no new `Asserts.log` entries. Known pre-existing assert families
+  on mature saves (filter, already filed): `CvContractBroker::makeContract` NULL pJoinUnit
+  (#336), `AI_formArmies` army-ID format (#364), unit stuck-in-loop short-circuit (#189 family).
 - Prefer minimal, local changes in large core files.
 - Preserve save compatibility by default; for intentional breaks, coordinate and
   mark with `@SAVEBREAK`. See `Notes for the next breaking of save game compatability cycle.txt`.
