@@ -28758,11 +28758,19 @@ bool CvUnitAI::AI_fulfillPropertyControlNeed()
 
 			if (iNbControlForces > MAX_TARGET_CONTROL_MAINTAIN)
 			{
-				// Not needed right now: hold in place AS a property-control unit (the dedicated
+				// Not needed right now: hold AS a property-control unit (the dedicated
 				// pool waits in-role) instead of flipping to RESERVE. That flip, paired with the
 				// (now removed) reserve-side conversion, caused the RESERVE<->PROPERTY_CONTROL
 				// oscillation. Property units keep their role from creation and are never flipped.
-				getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_PROPERTY_CONTROL_MAINTAIN, plot());
+				// Pool at home (#396): never camp foreign land, and park persistently
+				// (fortify-sleep) instead of re-deciding every turn.
+				if (plot()->isOwned() && plot()->getTeam() != getTeam() && AI_retreatToCity())
+				{
+					AI_logAct("propControl", "poolRetreatHome", plot());
+					return true;
+				}
+				AI_logAct("propControl", "poolWaitInRole", plot());
+				getGroup()->pushMission(canFortify() ? MISSION_FORTIFY : (canSleep() ? MISSION_SLEEP : MISSION_SKIP), -1, -1, 0, false, false, MISSIONAI_PROPERTY_CONTROL_MAINTAIN, plot());
 				return true;
 			}
 
@@ -28772,33 +28780,47 @@ bool CvUnitAI::AI_fulfillPropertyControlNeed()
 
 		if (atPlot(bestCity->plot()))
 		{
-			return getGroup()->pushMissionInternal(MISSION_SKIP, bestCity->getX(), bestCity->getY(), 0, false, false, MISSIONAI_PROPERTY_CONTROL_MAINTAIN, bestCity->plot());
-		}
-
-		//Calvitix. To reduce the amount of PropControl units moving, RNG 50% only will move
-		const int iValue = GC.getGame().getSorenRandNum(10, "Should Move for PropControl");
-
-		if (iValue <= 5) //50%
-		{
-			return getGroup()->pushMissionInternal(MISSION_SKIP, getX(), getY(), 0, false, false, MISSIONAI_PROPERTY_CONTROL_MAINTAIN, plot());
-		}
-		else
-		{
-
-			if (generateSafePathforVulnerable(bestCity->plot()))
-			{
-				const CvPlot* endTurnPlot = getPathEndTurnPlot();
-				return getGroup()->pushMissionInternal(MISSION_MOVE_TO, endTurnPlot->getX(), endTurnPlot->getY(), MOVE_IGNORE_DANGER, false, false, MISSIONAI_PROPERTY_CONTROL_RESPONSE, bestCity->plot());
-			}
-
-			getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_WAIT_FOR_ESCORT);
+			//	Persistent park at post (#342 idiom): fortify-sleep, not a one-turn skip.
+			AI_logAct("propControl", "maintainHere", bestCity->plot());
+			getGroup()->pushMission(canFortify() ? MISSION_FORTIFY : (canSleep() ? MISSION_SLEEP : MISSION_SKIP), -1, -1, 0, false, false, MISSIONAI_PROPERTY_CONTROL_MAINTAIN, bestCity->plot());
 			return true;
 		}
+
+		//	Commit the journey leg (#396). The old "RNG 50% only will move" dice (actually
+		//	60% don't-move) re-rolled every re-plan, leaving units random-walking toward
+		//	their city at ~0.4 legs/turn and stranded mid-route on whatever tile the dice
+		//	caught them - including foreign resource tiles crossed under open borders,
+		//	formally tagged as "maintaining" them. The thundering-herd concern the dice
+		//	addressed is already handled by the iResponders/iExisting divisor in the
+		//	city scoring.
+		if (generateSafePathforVulnerable(bestCity->plot()))
+		{
+			const CvPlot* endTurnPlot = getPathEndTurnPlot();
+			AI_logAct("propControl", "moveToNeed", bestCity->plot());
+			return getGroup()->pushMissionInternal(MISSION_MOVE_TO, endTurnPlot->getX(), endTurnPlot->getY(), MOVE_IGNORE_DANGER, false, false, MISSIONAI_PROPERTY_CONTROL_RESPONSE, bestCity->plot());
+		}
+
+		//	No safe path: don't camp wherever we stand waiting for an escort that is never
+		//	dispatched to property units - head home and pool there (#396).
+		if (AI_retreatToCity())
+		{
+			AI_logAct("propControl", "noPathRetreatHome", plot());
+			return true;
+		}
+		getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_WAIT_FOR_ESCORT);
+		return true;
 	}
 	else
-	{   //No city needs control right now: hold in place as a property-control unit (the dedicated
+	{   //No city needs control right now: hold as a property-control unit (the dedicated
 		//pool waits in-role); do NOT flip to RESERVE (that caused the oscillation).
-		getGroup()->pushMission(MISSION_SKIP, -1, -1, 0, false, false, MISSIONAI_PROPERTY_CONTROL_MAINTAIN, plot());
+		//Pool at home, persistently (#396).
+		if (plot()->isOwned() && plot()->getTeam() != getTeam() && AI_retreatToCity())
+		{
+			AI_logAct("propControl", "poolRetreatHome", plot());
+			return true;
+		}
+		AI_logAct("propControl", "poolWaitInRole", plot());
+		getGroup()->pushMission(canFortify() ? MISSION_FORTIFY : (canSleep() ? MISSION_SLEEP : MISSION_SKIP), -1, -1, 0, false, false, MISSIONAI_PROPERTY_CONTROL_MAINTAIN, plot());
 		return true;
 	}
 	return false;
