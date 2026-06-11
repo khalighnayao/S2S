@@ -17,6 +17,10 @@ See **[mechanics/](mechanics/README.md)**.
 - Revolution_Civics_XML_FAQ.htm — civics / Revolution system FAQ.
 - [WebDocumentation/](WebDocumentation/) — links to C2C combat-mod and feature guides.
 
+## Culture
+- [DESPAIR_INDEX.md](DESPAIR_INDEX.md) — The S2S Despair Index™: the standout bugs of the
+  rework, ranked by developer despair in centiElephants. Not holy writ; pure outlet.
+
 ## Map packs
 - SnofruSpacemaps readmes — the bundled Snofru space-map scripts (Duel / Large / Standard).
 
