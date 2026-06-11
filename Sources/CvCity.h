@@ -842,6 +842,10 @@ public:
 	int getExtraYield100(YieldTypes eYield) const;
 	void changeExtraYield(YieldTypes eYield, int iChange);
 	// ! Toffer
+	// Specialist yields are tracked apart from the other extra yields because they receive the
+	// city yield modifier like worked tiles do (#317); the rest of the extra bucket stays flat.
+	int getSpecialistYieldTotal(YieldTypes eYield) const;
+	void changeSpecialistYieldTotal(YieldTypes eYield, int iChange);
 	void changeBuildingExtraYield100(YieldTypes eYield, int iChange);
 	int getBuildingExtraYield100(YieldTypes eYield) const;
 
@@ -1732,6 +1736,7 @@ protected:
 	int* m_buildingYieldMod;
 	int* m_buildingCommerceMod;
 	int* m_aiExtraYield;
+	int* m_aiSpecialistYieldTotal;
 	int* m_aiBaseYieldPerPopRate;
 	int* m_aiYieldRateModifier;
 	int* m_aiPowerYieldRateModifier;
