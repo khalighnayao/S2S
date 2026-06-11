@@ -12,6 +12,7 @@
 #include "CvEventReporter.h"
 #include "CvGameAI.h"
 #include "CvGlobals.h"
+#include "CvHttpServer.h"
 #include "CvInitCore.h"
 #include "CvInfos.h"
 #include "CvUnitCombatInfo.h"
@@ -2393,6 +2394,10 @@ again:
 			goto again;
 		}
 	}
+	// Dev live-state endpoint (#387): refresh the snapshot the HTTP thread serves.
+	// One bool check when the BUG-gated server is off; internally throttled when on.
+	CvHttpServer::publishIfDue();
+
 	//OutputDebugString(CvString::format("Stop profiling(false) after CvGame::update()\n").c_str());
 	PROFILE_END(UPD1);
 	stopProfilingDLL(false);

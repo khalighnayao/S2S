@@ -241,17 +241,37 @@ interface NOW (cheap to honor, expensive to retrofit): tenants must be **enumera
 serializable** — a uniform "dump tenant to JSON" hook plus the version/timestamp header — so
 the eventual endpoint is a thin reader over the registry rather than per-feature plumbing.
 
-**PoC shipped (2026-06-11):** `Sources/CvHttpServer.{h,cpp}` — a GET-only HTTP/1.0
-hello-world server on `127.0.0.1:7227`, on its own Win32 thread, gated by the BUG option
+**Endpoint shipped (2026-06-11):** `Sources/CvHttpServer.{h,cpp}` — a GET-only HTTP/1.0
+server on `127.0.0.1:7227`, on its own Win32 thread, gated by the BUG option
 `Autolog__HttpServer` (Logging tab, off by default; toggling takes effect on closing the
-options screen via `refreshOptionsBUG`). It serves canned bytes only and touches zero game
-state; the repository wiring above is the follow-up. Build pitfalls already solved in its
-comments — read them before touching: must include `winsock.h` (NOT `winsock2.h` — unity
-batches pull a full-fat `windows.h` whose `winsock.h` makes `winsock2.h` uncompilable), and
-winsock's `bind` must be taken through a typed function pointer because `boost::bind` is
-visible at global scope via the PCH and VC7.1 resolves even `::bind` calls to it. The DLL is
-pinned by the server thread (`GetModuleHandleEx` + `FreeLibraryAndExitThread`) so an EXE-side
-`FreeLibrary` can never unmap code under the running thread.
+options screen via `refreshOptionsBUG`). Live routes: `/` (hello-world smoke test) and
+**`/units`** with optional `?id=N` / `?playerNumber=N` filters — JSON per unit:
+id/owner/x/y/type/ai (XML keys)/group/missionAI/activity/damage/level, wrapper carries the
+snapshot turn (also the `X-S2S-Turn` response header).
+
+**Publish-and-serve contract (the pattern phase 2 generalizes):** the server thread NEVER
+touches game objects. `CvHttpServer::publishIfDue()` runs on the game thread once per frame
+(end of `CvGame::update`), is a single bool check while the server is off, and every 5s
+while it is on walks the units of all alive players into a POD snapshot vector swapped in
+under a critical section. The server thread renders JSON from that snapshot only. Data is
+therefore "as of the last publish" (≤5s stale, labelled with its turn). Phase 2 = replace
+the hand-rolled units walk with enumeration of repository tenants once the uniform
+serialize hook exists; each tenant becomes a route the same way.
+
+JSON rendering rule: `/units` hand-builds its JSON (flat ints + XML keys only — no escaping
+risk, and faster than a DOM) and that is the boundary: **any field that can carry free text
+(unit/city names, etc.) and the phase-2 tenant dump hook must use the vendored `picojson`**
+(`include/picojson.h`, already in the PCH; FAssert's AssertsJson.log is the precedent) so
+string escaping is never hand-rolled. Beware `CvString::format`'s ~82KB cap — it silently
+returns an empty string beyond it; assemble large documents by concatenation.
+
+Build pitfalls already solved in its comments — read them before touching: must include
+`winsock.h` (NOT `winsock2.h` — unity batches pull a full-fat `windows.h` whose `winsock.h`
+makes `winsock2.h` uncompilable), and winsock's `bind` must be taken through a typed
+function pointer because `boost::bind` is visible at global scope via the PCH and VC7.1
+resolves even `::bind` calls to it. The DLL is pinned by the server thread
+(`GetModuleHandleEx` + `FreeLibraryAndExitThread`) so an EXE-side `FreeLibrary` can never
+unmap code under the running thread.
 
 ## 9. Decisions — resolved & open
 
