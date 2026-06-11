@@ -12,163 +12,17 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvTraitInfo::CvTraitInfo()
-	: m_iHealth(0)
-	, m_iHappiness(0)
-	, m_iMaxAnarchy(-1)
-	, m_iUpkeepModifier(0)
-	, m_iLevelExperienceModifier(0)
-	, m_iGreatPeopleRateModifier(0)
-	, m_iGreatGeneralRateModifier(0)
-	, m_iDomesticGreatGeneralRateModifier(0)
-	, m_iMaxGlobalBuildingProductionModifier(0)
-	, m_iMaxTeamBuildingProductionModifier(0)
-	, m_iMaxPlayerBuildingProductionModifier(0)
-
-	, m_iRevIdxLocal(0)
-	, m_iRevIdxNational(0)
-	, m_iRevIdxDistanceModifier(0)
-	, m_iRevIdxHolyCityGood(0)
-	, m_iRevIdxHolyCityBad(0)
-	, m_fRevIdxNationalityMod(0)
-	, m_fRevIdxGoodReligionMod(0)
-	, m_fRevIdxBadReligionMod(0)
-	, m_bNonStateReligionCommerce(false)
-	, m_bUpgradeAnywhere(false)
-
-	, m_paiExtraYieldThreshold(NULL)
-	, m_paiTradeYieldModifier(NULL)
-	, m_paiCommerceChange(NULL)
-	, m_paiCommerceModifier(NULL)
-	, m_ppbFreePromotionUnitCombats(NULL)
-
-	, m_PropertyManipulators()
-	//TB Traits Mods begin
-	, m_PropertyManipulatorsNull()
-	//Textual References
-	, m_iPrereqTrait(NO_TRAIT)
-	, m_iPrereqOrTrait1(NO_TRAIT)
-	, m_iPrereqOrTrait2(NO_TRAIT)
-	, m_ePromotionLine(NO_PROMOTIONLINE)
-	, m_iGreatPeopleUnitType(NO_UNIT)
-	, m_ePrereqTech(NO_TECH)
-
-	, m_eEraAdvanceFreeSpecialistType(NO_SPECIALIST)
-	, m_iGoldenAgeonBirthofGreatPeopleType(NO_UNIT)
-	//integers
-	, m_iWarWearinessAccumulationModifier(0)
-	, m_iCivicAnarchyTimeModifier(0)
-	, m_iReligiousAnarchyTimeModifier(0)
-	, m_iImprovementUpgradeRateModifier(0)
-	, m_iWorkerSpeedModifier(0)
-	, m_iMaxConscript(0)
-	, m_iDistanceMaintenanceModifier(0)
-	, m_iNumCitiesMaintenanceModifier(0)
-	, m_iCorporationMaintenanceModifier(0)
-	, m_iStateReligionGreatPeopleRateModifier(0)
-	, m_iFreeExperience(0)
-	, m_iFreeUnitUpkeepCivilian(0)
-	, m_iFreeUnitUpkeepMilitary(0)
-	, m_iFreeUnitUpkeepCivilianPopPercent(0)
-	, m_iFreeUnitUpkeepMilitaryPopPercent(0)
-	, m_iCivilianUnitUpkeepMod(0)
-	, m_iMilitaryUnitUpkeepMod(0)
-	, m_iHappyPerMilitaryUnit(0)
-	, m_iLargestCityHappiness(0)
-	, m_iFreeSpecialist(0)
-	, m_iTradeRoutes(0)
-	, m_iStateReligionHappiness(0)
-	, m_iNonStateReligionHappiness(0)
-	, m_iStateReligionUnitProductionModifier(0)
-	, m_iStateReligionBuildingProductionModifier(0)
-	, m_iStateReligionFreeExperience(0)
-	, m_iExpInBorderModifier(0)
-	, m_iCityDefenseBonus(0)
-	, m_iMilitaryProductionModifier(0)
-	, m_iAttitudeModifier(0)
-	, m_iLinePriority(0)
-	, m_iEspionageDefense(0)
-	, m_iMinAnarchy(0)
-	, m_iMaxTradeRoutesChange(0)
-	, m_iGoldenAgeDurationModifier(0)
-	, m_iGreatPeopleRateChange(0)
-	, m_iHurryAngerModifier(0)
-	, m_iHurryCostModifier(0)
-	, m_iEnemyWarWearinessModifier(0)
-	, m_iForeignTradeRouteModifier(0)
-	, m_iBombardDefense(0)
-	, m_iUnitUpgradePriceModifier(0)
-	, m_iCoastalTradeRoutes(0)
-
-	, m_iGlobalPopulationgrowthratepercentage(0)
-	, m_iCityStartCulture(0)
-	, m_iGlobalAirUnitCapacity(0)
-	, m_iCapitalXPModifier(0)
-	, m_iHolyCityofStateReligionXPModifier(0)
-	, m_iHolyCityofNonStateReligionXPModifier(0)
-	, m_iBonusPopulationinNewCities(0)
-	, m_iMissileRange(0)
-	, m_iFlightOperationRange(0)
-	, m_iNavalCargoSpace(0)
-	, m_iMissileCargoSpace(0)
-	, m_iNationalCaptureProbabilityModifier(0)
-	, m_iNationalCaptureResistanceModifier(0)
-	, m_iStateReligionSpreadProbabilityModifier(0)
-	, m_iNonStateReligionSpreadProbabilityModifier(0)
-	, m_iFreedomFighterChange(0)
-	//booleans
-	, m_bMilitaryFoodProduction(false)
-	, m_bNegativeTrait(false)
-	, m_bImpurePropertyManipulators(false)
-	, m_bImpurePromotions(false)
-	, m_bCivilizationTrait(false)
-	, m_bAllowsInquisitions(false)
-	, m_bCoastalAIInfluence(false)
-	, m_bBarbarianSelectionOnly(false)
-	, m_bCitiesStartwithStateReligion(false)
-	, m_bDraftsOnCityCapture(false)
-	, m_bFreeSpecialistperWorldWonder(false)
-	, m_bFreeSpecialistperNationalWonder(false)
-	, m_bFreeSpecialistperTeamProject(false)
-	, m_bExtraGoody(false)
-	, m_bAllReligionsActive(false)
-	, m_bBansNonStateReligions(false)
-	, m_bFreedomFighter(false)
-	//arrays
+	// Only the fields NOT declared in getDataMembers are initialized here;
+	// everything declared there is initialized by initDataMembers() below.
+	: m_ppbFreePromotionUnitCombats(NULL)
 	, m_ppaiSpecialistYieldChange(NULL)
-	, m_piYieldModifier(NULL)
-	, m_piCapitalYieldModifier(NULL)
-	, m_piCapitalCommerceModifier(NULL)
-	, m_piSpecialistExtraCommerce(NULL)
-	, m_piSpecialistExtraYield(NULL)
-	, m_piYieldChange(NULL)
 	, m_ppaiSpecialistCommerceChange(NULL)
 	, m_piFlavorValue(NULL)
-	, m_paiLessYieldThreshold(NULL)
-	, m_piSeaPlotYieldChanges(NULL)
 	, m_ppaiImprovementYieldChange(NULL)
-	, m_piGoldenAgeYieldChanges(NULL)
-	, m_piGoldenAgeCommerceChanges(NULL)
-	//For Pure Traits
-	, m_paiExtraYieldThresholdFiltered(NULL)
-	, m_paiTradeYieldModifierFiltered(NULL)
-	, m_paiCommerceChangeFiltered(NULL)
-	, m_paiCommerceModifierFiltered(NULL)
-	, m_ppaiSpecialistYieldChangeFiltered(NULL)
-	, m_piYieldModifierFiltered(NULL)
-	, m_piCapitalYieldModifierFiltered(NULL)
-	, m_piCapitalCommerceModifierFiltered(NULL)
-	, m_piSpecialistExtraCommerceFiltered(NULL)
-	, m_piSpecialistExtraYieldFiltered(NULL)
-	, m_piYieldChangeFiltered(NULL)
-	, m_ppaiSpecialistCommerceChangeFiltered(NULL)
-	, m_paiLessYieldThresholdFiltered(NULL)
-	, m_piSeaPlotYieldChangesFiltered(NULL)
-	, m_ppaiImprovementYieldChangeFiltered(NULL)
-
-	, m_piGoldenAgeYieldChangesFiltered(NULL)
-	, m_piGoldenAgeCommerceChangesFiltered(NULL)
-	//TB Traits Mods end
 	, m_piBonusHappinessChangesFiltered(NULL)
+	, m_ppaiSpecialistYieldChangeFiltered(NULL)
+	, m_ppaiSpecialistCommerceChangeFiltered(NULL)
+	, m_ppaiImprovementYieldChangeFiltered(NULL)
 {
 	CvInfoUtil(this).initDataMembers();
 }
@@ -183,22 +37,10 @@ CvTraitInfo::CvTraitInfo()
 CvTraitInfo::~CvTraitInfo()
 {
 	PROFILE_EXTRA_FUNC();
-	SAFE_DELETE_ARRAY(m_paiExtraYieldThreshold);
-	SAFE_DELETE_ARRAY(m_paiTradeYieldModifier);
-	SAFE_DELETE_ARRAY(m_paiCommerceChange);
-	SAFE_DELETE_ARRAY(m_paiCommerceModifier);
+	// The 1D yield/commerce arrays and the trait-prereq delayed resolutions are owned by their
+	// CvInfoUtil wrappers and released by uninitDataMembers() below.
 	SAFE_DELETE_ARRAY2(m_ppbFreePromotionUnitCombats, GC.getNumPromotionInfos());
 	SAFE_DELETE_ARRAY2(m_ppaiSpecialistYieldChange, GC.getNumSpecialistInfos());
-	SAFE_DELETE_ARRAY(m_piYieldModifier);
-	SAFE_DELETE_ARRAY(m_piCapitalYieldModifier);
-	SAFE_DELETE_ARRAY(m_piCapitalCommerceModifier);
-	SAFE_DELETE_ARRAY(m_piSpecialistExtraCommerce);
-	SAFE_DELETE_ARRAY(m_piSpecialistExtraYield);
-	SAFE_DELETE_ARRAY(m_piYieldChange);
-	SAFE_DELETE_ARRAY(m_paiLessYieldThreshold);
-	SAFE_DELETE_ARRAY(m_piSeaPlotYieldChanges);
-	SAFE_DELETE_ARRAY(m_piGoldenAgeYieldChanges);
-	SAFE_DELETE_ARRAY(m_piGoldenAgeCommerceChanges);
 	SAFE_DELETE_ARRAY2(m_ppaiSpecialistCommerceChange, GC.getNumSpecialistInfos());
 	SAFE_DELETE_ARRAY(m_piFlavorValue);
 	SAFE_DELETE_ARRAY2(m_ppaiImprovementYieldChange, GC.getNumImprovementInfos());
@@ -225,27 +67,9 @@ CvTraitInfo::~CvTraitInfo()
 	}
 
 
-	SAFE_DELETE_ARRAY(m_paiExtraYieldThresholdFiltered);
-	SAFE_DELETE_ARRAY(m_paiTradeYieldModifierFiltered);
-	SAFE_DELETE_ARRAY(m_paiCommerceChangeFiltered);
-	SAFE_DELETE_ARRAY(m_paiCommerceModifierFiltered);
-	SAFE_DELETE_ARRAY(m_piSeaPlotYieldChangesFiltered);
-	SAFE_DELETE_ARRAY(m_piGoldenAgeYieldChangesFiltered);
-	SAFE_DELETE_ARRAY(m_piGoldenAgeCommerceChangesFiltered);
-	SAFE_DELETE_ARRAY(m_piYieldModifierFiltered);
-	SAFE_DELETE_ARRAY(m_piCapitalYieldModifierFiltered);
-	SAFE_DELETE_ARRAY(m_piCapitalCommerceModifierFiltered);
-	SAFE_DELETE_ARRAY(m_piSpecialistExtraCommerceFiltered);
-	SAFE_DELETE_ARRAY(m_piSpecialistExtraYieldFiltered);
-	SAFE_DELETE_ARRAY(m_piYieldChangeFiltered);
-	SAFE_DELETE_ARRAY(m_paiLessYieldThresholdFiltered);
 	SAFE_DELETE_ARRAY2(m_ppaiSpecialistYieldChangeFiltered, GC.getNumSpecialistInfos());
 	SAFE_DELETE_ARRAY2(m_ppaiSpecialistCommerceChangeFiltered, GC.getNumSpecialistInfos());
 	SAFE_DELETE_ARRAY2(m_ppaiImprovementYieldChangeFiltered, GC.getNumImprovementInfos());
-
-	GC.removeDelayedResolution((int*)&m_iPrereqTrait);
-	GC.removeDelayedResolution((int*)&m_iPrereqOrTrait1);
-	GC.removeDelayedResolution((int*)&m_iPrereqOrTrait2);
 
 	CvInfoUtil(this).uninitDataMembers();
 }
@@ -2792,92 +2616,193 @@ void CvTraitInfo::getDataMembers(CvInfoUtil& util)
 		.add(m_aImprovementUpgradeModifierTypes, L"ImprovementUpgradeModifierTypes")
 		.add(m_aDomainFreeExperiences, L"DomainFreeExperiences")
 		.add(m_aDomainProductionModifiers, L"DomainProductionModifiers")
+
+		// Integer scalars
+		.add(m_iHealth, L"iHealth")
+		.add(m_iHappiness, L"iHappiness")
+		.add(m_iMaxAnarchy, L"iMaxAnarchy", -1)
+		.add(m_iUpkeepModifier, L"iUpkeepModifier")
+		.add(m_iLevelExperienceModifier, L"iLevelExperienceModifier")
+		.add(m_iGreatPeopleRateModifier, L"iGreatPeopleRateModifier")
+		.add(m_iGreatGeneralRateModifier, L"iGreatGeneralRateModifier")
+		.add(m_iDomesticGreatGeneralRateModifier, L"iDomesticGreatGeneralRateModifier")
+		.add(m_iMaxGlobalBuildingProductionModifier, L"iMaxGlobalBuildingProductionModifier")
+		.add(m_iMaxTeamBuildingProductionModifier, L"iMaxTeamBuildingProductionModifier")
+		.add(m_iMaxPlayerBuildingProductionModifier, L"iMaxPlayerBuildingProductionModifier")
+		.add(m_iRevIdxLocal, L"iRevIdxLocal")
+		.add(m_iRevIdxNational, L"iRevIdxNational")
+		.add(m_iRevIdxDistanceModifier, L"iRevIdxDistanceModifier")
+		.add(m_iRevIdxHolyCityGood, L"iRevIdxHolyCityGood")
+		.add(m_iRevIdxHolyCityBad, L"iRevIdxHolyCityBad")
+		.add(m_iWarWearinessAccumulationModifier, L"iWarWearinessAccumulationModifier")
+		.add(m_iCivicAnarchyTimeModifier, L"iCivicAnarchyTimeModifier")
+		.add(m_iReligiousAnarchyTimeModifier, L"iReligiousAnarchyTimeModifier")
+		.add(m_iImprovementUpgradeRateModifier, L"iImprovementUpgradeRateModifier")
+		.add(m_iWorkerSpeedModifier, L"iWorkerSpeedModifier")
+		.add(m_iMaxConscript, L"iMaxConscript")
+		.add(m_iDistanceMaintenanceModifier, L"iDistanceMaintenanceModifier")
+		.add(m_iNumCitiesMaintenanceModifier, L"iNumCitiesMaintenanceModifier")
+		.add(m_iCorporationMaintenanceModifier, L"iCorporationMaintenanceModifier")
+		.add(m_iStateReligionGreatPeopleRateModifier, L"iStateReligionGreatPeopleRateModifier")
+		.add(m_iFreeExperience, L"iFreeExperience")
+		.add(m_iFreeUnitUpkeepCivilian, L"iFreeUnitUpkeepCivilian")
+		.add(m_iFreeUnitUpkeepMilitary, L"iFreeUnitUpkeepMilitary")
+		.add(m_iFreeUnitUpkeepCivilianPopPercent, L"iFreeUnitUpkeepCivilianPopPercent")
+		.add(m_iFreeUnitUpkeepMilitaryPopPercent, L"iFreeUnitUpkeepMilitaryPopPercent")
+		.add(m_iCivilianUnitUpkeepMod, L"iCivilianUnitUpkeepMod")
+		.add(m_iMilitaryUnitUpkeepMod, L"iMilitaryUnitUpkeepMod")
+		.add(m_iHappyPerMilitaryUnit, L"iHappyPerMilitaryUnit")
+		.add(m_iLargestCityHappiness, L"iLargestCityHappiness")
+		.add(m_iFreeSpecialist, L"iFreeSpecialist")
+		.add(m_iTradeRoutes, L"iTradeRoutes")
+		.add(m_iStateReligionHappiness, L"iStateReligionHappiness")
+		.add(m_iNonStateReligionHappiness, L"iNonStateReligionHappiness")
+		.add(m_iStateReligionUnitProductionModifier, L"iStateReligionUnitProductionModifier")
+		.add(m_iStateReligionBuildingProductionModifier, L"iStateReligionBuildingProductionModifier")
+		.add(m_iStateReligionFreeExperience, L"iStateReligionFreeExperience")
+		.add(m_iExpInBorderModifier, L"iExpInBorderModifier")
+		.add(m_iCityDefenseBonus, L"iCityDefenseBonus")
+		.add(m_iMilitaryProductionModifier, L"iMilitaryProductionModifier")
+		.add(m_iAttitudeModifier, L"iAttitudeModifier")
+		.add(m_iLinePriority, L"iLinePriority")
+		.add(m_iEspionageDefense, L"iEspionageDefense")
+		.add(m_iMinAnarchy, L"iMinAnarchy")
+		.add(m_iMaxTradeRoutesChange, L"iMaxTradeRoutesChange")
+		.add(m_iGoldenAgeDurationModifier, L"iGoldenAgeDurationModifier")
+		.add(m_iGreatPeopleRateChange, L"iGreatPeopleRateChange")
+		.add(m_iHurryAngerModifier, L"iHurryAngerModifier")
+		.add(m_iHurryCostModifier, L"iHurryCostModifier")
+		.add(m_iEnemyWarWearinessModifier, L"iEnemyWarWearinessModifier")
+		.add(m_iForeignTradeRouteModifier, L"iForeignTradeRouteModifier")
+		.add(m_iBombardDefense, L"iBombardDefense")
+		.add(m_iUnitUpgradePriceModifier, L"iUnitUpgradePriceModifier")
+		.add(m_iCoastalTradeRoutes, L"iCoastalTradeRoutes")
+		.add(m_iGlobalPopulationgrowthratepercentage, L"iGlobalPopulationgrowthratepercentage")
+		.add(m_iCityStartCulture, L"iCityStartCulture")
+		.add(m_iGlobalAirUnitCapacity, L"iGlobalAirUnitCapacity")
+		.add(m_iCapitalXPModifier, L"iCapitalXPModifier")
+		.add(m_iHolyCityofStateReligionXPModifier, L"iHolyCityofStateReligionXPModifier")
+		.add(m_iHolyCityofNonStateReligionXPModifier, L"iHolyCityofNonStateReligionXPModifier")
+		.add(m_iBonusPopulationinNewCities, L"iBonusPopulationinNewCities")
+		.add(m_iMissileRange, L"iMissileRange")
+		.add(m_iFlightOperationRange, L"iFlightOperationRange")
+		.add(m_iNavalCargoSpace, L"iNavalCargoSpace")
+		.add(m_iMissileCargoSpace, L"iMissileCargoSpace")
+		.add(m_iNationalCaptureProbabilityModifier, L"iNationalCaptureProbabilityModifier")
+		.add(m_iNationalCaptureResistanceModifier, L"iNationalCaptureResistanceModifier")
+		.add(m_iStateReligionSpreadProbabilityModifier, L"iStateReligionSpreadProbabilityModifier")
+		.add(m_iNonStateReligionSpreadProbabilityModifier, L"iNonStateReligionSpreadProbabilityModifier")
+		.add(m_iFreedomFighterChange, L"iFreedomFighterChange")
+
+		// Float scalars
+		.add(m_fRevIdxNationalityMod, L"fRevIdxNationalityMod")
+		.add(m_fRevIdxBadReligionMod, L"fRevIdxBadReligionMod")
+		.add(m_fRevIdxGoodReligionMod, L"fRevIdxGoodReligionMod")
+
+		// Booleans
+		.add(m_bNonStateReligionCommerce, L"bNonStateReligionCommerce")
+		.add(m_bUpgradeAnywhere, L"bUpgradeAnywhere")
+		.add(m_bMilitaryFoodProduction, L"bMilitaryFoodProduction")
+		.add(m_bNegativeTrait, L"bNegativeTrait")
+		.add(m_bImpurePropertyManipulators, L"bImpurePropertyManipulators")
+		.add(m_bImpurePromotions, L"bImpurePromotions")
+		.add(m_bCivilizationTrait, L"bCivilizationTrait")
+		.add(m_bAllowsInquisitions, L"bAllowsInquisitions")
+		.add(m_bCoastalAIInfluence, L"bCoastalAIInfluence")
+		.add(m_bBarbarianSelectionOnly, L"bBarbarianSelectionOnly")
+		.add(m_bCitiesStartwithStateReligion, L"bCitiesStartwithStateReligion")
+		.add(m_bDraftsOnCityCapture, L"bDraftsOnCityCapture")
+		.add(m_bFreeSpecialistperWorldWonder, L"bFreeSpecialistperWorldWonder")
+		.add(m_bFreeSpecialistperNationalWonder, L"bFreeSpecialistperNationalWonder")
+		.add(m_bFreeSpecialistperTeamProject, L"bFreeSpecialistperTeamProject")
+		.add(m_bExtraGoody, L"bExtraGoody")
+		.add(m_bAllReligionsActive, L"bAllReligionsActive")
+		.add(m_bBansNonStateReligions, L"bBansNonStateReligions")
+		.add(m_bFreedomFighter, L"bFreedomFighter")
+
+		// Enum FKs. Tech/PromotionLine/Specialist load before Trait, so these resolve immediately
+		// (same as the legacy GetInfoClass reads); the trait self-FKs auto-pick delayed resolution
+		// (same as the legacy GetOptionalTypeEnumWithDelayedResolution reads).
+		.addEnum(m_ePrereqTech, L"PrereqTech")
+		.addEnum(m_ePromotionLine, L"PromotionLine")
+		.addEnum(m_eEraAdvanceFreeSpecialistType, L"EraAdvanceFreeSpecialistType")
+		.addEnum(m_iPrereqTrait, L"TraitPrereq")
+		.addEnum(m_iPrereqOrTrait1, L"TraitPrereqOr1")
+		.addEnum(m_iPrereqOrTrait2, L"TraitPrereqOr2")
+
+		// Legacy int members holding a UnitTypes index (immediate resolution, like the legacy reads)
+		.addEnumAsInt(m_iGreatPeopleUnitType, L"GreatPeopleUnitType")
+		.addEnumAsInt(m_iGoldenAgeonBirthofGreatPeopleType, L"GoldenAgeonBirthofGreatPersonType")
+
+		// Strings (not checksummed)
+		.add(m_szShortDescription, L"ShortDescription")
+
+		// Membership lists (merge = unique+sort)
+		.add(m_aiOnGameOptions, L"OnGameOptions")
+		.add(m_aiNotOnGameOptions, L"NotOnGameOptions")
+		.add(m_aiCategories, L"Categories")
+
+		// Yield/commerce arrays (wrapper owns the heap array — dtor relies on uninitDataMembers).
+		// The *Filtered twins deliberately read the same tags as their primaries: they start as a
+		// copy of the raw values and are filtered lazily at runtime by the PURE_TRAITS getters.
+		.addYields(m_paiExtraYieldThreshold, L"ExtraYieldThresholds")
+		.addYields(m_paiExtraYieldThresholdFiltered, L"ExtraYieldThresholds")
+		.addYields(m_paiTradeYieldModifier, L"TradeYieldModifiers")
+		.addYields(m_paiTradeYieldModifierFiltered, L"TradeYieldModifiers")
+		.addCommerce(m_paiCommerceChange, L"CommerceChanges")
+		.addCommerce(m_paiCommerceChangeFiltered, L"CommerceChanges")
+		.addCommerce(m_paiCommerceModifier, L"CommerceModifiers")
+		.addCommerce(m_paiCommerceModifierFiltered, L"CommerceModifiers")
+		.addYields(m_piYieldModifier, L"YieldModifiers")
+		.addYields(m_piYieldModifierFiltered, L"YieldModifiers")
+		.addYields(m_piCapitalYieldModifier, L"CapitalYieldModifiers")
+		.addYields(m_piCapitalYieldModifierFiltered, L"CapitalYieldModifiers")
+		.addCommerce(m_piCapitalCommerceModifier, L"CapitalCommerceModifiers")
+		.addCommerce(m_piCapitalCommerceModifierFiltered, L"CapitalCommerceModifiers")
+		.addCommerce(m_piSpecialistExtraCommerce, L"SpecialistExtraCommerces")
+		.addCommerce(m_piSpecialistExtraCommerceFiltered, L"SpecialistExtraCommerces")
+		.addYields(m_piSpecialistExtraYield, L"SpecialistExtraYields")
+		.addYields(m_piSpecialistExtraYieldFiltered, L"SpecialistExtraYields")
+		.addYields(m_piYieldChange, L"YieldChanges")
+		.addYields(m_piYieldChangeFiltered, L"YieldChanges")
+		.addYields(m_paiLessYieldThreshold, L"LessYieldThresholds")
+		.addYields(m_paiLessYieldThresholdFiltered, L"LessYieldThresholds")
+		.addYields(m_piSeaPlotYieldChanges, L"SeaPlotYieldChanges")
+		.addYields(m_piSeaPlotYieldChangesFiltered, L"SeaPlotYieldChanges")
+		.addYields(m_piGoldenAgeYieldChanges, L"GoldenAgeYieldChanges")
+		.addYields(m_piGoldenAgeYieldChangesFiltered, L"GoldenAgeYieldChanges")
+		.addCommerce(m_piGoldenAgeCommerceChanges, L"GoldenAgeCommerceChanges")
+		.addCommerce(m_piGoldenAgeCommerceChangesFiltered, L"GoldenAgeCommerceChanges")
+
+		// Self-contained sub-object
+		.add(m_PropertyManipulators)
 	;
+
+	// Still hand-written in read()/copyNonDefaults()/getCheckSum() (see #298):
+	// - 2D int**/bool** arrays (m_ppbFreePromotionUnitCombats, m_ppaiSpecialistYieldChange,
+	//   m_ppaiSpecialistCommerceChange, m_ppaiImprovementYieldChange + Filtered twins) — the
+	//   documented m_ppi wrapper blocker.
+	// - m_piFlavorValue — SetVariableListTagPair dynamic array (no wrapper).
+	// - m_aDisallowedTraitTypes, m_aBuildingProductionModifiers, m_aUnitProductionModifiers,
+	//   m_aCivicOptionNoUpkeepTypes — struct-vectors with delayed-resolution FKs (addStruct
+	//   resolves nested FKs immediately, so it cannot express these).
+	// - m_aSpecialUnitProductionModifiers, m_aUnitCombatFreeExperiences,
+	//   m_aUnitCombatProductionModifiers — immediate FKs, but the shared CvStructs.h structs
+	//   do not declare getDataMembers, which addStruct requires.
+	// - m_PropertyManipulatorsNull, m_piBonusHappinessChangesFiltered — runtime-only, never read.
 }
 
 bool CvTraitInfo::read(CvXMLLoadUtility* pXML)
 {
 	PROFILE_EXTRA_FUNC();
 	CvString szTextVal;
-	CvString szTextVal2;
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"ShortDescription");
-	setShortDescription(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(&m_iHealth, L"iHealth");
-	pXML->GetOptionalChildXmlValByName(&m_iHappiness, L"iHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxAnarchy, L"iMaxAnarchy",-1);
-	pXML->GetOptionalChildXmlValByName(&m_iUpkeepModifier, L"iUpkeepModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iLevelExperienceModifier, L"iLevelExperienceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGreatPeopleRateModifier, L"iGreatPeopleRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGreatGeneralRateModifier, L"iGreatGeneralRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iDomesticGreatGeneralRateModifier, L"iDomesticGreatGeneralRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxGlobalBuildingProductionModifier, L"iMaxGlobalBuildingProductionModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxTeamBuildingProductionModifier, L"iMaxTeamBuildingProductionModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxPlayerBuildingProductionModifier, L"iMaxPlayerBuildingProductionModifier");
-
-/********************************************************************************/
-/**		REVDCM									2/16/10				phungus420	*/
-/**																				*/
-/**		RevTrait Effects														*/
-/********************************************************************************/
-	pXML->GetOptionalChildXmlValByName(&m_iRevIdxLocal, L"iRevIdxLocal");
-	pXML->GetOptionalChildXmlValByName(&m_iRevIdxNational, L"iRevIdxNational");
-	pXML->GetOptionalChildXmlValByName(&m_iRevIdxDistanceModifier, L"iRevIdxDistanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iRevIdxHolyCityGood, L"iRevIdxHolyCityGood");
-	pXML->GetOptionalChildXmlValByName(&m_iRevIdxHolyCityBad, L"iRevIdxHolyCityBad");
-	pXML->GetOptionalChildXmlValByName(&m_fRevIdxNationalityMod, L"fRevIdxNationalityMod");
-	pXML->GetOptionalChildXmlValByName(&m_fRevIdxBadReligionMod, L"fRevIdxBadReligionMod");
-	pXML->GetOptionalChildXmlValByName(&m_fRevIdxGoodReligionMod, L"fRevIdxGoodReligionMod");
-	pXML->GetOptionalChildXmlValByName(&m_bNonStateReligionCommerce, L"bNonStateReligionCommerce");
-	pXML->GetOptionalChildXmlValByName(&m_bUpgradeAnywhere, L"bUpgradeAnywhere");
-/********************************************************************************/
-/**		REVDCM									END								*/
-/********************************************************************************/
-
-	if (pXML->TryMoveToXmlFirstChild(L"ExtraYieldThresholds"))
-	{
-		pXML->SetYields(&m_paiExtraYieldThreshold);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_paiExtraYieldThreshold);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"TradeYieldModifiers"))
-	{
-		pXML->SetYields(&m_paiTradeYieldModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_paiTradeYieldModifier);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CommerceChanges"))
-	{
-		pXML->SetCommerce(&m_paiCommerceChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_paiCommerceChange);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CommerceModifiers"))
-	{
-		pXML->SetCommerce(&m_paiCommerceModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_paiCommerceModifier);
-	}
+	// Scalars, strings, enum FKs, membership lists, yield/commerce arrays and the property
+	// manipulators are declared in getDataMembers and read by CvInfoUtil(this).readXml below.
 
 	FAssertMsg((GC.getNumPromotionInfos() > 0) && (GC.getNumUnitCombatInfos()) > 0,"either the number of promotion infos is zero or less or the number of unit combat types is zero or less");
 	if (pXML->TryMoveToXmlFirstChild(L"FreePromotionUnitCombatTypes"))
@@ -2970,108 +2895,6 @@ bool CvTraitInfo::read(CvXMLLoadUtility* pXML)
 
 		pXML->MoveToXmlParent();
 	}
-	m_PropertyManipulators.read(pXML);
-
-	//TB Traits Mods begin
-	//Textual References
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PromotionLine");
-	m_ePromotionLine = (PromotionLineTypes) pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"GreatPeopleUnitType");
-	m_iGreatPeopleUnitType = (UnitTypes) pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"GoldenAgeonBirthofGreatPersonType");
-	m_iGoldenAgeonBirthofGreatPeopleType = (UnitTypes) pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PrereqTech");
-	m_ePrereqTech = (TechTypes) pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"EraAdvanceFreeSpecialistType");
-	m_eEraAdvanceFreeSpecialistType = (SpecialistTypes) pXML->GetInfoClass(szTextVal);
-
-	//integers
-	pXML->GetOptionalChildXmlValByName(&m_iWarWearinessAccumulationModifier, L"iWarWearinessAccumulationModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iCivicAnarchyTimeModifier, L"iCivicAnarchyTimeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iReligiousAnarchyTimeModifier, L"iReligiousAnarchyTimeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iImprovementUpgradeRateModifier, L"iImprovementUpgradeRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iWorkerSpeedModifier, L"iWorkerSpeedModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxConscript, L"iMaxConscript");
-	pXML->GetOptionalChildXmlValByName(&m_iDistanceMaintenanceModifier, L"iDistanceMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iNumCitiesMaintenanceModifier, L"iNumCitiesMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iCorporationMaintenanceModifier, L"iCorporationMaintenanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iStateReligionGreatPeopleRateModifier, L"iStateReligionGreatPeopleRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeExperience, L"iFreeExperience");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeUnitUpkeepCivilian, L"iFreeUnitUpkeepCivilian");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeUnitUpkeepMilitary, L"iFreeUnitUpkeepMilitary");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeUnitUpkeepCivilianPopPercent, L"iFreeUnitUpkeepCivilianPopPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeUnitUpkeepMilitaryPopPercent, L"iFreeUnitUpkeepMilitaryPopPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iCivilianUnitUpkeepMod, L"iCivilianUnitUpkeepMod");
-	pXML->GetOptionalChildXmlValByName(&m_iMilitaryUnitUpkeepMod, L"iMilitaryUnitUpkeepMod");
-	pXML->GetOptionalChildXmlValByName(&m_iHappyPerMilitaryUnit, L"iHappyPerMilitaryUnit");
-	pXML->GetOptionalChildXmlValByName(&m_iLargestCityHappiness, L"iLargestCityHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeSpecialist, L"iFreeSpecialist");
-	pXML->GetOptionalChildXmlValByName(&m_iTradeRoutes, L"iTradeRoutes");
-	pXML->GetOptionalChildXmlValByName(&m_iStateReligionHappiness, L"iStateReligionHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iNonStateReligionHappiness, L"iNonStateReligionHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iStateReligionUnitProductionModifier, L"iStateReligionUnitProductionModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iStateReligionBuildingProductionModifier, L"iStateReligionBuildingProductionModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iStateReligionFreeExperience, L"iStateReligionFreeExperience");
-	pXML->GetOptionalChildXmlValByName(&m_iExpInBorderModifier, L"iExpInBorderModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iCityDefenseBonus, L"iCityDefenseBonus");
-	pXML->GetOptionalChildXmlValByName(&m_iMilitaryProductionModifier, L"iMilitaryProductionModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iAttitudeModifier, L"iAttitudeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iLinePriority, L"iLinePriority");
-	pXML->GetOptionalChildXmlValByName(&m_iEspionageDefense, L"iEspionageDefense");
-	pXML->GetOptionalChildXmlValByName(&m_iMinAnarchy, L"iMinAnarchy");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxTradeRoutesChange, L"iMaxTradeRoutesChange");
-	pXML->GetOptionalChildXmlValByName(&m_iGoldenAgeDurationModifier, L"iGoldenAgeDurationModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iGreatPeopleRateChange, L"iGreatPeopleRateChange");
-	pXML->GetOptionalChildXmlValByName(&m_iHurryAngerModifier, L"iHurryAngerModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iHurryCostModifier, L"iHurryCostModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iEnemyWarWearinessModifier, L"iEnemyWarWearinessModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iForeignTradeRouteModifier, L"iForeignTradeRouteModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iBombardDefense, L"iBombardDefense");
-	pXML->GetOptionalChildXmlValByName(&m_iUnitUpgradePriceModifier, L"iUnitUpgradePriceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iCoastalTradeRoutes, L"iCoastalTradeRoutes");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalPopulationgrowthratepercentage, L"iGlobalPopulationgrowthratepercentage");
-	pXML->GetOptionalChildXmlValByName(&m_iCityStartCulture, L"iCityStartCulture");
-	pXML->GetOptionalChildXmlValByName(&m_iGlobalAirUnitCapacity, L"iGlobalAirUnitCapacity");
-	pXML->GetOptionalChildXmlValByName(&m_iCapitalXPModifier, L"iCapitalXPModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iHolyCityofStateReligionXPModifier, L"iHolyCityofStateReligionXPModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iHolyCityofNonStateReligionXPModifier, L"iHolyCityofNonStateReligionXPModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iBonusPopulationinNewCities, L"iBonusPopulationinNewCities");
-	pXML->GetOptionalChildXmlValByName(&m_iMissileRange, L"iMissileRange");
-	pXML->GetOptionalChildXmlValByName(&m_iFlightOperationRange, L"iFlightOperationRange");
-	pXML->GetOptionalChildXmlValByName(&m_iNavalCargoSpace, L"iNavalCargoSpace");
-	pXML->GetOptionalChildXmlValByName(&m_iMissileCargoSpace, L"iMissileCargoSpace");
-	pXML->GetOptionalChildXmlValByName(&m_iNationalCaptureProbabilityModifier, L"iNationalCaptureProbabilityModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iNationalCaptureResistanceModifier, L"iNationalCaptureResistanceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iStateReligionSpreadProbabilityModifier, L"iStateReligionSpreadProbabilityModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iNonStateReligionSpreadProbabilityModifier, L"iNonStateReligionSpreadProbabilityModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iFreedomFighterChange, L"iFreedomFighterChange");
-	//booleans
-	pXML->GetOptionalChildXmlValByName(&m_bMilitaryFoodProduction, L"bMilitaryFoodProduction");
-	pXML->GetOptionalChildXmlValByName(&m_bNegativeTrait, L"bNegativeTrait");
-	pXML->GetOptionalChildXmlValByName(&m_bImpurePropertyManipulators, L"bImpurePropertyManipulators");
-	pXML->GetOptionalChildXmlValByName(&m_bImpurePromotions, L"bImpurePromotions");
-	pXML->GetOptionalChildXmlValByName(&m_bCivilizationTrait, L"bCivilizationTrait");
-	pXML->GetOptionalChildXmlValByName(&m_bAllowsInquisitions, L"bAllowsInquisitions");
-	pXML->GetOptionalChildXmlValByName(&m_bCoastalAIInfluence, L"bCoastalAIInfluence");
-	pXML->GetOptionalChildXmlValByName(&m_bBarbarianSelectionOnly, L"bBarbarianSelectionOnly");
-	pXML->GetOptionalChildXmlValByName(&m_bCitiesStartwithStateReligion, L"bCitiesStartwithStateReligion");
-	pXML->GetOptionalChildXmlValByName(&m_bDraftsOnCityCapture, L"bDraftsOnCityCapture");
-	pXML->GetOptionalChildXmlValByName(&m_bFreeSpecialistperWorldWonder, L"bFreeSpecialistperWorldWonder");
-	pXML->GetOptionalChildXmlValByName(&m_bFreeSpecialistperNationalWonder, L"bFreeSpecialistperNationalWonder");
-	pXML->GetOptionalChildXmlValByName(&m_bFreeSpecialistperTeamProject, L"bFreeSpecialistperTeamProject");
-	pXML->GetOptionalChildXmlValByName(&m_bExtraGoody, L"bExtraGoody");
-	pXML->GetOptionalChildXmlValByName(&m_bAllReligionsActive, L"bAllReligionsActive");
-	pXML->GetOptionalChildXmlValByName(&m_bBansNonStateReligions, L"bBansNonStateReligions");
-	pXML->GetOptionalChildXmlValByName(&m_bFreedomFighter, L"bFreedomFighter");
-
-	// bool vector without delayed resolution
-	pXML->SetOptionalVector(&m_aiOnGameOptions, L"OnGameOptions");
-	pXML->SetOptionalVector(&m_aiNotOnGameOptions, L"NotOnGameOptions");
-	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
 
 	//arrays
 	int j;
@@ -3116,76 +2939,6 @@ bool CvTraitInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	if (pXML->TryMoveToXmlFirstChild(L"YieldModifiers"))
-	{
-		pXML->SetYields(&m_piYieldModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piYieldModifier);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CapitalYieldModifiers"))
-	{
-		pXML->SetYields(&m_piCapitalYieldModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCapitalYieldModifier);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CapitalCommerceModifiers"))
-	{
-		pXML->SetCommerce(&m_piCapitalCommerceModifier);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCapitalCommerceModifier);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"SpecialistExtraCommerces"))
-	{
-		pXML->SetCommerce(&m_piSpecialistExtraCommerce);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piSpecialistExtraCommerce);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"SpecialistExtraYields"))
-	{
-		pXML->SetYields(&m_piSpecialistExtraYield);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piSpecialistExtraYield);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"YieldChanges"))
-	{
-		pXML->SetYields(&m_piYieldChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piYieldChange);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"LessYieldThresholds"))
-	{
-		pXML->SetYields(&m_paiLessYieldThreshold);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_paiLessYieldThreshold);
-	}
-
 	if (pXML->TryMoveToXmlFirstChild(L"SpecialistCommerceChanges"))
 	{
 		iNumChildren = pXML->GetXmlChildrenNumber();
@@ -3226,16 +2979,6 @@ bool CvTraitInfo::read(CvXMLLoadUtility* pXML)
 	}
 	pXML->SetVariableListTagPair(&m_piFlavorValue, L"Flavors", GC.getNumFlavorTypes());
 
-	if (pXML->TryMoveToXmlFirstChild(L"SeaPlotYieldChanges"))
-	{
-		pXML->SetYields(&m_piSeaPlotYieldChanges);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piSeaPlotYieldChanges);
-	}
-
 	if (pXML->TryMoveToXmlFirstChild(L"ImprovementYieldChanges"))
 	{
 		iNumChildren = pXML->GetXmlChildrenNumber();
@@ -3273,26 +3016,6 @@ bool CvTraitInfo::read(CvXMLLoadUtility* pXML)
 			pXML->MoveToXmlParent();
 		}
 		pXML->MoveToXmlParent();
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"GoldenAgeYieldChanges"))
-	{
-		pXML->SetYields(&m_piGoldenAgeYieldChanges);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piGoldenAgeYieldChanges);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"GoldenAgeCommerceChanges"))
-	{
-		pXML->SetCommerce(&m_piGoldenAgeCommerceChanges);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piGoldenAgeCommerceChanges);
 	}
 
 	if(pXML->TryMoveToXmlFirstChild(L"DisallowedTraitTypes"))
@@ -3459,47 +3182,8 @@ bool CvTraitInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	//For Pure Traits
-
-	if (pXML->TryMoveToXmlFirstChild(L"ExtraYieldThresholds"))
-	{
-		pXML->SetYields(&m_paiExtraYieldThresholdFiltered);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_paiExtraYieldThresholdFiltered);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"TradeYieldModifiers"))
-	{
-		pXML->SetYields(&m_paiTradeYieldModifierFiltered);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_paiTradeYieldModifierFiltered);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CommerceChanges"))
-	{
-		pXML->SetCommerce(&m_paiCommerceChangeFiltered);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_paiCommerceChangeFiltered);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CommerceModifiers"))
-	{
-		pXML->SetCommerce(&m_paiCommerceModifierFiltered);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_paiCommerceModifierFiltered);
-	}
+	//For Pure Traits (the Filtered 1D arrays are declared in getDataMembers; only the 2D
+	// Filtered arrays remain hand-written here)
 
 	if (pXML->TryMoveToXmlFirstChild(L"SpecialistYieldChanges"))
 	{
@@ -3542,66 +3226,6 @@ bool CvTraitInfo::read(CvXMLLoadUtility* pXML)
 
 		// set the current xml node to it's parent node
 		pXML->MoveToXmlParent();
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"YieldModifiers"))
-	{
-		pXML->SetYields(&m_piYieldModifierFiltered);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piYieldModifierFiltered);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CapitalYieldModifiers"))
-	{
-		pXML->SetYields(&m_piCapitalYieldModifierFiltered);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCapitalYieldModifierFiltered);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CapitalCommerceModifiers"))
-	{
-		pXML->SetCommerce(&m_piCapitalCommerceModifierFiltered);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCapitalCommerceModifierFiltered);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"SpecialistExtraCommerces"))
-	{
-		pXML->SetCommerce(&m_piSpecialistExtraCommerceFiltered);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piSpecialistExtraCommerceFiltered);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"SpecialistExtraYields"))
-	{
-		pXML->SetYields(&m_piSpecialistExtraYieldFiltered);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piSpecialistExtraYieldFiltered);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"YieldChanges"))
-	{
-		pXML->SetYields(&m_piYieldChangeFiltered);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piYieldChangeFiltered);
 	}
 
 	if (pXML->TryMoveToXmlFirstChild(L"SpecialistCommerceChanges"))
@@ -3647,26 +3271,6 @@ bool CvTraitInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	if (pXML->TryMoveToXmlFirstChild(L"LessYieldThresholds"))
-	{
-		pXML->SetYields(&m_paiLessYieldThresholdFiltered);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_paiLessYieldThresholdFiltered);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"SeaPlotYieldChanges"))
-	{
-		pXML->SetYields(&m_piSeaPlotYieldChangesFiltered);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piSeaPlotYieldChangesFiltered);
-	}
-
 	if (pXML->TryMoveToXmlFirstChild(L"ImprovementYieldChanges"))
 	{
 		iNumChildren = pXML->GetXmlChildrenNumber();
@@ -3706,30 +3310,6 @@ bool CvTraitInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	if (pXML->TryMoveToXmlFirstChild(L"GoldenAgeYieldChanges"))
-	{
-		pXML->SetYields(&m_piGoldenAgeYieldChangesFiltered);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piGoldenAgeYieldChangesFiltered);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"GoldenAgeCommerceChanges"))
-	{
-		pXML->SetCommerce(&m_piGoldenAgeCommerceChangesFiltered);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piGoldenAgeCommerceChangesFiltered);
-	}
-
-	pXML->GetOptionalTypeEnumWithDelayedResolution(m_iPrereqTrait, L"TraitPrereq");
-	pXML->GetOptionalTypeEnumWithDelayedResolution(m_iPrereqOrTrait1, L"TraitPrereqOr1");
-	pXML->GetOptionalTypeEnumWithDelayedResolution(m_iPrereqOrTrait2, L"TraitPrereqOr2");
-
 	CvInfoUtil(this).readXml(pXML);
 
 	return true;
@@ -3738,85 +3318,14 @@ bool CvTraitInfo::read(CvXMLLoadUtility* pXML)
 void CvTraitInfo::copyNonDefaults(CvTraitInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	bool bDefault = false;
 	int iDefault = 0;
-	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	CvString cDefault = CvString::format("").GetCString();
-	CvWString wDefault = CvWString::format(L"").GetCString();
-
-	if (getShortDescription() == cDefault) setShortDescription(pClassInfo->getShortDescription());
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getHealth() == iDefault) m_iHealth = pClassInfo->getHealth();
-	if (getHappiness() == iDefault) m_iHappiness = pClassInfo->getHappiness();
-	if (getMaxAnarchy() == iDefault) m_iMaxAnarchy = pClassInfo->getMaxAnarchy();
-	if (getUpkeepModifier() == iDefault) m_iUpkeepModifier = pClassInfo->getUpkeepModifier();
-	if (getLevelExperienceModifier() == iDefault) m_iLevelExperienceModifier = pClassInfo->getLevelExperienceModifier();
-	if (getGreatPeopleRateModifier() == iDefault) m_iGreatPeopleRateModifier = pClassInfo->getGreatPeopleRateModifier();
-	if (getGreatGeneralRateModifier() == iDefault) m_iGreatGeneralRateModifier = pClassInfo->getGreatGeneralRateModifier();
-	if (getDomesticGreatGeneralRateModifier() == iDefault) m_iDomesticGreatGeneralRateModifier = pClassInfo->getDomesticGreatGeneralRateModifier();
-	if (getMaxGlobalBuildingProductionModifier() == iDefault) m_iMaxGlobalBuildingProductionModifier = pClassInfo->getMaxGlobalBuildingProductionModifier();
-	if (getMaxTeamBuildingProductionModifier() == iDefault) m_iMaxTeamBuildingProductionModifier = pClassInfo->getMaxTeamBuildingProductionModifier();
-	if (getMaxPlayerBuildingProductionModifier() == iDefault) m_iMaxPlayerBuildingProductionModifier = pClassInfo->getMaxPlayerBuildingProductionModifier();
-
-	if (!m_paiExtraYieldThreshold) CvXMLLoadUtility::InitList(&m_paiExtraYieldThreshold, NUM_YIELD_TYPES);
-	if (!m_paiTradeYieldModifier) CvXMLLoadUtility::InitList(&m_paiTradeYieldModifier, NUM_YIELD_TYPES);
-	if (!m_paiExtraYieldThresholdFiltered) CvXMLLoadUtility::InitList(&m_paiExtraYieldThresholdFiltered, NUM_YIELD_TYPES);
-	if (!m_paiTradeYieldModifierFiltered) CvXMLLoadUtility::InitList(&m_paiTradeYieldModifierFiltered, NUM_YIELD_TYPES);
-	if (!m_paiLessYieldThreshold) CvXMLLoadUtility::InitList(&m_paiLessYieldThreshold, NUM_YIELD_TYPES);
-	if (!m_paiLessYieldThresholdFiltered) CvXMLLoadUtility::InitList(&m_paiLessYieldThresholdFiltered, NUM_YIELD_TYPES);
-	for ( int j = 0; j < NUM_YIELD_TYPES; j++ )
-	{
-		if (m_paiExtraYieldThreshold[j] == iDefault)
-		{
-			m_paiExtraYieldThreshold[j] = pClassInfo->getExtraYieldThreshold(j);
-		}
-		if (m_paiTradeYieldModifier[j] == iDefault)
-		{
-			m_paiTradeYieldModifier[j] = pClassInfo->getTradeYieldModifier(j);
-		}
-		if (m_paiExtraYieldThresholdFiltered[j] == iDefault)
-		{
-			m_paiExtraYieldThresholdFiltered[j] = pClassInfo->getExtraYieldThreshold(j);
-		}
-		if (m_paiTradeYieldModifierFiltered[j] == iDefault)
-		{
-			m_paiTradeYieldModifierFiltered[j] = pClassInfo->getTradeYieldModifier(j);
-		}
-		if (m_paiLessYieldThreshold[j] == iDefault)
-		{
-			m_paiLessYieldThreshold[j] = pClassInfo->getLessYieldThreshold(j);
-		}
-		if (m_paiLessYieldThresholdFiltered[j] == iDefault)
-		{
-			m_paiLessYieldThresholdFiltered[j] = pClassInfo->getLessYieldThreshold(j);
-		}
-	}
-
-	if (!m_paiCommerceChange) CvXMLLoadUtility::InitList(&m_paiCommerceChange, NUM_COMMERCE_TYPES);
-	if (!m_paiCommerceModifier) CvXMLLoadUtility::InitList(&m_paiCommerceModifier, NUM_COMMERCE_TYPES);
-	if (!m_paiCommerceChangeFiltered) CvXMLLoadUtility::InitList(&m_paiCommerceChangeFiltered, NUM_COMMERCE_TYPES);
-	if (!m_paiCommerceModifierFiltered) CvXMLLoadUtility::InitList(&m_paiCommerceModifierFiltered, NUM_COMMERCE_TYPES);
-	for ( int j = 0; j < NUM_COMMERCE_TYPES; j++ )
-	{
-		if (m_paiCommerceChange[j] == iDefault)
-		{
-			m_paiCommerceChange[j] = pClassInfo->getCommerceChange(j);
-		}
-		if (m_paiCommerceModifier[j] == iDefault)
-		{
-			m_paiCommerceModifier[j] = pClassInfo->getCommerceModifier(j);
-		}
-		if (m_paiCommerceChangeFiltered[j] == iDefault)
-		{
-			m_paiCommerceChangeFiltered[j] = pClassInfo->getCommerceChange(j);
-		}
-		if (m_paiCommerceModifierFiltered[j] == iDefault)
-		{
-			m_paiCommerceModifierFiltered[j] = pClassInfo->getCommerceModifier(j);
-		}
-	}
+	// Scalars, strings, enum FKs, membership lists, yield/commerce arrays and the property
+	// manipulators are declared in getDataMembers and merged by CvInfoUtil(this).copyNonDefaults
+	// below. NOTE: the wrapper merge compares against the type-correct defaults and merges every
+	// declared field, which fixes several legacy merge bugs — see getCheckSum's parity comment.
 
 	for ( int j = 0; j < GC.getNumPromotionInfos(); j++ )
 	{
@@ -3836,113 +3345,6 @@ void CvTraitInfo::copyNonDefaults(CvTraitInfo* pClassInfo)
 			}
 		}
 	}
-
-	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
-
-	//TB Traits Mods begin
-	//Textual References
-	if (getPromotionLine() == NO_PROMOTIONLINE) m_ePromotionLine = pClassInfo->getPromotionLine();
-	if (m_iGreatPeopleUnitType == NO_UNIT) m_iGreatPeopleUnitType = pClassInfo->m_iGreatPeopleUnitType;
-	if (m_iGoldenAgeonBirthofGreatPeopleType == NO_UNIT) m_iGoldenAgeonBirthofGreatPeopleType = pClassInfo->m_iGoldenAgeonBirthofGreatPeopleType;
-	if (getPrereqTech() == NO_TECH) m_ePrereqTech = pClassInfo->getPrereqTech();
-	if (getEraAdvanceFreeSpecialistType() == NO_SPECIALIST) m_eEraAdvanceFreeSpecialistType = pClassInfo->getEraAdvanceFreeSpecialistType();
-	if (getWarWearinessAccumulationModifier() == iDefault) m_iWarWearinessAccumulationModifier = pClassInfo->getWarWearinessAccumulationModifier();
-	if (getCivicAnarchyTimeModifier() == iDefault) m_iCivicAnarchyTimeModifier = pClassInfo->getCivicAnarchyTimeModifier();
-	if (getReligiousAnarchyTimeModifier() == iDefault) m_iReligiousAnarchyTimeModifier = pClassInfo->getReligiousAnarchyTimeModifier();
-	if (getImprovementUpgradeRateModifier() == iDefault) m_iImprovementUpgradeRateModifier = pClassInfo->getImprovementUpgradeRateModifier();
-	if (getWorkerSpeedModifier() == iDefault) m_iWorkerSpeedModifier = pClassInfo->getWorkerSpeedModifier();
-	if (getMaxConscript() == iDefault) m_iMaxConscript = pClassInfo->getMaxConscript();
-	if (getDistanceMaintenanceModifier() == iDefault) m_iDistanceMaintenanceModifier = pClassInfo->getDistanceMaintenanceModifier();
-	if (getNumCitiesMaintenanceModifier() == iDefault) m_iNumCitiesMaintenanceModifier = pClassInfo->getNumCitiesMaintenanceModifier();
-	if (getCorporationMaintenanceModifier() == iDefault) m_iCorporationMaintenanceModifier = pClassInfo->getCorporationMaintenanceModifier();
-	if (getStateReligionGreatPeopleRateModifier() == iDefault) m_iStateReligionGreatPeopleRateModifier = pClassInfo->getStateReligionGreatPeopleRateModifier();
-	if (getFreeExperience() == iDefault) m_iFreeExperience = pClassInfo->getFreeExperience();
-	if (m_iFreeUnitUpkeepCivilian == iDefault) m_iFreeUnitUpkeepCivilian = pClassInfo->getFreeUnitUpkeepCivilian();
-	if (m_iFreeUnitUpkeepMilitary == iDefault) m_iFreeUnitUpkeepMilitary = pClassInfo->getFreeUnitUpkeepMilitary();
-	if (m_iFreeUnitUpkeepCivilianPopPercent == iDefault) m_iFreeUnitUpkeepCivilianPopPercent = pClassInfo->getFreeUnitUpkeepCivilianPopPercent();
-	if (m_iFreeUnitUpkeepMilitaryPopPercent == iDefault) m_iFreeUnitUpkeepMilitaryPopPercent = pClassInfo->getFreeUnitUpkeepMilitaryPopPercent();
-	if (m_iCivilianUnitUpkeepMod == iDefault) m_iCivilianUnitUpkeepMod = pClassInfo->getCivilianUnitUpkeepMod();
-	if (m_iMilitaryUnitUpkeepMod == iDefault) m_iMilitaryUnitUpkeepMod = pClassInfo->getMilitaryUnitUpkeepMod();
-	if (getHappyPerMilitaryUnit() == iDefault) m_iHappyPerMilitaryUnit = pClassInfo->getHappyPerMilitaryUnit();
-	if (getLargestCityHappiness() == iDefault) m_iLargestCityHappiness = pClassInfo->getLargestCityHappiness();
-	if (getFreeSpecialist() == iDefault) m_iFreeSpecialist = pClassInfo->getFreeSpecialist();
-	if (getTradeRoutes() == iDefault) m_iTradeRoutes = pClassInfo->getTradeRoutes();
-	if (getStateReligionHappiness() == iDefault) m_iStateReligionHappiness = pClassInfo->getStateReligionHappiness();
-	if (getNonStateReligionHappiness() == iDefault) m_iNonStateReligionHappiness = pClassInfo->getNonStateReligionHappiness();
-	if (getStateReligionUnitProductionModifier() == iDefault) m_iStateReligionUnitProductionModifier = pClassInfo->getStateReligionUnitProductionModifier();
-	if (getStateReligionBuildingProductionModifier() == iDefault) m_iStateReligionBuildingProductionModifier = pClassInfo->getStateReligionBuildingProductionModifier();
-	if (getStateReligionFreeExperience() == iDefault) m_iStateReligionFreeExperience = pClassInfo->getStateReligionFreeExperience();
-	if (getExpInBorderModifier() == iDefault) m_iExpInBorderModifier = pClassInfo->getExpInBorderModifier();
-	if (getCityDefenseBonus() == iDefault) m_iCityDefenseBonus = pClassInfo->getCityDefenseBonus();
-	if (getMilitaryProductionModifier() == iDefault) m_iMilitaryProductionModifier = pClassInfo->getMilitaryProductionModifier();
-	if (getAttitudeModifier() == iDefault) m_iAttitudeModifier = pClassInfo->getAttitudeModifier();
-	if (getLinePriority() == iDefault) m_iLinePriority = pClassInfo->getLinePriority();
-	if (getEspionageDefense() == iDefault) m_iEspionageDefense = pClassInfo->getEspionageDefense();
-	if (getMinAnarchy() == iDefault) m_iMinAnarchy = pClassInfo->getMinAnarchy();
-	if (getMaxTradeRoutesChange() == iDefault) m_iMaxTradeRoutesChange = pClassInfo->getMaxTradeRoutesChange();
-	if (getGoldenAgeDurationModifier() == iDefault) m_iGoldenAgeDurationModifier = pClassInfo->getGoldenAgeDurationModifier();
-	if (getGreatPeopleRateChange() == iDefault) m_iGreatPeopleRateChange = pClassInfo->getGreatPeopleRateChange();
-	if (getHurryAngerModifier() == iDefault) m_iHurryAngerModifier = pClassInfo->getHurryAngerModifier();
-	if (getHurryCostModifier() == iDefault) m_iHurryCostModifier = pClassInfo->getHurryCostModifier();
-	if (getEnemyWarWearinessModifier() == iDefault) m_iEnemyWarWearinessModifier = pClassInfo->getEnemyWarWearinessModifier();
-	if (getForeignTradeRouteModifier() == iDefault) m_iForeignTradeRouteModifier = pClassInfo->getForeignTradeRouteModifier();
-	if (getBombardDefense() == iDefault) m_iBombardDefense = pClassInfo->getBombardDefense();
-	if (getUnitUpgradePriceModifier() == iDefault) m_iUnitUpgradePriceModifier = pClassInfo->getUnitUpgradePriceModifier();
-	if (getCoastalTradeRoutes() == iDefault) m_iCoastalTradeRoutes = pClassInfo->getCoastalTradeRoutes();
-	if (getGlobalPopulationgrowthratepercentage() == iDefault) m_iGlobalPopulationgrowthratepercentage = pClassInfo->getGlobalPopulationgrowthratepercentage();
-	if (getCityStartCulture(true) == iDefault) m_iCityStartCulture = pClassInfo->getCityStartCulture(true);
-	if (getGlobalAirUnitCapacity() == iDefault) m_iGlobalAirUnitCapacity = pClassInfo->getGlobalAirUnitCapacity();
-	if (getCapitalXPModifier() == iDefault) m_iCapitalXPModifier = pClassInfo->getCapitalXPModifier();
-	if (getHolyCityofStateReligionXPModifier() == iDefault) m_iHolyCityofStateReligionXPModifier = pClassInfo->getHolyCityofStateReligionXPModifier();
-	if (getHolyCityofNonStateReligionXPModifier() == iDefault) m_iHolyCityofNonStateReligionXPModifier = pClassInfo->getHolyCityofNonStateReligionXPModifier();
-	if (getBonusPopulationinNewCities() == iDefault) m_iBonusPopulationinNewCities = pClassInfo->getBonusPopulationinNewCities();
-	if (getMissileRange() == iDefault) m_iMissileRange = pClassInfo->getMissileRange();
-	if (getFlightOperationRange() == iDefault) m_iFlightOperationRange = pClassInfo->getFlightOperationRange();
-	if (getNavalCargoSpace() == iDefault) m_iNavalCargoSpace = pClassInfo->getNavalCargoSpace();
-	if (getMissileCargoSpace() == iDefault) m_iMissileCargoSpace = pClassInfo->getMissileCargoSpace();
-	if (getNationalCaptureProbabilityModifier() == iDefault) m_iNationalCaptureProbabilityModifier = pClassInfo->getNationalCaptureProbabilityModifier();
-	if (getNationalCaptureResistanceModifier() == iDefault) m_iNationalCaptureResistanceModifier = pClassInfo->getNationalCaptureResistanceModifier();
-	if (getStateReligionSpreadProbabilityModifier() == iDefault) m_iStateReligionSpreadProbabilityModifier = pClassInfo->getStateReligionSpreadProbabilityModifier();
-	if (getNonStateReligionSpreadProbabilityModifier() == iDefault) m_iNonStateReligionSpreadProbabilityModifier = pClassInfo->getNonStateReligionSpreadProbabilityModifier();
-	if (getFreedomFighterChange() == iDefault) m_iFreedomFighterChange = pClassInfo->getFreedomFighterChange();
-	//booleans
-	if (isMilitaryFoodProduction() == bDefault) m_bMilitaryFoodProduction = pClassInfo->isMilitaryFoodProduction();
-	if (isNegativeTrait() == bDefault) m_bNegativeTrait = pClassInfo->isNegativeTrait();
-	if (isImpurePropertyManipulators() == bDefault) m_bImpurePropertyManipulators = pClassInfo->isImpurePropertyManipulators();
-	if (isImpurePromotions() == bDefault) m_bImpurePromotions = pClassInfo->isImpurePromotions();
-	if (isCivilizationTrait() == bDefault) m_bCivilizationTrait = pClassInfo->isCivilizationTrait();
-	if (isAllowsInquisitions() == bDefault) m_bAllowsInquisitions = pClassInfo->isAllowsInquisitions();
-	if (isCoastalAIInfluence() == bDefault) m_bCoastalAIInfluence = pClassInfo->isCoastalAIInfluence();
-	if (isBarbarianSelectionOnly() == bDefault) m_bBarbarianSelectionOnly = pClassInfo->isBarbarianSelectionOnly();
-	if (isCitiesStartwithStateReligion() == bDefault) m_bCitiesStartwithStateReligion = pClassInfo->isCitiesStartwithStateReligion();
-	if (isDraftsOnCityCapture() == bDefault) m_bDraftsOnCityCapture = pClassInfo->isDraftsOnCityCapture();
-	if (isFreeSpecialistperWorldWonder() == bDefault) m_bFreeSpecialistperWorldWonder = pClassInfo->isFreeSpecialistperWorldWonder();
-	if (isFreeSpecialistperNationalWonder() == bDefault) m_bFreeSpecialistperNationalWonder = pClassInfo->isFreeSpecialistperNationalWonder();
-	if (isFreeSpecialistperTeamProject() == bDefault) m_bFreeSpecialistperTeamProject = pClassInfo->isFreeSpecialistperTeamProject();
-	if (isExtraGoody() == bDefault) m_bExtraGoody = pClassInfo->isExtraGoody();
-	if (isAllReligionsActive() == bDefault) m_bAllReligionsActive = pClassInfo->isAllReligionsActive();
-	if (isBansNonStateReligions() == bDefault) m_bBansNonStateReligions = pClassInfo->isBansNonStateReligions();
-	if (isFreedomFighter() == bDefault) m_bFreedomFighter = pClassInfo->isFreedomFighter();
-
-	// bool vector without delayed resolution
-	if (getNumNotOnGameOptions() == 0)
-	{
-		m_aiNotOnGameOptions.clear();
-		for ( int i = 0; i < pClassInfo->getNumNotOnGameOptions(); i++)
-		{
-			m_aiNotOnGameOptions.push_back(pClassInfo->getNotOnGameOption(i));
-		}
-	}
-	if (getNumOnGameOptions() == 0)
-	{
-		m_aiOnGameOptions.clear();
-		for ( int i = 0; i < pClassInfo->getNumOnGameOptions(); i++)
-		{
-			m_aiOnGameOptions.push_back(pClassInfo->getOnGameOption(i));
-		}
-	}
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
 
 	//Arrays
 	for ( int i = 0; i < GC.getNumSpecialistInfos(); i++)
@@ -4028,112 +3430,6 @@ void CvTraitInfo::copyNonDefaults(CvTraitInfo* pClassInfo)
 					m_ppaiImprovementYieldChangeFiltered[i][j] = iChange;
 				}
 			}
-		}
-	}
-
-	if (!m_piYieldModifier) CvXMLLoadUtility::InitList(&m_piYieldModifier, NUM_YIELD_TYPES);
-	if (!m_piYieldModifierFiltered) CvXMLLoadUtility::InitList(&m_piYieldModifierFiltered, NUM_YIELD_TYPES);
-	if (!m_piCapitalYieldModifier) CvXMLLoadUtility::InitList(&m_piCapitalYieldModifier, NUM_YIELD_TYPES);
-	if (!m_piCapitalYieldModifierFiltered) CvXMLLoadUtility::InitList(&m_piCapitalYieldModifierFiltered, NUM_YIELD_TYPES);
-	if (!m_piSpecialistExtraYield) CvXMLLoadUtility::InitList(&m_piSpecialistExtraYield, NUM_YIELD_TYPES);
-	if (!m_piSpecialistExtraYieldFiltered) CvXMLLoadUtility::InitList(&m_piSpecialistExtraYieldFiltered, NUM_YIELD_TYPES);
-	if (!m_piYieldChange) CvXMLLoadUtility::InitList(&m_piYieldChange, NUM_YIELD_TYPES);
-	if (!m_piYieldChangeFiltered) CvXMLLoadUtility::InitList(&m_piYieldChangeFiltered, NUM_YIELD_TYPES);
-	if (!m_piSeaPlotYieldChanges) CvXMLLoadUtility::InitList(&m_piSeaPlotYieldChanges, NUM_YIELD_TYPES);
-	if (!m_piSeaPlotYieldChangesFiltered) CvXMLLoadUtility::InitList(&m_piSeaPlotYieldChangesFiltered, NUM_YIELD_TYPES);
-	if (!m_piGoldenAgeYieldChanges) CvXMLLoadUtility::InitList(&m_piGoldenAgeYieldChanges, NUM_YIELD_TYPES);
-	if (!m_piGoldenAgeYieldChangesFiltered) CvXMLLoadUtility::InitList(&m_piGoldenAgeYieldChangesFiltered, NUM_YIELD_TYPES);
-	for ( int i = 0; i < NUM_YIELD_TYPES; i++ )
-	{
-		if ( m_piYieldModifier[i] == iDefault )
-		{
-			m_piYieldModifier[i] = pClassInfo->getYieldModifier(i);
-		}
-		if ( m_piYieldModifierFiltered[i] == iDefault )
-		{
-			m_piYieldModifierFiltered[i] = pClassInfo->getYieldModifier(i);
-		}
-
-		if ( m_piCapitalYieldModifier[i] == iDefault )
-		{
-			m_piCapitalYieldModifier[i] = pClassInfo->getCapitalYieldModifier(i);
-		}
-		if ( m_piCapitalYieldModifierFiltered[i] == iDefault )
-		{
-			m_piCapitalYieldModifierFiltered[i] = pClassInfo->getCapitalYieldModifier(i);
-		}
-
-		if ( m_piSpecialistExtraYield[i] == iDefault )
-		{
-			m_piSpecialistExtraYield[i] = pClassInfo->getSpecialistExtraYield(i);
-		}
-		if ( m_piSpecialistExtraYieldFiltered[i] == iDefault )
-		{
-			m_piSpecialistExtraYieldFiltered[i] = pClassInfo->getSpecialistExtraYield(i);
-		}
-
-		if ( m_piYieldChange[i] == iDefault )
-		{
-			m_piYieldChange[i] = pClassInfo->getYieldChange(i);
-		}
-		if ( m_piYieldChangeFiltered[i] == iDefault )
-		{
-			m_piYieldChangeFiltered[i] = pClassInfo->getYieldChange(i);
-		}
-
-		if ( m_piSeaPlotYieldChanges[i] == iDefault )
-		{
-			m_piSeaPlotYieldChanges[i] = pClassInfo->getSeaPlotYieldChanges(i);
-		}
-		if ( m_piSeaPlotYieldChangesFiltered[i] == iDefault )
-		{
-			m_piSeaPlotYieldChangesFiltered[i] = pClassInfo->getSeaPlotYieldChanges(i);
-		}
-
-//Team Project (7)
-		if ( m_piGoldenAgeYieldChanges[i] == iDefault )
-		{
-			m_piGoldenAgeYieldChanges[i] = pClassInfo->getGoldenAgeYieldChanges(i);
-		}
-		if ( m_piGoldenAgeYieldChangesFiltered[i] == iDefault )
-		{
-			m_piGoldenAgeYieldChangesFiltered[i] = pClassInfo->getGoldenAgeYieldChanges(i);
-		}
-	}
-
-	if (!m_piCapitalCommerceModifier) CvXMLLoadUtility::InitList(&m_piCapitalCommerceModifier, NUM_COMMERCE_TYPES);
-	if (!m_piCapitalCommerceModifierFiltered) CvXMLLoadUtility::InitList(&m_piCapitalCommerceModifierFiltered, NUM_COMMERCE_TYPES);
-	if (!m_piSpecialistExtraCommerce) CvXMLLoadUtility::InitList(&m_piSpecialistExtraCommerce, NUM_COMMERCE_TYPES);
-	if (!m_piSpecialistExtraCommerceFiltered) CvXMLLoadUtility::InitList(&m_piSpecialistExtraCommerceFiltered, NUM_COMMERCE_TYPES);
-	if (!m_piGoldenAgeCommerceChanges) CvXMLLoadUtility::InitList(&m_piGoldenAgeCommerceChanges, NUM_COMMERCE_TYPES);
-	if (!m_piGoldenAgeCommerceChangesFiltered) CvXMLLoadUtility::InitList(&m_piGoldenAgeCommerceChangesFiltered, NUM_COMMERCE_TYPES);
-	for ( int i = 0; i < NUM_COMMERCE_TYPES; i++ )
-	{
-		if ( m_piCapitalCommerceModifier[i] == iDefault )
-		{
-			m_piCapitalCommerceModifier[i] = pClassInfo->getCapitalCommerceModifier(i);
-		}
-		if ( m_piCapitalCommerceModifierFiltered[i] == iDefault )
-		{
-			m_piCapitalCommerceModifierFiltered[i] = pClassInfo->getCapitalCommerceModifier(i);
-		}
-
-		if ( m_piSpecialistExtraCommerce[i] == iDefault )
-		{
-			m_piSpecialistExtraCommerce[i] = pClassInfo->getSpecialistExtraCommerce(i);
-		}
-		if ( m_piSpecialistExtraCommerceFiltered[i] == iDefault )
-		{
-			m_piSpecialistExtraCommerceFiltered[i] = pClassInfo->getSpecialistExtraCommerce(i);
-		}
-
-		if ( m_piGoldenAgeCommerceChanges[i] == iDefault )
-		{
-			m_piGoldenAgeCommerceChanges[i] = pClassInfo->getGoldenAgeCommerceChanges(i);
-		}
-		if ( m_piGoldenAgeCommerceChangesFiltered[i] == iDefault )
-		{
-			m_piGoldenAgeCommerceChangesFiltered[i] = pClassInfo->getGoldenAgeCommerceChanges(i);
 		}
 	}
 
@@ -4250,10 +3546,6 @@ void CvTraitInfo::copyNonDefaults(CvTraitInfo* pClassInfo)
 	{
 		CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aUnitCombatProductionModifiers, pClassInfo->m_aUnitCombatProductionModifiers);
 	}
-
-	GC.copyNonDefaultDelayedResolution((int*)&m_iPrereqTrait, (int*)&pClassInfo->m_iPrereqTrait);
-	GC.copyNonDefaultDelayedResolution((int*)&m_iPrereqOrTrait1, (int*)&pClassInfo->m_iPrereqOrTrait1);
-	GC.copyNonDefaultDelayedResolution((int*)&m_iPrereqOrTrait2, (int*)&pClassInfo->m_iPrereqOrTrait2);
 
 	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
@@ -4527,7 +3819,20 @@ void CvTraitInfo::getCheckSum(uint32_t& iSum) const
 
 	//TB Traits Mods end
 
-	CvInfoUtil(const_cast<CvTraitInfo*>(this)).checkSum(iSum);
+	// Checksum parity (savegame asset checksum): the fields migrated to getDataMembers are still
+	// checksummed by hand ABOVE, in the legacy fold order — CheckSum is an order-sensitive rotating
+	// fold, so delegating to CvInfoUtil::checkSum (declaration order) would shift every trait's sum.
+	// The IDValueMaps below were already delegated (folded last); these explicit CheckSumC calls
+	// reproduce IDValueMapWrapper::checkSum byte-for-byte in the same (declaration) order.
+	// If a field is added to getDataMembers, add a matching CheckSum line here.
+	CheckSumC(iSum, m_aSpecialBuildingProductionModifiers);
+	CheckSumC(iSum, m_aBuildWorkerSpeedModifierTypes);
+	CheckSumC(iSum, m_aBuildingHappinessModifiers);
+	CheckSumC(iSum, m_aTechResearchModifiers);
+	CheckSumC(iSum, m_aBonusHappinessChanges);
+	CheckSumC(iSum, m_aImprovementUpgradeModifierTypes);
+	CheckSumC(iSum, m_aDomainFreeExperiences);
+	CheckSumC(iSum, m_aDomainProductionModifiers);
 }
 
 
