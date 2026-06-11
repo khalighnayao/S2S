@@ -99,6 +99,12 @@ void CvUnitAI::AI_clearCaches()
 //	the city would still hold this percentage of its needed defense strength without it.
 #define	GARRISON_RELEASE_MARGIN_PERCENT	125
 
+//	Minimum lead-attacker win% for a garrison to sortie against wildlife (#400). Killing
+//	an adjacent animal banks food/production/commerce yields, so near-sure kills are a
+//	legitimate harvest - but animals cannot attack cities, so there is never a defensive
+//	reason to accept coin-flip odds (which bled the prehistoric defense corps 84 -> 25).
+#define	GARRISON_ANIMAL_SORTIE_MIN_ODDS	85
+
 #define FOUND_RANGE					(7)
 
 typedef struct
@@ -12799,7 +12805,12 @@ bool CvUnitAI::AI_chokeDefend()
 	{
 		const int iPlotDanger = GET_PLAYER(getOwner()).AI_getPlotDanger(plot(), 3);
 
-		if (iPlotDanger <= 4 && AI_anyAttack(1, 65, std::max(0, iPlotDanger - 1)))
+		//	Sortie via AI_leaveAttack, NOT AI_anyAttack (the #382 disease, second site):
+		//	anyAttack(1,..) ran through AI_searchRange ((1+1)*(moves+1) = 4-6 tiles) with no
+		//	territory bound, marching city defenders off to "choke-defend" distant targets.
+		//	leaveAttack is raw-radius 1, refuses when last defender, only sorties from
+		//	strength, and skips wildlife-only targets.
+		if (iPlotDanger <= 4 && AI_leaveAttack(1, 65, 150))
 		{
 			return true;
 		}
@@ -18043,6 +18054,29 @@ bool CvUnitAI::AI_leaveAttack(int iRange, int iOddsThreshold, int iStrengthThres
 		&& !atPlot(plotX)
 		&& (plotX->isVisibleEnemyUnit(this) || plotX->isCity(true) && AI_potentialEnemy(plotX->getTeam(), plotX)))
 		{
+			//	Wildlife near the city is a harvest opportunity, not a threat (animals
+			//	cannot attack cities, but killing one banks food/production/commerce). A
+			//	capable garrison unit taking a NEAR-SURE kill is valid strategy; coin-flip
+			//	duels are not - they bled the prehistoric defense corps 84 -> 25 by turn
+			//	71 (#400). So animal-only targets demand GARRISON_ANIMAL_SORTIE_MIN_ODDS
+			//	when sortieing from an own city; real military targets keep the caller's
+			//	bar. Field use (not in an own city) is unchanged. Attack-incapable units
+			//	(e.g. bOnlyDefensive guardians) are already excluded: a group with no
+			//	attacker gets 0% win odds and passes no bar.
+			bool bOnlyAnimals = false;
+			if (pCity != NULL && pCity->getOwner() == getOwner() && plotX->getNumUnits() > 0)
+			{
+				bOnlyAnimals = true;
+				foreach_(const CvUnit * pTargetUnit, plotX->units())
+				{
+					if (!pTargetUnit->isAnimal())
+					{
+						bOnlyAnimals = false;
+						break;
+					}
+				}
+			}
+
 			int iPathTurns;
 			if (generatePath(plotX, 0, true, &iPathTurns, iRange))
 			{
@@ -18050,7 +18084,8 @@ bool CvUnitAI::AI_leaveAttack(int iRange, int iOddsThreshold, int iStrengthThres
 				const int iValue = getGroup()->AI_attackOdds(plotX, true, false, NULL, -1, &iWinOdds);
 
 				// #319: gate on the lead attacker's win%, rank on goodness.
-				if (iWinOdds >= AI_finalOddsThreshold(plotX, iOddsThreshold))
+				if (iWinOdds >= AI_finalOddsThreshold(plotX, iOddsThreshold)
+				&& (!bOnlyAnimals || iWinOdds >= GARRISON_ANIMAL_SORTIE_MIN_ODDS))
 				{
 					if (iValue > iBestValue)
 					{

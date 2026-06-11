@@ -88,6 +88,17 @@ Rules that follow (owner rulings, issue #384):
   2). Now `rect(2,2)`, matching the range-2 strength accounting; and the in-city recall
   preference includes garrison members, not just city-AI types, since auxiliaries keep
   their own UNITAI.
+- **Garrison wildlife sorties are harvests, not defense — near-sure odds only (#400).**
+  Animals cannot attack cities, but killing one banks food/production/commerce yields
+  (owner ruling: a capable defender taking that kill is valid strategy). So
+  `AI_leaveAttack` from an own city demands `GARRISON_ANIMAL_SORTIE_MIN_ODDS` (85% lead
+  win) for animal-only target plots, while real military targets keep the caller's 55–70
+  bar — coin-flip bear duels bled the prehistoric defense corps 84 → 25 by turn 71. Field
+  use is unchanged; attack-incapable units (`bOnlyDefensive`) were never able to sortie
+  (an attacker-less group gets 0% win odds). `AI_chokeDefend` sorties via
+  `AI_leaveAttack(1, 65, 150)`, not `AI_anyAttack` — the anyAttack call was the #382 cold
+  case's second site (range-inflated to 4–6 tiles through `AI_searchRange`, no territory
+  bound).
 - **Mis-typed primary defenders self-correct.** At its re-plan, a CITY_DEFENSE unit with
   `noDefensiveBonus()` — the categorical unsuitability test, the same one strict
   `AI_findBestDefender` uses to reject defense candidates — demotes back to its XML
