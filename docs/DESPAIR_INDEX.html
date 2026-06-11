@@ -133,7 +133,36 @@
 </article>
 
 <article class="entry silver">
-  <h2><span class="medal">🥈</span> 2. The (Un)Fortified Position</h2>
+  <h2><span class="medal">🥈</span> 2. The Library of Alexandria, Burned Nightly</h2>
+  <div class="score-row"><span class="score">95 cE🐘</span><span class="meter"><i style="width:95%"></i></span></div>
+  <p>Building values — the numbers behind every "what should this city build?" decision —
+  were guarded by a cache that <code>CvCity::doTurn</code> <strong>deleted every turn, for
+  every city, unconditionally</strong>. No event-driven invalidation, no staleness check;
+  just <code>SAFE_DELETE</code> at dawn. And every "recalculation" re-derived
+  <strong>static XML facts by brute force</strong> — which buildings enable which
+  (O(buildings²) <code>canConstruct</code> sweeps), which units each building unlocks
+  (O(buildings × units) expression evaluations) — answers that cannot change without
+  restarting the game, re-learned ~1,350 times per turn at ~100 ms each. Peak measurement:
+  <strong>134.7 seconds of a 170.8-second turn. 87% of the entire late game</strong>,
+  spent re-deriving the tech tree from first principles.</p>
+  <p>The despair is a trilogy:</p>
+  <p><strong>Act II:</strong> the static relationships were made <em>actually static</em> —
+  a load-time reverse index, ~390× on the hotspot (11.7 s/turn → 0.05 s). Victory
+  declared. Then the <strong>identical O(buildings²) brute-force sweep was found alive in
+  a second location</strong> — the building-scoring loop's "enables other buildings" bonus
+  — quietly burning ~4 s/turn and wearing a <code>// TODO OPT</code> comment like a name
+  tag.</p>
+  <p><strong>Act III:</strong> the first cache-<em>retention</em> fix returned 40% instead
+  of the expected 4×, because the "retain values" flush still stamped every cache
+  <strong>incomplete</strong> every turn, and the first read then forced a full recompute
+  anyway. The library kept its books and re-read all of them just to be sure.</p>
+  <p class="status">Status: fixed in three installments (the #314 static index, retention
+  + staggered refresh, the scoring-loop migration). The residual ~2.6 s/turn is
+  event-driven and has an appointment with the repository.</p>
+</article>
+
+<article class="entry bronze">
+  <h2><span class="medal">🥉</span> 3. The (Un)Fortified Position</h2>
   <div class="score-row"><span class="score">92 cE🐘</span><span class="meter"><i style="width:92%"></i></span></div>
   <p>AI garrisons parked with one-turn <code>MISSION_SKIP</code>, so they never actually
   fortified — meaning <strong>AI cities have never received fortification defense
@@ -148,8 +177,8 @@
   re-plans).</p>
 </article>
 
-<article class="entry bronze">
-  <h2><span class="medal">🥉</span> 3. Schrödinger's Job Application</h2>
+<article class="entry">
+  <h2>4. Schrödinger's Job Application</h2>
   <div class="score-row"><span class="score">85 cE🐘</span><span class="meter"><i style="width:85%"></i></span></div>
   <p>A unit's first <code>processContracts</code> call of the turn <em>advertised</em> for
   work, found none, and returned <code>true</code> — "I did something!" The slice driver,
@@ -161,7 +190,7 @@
 </article>
 
 <article class="entry">
-  <h2>4. The RESERVE ↔ PROPERTY_CONTROL Hokey Pokey</h2>
+  <h2>5. The RESERVE ↔ PROPERTY_CONTROL Hokey Pokey</h2>
   <div class="score-row"><span class="score">78 cE🐘</span><span class="meter"><i style="width:78%"></i></span></div>
   <p>The role-conversion gate asked <em>"could this unit theoretically help with
   crime?"</em> while the assignment handler asked <em>"does this unit actually have the
@@ -174,7 +203,7 @@
 </article>
 
 <article class="entry">
-  <h2>5. The Unkillable Peasant</h2>
+  <h2>6. The Unkillable Peasant</h2>
   <div class="score-row"><span class="score">71 cE🐘</span><span class="meter"><i style="width:71%"></i></span></div>
   <p><code>getCombatOdds</code> floored per-round damage to 0 against ~zero-strength
   defenders, making a dying militiaman <strong>mathematically immortal</strong>. The AI
@@ -187,7 +216,7 @@
 </article>
 
 <article class="entry">
-  <h2>6. The Eternal Anesthesiologist</h2>
+  <h2>7. The Eternal Anesthesiologist</h2>
   <div class="score-row"><span class="score">60 cE🐘</span><span class="meter"><i style="width:60%"></i></span></div>
   <p><code>AI_heal</code> returned <code>true</code> for a heal no-op when the unit
   <em>couldn't heal</em>, so units re-decided "heal in city" <strong>49–196 times per
@@ -198,7 +227,7 @@
 </article>
 
 <article class="entry">
-  <h2>7. The .vcxproj of Lies</h2>
+  <h2>8. The .vcxproj of Lies</h2>
   <div class="score-row"><span class="score">47 cE🐘</span><span class="meter"><i style="width:47%"></i></span></div>
   <p>The Visual Studio project file confidently states <code>PlatformToolset: v142</code>.
   The actual compiler is the <strong>Microsoft Visual C++ Toolkit 2003</strong> (MSVC 7.1).

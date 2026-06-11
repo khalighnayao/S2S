@@ -33,7 +33,37 @@ member of a city it contributed exactly nothing to.
 
 ---
 
-## 🥈 2. The (Un)Fortified Position — 92 cE🐘
+## 🥈 2. The Library of Alexandria, Burned Nightly — 95 cE🐘
+
+Building values — the numbers behind every "what should this city build?" decision — were
+guarded by a cache that `CvCity::doTurn` **deleted every turn, for every city,
+unconditionally**. No event-driven invalidation, no staleness check; just `SAFE_DELETE` at
+dawn. And every "recalculation" re-derived **static XML facts by brute force** — which
+buildings enable which (O(buildings²) `canConstruct` sweeps), which units each building
+unlocks (O(buildings × units) expression evaluations) — answers that cannot change without
+restarting the game, re-learned ~1,350 times per turn at ~100 ms each. Peak measurement:
+**134.7 seconds of a 170.8-second turn. 87% of the entire late game**, spent re-deriving
+the tech tree from first principles.
+
+The despair is a trilogy:
+
+- **Act II:** the static relationships were made *actually static* — a load-time reverse
+  index, ~390× on the hotspot (11.7 s/turn → 0.05 s). Victory declared. Then the
+  **identical O(buildings²) brute-force sweep was found alive in a second location** — the
+  building-scoring loop's "enables other buildings" bonus — quietly burning ~4 s/turn and
+  wearing a `// TODO OPT` comment like a name tag.
+- **Act III:** the first cache-*retention* fix returned 40% instead of the expected 4×,
+  because the "retain values" flush still stamped every cache **incomplete** every turn,
+  and the first read then forced a full recompute anyway. The library kept its books and
+  re-read all of them just to be sure.
+
+*Status: fixed in three installments (the #314 static index, retention + staggered
+refresh, the scoring-loop migration). The residual ~2.6 s/turn is event-driven and has an
+appointment with the repository.*
+
+---
+
+## 🥉 3. The (Un)Fortified Position — 92 cE🐘
 
 AI garrisons parked with one-turn `MISSION_SKIP`, so they never actually fortified —
 meaning **AI cities have never received fortification defense bonuses**, plausibly since
@@ -49,7 +79,7 @@ awake, slightly nervous, accruing nothing.
 
 ---
 
-## 🥉 3. Schrödinger's Job Application — 85 cE🐘
+## 4. Schrödinger's Job Application — 85 cE🐘
 
 A unit's first `processContracts` call of the turn *advertised* for work, found none, and
 returned `true` — "I did something!" The slice driver, taking it at its word, re-ran the
@@ -62,7 +92,7 @@ as a full shift — and the *system agreed*.
 
 ---
 
-## 4. The RESERVE ↔ PROPERTY_CONTROL Hokey Pokey — 78 cE🐘
+## 5. The RESERVE ↔ PROPERTY_CONTROL Hokey Pokey — 78 cE🐘
 
 The role-conversion gate asked *"could this unit theoretically help with crime?"* while
 the assignment handler asked *"does this unit actually have the equipment?"* Different
@@ -77,7 +107,7 @@ you corrupt the demand accounting. That's what it's all about.
 
 ---
 
-## 5. The Unkillable Peasant — 71 cE🐘
+## 6. The Unkillable Peasant — 71 cE🐘
 
 `getCombatOdds` floored per-round damage to 0 against ~zero-strength defenders, making a
 dying militiaman **mathematically immortal**. The AI under-reported its own win odds
@@ -91,7 +121,7 @@ layer above it nodded along.
 
 ---
 
-## 6. The Eternal Anesthesiologist — 60 cE🐘
+## 7. The Eternal Anesthesiologist — 60 cE🐘
 
 `AI_heal` returned `true` for a heal no-op when the unit *couldn't heal*, so units
 re-decided "heal in city" **49–196 times per turn** — and in rare alignments, the turn
@@ -104,7 +134,7 @@ pressing it 195 more times. Except occasionally the building never lets you leav
 
 ---
 
-## 7. The .vcxproj of Lies — 47 cE🐘
+## 8. The .vcxproj of Lies — 47 cE🐘
 
 The Visual Studio project file confidently states `PlatformToolset: v142`. The actual
 compiler is the **Microsoft Visual C++ Toolkit 2003** (MSVC 7.1). The project file drives
