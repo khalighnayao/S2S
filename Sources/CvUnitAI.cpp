@@ -27019,15 +27019,21 @@ bool CvUnitAI::AI_patrolBorders()
 		{
 			const DirectionTypes eNewDirection = estimateDirection(plot(), pLoopPlot);
 			int iValue = GC.getGame().getSorenRandNum(10000, "AI Border Patrol");
-			if (pLoopPlot->isBorder(true))
+			//	Only the unit owner's OWN border earns the circuit bonus (#24): a plot of OURS
+			//	adjacent to anything not-ours. Foreign plots never count, or a patroller within
+			//	leash range of a friendly neighbour ends up walking the FRIEND's border seam.
+			if (pLoopPlot->getOwner() == getOwner())
 			{
-				bBorderInRange = true;
-				iValue += GC.getGame().getSorenRandNum(10000, "AI Border Patrol");
-			}
-			else if (pLoopPlot->isBorder(false))
-			{
-				bBorderInRange = true;
-				iValue += GC.getGame().getSorenRandNum(5000, "AI Border Patrol");
+				if (pLoopPlot->isBorder(true))
+				{
+					bBorderInRange = true;
+					iValue += GC.getGame().getSorenRandNum(10000, "AI Border Patrol");
+				}
+				else if (pLoopPlot->isBorder(false))
+				{
+					bBorderInRange = true;
+					iValue += GC.getGame().getSorenRandNum(5000, "AI Border Patrol");
+				}
 			}
 			//Avoid heading backwards, we want to circuit our borders, if possible.
 			if (eNewDirection == getOppositeDirection(getFacingDirection(false)))
@@ -27046,13 +27052,16 @@ bool CvUnitAI::AI_patrolBorders()
 			iValue += AI_directionAffinity(eNewDirection) * 1000;
 			if (pLoopPlot->getOwner() != getOwner())
 			{
+				//	This check was INVERTED (#24): with the leave-borders option ON it excluded
+				//	foreign plots outright, and with it OFF it let the walk drift abroad at /10
+				//	weight. Now: option ON = allowed but discouraged, OFF = never.
 				if (GET_PLAYER(getOwner()).isModderOption(MODDEROPTION_AUTO_PATROL_CAN_LEAVE_BORDERS))
 				{
-					iValue = -1;
+					iValue /= 10;
 				}
 				else
 				{
-					iValue /= 10;
+					iValue = -1;
 				}
 			}
 			if (getDomainType() == DOMAIN_LAND && pLoopPlot->isWater() || getDomainType() == DOMAIN_SEA && !pLoopPlot->isWater())
