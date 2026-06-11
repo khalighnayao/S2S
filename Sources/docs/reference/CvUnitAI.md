@@ -106,11 +106,6 @@ visibility-staleness-weighted wander + the shared birthmark direction bias, with
 | `getIntendedConstructBuilding()` | Returns the building this unit intends to construct (if any). |
 | `getIntendedHeritage()` | Returns the heritage this unit intends to found (if any). |
 
-## Logging
-| Method | Description |
-|---|---|
-| `SendLog(function, message)` | Emits a structured log entry via the `FLB` logger for AI debugging. |
-
 ## Related
 - [`CvUnit`](CvUnit.md) — base class (non-AI state)  
 - [`CvSelectionGroupAI`](CvSelectionGroupAI.md) — groups of units driven together  

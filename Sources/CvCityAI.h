@@ -127,7 +127,6 @@ public:
 	void AI_init();
 	void AI_uninit();
 	void AI_reset();
-	void SendLog(CvWString function, CvWString message) const;
 
 	/**
 	 * Performs the main AI logic for the city at the start of each turn.

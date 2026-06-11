@@ -231,6 +231,16 @@ decide what to improve and where (memory/plan: `city-driven-worker-valuation`). 
 payoffs: speed + better AI coordination. Aligns with lifting unit decisions to per-player
 orchestration (`ai-unit-movement-to-player-level`).
 
+### 8b. Queryability — the live-state endpoint (owner ruling 2026-06-11, #387)
+
+**"Have the ability to do a http request, and get data from the repositories."** The repository
+is the layer a live game-state query (dev/verification tooling — see #387) should serve:
+tenants are versioned snapshots by construction, so a serving thread reading a *published*
+repository version never races the game thread. Design requirement this places on the tenant
+interface NOW (cheap to honor, expensive to retrofit): tenants must be **enumerable and
+serializable** — a uniform "dump tenant to JSON" hook plus the version/timestamp header — so
+the eventual endpoint is a thin reader over the registry rather than per-feature plumbing.
+
 ## 9. Decisions — resolved & open
 
 Resolved:

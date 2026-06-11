@@ -195,16 +195,6 @@ void CvUnitAI::AI_reset(UnitAITypes eUnitAI, bool bConstructorCall)
 
 	m_aiWaitingOnUnitAITypes.clear();
 }
-void CvUnitAI::SendLog(CvWString function, CvWString message)
-{
-	//WIP, wrapper of the new FLB logger, to create correct payload for this class
-	CvWString aiType = "CvUnitAI";
-
-
-	// logAIJson(aiType, this->getName(), function, message);
-
-}
-
 // AI_update returns true when we should abort the loop and wait until next slice
 bool CvUnitAI::AI_update()
 {
@@ -1769,7 +1759,6 @@ void CvUnitAI::AI_settleMove()
 	}
 
 	const int iDanger = GET_PLAYER(getOwner()).AI_getPlotDanger(plot(), 3);
-	SendLog("SettlerAI", CvWString::format(L"iDanger check %I64d", iDanger));
 	if (iDanger > 0)
 	{
 		if (!getGroup()->canDefend() && (plot()->getOwner() == getOwner() || iDanger > 2)
@@ -1779,7 +1768,6 @@ void CvUnitAI::AI_settleMove()
 			{
 				return;
 			}
-			SendLog("SettlerAI", CvWString::format(L"already in city %I64d", iDanger));
 			getGroup()->pushMission(MISSION_SKIP);
 		}
 	}
@@ -1810,19 +1798,12 @@ void CvUnitAI::AI_settleMove()
 	if (!bInhibitFounding)
 	{
 		bInhibitFounding = GET_PLAYER(getOwner()).AI_isFinancialTrouble();
-		if (bInhibitFounding) SendLog("SettlerAI", CvWString::format(L"	Settler (%d) inhibited from founding due to financial difficulties", getID()));
-
-		if (bInhibitFounding && gUnitLogLevel >= 2)
-		{
-			SendLog("SettlerAI", CvWString::format(L"	Settler (%d) inhibited from founding due to financial difficulties", getID()));
-		}
 	}
 
 	if (!bInhibitFounding)
 	{
 		int iAreaBestFoundValue = 0;
 		int iOtherBestFoundValue = 0;
-		SendLog("SettlerAI", CvWString::format(L"Number of City Sites %WS %I64d ID: %d X: %d Y: %d", GET_PLAYER(getOwner()).getCivilizationDescription(0), GET_PLAYER(getOwner()).AI_getNumCitySites(), getID(), getX(), getY()));
 		for (int iI = 0; iI < GET_PLAYER(getOwner()).AI_getNumCitySites(); iI++)
 		{
 			CvPlot* pCitySitePlot = GET_PLAYER(getOwner()).AI_getCitySite(iI);
@@ -1832,7 +1813,6 @@ void CvUnitAI::AI_settleMove()
 			{
 				if (plot() == pCitySitePlot && canFound(plot()))
 				{
-					SendLog("SettlerAI", CvWString::format(L"Settler %S (%d) founding in place since it's at a city site %d, %d", GET_PLAYER(getOwner()).getCivilizationDescription(0), getID(), getX(), getY()));
 					getGroup()->pushMission(MISSION_FOUND);
 					return;
 				}
@@ -1849,7 +1829,6 @@ void CvUnitAI::AI_settleMove()
 							pEndTurnPlot = getPathEndTurnPlot();
 							if (pEndTurnPlot != NULL)
 							{
-								SendLog("SettlerAI", CvWString::format(L"Settler (%d) from %S continuing mission to %d, %d, current group strength (%d)", getID(), GET_PLAYER(getOwner()).getCivilizationDescription(0), pCitySitePlot->getX(), pCitySitePlot->getY(), getGroup()->getStrength()));
 								getGroup()->pushMission(MISSION_MOVE_TO, pEndTurnPlot->getX(), pEndTurnPlot->getY(), MOVE_SAFE_TERRITORY, false, false, MISSIONAI_FOUND, pCitySitePlot);
 								return;
 							}
@@ -1906,9 +1885,6 @@ void CvUnitAI::AI_settleMove()
 			//	If we're already in a city advertise for an escort
 			if (plot()->isCity() && (plot()->getOwner() == getOwner()) && !isCargo())
 			{
-				std::ostringstream stringStream;
-				stringStream << "Settler (" << getID() << ") for player" << getOwner() << "(" << GET_PLAYER(getOwner()).getCivilizationDescription(1) << ") at" << "(" << getX() << "," << getY() << ")" << "requesting defensive escort, current group strength (" << getGroup()->getStrength() << ")" << AI_minSettlerDefense() << std::endl;
-				SendLog("SettlerAI", stringStream.str());
 				if (m_contractsLastEstablishedTurn != GC.getGame().getGameTurn())
 				{
 					//	For now advertise the work as being here since we'll be holding position
@@ -1933,9 +1909,6 @@ void CvUnitAI::AI_settleMove()
 		if (plot()->isCity() && plot()->getOwner() == getOwner() && getGroup()->getNumUnits() < 3
 		&& GC.getGame().getMaxCityElimination() > 0 && GET_PLAYER(getOwner()).AI_getAnyPlotDanger(plot()))
 		{
-			std::ostringstream stringStream;
-			stringStream << "Settler (" << getID() << ") for player" << getOwner() << "(" << GET_PLAYER(getOwner()).getCivilizationDescription(0) << ") at" << "(" << getX() << "," << getY() << ")" << "skipping due to not enough units (" << getGroup()->getStrength() << ")" << GC.getGame().getMaxCityElimination() << GET_PLAYER(getOwner()).AI_getAnyPlotDanger(plot()) << std::endl;
-			SendLog("SettlerAI", stringStream.str());
 			getGroup()->pushMission(MISSION_SKIP);
 			return;
 		}
@@ -1949,7 +1922,6 @@ void CvUnitAI::AI_settleMove()
 		{
 			if (AI_load(UNITAI_SETTLER_SEA, MISSIONAI_LOAD_SETTLER, NO_UNITAI, -1, -1, -1, 0, MOVE_NO_ENEMY_TERRITORY))
 			{
-				SendLog("SettlerAI", "tries to board ship");
 				return;
 			}
 			// BBAI TODO: Go to a good city (like one with a transport) ...
@@ -21907,7 +21879,6 @@ bool CvUnitAI::AI_travelToUpgradeCity()
 	{
 		return false;
 	}
-	SendLog("AI_ExploreMove", CvWString::format(L"Unit: %S is not a dead end unit, and can potentially upgrade to something one day", this->getName().c_str()));
 	// is there a city which can upgrade us?
 	CvCity* pUpgradeCity = getUpgradeCity(/*bSearch*/ true);
 	if (pUpgradeCity != NULL)
