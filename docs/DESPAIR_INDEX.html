@@ -227,7 +227,27 @@
 </article>
 
 <article class="entry">
-  <h2>8. The .vcxproj of Lies</h2>
+  <h2>8. International Civil Asset Forfeiture</h2>
+  <div class="score-row"><span class="score">55 cE🐘</span><span class="meter"><i style="width:55%"></i></span></div>
+  <p>Foreign police cars were observed parked on the human player's <strong>resource
+  tiles</strong>, mission hover proudly reading <em>"Maintain property control."</em> The
+  mechanism: when a property-control unit isn't at its target city, the AI rolls a d10
+  every re-plan — and on 0–5 it simply <strong>doesn't move</strong>, skipping in place
+  wherever it stands, formally maintaining whatever tile that happens to be. The code
+  comment says <em>"RNG 50% only will move."</em> <code>iValue &lt;= 5</code> out of ten
+  outcomes is 60%. The comment cannot count, the police cannot drive, and the unit
+  random-walks toward its destination at ~0.4 steps per turn, getting stranded mid-route
+  in other nations' territory — where it sets up a checkpoint on someone else's
+  uranium.</p>
+  <p>Bonus: if pathing failed, it parked on <em>"waiting for escort"</em> — an escort that
+  is never dispatched to property units. The police car waits for backup. Forever.
+  Abroad.</p>
+  <p class="status">Status: fixed (#396) — the dice are gone, journeys commit, and units
+  pool at home, fortified. The uranium has been returned.</p>
+</article>
+
+<article class="entry">
+  <h2>9. The .vcxproj of Lies</h2>
   <div class="score-row"><span class="score">47 cE🐘</span><span class="meter"><i style="width:47%"></i></span></div>
   <p>The Visual Studio project file confidently states <code>PlatformToolset: v142</code>.
   The actual compiler is the <strong>Microsoft Visual C++ Toolkit 2003</strong> (MSVC 7.1).

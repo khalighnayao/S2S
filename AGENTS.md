@@ -94,6 +94,19 @@ not findings to re-discover.
   reluctantly via `GARRISON_RELEASE_MARGIN_PERCENT`). Details:
   `Sources/docs/reference/CvUnitAI.md` (garrison-tiers section).
 
+### Unit AI fallback terminals
+- **Audit pattern: idle-unit fallback terminals must not park units wherever they happen
+  to stand.** Three owner-observed "lost contact with the mothership" cases share it:
+  hunters advertising for escorts while idling in rival borders (#392), property-control
+  units stranded mid-route by a per-re-plan "don't move" dice (#396), human workers
+  waiting forever on `MISSIONAI_WAIT_FOR_ESCORT` (escorts are never dispatched to them).
+  Rules when writing/touching a fallback terminal: park in OWN territory (if standing on
+  another team's land with nothing to do, `AI_retreatToCity` first); park persistently
+  (FORTIFY → SLEEP → SKIP, the #342 idiom), not via one-turn `MISSION_SKIP`; and never
+  gate per-re-plan progress on an RNG — re-rolled dice compound into a random walk.
+  `MOVE_NO_ENEMY_TERRITORY` does NOT keep units out of rival land (it only excludes
+  at-war territory), so it is not a substitute for any of the above.
+
 ### Graphics / map generation
 - Any plot-graphics mutation must be guarded by **`GC.IsGraphicsInitialized()`**.
   During a NEW game, world generation (`addGameElements` → rivers/features/bonuses)
