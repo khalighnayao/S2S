@@ -148,6 +148,9 @@ other nations' territory — where it sets up a checkpoint on someone else's ura
 Bonus: if pathing failed, it parked on *"waiting for escort"* — an escort that is never
 dispatched to property units. The police car waits for backup. Forever. Abroad.
 
+In fairness to the code, the mission is called *property control*, and the police cars
+controlled the plot like it was their property. The bug was in our expectations.
+
 *Status: fixed (#396) — the dice are gone, journeys commit, and units pool at home,
 fortified. The uranium has been returned.*
 
