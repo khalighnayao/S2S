@@ -4719,6 +4719,25 @@ void CvUnitAI::AI_cityDefenseMove()
 		return;
 	}
 
+	//	Role hygiene (#384): a primary defender that cannot use defensive bonuses is
+	//	categorically mis-typed (the historic garrison retype stamped COUNTER/ATTACK units
+	//	CITY_DEFENSE as a parking side effect, and saves carry that population). Demote it
+	//	back to its XML default role at its own re-plan - a deliberate, criteria-gated
+	//	re-evaluation, the same test the strict AI_findBestDefender pass uses to reject
+	//	defense candidates. With the garrison retype sources gone this population only
+	//	shrinks. Garrison membership (auxiliary tier) is type-independent, so a demoted
+	//	defender parked in a city keeps counting toward that city's defense strength.
+	if (noDefensiveBonus())
+	{
+		const UnitAITypes eDefaultAI = m_pUnitInfo->getDefaultUnitAIType();
+		if (eDefaultAI != NO_UNITAI && eDefaultAI != UNITAI_CITY_DEFENSE)
+		{
+			AI_logAct("cityDefenseMove", "demoteUnsuitedDefender", plot());
+			AI_setUnitAIType(eDefaultAI);
+			return;
+		}
+	}
+
 	bool bDanger = (GET_PLAYER(getOwner()).AI_getAnyPlotDanger(plot(), 3));
 
 	if (MISSIONAI_REGROUP == getGroup()->AI_getMissionAIType())

@@ -80,6 +80,13 @@ Rules that follow (owner rulings, issue #384):
   release gate (`AI_guardCity`'s `AI_isDefended` hold test) demands a
   `GARRISON_RELEASE_MARGIN_PERCENT` (125%) strength surplus before an existing garrison
   member may leave; joining is judged at the plain 100% bar.
+- **Mis-typed primary defenders self-correct.** At its re-plan, a CITY_DEFENSE unit with
+  `noDefensiveBonus()` — the categorical unsuitability test, the same one strict
+  `AI_findBestDefender` uses to reject defense candidates — demotes back to its XML
+  default UNITAI (top of `AI_cityDefenseMove`). This bleeds the historic retype
+  population out of existing saves; with the retype sources gone it only shrinks. The
+  *general* "is this unit any good at its role" re-evaluation remains #380 (reset tool)
+  / `unit-ai-valuation.md` territory.
 - Membership changes log as `[UNT/garrison]` (level 2) — `type=` distinguishes primary
   (CITY_DEFENSE) from auxiliary members.
 

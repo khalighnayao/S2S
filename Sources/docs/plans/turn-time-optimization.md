@@ -180,7 +180,10 @@ per-slice Python `gameUpdate` (~5 ms), `updateScore`, `testAlive`; `plotPaging` 
   (`GARRISON_RELEASE_MARGIN_PERCENT` 125) implements the owner's retention ruling.
   Expected effects to verify: `[UNT/role] -> 10` conversions disappear; CITY_DEFENSE
   `[PERF/unitai]` n drops toward true defender count; `[UNT/garrison]` shows stable
-  membership. The city-declared-needs repository channel remains the campaign's main body.
+  membership. Existing saves bleed their historic mis-typed population via a categorical
+  demotion (`noDefensiveBonus()` CITY_DEFENSE units revert to XML default at re-plan,
+  `[UNT/act] demoteUnsuitedDefender`). The city-declared-needs repository channel remains
+  the campaign's main body.
 
 Deprioritized (measured negligible): visibility stickytape, property solver, trade routes,
 the unit-choose family.
