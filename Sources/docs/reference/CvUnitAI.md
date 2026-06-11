@@ -87,6 +87,14 @@ retreat/safety. City capturing during intercepts is gated by `AUTO_PATROL_NO_CIT
 Historical bug: the range-7/12 intercepts used to sit AFTER the walk and were unreachable —
 patrollers circled past interior intruders.
 
+**Known deferred limitation (owner decision 2026-06-11):** coverage concentrates on the border
+ring, so the deep interior of a very large empire can sit in fog where intruders are invisible
+to the intercept scans ("a unit can only hunt what someone can see"). Judged good enough for
+now; if enemy units are observed jogging around freely in the center of a large empire, file a
+fresh specialized issue for coverage-driven territory patrol (sketch existed in #376:
+visibility-staleness-weighted wander + the shared birthmark direction bias, with a UI rename to
+"Territory Patrol").
+
 ## State / Identity
 | Method | Description |
 |---|---|
