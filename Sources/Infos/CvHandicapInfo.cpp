@@ -31,61 +31,73 @@
 //  PURPOSE :   Default constructor
 //
 //------------------------------------------------------------------------------------------------------
-CvHandicapInfo::CvHandicapInfo() :
-m_iFreeWinsVsBarbs(0),
-m_iAnimalAttackProb(0),
-m_iAdvancedStartPointsMod(0),
-m_iStartingGold(0),
-m_iUnitUpkeepPercent(0),
-m_iDistanceMaintenancePercent(0),
-m_iNumCitiesMaintenancePercent(0),
-m_iColonyMaintenancePercent(0),
-m_iMaxColonyMaintenance(0),
-m_iCorporationMaintenancePercent(0),
-m_iCivicUpkeepPercent(0),
-m_iInflationPercent(0),
-m_iHealthBonus(0),
-m_iHappyBonus(0),
-m_iAttitudeChange(0),
-m_iNoTechTradeModifier(0),
-m_iTechTradeKnownModifier(0),
-m_iUnownedWaterTilesPerBarbarianUnit(0),
-m_iUnownedTilesPerBarbarianCity(0),
-m_iBarbarianCityCreationTurnsElapsed(0),
-m_iBarbarianCityCreationProb(0),
-m_iAnimalCombatModifier(0),
-m_iBarbarianCombatModifier(0),
-m_iAIAnimalCombatModifier(0),
-m_iSubdueAnimalBonusAI(0),
-m_iAIBarbarianCombatModifier(0),
-m_iStartingDefenseUnits(0),
-m_iStartingWorkerUnits(0),
-m_iStartingExploreUnits(0),
-m_iAIStartingDefenseUnits(0),
-m_iAIStartingWorkerUnits(0),
-m_iAIStartingExploreUnits(0),
-m_iBarbarianInitialDefenders(0),
-m_iAIDeclareWarProb(0),
-m_iAIWorkRateModifier(0),
-m_iAIGrowthPercent(0),
-m_iAITrainPercent(0),
-m_iAIWorldTrainPercent(0),
-m_iAIConstructPercent(0),
-m_iAIWorldConstructPercent(0),
-m_iAICreatePercent(0),
-m_iAIResearchPercent(0),
-m_iAIWorldCreatePercent(0),
-m_iAICivicUpkeepPercent(0),
-m_iAIUnitUpkeepPercent(0),
-m_iAIUnitSupplyPercent(0),
-m_iAIUnitUpgradePercent(0),
-m_iAIInflationPercent(0),
-m_iAIWarWearinessPercent(0),
-m_iAIPerEraModifier(0),
-m_iAIAdvancedStartPercent(0),
-m_iRevolutionIndexPercent(0)
-,m_PropertyManipulators()
+CvHandicapInfo::CvHandicapInfo()
 {
+	CvInfoUtil(this).initDataMembers();
+}
+
+
+// Every XML-backed field is declared here (#196); read/copy derive from it.
+// getCheckSum stays explicit: the legacy checksum omits m_iSubdueAnimalBonusAI (a read field),
+// so delegating would change the savegame asset checksum.
+void CvHandicapInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.add(m_iFreeWinsVsBarbs, L"iFreeWinsVsBarbs")
+		.add(m_iAnimalAttackProb, L"iAnimalAttackProb")
+		.add(m_iAdvancedStartPointsMod, L"iAdvancedStartPointsMod")
+		.add(m_iStartingGold, L"iGold")
+		.add(m_iUnitUpkeepPercent, L"iUnitUpkeepPercent")
+		.add(m_iDistanceMaintenancePercent, L"iDistanceMaintenancePercent")
+		.add(m_iNumCitiesMaintenancePercent, L"iNumCitiesMaintenancePercent")
+		.add(m_iColonyMaintenancePercent, L"iColonyMaintenancePercent")
+		.add(m_iMaxColonyMaintenance, L"iMaxColonyMaintenance")
+		.add(m_iCorporationMaintenancePercent, L"iCorporationMaintenancePercent")
+		.add(m_iCivicUpkeepPercent, L"iCivicUpkeepPercent")
+		.add(m_iInflationPercent, L"iInflationPercent")
+		.add(m_iHealthBonus, L"iHealthBonus")
+		.add(m_iHappyBonus, L"iHappyBonus")
+		.add(m_iAttitudeChange, L"iAttitudeChange")
+		.add(m_iNoTechTradeModifier, L"iNoTechTradeModifier")
+		.add(m_iTechTradeKnownModifier, L"iTechTradeKnownModifier")
+		.add(m_iUnownedWaterTilesPerBarbarianUnit, L"iUnownedWaterTilesPerBarbarianUnit")
+		.add(m_iUnownedTilesPerBarbarianCity, L"iUnownedTilesPerBarbarianCity")
+		.add(m_iBarbarianCityCreationTurnsElapsed, L"iBarbarianCityCreationTurnsElapsed")
+		.add(m_iBarbarianCityCreationProb, L"iBarbarianCityCreationProb")
+		.add(m_iAnimalCombatModifier, L"iAnimalBonus")
+		.add(m_iBarbarianCombatModifier, L"iBarbarianBonus")
+		.add(m_iAIAnimalCombatModifier, L"iAIAnimalBonus")
+		.add(m_iSubdueAnimalBonusAI, L"iSubdueAnimalBonusAI")
+		.add(m_iAIBarbarianCombatModifier, L"iAIBarbarianBonus")
+		.add(m_iStartingDefenseUnits, L"iStartingDefenseUnits")
+		.add(m_iStartingWorkerUnits, L"iStartingWorkerUnits")
+		.add(m_iStartingExploreUnits, L"iStartingExploreUnits")
+		.add(m_iAIStartingDefenseUnits, L"iAIStartingDefenseUnits")
+		.add(m_iAIStartingWorkerUnits, L"iAIStartingWorkerUnits")
+		.add(m_iAIStartingExploreUnits, L"iAIStartingExploreUnits")
+		.add(m_iBarbarianInitialDefenders, L"iBarbarianDefenders")
+		.add(m_iAIDeclareWarProb, L"iAIDeclareWarProb")
+		.add(m_iAIWorkRateModifier, L"iAIWorkRateModifier")
+		.add(m_iAIGrowthPercent, L"iAIGrowthPercent")
+		.add(m_iAITrainPercent, L"iAITrainPercent")
+		.add(m_iAIWorldTrainPercent, L"iAIWorldTrainPercent")
+		.add(m_iAIConstructPercent, L"iAIConstructPercent")
+		.add(m_iAIWorldConstructPercent, L"iAIWorldConstructPercent")
+		.add(m_iAICreatePercent, L"iAICreatePercent")
+		.add(m_iAIResearchPercent, L"iAIResearchPercent")
+		.add(m_iAIWorldCreatePercent, L"iAIWorldCreatePercent")
+		.add(m_iAICivicUpkeepPercent, L"iAICivicUpkeepPercent")
+		.add(m_iAIUnitUpkeepPercent, L"iAIUnitUpkeepPercent")
+		.add(m_iAIUnitSupplyPercent, L"iAIUnitSupplyPercent")
+		.add(m_iAIUnitUpgradePercent, L"iAIUnitUpgradePercent")
+		.add(m_iAIInflationPercent, L"iAIInflationPercent")
+		.add(m_iAIWarWearinessPercent, L"iAIWarWearinessPercent")
+		.add(m_iAIPerEraModifier, L"iAIPerEraModifier")
+		.add(m_iAIAdvancedStartPercent, L"iAIAdvancedStartPercent")
+		.add(m_piGoodies, L"Goodies")
+		.add(m_iRevolutionIndexPercent, L"iRevolutionIndexPercent")
+		.add(m_PropertyManipulators)
+	;
 }
 
 
@@ -421,6 +433,9 @@ int CvHandicapInfo::getRevolutionIndexPercent() const
 
 
 
+// Explicit, NOT delegated to CvInfoUtil (#196): the legacy checksum omits m_iSubdueAnimalBonusAI
+// (which IS read from XML and declared in getDataMembers); delegating would fold it in and
+// change the savegame asset checksum. Order reproduces the legacy composition exactly.
 void CvHandicapInfo::getCheckSum(uint32_t& iSum) const
 {
 	CheckSum(iSum, m_iFreeWinsVsBarbs);
@@ -485,69 +500,12 @@ void CvHandicapInfo::getCheckSum(uint32_t& iSum) const
 
 bool CvHandicapInfo::read(CvXMLLoadUtility* pXML)
 {
-
 	if (!CvInfoBase::read(pXML))
 	{
 		return false;
 	}
 
-	pXML->GetOptionalChildXmlValByName(&m_iFreeWinsVsBarbs, L"iFreeWinsVsBarbs");
-	pXML->GetOptionalChildXmlValByName(&m_iAnimalAttackProb, L"iAnimalAttackProb");
-	pXML->GetOptionalChildXmlValByName(&m_iAdvancedStartPointsMod, L"iAdvancedStartPointsMod");
-	pXML->GetOptionalChildXmlValByName(&m_iStartingGold, L"iGold");
-	pXML->GetOptionalChildXmlValByName(&m_iUnitUpkeepPercent, L"iUnitUpkeepPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iDistanceMaintenancePercent, L"iDistanceMaintenancePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iNumCitiesMaintenancePercent, L"iNumCitiesMaintenancePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iColonyMaintenancePercent, L"iColonyMaintenancePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iMaxColonyMaintenance, L"iMaxColonyMaintenance");
-	pXML->GetOptionalChildXmlValByName(&m_iCorporationMaintenancePercent, L"iCorporationMaintenancePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iCivicUpkeepPercent, L"iCivicUpkeepPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iInflationPercent, L"iInflationPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iHealthBonus, L"iHealthBonus");
-	pXML->GetOptionalChildXmlValByName(&m_iHappyBonus, L"iHappyBonus");
-	pXML->GetOptionalChildXmlValByName(&m_iAttitudeChange, L"iAttitudeChange");
-	pXML->GetOptionalChildXmlValByName(&m_iNoTechTradeModifier, L"iNoTechTradeModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iTechTradeKnownModifier, L"iTechTradeKnownModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iUnownedWaterTilesPerBarbarianUnit, L"iUnownedWaterTilesPerBarbarianUnit");
-	pXML->GetOptionalChildXmlValByName(&m_iUnownedTilesPerBarbarianCity, L"iUnownedTilesPerBarbarianCity");
-	pXML->GetOptionalChildXmlValByName(&m_iBarbarianCityCreationTurnsElapsed, L"iBarbarianCityCreationTurnsElapsed");
-	pXML->GetOptionalChildXmlValByName(&m_iBarbarianCityCreationProb, L"iBarbarianCityCreationProb");
-	pXML->GetOptionalChildXmlValByName(&m_iAnimalCombatModifier, L"iAnimalBonus");
-	pXML->GetOptionalChildXmlValByName(&m_iBarbarianCombatModifier, L"iBarbarianBonus");
-	pXML->GetOptionalChildXmlValByName(&m_iAIAnimalCombatModifier, L"iAIAnimalBonus");
-	pXML->GetOptionalChildXmlValByName(&m_iSubdueAnimalBonusAI, L"iSubdueAnimalBonusAI");
-	pXML->GetOptionalChildXmlValByName(&m_iAIBarbarianCombatModifier, L"iAIBarbarianBonus");
-	pXML->GetOptionalChildXmlValByName(&m_iStartingDefenseUnits, L"iStartingDefenseUnits");
-	pXML->GetOptionalChildXmlValByName(&m_iStartingWorkerUnits, L"iStartingWorkerUnits");
-	pXML->GetOptionalChildXmlValByName(&m_iStartingExploreUnits, L"iStartingExploreUnits");
-	pXML->GetOptionalChildXmlValByName(&m_iAIStartingDefenseUnits, L"iAIStartingDefenseUnits");
-	pXML->GetOptionalChildXmlValByName(&m_iAIStartingWorkerUnits, L"iAIStartingWorkerUnits");
-	pXML->GetOptionalChildXmlValByName(&m_iAIStartingExploreUnits, L"iAIStartingExploreUnits");
-	pXML->GetOptionalChildXmlValByName(&m_iBarbarianInitialDefenders, L"iBarbarianDefenders");
-	pXML->GetOptionalChildXmlValByName(&m_iAIDeclareWarProb, L"iAIDeclareWarProb");
-	pXML->GetOptionalChildXmlValByName(&m_iAIWorkRateModifier, L"iAIWorkRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iAIGrowthPercent, L"iAIGrowthPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAITrainPercent, L"iAITrainPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAIWorldTrainPercent, L"iAIWorldTrainPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAIConstructPercent, L"iAIConstructPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAIWorldConstructPercent, L"iAIWorldConstructPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAICreatePercent, L"iAICreatePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAIResearchPercent, L"iAIResearchPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAIWorldCreatePercent, L"iAIWorldCreatePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAICivicUpkeepPercent, L"iAICivicUpkeepPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAIUnitUpkeepPercent, L"iAIUnitUpkeepPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAIUnitSupplyPercent, L"iAIUnitSupplyPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAIUnitUpgradePercent, L"iAIUnitUpgradePercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAIInflationPercent, L"iAIInflationPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAIWarWearinessPercent, L"iAIWarWearinessPercent");
-	pXML->GetOptionalChildXmlValByName(&m_iAIPerEraModifier, L"iAIPerEraModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iAIAdvancedStartPercent, L"iAIAdvancedStartPercent");
-
-	pXML->SetOptionalVector(&m_piGoodies, L"Goodies");
-
-	pXML->GetOptionalChildXmlValByName(&m_iRevolutionIndexPercent, L"iRevolutionIndexPercent");
-
-	m_PropertyManipulators.read(pXML);
+	CvInfoUtil(this).readXml(pXML);
 
 	return true;
 }
@@ -555,67 +513,8 @@ bool CvHandicapInfo::read(CvXMLLoadUtility* pXML)
 
 void CvHandicapInfo::copyNonDefaults(const CvHandicapInfo* pClassInfo)
 {
-	int iDefault = 0;
-	CvString cDefault = CvString::format("").GetCString();
-	CvWString wDefault = CvWString::format(L"").GetCString();
-
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getFreeWinsVsBarbs() == iDefault) m_iFreeWinsVsBarbs = pClassInfo->getFreeWinsVsBarbs();
-	if (getAnimalAttackProb() == iDefault) m_iAnimalAttackProb = pClassInfo->getAnimalAttackProb();
-	if (getAdvancedStartPointsMod() == iDefault) m_iAdvancedStartPointsMod = pClassInfo->getAdvancedStartPointsMod();
-	if (getStartingGold() == iDefault) m_iStartingGold = pClassInfo->getStartingGold();
-	if (getUnitUpkeepPercent() == iDefault) m_iUnitUpkeepPercent = pClassInfo->getUnitUpkeepPercent();
-	if (getDistanceMaintenancePercent() == iDefault) m_iDistanceMaintenancePercent = pClassInfo->getDistanceMaintenancePercent();
-	if (getNumCitiesMaintenancePercent() == iDefault) m_iNumCitiesMaintenancePercent = pClassInfo->getNumCitiesMaintenancePercent();
-	if (getColonyMaintenancePercent() == iDefault) m_iColonyMaintenancePercent = pClassInfo->getColonyMaintenancePercent();
-	if (getMaxColonyMaintenance() == iDefault) m_iMaxColonyMaintenance = pClassInfo->getMaxColonyMaintenance();
-	if (getCorporationMaintenancePercent() == iDefault) m_iCorporationMaintenancePercent = pClassInfo->getCorporationMaintenancePercent();
-	if (getCivicUpkeepPercent() == iDefault) m_iCivicUpkeepPercent = pClassInfo->getCivicUpkeepPercent();
-	if (getInflationPercent() == iDefault) m_iInflationPercent = pClassInfo->getInflationPercent();
-	if (getHealthBonus() == iDefault) m_iHealthBonus = pClassInfo->getHealthBonus();
-	if (getHappyBonus() == iDefault) m_iHappyBonus = pClassInfo->getHappyBonus();
-	if (getAttitudeChange() == iDefault) m_iAttitudeChange = pClassInfo->getAttitudeChange();
-	if (getNoTechTradeModifier() == iDefault) m_iNoTechTradeModifier = pClassInfo->getNoTechTradeModifier();
-	if (getTechTradeKnownModifier() == iDefault) m_iTechTradeKnownModifier = pClassInfo->getTechTradeKnownModifier();
-	if (getUnownedWaterTilesPerBarbarianUnit() == iDefault) m_iUnownedWaterTilesPerBarbarianUnit = pClassInfo->getUnownedWaterTilesPerBarbarianUnit();
-	if (getUnownedTilesPerBarbarianCity() == iDefault) m_iUnownedTilesPerBarbarianCity = pClassInfo->getUnownedTilesPerBarbarianCity();
-	if (getBarbarianCityCreationTurnsElapsed() == iDefault) m_iBarbarianCityCreationTurnsElapsed = pClassInfo->getBarbarianCityCreationTurnsElapsed();
-	if (getBarbarianCityCreationProb() == iDefault) m_iBarbarianCityCreationProb = pClassInfo->getBarbarianCityCreationProb();
-	if (getAnimalCombatModifier() == iDefault) m_iAnimalCombatModifier = pClassInfo->getAnimalCombatModifier();
-	if (getBarbarianCombatModifier() == iDefault) m_iBarbarianCombatModifier = pClassInfo->getBarbarianCombatModifier();
-	if (getAIAnimalCombatModifier() == iDefault) m_iAIAnimalCombatModifier = pClassInfo->getAIAnimalCombatModifier();
-	if (m_iSubdueAnimalBonusAI == iDefault) m_iSubdueAnimalBonusAI = pClassInfo->getSubdueAnimalBonusAI();
-	if (getAIBarbarianCombatModifier() == iDefault) m_iAIBarbarianCombatModifier = pClassInfo->getAIBarbarianCombatModifier();
-	if (getStartingDefenseUnits() == iDefault) m_iStartingDefenseUnits = pClassInfo->getStartingDefenseUnits();
-	if (getStartingWorkerUnits() == iDefault) m_iStartingWorkerUnits = pClassInfo->getStartingWorkerUnits();
-	if (getStartingExploreUnits() == iDefault) m_iStartingExploreUnits = pClassInfo->getStartingExploreUnits();
-	if (getAIStartingDefenseUnits() == iDefault) m_iAIStartingDefenseUnits = pClassInfo->getAIStartingDefenseUnits();
-	if (getAIStartingWorkerUnits() == iDefault) m_iAIStartingWorkerUnits = pClassInfo->getAIStartingWorkerUnits();
-	if (getAIStartingExploreUnits() == iDefault) m_iAIStartingExploreUnits = pClassInfo->getAIStartingExploreUnits();
-	if (getBarbarianInitialDefenders() == iDefault) m_iBarbarianInitialDefenders = pClassInfo->getBarbarianInitialDefenders();
-	if (getAIDeclareWarProb() == iDefault) m_iAIDeclareWarProb = pClassInfo->getAIDeclareWarProb();
-	if (getAIWorkRateModifier() == iDefault) m_iAIWorkRateModifier = pClassInfo->getAIWorkRateModifier();
-	if (getAIGrowthPercent() == iDefault) m_iAIGrowthPercent = pClassInfo->getAIGrowthPercent();
-	if (getAITrainPercent() == iDefault) m_iAITrainPercent = pClassInfo->getAITrainPercent();
-	if (getAIWorldTrainPercent() == iDefault) m_iAIWorldTrainPercent = pClassInfo->getAIWorldTrainPercent();
-	if (getAIConstructPercent() == iDefault) m_iAIConstructPercent = pClassInfo->getAIConstructPercent();
-	if (getAIWorldConstructPercent() == iDefault) m_iAIWorldConstructPercent = pClassInfo->getAIWorldConstructPercent();
-	if (getAICreatePercent() == iDefault) m_iAICreatePercent = pClassInfo->getAICreatePercent();
-	if (getAIResearchPercent() == iDefault) m_iAIResearchPercent = pClassInfo->getAIResearchPercent();
-	if (getAIWorldCreatePercent() == iDefault) m_iAIWorldCreatePercent = pClassInfo->getAIWorldCreatePercent();
-	if (getAICivicUpkeepPercent() == iDefault) m_iAICivicUpkeepPercent = pClassInfo->getAICivicUpkeepPercent();
-	if (getAIUnitUpkeepPercent() == iDefault) m_iAIUnitUpkeepPercent = pClassInfo->getAIUnitUpkeepPercent();
-	if (getAIUnitSupplyPercent() == iDefault) m_iAIUnitSupplyPercent = pClassInfo->getAIUnitSupplyPercent();
-	if (getAIUnitUpgradePercent() == iDefault) m_iAIUnitUpgradePercent = pClassInfo->getAIUnitUpgradePercent();
-	if (getAIInflationPercent() == iDefault) m_iAIInflationPercent = pClassInfo->getAIInflationPercent();
-	if (getAIWarWearinessPercent() == iDefault) m_iAIWarWearinessPercent = pClassInfo->getAIWarWearinessPercent();
-	if (getAIPerEraModifier() == iDefault) m_iAIPerEraModifier = pClassInfo->getAIPerEraModifier();
-	if (getAIAdvancedStartPercent() == iDefault) m_iAIAdvancedStartPercent = pClassInfo->getAIAdvancedStartPercent();
-	if (getRevolutionIndexPercent() == iDefault) m_iRevolutionIndexPercent = pClassInfo->getRevolutionIndexPercent();
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_piGoodies, pClassInfo->m_piGoodies);
-
-	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 }
 

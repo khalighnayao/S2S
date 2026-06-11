@@ -32,22 +32,14 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvCivilizationInfo::CvCivilizationInfo():
-m_iDefaultPlayerColor(NO_PLAYERCOLOR),
-m_iArtStyleType(NO_ARTSTYLE),
-m_iUnitArtStyleType(NO_UNIT_ARTSTYLE),
 m_iNumCityNames(0),
 m_iNumLeaders(0),
 m_iSelectionSoundScriptId(0),
 m_iActionSoundScriptId(0),
-m_iDerivativeCiv(NO_CIVILIZATION),
-m_bPlayable(false),
-m_bAIPlayable(false),
 m_piCivilizationInitialCivics(NULL),
-m_paszCityNames(NULL),
-m_iSpawnRateModifier(0),
-m_iSpawnRateNPCPeaceModifier(0),
-m_bStronglyRestricted(false)
+m_paszCityNames(NULL)
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -62,7 +54,35 @@ CvCivilizationInfo::~CvCivilizationInfo()
 {
 	SAFE_DELETE_ARRAY(m_piCivilizationInitialCivics);
 	SAFE_DELETE_ARRAY(m_paszCityNames);
-	GC.removeDelayedResolution((int*)&m_iDerivativeCiv);
+	// m_iDerivativeCiv's pending delayed-resolution entry is removed by its wrapper's uninitVar.
+	CvInfoUtil(this).uninitDataMembers();
+}
+
+
+// Fields declared here are read/copied by CvInfoUtil (#196). Still hand-written:
+// - m_szShortDescriptionKey / m_szAdjectiveKey: CvWString members (wrappers only support CvString);
+// - m_szArtDefineTag: its modular merge must run BEFORE CvInfoBase::copyNonDefaults (see there);
+// - m_iSelectionSoundScriptId / m_iActionSoundScriptId: resolved via the runtime audio-tag table;
+// - Cities string list (m_paszCityNames + m_iNumCityNames);
+// - InitialCivics: bespoke read keyed into a fixed CivicOption-length array;
+// - getCheckSum: explicit, because the legacy checksum omits several read fields (see there).
+void CvCivilizationInfo::getDataMembers(CvInfoUtil& util)
+{
+	util
+		.addEnumAsInt(m_iDefaultPlayerColor, L"DefaultPlayerColor")
+		.addEnumAsInt(m_iArtStyleType, L"ArtStyleType")
+		.addEnumAsInt(m_iUnitArtStyleType, L"UnitArtStyleType")
+		.add(m_bPlayable, L"bPlayable")
+		.add(m_bAIPlayable, L"bAIPlayable")
+		.add(m_aiCivilizationBuildings, L"FreeBuildings")
+		.add(m_aeCivilizationFreeTechs, L"FreeTechs")
+		.add(m_aeCivilizationDisableTechs, L"DisableTechs")
+		.add(m_aeLeaders, L"Leaders")
+		.add(m_iSpawnRateModifier, L"iSpawnRateModifier")
+		.add(m_iSpawnRateNPCPeaceModifier, L"iSpawnRateNPCPeaceModifier")
+		.add(m_bStronglyRestricted, L"bStronglyRestricted")
+		.addEnum(m_iDerivativeCiv, L"DerivativeCiv")
+	;
 }
 
 
@@ -276,6 +296,9 @@ bool CvCivilizationInfo::isStronglyRestricted() const
 }
 
 
+// Explicit, NOT delegated to CvInfoUtil (#196): the legacy checksum omits several read fields
+// (m_iDefaultPlayerColor, m_iArtStyleType, m_iUnitArtStyleType), and the hand-written
+// InitialCivics array sits mid-order; delegating would change the savegame asset checksum.
 void CvCivilizationInfo::getCheckSum(uint32_t& iSum) const
 {
 	CheckSum(iSum, m_iDerivativeCiv);
@@ -301,32 +324,25 @@ bool CvCivilizationInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
+	CvInfoUtil(this).readXml(pXML);
+
+	// CvWString members are not wrapper-expressible (only CvString is)
 	pXML->GetOptionalChildXmlValByName(m_szShortDescriptionKey, L"ShortDescription");
 	pXML->GetOptionalChildXmlValByName(m_szAdjectiveKey, L"Adjective");
-	pXML->GetOptionalTypeEnum(m_iDefaultPlayerColor, L"DefaultPlayerColor");
+	// Hand-written because its modular merge must run before the base copy (see copyNonDefaults)
 	pXML->GetOptionalChildXmlValByName(m_szArtDefineTag, L"ArtDefineTag");
-	pXML->GetOptionalTypeEnum(m_iArtStyleType, L"ArtStyleType");
-	pXML->GetOptionalTypeEnum(m_iUnitArtStyleType, L"UnitArtStyleType");
 
+	// Audio script ids resolve through the runtime audio-tag table, not the info-type registry
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"CivilizationSelectionSound");
 	m_iSelectionSoundScriptId = (szTextVal.GetLength() > 0) ? gDLL->getAudioTagIndex( szTextVal.GetCString(), AUDIOTAG_3DSCRIPT ) : -1;
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"CivilizationActionSound");
 	m_iActionSoundScriptId = (szTextVal.GetLength() > 0) ? gDLL->getAudioTagIndex( szTextVal.GetCString(), AUDIOTAG_3DSCRIPT ) : -1;
-
-	// set the current xml node to it's next sibling and then
-	pXML->GetOptionalChildXmlValByName(&m_bPlayable, L"bPlayable");
-	pXML->GetOptionalChildXmlValByName(&m_bAIPlayable, L"bAIPlayable");
 
 	if (pXML->TryMoveToXmlFirstChild(L"Cities"))
 	{
 		pXML->SetStringList(&m_paszCityNames, &m_iNumCityNames);
 		pXML->MoveToXmlParent();
 	}
-
-	pXML->SetOptionalVector(&m_aiCivilizationBuildings, L"FreeBuildings");
-
-	pXML->SetOptionalVector(&m_aeCivilizationFreeTechs, L"FreeTechs");
-	pXML->SetOptionalVector(&m_aeCivilizationDisableTechs, L"DisableTechs");
 
 	if (pXML->TryMoveToXmlFirstChild(L"InitialCivics"))
 	{
@@ -370,16 +386,6 @@ bool CvCivilizationInfo::read(CvXMLLoadUtility* pXML)
 		SAFE_DELETE_ARRAY(m_piCivilizationInitialCivics);
 	}
 
-	pXML->SetOptionalVector(&m_aeLeaders, L"Leaders");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"CivilizationSelectionSound");
-
-	//TB Tags
-	pXML->GetOptionalChildXmlValByName(&m_iSpawnRateModifier, L"iSpawnRateModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iSpawnRateNPCPeaceModifier, L"iSpawnRateNPCPeaceModifier");
-	pXML->GetOptionalChildXmlValByName(&m_bStronglyRestricted, L"bStronglyRestricted");
-	pXML->GetOptionalTypeEnumWithDelayedResolution(m_iDerivativeCiv, L"DerivativeCiv");
-
 	return true;
 }
 
@@ -387,9 +393,6 @@ bool CvCivilizationInfo::read(CvXMLLoadUtility* pXML)
 void CvCivilizationInfo::copyNonDefaults(const CvCivilizationInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	const int iDefault = 0;
-	const int iTextDefault = -1;
-	const bool bDefault = false;
 	const CvString cDefault = CvString::format("").GetCString();
 	const CvWString wDefault = CvWString::format(L"").GetCString();
 
@@ -401,14 +404,7 @@ void CvCivilizationInfo::copyNonDefaults(const CvCivilizationInfo* pClassInfo)
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if ( isPlayable() == bDefault ) // "bPlayable"
-	{
-		m_bPlayable = (pClassInfo->isPlayable());
-	}
-	if ( isAIPlayable() == bDefault ) // "bAIPlayable"
-	{
-		m_bAIPlayable = (pClassInfo->isAIPlayable());
-	}
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
 	if ( getShortDescriptionKey() == wDefault )
 	{
@@ -420,18 +416,6 @@ void CvCivilizationInfo::copyNonDefaults(const CvCivilizationInfo* pClassInfo)
 		m_szAdjectiveKey = pClassInfo->getAdjectiveKey();
 	}
 
-	if ( getDefaultPlayerColor() == NO_PLAYERCOLOR ) // "DefaultPlayerColor"
-	{
-		m_iDefaultPlayerColor = (pClassInfo->getDefaultPlayerColor());
-	}
-	if ( getArtStyleType() == NO_ARTSTYLE ) // "ArtStyleType"
-	{
-		m_iArtStyleType = (pClassInfo->getArtStyleType());
-	}
-	if ( getUnitArtStyleType() == NO_UNIT_ARTSTYLE ) // "UnitArtStyleType"
-	{
-		m_iUnitArtStyleType = (pClassInfo->getUnitArtStyleType());
-	}
 	if ( getSelectionSoundScriptId() == AUDIOTAG_NONE ) // "CivilizationSelectionSound"
 	{
 		m_iSelectionSoundScriptId = (pClassInfo->getSelectionSoundScriptId());
@@ -440,11 +424,6 @@ void CvCivilizationInfo::copyNonDefaults(const CvCivilizationInfo* pClassInfo)
 	{
 		m_iActionSoundScriptId = (pClassInfo->getActionSoundScriptId());
 	}
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCivilizationBuildings, pClassInfo->m_aiCivilizationBuildings);
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeCivilizationFreeTechs, pClassInfo->m_aeCivilizationFreeTechs);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeCivilizationDisableTechs, pClassInfo->m_aeCivilizationDisableTechs);
 
 	for ( int i = 0; i < GC.getNumCivicOptionInfos(); i++)
 	{
@@ -456,24 +435,6 @@ void CvCivilizationInfo::copyNonDefaults(const CvCivilizationInfo* pClassInfo)
 			}
 			m_piCivilizationInitialCivics[i] = pClassInfo->getCivilizationInitialCivics(i);
 		}
-	}
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aeLeaders, pClassInfo->m_aeLeaders);
-
-	//TB Tags
-	//int
-	if ( getSpawnRateModifier() == iDefault )
-	{
-		m_iSpawnRateModifier = (pClassInfo->getSpawnRateModifier());
-	}
-	if ( getSpawnRateNPCPeaceModifier() == iDefault )
-	{
-		m_iSpawnRateNPCPeaceModifier = (pClassInfo->getSpawnRateNPCPeaceModifier());
-	}
-	//bool
-	if ( isStronglyRestricted() == bDefault )
-	{
-		m_bStronglyRestricted = (pClassInfo->isStronglyRestricted());
 	}
 
 	// First we check if there are different Unique Names in the Modules(we want to keep all of them)
@@ -489,7 +450,5 @@ void CvCivilizationInfo::copyNonDefaults(const CvCivilizationInfo* pClassInfo)
 		CvXMLLoadUtilityModTools::StringArrayExtend(&m_paszCityNames, &m_iNumCityNames, &m_paszOldNames, pClassInfo->getNumCityNames());
 		SAFE_DELETE_ARRAY(m_paszOldNames)
 	}
-
-	GC.copyNonDefaultDelayedResolution((int*)&m_iDerivativeCiv, (int*)&pClassInfo->m_iDerivativeCiv);
 }
 

@@ -76,6 +76,7 @@ public:
 	// as allowed in Unit or Building Info by the EnabledCivilization tag.  Generally used for NPC players.
 	bool isStronglyRestricted() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvCivilizationInfo* pClassInfo);
 	void getCheckSum(uint32_t& iSum) const;
