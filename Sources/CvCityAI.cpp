@@ -15312,21 +15312,20 @@ const {
 
 	const CvPlayerAI& kOwner = GET_PLAYER(getOwner());
 	int iValue = 0;
+
+	if (iFoodDifference > 0)
+	{
+		iValue += kBuilding.getFoodKept() / 2;
+	}
 	for (int iI = 0; iI < NUM_YIELD_TYPES; iI++)
 	{
-		int iYieldValue = 0;
-
-		if (iFoodDifference > 0)
-		{
-			iValue += kBuilding.getFoodKept() / 2;
-		}
-		iValue += AI_buildingYieldValue((YieldTypes)iI, eBuilding, kBuilding, bForeignTrade, aiFreeSpecialistYield[iI]);
+		int iYieldValue = AI_buildingYieldValue((YieldTypes)iI, eBuilding, kBuilding, bForeignTrade, aiFreeSpecialistYield[iI]);
 		{
 			int iGlobalYieldModValue = 0;
 
 			if (kBuilding.getGlobalYieldModifier(iI) > 0 || kBuilding.getAreaYieldModifier(iI) > 0)
 			{
-				foreach_(const CvCity * pLoopCity, GET_PLAYER((PlayerTypes)iI).cities())
+				foreach_(const CvCity * pLoopCity, kOwner.cities())
 				{
 					iGlobalYieldModValue +=
 					(
