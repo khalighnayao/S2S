@@ -397,6 +397,11 @@ bool CvBonusInfo::read(CvXMLLoadUtility* pXML)
 
 void CvBonusInfo::copyNonDefaults(const CvBonusInfo* pClassInfo)
 {
+	// The art tag must merge BEFORE the base copy: CvInfoBase::copyNonDefaults calls the virtual
+	// getButton(), which resolves through getArtDefineTag() — an empty tag asserts in
+	// ARTFILEMGR.getBonusArtInfo. The declared StringWrapper copy below then no-ops.
+	if (m_szArtDefineTag.empty()) m_szArtDefineTag = pClassInfo->getArtDefineTag();
+
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
 	CvInfoUtil(this).copyNonDefaults(pClassInfo);

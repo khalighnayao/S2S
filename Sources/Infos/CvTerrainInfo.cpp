@@ -228,6 +228,11 @@ void CvTerrainInfo::copyNonDefaults(const CvTerrainInfo* pClassInfo)
 	PROFILE_EXTRA_FUNC();
 	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
 
+	// The art tag must merge BEFORE the base copy: CvInfoBase::copyNonDefaults calls the virtual
+	// getButton(), which resolves through getArtDefineTag(). The declared StringWrapper copy
+	// then no-ops.
+	if (m_szArtDefineTag.empty()) m_szArtDefineTag = pClassInfo->getArtDefineTag();
+
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
 	CvInfoUtil(this).copyNonDefaults(pClassInfo);
