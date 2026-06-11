@@ -3784,15 +3784,15 @@ void CvCityAI::AI_chooseProduction()
 		{
 			commerceWeights[COMMERCE_GOLD] = commerceWeights[COMMERCE_GOLD] * 3 / 2;
 		}
-		if (!AI_isEmphasizeCommerce(COMMERCE_RESEARCH))
+		if (AI_isEmphasizeCommerce(COMMERCE_RESEARCH))
 		{
 			commerceWeights[COMMERCE_RESEARCH] = commerceWeights[COMMERCE_RESEARCH] * 3 / 2;
 		}
-		if (!AI_isEmphasizeCommerce(COMMERCE_CULTURE))
+		if (AI_isEmphasizeCommerce(COMMERCE_CULTURE))
 		{
 			commerceWeights[COMMERCE_CULTURE] = commerceWeights[COMMERCE_CULTURE] * 3 / 2;
 		}
-		if (!AI_isEmphasizeCommerce(COMMERCE_ESPIONAGE))
+		if (AI_isEmphasizeCommerce(COMMERCE_ESPIONAGE))
 		{
 			commerceWeights[COMMERCE_ESPIONAGE] = commerceWeights[COMMERCE_ESPIONAGE] * 3 / 2;
 		}
