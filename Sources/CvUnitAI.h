@@ -81,12 +81,6 @@ public:
 	void AI_reset(UnitAITypes eUnitAI = NO_UNITAI, bool bConstructorCall = false);
 
     /**
-     * Sends a log message for AI debugging.
-     * - Uses the FLB logger for this class.
-     */
-	void SendLog(CvWString function, CvWString message);
-
-    /**
      * Updates the unit AI each turn.
      * - Handles movement, missions, automation, and special states.
      * - Returns true if the unit should wait for the next turn.

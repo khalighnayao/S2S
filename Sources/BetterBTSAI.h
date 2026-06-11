@@ -19,7 +19,6 @@ extern int gUnitLogLevel;
 // Feeds logPerf() -> Performance.log. See PERF_SCOPE below.
 extern int gPerfLogLevel;
 
-void logAIJson(CvWString type, CvWString identifier, CvWString squirrel, CvWString message);
 void logCB(CvString message);
 void logToFile(CvString message, const char* filename);
 void logContractBroker(int level, const char* format, ...);

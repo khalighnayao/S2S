@@ -269,15 +269,6 @@ void CvCityAI::AI_reset()
 }
 
 
-void CvCityAI::SendLog(CvWString function, CvWString message) const
-{
-	//WIP, wrapper of the new FLB logger, to create correct payload for this class
-	CvWString aiType = "CvCityAI";
-
-
-	logAIJson(aiType, this->getName(), function, message);
-
-}
 
 //	KOSHLING - initialisation called on every city prior to performing unit mission allocation logic
 //	This allows caches that will remain valid for the processing of the current turn's units to be cleared
