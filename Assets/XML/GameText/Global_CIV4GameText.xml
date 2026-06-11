@@ -1037,6 +1037,14 @@
 		<Russian>Приказать подразделению самостоятельно искать и уничтожать вражеские единицы.</Russian>
 	</TEXT>
 	<TEXT>
+		<Tag>TXT_KEY_ACTION_AUTOMATE_SPREAD_BUILDING</Tag>
+		<English>Auto Spread Building</English>
+	</TEXT>
+	<TEXT>
+		<Tag>TXT_KEY_ACTION_AUTOMATE_SPREAD_BUILDING_HELP</Tag>
+		<English>Send the unit to construct its building in whichever of your cities needs it most (tamed and subdued animals carry their herd building to cities lacking the resource). The unit waits in a city when no city currently needs it, and never slaughters or disbands itself.</English>
+	</TEXT>
+	<TEXT>
 		<Tag>TXT_KEY_ACTION_AUTOMATE_HURRY</Tag>
 		<English>Automate Hurry</English>
 		<French>Accélération Automatisée</French>
