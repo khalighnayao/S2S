@@ -2,7 +2,7 @@
 
 > A rigorously unscientific ranking of the standout bugs from the last couple of weeks,
 > ordered by the quantity of despair each induces in a developer at the moment of
-> comprehension. Despair is measured in **centiElephants (cE🐘)** — the SI unit of despair,
+> comprehension. Despair is measured in **centiphants (cp)** — the SI unit of despair,
 > calibrated against a war elephant that was assigned to defend a city and was later found,
 > by the project owner personally, standing seven tiles away in someone else's country.
 >
@@ -10,7 +10,7 @@
 
 ---
 
-## 🥇 1. The Tactical Elephant Vacation Package — 100 cE🐘 *(definitional)*
+## 🥇 1. The Tactical Elephant Vacation Package — 100 cp *(definitional)*
 
 An Elephant Gunner garrisoned to defend its city was observed sightseeing in the human
 player's territory, 7 tiles from home. This required **three independent bugs stacked like
@@ -33,7 +33,7 @@ member of a city it contributed exactly nothing to.
 
 ---
 
-## 🥈 2. The Library of Alexandria, Burned Nightly — 95 cE🐘
+## 🥈 2. The Library of Alexandria, Burned Nightly — 95 cp
 
 Building values — the numbers behind every "what should this city build?" decision — were
 guarded by a cache that `CvCity::doTurn` **deleted every turn, for every city,
@@ -63,7 +63,7 @@ appointment with the repository.*
 
 ---
 
-## 🥉 3. The (Un)Fortified Position — 92 cE🐘
+## 🥉 3. The (Un)Fortified Position — 92 cp
 
 AI garrisons parked with one-turn `MISSION_SKIP`, so they never actually fortified —
 meaning **AI cities have never received fortification defense bonuses**, plausibly since
@@ -79,7 +79,7 @@ awake, slightly nervous, accruing nothing.
 
 ---
 
-## 4. Schrödinger's Job Application — 85 cE🐘
+## 4. Schrödinger's Job Application — 85 cp
 
 A unit's first `processContracts` call of the turn *advertised* for work, found none, and
 returned `true` — "I did something!" The slice driver, taking it at its word, re-ran the
@@ -92,7 +92,7 @@ as a full shift — and the *system agreed*.
 
 ---
 
-## 5. The RESERVE ↔ PROPERTY_CONTROL Hokey Pokey — 78 cE🐘
+## 5. The RESERVE ↔ PROPERTY_CONTROL Hokey Pokey — 78 cp
 
 The role-conversion gate asked *"could this unit theoretically help with crime?"* while
 the assignment handler asked *"does this unit actually have the equipment?"* Different
@@ -107,7 +107,7 @@ you corrupt the demand accounting. That's what it's all about.
 
 ---
 
-## 6. The Unkillable Peasant — 71 cE🐘
+## 6. The Unkillable Peasant — 71 cp
 
 `getCombatOdds` floored per-round damage to 0 against ~zero-strength defenders, making a
 dying militiaman **mathematically immortal**. The AI under-reported its own win odds
@@ -121,7 +121,7 @@ layer above it nodded along.
 
 ---
 
-## 7. The Eternal Anesthesiologist — 60 cE🐘
+## 7. The Eternal Anesthesiologist — 60 cp
 
 `AI_heal` returned `true` for a heal no-op when the unit *couldn't heal*, so units
 re-decided "heal in city" **49–196 times per turn** — and in rare alignments, the turn
@@ -134,7 +134,7 @@ pressing it 195 more times. Except occasionally the building never lets you leav
 
 ---
 
-## 8. International Civil Asset Forfeiture — 55 cE🐘
+## 8. International Civil Asset Forfeiture — 55 cp
 
 Foreign police cars were observed parked on the human player's **resource tiles**, mission
 hover proudly reading *"Maintain property control."* The mechanism: when a property-control
@@ -156,7 +156,7 @@ fortified. The uranium has been returned.*
 
 ---
 
-## 9. The .vcxproj of Lies — 47 cE🐘
+## 9. The .vcxproj of Lies — 47 cp
 
 The Visual Studio project file confidently states `PlatformToolset: v142`. The actual
 compiler is the **Microsoft Visual C++ Toolkit 2003** (MSVC 7.1). The project file drives
@@ -186,7 +186,7 @@ stop you.
 
 ---
 
-*Scale calibration note: 100 cE🐘 = 1 full Elephant. Readings above 100 are theoretically
+*Scale calibration note: 100 cp = 1 full Elephant. Readings above 100 are theoretically
 possible but would legally require the elephant to file an expense report for the trip.*
 
 *Contribution policy (owner-sanctioned): when the ongoing rework unearths something worthy

@@ -19,7 +19,7 @@ See **[mechanics/](mechanics/README.md)**.
 
 ## Culture
 - [DESPAIR_INDEX.md](DESPAIR_INDEX.md) — The S2S Despair Index™: the standout bugs of the
-  rework, ranked by developer despair in centiElephants. Not holy writ; pure outlet.
+  rework, ranked by developer despair in centiphants. Not holy writ; pure outlet.
   Hostable version: [DESPAIR_INDEX.html](DESPAIR_INDEX.html) (self-contained, served via
   GitHub Pages from this folder).
 
