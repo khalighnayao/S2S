@@ -51,6 +51,7 @@ CvCity::CvCity()
 	m_aiRiverPlotYield = new int[NUM_YIELD_TYPES];
 	m_aiBaseYieldRate = new int[NUM_YIELD_TYPES];
 	m_aiExtraYield = new int[NUM_YIELD_TYPES];
+	m_aiSpecialistYieldTotal = new int[NUM_YIELD_TYPES];
 	m_buildingExtraYield100 = new int[NUM_YIELD_TYPES];
 	m_buildingYieldMod = new int[NUM_YIELD_TYPES];
 	m_aiBaseYieldPerPopRate = new int[NUM_YIELD_TYPES];
@@ -174,6 +175,7 @@ CvCity::~CvCity()
 	SAFE_DELETE_ARRAY(m_aiRiverPlotYield);
 	SAFE_DELETE_ARRAY(m_aiBaseYieldRate);
 	SAFE_DELETE_ARRAY(m_aiExtraYield);
+	SAFE_DELETE_ARRAY(m_aiSpecialistYieldTotal);
 	SAFE_DELETE_ARRAY(m_buildingExtraYield100);
 	SAFE_DELETE_ARRAY(m_buildingYieldMod);
 	SAFE_DELETE_ARRAY(m_buildingCommerceMod);
@@ -637,6 +639,7 @@ void CvCity::reset(int iID, PlayerTypes eOwner, int iX, int iY, bool bConstructo
 		m_aiRiverPlotYield[iI] = 0;
 		m_aiBaseYieldRate[iI] = 0;
 		m_aiExtraYield[iI] = 0;
+		m_aiSpecialistYieldTotal[iI] = 0;
 		m_buildingExtraYield100[iI] = 0;
 		m_buildingYieldMod[iI] = 0;
 		m_aiBaseYieldPerPopRate[iI] = 0;
@@ -3953,7 +3956,7 @@ int CvCity::getProductionPerTurn(ProductionCalc::flags flags = ProductionCalc::Y
 	}
 	const int iFoodProduction = (flags & ProductionCalc::FoodProduction) ? std::max(0, getYieldRate(YIELD_FOOD) - foodConsumption(true)) : 0;
 	const int iOverflow = (flags & ProductionCalc::Overflow) ? getOverflowProduction() + getFeatureProduction() : 0;
-	const int iYield = (flags & ProductionCalc::Yield) ? getBaseYieldRate(YIELD_PRODUCTION) : 0;
+	const int iYield = (flags & ProductionCalc::Yield) ? getBaseYieldRate(YIELD_PRODUCTION) + getSpecialistYieldTotal(YIELD_PRODUCTION) : 0;
 
 	return std::max(1, getExtraYield(YIELD_PRODUCTION) + iOverflow + iFoodProduction + iYield * getBaseYieldRateModifier(YIELD_PRODUCTION) / 100);
 }
@@ -5137,7 +5140,7 @@ void CvCity::processSpecialist(SpecialistTypes eSpecialist, int iChange)
 
 	for (int iI = 0; iI < NUM_YIELD_TYPES; iI++)
 	{
-		changeExtraYield((YieldTypes)iI, (GC.getSpecialistInfo(eSpecialist).getYieldChange(iI) + GET_PLAYER(getOwner()).getSpecialistYieldPercentChanges(eSpecialist, (YieldTypes)iI) / 100) * iChange);
+		changeSpecialistYieldTotal((YieldTypes)iI, (GC.getSpecialistInfo(eSpecialist).getYieldChange(iI) + GET_PLAYER(getOwner()).getSpecialistYieldPercentChanges(eSpecialist, (YieldTypes)iI) / 100) * iChange);
 	}
 
 	for (int iI = 0; iI < NUM_COMMERCE_TYPES; iI++)
@@ -11233,7 +11236,12 @@ int CvCity::getYieldRate(const YieldTypes eYield) const
 int CvCity::getYieldRate100(const YieldTypes eYield) const
 {
 	PROFILE_FUNC();
-	return std::min(CITY_MAX_YIELD_RATE,std::max(100, getBaseYieldRate(eYield) * getBaseYieldRateModifier(eYield) + 100 * getExtraYield(eYield)));
+	// Specialist yields receive the city yield modifier exactly like worked tiles (#317);
+	// the remaining extra bucket (corporations, per-building yield changes, flat building
+	// yields, per-pop yields) stays unmodified.
+	return std::min(CITY_MAX_YIELD_RATE,std::max(100,
+		(getBaseYieldRate(eYield) + getSpecialistYieldTotal(eYield)) * getBaseYieldRateModifier(eYield)
+		+ 100 * getExtraYield(eYield)));
 }
 
 int CvCity::getPlotYield(YieldTypes eIndex)	const
@@ -11328,6 +11336,23 @@ void CvCity::changeExtraYield(YieldTypes eYield, int iChange)
 int CvCity::getExtraYield(YieldTypes eYield) const
 {
 	return getExtraYield100(eYield) / 100;
+}
+
+int CvCity::getSpecialistYieldTotal(YieldTypes eYield) const
+{
+	FASSERT_BOUNDS(0, NUM_YIELD_TYPES, eYield);
+	return m_aiSpecialistYieldTotal[eYield];
+}
+
+void CvCity::changeSpecialistYieldTotal(YieldTypes eYield, int iChange)
+{
+	FASSERT_BOUNDS(0, NUM_YIELD_TYPES, eYield);
+
+	if (iChange != 0)
+	{
+		m_aiSpecialistYieldTotal[eYield] += iChange;
+		onYieldChange();
+	}
 }
 
 
@@ -11757,7 +11782,7 @@ void CvCity::updateExtraSpecialistYield(YieldTypes eYield)
 	{
 		m_aiExtraSpecialistYield[eYield] = iNewYield;
 
-		changeExtraYield(eYield, iNewYield - iOldYield);
+		changeSpecialistYieldTotal(eYield, iNewYield - iOldYield);
 	}
 }
 
@@ -17352,6 +17377,9 @@ void CvCity::read(FDataStreamBase* pStream)
 	WRAPPER_READ(wrapper, "CvCity", &m_bPropertyControlBuildingQueued);
 
 	WRAPPER_READ_ARRAY(wrapper, "CvCity", NUM_YIELD_TYPES, m_aiExtraYield);
+	// Absent in older saves (stays 0; specialists are then still baked flat into m_aiExtraYield
+	// until a modifier recalculation rebuilds both arrays).
+	WRAPPER_READ_ARRAY(wrapper, "CvCity", NUM_YIELD_TYPES, m_aiSpecialistYieldTotal);
 	WRAPPER_READ_ARRAY(wrapper, "CvCity", NUM_COMMERCE_TYPES, m_aiBuildingCommerceTechChange);
 
 	WRAPPER_READ_ARRAY(wrapper, "CvCity", NUM_COMMERCE_TYPES, m_commercePerPopFromBuildings);
@@ -17968,6 +17996,7 @@ void CvCity::write(FDataStreamBase* pStream)
 	WRAPPER_WRITE(wrapper, "CvCity", m_bPropertyControlBuildingQueued);
 
 	WRAPPER_WRITE_ARRAY(wrapper, "CvCity", NUM_YIELD_TYPES, m_aiExtraYield);
+	WRAPPER_WRITE_ARRAY(wrapper, "CvCity", NUM_YIELD_TYPES, m_aiSpecialistYieldTotal);
 	WRAPPER_WRITE_ARRAY(wrapper, "CvCity", NUM_COMMERCE_TYPES, m_aiBuildingCommerceTechChange);
 
 	WRAPPER_WRITE_ARRAY(wrapper, "CvCity", NUM_COMMERCE_TYPES, m_commercePerPopFromBuildings);
@@ -22223,6 +22252,7 @@ void CvCity::clearModifierTotals()
 		m_aiCorporationYield[iI] = 0;
 		m_aiExtraSpecialistYield[iI] = 0;
 		m_aiExtraYield[iI] = 0;
+		m_aiSpecialistYieldTotal[iI] = 0;
 		m_buildingExtraYield100[iI] = 0;
 		m_buildingYieldMod[iI] = 0;
 	}

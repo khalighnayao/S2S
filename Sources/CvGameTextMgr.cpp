@@ -5566,7 +5566,7 @@ void CvGameTextMgr::setCityBarHelp(CvWStringBuffer &szString, CvCity* pCity)
 		if (bBaseValues)
 		{
 			//TB Traits begin
-			iBaseProductionDiffNoFood = pCity->getBaseYieldRate(YIELD_PRODUCTION) + pCity->getExtraYield(YIELD_PRODUCTION);
+			iBaseProductionDiffNoFood = pCity->getBaseYieldRate(YIELD_PRODUCTION) + pCity->getSpecialistYieldTotal(YIELD_PRODUCTION) + pCity->getExtraYield(YIELD_PRODUCTION);
 			//TB Traits end
 		}
 		else
@@ -5633,7 +5633,7 @@ void CvGameTextMgr::setCityBarHelp(CvWStringBuffer &szString, CvCity* pCity)
 		if (bBaseValues)
 		{
 			//TB Traits begin
-			iBaseProductionDiffNoFood = pCity->getBaseYieldRate(YIELD_PRODUCTION) + pCity->getExtraYield(YIELD_PRODUCTION);
+			iBaseProductionDiffNoFood = pCity->getBaseYieldRate(YIELD_PRODUCTION) + pCity->getSpecialistYieldTotal(YIELD_PRODUCTION) + pCity->getExtraYield(YIELD_PRODUCTION);
 			//TB Traits end
 		}
 		else
@@ -5778,7 +5778,7 @@ void CvGameTextMgr::setCityBarHelp(CvWStringBuffer &szString, CvCity* pCity)
 		if (bBaseValues)
 		{
 			//TB Traits begin
-			iRate = pCity->getBaseYieldRate(YIELD_COMMERCE) + pCity->getExtraYield(YIELD_COMMERCE);
+			iRate = pCity->getBaseYieldRate(YIELD_COMMERCE) + pCity->getSpecialistYieldTotal(YIELD_COMMERCE) + pCity->getExtraYield(YIELD_COMMERCE);
 			//TB Traits end
 		}
 		else
@@ -25906,12 +25906,46 @@ void CvGameTextMgr::setYieldHelp(CvWStringBuffer &szBuffer, CvCity& city, YieldT
 	const CvYieldInfo& info = GC.getYieldInfo(eYieldType);
 	const CvPlayer& owner = GET_PLAYER(city.getOwner());
 
-	const int iBaseYield = city.getBaseYieldRate(eYieldType);
+	// Specialist yields receive the city yield modifier like worked tiles (#317), so they
+	// belong to the multiplied base section here, not the flat extra section below.
+	const int iBaseYield = city.getBaseYieldRate(eYieldType) + city.getSpecialistYieldTotal(eYieldType);
 	int iYield = iBaseYield;
 
 	const int iPlotYield = city.getPlotYield(eYieldType);
 	szBuffer.append(gDLL->getText("TXT_KEY_MISC_HELP_WORKED_TILES_YIELD", iPlotYield, info.getChar()));
 	iYield -= iPlotYield;
+
+	// Specialists
+	{
+		int iSpecialistYield = 0;
+		int iFreeSpecialistYield = 0;
+		for (int iI = 0; iI < GC.getNumSpecialistInfos(); iI++)
+		{
+			const SpecialistTypes eType = static_cast<SpecialistTypes>(iI);
+			int iCount = city.getSpecialistCount(eType);
+			if (iCount > 0)
+			{
+				iSpecialistYield += iCount * city.specialistYield(eType, eYieldType);
+			}
+			iCount = city.getFreeSpecialistCount(eType);
+			if (iCount > 0)
+			{
+				iFreeSpecialistYield += iCount * city.specialistYield(eType, eYieldType);
+			}
+		}
+		if (iSpecialistYield != 0)
+		{
+			szBuffer.append(NEWLINE);
+			szBuffer.append(gDLL->getText("TXT_BULLET_D1_F2_FROM_S3", iSpecialistYield, info.getChar(), L"TXT_KEY_CONCEPT_SPECIALISTS"));
+			iYield -= iSpecialistYield;
+		}
+		if (iFreeSpecialistYield != 0)
+		{
+			szBuffer.append(NEWLINE);
+			szBuffer.append(gDLL->getText("TXT_BULLET_D1_F2_FROM_S3", iFreeSpecialistYield, info.getChar(), L"TXT_KEY_WB_FREE_SPECIALISTS"));
+			iYield -= iFreeSpecialistYield;
+		}
+	}
 
 	// Traits
 	if (owner.getFreeCityYield(eYieldType) != 0)
@@ -26088,41 +26122,10 @@ void CvGameTextMgr::setYieldHelp(CvWStringBuffer &szBuffer, CvCity& city, YieldT
 	}
 	szBuffer.append(SEPARATOR);
 
-	// Extra yields
+	// Extra yields (flat — not multiplied by the city yield modifier)
 	int iExtraYield = city.getExtraYield(eYieldType);
 	iYield = iExtraYield;
 
-	// Specialists
-	{
-		int iSpecialistYield = 0;
-		int iFreeSpecialistYield = 0;
-		for (int iI = 0; iI < GC.getNumSpecialistInfos(); iI++)
-		{
-			const SpecialistTypes eType = static_cast<SpecialistTypes>(iI);
-			int iCount = city.getSpecialistCount(eType);
-			if (iCount > 0)
-			{
-				iSpecialistYield += iCount * city.specialistYield(eType, eYieldType);
-			}
-			iCount = city.getFreeSpecialistCount(eType);
-			if (iCount > 0)
-			{
-				iFreeSpecialistYield += iCount * city.specialistYield(eType, eYieldType);
-			}
-		}
-		if (iSpecialistYield != 0)
-		{
-			szBuffer.append(NEWLINE);
-			szBuffer.append(gDLL->getText("TXT_BULLET_D1_F2_FROM_S3", iSpecialistYield, info.getChar(), L"TXT_KEY_CONCEPT_SPECIALISTS"));
-			iYield -= iSpecialistYield;
-		}
-		if (iFreeSpecialistYield != 0)
-		{
-			szBuffer.append(NEWLINE);
-			szBuffer.append(gDLL->getText("TXT_BULLET_D1_F2_FROM_S3", iFreeSpecialistYield, info.getChar(), L"TXT_KEY_WB_FREE_SPECIALISTS"));
-			iYield -= iFreeSpecialistYield;
-		}
-	}
 	// Corporations
 	{
 		const int iCorporationYield = city.getCorporationYield(eYieldType);

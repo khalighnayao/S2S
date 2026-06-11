@@ -27889,7 +27889,7 @@ void CvPlayer::changeSpecialistYieldPercentChanges(SpecialistTypes eIndex1, Yiel
 		{
 			const int iExistingValue = pLoopCity->getSpecialistCount(eIndex1) * (getSpecialistYieldPercentChanges(eIndex1, eIndex2) - iOldValue) / 100;
 			// set the new
-			pLoopCity->changeExtraYield(eIndex2, iExistingValue);
+			pLoopCity->changeSpecialistYieldTotal(eIndex2, iExistingValue);
 		}
 	}
 }

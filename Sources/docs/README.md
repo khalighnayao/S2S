@@ -62,6 +62,7 @@ This folder is split by intent:
 | [gamespeed-simplification](plans/gamespeed-simplification.md) | `CvGameSpeedInfo`: Percents→named fields, GameTurnInfos collapse, derived calendar table (#196) |
 | [fight-or-flight](plans/fight-or-flight.md) | `FIGHT_OR_FLIGHT` design capture (removal + plugin reimplementation) |
 | [surround-destroy-removal-map](plans/surround-destroy-removal-map.md) | `SURROUND_DESTROY` removal map (deferred) |
+| [specialist-rebalance](plans/specialist-rebalance.md) | Why specialists are weak + the lever plan: yield-modifier parity (done), GPP rebalance, city-amplifier mechanics (#317) |
 
 ## Where docs go
 
