@@ -28,9 +28,8 @@ void BuildSlotList( CvTextureBlendSlotList &list, CvString &numlist);
 //////////////////////////////////////////////////////////////////////////
 
 CvArtInfoTerrain::CvArtInfoTerrain()
-	: m_iLayerOrder(0)
-	, m_bAlphaShader(false)
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -89,23 +88,30 @@ CvTextureBlendSlotList& CvArtInfoTerrain::getBlendList(int blendMask)
 }
 
 
+// Grid/Detail/LayerOrder/AlphaShader were MANDATORY reads (GetChildXmlValByName) in the legacy
+// loader; the declarative read is optional, so a missing tag now loads the default silently
+// instead of also emitting an FErrorMsg. Same loaded values either way.
+void CvArtInfoTerrain::getDataMembers(CvInfoUtil& util)
+{
+	CvArtInfoAsset::getDataMembers(util);
+	util
+		.add(m_szGridTexture, L"Grid")
+		.add(m_szDetailTexture, L"Detail")
+		.add(m_iLayerOrder, L"LayerOrder")
+		.add(m_bAlphaShader, L"AlphaShader")
+	;
+}
+
+
 bool CvArtInfoTerrain::read(CvXMLLoadUtility* pXML)
 {
 	PROFILE_EXTRA_FUNC();
 	CvString szTextVal;
+	// Single declarative delegation (covers this class's declared fields too via virtual dispatch)
 	if (!CvArtInfoAsset::read(pXML))
 	{
 		return false;
 	}
-
-	pXML->GetChildXmlValByName(szTextVal, L"Grid");
-	setGridTexture(szTextVal);
-
-	pXML->GetChildXmlValByName(szTextVal, L"Detail");
-	setDetailTexture(szTextVal);
-
-	pXML->GetChildXmlValByName(&m_iLayerOrder, L"LayerOrder");
-	pXML->GetChildXmlValByName(&m_bAlphaShader, L"AlphaShader");
 
 	// Parse texture slots for blend tile lists
 	wchar_t xmlName[] = L"TextureBlend00";

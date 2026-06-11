@@ -24,12 +24,6 @@
 // CvArtInfoMovie
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-bool CvArtInfoMovie::read(CvXMLLoadUtility* pXML)
-{
-	return CvArtInfoAsset::read(pXML);
-}
-
-
 void CvArtInfoMovie::copyNonDefaults(const CvArtInfoMovie* pClassInfo)
 {
 	// Empty, for Art files we stick to FULL XML defintions

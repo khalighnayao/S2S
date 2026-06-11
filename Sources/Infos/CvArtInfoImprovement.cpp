@@ -24,9 +24,9 @@
 // CvArtInfoImprovement
 //////////////////////////////////////////////////////////////////////////
 
-CvArtInfoImprovement::CvArtInfoImprovement() :
-m_bExtraAnimations(false)
+CvArtInfoImprovement::CvArtInfoImprovement()
 {
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -41,20 +41,13 @@ bool CvArtInfoImprovement::isExtraAnimations() const
 }
 
 
-bool CvArtInfoImprovement::read(CvXMLLoadUtility* pXML)
+void CvArtInfoImprovement::getDataMembers(CvInfoUtil& util)
 {
-	if (!CvArtInfoScalableAsset::read(pXML))
-	{
-		return false;
-	}
-
-	pXML->GetOptionalChildXmlValByName(&m_bExtraAnimations, L"bExtraAnimations");
-
-	CvString szTextVal;
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"SHADERNIF", "");
-	setShaderNIF(szTextVal);
-
-	return true;
+	CvArtInfoScalableAsset::getDataMembers(util);
+	util
+		.add(m_bExtraAnimations, L"bExtraAnimations")
+		.add(m_szShaderNIF, L"SHADERNIF")
+	;
 }
 
 

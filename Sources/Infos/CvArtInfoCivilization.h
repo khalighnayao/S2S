@@ -17,7 +17,9 @@ public:
 
 	bool isWhiteFlag() const;
 
-	bool read(CvXMLLoadUtility* pXML);
+	// No read() override: all fields are declarative, so the inherited
+	// CvArtInfoAsset::read delegation reads them.
+	void getDataMembers(CvInfoUtil& util);
 	void copyNonDefaults(const CvArtInfoCivilization* pClassInfo);
 
 protected:

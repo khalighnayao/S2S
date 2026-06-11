@@ -30,8 +30,10 @@ public:
 	DllExport const char* getPath() const;
 	void setPath(const char* szDesc);
 
-	bool read(CvXMLLoadUtility* pXML);
-	void copyNonDefaults(const CvAssetInfoBase* pClassInfo);
+	// Declarative field registry (chained from CvArtInfoAsset::getDataMembers). This class has no
+	// read() of its own: the whole art-info family is read by the single CvInfoUtil delegation in
+	// CvArtInfoAsset::read, whose virtual getDataMembers dispatch covers this chain link.
+	void getDataMembers(CvInfoUtil& util);
 
 	//----------------------PROTECTED MEMBER VARIABLES----------------------------
 protected:

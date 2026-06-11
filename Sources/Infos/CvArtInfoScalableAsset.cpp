@@ -24,14 +24,18 @@
 // CvArtInfoScalableAsset
 /////////////////////////////////////////////////////////////////////////////////////////////
 
+void CvArtInfoScalableAsset::getDataMembers(CvInfoUtil& util)
+{
+	CvArtInfoAsset::getDataMembers(util);
+	CvScalableInfo::getDataMembers(util);
+}
+
+
 bool CvArtInfoScalableAsset::read(CvXMLLoadUtility* pXML)
 {
-	if (!CvArtInfoAsset::read(pXML))
-	{
-		return false;
-	}
-
-	return CvScalableInfo::read(pXML);
+	// The CvInfoUtil delegation in CvArtInfoAsset::read covers the CvScalableInfo mixin fields
+	// too (declared above), so the hand-written CvScalableInfo::read is no longer called here.
+	return CvArtInfoAsset::read(pXML);
 }
 
 

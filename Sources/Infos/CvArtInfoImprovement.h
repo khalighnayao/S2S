@@ -20,7 +20,9 @@ public:
 
 	bool isExtraAnimations() const;
 
-	bool read(CvXMLLoadUtility* pXML);
+	// No read() override: all fields are declarative, so the inherited
+	// CvArtInfoScalableAsset::read -> CvArtInfoAsset::read delegation reads them.
+	void getDataMembers(CvInfoUtil& util);
 	void copyNonDefaults(const CvArtInfoImprovement* pClassInfo);
 
 protected:
