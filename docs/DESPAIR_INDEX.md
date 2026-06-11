@@ -136,3 +136,8 @@ stop you.
 
 *Scale calibration note: 100 cE🐘 = 1 full Elephant. Readings above 100 are theoretically
 possible but would legally require the elephant to file an expense report for the trip.*
+
+*Contribution policy (owner-sanctioned): when the ongoing rework unearths something worthy
+— a bug whose comprehension produces an audible exhale — it may be added here, with a
+score, a name, and the respect it does not deserve. These entries double as an honest
+summary of the state of the inherited codebase, which is part of why the rework exists.*
