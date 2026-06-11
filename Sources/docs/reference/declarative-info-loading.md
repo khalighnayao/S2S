@@ -59,6 +59,12 @@ un-migrated classes are a harmless no-op. `CvBuildInfo` is the fully-migrated re
 1. **2D `m_ppi` arrays** (`int**`) — blocks Civic, Improvement, Property, Trait.
 2. **Delayed-resolution enum-as-int** — `addEnumAsInt` is immediate-only, so an `int` FK that
    used `addDelayedResolution` (e.g. `CvVoteSourceInfo::m_iCivic`) can't use it yet.
+3. **Non-info-class enums** (e.g. `CvPropertyInfo::m_eAIScaleType`, an `AIScaleTypes`) — `addEnum`
+   COMPILES for them (the primary `InfoClassTraits` template yields `NO_INFO_CLASS`) but
+   `isDelayedResolutionRequired` then indexes `m_infoClassXmlLoadOrder[-1]` — out-of-bounds.
+   Keep such fields hand-written (string + `GetInfoClass`) until the trait/guard exists.
+4. **Plain pair-vectors** (`std::vector<std::pair<Enum,int>>` read via `SetOptionalPairVector`,
+   e.g. `UnitCombatModifierArray`/`TechModifierArray`/`EraArray`) — only `IDValueMap` has a wrapper.
 
 **Before writing a new wrapper, check whether the data structure should exist at all.**
 The former blocker "non-FK `IDValueMap` keyed by plain `int`" (`IDValueMapPercent`) was
@@ -119,13 +125,34 @@ data model — which is what the pitfalls below are for.
 - **Array-owning classes:** `addYields`/`addCommerce`/`addBoolExpr` take ownership; switch the
   destructor from `SAFE_DELETE[_ARRAY]` to `CvInfoUtil(this).uninitDataMembers()`.
 - All `NO_X` enum sentinels are `-1` (Civ4 convention), matching the enum wrappers' default.
+- **Load-bearing sentinel defaults** (`CvReligionInfo`/`CvCorporationInfo` `m_iTGAIndex`):
+  `RemoveTGAFiller` identifies the never-read filler infos that `LoadPreMenuGlobals` pads the
+  vectors with by `getTGAIndex() == -1` — i.e. the *ctor* default (−1) deliberately differs from
+  the *read* default (0). No single wrapper default reproduces that triple (ctor −1 / read 0 /
+  copy-compare 0); getting it wrong makes `RemoveTGAFiller` delete real religions. Keep such
+  fields hand-written.
+- **Order/duplicate-sensitive lists must not use the vector wrapper.** `VectorWrapper`'s merge
+  dedups **and sorts**. Lists the EXE indexes positionally via DllExport getters
+  (`CvEntityEventInfo` animation paths, `CvUnitFormationInfo` event masks) or where duplicates
+  are data (`CvSpawnInfo` spawn groups spawn one unit per entry — live XML has duplicate units)
+  stay hand-written.
 
 ## Status (2026-06)
 
 `CvBuildInfo` fully migrated (reference). Incremental per-class migration in flight under #196;
-29 classes migrated (incl. `CvWorldInfo` via the Percents→named-field restructure #310, and
-`CvGameSpeedInfo` #248 via the calendar restructure — see `calendar-and-gamespeed.md`;
-`CvEraInfo` is a partial adopter: its three calendar-pacing fields are declarative)
-+ ~15 empty-stub sub-issues closed as no-work so far. Authoritative class
+29 classes were migrated through the Tier-1/Tier-2 waves (incl. `CvWorldInfo` via the
+Percents→named-field restructure #310, and `CvGameSpeedInfo` #248 via the calendar restructure —
+see `calendar-and-gamespeed.md`) + ~15 empty-stub sub-issues closed as no-work. The 2026-06-10
+overnight campaign added ~50 more across five batch PRs: the whole art-info family (single
+delegation point in `CvArtInfoAsset::read`, virtual `getDataMembers` chaining), the graphics/UI
+classes, the small gameplay/options classes, and the medium gameplay classes (Bonus/Feature/
+Terrain/Era/Handicap/Civilization/Religion/Corporation/Project/Specialist/Tech/PromotionLine/
+Property/Outcome/Spawn/UnitFormation — mostly HYBRID: every wrapper-expressible field declarative,
+remainders blocked on the "not yet supported" list above, each noted at the field site).
+Still fully hand-written: the big partial adopters' remainders (`CvBuildingInfo`, `CvUnitInfo`,
+`CvPromotionInfo`, `CvTraitInfo`, `CvImprovementInfo`, `CvCivicInfo`, `CvUnitCombatInfo`),
+`CvEventInfo`/`CvEventTriggerInfo`/`CvLeaderHeadInfo`/`CvDiplomacyInfo`, and the per-issue
+skips (`CvWaterPlaneInfo` #309 — nested XML; `CvCategoryInfo` #221 — delayed-res vector;
+`CvModLoadControlInfo` #268 + `CvUnitArtStyleTypeInfo` #301 — bespoke loaders). Authoritative class
 list = `EXPAND_FOR_EACH_INFO_CLASS` in `CvInfoClassTraits.h`. Related: prerequisite unification
 is #195; the broader load-coherence background is in the bool-list flattening work.

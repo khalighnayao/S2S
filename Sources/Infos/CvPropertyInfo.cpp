@@ -31,19 +31,13 @@
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 CvPropertyInfo::CvPropertyInfo() :
-								m_iChar(0),
-								m_iFontButtonIndex(0),
-								m_bSourceDrain(false),
-								m_bOAType(false),
-								m_iAIWeight(0),
-								m_iOperationalRangeMin(-500),
-								m_iOperationalRangeMax(500),
-								m_iTargetLevel(0),
-								m_iTrainReluctance(1),
-								m_eAIScaleType(AISCALE_NONE),
-								m_PropertyManipulators()
+								// Hand-written (non-declarative) fields only - the rest is initialized by initDataMembers()
+								m_iChar(0), // runtime GameFont char, set later via setChar
+								m_eAIScaleType(AISCALE_NONE)
 {
 	PROFILE_EXTRA_FUNC();
+	CvInfoUtil(this).initDataMembers();
+
 	for (int i=0; i < NUM_GAMEOBJECTS; i++)
 	{
 		for (int j=0; j < NUM_GAMEOBJECTS; j++)
@@ -69,6 +63,29 @@ CvPropertyInfo::~CvPropertyInfo()
 }
 
 
+void CvPropertyInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Declared in the legacy getCheckSum order for the wrapped subset; FontButtonIndex is parked
+	// last because the legacy checksum deliberately omits it. The class keeps an explicit
+	// getCheckSum: AIScaleType (non-info enum, no InfoClassTraits => no addEnum), the 2D
+	// ChangePropagator array, the TargetLevelbyEraTypes pair-vector and the delayed-resolution
+	// PropertyBuildings/PropertyPromotions walks stay hand-written and sit mid-order in it.
+	// The CvWString display texts also stay hand-written (only CvString is wrapper-expressible).
+	util
+		.add(m_bSourceDrain, L"bSourceDrain")
+		.add(m_bOAType, L"bOAType")
+		.add(m_iAIWeight, L"iAIWeight")
+		.add(m_iOperationalRangeMin, L"iOperationalRangeMin", -500)
+		.add(m_iOperationalRangeMax, L"iOperationalRangeMax", 500)
+		.add(m_iTargetLevel, L"iTargetLevel")
+		.add(m_iTrainReluctance, L"iTrainReluctance", 1)
+		.add(m_PropertyManipulators)
+		// Not in the legacy checksum:
+		.add(m_iFontButtonIndex, L"FontButtonIndex")
+	;
+}
+
+
 bool CvPropertyInfo::read(CvXMLLoadUtility* pXML)
 {
 
@@ -78,19 +95,16 @@ bool CvPropertyInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
+	CvInfoUtil(this).readXml(pXML);
+
+	// Hand-written: CvWString members (only CvString is wrapper-expressible)
 	pXML->GetOptionalChildXmlValByName(m_szValueDisplayText, L"ValueDisplayText");
 	pXML->GetOptionalChildXmlValByName(m_szChangeDisplayText, L"ChangeDisplayText");
 	pXML->GetOptionalChildXmlValByName(m_szChangeAllCitiesDisplayText, L"ChangeAllCitiesDisplayText");
 	pXML->GetOptionalChildXmlValByName(m_szPrereqMinDisplayText, L"PrereqMinDisplayText");
 	pXML->GetOptionalChildXmlValByName(m_szPrereqMaxDisplayText, L"PrereqMaxDisplayText");
-	pXML->GetOptionalChildXmlValByName(&m_iAIWeight, L"iAIWeight");
-	pXML->GetOptionalChildXmlValByName(&m_bSourceDrain, L"bSourceDrain");
-	pXML->GetOptionalChildXmlValByName(&m_bOAType, L"bOAType");
-	pXML->GetOptionalChildXmlValByName(&m_iOperationalRangeMin, L"iOperationalRangeMin", -500);
-	pXML->GetOptionalChildXmlValByName(&m_iOperationalRangeMax, L"iOperationalRangeMax", 500);
-	pXML->GetOptionalChildXmlValByName(&m_iTargetLevel, L"iTargetLevel", 0);
-	pXML->GetOptionalChildXmlValByName(&m_iTrainReluctance, L"iTrainReluctance", 1);
-	pXML->GetOptionalChildXmlValByName(&m_iFontButtonIndex, L"FontButtonIndex");
+
+	// Hand-written: AIScaleTypes is not an info class (no InfoClassTraits), so addEnum can't be used
 	CvString szTextVal;
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"AIScaleType");
 	m_eAIScaleType = (AIScaleTypes) pXML->GetInfoClass(szTextVal);
@@ -211,8 +225,6 @@ bool CvPropertyInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	m_PropertyManipulators.read(pXML);
-
 	return true;
 }
 
@@ -220,26 +232,18 @@ bool CvPropertyInfo::read(CvXMLLoadUtility* pXML)
 void CvPropertyInfo::copyNonDefaults(const CvPropertyInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	const int iDefault = 0;
-	const CvString cDefault = CvString::format("").GetCString();
 	const CvWString wDefault = CvWString::format(L"").GetCString();
 
 	CvInfoBase::copyNonDefaults(pClassInfo);
 
-	if (getAIWeight() == iDefault) m_iAIWeight = pClassInfo->getAIWeight();
-	if (isSourceDrain() == false) m_bSourceDrain = pClassInfo->isSourceDrain();
-	if (isOAType() == false) m_bOAType = pClassInfo->isOAType();
-	if (getOperationalRangeMin() == -500) m_iOperationalRangeMin = pClassInfo->getOperationalRangeMin();
-	if (getOperationalRangeMax() == 500) m_iOperationalRangeMax = pClassInfo->getOperationalRangeMax();
-	if (getTargetLevel() == 0) m_iTargetLevel = pClassInfo->getTargetLevel();
-	if (getTrainReluctance() == 1) m_iTrainReluctance = pClassInfo->getTrainReluctance();
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
+
 	if (getAIScaleType() == AISCALE_NONE) m_eAIScaleType = pClassInfo->getAIScaleType();
 	if (getValueDisplayText() == NULL || getValueDisplayText() == wDefault) m_szValueDisplayText = pClassInfo->getValueDisplayText();
 	if (getChangeDisplayText() == NULL || getChangeDisplayText() == wDefault) m_szChangeDisplayText = pClassInfo->getChangeDisplayText();
 	if (getChangeAllCitiesDisplayText() == NULL || getChangeAllCitiesDisplayText() == wDefault) m_szChangeAllCitiesDisplayText = pClassInfo->getChangeAllCitiesDisplayText();
 	if (getPrereqMinDisplayText() == NULL || getPrereqMinDisplayText() == wDefault) m_szPrereqMinDisplayText = pClassInfo->getPrereqMinDisplayText();
 	if (getPrereqMaxDisplayText() == NULL || getPrereqMaxDisplayText() == wDefault) m_szPrereqMaxDisplayText = pClassInfo->getPrereqMaxDisplayText();
-	if (getFontButtonIndex() == 0) m_iFontButtonIndex = pClassInfo->getFontButtonIndex();
 
 	for (int i=0; i < NUM_GAMEOBJECTS; i++)
 	{
@@ -281,11 +285,13 @@ void CvPropertyInfo::copyNonDefaults(const CvPropertyInfo* pClassInfo)
 			m_aTargetLevelbyEraTypes.push_back(std::make_pair((EraTypes)i, pClassInfo->getTargetLevelbyEraType(i)));
 		}
 	}
-
-	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
 }
 
 
+// Explicit (not delegated to CvInfoUtil) on purpose: the hand-written fields (AIScaleType, the
+// TargetLevelbyEraTypes pair-vector, the 2D ChangePropagator array, PropertyBuildings and
+// PropertyPromotions) sit mid-order in the legacy checksum, and the legacy checksum deliberately
+// omits the (read) FontButtonIndex. Keep this byte-identical to the legacy order.
 void CvPropertyInfo::getCheckSum(uint32_t& iSum) const
 {
 	PROFILE_EXTRA_FUNC();

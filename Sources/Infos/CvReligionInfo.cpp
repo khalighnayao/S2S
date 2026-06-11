@@ -32,21 +32,19 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvReligionInfo::CvReligionInfo() :
+// m_iChar/m_iHolyCityChar are non-XML, runtime-assigned GameFont indices (see setChar/setHolyCityChar),
+// m_iMissionType is runtime-assigned via setMissionType; m_iFreeUnit (delayed-resolution int FK),
+// m_iTGAIndex (its ctor default -1 is the never-read TGA-filler sentinel - see RemoveTGAFiller) and
+// m_piFlavorValue (SetVariableListTagPair) stay hand-written. Every other XML-backed field is declared
+// in getDataMembers() and defaulted by initDataMembers() below.
 m_iChar(0),
 m_iTGAIndex(-1),
 m_iHolyCityChar(0),
-m_iTechPrereq(NO_TECH),
-m_iFreeUnit(NO_UNIT),
-m_iNumFreeUnits(0),
-m_iSpreadFactor(0),
 m_iMissionType(NO_MISSION),
-m_paiGlobalReligionCommerce(NULL),
-m_paiHolyCityCommerce(NULL),
-m_paiStateReligionCommerce(NULL),
-m_piFlavorValue(NULL),
-m_PropertyManipulators()
+m_iFreeUnit(NO_UNIT),
+m_piFlavorValue(NULL)
 {
-	reset();
+	CvInfoUtil(this).initDataMembers();
 }
 
 
@@ -59,9 +57,7 @@ m_PropertyManipulators()
 //------------------------------------------------------------------------------------------------------
 CvReligionInfo::~CvReligionInfo()
 {
-	SAFE_DELETE_ARRAY(m_paiGlobalReligionCommerce);
-	SAFE_DELETE_ARRAY(m_paiHolyCityCommerce);
-	SAFE_DELETE_ARRAY(m_paiStateReligionCommerce);
+	CvInfoUtil(this).uninitDataMembers(); // owns the three declared commerce arrays
 	SAFE_DELETE_ARRAY(m_piFlavorValue);
 
 	GC.removeDelayedResolution((int*)&m_iFreeUnit);
@@ -253,6 +249,33 @@ bool CvReligionInfo::isCategory(int i) const
 }
 
 
+void CvReligionInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Kept hand-written: m_iFreeUnit (delayed-resolution int FK - no wrapper yet), m_iTGAIndex (no
+	// wrapper default reproduces the legacy triple of ctor -1 / read-default 0 / copy-compare 0 - and
+	// the ctor -1 is the load-bearing never-read TGA-filler sentinel consumed by RemoveTGAFiller),
+	// m_piFlavorValue (SetVariableListTagPair dynamic array), m_szTechButton (required read - the
+	// wrapper only does optional reads, so the load-time missing-tag diagnostic would be lost) and
+	// m_szAdjectiveKey (CvWString - no wrapper). m_iChar/m_iHolyCityChar/m_iMissionType/
+	// m_shrineBuildings are runtime fields, not XML-backed. getCheckSum stays explicit: legacy omits
+	// m_iTGAIndex and checksums the runtime m_iMissionType mid-order.
+	util
+		.addEnum(m_iTechPrereq, L"TechPrereq")
+		.add(m_iNumFreeUnits, L"iFreeUnits")
+		.add(m_iSpreadFactor, L"iSpreadFactor")
+		.addCommerce(m_paiGlobalReligionCommerce, L"GlobalReligionCommerces")
+		.addCommerce(m_paiHolyCityCommerce, L"HolyCityCommerces")
+		.addCommerce(m_paiStateReligionCommerce, L"StateReligionCommerces")
+		.add(m_aiCategories, L"Categories")
+		.add(m_PropertyManipulators)
+		.add(m_szGenericTechButton, L"GenericTechButton")
+		.add(m_szMovieFile, L"MovieFile")
+		.add(m_szMovieSound, L"MovieSound")
+		.add(m_szSound, L"Sound")
+	;
+}
+
+
 //
 // read from xml
 //
@@ -264,51 +287,19 @@ bool CvReligionInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetOptionalTypeEnum(m_iTechPrereq, L"TechPrereq");
+	CvInfoUtil(this).readXml(pXML);
+
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"FreeUnit");
 	GC.addDelayedResolution((int*)&m_iFreeUnit, szTextVal);
-	pXML->GetOptionalChildXmlValByName(&m_iNumFreeUnits, L"iFreeUnits");
-	pXML->GetOptionalChildXmlValByName(&m_iSpreadFactor, L"iSpreadFactor");
+
 	pXML->GetOptionalChildXmlValByName(&m_iTGAIndex, L"iTGAIndex");
 
-	if (pXML->TryMoveToXmlFirstChild(L"GlobalReligionCommerces"))
-	{
-		pXML->SetCommerce(&m_paiGlobalReligionCommerce);
-		pXML->MoveToXmlParent();
-	}
-	else
-		SAFE_DELETE_ARRAY(m_paiGlobalReligionCommerce);
-
-	if (pXML->TryMoveToXmlFirstChild(L"HolyCityCommerces"))
-	{
-		pXML->SetCommerce(&m_paiHolyCityCommerce);
-		pXML->MoveToXmlParent();
-	}
-	else
-		SAFE_DELETE_ARRAY(m_paiHolyCityCommerce);
-
-	if (pXML->TryMoveToXmlFirstChild(L"StateReligionCommerces"))
-	{
-		pXML->SetCommerce(&m_paiStateReligionCommerce);
-		pXML->MoveToXmlParent();
-	}
-	else
-		SAFE_DELETE_ARRAY(m_paiStateReligionCommerce);
-
 	pXML->GetChildXmlValByName(m_szTechButton, L"TechButton");
-	pXML->GetOptionalChildXmlValByName(m_szGenericTechButton, L"GenericTechButton");
-	pXML->GetOptionalChildXmlValByName(m_szMovieFile, L"MovieFile");
-	pXML->GetOptionalChildXmlValByName(m_szMovieSound, L"MovieSound");
-	pXML->GetOptionalChildXmlValByName(m_szSound, L"Sound");
 
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"Adjective");
 	setAdjectiveKey(szTextVal);
 
 	pXML->SetVariableListTagPair(&m_piFlavorValue, L"Flavors", GC.getNumFlavorTypes());
-
-	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
-
-	m_PropertyManipulators.read(pXML);
 
 	return true;
 }
@@ -318,54 +309,18 @@ void CvReligionInfo::copyNonDefaults(const CvReligionInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
 	const int iDefault = 0;
-	const int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
 	const CvString cDefault = CvString::format("").GetCString();
 	const CvWString wDefault = CvWString::format(L"").GetCString();
 
 	CvHotkeyInfo::copyNonDefaults(pClassInfo);
 
-	if (getTechPrereq() == iTextDefault) m_iTechPrereq = pClassInfo->getTechPrereq();
-	GC.copyNonDefaultDelayedResolution((int*)&m_iFreeUnit, (int*)&pClassInfo->m_iFreeUnit);
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
 
-	if (getNumFreeUnits() == iDefault) m_iNumFreeUnits = pClassInfo->getNumFreeUnits();
-	if (getSpreadFactor() == iDefault) m_iSpreadFactor = pClassInfo->getSpreadFactor();
+	GC.copyNonDefaultDelayedResolution((int*)&m_iFreeUnit, (int*)&pClassInfo->m_iFreeUnit);
 
 	if (getTGAIndex() == iDefault) m_iTGAIndex = pClassInfo->getTGAIndex();
 
-	for ( int i = 0; i < NUM_COMMERCE_TYPES; i++)
-	{
-		if ( getGlobalReligionCommerce(i) == iDefault && pClassInfo->getGlobalReligionCommerce(i) != iDefault)
-		{
-			if ( NULL == m_paiGlobalReligionCommerce )
-			{
-				CvXMLLoadUtility::InitList(&m_paiGlobalReligionCommerce,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_paiGlobalReligionCommerce[i] = pClassInfo->getGlobalReligionCommerce(i);
-		}
-
-		if ( getHolyCityCommerce(i) == iDefault && pClassInfo->getHolyCityCommerce(i) != iDefault)
-		{
-			if ( NULL == m_paiHolyCityCommerce )
-			{
-				CvXMLLoadUtility::InitList(&m_paiHolyCityCommerce,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_paiHolyCityCommerce[i] = pClassInfo->getHolyCityCommerce(i);
-		}
-
-		if ( getStateReligionCommerce(i) == iDefault && pClassInfo->getStateReligionCommerce(i) != iDefault)
-		{
-			if ( NULL == m_paiStateReligionCommerce )
-			{
-				CvXMLLoadUtility::InitList(&m_paiStateReligionCommerce,NUM_COMMERCE_TYPES,iDefault);
-			}
-			m_paiStateReligionCommerce[i] = pClassInfo->getStateReligionCommerce(i);
-		}
-	}
 	if (getTechButton() == cDefault) m_szTechButton = pClassInfo->getTechButton();
-	if (getGenericTechButton() == cDefault) m_szGenericTechButton = pClassInfo->getGenericTechButton();
-	if (getMovieFile() == cDefault) m_szMovieFile = pClassInfo->getMovieFile();
-	if (getMovieSound() == cDefault) m_szMovieSound = pClassInfo->getMovieSound();
-	if (getSound() == cDefault) m_szSound = pClassInfo->getSound();
 	if (getAdjectiveKey() == wDefault) setAdjectiveKey(CvString::format("%s",pClassInfo->getAdjectiveKey()).GetCString());
 
 	for ( int i = 0; i < GC.getNumFlavorTypes(); i++ )
@@ -379,15 +334,14 @@ void CvReligionInfo::copyNonDefaults(const CvReligionInfo* pClassInfo)
 			m_piFlavorValue[i] = pClassInfo->getFlavorValue(i);
 		}
 	}
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
-
-	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
 }
 
 
 void CvReligionInfo::getCheckSum(uint32_t& iSum) const
 {
+	// NOTE: kept explicit (not delegated to CvInfoUtil) to preserve the exact legacy checksum, which
+	// omits the read field m_iTGAIndex, includes the runtime field m_iMissionType mid-order, and has
+	// the hand-written m_iFreeUnit/m_piFlavorValue interleaved with declared fields.
 	CheckSum(iSum, m_iTechPrereq);
 	CheckSum(iSum, m_iFreeUnit);
 	CheckSum(iSum, m_iNumFreeUnits);

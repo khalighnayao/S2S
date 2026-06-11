@@ -32,53 +32,38 @@
 //
 //------------------------------------------------------------------------------------------------------
 CvCorporationInfo::CvCorporationInfo() :
+// m_iChar/m_iHeadquarterChar are non-XML, runtime-assigned GameFont indices (see setChar/
+// setHeadquarterChar), m_iMissionType is runtime-assigned via setMissionType; m_iFreeUnit and the
+// PrereqBuilding/CompetingCorporation pairs are readPass3 machinery; m_iTGAIndex (its ctor default
+// -1 is the never-read TGA-filler sentinel - see RemoveTGAFiller) and m_piYieldChange (legacy
+// allocates a zero array when the tag is absent) stay hand-written. Every other XML-backed field
+// is declared in getDataMembers() and defaulted by initDataMembers() below.
  m_iChar(0)
 ,m_iTGAIndex(-1)
 ,m_iHeadquarterChar(0)
-,m_iTechPrereq(NO_TECH)
 ,m_iFreeUnit(NO_UNIT)
-,m_iSpreadFactor(0)
-,m_iSpreadCost(0)
-,m_iMaintenance(0)
 ,m_iMissionType(NO_MISSION)
-,m_iBonusProduced(NO_BONUS)
-,m_paiHeadquarterCommerce(NULL)
-,m_paiCommerceProduced(NULL)
-,m_paiYieldProduced(NULL)
-,m_iObsoleteTech(NO_TECH)
-,m_iPrereqGameOption(NO_GAMEOPTION)
-,m_iHealth(0)
-,m_iHappiness(0)
-,m_iMilitaryProductionModifier(0)
-,m_iFreeXP(0)
-,m_iSpread(0)
 ,m_paiPrereqBuilding(NULL)
 ,m_pabCompetingCorporation(NULL)
 ,m_piYieldChange(NULL)
-,m_piCommerceChange(NULL)
-,m_PropertyManipulators()
 {
-	reset();
+	CvInfoUtil(this).initDataMembers();
 }
 
 
 //------------------------------------------------------------------------------------------------------
 //
-//  FUNCTION:   ~CvReligionInfo()
+//  FUNCTION:   ~CvCorporationInfo()
 //
 //  PURPOSE :   Default destructor
 //
 //------------------------------------------------------------------------------------------------------
 CvCorporationInfo::~CvCorporationInfo()
 {
-	SAFE_DELETE_ARRAY(m_paiHeadquarterCommerce);
-	SAFE_DELETE_ARRAY(m_paiCommerceProduced);
-	SAFE_DELETE_ARRAY(m_paiYieldProduced);
+	CvInfoUtil(this).uninitDataMembers(); // owns the declared commerce/yield arrays
 	SAFE_DELETE_ARRAY(m_paiPrereqBuilding);
 	SAFE_DELETE_ARRAY(m_pabCompetingCorporation);
 	SAFE_DELETE_ARRAY(m_piYieldChange);
-	SAFE_DELETE_ARRAY(m_piCommerceChange);
-
 }
 
 
@@ -332,6 +317,43 @@ bool CvCorporationInfo::isCategory(int i) const
 }
 
 
+void CvCorporationInfo::getDataMembers(CvInfoUtil& util)
+{
+	// Kept hand-written: m_iFreeUnit + the PrereqBuildings/CompetingCorporations paired lists
+	// (readPass3 machinery), m_iTGAIndex (no wrapper default reproduces the legacy triple of ctor -1
+	// / read-default 0 / copy-compare 0 - and the ctor -1 is the load-bearing never-read TGA-filler
+	// sentinel consumed by RemoveTGAFiller) and m_piYieldChange (legacy read allocates a zero array
+	// when the tag is absent - the addYields wrapper would leave it NULL, changing the checksum and
+	// the non-NULL guarantee of getYieldChangeArray()). m_iChar/m_iHeadquarterChar/m_iMissionType are
+	// runtime fields, not XML-backed. getCheckSum stays explicit: legacy omits the read field
+	// m_iTGAIndex and checksums the runtime m_iMissionType plus the pass3 arrays mid-order.
+	util
+		.addEnum(m_iTechPrereq, L"TechPrereq")
+		.add(m_iSpreadFactor, L"iSpreadFactor")
+		.add(m_iSpreadCost, L"iSpreadCost")
+		.add(m_iMaintenance, L"iMaintenance")
+		.addEnumAsInt(m_iBonusProduced, L"BonusProduced")
+		.addEnum(m_iObsoleteTech, L"ObsoleteTech")
+		.addEnumAsInt(m_iPrereqGameOption, L"PrereqGameOption")
+		.add(m_iSpread, L"iSpread")
+		.add(m_iHealth, L"iHealth")
+		.add(m_iHappiness, L"iHappiness")
+		.add(m_iMilitaryProductionModifier, L"iMilitaryProductionModifier")
+		.add(m_iFreeXP, L"iFreeXP")
+		.addCommerce(m_piCommerceChange, L"CommerceChanges")
+		.add(m_vPrereqBonuses, L"PrereqBonuses")
+		.addCommerce(m_paiHeadquarterCommerce, L"HeadquarterCommerces")
+		.addCommerce(m_paiCommerceProduced, L"CommercesProduced")
+		.addYields(m_paiYieldProduced, L"YieldsProduced")
+		.add(m_aiCategories, L"Categories")
+		.add(m_PropertyManipulators)
+		.add(m_szMovieFile, L"MovieFile")
+		.add(m_szMovieSound, L"MovieSound")
+		.add(m_szSound, L"Sound")
+	;
+}
+
+
 //
 // read from xml
 //
@@ -344,66 +366,12 @@ bool CvCorporationInfo::read(CvXMLLoadUtility* pXML)
 		return false;
 	}
 
-	pXML->GetOptionalTypeEnum(m_iTechPrereq, L"TechPrereq");
+	CvInfoUtil(this).readXml(pXML);
 
 	pXML->GetOptionalChildXmlValByName(szTextVal, L"FreeUnit");
 	m_aszExtraXMLforPass3.push_back(szTextVal);
 
-	pXML->GetOptionalChildXmlValByName(&m_iSpreadFactor, L"iSpreadFactor");
-	pXML->GetOptionalChildXmlValByName(&m_iSpreadCost, L"iSpreadCost");
-	pXML->GetOptionalChildXmlValByName(&m_iMaintenance, L"iMaintenance");
 	pXML->GetOptionalChildXmlValByName(&m_iTGAIndex, L"iTGAIndex");
-
-	if (pXML->TryMoveToXmlFirstChild(L"HeadquarterCommerces"))
-	{
-		pXML->SetCommerce(&m_paiHeadquarterCommerce);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_paiHeadquarterCommerce);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"CommercesProduced"))
-	{
-		pXML->SetCommerce(&m_paiCommerceProduced);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_paiCommerceProduced);
-	}
-
-	if (pXML->TryMoveToXmlFirstChild(L"YieldsProduced"))
-	{
-		pXML->SetYields(&m_paiYieldProduced);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_paiYieldProduced);
-	}
-
-	pXML->SetOptionalVector(&m_vPrereqBonuses, L"PrereqBonuses");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"BonusProduced");
-	m_iBonusProduced = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(m_szMovieFile, L"MovieFile");
-	pXML->GetOptionalChildXmlValByName(m_szMovieSound, L"MovieSound");
-	pXML->GetOptionalChildXmlValByName(m_szSound, L"Sound");
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"ObsoleteTech");
-	m_iObsoleteTech = static_cast<TechTypes>(pXML->GetInfoClass(szTextVal));
-
-	pXML->GetOptionalChildXmlValByName(szTextVal, L"PrereqGameOption");
-	m_iPrereqGameOption = pXML->GetInfoClass(szTextVal);
-
-	pXML->GetOptionalChildXmlValByName(&m_iSpread, L"iSpread");
-	pXML->GetOptionalChildXmlValByName(&m_iHealth, L"iHealth");
-	pXML->GetOptionalChildXmlValByName(&m_iHappiness, L"iHappiness");
-	pXML->GetOptionalChildXmlValByName(&m_iMilitaryProductionModifier, L"iMilitaryProductionModifier");
-	pXML->GetOptionalChildXmlValByName(&m_iFreeXP, L"iFreeXP");
 
 	if (pXML->TryMoveToXmlFirstChild(L"PrereqBuildings"))
 	{
@@ -467,15 +435,6 @@ bool CvCorporationInfo::read(CvXMLLoadUtility* pXML)
 		pXML->MoveToXmlParent();
 	}
 
-	if (pXML->TryMoveToXmlFirstChild(L"CommerceChanges"))
-	{
-		pXML->SetCommerce(&m_piCommerceChange);
-		pXML->MoveToXmlParent();
-	}
-	else
-	{
-		SAFE_DELETE_ARRAY(m_piCommerceChange);
-	}
 	// if we can set the current xml node to it's next sibling
 	if (pXML->TryMoveToXmlFirstChild(L"YieldChanges"))
 	{
@@ -488,11 +447,6 @@ bool CvCorporationInfo::read(CvXMLLoadUtility* pXML)
 		pXML->CvXMLLoadUtility::InitList(&m_piYieldChange, NUM_YIELD_TYPES);
 	}
 
-
-	pXML->SetOptionalVector(&m_aiCategories, L"Categories");
-
-	m_PropertyManipulators.read(pXML);
-
 	return true;
 }
 
@@ -500,66 +454,26 @@ bool CvCorporationInfo::read(CvXMLLoadUtility* pXML)
 void CvCorporationInfo::copyNonDefaults(const CvCorporationInfo* pClassInfo)
 {
 	PROFILE_EXTRA_FUNC();
-	int iDefault = 0;
-	int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
-	CvString cDefault = CvString::format("").GetCString();
-	CvWString wDefault = CvWString::format(L"").GetCString();
+	const int iDefault = 0;
+	const int iTextDefault = -1;  //all integers which are TEXT_KEYS in the xml are -1 by default
 
 	CvHotkeyInfo::copyNonDefaults(pClassInfo);
 
-	if (getTechPrereq() == iTextDefault) m_iTechPrereq = pClassInfo->getTechPrereq();
+	// NOTE: for the declared commerce/yield arrays the legacy copy unconditionally allocated
+	// zero-filled arrays; the wrappers only allocate when a non-default source value is copied.
+	// Loaded values are identical, but a modular-merged corporation with the tag absent in both
+	// definitions now keeps a NULL array (getters already handle NULL).
+	CvInfoUtil(this).copyNonDefaults(pClassInfo);
+
 	if (m_iFreeUnit == iTextDefault) m_iFreeUnit = pClassInfo->getFreeUnit();
-	if (getSpreadFactor() == iDefault) m_iSpreadFactor = pClassInfo->getSpreadFactor();
-	if (getSpreadCost() == iDefault) m_iSpreadCost = pClassInfo->getSpreadCost();
-	if (getMaintenance() == iDefault) m_iMaintenance = pClassInfo->getMaintenance();
 
 	if (getTGAIndex() == iDefault) m_iTGAIndex = pClassInfo->getTGAIndex();
-
-	if (!m_paiHeadquarterCommerce) CvXMLLoadUtility::InitList(&m_paiHeadquarterCommerce, NUM_COMMERCE_TYPES);
-	if (!m_paiCommerceProduced) CvXMLLoadUtility::InitList(&m_paiCommerceProduced, NUM_COMMERCE_TYPES);
-	for ( int i = 0; i < NUM_COMMERCE_TYPES; i++ )
-	{
-		if ( m_paiHeadquarterCommerce[i] == iDefault )
-		{
-			m_paiHeadquarterCommerce[i] = pClassInfo->getHeadquarterCommerce(i);
-		}
-
-		if ( m_paiCommerceProduced[i] == iDefault )
-		{
-			m_paiCommerceProduced[i] = pClassInfo->getCommerceProduced(i);
-		}
-	}
-
-	if (!m_paiYieldProduced) CvXMLLoadUtility::InitList(&m_paiYieldProduced, NUM_YIELD_TYPES);
-	for ( int i = 0; i < NUM_YIELD_TYPES; i++ )
-	{
-		if ( m_paiYieldProduced[i] == iDefault )
-		{
-			m_paiYieldProduced[i] = pClassInfo->getYieldProduced(i);
-		}
-	}
-
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_vPrereqBonuses, pClassInfo->m_vPrereqBonuses);
-	CvXMLLoadUtility::CopyNonDefaultsFromVector(m_aiCategories, pClassInfo->m_aiCategories);
-
-	if (getBonusProduced() == iTextDefault) m_iBonusProduced = pClassInfo->getBonusProduced();
-
-	if (getMovieFile() == cDefault) m_szMovieFile = pClassInfo->getMovieFile();
-	if (getMovieSound() == cDefault) m_szMovieSound = pClassInfo->getMovieSound();
-	if (getSound() == cDefault) m_szSound = pClassInfo->getSound();
 
 	for ( int i = 0; i < pClassInfo->getPrereqBuildingVectorSize(); i++ )
 	{
 		m_aiPrereqBuildingforPass3.push_back(pClassInfo->getPrereqBuildingValuesVectorElement(i));
 		m_aszPrereqBuildingforPass3.push_back(pClassInfo->getPrereqBuildingNamesVectorElement(i));
 	}
-	if (getObsoleteTech() == iTextDefault) m_iObsoleteTech = pClassInfo->getObsoleteTech();
-	if (getSpread() == iDefault) m_iSpread = pClassInfo->getSpread();
-	if (getHealth() == iDefault) m_iHealth = pClassInfo->getHealth();
-	if (getHappiness() == iDefault) m_iHappiness = pClassInfo->getHappiness();
-	if (getMilitaryProductionModifier() == iDefault) m_iMilitaryProductionModifier = pClassInfo->getMilitaryProductionModifier();
-	if (getFreeXP() == iDefault) m_iFreeXP = pClassInfo->getFreeXP();
-	if (getPrereqGameOption() == iTextDefault) m_iPrereqGameOption = pClassInfo->getPrereqGameOption();
 
 	for ( int i = 0; i < pClassInfo->getCompetingCorporationVectorSize(); i++ )
 	{
@@ -572,27 +486,18 @@ void CvCorporationInfo::copyNonDefaults(const CvCorporationInfo* pClassInfo)
 	{
 		if ( getYieldChange(j) == iDefault && pClassInfo->getYieldChange(j) != iDefault)
 		{
-			if ( m_piYieldChange == NULL )
-			{
-				CvXMLLoadUtility::InitList(&m_piYieldChange, NUM_YIELD_TYPES);
-			}
 			m_piYieldChange[j] = pClassInfo->getYieldChange(j);
 		}
 	}
-	if (!m_piCommerceChange) CvXMLLoadUtility::InitList(&m_piCommerceChange, NUM_COMMERCE_TYPES);
-	for ( int j = 0; j < NUM_COMMERCE_TYPES; j++)
-	{
-		if ( m_piCommerceChange[j] == iDefault )
-		{
-			m_piCommerceChange[j] = pClassInfo->getCommerceChange(j);
-		}
-	}
-	m_PropertyManipulators.copyNonDefaults(&pClassInfo->m_PropertyManipulators);
 }
 
 
 void CvCorporationInfo::getCheckSum(uint32_t& iSum) const
 {
+	// NOTE: kept explicit (not delegated to CvInfoUtil) to preserve the exact legacy checksum, which
+	// omits the read field m_iTGAIndex and interleaves runtime/pass3/hand-written fields
+	// (m_iMissionType, m_iFreeUnit, m_paiPrereqBuilding, m_pabCompetingCorporation, m_piYieldChange)
+	// with the declared ones.
 	CheckSum(iSum, m_iTechPrereq);
 	CheckSum(iSum, m_iFreeUnit);
 	CheckSum(iSum, m_iSpreadFactor);

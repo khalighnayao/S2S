@@ -57,6 +57,8 @@ public:
 	void setChar(int i);
 	int getFontButtonIndex() const;
 
+	void getDataMembers(CvInfoUtil& util);
+
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvPropertyInfo* pClassInfo);
