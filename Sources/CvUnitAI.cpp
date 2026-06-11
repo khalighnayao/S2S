@@ -1480,6 +1480,35 @@ void CvUnitAI::AI_setBirthmark(int iNewValue)
 	m_iBirthmark = iNewValue;
 }
 
+//	THE single place a unit's birthmark-seeded compass heading comes from (#24). Every
+//	behaviour that wants per-unit directional variation (border patrol's circuit, the
+//	move-to-borders fan-out, future wander/explore spreads) goes through these two so the
+//	spreading logic is not reinvented per call site.
+DirectionTypes CvUnitAI::AI_getPreferredDirection() const
+{
+	return (DirectionTypes)(AI_getBirthmark() % NUM_DIRECTION_TYPES);
+}
+
+//	How closely eDirection matches this unit's preferred heading:
+//	NUM_DIRECTION_TYPES/2 (4) = exactly preferred ... 0 = directly opposite.
+int CvUnitAI::AI_directionAffinity(DirectionTypes eDirection) const
+{
+	if (eDirection == NO_DIRECTION)
+	{
+		return 0;
+	}
+	int iDelta = (int)eDirection - (int)AI_getPreferredDirection();
+	if (iDelta < 0)
+	{
+		iDelta = -iDelta;
+	}
+	if (iDelta > NUM_DIRECTION_TYPES / 2)
+	{
+		iDelta = NUM_DIRECTION_TYPES - iDelta;
+	}
+	return NUM_DIRECTION_TYPES / 2 - iDelta;
+}
+
 
 UnitAITypes CvUnitAI::AI_getUnitAIType() const
 {
@@ -26918,24 +26947,12 @@ bool CvUnitAI::AI_moveToBorders()
 								}
 							}
 
-							// Per-unit directional bias: each unit prefers a consistent
-							// compass sector (seeded from its birthmark, the per-unit AI
-							// seed) so several units fan out to different borders instead
-							// of converging on the same crossing.
+							// Per-unit directional bias (shared helper, see AI_getPreferredDirection):
+							// each unit prefers a consistent compass sector so several units fan
+							// out to different borders instead of converging on the same crossing.
 							if (iValue > 0)
 							{
-								const int iPreferredDir = AI_getBirthmark() % NUM_DIRECTION_TYPES;
-								const int iPlotDir = (int)directionXY(plot(), pLoopPlot);
-								int iDirDelta = iPlotDir - iPreferredDir;
-								if (iDirDelta < 0)
-								{
-									iDirDelta = -iDirDelta;
-								}
-								if (iDirDelta > NUM_DIRECTION_TYPES / 2)
-								{
-									iDirDelta = NUM_DIRECTION_TYPES - iDirDelta;
-								}
-								iValue += (NUM_DIRECTION_TYPES / 2 - iDirDelta) * 75;
+								iValue += AI_directionAffinity(directionXY(plot(), pLoopPlot)) * 75;
 							}
 
 							if (iValue * 10 > iBestValue)
@@ -26992,6 +27009,7 @@ bool CvUnitAI::AI_patrolBorders()
 
 	int iBestValue = 0;
 	const CvPlot* pBestPlot = NULL;
+	bool bBorderInRange = false;
 
 	const int iSearchRange = baseMoves();
 
@@ -27003,10 +27021,12 @@ bool CvUnitAI::AI_patrolBorders()
 			int iValue = GC.getGame().getSorenRandNum(10000, "AI Border Patrol");
 			if (pLoopPlot->isBorder(true))
 			{
+				bBorderInRange = true;
 				iValue += GC.getGame().getSorenRandNum(10000, "AI Border Patrol");
 			}
 			else if (pLoopPlot->isBorder(false))
 			{
+				bBorderInRange = true;
 				iValue += GC.getGame().getSorenRandNum(5000, "AI Border Patrol");
 			}
 			//Avoid heading backwards, we want to circuit our borders, if possible.
@@ -27018,22 +27038,12 @@ bool CvUnitAI::AI_patrolBorders()
 			{
 				iValue /= 10;
 			}
-			//	Split patrollers into two rotational streams (#24): units leaving the same city
-			//	all face the same way and the forward bias above then marches them around the
-			//	ring in one pack. Birthmark parity (the per-unit variation seed, same idiom as
-			//	the other AI_getBirthmark() % N spreads) picks each unit's preferred side —
-			//	even prefer veering right of their facing, odd left — as a mild, deterministic
-			//	(sync-safe) bias against the non-preferred side.
-			const DirectionTypes eFacing = getFacingDirection(false);
-			if (eFacing != NO_DIRECTION && eNewDirection != NO_DIRECTION && eNewDirection != eFacing)
-			{
-				const int iRightSteps = (eNewDirection - eFacing + NUM_DIRECTION_TYPES) % NUM_DIRECTION_TYPES;
-				const bool bRightOfFacing = iRightSteps >= 1 && iRightSteps <= 3;
-				if (bRightOfFacing != (AI_getBirthmark() % 2 == 0))
-				{
-					iValue /= 2;
-				}
-			}
+			//	Fan patrollers out (#24): each unit pulls toward its birthmark compass sector
+			//	(the shared AI_getPreferredDirection bias AI_moveToBorders also uses), so units
+			//	leaving the same city pick different ring directions instead of marching in one
+			//	pack. Added AFTER the backtrack penalties so circuit continuity still dominates
+			//	over reversing into the preferred sector.
+			iValue += AI_directionAffinity(eNewDirection) * 1000;
 			if (pLoopPlot->getOwner() != getOwner())
 			{
 				if (GET_PLAYER(getOwner()).isModderOption(MODDEROPTION_AUTO_PATROL_CAN_LEAVE_BORDERS))
@@ -27055,6 +27065,13 @@ bool CvUnitAI::AI_patrolBorders()
 				pBestPlot = pLoopPlot;
 			}
 		}
+	}
+	//	Automated mid-territory with no border in reach (#24): head for one properly
+	//	(AI_moveToBorders paths to a border crossing, fanned out by the same shared
+	//	direction bias) instead of random-walking the interior one tile at a time.
+	if (!bBorderInRange && AI_moveToBorders())
+	{
+		return true;
 	}
 	if (pBestPlot != NULL)
 	{

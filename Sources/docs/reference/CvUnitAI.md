@@ -63,17 +63,29 @@ Units participate in the `CvContractBroker` workflow through a five-state machin
 | `AI_searchRange(int iRange)` | Calculates the effective search radius for mission targeting. |
 | `AI_isAwaitingContract()` | Returns `true` if the unit is in `CONTRACTUAL_STATE_AWAITING_ANSWER`. |
 
+## Birthmark & direction finding (automation spreading)
+Every unit gets a **birthmark** at `AI_init` — a stable per-unit AI seed. Wherever several
+automated units would otherwise make identical choices, behaviour variation is keyed off it
+(`AI_getBirthmark() % N` gates exist across the unit AI). For DIRECTIONS there is exactly **one
+place** that turns the birthmark into a heading: `AI_getPreferredDirection()` (birthmark mod
+`NUM_DIRECTION_TYPES`) with `AI_directionAffinity(eDir)` scoring how closely a candidate
+direction matches it (4 = exactly preferred … 0 = opposite). Consumers: `AI_moveToBorders`
+(fans units out to different border crossings) and `AI_patrolBorders` (fans patrollers into
+different ring directions). New direction-spreading behaviours must use these helpers, not
+re-derive birthmark math.
+
 ## Border Patrol (AUTOMATE_BORDER_PATROL)
 `AI_borderPatrol()` is the human "Border Patrol" automation. Cascade (2026-06-11, #24):
 return-to-borders (when >2 tiles out) → heal → **intercept** visible enemies nearest-first out
 to range 12 (odds bar = the `AUTO_PATROL_MIN_COMBAT_ODDS` modder option, +5/+10/+15 at range
 5/7/12; targets confined to own territory except range 1-2 with `AUTO_PATROL_CAN_LEAVE_BORDERS`)
 → **walk the border** (`AI_patrolBorders`: randomized circuit biased onto border tiles,
-continues the unit's heading; patrollers split into two rotational streams by unit-ID parity so
-they don't all march one way) → roam outside (option) → retreat/safety. City capturing during
-intercepts is gated by `AUTO_PATROL_NO_CITY_CAPTURING`. Historical bug: the range-7/12
-intercepts used to sit AFTER the walk and were unreachable — patrollers circled past interior
-intruders.
+continues the unit's heading, pulled toward the unit's preferred compass sector so patrollers
+fan out; when automated mid-territory with no border in reach it hands off to
+`AI_moveToBorders` instead of random-walking the interior) → roam outside (option) →
+retreat/safety. City capturing during intercepts is gated by `AUTO_PATROL_NO_CITY_CAPTURING`.
+Historical bug: the range-7/12 intercepts used to sit AFTER the walk and were unreachable —
+patrollers circled past interior intruders.
 
 ## State / Identity
 | Method | Description |
