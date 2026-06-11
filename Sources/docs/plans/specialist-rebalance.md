@@ -29,6 +29,14 @@ track (#367/#370).
 
 ## Step 1 — yield-modifier parity (firm, IMPLEMENTED with this doc)
 
+**Owner ruling (2026-06-11, after first playtest):** the original decision to exclude
+specialists from the city bonus/modifier stack **was a mistake** — parity is the intended
+permanent design, not an experiment. Do not "restore" the flat behaviour; balance concerns are
+addressed by tuning data (steps 2–4), never by re-removing the modifier. (Consistent with the
+other found-disabled nerfs of the same vintage: the commented-out stronger emphasis weights in
+`CvCityAI.cpp` ~10064–10110 and the "AI no longer uses emphasis" comment — these were balance
+retreats, not design.) Extended playtests will tune the numbers on top of parity.
+
 Specialist yields now receive the city yield modifier exactly like worked tiles. Mechanics:
 
 - New tagged array `CvCity::m_aiSpecialistYieldTotal` accumulates the specialist share that
