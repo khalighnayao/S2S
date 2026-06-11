@@ -12016,7 +12016,12 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 
 							//	Not an ideal defensive candidate - is there a decent attack if the city
 							//	really feels it needs us as part of it (active?) defense?
-							if (AI_anyAttack(2, 55))
+							//	Sortie via AI_leaveAttack, NOT AI_anyAttack (#382): leaveAttack's radius
+							//	is raw tiles and it keeps the city defended, while anyAttack(2,..) ran
+							//	through AI_searchRange ((2+1)*(moves+1) = 9 tiles for a 2-mover) with no
+							//	territory bound -- garrisons marched off through neutral lands to chase
+							//	"nearby" targets the turn they were assigned.
+							if (AI_leaveAttack(2, 55, 150))
 							{
 								return true;
 							}
