@@ -136,8 +136,9 @@ actually searched 4–6 tiles, through the same range-inflation formula, the who
 Is the Bear Patrol working? Citizens, look around: not a single city has ever fallen to a
 bear.
 
-*Status: fixed (#400) — garrisons ignore wildlife (hunters exist for that), chokeDefend
-uses the leashed sortie. The bears remain, unbothered.*
+*Status: fixed (#400) — garrisons only hunt bears they are nearly certain to beat (the
+meat is genuinely worth it, ruled the owner), and chokeDefend uses the leashed sortie.
+The bears are now mostly unbothered, and exclusively by professionals.*
 
 ---
 
