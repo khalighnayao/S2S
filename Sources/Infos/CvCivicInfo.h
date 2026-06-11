@@ -230,6 +230,7 @@ public:
 	int getNumCategories() const;
 	bool isCategory(int i) const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool readPass3();
 	bool read(CvXMLLoadUtility* pXML);
 	void copyNonDefaults(const CvCivicInfo* pClassInfo);

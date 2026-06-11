@@ -163,6 +163,7 @@ public:
 	const char* getLeaderHead() const;
 	const char* getButton() const;
 
+	void getDataMembers(CvInfoUtil& util);
 	bool read(CvXMLLoadUtility* pXML);
 
 	void copyNonDefaults(const CvLeaderHeadInfo* pClassInfo);
