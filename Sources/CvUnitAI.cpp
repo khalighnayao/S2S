@@ -26686,6 +26686,17 @@ void CvUnitAI::AI_cityDefense()
 
 
 // AI don't use this, only human automated units does.
+//	The "Border Patrol" automation (AUTOMATE_BORDER_PATROL). What it actually does, in order:
+//	1. Come home when >2 tiles outside own borders; heal when hurt.
+//	2. INTERCEPT: attack visible enemies, nearest first, out to range 12 — the odds bar rises
+//	   with distance (base = the AUTO_PATROL_MIN_COMBAT_ODDS modder option; +5/+10/+15 at range
+//	   5/7/12). Targets are confined to own territory except at range 1-2, where the
+//	   AUTO_PATROL_CAN_LEAVE_BORDERS option may allow stepping out.
+//	3. Otherwise WALK THE BORDER: a randomized circuit biased onto border tiles (see
+//	   AI_patrolBorders), continuing in the unit's current heading.
+//	4. Otherwise roam outside borders (only with AUTO_PATROL_CAN_LEAVE_BORDERS), else retreat
+//	   to a city / find safety.
+//	(City capturing during the intercepts is gated by AUTO_PATROL_NO_CITY_CAPTURING elsewhere.)
 void CvUnitAI::AI_borderPatrol()
 {
 	PROFILE_FUNC();
@@ -26722,17 +26733,20 @@ void CvUnitAI::AI_borderPatrol()
 		return;
 	}
 
-	if (AI_patrolBorders())
-	{
-		return;
-	}
-
+	//	The long-range intercepts must come BEFORE the random border walk: the walk nearly
+	//	always finds a plot, so anything after it is dead code — which is why patrollers
+	//	circled their ring right past intruders pillaging the interior (#24).
 	if (AI_huntRange(7, iMinimumOdds + 10, true))
 	{
 		return;
 	}
 
 	if (AI_huntRange(12, iMinimumOdds + 15, true))
+	{
+		return;
+	}
+
+	if (AI_patrolBorders())
 	{
 		return;
 	}
@@ -27003,6 +27017,20 @@ bool CvUnitAI::AI_patrolBorders()
 			else if (isAdjacentDirection(getOppositeDirection(getFacingDirection(false)), eNewDirection))
 			{
 				iValue /= 10;
+			}
+			//	Split patrollers into two rotational streams (#24): units leaving the same city
+			//	all face the same way and the forward bias above then marches them around the
+			//	ring in one pack. Even unit IDs prefer veering right of their facing, odd ones
+			//	left — a mild, deterministic (sync-safe) bias against the non-preferred side.
+			const DirectionTypes eFacing = getFacingDirection(false);
+			if (eFacing != NO_DIRECTION && eNewDirection != NO_DIRECTION && eNewDirection != eFacing)
+			{
+				const int iRightSteps = (eNewDirection - eFacing + NUM_DIRECTION_TYPES) % NUM_DIRECTION_TYPES;
+				const bool bRightOfFacing = iRightSteps >= 1 && iRightSteps <= 3;
+				if (bRightOfFacing != ((getID() & 1) == 0))
+				{
+					iValue /= 2;
+				}
 			}
 			if (pLoopPlot->getOwner() != getOwner())
 			{

@@ -63,6 +63,18 @@ Units participate in the `CvContractBroker` workflow through a five-state machin
 | `AI_searchRange(int iRange)` | Calculates the effective search radius for mission targeting. |
 | `AI_isAwaitingContract()` | Returns `true` if the unit is in `CONTRACTUAL_STATE_AWAITING_ANSWER`. |
 
+## Border Patrol (AUTOMATE_BORDER_PATROL)
+`AI_borderPatrol()` is the human "Border Patrol" automation. Cascade (2026-06-11, #24):
+return-to-borders (when >2 tiles out) → heal → **intercept** visible enemies nearest-first out
+to range 12 (odds bar = the `AUTO_PATROL_MIN_COMBAT_ODDS` modder option, +5/+10/+15 at range
+5/7/12; targets confined to own territory except range 1-2 with `AUTO_PATROL_CAN_LEAVE_BORDERS`)
+→ **walk the border** (`AI_patrolBorders`: randomized circuit biased onto border tiles,
+continues the unit's heading; patrollers split into two rotational streams by unit-ID parity so
+they don't all march one way) → roam outside (option) → retreat/safety. City capturing during
+intercepts is gated by `AUTO_PATROL_NO_CITY_CAPTURING`. Historical bug: the range-7/12
+intercepts used to sit AFTER the walk and were unreachable — patrollers circled past interior
+intruders.
+
 ## State / Identity
 | Method | Description |
 |---|---|
