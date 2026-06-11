@@ -184,6 +184,12 @@ per-slice Python `gameUpdate` (~5 ms), `updateScore`, `testAlive`; `plotPaging` 
   demotion (`noDefensiveBonus()` CITY_DEFENSE units revert to XML default at re-plan,
   `[UNT/act] demoteUnsuitedDefender`). The city-declared-needs repository channel remains
   the campaign's main body.
+- *Playtest find (#384, live-traced via the /units endpoint):* `AI_guardCity`'s vicinity
+  guard-spot loop used `rect(NUM_CITY_PLOTS_2=21)` — a plot COUNT as a RADIUS — scanning a
+  43×43 box per re-plan (part of the measured "vicinity generatePath loops" cost) and
+  marching "garrison" units up to 21 tiles from their city. Fixed to `rect(2,2)`; the
+  in-city recall preference now also covers garrison members (auxiliaries are not
+  city-AI-typed anymore, so type-keyed recall missed them).
 
 Deprioritized (measured negligible): visibility stickytape, property solver, trade routes,
 the unit-choose family.

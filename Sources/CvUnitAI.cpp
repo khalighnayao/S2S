@@ -11954,8 +11954,10 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 
 						if (currentInCityDefenders <= (requiredInCityDefenders + (atPlot(pPlot) ? getGroup()->getNumUnits() : 0)))
 						{
-							//	Recall city AI types preferentially if there are enough
-							if (currentAllCityAIDefenders < requiredInCityDefenders || AI_isCityAIType())
+							//	Recall city AI types and existing garrison members preferentially
+							//	if there are enough (#384: auxiliaries keep their own UNITAI, so
+							//	membership - not type - marks them as part of this city's defense)
+							if (currentAllCityAIDefenders < requiredInCityDefenders || AI_isCityAIType() || AI_isCityGarrison(pCity))
 							{
 								bGuardInCity = true;
 							}
@@ -11971,7 +11973,12 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 						//	Guard a good spot outside the city but in its vicinity
 						int iBestValue = 0;
 
-						foreach_(CvPlot * pLoopPlot, pPlot->rect(NUM_CITY_PLOTS_2, NUM_CITY_PLOTS_2))
+						//	The true city vicinity: radius 2, the same range-2 ring the garrison
+						//	strength accounting reads. NUM_CITY_PLOTS_2 (21) is a PLOT COUNT for
+						//	plotCity() indexing, not a radius - rect(21,21) scanned a 43x43 box and
+						//	sent "vicinity" guards marching to defensive tiles up to 21 tiles away
+						//	while they stayed members of this city's garrison (#384).
+						foreach_(CvPlot * pLoopPlot, pPlot->rect(2, 2))
 						{
 							if (AI_plotValid(pLoopPlot) && pLoopPlot->area() == area())
 							{

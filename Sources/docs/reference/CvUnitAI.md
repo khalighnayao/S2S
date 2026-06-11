@@ -80,6 +80,14 @@ Rules that follow (owner rulings, issue #384):
   release gate (`AI_guardCity`'s `AI_isDefended` hold test) demands a
   `GARRISON_RELEASE_MARGIN_PERCENT` (125%) strength surplus before an existing garrison
   member may leave; joining is judged at the plain 100% bar.
+- **"Guard the vicinity" means radius 2.** `AI_guardCity`'s guard-spot chooser historically
+  scanned `rect(NUM_CITY_PLOTS_2, …)` — but that constant is a plot COUNT (21), not a
+  radius, so "vicinity" guards marched to defensive tiles up to 21 tiles away while staying
+  members of the origin city's garrison (caught live in the #384 playtest: an elephant
+  gunner parked 7 tiles out, contributing nothing — `getGarrisonStrength` only reads range
+  2). Now `rect(2,2)`, matching the range-2 strength accounting; and the in-city recall
+  preference includes garrison members, not just city-AI types, since auxiliaries keep
+  their own UNITAI.
 - **Mis-typed primary defenders self-correct.** At its re-plan, a CITY_DEFENSE unit with
   `noDefensiveBonus()` — the categorical unsuitability test, the same one strict
   `AI_findBestDefender` uses to reject defense candidates — demotes back to its XML
