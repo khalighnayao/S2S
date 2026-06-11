@@ -1,9 +1,12 @@
 # Dead Code & Dead XML Removal Pass — Plan
 
-Status: **planned / not started.** Companion to the standing bug-hunt
-(`Sources/docs/plans/codebase-bug-hunt.md`). Same discipline: tooling/grep
-*generates candidates*, but every removal is **personally verified against source
-before deletion**, in small reviewable PRs, Assert-build before each C++ PR.
+Status: **candidate generation started (2026-06-11)** — Tier-1 items verified, a
+dead-GlobalDefines sweep done, and a batch of dead members found by the #196
+migration campaign filed as issues (#352–#359). No removals yet. Companion to the
+standing bug-hunt (`Sources/docs/plans/codebase-bug-hunt.md`). Same discipline:
+tooling/grep *generates candidates*, but every removal is **personally verified
+against source before deletion**, in small reviewable PRs, Assert-build before
+each C++ PR.
 
 ## Why now
 
@@ -34,20 +37,33 @@ now is the dead-data pass, because:
 
 ## Tier 1 — high-confidence, immediate (low risk)
 
-Quick wins; verify zero references personally, then remove (code + header decls).
+Quick wins. **Verified 2026-06-11** (incl. the Boost.Python `.def()` layer):
 
-- **Disabled blocks** — ~19 `#if 0` in `Sources/`, clustered in
-  `CvGameCoreDLL.cpp` (profiler instrumentation) and `CvGameCoreUtils.cpp`
-  (pathfinding short-circuits/profiling). Plus commented-out `logBBAI()` calls in
-  `CvUnitAI.cpp` (~12966–13146) left from the deleted BBAI logging.
-- **Orphan Python file** — `Assets/Python/MapScriptToolsOld.py` (~179 KB, zero
-  `import` references anywhere). Delete.
-- **Marked-unused functions** — `CvCity::calculateTotalTradeYield` and
-  `CvPlayer::calculateTotalTradeYield` (both tagged `/* UNUSED */`, no callers) and
-  their header declarations.
-- **billw-disabled stubs** — `CvPlayer.cpp:~3805` (`AI_doCentralizedProduction`
-  "no point calling it"), `CvPlayerAI.cpp:~1547` (wonder-city block disabled "to
-  stop static analysis"). Confirm truly dead, then remove or finish.
+- **Disabled blocks** — **29** `//#if 0` blocks inventoried, clustered in
+  `CvGameCoreDLL.cpp` (8, profiler instrumentation) and `CvGameCoreUtils.cpp`
+  (8, pathfinding short-circuits/profiling); rest scattered (CvPlayerAI ×2,
+  CvUnitAI ×4, CvPlot, CvPlotGroup, CvViewport, FInputDevice.h, FProfiler.h,
+  CvGameCoreDLLDefNew.h). Plus **14** commented-out `logBBAI()` calls in
+  `CvUnitAI.cpp` (~13019–13449, 17563, 17576) left from the deleted BBAI logging.
+- ~~Orphan Python file `Assets/Python/MapScriptToolsOld.py`~~ — **NOT DEAD,
+  do not delete**: live `import MapScriptToolsOld as mst` in
+  `PrivateMaps/C2C_Inland_Sea.py:36` and `PrivateMaps/C2C_Tectonics.py:92`.
+  (Could be folded into the current MapScriptTools someday — separate work.)
+- **Marked-unused functions — CONFIRMED DEAD** (no callers, no Python `.def()`):
+  `CvCity::calculateTotalTradeYield` (`CvCity.h:880`, `CvCity.cpp:11708`) and
+  `CvPlayer::calculateTotalTradeYield` (`CvPlayer.h:1691`, `CvPlayer.cpp:24474`).
+- **billw-disabled stubs — CONFIRMED DEAD** (both fully commented out):
+  `CvPlayer.cpp:3812-3815` (`AI_doCentralizedProduction` call) and
+  `CvPlayerAI.cpp:1547-1632` (wonder-city block; the containing function
+  early-returns before it).
+- **Dead info-class members (batch, found by the #196 migration)** — see issue
+  **#358**: `CvBonusInfo::m_piImprovementChange`, `CvHandicapInfo::m_szHandicapName`,
+  `CvCivilizationInfo::m_iNumLeaders`, `CvEventInfo::m_iUnitPromotion`,
+  `CvCivicInfo::m_szGlobalDefine`, `CvUnitInfo::m_aVisibilityIntensityRangeTypes`,
+  `CvTraitInfo::m_piBonusHappinessChangesFiltered`, `CvAttachableInfo::m_fUpdateRate`,
+  `CvPromotionInfo::m_iNumPromotionOverwrites`.
+- **Dead class** — `CvDiplomacyTextInfo` (never instantiated, no loader/getter
+  can reach it) — see issue **#359**.
 
 ## Tier 2 — audit required (medium risk)
 
@@ -73,6 +89,14 @@ Quick wins; verify zero references personally, then remove (code + header decls)
     isNPC()` always-false guard) and `#64` (`CvCity::removeWorstCitizenActualEffects`
     inverted-while) — re-verify; these are logic-dead, fix-or-remove via the backlog.
 - **Removed-game-option code paths** — code gated on options that no longer exist.
+- **Loader/merge bugs found by the #196 migration (route via the bug backlog):**
+  #352 (CvProjectInfo readPass3 wrong-category bounds check), #353
+  (CvPromotionLineInfo pair-vector merge pushes the loop index as the type id),
+  #354 (CvBuildingInfo dtor frees BonusYieldModifier with the Specialist count +
+  read path never derives bDamageAttackerCapable), #355 (CvEventTriggerInfo
+  modular merge sorts TriggerTexts and their eras independently), #356
+  (CvWorldPickerInfo WaterLevelGloss merge pushes into the Decals vector), #357
+  (CvDiplomacyInfo FindResponseIndex bOnlyText poisoning + pointer-assign typo).
 
 ## Tier 3 — data orphans (needs tooling)
 
@@ -95,6 +119,34 @@ Each emits a candidate CSV; nothing is auto-removed.
 4. **Dead GlobalDefines** — `<DefineName>` in `GlobalDefines*.xml` vs `getDefine*`
    uses (C++ + Python). **Caveat:** `FVariableSystem` string lookups aren't
    statically visible.
+
+### Tier 3.4 sweep results (2026-06-11): dead-GlobalDefines candidates
+
+515 defines scanned (414 `GlobalDefines.xml`, 102 `GlobalDefinesAlt.xml` + others);
+all `getDefine*` call sites use literal strings (no dynamic construction found), so
+the static analysis is complete modulo the EXE: **defines consumed by the closed
+Firaxis engine (graphics/camera/audio knobs) may look dead from the DLL side but be
+live** — anything in the CAMERA/RENDER/AIR/FLAG/FOW families below must be assumed
+EXE-read unless proven otherwise; test in-game before deleting. The DLL-side-dead
+candidates (zero hits in Sources/, Assets/Python/, non-GlobalDefines XML):
+
+- *Engine-knob families (EXE-risk, verify in-game)*: AIR_DEFEND_DISTANCE,
+  AIR_DEFEND_FINISH, AIR_EXECUTE_DISTANCE, AIR_EXECUTE_FINISH, AIR_IDLE_HEIGHT,
+  AIR_PATROL_HEIGHT, AIR_PATROL_RADIUS, AIR_PATROL_SPEED, CAMERA_BATTLE_ZOOM_IN_DISTANCE,
+  CAMERA_CITY_NO_PITCH, CAMERA_CITY_TURN, CAMERA_CITY_ZOOM_IN_DISTANCE,
+  CAMERA_FORCE_TO_SMALLEST_MAX_DISTANCE, CAMERA_MAX_SCROLL_SPEED, CAMERA_MIN_SCROLL_SPEED,
+  CAMERA_NEAR_FAR_PLANE_RATIO, CAMERA_SHRINE_ZOOM_IN_DISTANCE, CAMERA_SMALLEST_MAX_DISTANCE,
+  EFFECT_DEFAULT_SIZE, FLAG_OFFSET_X/Y, FLAG_OFFSET2_X/Y, FOW_MINIMAP_WAS_VISIBLE_COLOR,
+  FOW_WAS_VISIBLE_COLOR, IMPROVEMENT_SCALE, BONUS_SCALE, RENDER_AREABORDER_UNDER_FEATURES,
+  RENDER_GLOBEVIEW_CLOUDS, RENDER_WATER, RIVER_Z_BIAS, ROUTE_Z_BIAS,
+  SINGLE_UNIT_GFX_EXTRA_SCALE, UNIT_ANIM_PAGE_MAX, DEFAULT_ANIM_PAGE_MAX,
+  UNIT_TRAIL_RESOLUTION, MINIMAP_RENDER_SIZE (had 2 ambiguous hits — recheck).
+- *UI / misc (likely DLL-or-Python history, safer)*: LEADERHEAD_RANDOM,
+  TURN_LOG_MAX_HEIGHT, TURN_LOG_MAX_WIDTH, TURN_LOG_MIN_HEIGHT, QUICKSAVE,
+  EVENT_MESSAGE_STAGGER_TIME, FORCE_UNOWNED_CITY_TIMER, CIV4_VERSION, MIN_VERSION,
+  SAVE_VERSION, MAX_PAGING_FRAME_TIME_MS (has an explicit "currently unused" comment).
+- *GlobalDefinesAlt (BUG options)*: BUG_CDA_ZOOM_CITY_DETAILS,
+  BUG_CITYBAR_CULTURE_TURNS, BUG_CITY_SCREEN_BASE_COMMERCE_HOVER.
 
 ## Hard caveats (a detection script MUST account for these)
 
