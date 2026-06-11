@@ -1412,7 +1412,9 @@ public:
 	virtual int AI_buildingValue(BuildingTypes eType, int iFocusFlags = 0, bool bForTech = false, bool bDebug = false) = 0;
 	virtual int AI_projectValue(ProjectTypes eProject) const = 0;
 	virtual int AI_neededSeaWorkers() const = 0;
-	virtual bool AI_isDefended(int iExtra = 0, bool bAllowAnyDefenders = true) = 0;
+	// iNeedModifierPercent scales the needed-strength bar (>100 = demand a surplus before
+	// answering "defended" - release hysteresis for garrison members, #384).
+	virtual bool AI_isDefended(int iExtra = 0, bool bAllowAnyDefenders = true, int iNeedModifierPercent = 100) = 0;
 
 	virtual bool AI_isAirDefended(bool bCountLand = 0, int iExtra = 0) = 0;
 	virtual bool AI_isAdequateHappinessMilitary(int iExtra = 0) const = 0;

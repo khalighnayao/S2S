@@ -366,7 +366,10 @@ public:
 	 */
 	int AI_neededSeaWorkers() const;
 
-	bool AI_isDefended(int iExtra = 0, bool bAllowAnyDefenders = true);
+	// iNeedModifierPercent scales the needed-strength bar (>100 = demand a surplus before
+	// answering "defended" - used as release hysteresis when a garrison member asks whether
+	// the city can spare it; a city is better off overdefended than underdefended, #384).
+	bool AI_isDefended(int iExtra = 0, bool bAllowAnyDefenders = true, int iNeedModifierPercent = 100);
 	bool AI_isAirDefended(bool bCountLand = false, int iExtra = 0);
 	bool AI_isDanger() const;
 	int evaluateDanger();

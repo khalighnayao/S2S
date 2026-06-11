@@ -55,6 +55,34 @@ Units participate in the `CvContractBroker` workflow through a five-state machin
 | `AI_isCityGarrison(pCity)` | Returns `true` if this unit is tasked as a garrison for the given city. |
 | `AI_setAsGarrison(pCity)` | Assigns this unit as garrison for a city. |
 
+## City garrison: primary vs auxiliary tiers (#384)
+
+City defense runs on **two independent ledgers**, and they must not be conflated:
+
+- **Garrison membership** (`m_iGarrisonCity`, serialized; set via `AI_setAsGarrison`,
+  self-expiring — each `AI_update` drops membership unless the unit's move re-affirms it).
+  Membership is the **auxiliary tier**: every member's defensive strength counts toward the
+  city's *actual* defense (`PUF_isCityGarrison` → `CvCityAI::getGarrisonStrength` →
+  `AI_isDefended`, and the broker request priority in `AI_doContractFloatingDefenders`).
+  **Any** combat unit can be a member — it keeps its own UNITAI while parked.
+- **The `UNITAI_CITY_DEFENSE` role** is the **primary tier**: only deliberately-assigned
+  defenders (unit training/role selection — never a parking side effect) satisfy the
+  count-based demand gates (`AI_chooseProduction` defender gates, `AI_minDefenders`
+  searches in `AI_guardCityMinDefender`, `AI_getTotalFloatingDefenders`).
+
+Rules that follow (owner rulings, issue #384):
+- **Garrisoning never retypes a unit.** `AI_guardCity` and the leave-a-defender-behind
+  paths (`AI_goToTargetCity`, `AI_cityAttack`) mark membership + park persistently
+  (FORTIFY → SLEEP → SKIP), keeping the unit's UNITAI. A strong-but-unsuited unit (e.g. a
+  `noDefensiveBonus()` elephant gunner) stays as auxiliary defense without occupying a
+  primary slot, so the city keeps training/requesting real defenders.
+- **Overdefended beats underdefended — join eagerly, release reluctantly.** The single
+  release gate (`AI_guardCity`'s `AI_isDefended` hold test) demands a
+  `GARRISON_RELEASE_MARGIN_PERCENT` (125%) strength surplus before an existing garrison
+  member may leave; joining is judged at the plain 100% bar.
+- Membership changes log as `[UNT/garrison]` (level 2) — `type=` distinguishes primary
+  (CITY_DEFENSE) from auxiliary members.
+
 ## Group & Mission
 | Method | Description |
 |---|---|

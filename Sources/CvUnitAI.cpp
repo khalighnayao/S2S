@@ -95,6 +95,10 @@ void CvUnitAI::AI_clearCaches()
 #define	MAX_SEARCH_RANGE			25
 #define	MAX_BARB_TARGET_CITY_RANGE	20
 
+//	Release hysteresis for city garrisons (#384): a garrison member is only spareable if
+//	the city would still hold this percentage of its needed defense strength without it.
+#define	GARRISON_RELEASE_MARGIN_PERCENT	125
+
 #define FOUND_RANGE					(7)
 
 typedef struct
@@ -11881,6 +11885,14 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 				//#endif
 				bool bDefend = false;
 
+				//	An existing garrison member is judged for RELEASE: the city must still be
+				//	defended with a strength surplus (margin > 100) without it. Anything else is
+				//	judged for JOINING at the plain bar. The asymmetry is deliberate (#384):
+				//	a city is better off overdefended than underdefended, so shedding a defender
+				//	to chase marginal value elsewhere is the error case - join eagerly, release
+				//	reluctantly.
+				const bool bGarrisonMember = canDefend() && AI_isCityGarrison(pCity);
+
 				//	Never remove the last unit
 				if (atPlot(pPlot) && canDefend() && pPlot->plotCount(PUF_canDefend /*PUF_canDefendGroupHead*/, -1, -1, NULL, getOwner()) == getGroup()->getNumUnits()) // XXX check for other team's units?
 				{
@@ -11888,7 +11900,7 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 				}
 				//	Check if it is adequately defended (allowing for this group leaving if it is thinking of doing so)
 				//	and also that we don't need the units to maintain happiness
-				else if (!(pCity->AI_isDefended(((!canDefend() || !AI_isCityGarrison(pCity)) ? 0 : -getGroup()->AI_getGenericValueTimes100(UNITVALUE_FLAGS_DEFENSIVE) / 100) + iExtra)) ||
+				else if (!(pCity->AI_isDefended((bGarrisonMember ? -getGroup()->AI_getGenericValueTimes100(UNITVALUE_FLAGS_DEFENSIVE) / 100 : 0) + iExtra, true, bGarrisonMember ? GARRISON_RELEASE_MARGIN_PERCENT : 100)) ||
 						 (atPlot(pPlot) && isMilitaryHappiness() && !(pCity->AI_isAdequateHappinessMilitary(-getGroup()->getNumUnits()))))
 				{
 					bDefend = true;
@@ -12032,22 +12044,19 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 						if (pEjectedUnit != NULL)
 						{
 							CvPlot* missionPlot = (bGuardInCity ? pBestGuardPlot : pBestPlot);
-							if (bGuardInCity)
-							{
-								if (pPlot->plotCount(PUF_isCityAIType, -1, -1, NULL, getOwner()) == 0)
-								{
-									if (pEjectedUnit->cityDefenseModifier() > 0)
-									{
-										FAssert(pEjectedUnit->AI_getUnitAIType() != UNITAI_HUNTER);
-										pEjectedUnit->AI_setUnitAIType(UNITAI_CITY_DEFENSE);
-									}
-								}
-							}
+
+							//	Garrisoning must NOT retype the unit to UNITAI_CITY_DEFENSE (#384).
+							//	Garrison membership (AI_setAsGarrison) is the auxiliary tier: the unit
+							//	counts toward the city's actual defense strength (getGarrisonStrength /
+							//	AI_isDefended) but keeps its own UNITAI, so the count-based demand gates
+							//	(production choice, min-defender searches, floating-defender totals) keep
+							//	seeing an honest primary-defender picture and the city still trains or
+							//	requests real defenders. Role changes happen only by deliberate
+							//	re-evaluation, never as a side effect of parking.
 							if (atPlot(pBestGuardPlot))
 							{
 								//	Mark the ejected unit as part of the city garrison
 								pEjectedUnit->getGroup()->AI_setAsGarrison(pCity);
-								pEjectedUnit->AI_setUnitAIType(UNITAI_CITY_DEFENSE);
 								AI_logAct("guardCity", "garrisonHere", pCity->plot());
 								//	Persistent park (see AI_guardCityBestDefender): fortify-sleep, not one-turn skip.
 								pEjectedUnit->getGroup()->pushMission(pEjectedUnit->canFortify() ? MISSION_FORTIFY : (pEjectedUnit->canSleep() ? MISSION_SLEEP : MISSION_SKIP), -1, -1, 0, false, false, MISSIONAI_GUARD_CITY, NULL);
@@ -12057,7 +12066,6 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 							{
 								//	Mark the ejected unit as part of the city garrison
 								pEjectedUnit->getGroup()->AI_setAsGarrison(pCity);
-								pEjectedUnit->AI_setUnitAIType(UNITAI_CITY_DEFENSE);
 								AI_logAct("guardCity", "moveToGarrison", missionPlot);
 								return (pEjectedUnit->getGroup()->pushMissionInternal(MISSION_MOVE_TO, missionPlot->getX(), missionPlot->getY(), 0, false, false, MISSIONAI_GUARD_CITY, missionPlot));
 							}
@@ -12102,7 +12110,7 @@ bool CvUnitAI::AI_guardCity(bool bLeave, bool bSearch, int iMaxPath)
 				{
 					continue;
 				}
-				if (!(pLoopCity->AI_isDefended((!AI_isCityAIType()) ? pLoopCity->plot()->plotStrength(UNITVALUE_FLAGS_DEFENSIVE, PUF_canDefendGroupHead, -1, -1, getOwner(), NO_TEAM, PUF_isNotCityAIType) : 0, 2)) ||
+				if (!(pLoopCity->AI_isDefended((!AI_isCityAIType()) ? pLoopCity->plot()->plotStrength(UNITVALUE_FLAGS_DEFENSIVE, PUF_canDefendGroupHead, -1, -1, getOwner(), NO_TEAM, PUF_isNotCityAIType) : 0)) ||
 					(isMilitaryHappiness() && !(pLoopCity->AI_isAdequateHappinessMilitary())))
 				{
 					if (!pLoopCity->plot()->isVisibleEnemyUnit(this))
@@ -17324,8 +17332,10 @@ bool CvUnitAI::AI_goToTargetCity(int iFlags, int iMaxPathTurns, const CvCity* pT
 
 					if (pEjectedUnit != NULL)
 					{
-						pEjectedUnit->getGroup()->pushMission(MISSION_SKIP);
-						pEjectedUnit->AI_setUnitAIType(UNITAI_CITY_DEFENSE);
+						//	Auxiliary garrison (#384): keep the unit's own UNITAI and park it
+						//	persistently (fortify, not a one-turn skip). It holds the city while
+						//	the honest demand accounting trains/requests real defenders.
+						pEjectedUnit->getGroup()->pushMission(pEjectedUnit->canFortify() ? MISSION_FORTIFY : (pEjectedUnit->canSleep() ? MISSION_SLEEP : MISSION_SKIP), -1, -1, 0, false, false, MISSIONAI_GUARD_CITY, NULL);
 						pEjectedUnit->AI_setAsGarrison(pBestPlot->getPlotCity());
 					}
 				}
@@ -17728,9 +17738,11 @@ bool CvUnitAI::AI_cityAttack(int iRange, int iOddsThreshold, bool bFollow)
 
 				if (pEjectedUnit != NULL)
 				{
-					pEjectedUnit->getGroup()->pushMission(MISSION_SKIP);
-					pEjectedUnit->AI_setUnitAIType(UNITAI_CITY_DEFENSE);
-					pEjectedUnit->AI_setAsGarrison(pBestPlot->getPlotCity());
+					//	Auxiliary garrison (#384): keep the unit's own UNITAI and park it
+					//	persistently (fortify, not a one-turn skip). Garrison membership goes to
+					//	the city we just found undefended - the one the unit is standing in.
+					pEjectedUnit->getGroup()->pushMission(pEjectedUnit->canFortify() ? MISSION_FORTIFY : (pEjectedUnit->canSleep() ? MISSION_SLEEP : MISSION_SKIP), -1, -1, 0, false, false, MISSIONAI_GUARD_CITY, NULL);
+					pEjectedUnit->AI_setAsGarrison(plot()->getPlotCity());
 				}
 			}
 		}
@@ -28156,26 +28168,16 @@ void CvUnitAI::AI_setAsGarrison(const CvCity* pCity)
 
 	if (iGarrisonCity != m_iGarrisonCity)
 	{
-		if (pCity == NULL)
-		{
-			pCity = GET_PLAYER(getOwner()).getCity(m_iGarrisonCity);
-		}
+		// [UNT/garrison] -- garrison-membership change (#384): the unit joins/leaves a city's
+		// garrison WITHOUT changing UNITAI. Membership is the auxiliary tier - it feeds the
+		// strength accounting (getGarrisonStrength/AI_isDefended); type=N shows whether this
+		// member is a primary defender (UNITAI_CITY_DEFENSE) or an auxiliary keeping its role.
+		logUnitAI(2, "[UNT/garrison] owner=%d unit=%d type=%d action=%s city=%d",
+			(int)getOwner(), getID(), (int)AI_getUnitAIType(),
+			iGarrisonCity == -1 ? "leave" : "join",
+			iGarrisonCity == -1 ? m_iGarrisonCity : iGarrisonCity);
 
 		m_iGarrisonCity = iGarrisonCity;
-
-		if (gUnitLogLevel >= 3)
-		{
-			if (iGarrisonCity == -1)
-			{
-				if (pCity != NULL)
-				{
-				}
-			}
-			else
-			{
-				FAssert(pCity != NULL);
-			}
-		}
 	}
 }
 

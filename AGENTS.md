@@ -82,6 +82,18 @@ not findings to re-discover.
   `BuildEvaluation.log`, gated by `gPlayerLogLevel` (1=headline, 2=per-plot, 3=per-candidate).
   The class doc comment in `Sources/CvWorkerAI.h` is the authoritative tag reference.
 
+### City garrison tiers
+- **City defense runs on two ledgers — do not conflate them (#384).** Garrison
+  *membership* (`CvUnitAI::AI_setAsGarrison`, self-expiring) is the **auxiliary** tier:
+  any combat unit parked in a city counts toward actual defense strength
+  (`getGarrisonStrength`/`AI_isDefended`) while **keeping its own UNITAI**. The
+  `UNITAI_CITY_DEFENSE` role is the **primary** tier feeding the count-based demand gates
+  (production choice, min-defender searches, floating-defender totals). Garrisoning must
+  NEVER retype a unit (the historic unconditional retype in `AI_guardCity` corrupted the
+  demand picture — owner ruling: overdefended > underdefended, join eagerly/release
+  reluctantly via `GARRISON_RELEASE_MARGIN_PERCENT`). Details:
+  `Sources/docs/reference/CvUnitAI.md` (garrison-tiers section).
+
 ### Graphics / map generation
 - Any plot-graphics mutation must be guarded by **`GC.IsGraphicsInitialized()`**.
   During a NEW game, world generation (`addGameElements` → rivers/features/bonuses)
@@ -93,6 +105,11 @@ not findings to re-discover.
   `shouldHaveGraphics`; `CvMap::setupGraphical`.
 
 ## Conventions
+- **Narrate your work verbosely (owner ruling 2026-06-11).** While investigating or
+  changing anything, explain *what you are looking for and why* as you go — before each
+  search/read/build step, not just in a final summary. The owner follows along in real
+  time; terse status lines ("checking X…") hide the reasoning. State the question each
+  step is meant to answer, what you expect to find, and what the result actually told you.
 - **Nothing here is ever "just a one-liner" — expect hidden consequences.** This is a
   large, tightly-coupled Civ4/C2C codebase with non-obvious cross-cutting wiring (combat
   math shared across UI/AI/resolution, name-tagged save serialization, dual Python-enum
