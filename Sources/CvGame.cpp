@@ -959,6 +959,9 @@ void CvGame::reset(HandicapTypes eHandicap, bool bConstructorCall)
 	m_bPbemTurnSent = false;
 	m_bHotPbemBetweenTurns = false;
 	m_bPlayerOptionsSent = false;
+	// True until any team advances past the start era (#105); checkGameStart flips it.
+	// Old saves without the tag keep this default and self-correct on the first query.
+	m_bGameStart = true;
 
 	m_eHandicap = NO_HANDICAP;
 	m_ePausePlayer = NO_PLAYER;
@@ -5326,7 +5329,10 @@ bool CvGame::isGameStart()
 
 void CvGame::checkGameStart()
 {
-	if (getHighestEra() >= getStartEra())
+	// The start window lasts while the most advanced team is still IN the start era;
+	// ">=" closed it on the spot (highest era == start era from turn 0), which combined
+	// with the missing init meant isGameStart() could never report true (#105).
+	if (getHighestEra() > getStartEra())
 	{
 		m_bGameStart = false;
 	}
