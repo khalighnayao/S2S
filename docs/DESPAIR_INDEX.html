@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The S2S Despair Index™</title>
-<meta name="description" content="A rigorously unscientific ranking of Stones2Stars bugs by the developer despair they induce, measured in centiElephants.">
+<meta name="description" content="A rigorously unscientific ranking of Stones2Stars bugs by the developer despair they induce, measured in centiphants.">
 <style>
   :root {
     --bg: #14121a;
@@ -99,7 +99,7 @@
 </header>
 
 <div class="preamble">
-  Despair is measured in <strong>centiElephants (cE🐘)</strong> — the SI unit of despair,
+  Despair is measured in <strong>centiphants (cp)</strong> — the SI unit of despair,
   calibrated against a war elephant that was assigned to defend a city and was later found,
   by the project owner personally, standing seven tiles away in someone else's country.
   <br><br>
@@ -108,7 +108,7 @@
 
 <article class="entry gold">
   <h2><span class="medal">🥇</span> 1. The Tactical Elephant Vacation Package</h2>
-  <div class="score-row"><span class="score">100 cE🐘 (definitional)</span><span class="meter"><i style="width:100%"></i></span></div>
+  <div class="score-row"><span class="score">100 cp (definitional)</span><span class="meter"><i style="width:100%"></i></span></div>
   <p>An Elephant Gunner garrisoned to defend its city was observed sightseeing in the human
   player's territory, 7 tiles from home. This required <strong>three independent bugs
   stacked like a turducken</strong>:</p>
@@ -134,7 +134,7 @@
 
 <article class="entry silver">
   <h2><span class="medal">🥈</span> 2. The Library of Alexandria, Burned Nightly</h2>
-  <div class="score-row"><span class="score">95 cE🐘</span><span class="meter"><i style="width:95%"></i></span></div>
+  <div class="score-row"><span class="score">95 cp</span><span class="meter"><i style="width:95%"></i></span></div>
   <p>Building values — the numbers behind every "what should this city build?" decision —
   were guarded by a cache that <code>CvCity::doTurn</code> <strong>deleted every turn, for
   every city, unconditionally</strong>. No event-driven invalidation, no staleness check;
@@ -163,7 +163,7 @@
 
 <article class="entry bronze">
   <h2><span class="medal">🥉</span> 3. The (Un)Fortified Position</h2>
-  <div class="score-row"><span class="score">92 cE🐘</span><span class="meter"><i style="width:92%"></i></span></div>
+  <div class="score-row"><span class="score">92 cp</span><span class="meter"><i style="width:92%"></i></span></div>
   <p>AI garrisons parked with one-turn <code>MISSION_SKIP</code>, so they never actually
   fortified — meaning <strong>AI cities have never received fortification defense
   bonuses</strong>, plausibly since the BTS era. Cities under-read their own defense,
@@ -179,7 +179,7 @@
 
 <article class="entry">
   <h2>4. Schrödinger's Job Application</h2>
-  <div class="score-row"><span class="score">85 cE🐘</span><span class="meter"><i style="width:85%"></i></span></div>
+  <div class="score-row"><span class="score">85 cp</span><span class="meter"><i style="width:85%"></i></span></div>
   <p>A unit's first <code>processContracts</code> call of the turn <em>advertised</em> for
   work, found none, and returned <code>true</code> — "I did something!" The slice driver,
   taking it at its word, re-ran the unit's <strong>entire decision cascade a second
@@ -191,7 +191,7 @@
 
 <article class="entry">
   <h2>5. The RESERVE ↔ PROPERTY_CONTROL Hokey Pokey</h2>
-  <div class="score-row"><span class="score">78 cE🐘</span><span class="meter"><i style="width:78%"></i></span></div>
+  <div class="score-row"><span class="score">78 cp</span><span class="meter"><i style="width:78%"></i></span></div>
   <p>The role-conversion gate asked <em>"could this unit theoretically help with
   crime?"</em> while the assignment handler asked <em>"does this unit actually have the
   equipment?"</em> Different answers → units flipped roles <strong>~750 times per
@@ -204,7 +204,7 @@
 
 <article class="entry">
   <h2>6. The Unkillable Peasant</h2>
-  <div class="score-row"><span class="score">71 cE🐘</span><span class="meter"><i style="width:71%"></i></span></div>
+  <div class="score-row"><span class="score">71 cp</span><span class="meter"><i style="width:71%"></i></span></div>
   <p><code>getCombatOdds</code> floored per-round damage to 0 against ~zero-strength
   defenders, making a dying militiaman <strong>mathematically immortal</strong>. The AI
   under-reported its own win odds against trivial opposition — in the engine that feeds
@@ -217,7 +217,7 @@
 
 <article class="entry">
   <h2>7. The Eternal Anesthesiologist</h2>
-  <div class="score-row"><span class="score">60 cE🐘</span><span class="meter"><i style="width:60%"></i></span></div>
+  <div class="score-row"><span class="score">60 cp</span><span class="meter"><i style="width:60%"></i></span></div>
   <p><code>AI_heal</code> returned <code>true</code> for a heal no-op when the unit
   <em>couldn't heal</em>, so units re-decided "heal in city" <strong>49–196 times per
   turn</strong> — and in rare alignments, the turn simply <em>never ended</em>.</p>
@@ -228,7 +228,7 @@
 
 <article class="entry">
   <h2>8. International Civil Asset Forfeiture</h2>
-  <div class="score-row"><span class="score">55 cE🐘</span><span class="meter"><i style="width:55%"></i></span></div>
+  <div class="score-row"><span class="score">55 cp</span><span class="meter"><i style="width:55%"></i></span></div>
   <p>Foreign police cars were observed parked on the human player's <strong>resource
   tiles</strong>, mission hover proudly reading <em>"Maintain property control."</em> The
   mechanism: when a property-control unit isn't at its target city, the AI rolls a d10
@@ -251,7 +251,7 @@
 
 <article class="entry">
   <h2>9. The .vcxproj of Lies</h2>
-  <div class="score-row"><span class="score">47 cE🐘</span><span class="meter"><i style="width:47%"></i></span></div>
+  <div class="score-row"><span class="score">47 cp</span><span class="meter"><i style="width:47%"></i></span></div>
   <p>The Visual Studio project file confidently states <code>PlatformToolset: v142</code>.
   The actual compiler is the <strong>Microsoft Visual C++ Toolkit 2003</strong> (MSVC 7.1).
   The project file drives nothing, is synced with nothing, and has already caused one wrong
@@ -290,7 +290,7 @@
 </section>
 
 <div class="fineprint">
-  <p>Scale calibration note: 100 cE🐘 = 1 full Elephant. Readings above 100 are
+  <p>Scale calibration note: 100 cp = 1 full Elephant. Readings above 100 are
   theoretically possible but would legally require the elephant to file an expense report
   for the trip.</p>
   <p>Contribution policy (owner-sanctioned): when the ongoing rework unearths something
