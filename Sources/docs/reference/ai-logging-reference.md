@@ -121,7 +121,13 @@ Pipeline side (`CvCity::pushOrder`/`popOrder`/`doProduction`):
   log too — `seaAreaAttack` (`pursueEnemyInArea`/`ambush`), `blockade`
   (`blockadeHere`/`moveToBlockade`), `seaBombard` (`bombardOrPlunder`/`moveToBombard`),
   `shadow` (`shadowHere`/`moveToShadow`). See [`../plans/sea-ai-rework.md`](../plans/sea-ai-rework.md).
-- `[UNT/role]` (1) — a UNITAI role reassignment (`UNITAI 4 -> 10`).
+- `[UNT/role]` (1) — a UNITAI role reassignment (`UNITAI 4 -> 10`). Since #384 garrisoning
+  no longer retypes units, so these should be rare; a flood of `-> 10` (CITY_DEFENSE)
+  conversions indicates a regression.
+- `[UNT/garrison]` (2) — city-garrison membership change (`action=join/leave city=N`,
+  in `CvUnitAI::AI_setAsGarrison`). `type=` shows whether the member is a primary defender
+  (CITY_DEFENSE) or an auxiliary keeping its own UNITAI — see the garrison-tiers section
+  in [`CvUnitAI.md`](CvUnitAI.md).
 - `[UNT/mission]` (2) — the committed MissionAI + target (central, in
   `CvSelectionGroupAI::AI_setMissionAI`).
 

@@ -6822,11 +6822,11 @@ int CvCityAI::AI_neededSeaWorkers() const
 }
 
 
-bool CvCityAI::AI_isDefended(int iExtra, bool bAllowAnyDefenders)
+bool CvCityAI::AI_isDefended(int iExtra, bool bAllowAnyDefenders, int iNeedModifierPercent)
 {
 	PROFILE_FUNC();
 
-	return getGarrisonStrength(bAllowAnyDefenders) + iExtra >= AI_neededDefenseStrength();
+	return getGarrisonStrength(bAllowAnyDefenders) + iExtra >= AI_neededDefenseStrength() * iNeedModifierPercent / 100;
 }
 
 bool CvCityAI::AI_isAdequateHappinessMilitary(int iExtra) const

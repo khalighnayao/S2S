@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The S2S Despair Index™</title>
+<meta name="description" content="A rigorously unscientific ranking of Stones2Stars bugs by the developer despair they induce, measured in centiElephants.">
+<style>
+  :root {
+    --bg: #14121a;
+    --panel: #1d1a26;
+    --panel-edge: #2c2839;
+    --ink: #d8d3e6;
+    --ink-dim: #8e88a3;
+    --accent: #c9a45c;
+    --gold: #e3b341;
+    --silver: #b8bfc9;
+    --bronze: #c08552;
+    --bar-bg: #2a2636;
+    --bar-fill: linear-gradient(90deg, #6d5a9c, #a667a0, #d96c6c);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  header { text-align: center; margin-bottom: 2.5rem; }
+  header .elephant { font-size: 4rem; line-height: 1; filter: saturate(.8); }
+  h1 {
+    font-size: 2.6rem; margin: .4rem 0 .2rem; letter-spacing: .02em;
+    color: var(--accent);
+  }
+  header .tagline { color: var(--ink-dim); font-style: italic; max-width: 620px; margin: .6rem auto 0; }
+  .preamble {
+    background: var(--panel); border: 1px solid var(--panel-edge); border-left: 4px solid var(--accent);
+    border-radius: 6px; padding: 1.1rem 1.4rem; margin: 0 0 2.5rem; font-style: italic; color: var(--ink-dim);
+  }
+  .preamble strong { color: var(--ink); }
+  .entry {
+    background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 8px;
+    padding: 1.5rem 1.75rem 1.4rem; margin-bottom: 1.6rem; position: relative;
+  }
+  .entry.gold   { border-top: 3px solid var(--gold); }
+  .entry.silver { border-top: 3px solid var(--silver); }
+  .entry.bronze { border-top: 3px solid var(--bronze); }
+  .entry h2 {
+    font-size: 1.45rem; margin: 0 0 .25rem; color: var(--ink);
+    display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap;
+  }
+  .entry h2 .medal { font-size: 1.3rem; }
+  .score-row { display: flex; align-items: center; gap: .9rem; margin: .35rem 0 1rem; }
+  .score {
+    font-family: Consolas, 'Courier New', monospace; font-size: .95rem; color: var(--accent);
+    white-space: nowrap;
+  }
+  .meter { flex: 1; height: 10px; background: var(--bar-bg); border-radius: 5px; overflow: hidden; }
+  .meter > i { display: block; height: 100%; background: var(--bar-fill); border-radius: 5px; }
+  .entry p { margin: .7rem 0; }
+  .entry ol { margin: .5rem 0 .8rem 1.4rem; padding: 0; }
+  .entry li { margin: .35rem 0; }
+  code {
+    font-family: Consolas, 'Courier New', monospace; font-size: .88em;
+    background: #272336; color: #e8c89a; padding: .08em .35em; border-radius: 4px;
+  }
+  .status {
+    margin-top: 1rem; padding-top: .8rem; border-top: 1px dashed var(--panel-edge);
+    font-style: italic; color: var(--ink-dim); font-size: .95rem;
+  }
+  .hm { margin-top: 3rem; }
+  .hm h2 { color: var(--accent); font-size: 1.5rem; }
+  .hm .entry { padding: 1.1rem 1.5rem; }
+  .hm .entry h3 { margin: 0 0 .3rem; font-size: 1.1rem; color: var(--ink); }
+  .hm .entry p { margin: .3rem 0; color: var(--ink); font-size: .97rem; }
+  .fineprint {
+    margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--panel-edge);
+    color: var(--ink-dim); font-style: italic; font-size: .92rem;
+  }
+  footer {
+    margin-top: 2.5rem; text-align: center; color: var(--ink-dim); font-size: .9rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  em { color: inherit; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="elephant">🐘</div>
+  <h1>The S2S Despair Index™</h1>
+  <p class="tagline">A rigorously unscientific ranking of the standout bugs from the
+  Stones2Stars rework, ordered by the quantity of despair each induces in a developer at
+  the moment of comprehension.</p>
+</header>
+
+<div class="preamble">
+  Despair is measured in <strong>centiElephants (cE🐘)</strong> — the SI unit of despair,
+  calibrated against a war elephant that was assigned to defend a city and was later found,
+  by the project owner personally, standing seven tiles away in someone else's country.
+  <br><br>
+  This document is not holy writ. It is an outlet. No process shall ever cite it.
+</div>
+
+<article class="entry gold">
+  <h2><span class="medal">🥇</span> 1. The Tactical Elephant Vacation Package</h2>
+  <div class="score-row"><span class="score">100 cE🐘 (definitional)</span><span class="meter"><i style="width:100%"></i></span></div>
+  <p>An Elephant Gunner garrisoned to defend its city was observed sightseeing in the human
+  player's territory, 7 tiles from home. This required <strong>three independent bugs
+  stacked like a turducken</strong>:</p>
+  <ol>
+    <li>Parking in a city silently retyped any unit to <code>UNITAI_CITY_DEFENSE</code> —
+    a unit that <em>cannot use defensive bonuses</em> became the city's official primary
+    defender.</li>
+    <li>The garrison was then offered a "nearby" attack whose search radius was
+    <code>(range+1) × (moves+1)</code> = <strong>9 tiles</strong>, with no territory
+    restriction.</li>
+    <li>And "guard a good spot in the city's <em>vicinity</em>" scanned a
+    <strong>43×43 tile box</strong>, because <code>NUM_CITY_PLOTS_2</code> (a plot
+    <em>count</em>, 21) was passed to <code>rect()</code> (which takes a <em>radius</em>).
+    The vicinity was a quarter of the continent.</li>
+  </ol>
+  <p>Every individual fix reveals the next bug, like a matryoshka doll where every layer is
+  also on fire. The live specimen (unit 1843333) was traced in real time via the new HTTP
+  endpoint: fortified on a lovely defensive hill, 7 tiles out, proudly counted as a
+  garrison member of a city it contributed exactly nothing to.</p>
+  <p class="status">Status: fixed across PRs #383 and #391. The elephant stays home now.
+  Probably.</p>
+</article>
+
+<article class="entry silver">
+  <h2><span class="medal">🥈</span> 2. The (Un)Fortified Position</h2>
+  <div class="score-row"><span class="score">92 cE🐘</span><span class="meter"><i style="width:92%"></i></span></div>
+  <p>AI garrisons parked with one-turn <code>MISSION_SKIP</code>, so they never actually
+  fortified — meaning <strong>AI cities have never received fortification defense
+  bonuses</strong>, plausibly since the BTS era. Cities under-read their own defense,
+  concluded they needed more defenders, hoarded them, and every one of those defenders
+  re-planned its entire existence from scratch <strong>every single turn, forever</strong>
+  (~15&nbsp;s/turn for CITY_DEFENSE alone).</p>
+  <p>The perf bug and the gameplay bug were the same bug, the fix was <em>"push FORTIFY
+  instead of SKIP"</em>, and the wrongness was old enough to vote. Generations of defenders
+  stood in cities, awake, slightly nervous, accruing nothing.</p>
+  <p class="status">Status: fixed in the #342 campaign (persistent parks, staggered
+  re-plans).</p>
+</article>
+
+<article class="entry bronze">
+  <h2><span class="medal">🥉</span> 3. Schrödinger's Job Application</h2>
+  <div class="score-row"><span class="score">85 cE🐘</span><span class="meter"><i style="width:85%"></i></span></div>
+  <p>A unit's first <code>processContracts</code> call of the turn <em>advertised</em> for
+  work, found none, and returned <code>true</code> — "I did something!" The slice driver,
+  taking it at its word, re-ran the unit's <strong>entire decision cascade a second
+  time</strong>. For ~6,000 advertising units. Every turn.</p>
+  <p>The unit's day consisted of asking "does anyone need me?", hearing silence, and
+  billing it as a full shift — and the <em>system agreed</em>.</p>
+  <p class="status">Status: fixed. Asking around is no longer a career.</p>
+</article>
+
+<article class="entry">
+  <h2>4. The RESERVE ↔ PROPERTY_CONTROL Hokey Pokey</h2>
+  <div class="score-row"><span class="score">78 cE🐘</span><span class="meter"><i style="width:78%"></i></span></div>
+  <p>The role-conversion gate asked <em>"could this unit theoretically help with
+  crime?"</em> while the assignment handler asked <em>"does this unit actually have the
+  equipment?"</em> Different answers → units flipped roles <strong>~750 times per
+  turn</strong>, and the phantom "we're handling it!" signal suppressed real crime-fighting
+  production, which drove the cheap-military production spam.</p>
+  <p>You put your whole UnitAI in, you take your whole UnitAI out, you do the hokey pokey
+  and you corrupt the demand accounting. That's what it's all about.</p>
+  <p class="status">Status: fixed — both sides now ask the same question.</p>
+</article>
+
+<article class="entry">
+  <h2>5. The Unkillable Peasant</h2>
+  <div class="score-row"><span class="score">71 cE🐘</span><span class="meter"><i style="width:71%"></i></span></div>
+  <p><code>getCombatOdds</code> floored per-round damage to 0 against ~zero-strength
+  defenders, making a dying militiaman <strong>mathematically immortal</strong>. The AI
+  under-reported its own win odds against trivial opposition — in the engine that feeds
+  <em>every AI attack decision and the player-facing combat preview</em>.</p>
+  <p>Somewhere in the math, a tank regarded a wounded peasant with genuine caution, and
+  every layer above it nodded along.</p>
+  <p class="status">Status: fixed (damage clamped to ≥1 per round). The peasant is at
+  peace.</p>
+</article>
+
+<article class="entry">
+  <h2>6. The Eternal Anesthesiologist</h2>
+  <div class="score-row"><span class="score">60 cE🐘</span><span class="meter"><i style="width:60%"></i></span></div>
+  <p><code>AI_heal</code> returned <code>true</code> for a heal no-op when the unit
+  <em>couldn't heal</em>, so units re-decided "heal in city" <strong>49–196 times per
+  turn</strong> — and in rare alignments, the turn simply <em>never ended</em>.</p>
+  <p>The software equivalent of pressing an elevator button that is lit, knowing it is lit,
+  and pressing it 195 more times. Except occasionally the building never lets you leave.</p>
+  <p class="status">Status: fixed (<code>canHeal()</code> guard). The elevator arrives.</p>
+</article>
+
+<article class="entry">
+  <h2>7. The .vcxproj of Lies</h2>
+  <div class="score-row"><span class="score">47 cE🐘</span><span class="meter"><i style="width:47%"></i></span></div>
+  <p>The Visual Studio project file confidently states <code>PlatformToolset: v142</code>.
+  The actual compiler is the <strong>Microsoft Visual C++ Toolkit 2003</strong> (MSVC 7.1).
+  The project file drives nothing, is synced with nothing, and has already caused one wrong
+  toolchain conclusion that had to be corrected with a HARD RULE in block capitals.</p>
+  <p>The single most authoritative-<em>looking</em> file in the repository is a museum
+  exhibit. Trust it and you'll write <code>auto</code>, and the year 2003 will personally
+  reach through the linker to stop you.</p>
+  <p class="status">Status: mitigated by documentation and fear.</p>
+</article>
+
+<section class="hm">
+  <h2>Honorable Mentions</h2>
+
+  <article class="entry">
+    <h3>The Zen Logger</h3>
+    <p><code>AI_setAsGarrison</code> contained, for years, a gated logging block of
+    perfectly empty braces: at log level 3 it logged <em>nothing</em>, flawlessly. One hand
+    garrisoning. Replaced this week by <code>[UNT/garrison]</code>, which logs
+    <em>something</em>.</p>
+  </article>
+
+  <article class="entry">
+    <h3>The Integer Answering a Yes/No Question</h3>
+    <p>A stale argument passed <code>2</code> into <code>bool bAllowAnyDefenders</code>,
+    left over from a signature that no longer exists. Truncated to <code>true</code>, it
+    spent years confidently answering a question it was never asked.</p>
+  </article>
+
+  <article class="entry">
+    <h3>Waiting for Escortdot</h3>
+    <p>Human-automated workers stall forever on <code>WAIT_FOR_ESCORT</code>, because
+    escorts are only ever dispatched to AI workers. Two workers, by a road, waiting.
+    <em>"Shall we improve the tile?" "We can't." "Why not?" "We're waiting for the
+    escort."</em> The escort has never once come.</p>
+  </article>
+</section>
+
+<div class="fineprint">
+  <p>Scale calibration note: 100 cE🐘 = 1 full Elephant. Readings above 100 are
+  theoretically possible but would legally require the elephant to file an expense report
+  for the trip.</p>
+  <p>Contribution policy (owner-sanctioned): when the ongoing rework unearths something
+  worthy — a bug whose comprehension produces an audible exhale — it may be added here,
+  with a score, a name, and the respect it does not deserve. These entries double as an
+  honest summary of the state of the inherited codebase, which is part of why the rework
+  exists.</p>
+</div>
+
+<footer>
+  <p><strong>Stones2Stars</strong> — a Civ4 / Caveman2Cosmos rework ·
+  <a href="https://github.com/Stones2Stars/S2S">github.com/Stones2Stars/S2S</a></p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -69,6 +69,11 @@ group at once.
 | `AI_isCityGarrison(pCity)` | Returns `true` if this group is tasked as the garrison of a specific city. |
 | `AI_setAsGarrison(pCity)` | Marks this group as the garrison for a city. |
 
+Both delegate to the **head unit's** membership state (`CvUnitAI::m_iGarrisonCity`).
+Garrison membership is the *auxiliary* defense tier — members keep their own UNITAI and
+count toward city defense strength, not the primary-defender quota. See the garrison-tiers
+section in [`CvUnitAI.md`](CvUnitAI.md) (#384).
+
 ## Defender Selection
 | Method | Description |
 |---|---|

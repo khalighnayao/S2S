@@ -55,6 +55,49 @@ Units participate in the `CvContractBroker` workflow through a five-state machin
 | `AI_isCityGarrison(pCity)` | Returns `true` if this unit is tasked as a garrison for the given city. |
 | `AI_setAsGarrison(pCity)` | Assigns this unit as garrison for a city. |
 
+## City garrison: primary vs auxiliary tiers (#384)
+
+City defense runs on **two independent ledgers**, and they must not be conflated:
+
+- **Garrison membership** (`m_iGarrisonCity`, serialized; set via `AI_setAsGarrison`,
+  self-expiring — each `AI_update` drops membership unless the unit's move re-affirms it).
+  Membership is the **auxiliary tier**: every member's defensive strength counts toward the
+  city's *actual* defense (`PUF_isCityGarrison` → `CvCityAI::getGarrisonStrength` →
+  `AI_isDefended`, and the broker request priority in `AI_doContractFloatingDefenders`).
+  **Any** combat unit can be a member — it keeps its own UNITAI while parked.
+- **The `UNITAI_CITY_DEFENSE` role** is the **primary tier**: only deliberately-assigned
+  defenders (unit training/role selection — never a parking side effect) satisfy the
+  count-based demand gates (`AI_chooseProduction` defender gates, `AI_minDefenders`
+  searches in `AI_guardCityMinDefender`, `AI_getTotalFloatingDefenders`).
+
+Rules that follow (owner rulings, issue #384):
+- **Garrisoning never retypes a unit.** `AI_guardCity` and the leave-a-defender-behind
+  paths (`AI_goToTargetCity`, `AI_cityAttack`) mark membership + park persistently
+  (FORTIFY → SLEEP → SKIP), keeping the unit's UNITAI. A strong-but-unsuited unit (e.g. a
+  `noDefensiveBonus()` elephant gunner) stays as auxiliary defense without occupying a
+  primary slot, so the city keeps training/requesting real defenders.
+- **Overdefended beats underdefended — join eagerly, release reluctantly.** The single
+  release gate (`AI_guardCity`'s `AI_isDefended` hold test) demands a
+  `GARRISON_RELEASE_MARGIN_PERCENT` (125%) strength surplus before an existing garrison
+  member may leave; joining is judged at the plain 100% bar.
+- **"Guard the vicinity" means radius 2.** `AI_guardCity`'s guard-spot chooser historically
+  scanned `rect(NUM_CITY_PLOTS_2, …)` — but that constant is a plot COUNT (21), not a
+  radius, so "vicinity" guards marched to defensive tiles up to 21 tiles away while staying
+  members of the origin city's garrison (caught live in the #384 playtest: an elephant
+  gunner parked 7 tiles out, contributing nothing — `getGarrisonStrength` only reads range
+  2). Now `rect(2,2)`, matching the range-2 strength accounting; and the in-city recall
+  preference includes garrison members, not just city-AI types, since auxiliaries keep
+  their own UNITAI.
+- **Mis-typed primary defenders self-correct.** At its re-plan, a CITY_DEFENSE unit with
+  `noDefensiveBonus()` — the categorical unsuitability test, the same one strict
+  `AI_findBestDefender` uses to reject defense candidates — demotes back to its XML
+  default UNITAI (top of `AI_cityDefenseMove`). This bleeds the historic retype
+  population out of existing saves; with the retype sources gone it only shrinks. The
+  *general* "is this unit any good at its role" re-evaluation remains #380 (reset tool)
+  / `unit-ai-valuation.md` territory.
+- Membership changes log as `[UNT/garrison]` (level 2) — `type=` distinguishes primary
+  (CITY_DEFENSE) from auxiliary members.
+
 ## Group & Mission
 | Method | Description |
 |---|---|

@@ -171,6 +171,25 @@ per-slice Python `gameUpdate` (~5 ms), `updateScore`, `testAlive`; `plotPaging` 
   full strength, easing the over-stacking attractor and the conscription of non-fortifying
   units). Tied plans: `derived-data-repository.md` §8, `unit-ai-valuation.md` (defender
   production glut), `ai-architecture-north-star.md` (per-UNITAI modules).
+- *STEP 1 SHIPPED (#384 — garrison tiers, see `../reference/CvUnitAI.md`):* garrisoning no
+  longer retypes units to CITY_DEFENSE (the retype both corrupted the count-based demand
+  gates — fake defenders suppressed real training — and fed mis-suited units into the
+  expensive CITY_DEFENSE relocation cascade). Auxiliary members keep their own UNITAI and
+  park persistently; the leave-a-defender-behind attack paths got the FORTIFY park idiom
+  (their one-turn `MISSION_SKIP` was this same churn class); release hysteresis
+  (`GARRISON_RELEASE_MARGIN_PERCENT` 125) implements the owner's retention ruling.
+  Expected effects to verify: `[UNT/role] -> 10` conversions disappear; CITY_DEFENSE
+  `[PERF/unitai]` n drops toward true defender count; `[UNT/garrison]` shows stable
+  membership. Existing saves bleed their historic mis-typed population via a categorical
+  demotion (`noDefensiveBonus()` CITY_DEFENSE units revert to XML default at re-plan,
+  `[UNT/act] demoteUnsuitedDefender`). The city-declared-needs repository channel remains
+  the campaign's main body.
+- *Playtest find (#384, live-traced via the /units endpoint):* `AI_guardCity`'s vicinity
+  guard-spot loop used `rect(NUM_CITY_PLOTS_2=21)` — a plot COUNT as a RADIUS — scanning a
+  43×43 box per re-plan (part of the measured "vicinity generatePath loops" cost) and
+  marching "garrison" units up to 21 tiles from their city. Fixed to `rect(2,2)`; the
+  in-city recall preference now also covers garrison members (auxiliaries are not
+  city-AI-typed anymore, so type-keyed recall missed them).
 
 Deprioritized (measured negligible): visibility stickytape, property solver, trade routes,
 the unit-choose family.
