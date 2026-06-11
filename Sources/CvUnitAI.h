@@ -182,6 +182,13 @@ public:
      */
 	void AI_setBirthmark(int iNewValue);
 
+	// THE single place a unit's birthmark-seeded compass heading comes from (#24): wander/
+	// patrol behaviours share these so several units fan out deterministically instead of
+	// converging. Affinity scores how closely a direction matches the preferred heading
+	// (NUM_DIRECTION_TYPES/2 = exactly preferred .. 0 = opposite).
+	DirectionTypes AI_getPreferredDirection() const;
+	int AI_directionAffinity(DirectionTypes eDirection) const;
+
     /**
      * Gets the AI type of the unit.
      */

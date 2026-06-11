@@ -1480,6 +1480,35 @@ void CvUnitAI::AI_setBirthmark(int iNewValue)
 	m_iBirthmark = iNewValue;
 }
 
+//	THE single place a unit's birthmark-seeded compass heading comes from (#24). Every
+//	behaviour that wants per-unit directional variation (border patrol's circuit, the
+//	move-to-borders fan-out, future wander/explore spreads) goes through these two so the
+//	spreading logic is not reinvented per call site.
+DirectionTypes CvUnitAI::AI_getPreferredDirection() const
+{
+	return (DirectionTypes)(AI_getBirthmark() % NUM_DIRECTION_TYPES);
+}
+
+//	How closely eDirection matches this unit's preferred heading:
+//	NUM_DIRECTION_TYPES/2 (4) = exactly preferred ... 0 = directly opposite.
+int CvUnitAI::AI_directionAffinity(DirectionTypes eDirection) const
+{
+	if (eDirection == NO_DIRECTION)
+	{
+		return 0;
+	}
+	int iDelta = (int)eDirection - (int)AI_getPreferredDirection();
+	if (iDelta < 0)
+	{
+		iDelta = -iDelta;
+	}
+	if (iDelta > NUM_DIRECTION_TYPES / 2)
+	{
+		iDelta = NUM_DIRECTION_TYPES - iDelta;
+	}
+	return NUM_DIRECTION_TYPES / 2 - iDelta;
+}
+
 
 UnitAITypes CvUnitAI::AI_getUnitAIType() const
 {
@@ -26686,6 +26715,17 @@ void CvUnitAI::AI_cityDefense()
 
 
 // AI don't use this, only human automated units does.
+//	The "Border Patrol" automation (AUTOMATE_BORDER_PATROL). What it actually does, in order:
+//	1. Come home when >2 tiles outside own borders; heal when hurt.
+//	2. INTERCEPT: attack visible enemies, nearest first, out to range 12 — the odds bar rises
+//	   with distance (base = the AUTO_PATROL_MIN_COMBAT_ODDS modder option; +5/+10/+15 at range
+//	   5/7/12). Targets are confined to own territory except at range 1-2, where the
+//	   AUTO_PATROL_CAN_LEAVE_BORDERS option may allow stepping out.
+//	3. Otherwise WALK THE BORDER: a randomized circuit biased onto border tiles (see
+//	   AI_patrolBorders), continuing in the unit's current heading.
+//	4. Otherwise roam outside borders (only with AUTO_PATROL_CAN_LEAVE_BORDERS), else retreat
+//	   to a city / find safety.
+//	(City capturing during the intercepts is gated by AUTO_PATROL_NO_CITY_CAPTURING elsewhere.)
 void CvUnitAI::AI_borderPatrol()
 {
 	PROFILE_FUNC();
@@ -26722,17 +26762,20 @@ void CvUnitAI::AI_borderPatrol()
 		return;
 	}
 
-	if (AI_patrolBorders())
-	{
-		return;
-	}
-
+	//	The long-range intercepts must come BEFORE the random border walk: the walk nearly
+	//	always finds a plot, so anything after it is dead code — which is why patrollers
+	//	circled their ring right past intruders pillaging the interior (#24).
 	if (AI_huntRange(7, iMinimumOdds + 10, true))
 	{
 		return;
 	}
 
 	if (AI_huntRange(12, iMinimumOdds + 15, true))
+	{
+		return;
+	}
+
+	if (AI_patrolBorders())
 	{
 		return;
 	}
@@ -26904,24 +26947,12 @@ bool CvUnitAI::AI_moveToBorders()
 								}
 							}
 
-							// Per-unit directional bias: each unit prefers a consistent
-							// compass sector (seeded from its birthmark, the per-unit AI
-							// seed) so several units fan out to different borders instead
-							// of converging on the same crossing.
+							// Per-unit directional bias (shared helper, see AI_getPreferredDirection):
+							// each unit prefers a consistent compass sector so several units fan
+							// out to different borders instead of converging on the same crossing.
 							if (iValue > 0)
 							{
-								const int iPreferredDir = AI_getBirthmark() % NUM_DIRECTION_TYPES;
-								const int iPlotDir = (int)directionXY(plot(), pLoopPlot);
-								int iDirDelta = iPlotDir - iPreferredDir;
-								if (iDirDelta < 0)
-								{
-									iDirDelta = -iDirDelta;
-								}
-								if (iDirDelta > NUM_DIRECTION_TYPES / 2)
-								{
-									iDirDelta = NUM_DIRECTION_TYPES - iDirDelta;
-								}
-								iValue += (NUM_DIRECTION_TYPES / 2 - iDirDelta) * 75;
+								iValue += AI_directionAffinity(directionXY(plot(), pLoopPlot)) * 75;
 							}
 
 							if (iValue * 10 > iBestValue)
@@ -26978,6 +27009,7 @@ bool CvUnitAI::AI_patrolBorders()
 
 	int iBestValue = 0;
 	const CvPlot* pBestPlot = NULL;
+	bool bBorderInRange = false;
 
 	const int iSearchRange = baseMoves();
 
@@ -26987,13 +27019,21 @@ bool CvUnitAI::AI_patrolBorders()
 		{
 			const DirectionTypes eNewDirection = estimateDirection(plot(), pLoopPlot);
 			int iValue = GC.getGame().getSorenRandNum(10000, "AI Border Patrol");
-			if (pLoopPlot->isBorder(true))
+			//	Only the unit owner's OWN border earns the circuit bonus (#24): a plot of OURS
+			//	adjacent to anything not-ours. Foreign plots never count, or a patroller within
+			//	leash range of a friendly neighbour ends up walking the FRIEND's border seam.
+			if (pLoopPlot->getOwner() == getOwner())
 			{
-				iValue += GC.getGame().getSorenRandNum(10000, "AI Border Patrol");
-			}
-			else if (pLoopPlot->isBorder(false))
-			{
-				iValue += GC.getGame().getSorenRandNum(5000, "AI Border Patrol");
+				if (pLoopPlot->isBorder(true))
+				{
+					bBorderInRange = true;
+					iValue += GC.getGame().getSorenRandNum(10000, "AI Border Patrol");
+				}
+				else if (pLoopPlot->isBorder(false))
+				{
+					bBorderInRange = true;
+					iValue += GC.getGame().getSorenRandNum(5000, "AI Border Patrol");
+				}
 			}
 			//Avoid heading backwards, we want to circuit our borders, if possible.
 			if (eNewDirection == getOppositeDirection(getFacingDirection(false)))
@@ -27004,15 +27044,24 @@ bool CvUnitAI::AI_patrolBorders()
 			{
 				iValue /= 10;
 			}
+			//	Fan patrollers out (#24): each unit pulls toward its birthmark compass sector
+			//	(the shared AI_getPreferredDirection bias AI_moveToBorders also uses), so units
+			//	leaving the same city pick different ring directions instead of marching in one
+			//	pack. Added AFTER the backtrack penalties so circuit continuity still dominates
+			//	over reversing into the preferred sector.
+			iValue += AI_directionAffinity(eNewDirection) * 1000;
 			if (pLoopPlot->getOwner() != getOwner())
 			{
+				//	This check was INVERTED (#24): with the leave-borders option ON it excluded
+				//	foreign plots outright, and with it OFF it let the walk drift abroad at /10
+				//	weight. Now: option ON = allowed but discouraged, OFF = never.
 				if (GET_PLAYER(getOwner()).isModderOption(MODDEROPTION_AUTO_PATROL_CAN_LEAVE_BORDERS))
 				{
-					iValue = -1;
+					iValue /= 10;
 				}
 				else
 				{
-					iValue /= 10;
+					iValue = -1;
 				}
 			}
 			if (getDomainType() == DOMAIN_LAND && pLoopPlot->isWater() || getDomainType() == DOMAIN_SEA && !pLoopPlot->isWater())
@@ -27025,6 +27074,13 @@ bool CvUnitAI::AI_patrolBorders()
 				pBestPlot = pLoopPlot;
 			}
 		}
+	}
+	//	Automated mid-territory with no border in reach (#24): head for one properly
+	//	(AI_moveToBorders paths to a border crossing, fanned out by the same shared
+	//	direction bias) instead of random-walking the interior one tile at a time.
+	if (!bBorderInRange && AI_moveToBorders())
+	{
+		return true;
 	}
 	if (pBestPlot != NULL)
 	{
