@@ -13,44 +13,7 @@
 
 ---
 
-## 🥇 1. The 300-Kilometer Longbow — 100 cb *(definitional)*
-
-On a standard map a tile spans something on the order of hundreds of kilometers. The
-ranged-attack mechanic let **every ranged unit** fire into the neighboring tile — an
-archer loosing a volley at six orders of magnitude beyond the effective range of a
-longbow, from Oslo, hitting a man standing in Bergen.
-
-The masterstroke is what the volley accomplished: until roughly the tank era, **nothing**.
-The damage numbers were so small that entire armies camped outside cities for centuries,
-performing the ritual potshot as institutional proof of effort — the *"yay, we did
-something at least"* clause, fired across three hundred kilometers, dealing zero.
-
-*Status: turned off by the owner in self-defense. Scheduled to return as a siege-only
-mechanic (#410), where "bombarding the adjacent tile" abstracts to conducting siege
-operations against fortifications you are actually encamped at — the one reading where
-the fiction and the mechanics agree.*
-
----
-
-## 🥈 2. Warfare by Appointment Only — 85 cb
-
-For most of the early game, every unit on the map has exactly **1 movement point** —
-raider and farmer, wolf and warlord, all marching in perfect lockstep. Consequence: in
-the open field, **nothing can ever catch anything**. Every engagement is strictly
-consensual; the enemy you can see will be precisely one tile further away tomorrow,
-forever, like a horizon with a grudge.
-
-A horde of sixty raiders can therefore be thinned by exactly two mechanisms: you find
-and raze their home town, or they spontaneously decide to have a go. Until one of those
-occurs, both armies coexist on the steppe in an eternal, mutually visible, perfectly
-safe stalemate — history's first cold war, conducted at walking pace.
-
-*Status: structural. Partially relieved barb-side by horde courage (#409 — they now
-decide to have a go); the civ-side army lifecycle is #410.*
-
----
-
-## 🥉 3. The Clandestine Battering Ram — 80 cb
+## 🥇 1. The Clandestine Battering Ram — 113 cb *(first over the cap)*
 
 A battering ram cannot be ordered to batter anything. It has no bombard command, no
 button, no siege verb of any kind. Its entire reason for existing — reducing city
@@ -71,21 +34,63 @@ the stat is to die holding it.
 At best, stealthy. At worst — in the owner's full technical assessment — *"just........
 no words....."*
 
-The mechanic appears in none of the public documentation (the CivFanatics combat-mod
-guides do not mention it), so nobody ever figured it out — they just learned the
-practical consequence: these units are wildly useless unless you either **merge them to
-infinity** under Size Matters, so a battering ram becomes statistically able to survive
-assaulting a fully fortified city, or **produce them to hell**, so you can afford to
-waste a few dozen as ammunition. A siege weapon whose two viable doctrines are
-"singularity ram" and "human-wave the woodwork."
+The mechanic appears in none of the public documentation, so nobody ever figured it
+out — they just learned the practical consequence: these units are wildly useless unless
+you either **merge them to infinity** under Size Matters, so a battering ram becomes
+statistically able to survive assaulting a fully fortified city, or **produce them to
+hell**, so you can afford to waste a few dozen as ammunition. A siege weapon whose two
+viable doctrines are "singularity ram" and "human-wave the woodwork."
 
 Which is its own realism citation: the historical battering ram was a thing you schlepped
 for miles, hid behind, and could never actually lose — a roofed, mantleted, reusable piece
 of capital equipment that outlived the men swinging it. It was not something you built in
 the hundreds and fed to a wall like crackers.
 
+Per the calibration note, readings above 100 are reserved for mechanics that violate not
+merely military history but causality — and this is the first entry to qualify: a weapon
+whose **effect requires the destruction of its cause**. The longer you think about it,
+the crazier it gets. It is bad game design elevated to an artform, and the committee
+(the owner, thinking about it some more) has ruled it off the scale.
+
 *Status: working as designed, allegedly. The army-lifecycle work (#410) owns the
 question of what early-era siege should actually be.*
+
+---
+
+## 🥈 2. The 300-Kilometer Longbow — 100 cb *(definitional)*
+
+On a standard map a tile spans something on the order of hundreds of kilometers. The
+ranged-attack mechanic let **every ranged unit** fire into the neighboring tile — an
+archer loosing a volley at six orders of magnitude beyond the effective range of a
+longbow, from Oslo, hitting a man standing in Bergen.
+
+The masterstroke is what the volley accomplished: until roughly the tank era, **nothing**.
+The damage numbers were so small that entire armies camped outside cities for centuries,
+performing the ritual potshot as institutional proof of effort — the *"yay, we did
+something at least"* clause, fired across three hundred kilometers, dealing zero.
+
+*Status: turned off by the owner in self-defense. Scheduled to return as a siege-only
+mechanic (#410), where "bombarding the adjacent tile" abstracts to conducting siege
+operations against fortifications you are actually encamped at — the one reading where
+the fiction and the mechanics agree.*
+
+---
+
+## 🥉 3. Warfare by Appointment Only — 85 cb
+
+For most of the early game, every unit on the map has exactly **1 movement point** —
+raider and farmer, wolf and warlord, all marching in perfect lockstep. Consequence: in
+the open field, **nothing can ever catch anything**. Every engagement is strictly
+consensual; the enemy you can see will be precisely one tile further away tomorrow,
+forever, like a horizon with a grudge.
+
+A horde of sixty raiders can therefore be thinned by exactly two mechanisms: you find
+and raze their home town, or they spontaneously decide to have a go. Until one of those
+occurs, both armies coexist on the steppe in an eternal, mutually visible, perfectly
+safe stalemate — history's first cold war, conducted at walking pace.
+
+*Status: structural. Partially relieved barb-side by horde courage (#409 — they now
+decide to have a go); the civ-side army lifecycle is #410.*
 
 ---
 

@@ -60,6 +60,10 @@
   }
   .meter { flex: 1; height: 10px; background: var(--bar-bg); border-radius: 5px; overflow: hidden; }
   .meter > i { display: block; height: 100%; background: var(--bar-fill); border-radius: 5px; }
+  .meter.over > i {
+    background: linear-gradient(90deg, #4f8d74, #b9c46a, #e3b341, #d96c6c);
+    box-shadow: 0 0 8px rgba(217, 108, 108, .55);
+  }
   .entry p { margin: .7rem 0; }
   code {
     font-family: Consolas, 'Courier New', monospace; font-size: .88em;
@@ -104,7 +108,47 @@
 </div>
 
 <article class="entry gold">
-  <h2><span class="medal">🥇</span> 1. The 300-Kilometer Longbow</h2>
+  <h2><span class="medal">🥇</span> 1. The Clandestine Battering Ram</h2>
+  <div class="score-row"><span class="score">113 cb (off the scale)</span><span class="meter over"><i style="width:100%"></i></span></div>
+  <p>A battering ram cannot be ordered to batter anything. It has no bombard command, no
+  button, no siege verb of any kind. Its entire reason for existing — reducing city
+  defenses — is implemented as a <strong>hidden dice roll</strong> (<code>iBreakdownChance</code>,
+  25%) that procs per combat round <em>only while the ram is personally assaulting the
+  garrison</em>, an engagement a strength-4 wooden frame conducts approximately once. The
+  walls are chipped, if they are chipped, as an invisible side effect of the ram's death,
+  at a rate scaled down by the defenses it is trying to chip.</p>
+  <p>Nobody is told any of this. The mechanic's documentation lives on a fifteen-year-old
+  forum thread; the in-code comments reveal it was <em>originally</em> a pure no-combat
+  "siege event" that was later converted to real combat with a note that the rams'
+  strength should probably be reduced "when I get into the H2H/Distance mechanism" — a
+  mechanism the code is still waiting for. The AI, for its part, values breakdown chance
+  like a bombard rate it could aim, overbuilds the units, and then discovers the only way
+  to cash the stat is to die holding it.</p>
+  <p>At best, stealthy. At worst — in the owner's full technical assessment —
+  <em>"just........ no words....."</em></p>
+  <p>The mechanic appears in none of the public documentation, so nobody ever figured it
+  out — they just learned the practical consequence: these units are wildly useless unless
+  you either <strong>merge them to infinity</strong> under Size Matters, so a battering
+  ram becomes statistically able to survive assaulting a fully fortified city, or
+  <strong>produce them to hell</strong>, so you can afford to waste a few dozen as
+  ammunition. A siege weapon whose two viable doctrines are "singularity ram" and
+  "human-wave the woodwork."</p>
+  <p>Which is its own realism citation: the historical battering ram was a thing you
+  schlepped for miles, hid behind, and could never actually lose — a roofed, mantleted,
+  reusable piece of capital equipment that outlived the men swinging it. It was not
+  something you built in the hundreds and fed to a wall like crackers.</p>
+  <p>Per the calibration note, readings above 100 are reserved for mechanics that violate
+  not merely military history but causality — and this is the first entry to qualify: a
+  weapon whose <strong>effect requires the destruction of its cause</strong>. The longer
+  you think about it, the crazier it gets. It is bad game design elevated to an artform,
+  and the committee (the owner, thinking about it some more) has ruled it off the
+  scale.</p>
+  <p class="status">Status: working as designed, allegedly. The army-lifecycle work (#410)
+  owns the question of what early-era siege should actually be.</p>
+</article>
+
+<article class="entry silver">
+  <h2><span class="medal">🥈</span> 2. The 300-Kilometer Longbow</h2>
   <div class="score-row"><span class="score">100 cb (definitional)</span><span class="meter"><i style="width:100%"></i></span></div>
   <p>On a standard map a tile spans something on the order of hundreds of kilometers. The
   ranged-attack mechanic let <strong>every ranged unit</strong> fire into the neighboring
@@ -121,8 +165,8 @@
   one reading where the fiction and the mechanics agree.</p>
 </article>
 
-<article class="entry silver">
-  <h2><span class="medal">🥈</span> 2. Warfare by Appointment Only</h2>
+<article class="entry bronze">
+  <h2><span class="medal">🥉</span> 3. Warfare by Appointment Only</h2>
   <div class="score-row"><span class="score">85 cb</span><span class="meter"><i style="width:85%"></i></span></div>
   <p>For most of the early game, every unit on the map has exactly <strong>1 movement
   point</strong> — raider and farmer, wolf and warlord, all marching in perfect lockstep.
@@ -135,31 +179,6 @@
   safe stalemate — history's first cold war, conducted at walking pace.</p>
   <p class="status">Status: structural. Partially relieved barb-side by horde courage
   (#409 — they now decide to have a go); the civ-side army lifecycle is #410.</p>
-</article>
-
-<article class="entry bronze">
-  <h2><span class="medal">🥉</span> 3. The Clandestine Battering Ram</h2>
-  <div class="score-row"><span class="score">80 cb</span><span class="meter"><i style="width:80%"></i></span></div>
-  <p>A battering ram cannot be ordered to batter anything. It has no bombard command, no
-  button, no siege verb of any kind. Its entire reason for existing — reducing city
-  defenses — is implemented as a <strong>hidden dice roll</strong> (<code>iBreakdownChance</code>,
-  25%) that procs per combat round <em>only while the ram is personally assaulting the
-  garrison</em>, an engagement a strength-4 wooden frame conducts approximately once. The
-  walls are chipped, if they are chipped, as an invisible side effect of the ram's death,
-  at a rate scaled down by the defenses it is trying to chip.</p>
-  <p>The mechanic appears in none of the public documentation, so nobody ever figured it
-  out — they just learned the practical consequence: these units are wildly useless unless
-  you either <strong>merge them to infinity</strong> under Size Matters, so a battering
-  ram becomes statistically able to survive assaulting a fully fortified city, or
-  <strong>produce them to hell</strong>, so you can afford to waste a few dozen as
-  ammunition. A siege weapon whose two viable doctrines are "singularity ram" and
-  "human-wave the woodwork."</p>
-  <p>Which is its own realism citation: the historical battering ram was a thing you
-  schlepped for miles, hid behind, and could never actually lose — a roofed, mantleted,
-  reusable piece of capital equipment that outlived the men swinging it. It was not
-  something you built in the hundreds and fed to a wall like crackers.</p>
-  <p class="status">Status: working as designed, allegedly. The army-lifecycle work (#410)
-  owns the question of what early-era siege should actually be.</p>
 </article>
 
 <article class="entry">
