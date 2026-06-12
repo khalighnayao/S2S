@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The S2S Realism Index™</title>
+<meta name="description" content="A rigorously unscientific catalogue of Stones2Stars' most super realistic game mechanics, measured in centibows.">
+<style>
+  :root {
+    --bg: #12161a;
+    --panel: #1a2026;
+    --panel-edge: #283139;
+    --ink: #d5dde2;
+    --ink-dim: #8a98a3;
+    --accent: #6fae8f;
+    --gold: #e3b341;
+    --silver: #b8bfc9;
+    --bronze: #c08552;
+    --bar-bg: #26303a;
+    --bar-fill: linear-gradient(90deg, #4f8d74, #6fae8f, #b9c46a);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  header { text-align: center; margin-bottom: 2.5rem; }
+  header .bow { font-size: 4rem; line-height: 1; filter: saturate(.85); }
+  h1 {
+    font-size: 2.6rem; margin: .4rem 0 .2rem; letter-spacing: .02em;
+    color: var(--accent);
+  }
+  header .tagline { color: var(--ink-dim); font-style: italic; max-width: 640px; margin: .6rem auto 0; }
+  .preamble {
+    background: var(--panel); border: 1px solid var(--panel-edge); border-left: 4px solid var(--accent);
+    border-radius: 6px; padding: 1.1rem 1.4rem; margin: 0 0 2.5rem; font-style: italic; color: var(--ink-dim);
+  }
+  .preamble strong { color: var(--ink); }
+  .preamble a { color: var(--accent); }
+  .entry {
+    background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 8px;
+    padding: 1.5rem 1.75rem 1.4rem; margin-bottom: 1.6rem; position: relative;
+  }
+  .entry.gold   { border-top: 3px solid var(--gold); }
+  .entry.silver { border-top: 3px solid var(--silver); }
+  .entry.bronze { border-top: 3px solid var(--bronze); }
+  .entry h2 {
+    font-size: 1.45rem; margin: 0 0 .25rem; color: var(--ink);
+    display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap;
+  }
+  .entry h2 .medal { font-size: 1.3rem; }
+  .score-row { display: flex; align-items: center; gap: .9rem; margin: .35rem 0 1rem; }
+  .score {
+    font-family: Consolas, 'Courier New', monospace; font-size: .95rem; color: var(--accent);
+    white-space: nowrap;
+  }
+  .meter { flex: 1; height: 10px; background: var(--bar-bg); border-radius: 5px; overflow: hidden; }
+  .meter > i { display: block; height: 100%; background: var(--bar-fill); border-radius: 5px; }
+  .entry p { margin: .7rem 0; }
+  code {
+    font-family: Consolas, 'Courier New', monospace; font-size: .88em;
+    background: #233039; color: #a8d8be; padding: .08em .35em; border-radius: 4px;
+  }
+  .status {
+    margin-top: 1rem; padding-top: .8rem; border-top: 1px dashed var(--panel-edge);
+    font-style: italic; color: var(--ink-dim); font-size: .95rem;
+  }
+  .fineprint {
+    margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--panel-edge);
+    color: var(--ink-dim); font-style: italic; font-size: .92rem;
+  }
+  footer {
+    margin-top: 2.5rem; text-align: center; color: var(--ink-dim); font-size: .9rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  em { color: inherit; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="bow">🏹</div>
+  <h1>The S2S Realism Index™</h1>
+  <p class="tagline">A rigorously unscientific catalogue of the game's most
+  <strong>super realistic</strong> mechanics, ordered by the distance between what the
+  mechanic claims to depict and anything that has ever happened on Earth.</p>
+</header>
+
+<div class="preamble">
+  Distance is measured in <strong>centibows (cb)</strong> — the SI unit of verisimilitude,
+  calibrated against an archer on a standard-size map providing effective fire support to a
+  battle roughly <strong>three hundred kilometers away</strong>.
+  <br><br>
+  Sibling publication of the <a href="DESPAIR_INDEX.html">Despair Index</a>. The Despair
+  Index is for bugs — things the code does wrong. This index is for <em>features</em> —
+  things the code does exactly as designed, which is somehow worse. This document is not
+  holy writ. It is an outlet. No process shall ever cite it.
+</div>
+
+<article class="entry gold">
+  <h2><span class="medal">🥇</span> 1. The 300-Kilometer Longbow</h2>
+  <div class="score-row"><span class="score">100 cb (definitional)</span><span class="meter"><i style="width:100%"></i></span></div>
+  <p>On a standard map a tile spans something on the order of hundreds of kilometers. The
+  ranged-attack mechanic let <strong>every ranged unit</strong> fire into the neighboring
+  tile — an archer loosing a volley at six orders of magnitude beyond the effective range
+  of a longbow, from Oslo, hitting a man standing in Bergen.</p>
+  <p>The masterstroke is what the volley accomplished: until roughly the tank era,
+  <strong>nothing</strong>. The damage numbers were so small that entire armies camped
+  outside cities for centuries, performing the ritual potshot as institutional proof of
+  effort — the <em>"yay, we did something at least"</em> clause, fired across three
+  hundred kilometers, dealing zero.</p>
+  <p class="status">Status: turned off by the owner in self-defense. Scheduled to return
+  as a siege-only mechanic (#410), where "bombarding the adjacent tile" abstracts to
+  conducting siege operations against fortifications you are actually encamped at — the
+  one reading where the fiction and the mechanics agree.</p>
+</article>
+
+<article class="entry silver">
+  <h2><span class="medal">🥈</span> 2. Warfare by Appointment Only</h2>
+  <div class="score-row"><span class="score">85 cb</span><span class="meter"><i style="width:85%"></i></span></div>
+  <p>For most of the early game, every unit on the map has exactly <strong>1 movement
+  point</strong> — raider and farmer, wolf and warlord, all marching in perfect lockstep.
+  Consequence: in the open field, <strong>nothing can ever catch anything</strong>. Every
+  engagement is strictly consensual; the enemy you can see will be precisely one tile
+  further away tomorrow, forever, like a horizon with a grudge.</p>
+  <p>A horde of sixty raiders can therefore be thinned by exactly two mechanisms: you find
+  and raze their home town, or they spontaneously decide to have a go. Until one of those
+  occurs, both armies coexist on the steppe in an eternal, mutually visible, perfectly
+  safe stalemate — history's first cold war, conducted at walking pace.</p>
+  <p class="status">Status: structural. Partially relieved barb-side by horde courage
+  (#409 — they now decide to have a go); the civ-side army lifecycle is #410.</p>
+</article>
+
+<article class="entry bronze">
+  <h2><span class="medal">🥉</span> 3. The Clandestine Battering Ram</h2>
+  <div class="score-row"><span class="score">80 cb</span><span class="meter"><i style="width:80%"></i></span></div>
+  <p>A battering ram cannot be ordered to batter anything. It has no bombard command, no
+  button, no siege verb of any kind. Its entire reason for existing — reducing city
+  defenses — is implemented as a <strong>hidden dice roll</strong> (<code>iBreakdownChance</code>,
+  25%) that procs per combat round <em>only while the ram is personally assaulting the
+  garrison</em>, an engagement a strength-4 wooden frame conducts approximately once. The
+  walls are chipped, if they are chipped, as an invisible side effect of the ram's death,
+  at a rate scaled down by the defenses it is trying to chip.</p>
+  <p>The mechanic appears in none of the public documentation, so nobody ever figured it
+  out — they just learned the practical consequence: these units are wildly useless unless
+  you either <strong>merge them to infinity</strong> under Size Matters, so a battering
+  ram becomes statistically able to survive assaulting a fully fortified city, or
+  <strong>produce them to hell</strong>, so you can afford to waste a few dozen as
+  ammunition. A siege weapon whose two viable doctrines are "singularity ram" and
+  "human-wave the woodwork."</p>
+  <p>Which is its own realism citation: the historical battering ram was a thing you
+  schlepped for miles, hid behind, and could never actually lose — a roofed, mantleted,
+  reusable piece of capital equipment that outlived the men swinging it. It was not
+  something you built in the hundreds and fed to a wall like crackers.</p>
+  <p class="status">Status: working as designed, allegedly. The army-lifecycle work (#410)
+  owns the question of what early-era siege should actually be.</p>
+</article>
+
+<article class="entry">
+  <h2>4. The Hundred-Year Picnic</h2>
+  <div class="score-row"><span class="score">75 cb</span><span class="meter"><i style="width:75%"></i></span></div>
+  <p>An AI stack assembles, marches to an enemy city, encamps — so far, textbook Vegetius —
+  and then discovers its composition is entirely ranged units, which cannot assault
+  anything. Lacking both an assault component and any concept of "this is not working,"
+  the army settles in: taking passive damage from the defenses, returning fire with the
+  zero-damage 300-kilometer volleys of entry №1, generation after generation, a siege
+  with all the military significance of a family reunion in hostile weather.</p>
+  <p>No commitment, no completion, no retreat. Just vibes, attrition, and the unshakeable
+  institutional conviction that the potshots will, eventually, maybe, do something.</p>
+  <p class="status">Status: the acceptance test for the #410 army model — that stack must
+  either requisition assault troops or go home.</p>
+</article>
+
+<article class="entry">
+  <h2>5. The Grid Before the Generator</h2>
+  <div class="score-row"><span class="score">72 cb</span><span class="meter"><i style="width:72%"></i></span></div>
+  <p>You discover Electricity. Eager to enter the modern age, you order a power plant. You
+  cannot. First your city must build <strong>Power Lines</strong> — a complete electrical
+  distribution network, erected pole by pole, for electricity that <em>does not exist
+  anywhere on the planet</em> — and only once the dead copper is humming with anticipation
+  does the game permit you to construct something that generates power to put in it.
+  <code>BUILDING_POWER_LINES</code> is the gateway prerequisite for the entire electric
+  economy (45 references downstream), making "wiring the city for nothing" the mandatory
+  first act of every electrical age.</p>
+  <p>And every city repeats the whole ritual independently — poles, then plant, in each
+  one — because power is strictly municipal (see the issue trying to make electricity
+  empire-wide).</p>
+  <p class="status">Status: working exactly as designed. Empire-wide power
+  generation/consumption is the productive direction (#411).</p>
+</article>
+
+<article class="entry">
+  <h2>6. The 326 Artisanal Supply Chains</h2>
+  <div class="score-row"><span class="score">68 cb</span><span class="meter"><i style="width:68%"></i></span></div>
+  <p>The game tracks <strong>481 distinct bonus resources</strong>, of which
+  <strong>326 are manufactured goods</strong> — each a discrete, named,
+  individually-plumbed commodity flowing through the trade network. This is not an
+  abstraction of an industrial economy; it is an attempt at a full-relational inventory of
+  one, in a game whose map cannot decide how long a tile is (see entry №1).</p>
+  <p>Special mention to the energy aisle, where the seventeen-plus distinct power plant
+  types include "Osmotic", "Jetstream", "Quantum Vacuum", and — for the late game —
+  "Cosmic Expansion", a power plant fueled by the universe getting bigger.</p>
+  <p class="status">Status: working exactly as designed, at O(bonuses) cost in every
+  prereq sweep the constructibility work (#195) keeps having to index around.</p>
+</article>
+
+<div class="fineprint">
+  <p>Scale calibration note: 100 cb = 1 full Longbow. Readings above 100 are reserved for
+  mechanics that violate not merely military history but causality.</p>
+  <p>Contribution policy (owner-sanctioned): when play or rework surfaces a mechanic that
+  is working exactly as designed and the design describes a physically impossible world —
+  a "super realistic" mechanic — it may be added here, with a score, a name, and a
+  citation to whichever issue is trying to make it less realistic in the productive
+  direction.</p>
+</div>
+
+<footer>
+  <p><strong>Stones2Stars</strong> — a Civ4 / Caveman2Cosmos rework ·
+  <a href="https://github.com/Stones2Stars/S2S">github.com/Stones2Stars/S2S</a> ·
+  <a href="https://discord.gg/R8Uejx6uaK">discord.gg/R8Uejx6uaK</a></p>
+  <p>Fresh realism may be reported, contested, or savored on the
+  <a href="https://discord.gg/R8Uejx6uaK">S2S Discord</a>.</p>
+  <p>Sibling publication: <a href="DESPAIR_INDEX.html">The Despair Index™</a> — for the
+  things the code does wrong.</p>
+</footer>
+
+</div>
+</body>
+</html>
