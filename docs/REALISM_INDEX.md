@@ -31,8 +31,9 @@ the code is still waiting for. The AI, for its part, values breakdown chance lik
 bombard rate it could aim, overbuilds the units, and then discovers the only way to cash
 the stat is to die holding it.
 
-At best, stealthy. At worst — in the owner's full technical assessment — *"just........
-no words....."*
+At best, stealthy. At worst, the committee's final verdict: **the only weapon in military
+history that files its battle report as an obituary** — damage nobody ordered, through a
+mechanism nobody documented, from a unit nobody will see again.
 
 The mechanic appears in none of the public documentation, so nobody ever figured it
 out — they just learned the practical consequence: these units are wildly useless unless
