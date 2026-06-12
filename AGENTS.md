@@ -149,6 +149,11 @@ not findings to re-discover.
   `git checkout`-ing away silently removes the changes from their build. **Never switch
   branches while the user may be mid-build.** (Read-only git — `status`/`log`/`diff` — is
   always fine.)
+- **Docs-only changes may be committed and pushed straight to `main`** (owner ruling
+  2026-06-12): the indexes (`docs/DESPAIR_INDEX.*`, `docs/REALISM_INDEX.*`), player docs,
+  `Sources/docs/` notes, AGENTS.md — provided NOTHING else rides in the commit. Anything
+  gameplay-affecting (C++ code, `Assets/XML` data, Python) keeps the careful path:
+  branch + PR + playtest per the conventions above.
 - **Verify the current branch immediately before every commit.** Run
   `git branch --show-current` (or `git status`) in the same command as the commit and
   confirm it is the branch you intend. The working copy is shared with the owner, who may
