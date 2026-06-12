@@ -35,6 +35,8 @@ Example: `Benchmarks/2026-06-11_prehistoric-15civs_england-p0/`
 | `snapshots/` | Hand-kept copies of `PlotSnapshot_turn_tN.csv` for turns worth preserving (copy them out before rotation) |
 | `logs/` | Captures of the gated AI logs when Autolog was enabled, named `<LogName>_t<from>-<to>.log` (e.g. `BuildEvaluation_t200-260.log`) |
 | `notes.md` | Running observations: notable events with turn numbers (civ deaths, razed cities, wars), settings (difficulty, speed, options), and analysis conclusions |
+| `commentary.md` | Optional: the live running-commentary transcript when a game was observed with an agent "booth" (bulletins, siege calls, forensics) — kept verbatim when worth keeping |
+| `watcher.ps1` | Optional: the per-game watcher script that fed the commentary monitor (eliminations, city losses, channel arms, periodic standings) |
 
 ## Collector
 
