@@ -6,6 +6,10 @@
 > calibrated against a war elephant that was assigned to defend a city and was later found,
 > by the project owner personally, standing seven tiles away in someone else's country.
 >
+> Sibling publication of the [Realism Index](REALISM_INDEX.md). This index is for bugs — things
+> the code does wrong. The Realism Index is for *features* — things the code does exactly as
+> designed, which is somehow worse.
+>
 > This document is not holy writ. It is an outlet. No process shall ever cite it.
 
 ---
