@@ -13,6 +13,7 @@ reference — **but it has not yet been verified against the S2S codebase.**
 > per-section caveat once verified.
 
 ## Contents
+- [xml-validator.md](xml-validator.md) — how to run `Tools\XmlValidator.exe` to find and fix XML errors before they fail the CI build (S2S-verified, not imported).
 - [modders-documentation.md](modders-documentation.md) — adapted from the C2C "Modder's Documentation" thread (XML schema/modules, AI flavors, properties, the expression/outcome system, combat-mod schema, Outbreaks & Afflictions, Size Matters, multimaps, art pipeline, Revolutions).
 - [player-guide.md](player-guide.md) — adapted from the "Caveman2Cosmos v44 Player Guide" thread (game options, eras/gateway techs, city/unit/culture/combat/religion/trait/civic/economy systems).
 
