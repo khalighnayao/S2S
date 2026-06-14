@@ -147,6 +147,53 @@ constructibility work (#195) keeps having to index around.*
 
 ---
 
+## 7. The Net Present Value of the Cosmos — 3 cb *(lowest reading on record)*
+
+The committee debated for some time whether space qualifies for this index at all, because
+space is, in fact, **empty** — and `TERRAIN_NONE`, the single terrain underpinning every
+orbital, lunar, and interplanetary tile, models this with a fidelity unmatched anywhere
+else in the game: **no yields block whatsoever.** Zero food. Zero production. Zero
+commerce. Not "barren until terraformed," not "habitable once you build the dome" — there
+is no terraform build for space, no habitat improvement, no preparation step. The vacuum
+yields nothing because the vacuum is nothing. For once, the map and reality agree
+completely.
+
+This is the problem.
+
+The AI is, at its core, a yield maximizer. City founding rejects any site whose tiles
+can't muster 2 food and 3 total yield; plot valuation divides anything below that threshold
+by sixteen. So when the AI turns its gaze to the heavens — the moon, Mars, the rings of
+Saturn — it performs the calculation correctly, arrives at a net present value of **exactly
+zero**, and elects to remain on Earth, forever, where the dirt at least grows wheat. There
+is no bug here. There is only a rational economic actor declining to fund a space program
+with no return on investment, which is the single most plausible thing any AI in this game
+has ever done.
+
+Humanity reaches space anyway, because humans will pour treasure into a barren rock for
+reasons no founding-value heuristic will ever model. The AI, lacking poetry, stays home
+and tends its farms.
+
+The truly realistic part is not the empty vacuum — it's the **promise**. Somewhere back in
+the C2C era, well over a decade ago, someone shipped the space maps on the assumption that
+teaching the AI to understand them would be the easy part, a tidy follow-up for some near
+future. That follow-up has since outlived the assumption, the original codebase, and a good
+fraction of the player base. It survives today as Phase **B7** of the multimap→zone rework
+— "make space extend Earth's gradients so existing AI carries over" — the same decade-plus
+IOU, reissued in fresh ink. The cosmos has been "coming next version" for longer than most
+software lives.
+
+At 3 cb it is the lowest-scoring entry the index will likely ever record — earning its
+place not by depicting an impossible world, but by depicting the real one so faithfully
+that the game's own intelligence took one look and opted out.
+
+*Status: working exactly as designed; in fairness, the design is correct. AI space
+awareness is explicitly deferred to Phase B7 of the multimap→zone rework
+(`Sources/docs/plans/multimap-zone-rework.md`) — teaching the cosmos to lie about its
+yields just enough that the AI will deign to leave the planet. ETA: historically, "next
+version."*
+
+---
+
 *Scale calibration note: 100 cb = 1 full Longbow. Readings above 100 are reserved for
 mechanics that violate not merely military history but causality.*
 
