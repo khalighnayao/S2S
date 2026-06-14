@@ -159,7 +159,56 @@ pressing it 195 more times. Except occasionally the building never lets you leav
 
 ---
 
-## 9. International Civil Asset Forfeiture — 55 cp
+## 9. The Wonder That Builds Character — 59 cp
+
+A National Wonder reaches into your civilization and hands it a personality. Build the right
+one and you don't get a bonus — you acquire a *trait*, the same kind of thing a leader is
+born with, applied in full via `setHasTrait` → `processTrait`, modifier bundle and all.
+Demolish the building and the trait is revoked: you are, briefly, a different civilization,
+then yourself again.
+
+The trait system — meant to describe who your leader *is* — has been quietly conscripted as
+a general-purpose effect courier, wired to buildings through a `FreeTraitTypes` foreign key
+and gated by a `bCivilizationTrait` flag. 22 "traits" turn out to be wonders in a coat: the
+*Ancient Way of the…* set, the astrological influences. "What traits does this civilization
+have" stopped being a question about leaders and became a question about your construction
+history.
+
+Three things that should never touch — a building, a leader trait, and a nationwide effect —
+were fused into one, and the engine applies the whole bundle without blinking, because as
+far as it is concerned this is entirely normal.
+
+*Status: working exactly as designed (a sibling waits in the Realism Index) — which is the
+entire despair: it functions flawlessly while catapulting a fresh bug at any developer who
+dares touch it. The wonder giveth a personality; the wrecking ball taketh it away.*
+
+---
+
+## 10. The Trait in a Trenchcoat — 58 cp
+
+There is no such thing as a "complex trait." There are 64 ordinary traits, each of which is
+secretly *two* traits standing on each other's shoulders in one `<Type>`. The vanilla
+`TRAIT_AGGRESSIVE` carries, inline and under its own name, a complete second personality —
+`ReplacementID: TRAIT_COMPLEX_AGGRESSIVE`, a type that exists nowhere else, has no record of
+its own, and answers to no one. A generic engine (`CvInfoReplacements`) waits for one game
+option to flip, then swaps the whole soul out mid-sentence. Nothing in the trait's own data
+admits this can happen; the only tell is two tags a hundred lines apart.
+
+The faithful reader — a migration that, reasonably, treats the same `<Type>` appearing twice
+as an override — lovingly merges the disguise into the man wearing it, producing 64 chimeras
+with a vanilla face and a complex strategy, each insisting it is one trait while sourcing its
+opinions from two.
+
+In fairness, the fix itself isn't even bad — a clean conditional whole-object replacement. The
+despair is that "what traits does this leader have" has no answer until you *also* ask a game
+option, a separate templated class, and a type that was never really there.
+
+*Status: untangled (#428) — the disguise is now its own `TRAIT_COMPLEX_*` file, the base trait
+declares `replacedBy` and keeps its own face, and the store stopped marrying strangers.*
+
+---
+
+## 11. International Civil Asset Forfeiture — 55 cp
 
 Foreign police cars were observed parked on the human player's **resource tiles**, mission
 hover proudly reading *"Maintain property control."* The mechanism: when a property-control
@@ -181,7 +230,7 @@ fortified. The uranium has been returned.*
 
 ---
 
-## 10. The .vcxproj of Lies — 47 cp
+## 12. The .vcxproj of Lies — 47 cp
 
 The Visual Studio project file confidently states `PlatformToolset: v142`. The actual
 compiler is the **Microsoft Visual C++ Toolkit 2003** (MSVC 7.1). The project file drives
@@ -222,5 +271,6 @@ summary of the state of the inherited codebase, which is part of why the rework 
 *Fresh despair may be reported, contested, or savored on the
 [S2S Discord](https://discord.gg/R8Uejx6uaK).*
 
-*Sibling publication: the [Realism Index](REALISM_INDEX.md) — for mechanics that work
-exactly as designed, which is somehow worse.*
+*Sibling publications: the [Realism Index](REALISM_INDEX.md) (mechanics working exactly as
+designed, which is somehow worse) and the [Complexity Index](COMPLEXITY_INDEX.md) (one entry,
+and it is everything).*

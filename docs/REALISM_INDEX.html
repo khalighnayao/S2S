@@ -230,6 +230,99 @@
   prereq sweep the constructibility work (#195) keeps having to index around.</p>
 </article>
 
+<article class="entry">
+  <h2>7. You Are What You Build</h2>
+  <div class="score-row"><span class="score">48 cb</span><span class="meter"><i style="width:48%"></i></span></div>
+  <p>A civilization's character is not chosen, inherited, or earned over centuries — it is
+  <em>constructed</em>. Finish the right National Wonder and your people acquire an innate
+  trait, the same indelible kind a leader is born with; raze that building and the trait
+  evaporates, the national character politely reverting as the rubble settles. Identity is a
+  function of your current building inventory, recomputed on every completion and demolition,
+  and the game applies it with total sincerity.</p>
+  <p>The realism is impeccable in its own way: monuments <em>do</em> shape who a people
+  believe themselves to be — so the engine models it literally, as a wire running from a
+  foundation to the soul. Build the war-monument, become Aggressive. Build the observatory
+  and read the stars into your blood. Knock it down, forget who you were. No metaphor
+  survives contact with the implementation; here the metaphor <em>is</em> the
+  implementation.</p>
+  <p class="status">Status: working exactly as designed — a building grants a
+  <code>bCivilizationTrait</code> via its <code>FreeTraitTypes</code>, applied through the
+  very same <code>setHasTrait</code>/<code>processTrait</code> path a leader's own traits
+  use. Its bug-catapulting twin holds court in the
+  <a href="DESPAIR_INDEX.html">Despair Index</a>. No issue yet dares propose making national
+  identity less load-bearing on masonry.</p>
+</article>
+
+<article class="entry">
+  <h2>8. Cultural Exports</h2>
+  <div class="score-row"><span class="score">44 cb</span><span class="meter"><i style="width:44%"></i></span></div>
+  <p>A civilization's culture is, the game maintains, a tradeable commodity. Found the
+  national wonder for a Culture and you receive a <code>BONUS_*</code> representing it;
+  because that bonus carries <code>TechCityTrade = NONE</code>, it is tradeable from the first
+  turn, no enabling technology required. Your culture now sits in the diplomacy screen between
+  Iron and Incense — available to sell, gift, or demand at the negotiating table.</p>
+  <p>The realism is, in its way, unimpeachable: cultures <em>are</em> exported, exchanged, and
+  absorbed between nations. The game simply renders the metaphor as freight — the Abbasid
+  identity, FOB your capital, three gold a turn, cancel anytime. There is no mechanism for the
+  buyer to <em>become</em> more Abbasid, nor for you to become less; the commodity changes
+  hands and means nothing, which is itself a fairly honest model of the international culture
+  trade.</p>
+  <p>Underneath, this rides a <code>building → bonus → building</code> indirection: 410 of the
+  game's 907 bonuses — roughly 45% — are these <code>BONUSCLASS_CULTURE</code> phantoms, each
+  existing only to relay a wonder's existence to the buildings it unlocks. It is not a bug,
+  and it catapults nothing at anyone; it is merely dumb, and it quietly taxes every load and
+  every resource sweep for the privilege.</p>
+  <p class="status">Status: working exactly as designed — a <code>BONUSCLASS_CULTURE</code>
+  resource granted by a wonder, tradeable by default. The whole tier is slated for collapse to
+  a direct building→building enable in #428's purge backlog, which retires both the phantom
+  resources and the cultural commodities exchange.</p>
+</article>
+
+<article class="entry">
+  <h2>9. The Net Present Value of the Cosmos</h2>
+  <div class="score-row"><span class="score">9 cb</span><span class="meter"><i style="width:9%"></i></span></div>
+  <p>Space is not, it turns out, <em>permanently</em> barren — it is barren <strong>until
+  prepared</strong>. Space terrain (<code>TERRAIN_NONE</code>) ships with no yields at all —
+  zero food, zero production, zero commerce — but the game models the obvious real
+  constraint, that you cannot farm a vacuum until you have made it habitable, as a
+  <strong>preparation step</strong>: a terraform-class worker build that converts the dead
+  plot into terrain that actually yields. This part is genuinely realistic, and it works
+  exactly as designed. You make the ground first; only then does it give.</p>
+  <p>The catch is <em>where that knowledge lives</em>. The worker AI and the city AI both
+  understand the preparation step completely — hand them a space city and its automated
+  workers will dutifully terraform its tiles into productivity, no different from draining a
+  marsh. The <strong>founding</strong> AI understands none of it. <code>AI_foundValue</code>
+  scores a candidate site by the raw nature yield of the tiles around it — the unprepared,
+  pre-terraform zero — so the entire cosmos reads as worthless gravel and the AI never plants
+  the flag. The hands know exactly how to make space bloom; the part of the brain that
+  decides <em>where</em> to build a city has never been introduced to the hands.</p>
+  <p>The settlers, in effect, simply cannot be bothered to step outside and check whether
+  anywhere else might be worth the trouble. Home is best, and all that. They glance at the
+  void, see nothing growing, and conclude — correctly, by their own arithmetic — that there
+  is no reason to go.</p>
+  <p>And here is the exquisite cruelty: had the AI ever, by accident or by the mercy of a
+  stray script, managed to place a single city in space, that one city would have
+  <em>worked</em>. Its automated workers would have prepared its tiles and it would have
+  hummed along like any other. But it would have remained an island of exactly one — because
+  every <em>additional</em> space city faces the identical founding gate the first one only
+  slipped through by fluke. The capability is real, reachable, and one missing heuristic away
+  — gated forever behind a settler who would simply rather stay home.</p>
+  <p>The deepest stratum of realism here is not the vacuum but the <strong>promise</strong>.
+  Somewhere back in the C2C era, well over a decade ago, someone shipped the space maps on
+  the assumption that teaching the AI to understand them would be the easy part, a tidy
+  follow-up for some near future. That follow-up has since outlived the assumption, the
+  original codebase, and a good fraction of the player base. It survives today as Phase
+  <strong>B7</strong> of the multimap→zone rework — "make space extend Earth's gradients so
+  existing AI carries over" — the same decade-plus IOU, reissued in fresh ink. The cosmos
+  has been "coming next version" for longer than most software lives.</p>
+  <p class="status">Status: working as designed where it counts (terraform + worker/city AI
+  both understand preparation), blind where it matters (<code>AI_foundValue</code> scores the
+  raw, pre-terraform yield, so the AI never founds the one city that would teach itself the
+  rest). AI space awareness is explicitly deferred to Phase B7 of the multimap→zone rework
+  (<code>Sources/docs/plans/multimap-zone-rework.md</code>), and the founding blindness is now
+  tracked as issue #433. ETA: historically, "next version."</p>
+</article>
+
 <div class="fineprint">
   <p>Scale calibration note: 100 cb = 1 full Longbow. Readings above 100 are reserved for
   mechanics that violate not merely military history but causality.</p>
@@ -246,8 +339,9 @@
   <a href="https://discord.gg/R8Uejx6uaK">discord.gg/R8Uejx6uaK</a></p>
   <p>Fresh realism may be reported, contested, or savored on the
   <a href="https://discord.gg/R8Uejx6uaK">S2S Discord</a>.</p>
-  <p>Sibling publication: <a href="DESPAIR_INDEX.html">The Despair Index™</a> — for the
-  things the code does wrong.</p>
+  <p>Sibling publications: <a href="DESPAIR_INDEX.html">The Despair Index™</a> (things the
+  code does wrong) and <a href="COMPLEXITY_INDEX.html">The Complexity Index™</a> (one entry,
+  and it is everything).</p>
 </footer>
 
 </div>

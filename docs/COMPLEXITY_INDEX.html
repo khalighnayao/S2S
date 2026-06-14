@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The S2S Complexity Index™</title>
+<meta name="description" content="A rigorously unscientific ranking of Stones2Stars systems by the complexity they inflict, measured in centi-Gordians. It has one entry.">
+<style>
+  :root {
+    --bg: #121a18;
+    --panel: #1a2622;
+    --panel-edge: #283932;
+    --ink: #d3e6df;
+    --ink-dim: #88a39a;
+    --accent: #5cc9a4;
+    --bar-bg: #26362f;
+    --bar-fill: linear-gradient(90deg, #5a9c7a, #67a0a0, #6c8fd9);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  header { text-align: center; margin-bottom: 2.5rem; }
+  header .knot { font-size: 4rem; line-height: 1; filter: saturate(.8); }
+  h1 {
+    font-size: 2.6rem; margin: .4rem 0 .2rem; letter-spacing: .02em;
+    color: var(--accent);
+  }
+  header .tagline { color: var(--ink-dim); font-style: italic; max-width: 620px; margin: .6rem auto 0; }
+  .preamble {
+    background: var(--panel); border: 1px solid var(--panel-edge); border-left: 4px solid var(--accent);
+    border-radius: 6px; padding: 1.1rem 1.4rem; margin: 0 0 2.5rem; font-style: italic; color: var(--ink-dim);
+  }
+  .preamble strong { color: var(--ink); }
+  .preamble .tied { display: block; text-align: center; font-size: 1.15rem; color: var(--accent); margin: .8rem 0; font-style: normal; }
+  .entry {
+    background: var(--panel); border: 1px solid var(--panel-edge); border-radius: 8px;
+    border-top: 3px solid var(--accent);
+    padding: 1.5rem 1.75rem 1.4rem; margin-bottom: 1.6rem; position: relative;
+  }
+  .entry h2 {
+    font-size: 1.45rem; margin: 0 0 .25rem; color: var(--ink);
+    display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap;
+  }
+  .score-row { display: flex; align-items: center; gap: .9rem; margin: .35rem 0 1rem; }
+  .score {
+    font-family: Consolas, 'Courier New', monospace; font-size: .95rem; color: var(--accent);
+    white-space: nowrap;
+  }
+  .meter { flex: 1; height: 10px; background: var(--bar-bg); border-radius: 5px; overflow: hidden; }
+  .meter > i { display: block; height: 100%; background: var(--bar-fill); border-radius: 5px; }
+  .entry p { margin: .7rem 0; }
+  code {
+    font-family: Consolas, 'Courier New', monospace; font-size: .88em;
+    background: #23332c; color: #9ae8c8; padding: .08em .35em; border-radius: 4px;
+  }
+  .status {
+    margin-top: 1rem; padding-top: .8rem; border-top: 1px dashed var(--panel-edge);
+    font-style: italic; color: var(--ink-dim); font-size: .95rem;
+  }
+  .fineprint {
+    margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--panel-edge);
+    color: var(--ink-dim); font-style: italic; font-size: .92rem;
+  }
+  footer {
+    margin-top: 2.5rem; text-align: center; color: var(--ink-dim); font-size: .9rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  em { color: inherit; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="knot">🪢</div>
+  <h1>The S2S Complexity Index™</h1>
+  <p class="tagline">A rigorously unscientific ranking of the Stones2Stars systems by the
+  complexity they inflict on anyone who dares to understand them. It has one entry.</p>
+</header>
+
+<div class="preamble">
+  Complexity is measured in <strong>centi-Gordians (cg)</strong> — the SI unit of structural
+  complexity, calibrated against a single Gordian Knot (100 cg): a structure that cannot be
+  untied, only cut.
+  <br><br>
+  We tried to do this properly. We lined up the individual offenders to score them — the trait
+  system, the 410 phantom resources, the conditional whole-object replacement engine, the 117
+  hand-written info loaders, the combat math shared across four subsystems, the save format
+  that keys on names, the graphics that page before they initialize, the build that lies about
+  its own compiler — and we went to rank them.
+  <span class="tied">They all tied for first.</span>
+  So we abandoned the ranking and entered the only specimen the methodology could honestly
+  support.
+</div>
+
+<article class="entry">
+  <h2>1. The Entire Codebase</h2>
+  <div class="score-row"><span class="score">9001 cg (out of 100)</span><span class="meter"><i style="width:100%"></i></span></div>
+  <p>A Civ4 / Caveman2Cosmos mod accreted across more than fifteen years by many hands, most
+  of them no longer reachable and none of them in agreement. There is no subsystem you can
+  touch in isolation. Combat math is shared between the UI, the AI, and resolution. The save
+  format is a name-keyed tag soup. Enums must be registered in two separate files or fail
+  silently at runtime. The build groups source into unity batches that expose missing includes
+  at random. Graphics paths run before the engine that backs them exists. And the single most
+  authoritative-<em>looking</em> file in the repository — the project file — describes a
+  compiler the build does not use.</p>
+  <p>Every thread, pulled, turns out to be load-bearing for three others. Every "small fix"
+  sits one semitone from a save-break, an out-of-sync, or a crash that only happens with
+  graphics paging off. The official engineering guidance, written into <code>AGENTS.md</code>
+  in self-defense, reduces to a single sentence: <em>nothing here is ever "just a
+  one-liner."</em></p>
+  <p>This is not a flaw in the codebase. It <strong>is</strong> the codebase. Complexity here
+  is not the exception that earns a place on a list; it is the ambient condition — the medium,
+  the water, the rule. Which is why this index has exactly one entry, and always will.</p>
+  <p class="status">Status: the entire Stones2Stars rework — the JSON data migration (#428),
+  the cascade model, the AI lift to player level, the combat simplification, the dead-code and
+  dead-XML sweeps — exists for the single purpose of making this number go down. Progress is
+  counted in Gordian Knots cut, never untied.</p>
+</article>
+
+<div class="fineprint">
+  <p>Scale calibration note: 100 cg = 1 Gordian Knot. The instrument was built to read to 100.
+  The inaugural measurement returned 9001. The instrument has been retired; the reading
+  stands.</p>
+  <p>Contribution policy: there is no contribution policy. Everything qualifies — that is the
+  finding.</p>
+</div>
+
+<footer>
+  <p><strong>Stones2Stars</strong> — a Civ4 / Caveman2Cosmos rework ·
+  <a href="https://github.com/Stones2Stars/S2S">github.com/Stones2Stars/S2S</a> ·
+  <a href="https://discord.gg/R8Uejx6uaK">discord.gg/R8Uejx6uaK</a></p>
+  <p>Sibling publications: <a href="DESPAIR_INDEX.html">The Despair Index™</a> (things the
+  code does wrong) and <a href="REALISM_INDEX.html">The Realism Index™</a> (things the code
+  does exactly as designed, which is somehow worse).</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -252,7 +252,55 @@
 </article>
 
 <article class="entry">
-  <h2>9. International Civil Asset Forfeiture</h2>
+  <h2>9. The Wonder That Builds Character</h2>
+  <div class="score-row"><span class="score">59 cp</span><span class="meter"><i style="width:59%"></i></span></div>
+  <p>A National Wonder reaches into your civilization and hands it a personality. Build the
+  right one and you don't get a bonus — you acquire a <em>trait</em>, the same kind of thing
+  a leader is born with, applied in full via <code>setHasTrait</code> →
+  <code>processTrait</code>, modifier bundle and all. Demolish the building and the trait is
+  revoked: you are, briefly, a different civilization, then yourself again.</p>
+  <p>The trait system — meant to describe who your leader <em>is</em> — has been quietly
+  conscripted as a general-purpose effect courier, wired to buildings through a
+  <code>FreeTraitTypes</code> foreign key and gated by a <code>bCivilizationTrait</code>
+  flag. 22 "traits" turn out to be wonders in a coat: the <em>Ancient Way of the…</em> set,
+  the astrological influences. "What traits does this civilization have" stopped being a
+  question about leaders and became a question about your construction history.</p>
+  <p>Three things that should never touch — a building, a leader trait, and a nationwide
+  effect — were fused into one, and the engine applies the whole bundle without blinking,
+  because as far as it is concerned this is entirely normal.</p>
+  <p class="status">Status: working exactly as designed (a sibling waits in the Realism
+  Index) — which is the entire despair: it functions flawlessly while catapulting a fresh
+  bug at any developer who dares touch it. The wonder giveth a personality; the wrecking
+  ball taketh it away.</p>
+</article>
+
+<article class="entry">
+  <h2>10. The Trait in a Trenchcoat</h2>
+  <div class="score-row"><span class="score">58 cp</span><span class="meter"><i style="width:58%"></i></span></div>
+  <p>There is no such thing as a "complex trait." There are 64 ordinary traits, each of
+  which is secretly <em>two</em> traits standing on each other's shoulders in one
+  <code>&lt;Type&gt;</code>. The vanilla <code>TRAIT_AGGRESSIVE</code> carries, inline and
+  under its own name, a complete second personality — <code>ReplacementID:
+  TRAIT_COMPLEX_AGGRESSIVE</code>, a type that exists nowhere else, has no record of its
+  own, and answers to no one. A generic engine (<code>CvInfoReplacements</code>) waits for
+  one game option to flip, then swaps the whole soul out mid-sentence. Nothing in the
+  trait's own data admits this can happen; the only tell is two tags a hundred lines
+  apart.</p>
+  <p>The faithful reader — a migration that, reasonably, treats the same
+  <code>&lt;Type&gt;</code> appearing twice as an override — lovingly merges the disguise
+  into the man wearing it, producing 64 chimeras with a vanilla face and a complex strategy,
+  each insisting it is one trait while sourcing its opinions from two.</p>
+  <p>In fairness, the fix itself isn't even bad — a clean conditional whole-object
+  replacement. The despair is that "what traits does this leader have" has no answer until
+  you <em>also</em> ask a game option, a separate templated class, and a type that was never
+  really there.</p>
+  <p class="status">Status: untangled (#428) — the disguise is now its own
+  <code>TRAIT_COMPLEX_*</code> file, the base trait declares <code>replacedBy</code> and
+  keeps its own face, and the store stopped marrying strangers.</p>
+</article>
+
+<article class="entry">
+  <h2>11. International Civil Asset Forfeiture</h2>
   <div class="score-row"><span class="score">55 cp</span><span class="meter"><i style="width:55%"></i></span></div>
   <p>Foreign police cars were observed parked on the human player's <strong>resource
   tiles</strong>, mission hover proudly reading <em>"Maintain property control."</em> The
@@ -275,7 +323,7 @@
 </article>
 
 <article class="entry">
-  <h2>10. The .vcxproj of Lies</h2>
+  <h2>12. The .vcxproj of Lies</h2>
   <div class="score-row"><span class="score">47 cp</span><span class="meter"><i style="width:47%"></i></span></div>
   <p>The Visual Studio project file confidently states <code>PlatformToolset: v142</code>.
   The actual compiler is the <strong>Microsoft Visual C++ Toolkit 2003</strong> (MSVC 7.1).
@@ -329,8 +377,9 @@
   <p><strong>Stones2Stars</strong> — a Civ4 / Caveman2Cosmos rework ·
   <a href="https://github.com/Stones2Stars/S2S">github.com/Stones2Stars/S2S</a> ·
   <a href="https://discord.gg/R8Uejx6uaK">discord.gg/R8Uejx6uaK</a></p>
-  <p>Sibling publication: <a href="REALISM_INDEX.html">The Realism Index™</a> — for the
-  things the code does exactly as designed, which is somehow worse.</p>
+  <p>Sibling publications: <a href="REALISM_INDEX.html">The Realism Index™</a> (things the
+  code does exactly as designed, which is somehow worse) and
+  <a href="COMPLEXITY_INDEX.html">The Complexity Index™</a> (one entry, and it is everything).</p>
 </footer>
 
 </div>

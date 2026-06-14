@@ -147,7 +147,57 @@ constructibility work (#195) keeps having to index around.*
 
 ---
 
-## 7. The Net Present Value of the Cosmos — 9 cb
+## 7. You Are What You Build — 48 cb
+
+A civilization's character is not chosen, inherited, or earned over centuries — it is
+*constructed*. Finish the right National Wonder and your people acquire an innate trait, the
+same indelible kind a leader is born with; raze that building and the trait evaporates, the
+national character politely reverting as the rubble settles. Identity is a function of your
+current building inventory, recomputed on every completion and demolition, and the game
+applies it with total sincerity.
+
+The realism is impeccable in its own way: monuments *do* shape who a people believe
+themselves to be — so the engine models it literally, as a wire running from a foundation to
+the soul. Build the war-monument, become Aggressive. Build the observatory and read the
+stars into your blood. Knock it down, forget who you were. No metaphor survives contact with
+the implementation; here the metaphor *is* the implementation.
+
+*Status: working exactly as designed — a building grants a `bCivilizationTrait` via its
+`FreeTraitTypes`, applied through the very same `setHasTrait`/`processTrait` path a leader's
+own traits use. Its bug-catapulting twin holds court in the
+[Despair Index](DESPAIR_INDEX.md). No issue yet dares propose making national identity less
+load-bearing on masonry.*
+
+---
+
+## 8. Cultural Exports — 44 cb
+
+A civilization's culture is, the game maintains, a tradeable commodity. Found the national
+wonder for a Culture and you receive a `BONUS_*` representing it; because that bonus carries
+`TechCityTrade = NONE`, it is tradeable from the first turn, no enabling technology required.
+Your culture now sits in the diplomacy screen between Iron and Incense — available to sell,
+gift, or demand at the negotiating table.
+
+The realism is, in its way, unimpeachable: cultures *are* exported, exchanged, and absorbed
+between nations. The game simply renders the metaphor as freight — the Abbasid identity, FOB
+your capital, three gold a turn, cancel anytime. There is no mechanism for the buyer to
+*become* more Abbasid, nor for you to become less; the commodity changes hands and means
+nothing, which is itself a fairly honest model of the international culture trade.
+
+Underneath, this rides a `building → bonus → building` indirection: 410 of the game's 907
+bonuses — roughly 45% — are these `BONUSCLASS_CULTURE` phantoms, each existing only to relay a
+wonder's existence to the buildings it unlocks. It is not a bug, and it catapults nothing at
+anyone; it is merely dumb, and it quietly taxes every load and every resource sweep for the
+privilege.
+
+*Status: working exactly as designed — a `BONUSCLASS_CULTURE` resource granted by a wonder,
+tradeable by default. The whole tier is slated for collapse to a direct building→building
+enable in #428's purge backlog, which retires both the phantom resources and the cultural
+commodities exchange.*
+
+---
+
+## 9. The Net Present Value of the Cosmos — 9 cb
 
 Space is not, it turns out, *permanently* barren — it is barren **until prepared**. Space
 terrain (`TERRAIN_NONE`) ships with no yields at all — zero food, zero production, zero
@@ -192,7 +242,8 @@ longer than most software lives.
 preparation), blind where it matters (`AI_foundValue` scores the raw, pre-terraform yield,
 so the AI never founds the one city that would teach itself the rest). AI space awareness is
 explicitly deferred to Phase B7 of the multimap→zone rework
-(`Sources/docs/plans/multimap-zone-rework.md`). ETA: historically, "next version."*
+(`Sources/docs/plans/multimap-zone-rework.md`), and the founding blindness is now tracked as
+issue #433. ETA: historically, "next version."*
 
 ---
 
@@ -206,3 +257,6 @@ to whichever issue is trying to make it less realistic in the productive directi
 
 *Fresh realism may be reported, contested, or savored on the
 [S2S Discord](https://discord.gg/R8Uejx6uaK).*
+
+*Sibling publications: the [Despair Index](DESPAIR_INDEX.md) (things the code does wrong) and
+the [Complexity Index](COMPLEXITY_INDEX.md) (one entry, and it is everything).*
