@@ -147,50 +147,52 @@ constructibility work (#195) keeps having to index around.*
 
 ---
 
-## 7. The Net Present Value of the Cosmos — 3 cb *(lowest reading on record)*
+## 7. The Net Present Value of the Cosmos — 9 cb
 
-The committee debated for some time whether space qualifies for this index at all, because
-space is, in fact, **empty** — and `TERRAIN_NONE`, the single terrain underpinning every
-orbital, lunar, and interplanetary tile, models this with a fidelity unmatched anywhere
-else in the game: **no yields block whatsoever.** Zero food. Zero production. Zero
-commerce. Not "barren until terraformed," not "habitable once you build the dome" — there
-is no terraform build for space, no habitat improvement, no preparation step. The vacuum
-yields nothing because the vacuum is nothing. For once, the map and reality agree
-completely.
+Space is not, it turns out, *permanently* barren — it is barren **until prepared**. Space
+terrain (`TERRAIN_NONE`) ships with no yields at all — zero food, zero production, zero
+commerce — but the game models the obvious real constraint, that you cannot farm a vacuum
+until you have made it habitable, as a **preparation step**: a terraform-class worker build
+that converts the dead plot into terrain that actually yields. This part is genuinely
+realistic, and it works exactly as designed. You make the ground first; only then does it
+give.
 
-This is the problem.
+The catch is *where that knowledge lives*. The worker AI and the city AI both understand
+the preparation step completely — hand them a space city and its automated workers will
+dutifully terraform its tiles into productivity, no different from draining a marsh. The
+**founding** AI understands none of it. `AI_foundValue` scores a candidate site by the raw
+nature yield of the tiles around it — the unprepared, pre-terraform zero — so the entire
+cosmos reads as worthless gravel and the AI never plants the flag. The hands know exactly
+how to make space bloom; the part of the brain that decides *where* to build a city has
+never been introduced to the hands.
 
-The AI is, at its core, a yield maximizer. City founding rejects any site whose tiles
-can't muster 2 food and 3 total yield; plot valuation divides anything below that threshold
-by sixteen. So when the AI turns its gaze to the heavens — the moon, Mars, the rings of
-Saturn — it performs the calculation correctly, arrives at a net present value of **exactly
-zero**, and elects to remain on Earth, forever, where the dirt at least grows wheat. There
-is no bug here. There is only a rational economic actor declining to fund a space program
-with no return on investment, which is the single most plausible thing any AI in this game
-has ever done.
+The settlers, in effect, simply cannot be bothered to step outside and check whether
+anywhere else might be worth the trouble. Home is best, and all that. They glance at the
+void, see nothing growing, and conclude — correctly, by their own arithmetic — that there
+is no reason to go.
 
-Humanity reaches space anyway, because humans will pour treasure into a barren rock for
-reasons no founding-value heuristic will ever model. The AI, lacking poetry, stays home
-and tends its farms.
+And here is the exquisite cruelty: had the AI ever, by accident or by the mercy of a stray
+script, managed to place a single city in space, that one city would have *worked*. Its
+automated workers would have prepared its tiles and it would have hummed along like any
+other. But it would have remained an island of exactly one — because every *additional*
+space city faces the identical founding gate the first one only slipped through by fluke.
+The capability is real, reachable, and one missing heuristic away — gated forever behind a
+settler who would simply rather stay home.
 
-The truly realistic part is not the empty vacuum — it's the **promise**. Somewhere back in
-the C2C era, well over a decade ago, someone shipped the space maps on the assumption that
-teaching the AI to understand them would be the easy part, a tidy follow-up for some near
-future. That follow-up has since outlived the assumption, the original codebase, and a good
-fraction of the player base. It survives today as Phase **B7** of the multimap→zone rework
-— "make space extend Earth's gradients so existing AI carries over" — the same decade-plus
-IOU, reissued in fresh ink. The cosmos has been "coming next version" for longer than most
-software lives.
+The deepest stratum of realism here is not the vacuum but the **promise**. Somewhere back
+in the C2C era, well over a decade ago, someone shipped the space maps on the assumption
+that teaching the AI to understand them would be the easy part, a tidy follow-up for some
+near future. That follow-up has since outlived the assumption, the original codebase, and a
+good fraction of the player base. It survives today as Phase **B7** of the multimap→zone
+rework — "make space extend Earth's gradients so existing AI carries over" — the same
+decade-plus IOU, reissued in fresh ink. The cosmos has been "coming next version" for
+longer than most software lives.
 
-At 3 cb it is the lowest-scoring entry the index will likely ever record — earning its
-place not by depicting an impossible world, but by depicting the real one so faithfully
-that the game's own intelligence took one look and opted out.
-
-*Status: working exactly as designed; in fairness, the design is correct. AI space
-awareness is explicitly deferred to Phase B7 of the multimap→zone rework
-(`Sources/docs/plans/multimap-zone-rework.md`) — teaching the cosmos to lie about its
-yields just enough that the AI will deign to leave the planet. ETA: historically, "next
-version."*
+*Status: working as designed where it counts (terraform + worker/city AI both understand
+preparation), blind where it matters (`AI_foundValue` scores the raw, pre-terraform yield,
+so the AI never founds the one city that would teach itself the rest). AI space awareness is
+explicitly deferred to Phase B7 of the multimap→zone rework
+(`Sources/docs/plans/multimap-zone-rework.md`). ETA: historically, "next version."*
 
 ---
 
