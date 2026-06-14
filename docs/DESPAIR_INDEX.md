@@ -111,7 +111,37 @@ you corrupt the demand accounting. That's what it's all about.
 
 ---
 
-## 6. The Unkillable Peasant — 71 cp
+## 6. Strength by Committee — 72 cp
+
+Ask a simple question — "how strong is this unit against that one?" — and the engine cannot tell
+you where the answer came from. A unit's combat strength is built by pouring **~40 signed
+percentages into one integer** and multiplying once at the very end (`CvUnit.cpp:12164`). Into
+that single number, *four separate "vs" systems* deposit with no precedence and no record of
+origin: the vs-combat-class matrix (authored on the unit, on its promotions, AND on every one of
+the ~20 classes the unit belongs to), vs-specific-unit attack, vs-specific-unit defense, and
+flanking. They are added. Once added, a `+50%` from the class matrix is indistinguishable from a
+`+50%` a modder pasted onto the unit — there is no way, in code or data, to learn which of the
+four cooks salted the soup.
+
+So a Mounted unit can hand-author "+50% vs Spearman" — directly contradicting the canonical
+anti-Mounted class — and the game just adds it on top, silently inverting its own
+rock-paper-scissors with no warning. The matrix that was supposed to *be* the system is vestigial
+(18 edges across 14 of 418 classes; 96% of classes are inert tags); the real logic sprawls across
+**966 per-unit edges — 54x the matrix** — hand-pasted onto individual units.
+
+The finishing touch: the help text that would let a player audit any of this **labels the two
+axes backwards** — vs-class renders as "vs. Type" and vs-type as "vs. Class"
+(`CvGameTextMgr.cpp:1009/1043/12860/12896`). The one window into the circus is a fun-house mirror.
+And the AI, summing the overlapping channels, pays twice for the same advantage.
+
+*Status: documented, not fixed (`reference/unitcombat.md`). The real structure — one single-origin
+vs-class matrix with explicit per-unit overrides, the orthogonal taxonomies (size/species/motility)
+split out, and the labels un-swapped — is a standing rework. For now nobody knows where the +50%
+came from, the engine least of all.*
+
+---
+
+## 7. The Unkillable Peasant — 71 cp
 
 `getCombatOdds` floored per-round damage to 0 against ~zero-strength defenders, making a
 dying militiaman **mathematically immortal**. The AI under-reported its own win odds
@@ -125,7 +155,7 @@ layer above it nodded along.
 
 ---
 
-## 7. The Bear Patrol — 62 cp
+## 8. The Bear Patrol — 62 cp
 
 The world's city defenders kept abandoning their posts to duel wildlife. Garrison sorties
 fire at a **55% odds bar** against any "enemy" within reach — and in the prehistoric era,
@@ -146,7 +176,7 @@ The bears are now mostly unbothered, and exclusively by professionals.*
 
 ---
 
-## 8. The Eternal Anesthesiologist — 60 cp
+## 9. The Eternal Anesthesiologist — 60 cp
 
 `AI_heal` returned `true` for a heal no-op when the unit *couldn't heal*, so units
 re-decided "heal in city" **49–196 times per turn** — and in rare alignments, the turn
@@ -159,7 +189,7 @@ pressing it 195 more times. Except occasionally the building never lets you leav
 
 ---
 
-## 9. The Wonder That Builds Character — 59 cp
+## 10. The Wonder That Builds Character — 59 cp
 
 A National Wonder reaches into your civilization and hands it a personality. Build the right
 one and you don't get a bonus — you acquire a *trait*, the same kind of thing a leader is
@@ -184,7 +214,7 @@ dares touch it. The wonder giveth a personality; the wrecking ball taketh it awa
 
 ---
 
-## 10. The Trait in a Trenchcoat — 58 cp
+## 11. The Trait in a Trenchcoat — 58 cp
 
 There is no such thing as a "complex trait." There are 64 ordinary traits, each of which is
 secretly *two* traits standing on each other's shoulders in one `<Type>`. The vanilla
@@ -208,7 +238,7 @@ declares `replacedBy` and keeps its own face, and the store stopped marrying str
 
 ---
 
-## 11. International Civil Asset Forfeiture — 55 cp
+## 12. International Civil Asset Forfeiture — 55 cp
 
 Foreign police cars were observed parked on the human player's **resource tiles**, mission
 hover proudly reading *"Maintain property control."* The mechanism: when a property-control
@@ -230,7 +260,7 @@ fortified. The uranium has been returned.*
 
 ---
 
-## 12. The .vcxproj of Lies — 47 cp
+## 13. The .vcxproj of Lies — 47 cp
 
 The Visual Studio project file confidently states `PlatformToolset: v142`. The actual
 compiler is the **Microsoft Visual C++ Toolkit 2003** (MSVC 7.1). The project file drives

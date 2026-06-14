@@ -207,7 +207,37 @@
 </article>
 
 <article class="entry">
-  <h2>6. The Unkillable Peasant</h2>
+  <h2>6. Strength by Committee</h2>
+  <div class="score-row"><span class="score">72 cp</span><span class="meter"><i style="width:72%"></i></span></div>
+  <p>Ask a simple question — "how strong is this unit against that one?" — and the engine cannot
+  tell you where the answer came from. A unit's combat strength is built by pouring <strong>~40
+  signed percentages into one integer</strong> and multiplying once at the very end
+  (<code>CvUnit.cpp:12164</code>). Into that single number, <em>four separate "vs" systems</em>
+  deposit with no precedence and no record of origin: the vs-combat-class matrix (authored on the
+  unit, on its promotions, AND on every one of the ~20 classes the unit belongs to),
+  vs-specific-unit attack, vs-specific-unit defense, and flanking. They are added. Once added, a
+  <code>+50%</code> from the class matrix is indistinguishable from a <code>+50%</code> a modder
+  pasted onto the unit — there is no way, in code or data, to learn which of the four cooks salted
+  the soup.</p>
+  <p>So a Mounted unit can hand-author "+50% vs Spearman" — directly contradicting the canonical
+  anti-Mounted class — and the game just adds it on top, silently inverting its own
+  rock-paper-scissors with no warning. The matrix that was supposed to <em>be</em> the system is
+  vestigial (18 edges across 14 of 418 classes; 96% of classes are inert tags); the real logic
+  sprawls across <strong>966 per-unit edges — 54&times; the matrix</strong> — hand-pasted onto
+  individual units.</p>
+  <p>The finishing touch: the help text that would let a player audit any of this <strong>labels
+  the two axes backwards</strong> — vs-class renders as "vs. Type" and vs-type as "vs. Class"
+  (<code>CvGameTextMgr.cpp:1009/1043/12860/12896</code>). The one window into the circus is a
+  fun-house mirror. And the AI, summing the overlapping channels, pays twice for the same
+  advantage.</p>
+  <p class="status">Status: documented, not fixed (<code>reference/unitcombat.md</code>). The real
+  structure — one single-origin vs-class matrix with explicit per-unit overrides, the orthogonal
+  taxonomies (size/species/motility) split out, and the labels un-swapped — is a standing rework.
+  For now nobody knows where the +50% came from, the engine least of all.</p>
+</article>
+
+<article class="entry">
+  <h2>7. The Unkillable Peasant</h2>
   <div class="score-row"><span class="score">71 cp</span><span class="meter"><i style="width:71%"></i></span></div>
   <p><code>getCombatOdds</code> floored per-round damage to 0 against ~zero-strength
   defenders, making a dying militiaman <strong>mathematically immortal</strong>. The AI
@@ -220,7 +250,7 @@
 </article>
 
 <article class="entry">
-  <h2>7. The Bear Patrol</h2>
+  <h2>8. The Bear Patrol</h2>
   <div class="score-row"><span class="score">62 cp</span><span class="meter"><i style="width:62%"></i></span></div>
   <p>The world's city defenders kept abandoning their posts to duel wildlife. Garrison
   sorties fire at a <strong>55% odds bar</strong> against any "enemy" within reach — and
@@ -241,7 +271,7 @@
 </article>
 
 <article class="entry">
-  <h2>8. The Eternal Anesthesiologist</h2>
+  <h2>9. The Eternal Anesthesiologist</h2>
   <div class="score-row"><span class="score">60 cp</span><span class="meter"><i style="width:60%"></i></span></div>
   <p><code>AI_heal</code> returned <code>true</code> for a heal no-op when the unit
   <em>couldn't heal</em>, so units re-decided "heal in city" <strong>49–196 times per
@@ -252,7 +282,7 @@
 </article>
 
 <article class="entry">
-  <h2>9. The Wonder That Builds Character</h2>
+  <h2>10. The Wonder That Builds Character</h2>
   <div class="score-row"><span class="score">59 cp</span><span class="meter"><i style="width:59%"></i></span></div>
   <p>A National Wonder reaches into your civilization and hands it a personality. Build the
   right one and you don't get a bonus — you acquire a <em>trait</em>, the same kind of thing
@@ -275,7 +305,7 @@
 </article>
 
 <article class="entry">
-  <h2>10. The Trait in a Trenchcoat</h2>
+  <h2>11. The Trait in a Trenchcoat</h2>
   <div class="score-row"><span class="score">58 cp</span><span class="meter"><i style="width:58%"></i></span></div>
   <p>There is no such thing as a "complex trait." There are 64 ordinary traits, each of
   which is secretly <em>two</em> traits standing on each other's shoulders in one
@@ -300,7 +330,7 @@
 </article>
 
 <article class="entry">
-  <h2>11. International Civil Asset Forfeiture</h2>
+  <h2>12. International Civil Asset Forfeiture</h2>
   <div class="score-row"><span class="score">55 cp</span><span class="meter"><i style="width:55%"></i></span></div>
   <p>Foreign police cars were observed parked on the human player's <strong>resource
   tiles</strong>, mission hover proudly reading <em>"Maintain property control."</em> The
@@ -323,7 +353,7 @@
 </article>
 
 <article class="entry">
-  <h2>12. The .vcxproj of Lies</h2>
+  <h2>13. The .vcxproj of Lies</h2>
   <div class="score-row"><span class="score">47 cp</span><span class="meter"><i style="width:47%"></i></span></div>
   <p>The Visual Studio project file confidently states <code>PlatformToolset: v142</code>.
   The actual compiler is the <strong>Microsoft Visual C++ Toolkit 2003</strong> (MSVC 7.1).
